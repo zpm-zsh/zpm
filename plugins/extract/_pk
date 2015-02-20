@@ -1,0 +1,28 @@
+#compdef pk
+#autoload
+
+
+# pk zsh completion, based on adb completion
+
+local -a _1st_arguments
+_1st_arguments=(
+    'tbz:Create tar.bz archive'
+    'tgz:Create tar.gz archive'
+    'tar:Create tar archive'
+    'bz2:Create bz2 archive'
+    'gz:Create gz archive'
+    '7z:Create 7z archive'
+    'zip:Create zip archive'
+    'xpi:Create Firefox extension'
+    'crx:Create Chrome extension'
+)
+
+_arguments \
+	'*:: :->subcmds' && return 0
+
+if (( CURRENT == 1 )); then
+	_describe -t commands "pk subcommand" _1st_arguments
+	return
+fi
+
+_files

@@ -1,0 +1,20 @@
+#compdef npm
+#autoload
+
+local -a _1st_arguments
+_1st_arguments=(
+  'help:Show this message'
+  'install:Install package'
+  'update:Update packages'
+  'uninstall:Uninstall package'
+  'list:List packages'
+  'search:Search packages'
+  'verison:Show version'
+)
+
+_arguments -C '*:: :->subcmds' && return 0
+
+if (( CURRENT == 1 )); then
+  _describe -t commands "npm subcommand" _1st_arguments
+  return
+fi

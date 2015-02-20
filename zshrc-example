@@ -1,0 +1,72 @@
+plugins=( npm nvm rvm gvm pip pyenv golang ) #Package managers & langs
+  
+
+plugins+=( zsh-completions  kill pidof docker  ) #Completions for programs
+
+plugins+=( minesweeper 2048 datauri ansiweather ack ls++ ls-- spark dropbox myip extract mysql q hr pass k marks sshrc servers tor tmux genpasswd viewer desktop ) #Programs
+
+plugins+=( colors grc  dircolors ) #Colors
+
+plugins+=( rationalise-dot zsh-core human ls cd  ) #ZSH
+
+plugins+=( battery node status path git ) #Prompt
+
+plugins+=( hosts translator gitignore command-not-found autoenv fasd history-substring-search zsh-syntax-highlighting zsh-autosuggestions ) #Plugins
+
+TMUX_AUTOSTART=dsf
+if [[ ! -f ~/.zpm/zpm.zsh ]]; then
+	git clone https://github.com/horosgrisa/ZPM ~/.zpm
+	cd ~/.zpm
+	git submodule update --init --recursive
+	cd
+
+fi
+
+source ~/.zpm/zpm.zsh
+
+# Variables
+
+PROMPT='%{$fg[magenta]%} %M %{$fg[yellow]%}➜ %{$reset_color%}'
+RPROMPT=' $last_status$node_version$gitprompt$battery_charge$current_path%{$reset_color%}'
+PS2="%{$fg[green]%}%_>%{$reset_color%}"
+WORDCHARS='*?_-[]~=&;!#$%^(){}<>:.'
+
+export NULLCMD=true
+export READNULLCMD=less
+export PAGER="less"
+export EDITOR="vim"
+CURRENT_PATH_PREFIX=" "
+GIT_PREFIX=" "
+NODE_VERSION_PREFIX=" "
+BATTERY_CHARGE_PREFIX=" "
+
+ZSH_HIGHLIGHT_STYLES[single-quoted-argument]='fg=yellow'
+ZSH_HIGHLIGHT_STYLES[double-quoted-argument]='fg=yellow'
+ZSH_HIGHLIGHT_STYLES[bracket-error]='fg=white,bg=red'
+ZSH_HIGHLIGHT_STYLES[bracket-level-1]='fg=blue'
+ZSH_HIGHLIGHT_STYLES[bracket-level-2]='fg=green'
+ZSH_HIGHLIGHT_STYLES[bracket-level-3]='fg=yellow'
+ZSH_HIGHLIGHT_STYLES[bracket-level-4]='fg=magenta'
+ZSH_HIGHLIGHT_STYLES[cursor-matchingbracket]='fg=red,bg=blue' 
+ZSH_HIGHLIGHT_STYLES[alias]='fg=green'
+ZSH_HIGHLIGHT_STYLES[path]='fg=cyan,italic,underline'
+ZSH_HIGHLIGHT_STYLES[globbing]='fg=red'
+ZSH_HIGHLIGHT_STYLES[default]='fg=cyan'
+ZSH_HIGHLIGHT_STYLES[cursor]='bg=blue'
+ZSH_HIGHLIGHT_STYLES[precommand]='fg=cyan,underline'
+ZSH_HIGHLIGHT_STYLES[unknown-token]='fg=red,underline'
+
+ZSH_HIGHLIGHT_PATTERNS+=('rm -rf *' 'fg=white,bg=red') 
+ZSH_HIGHLIGHT_PATTERNS+=('\|' 'fg=magenta')
+ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
+
+# Aliaces
+
+alias f='fasd -f -e vim'
+alias o='fasd -e xdg-open'
+alias d='fasd_cd -d -i'
+alias j='fasd_cd -d -i'
+alias \$=""
+
+alias screenfetch='screenfetch -c 1,2'
+

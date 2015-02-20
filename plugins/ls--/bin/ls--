@@ -1,0 +1,105 @@
+#!/usr/bin/env python2
+# -*- coding: utf-8 -*-
+
+import subprocess
+
+
+__all__ = ["transform"]
+__version__ = '0.3'
+__author__ = 'Christoph Burgmer <cburgmer@ira.uka.de>'
+__url__ = 'http://github.com/cburgmer/upsidedown'
+__license__ = 'MIT'
+
+import unicodedata
+import string
+
+# Define dual character. Make sure that mapping is bijective.
+FLIP_RANGES = [
+    (string.ascii_lowercase, u"ɐqɔpǝɟƃɥᴉɾʞꞁɯuodbɹsʇnʌʍxʎz"),
+    # alternatives: l:ʅ
+    (string.ascii_uppercase, u"ⱯᗺƆᗡƎᖵ⅁HIᒋ⋊ꞀWNOԀꝹᴚS⊥∩ɅMX⅄Z"),
+    # alternatives: L:ᒣ⅂, J:ſ, F:߃Ⅎ, A:∀ᗄ, U:Ⴖ, W:Ϻ, C:ϽↃ, Q:Ό, M:Ɯꟽ
+    (string.digits, u"0ІᘔƐᔭ59Ɫ86"),
+    (string.punctuation, u"¡„#$%⅋,)(*+'-˙/:؛>=<¿@]\\[ᵥ‾`}|{~"),
+    ]
+# See also http://www.fileformat.info/convert/text/upside-down-map.htm
+
+# See:
+# http://de.wikipedia.org/wiki/Unicode-Block_Kombinierende_diakritische_Zeichen
+UNICODE_COMBINING_DIACRITICS = {u'̈': u'̤', u'̊': u'̥', u'́': u'̗', u'̀': u'̖',
+    u'̇': u'̣', u'̃': u'̰', u'̄': u'̱', u'̂': u'̬', u'̆': u'̯', u'̌': u'̭',
+    u'̑': u'̮', u'̍': u'̩'}
+
+TRANSLITERATIONS = {u'ß': 'ss'}
+
+# character lookup
+_CHARLOOKUP = {}
+for chars, flipped in FLIP_RANGES:
+    _CHARLOOKUP.update(zip(chars, flipped))
+
+# get reverse direction
+for char in _CHARLOOKUP.copy():
+    # make 1:1 back transformation possible
+    assert (_CHARLOOKUP[char] not in _CHARLOOKUP
+        or _CHARLOOKUP[_CHARLOOKUP[char]] == char), \
+        ("%s has ambiguous mapping" % _CHARLOOKUP[char])
+    _CHARLOOKUP[_CHARLOOKUP[char]] = char
+
+# lookup for diacritical marks, reverse first
+_DIACRITICSLOOKUP = dict([(UNICODE_COMBINING_DIACRITICS[char], char) \
+    for char in UNICODE_COMBINING_DIACRITICS])
+_DIACRITICSLOOKUP.update(UNICODE_COMBINING_DIACRITICS)
+
+def transform(string, transliterations=None):
+    u"""
+    Transform the string to "upside-down" writing.
+
+    Example:
+
+        >>> import upsidedown
+        >>> print upsidedown.transform('Hello World!')
+        ¡pꞁɹoM oꞁꞁǝH
+
+    For languages with diacritics you might want to supply a transliteration to
+    work around missing (rendering of) upside-down forms:
+        >>> import upsidedown
+        >>> print upsidedown.transform(u'köln', transliterations={u'ö': 'oe'})
+        ulǝoʞ
+    """
+    transliterations = transliterations or TRANSLITERATIONS
+
+    for character in transliterations:
+        string = string.replace(character, transliterations[character])
+
+    inputChars = list(string)
+    inputChars.reverse()
+
+    output = []
+    for character in inputChars:
+        if character in _CHARLOOKUP:
+            output.append(_CHARLOOKUP[character])
+        else:
+            charNormalised = unicodedata.normalize("NFD", character)
+
+            for c in charNormalised[:]:
+                if c in _CHARLOOKUP:
+                    charNormalised = charNormalised.replace(c, _CHARLOOKUP[c])
+                elif c in _DIACRITICSLOOKUP:
+                    charNormalised = charNormalised.replace(c,
+                        _DIACRITICSLOOKUP[c])
+
+            output.append(unicodedata.normalize("NFC", charNormalised))
+
+    return ''.join(output)
+
+
+import sys
+sys.argv[0] = '/bin/ls'
+p = subprocess.Popen(sys.argv, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+o, e = p.communicate()
+res = o + e
+maxlen = max(len(x) for x in res.splitlines())
+res = ''.join(x.ljust(maxlen) + '\n' for x in res.splitlines())
+
+print transform(res.decode('utf8')).encode('utf8')
+

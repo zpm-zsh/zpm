@@ -1,0 +1,15 @@
+root = true
+
+[*]
+end_of_line = lf
+insert_final_newline = true
+
+[*.zsh]
+indent_style = space
+indent_size = 4
+
+[custom/**]
+end_of_line = ignore
+insert_final_newline = ignore
+indent_style = ignore
+indent_size = ignore

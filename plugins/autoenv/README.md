@@ -1,0 +1,4 @@
+autoenv
+=======
+
+Autoenv for zsh

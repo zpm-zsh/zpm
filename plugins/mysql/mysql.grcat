@@ -1,0 +1,40 @@
+#разделители строк для вертикального вывода результатов с помощью \G
+regexp=[*]+.+[*]+
+count=stop
+colours=white
+-
+#границы таблиц
+regexp=[+\-\╔\═\╗\║\─\╚\╝\╟\┼\╢\╤\╧\│]+
+colours=red
+-
+#цвет текста по умолчанию
+regexp=[\w\.]+
+colours=green
+-
+#текст в скобках ( ) и кавычках ' '
+regexp=\([\w\d,']+\)
+colours=white
+-
+#числа
+regexp=\s[\d\.]+\s
+colours=yellow
+-
+#имена полей при вертикальном выводе с помощью \G
+regexp=\w+:
+colours=white
+-
+#даты
+regexp=\d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2}
+colours=cyan
+-
+#IP
+regexp=(\d{1,3}\.){3}\d{1,3}(:\d{1,5})?
+colours=cyan
+-
+#поля, таблицы и другие системные сущности в символах ` `
+regexp=`\w+`
+colours=yellow
+-
+#email
+regexp=[\w\.\-_]+@[\w\.\-_]+
+colours=magenta

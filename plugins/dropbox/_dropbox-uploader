@@ -1,0 +1,49 @@
+#compdef dropbox-uploader
+#autoload
+
+local -a _1st_arguments
+_1st_arguments=(
+    'upload:Upload from <LOCAL_FILE/DIR>  to <REMOTE_FILE/DIR>'
+    'download:Download from <REMOTE_FILE/DIR> to [LOCAL_FILE/DIR]'
+    'move:Move from <REMOTE_FILE/DIR> to <REMOTE_FILE/DIR>'
+    'copy:From <REMOTE_FILE/DIR> to <REMOTE_FILE/DIR>'
+    'list:[REMOTE_DIR]'
+    'mkdir:<REMOTE_DIR>'
+    'delete:<REMOTE_FILE/DIR>'
+    'share:<REMOTE_FILE>'
+    'info'
+    'unlink'
+)
+
+_arguments : \
+	"-f[Load the configuration file from a specific file]" \
+	"-s[Skip already existing files when download/upload. Default: Overwrite]" \
+	"-d[Enable DEBUG mode]" \
+	"-q[Quiet mode. Don't show messages]"\
+	"-p[Show cURL progress meter]"\
+	"-k[Doesn't check for SSL certificates (insecure)]"\
+	'*:: :->subcmds' && return 0
+
+if (( CURRENT == 1 )); then
+	_describe -t commands "Dropbox-upload subcommand" _1st_arguments
+	return
+fi
+
+if (( CURRENT == 2 )); then
+    case "$words[1]" in
+        copy|delete|download|list|mkdir|move|share|upload)
+            _files
+        ;;
+    esac
+fi
+
+if (( CURRENT == 3 )); then
+    case "$words[1]" in
+        copy|download|move|upload)
+            _files
+        ;;
+    esac
+fi
+
+
+return
