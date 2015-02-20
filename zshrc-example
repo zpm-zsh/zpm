@@ -13,7 +13,6 @@ plugins+=( battery node status path git ) #Prompt
 
 plugins+=( hosts translator gitignore command-not-found autoenv fasd history-substring-search zsh-syntax-highlighting zsh-autosuggestions ) #Plugins
 
-TMUX_AUTOSTART=dsf
 if [[ ! -f ~/.zpm/zpm.zsh ]]; then
 	git clone https://github.com/horosgrisa/ZPM ~/.zpm
 	cd ~/.zpm
