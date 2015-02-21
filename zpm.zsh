@@ -14,8 +14,8 @@ if [[ -z $ZPM ]]; then
         HISTFILE=$HOME/.zsh_history
     fi
 
-    HISTSIZE=9999
-    SAVEHIST=9999
+    HISTSIZE=999
+    SAVEHIST=999
     if [[ "$COLORS" == "true" ]]; then
         autoload -U colors && colors
     fi

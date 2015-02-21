@@ -7,25 +7,23 @@ plugins+=( minesweeper 2048 datauri ansiweather ack ls++ ls-- spark dropbox myip
 
 plugins+=( colors grc  dircolors ) #Colors
 
-plugins+=( rationalise-dot zsh-core human ls cd  ) #ZSH
+plugins+=( rationalise-dot zsh-core human ls cd zsh-recompile ) #ZSH
 
 plugins+=( battery node status path git ) #Prompt
 
 plugins+=( hosts translator gitignore command-not-found autoenv fasd history-substring-search zsh-syntax-highlighting zsh-autosuggestions ) #Plugins
 
-if [[ ! -f ~/.zpm/zpm.zsh ]]; then
-	git clone https://github.com/horosgrisa/ZPM ~/.zpm
-	cd ~/.zpm
-	git submodule update --init --recursive
-	cd
 
+if [[ ! -f ~/.zpm/zpm.zsh ]]; then
+	git clone --recursive https://github.com/horosgrisa/ZPM ~/.zpm
 fi
 
 source ~/.zpm/zpm.zsh
 
 # Variables
 
-PROMPT='%{$fg[magenta]%} %M %{$fg[yellow]%}➜ %{$reset_color%}'
+# PROMPT='%{$fg[magenta]%} %M %{$fg[yellow]%}➜ %{$reset_color%}'
+PROMPT='%{$fg[magenta]%} %M %{$fg[yellow]%}ᐅ %{$reset_color%}'
 RPROMPT=' $last_status$node_version$gitprompt$battery_charge$current_path%{$reset_color%}'
 PS2="%{$fg[green]%}%_>%{$reset_color%}"
 WORDCHARS='*?_-[]~=&;!#$%^(){}<>:.'
