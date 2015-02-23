@@ -22,8 +22,7 @@ source ~/.zpm/zpm.zsh
 
 # Variables
 
-# PROMPT='%{$fg[magenta]%} %M %{$fg[yellow]%}➜ %{$reset_color%}'
-PROMPT='%{$fg[magenta]%} %M %{$fg[yellow]%}ᐅ %{$reset_color%}'
+PROMPT='%{$fg[magenta]%} %M %{$fg[yellow]%}➜ %{$reset_color%}'
 RPROMPT=' $last_status$node_version$gitprompt$battery_charge$current_path%{$reset_color%}'
 PS2="%{$fg[green]%}%_>%{$reset_color%}"
 WORDCHARS='*?_-[]~=&;!#$%^(){}<>:.'

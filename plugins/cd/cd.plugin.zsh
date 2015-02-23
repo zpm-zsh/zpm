@@ -10,12 +10,3 @@ alias ..='cd ../'
 alias ...='cd ../../'
 alias ....='cd ../../../'
 alias .....='cd ../../../../'
-
-
-function _showfolder(){
-
-  $(whence ls)
-
-}
-
-chpwd_functions+=( _showfolder )

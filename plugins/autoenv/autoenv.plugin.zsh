@@ -1,7 +1,13 @@
 #!/usr/bin/env zsh
 
-AUTOENV_AUTH_FILE=~/.autoenv_authorized
-AUTOENV_COLORED=true
+
+if [[ -z $AUTOENV_AUTH_FILE ]]; then
+    AUTOENV_AUTH_FILE=~/.autoenv_authorized
+fi
+
+if [[ -z $AUTOENV_COLORED ]]; then
+    AUTOENV_COLORED=true
+fi
 
 add_auth_file(){
   if which shasum &> /dev/null
