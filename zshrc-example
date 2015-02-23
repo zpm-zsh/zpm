@@ -22,7 +22,7 @@ Plug voronkovich/gitignore.plugin.zsh zsh-users/zsh-syntax-highlighting horosgri
 Plug hosts translator command-not-found autoenv fasd  #Plugins
 
 
-Plug_init
+ZPM_init
 
 # Variables
 

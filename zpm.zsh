@@ -4,7 +4,7 @@ if [[ -z $plugins ]]; then
     plugins=( );
 fi
 
-function Plug_init(){
+function ZPM_init(){
 
     if [[ -z $COLORS ]]; then
         export COLORS=true
