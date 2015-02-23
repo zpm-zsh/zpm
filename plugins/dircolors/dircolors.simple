@@ -83,7 +83,7 @@ OTHER_WRITABLE 34;40
 # symbolic link
 LINK 35
 
-# pipe, socket, block device, character device (blue bg)
+# pipe, socket, block device, character device 
 FIFO 30;44
 SOCK 35;44
 DOOR 35;44 # Solaris 2.5 and later
@@ -92,9 +92,9 @@ CHR  37;44
 
 
 # Orphaned symlinks (blinking white on red)
-# Blink may or may not work (works on iTerm dark or light, and Putty dark)
+# Blink may or may not work
 ORPHAN  05;37;41
-# ... and the files that orphaned symlinks point to (blinking white on red)
+# ... and the files that orphaned symlinks point to
 MISSING 05;37;41
 
 # files with execute permission
