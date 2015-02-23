@@ -7,7 +7,7 @@ source ~/.zpm/zpm.zsh
 
 Plug npm nvm rvm gvm pip pyenv golang  #Package managers & langs
 
-Plug zsh-completions kill pidof docker   #Completions for programs
+Plug zsh-completions pidof docker   #Completions for programs
 
 Plug minesweeper 2048 datauri ansiweather ack ls++ ls-- spark dropbox myip extract mysql q hr pass k marks sshrc servers tor tmux genpasswd viewer desktop  #Programs
 
@@ -40,37 +40,37 @@ GIT_PREFIX=" "
 NODE_VERSION_PREFIX=" "
 BATTERY_CHARGE_PREFIX=" "
 
-ZSH_HIGHLIGHT_STYLES[single-quoted-argument]='fg=yellow'
-ZSH_HIGHLIGHT_STYLES[double-quoted-argument]='fg=yellow'
-ZSH_HIGHLIGHT_STYLES[bracket-error]='fg=white,bg=red'
-ZSH_HIGHLIGHT_STYLES[bracket-level-1]='fg=blue'
-ZSH_HIGHLIGHT_STYLES[bracket-level-2]='fg=green'
-ZSH_HIGHLIGHT_STYLES[bracket-level-3]='fg=yellow'
-ZSH_HIGHLIGHT_STYLES[bracket-level-4]='fg=magenta'
-ZSH_HIGHLIGHT_STYLES[cursor-matchingbracket]='fg=red,bg=blue' 
-ZSH_HIGHLIGHT_STYLES[alias]='fg=green'
-ZSH_HIGHLIGHT_STYLES[path]='fg=cyan,italic,underline'
-ZSH_HIGHLIGHT_STYLES[globbing]='fg=red'
-ZSH_HIGHLIGHT_STYLES[default]='fg=cyan'
-ZSH_HIGHLIGHT_STYLES[cursor]='bg=blue'
-ZSH_HIGHLIGHT_STYLES[precommand]='fg=cyan,underline'
-ZSH_HIGHLIGHT_STYLES[unknown-token]='fg=red,underline'
+# ZSH_HIGHLIGHT_STYLES[single-quoted-argument]='fg=yellow'
+# ZSH_HIGHLIGHT_STYLES[double-quoted-argument]='fg=yellow'
+# ZSH_HIGHLIGHT_STYLES[bracket-error]='fg=white,bg=red'
+# ZSH_HIGHLIGHT_STYLES[bracket-level-1]='fg=blue'
+# ZSH_HIGHLIGHT_STYLES[bracket-level-2]='fg=green'
+# ZSH_HIGHLIGHT_STYLES[bracket-level-3]='fg=yellow'
+# ZSH_HIGHLIGHT_STYLES[bracket-level-4]='fg=magenta'
+# ZSH_HIGHLIGHT_STYLES[cursor-matchingbracket]='fg=red,bg=blue' 
+# ZSH_HIGHLIGHT_STYLES[alias]='fg=green'
+# ZSH_HIGHLIGHT_STYLES[path]='fg=cyan,italic,underline'
+# ZSH_HIGHLIGHT_STYLES[globbing]='fg=red'
+# ZSH_HIGHLIGHT_STYLES[default]='fg=cyan'
+# ZSH_HIGHLIGHT_STYLES[cursor]='bg=blue'
+# ZSH_HIGHLIGHT_STYLES[precommand]='fg=cyan,underline'
+# ZSH_HIGHLIGHT_STYLES[unknown-token]='fg=red,underline'
 
-ZSH_HIGHLIGHT_PATTERNS+=('rm -rf *' 'fg=white,bg=red') 
-ZSH_HIGHLIGHT_PATTERNS+=('\|' 'fg=magenta')
-ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
+# ZSH_HIGHLIGHT_PATTERNS+=('rm -rf *' 'fg=white,bg=red') 
+# ZSH_HIGHLIGHT_PATTERNS+=('\|' 'fg=magenta')
+# ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
 
-# Aliaces
+# # Aliaces
 
-alias f='fasd -f -e vim'
-alias o='fasd -e xdg-open'
-alias d='fasd_cd -d -i'
-alias j='fasd_cd -d -i'
-alias \$=""
+# alias f='fasd -f -e vim'
+# alias o='fasd -e xdg-open'
+# alias d='fasd_cd -d -i'
+# alias j='fasd_cd -d -i'
+# alias \$=""
 
-alias screenfetch='screenfetch -c 1,2'
+# alias screenfetch='screenfetch -c 1,2'
 
-bindkey '^[[A' history-substring-search-up
-bindkey '^[[B' history-substring-search-down
+# bindkey '^[[A' history-substring-search-up
+# bindkey '^[[B' history-substring-search-down
 
 

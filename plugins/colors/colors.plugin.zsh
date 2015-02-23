@@ -12,4 +12,7 @@ export LESS_TERMCAP_se=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[04;38;5;146m'
 export LESS_TERMCAP_ue=$'\E[0m'
 export LESS='-R -M'
-export LESSOPEN='|pygmentize -f 256 -g %s'
+           
+if hash pygmentize 2>/dev/null; then
+    export LESSOPEN='|pygmentize -f 256 -g %s'
+fi
