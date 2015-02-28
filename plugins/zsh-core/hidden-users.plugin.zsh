@@ -1,6 +1,5 @@
 #!/usr/bin/env zsh
 
-
 zstyle ':completion:*:*:*:users' ignored-patterns \
 adm avahi beaglidx bin cacti canna clamav daemon \
 dbus distcache dovecot fax ftp games gkrellmd gopher \

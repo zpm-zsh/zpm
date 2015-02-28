@@ -31,10 +31,7 @@ RPROMPT=' $last_status$node_version$gitprompt$battery_charge$current_path%{$rese
 PS2="%{$fg[green]%}%_>%{$reset_color%}"
 WORDCHARS='*?_-[]~=&;!#$%^(){}<>:.'
 
-export NULLCMD=true
-export READNULLCMD=less
-export PAGER="less"
-export EDITOR="vim"
+
 CURRENT_PATH_PREFIX=" "
 GIT_PREFIX=" "
 NODE_VERSION_PREFIX=" "
