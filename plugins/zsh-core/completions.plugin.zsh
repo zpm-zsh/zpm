@@ -3,11 +3,9 @@
 if [[ "$COLORS" == "true" ]]; then
     zstyle ':completion:*:*:kill:*:processes' list-colors "=(#b) #([0-9]#)*=36=31"
     zstyle ':completion:*:warnings' format $'%{\e[0;31m%}No matches for:%{\e[0m%} %d'
-    zstyle -e ':completion:*:default' list-colors 'reply=("${PREFIX:+=(#bi)($PREFIX:t)*==01;34=01;34}:${(s.:.)LS_COLORS}")';
+    zstyle -e ':completion:*:default' list-colors 'reply=("${PREFIX:+=(#bi)($PREFIX:t)*==00;33=00;33}:${(s.:.)LS_COLORS}")';
 else
-    zstyle ':completion:*:*:kill:*:processes' list-colors "=(#b) #([0-9]#)*"
     zstyle ':completion:*:warnings' format $'No matches for: %d'
-    zstyle -e ':completion:*:default' list-colors 'reply=("${PREFIX:+=(#bi)($PREFIX:t)*}:${(s.:.)LS_COLORS}")';
 fi
 zstyle ':completion:*:processes' command "ps -au$USER"
 zstyle ':completion:*:processes' sort false

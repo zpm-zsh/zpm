@@ -70,10 +70,10 @@ function ZPM_init(){
     
         for plugin ($plugins); do
             if [[ -d $ZPM_DIR/plugins/$plugin/bin ]]; then
-                path=( $ZPM_DIR/plugins/$plugin/bin $path )
+                path=( $path $ZPM_DIR/plugins/$plugin/bin )
             else
                 if [[ $plugin == */* ]] && [[ -d $ZPM_DIR/custom/${plugin##*\/}/bin ]]; then
-                    path=( $ZPM_DIR/custom/${plugin##*\/}/bin $path )
+                    path=( $path $ZPM_DIR/custom/${plugin##*\/}/bin )
                 fi
             fi
         done
@@ -109,9 +109,6 @@ function ZPM_init(){
                 fi
             fi
         done
-
-
-
         unset plugin
         compinit
     

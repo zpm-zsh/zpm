@@ -40,37 +40,36 @@ GIT_PREFIX=" "
 NODE_VERSION_PREFIX=" "
 BATTERY_CHARGE_PREFIX=" "
 
-# ZSH_HIGHLIGHT_STYLES[single-quoted-argument]='fg=yellow'
-# ZSH_HIGHLIGHT_STYLES[double-quoted-argument]='fg=yellow'
-# ZSH_HIGHLIGHT_STYLES[bracket-error]='fg=white,bg=red'
-# ZSH_HIGHLIGHT_STYLES[bracket-level-1]='fg=blue'
-# ZSH_HIGHLIGHT_STYLES[bracket-level-2]='fg=green'
-# ZSH_HIGHLIGHT_STYLES[bracket-level-3]='fg=yellow'
-# ZSH_HIGHLIGHT_STYLES[bracket-level-4]='fg=magenta'
-# ZSH_HIGHLIGHT_STYLES[cursor-matchingbracket]='fg=red,bg=blue' 
-# ZSH_HIGHLIGHT_STYLES[alias]='fg=green'
-# ZSH_HIGHLIGHT_STYLES[path]='fg=cyan,italic,underline'
-# ZSH_HIGHLIGHT_STYLES[globbing]='fg=red'
-# ZSH_HIGHLIGHT_STYLES[default]='fg=cyan'
-# ZSH_HIGHLIGHT_STYLES[cursor]='bg=blue'
-# ZSH_HIGHLIGHT_STYLES[precommand]='fg=cyan,underline'
-# ZSH_HIGHLIGHT_STYLES[unknown-token]='fg=red,underline'
+ZSH_HIGHLIGHT_STYLES[single-quoted-argument]='fg=yellow'
+ZSH_HIGHLIGHT_STYLES[double-quoted-argument]='fg=yellow'
+ZSH_HIGHLIGHT_STYLES[bracket-error]='fg=white,bg=red'
+ZSH_HIGHLIGHT_STYLES[bracket-level-1]='fg=blue'
+ZSH_HIGHLIGHT_STYLES[bracket-level-2]='fg=green'
+ZSH_HIGHLIGHT_STYLES[bracket-level-3]='fg=yellow'
+ZSH_HIGHLIGHT_STYLES[bracket-level-4]='fg=magenta'
+ZSH_HIGHLIGHT_STYLES[cursor-matchingbracket]='fg=red,bg=blue' 
+ZSH_HIGHLIGHT_STYLES[alias]='fg=green'
+ZSH_HIGHLIGHT_STYLES[path]='fg=cyan,italic,underline'
+ZSH_HIGHLIGHT_STYLES[globbing]='fg=red'
+ZSH_HIGHLIGHT_STYLES[default]='fg=cyan'
+ZSH_HIGHLIGHT_STYLES[cursor]='bg=blue'
+ZSH_HIGHLIGHT_STYLES[precommand]='fg=cyan,underline'
+ZSH_HIGHLIGHT_STYLES[unknown-token]='fg=red,underline'
 
-# ZSH_HIGHLIGHT_PATTERNS+=('rm -rf *' 'fg=white,bg=red') 
-# ZSH_HIGHLIGHT_PATTERNS+=('\|' 'fg=magenta')
-# ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
+ZSH_HIGHLIGHT_PATTERNS+=('rm -rf *' 'fg=white,bg=red') 
+ZSH_HIGHLIGHT_PATTERNS+=('\|' 'fg=magenta')
+ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
 
-# # Aliaces
+# Aliaces
 
-# alias f='fasd -f -e vim'
-# alias o='fasd -e xdg-open'
-# alias d='fasd_cd -d -i'
-# alias j='fasd_cd -d -i'
-# alias \$=""
+alias f='fasd -f -e vim'
+alias o='fasd -e xdg-open'
+alias d='fasd_cd -d -i'
+alias j='fasd_cd -d -i'
+alias \$=""
 
-# alias screenfetch='screenfetch -c 1,2'
-
-# bindkey '^[[A' history-substring-search-up
-# bindkey '^[[B' history-substring-search-down
+alias screenfetch='screenfetch -c 1,2'
 
 
+transfer() { if [ $# -eq 0 ]; then echo "No arguments specified. Usage:\necho transfer /tmp/test.md\ncat /tmp/test.md | transfer test.md"; return 1; fi
+tmpfile=$( mktemp -t transferXXX ); if tty -s; then basefile=$(basename "$1" | sed -e 's/[^a-zA-Z0-9._-]/-/g'); curl --progress-bar --upload-file "$1" "https://transfer.sh/$basefile" >> $tmpfile; else curl --progress-bar --upload-file "-" "https://transfer.sh/$1" >> $tmpfile ; fi; cat $tmpfile; rm -f $tmpfile; }; alias transfer=transfer 
