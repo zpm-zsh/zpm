@@ -9,7 +9,7 @@ Plug npm nvm rvm gvm pip pyenv golang  #Package managers & langs
 
 Plug horosgrisa/zsh-completions pidof docker   #Completions for programs
 
-Plug minesweeper 2048 datauri ansiweather ack ls++ ls-- spark dropbox myip extract mysql q hr pass k marks sshrc servers tor tmux genpasswd viewer desktop  #Programs
+Plug datauri ansiweather ack ls++ ls-- dropbox myip extract horosgrisa/mysql-colorize q hr pass  marks sshrc servers tor tmux genpasswd viewer desktop  #Programs
 
 Plug colors grc dircolors  #Colors
 

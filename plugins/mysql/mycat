@@ -1,3 +1,0 @@
-#!/usr/bin/env zsh
-
-${0:a:h}/mycat.sed | ${0:a:h}/grcat ${0:a:h}/mysql.grcat | LESSOPEN='|pygmentize -f 256 -g %s' less -S -R -M;

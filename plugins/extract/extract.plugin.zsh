@@ -33,7 +33,7 @@ e() {
                 tar fxv "$1"                               
             ;;
             (*.tar.bz2|*.tbz|*.tbz2)
-                ar fxv "$1"
+                tar fxv "$1"
             ;;
             (*.tar.xz|*.txz)
                 tar --xz --help &> /dev/null \
