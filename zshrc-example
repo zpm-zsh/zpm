@@ -7,7 +7,7 @@ source ~/.zpm/zpm.zsh
 
 Plug npm nvm rvm gvm pip pyenv golang  #Package managers & langs
 
-Plug zsh-completions pidof docker   #Completions for programs
+Plug horosgrisa/zsh-completions pidof docker   #Completions for programs
 
 Plug minesweeper 2048 datauri ansiweather ack ls++ ls-- spark dropbox myip extract mysql q hr pass k marks sshrc servers tor tmux genpasswd viewer desktop  #Programs
 
@@ -17,9 +17,9 @@ Plug rationalise-dot zsh-core human ls cd zsh-recompile  #ZSH
 
 Plug battery node status path git  #Prompt
 
-Plug voronkovich/gitignore.plugin.zsh zsh-users/zsh-syntax-highlighting horosgrisa/zsh-history-substring-search horosgrisa/autosuggestions
+Plug voronkovich/gitignore.plugin.zsh zsh-users/zsh-syntax-highlighting horosgrisa/zsh-history-substring-search horosgrisa/autosuggestions horosgrisa/autoenv
 
-Plug hosts translator command-not-found autoenv fasd  #Plugins
+Plug hosts translator command-not-found fasd  #Plugins
 
 
 ZPM_init
