@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 
 translator() {
-  LBUFFER=$( wget -U "Mozilla/5.0" -qO - "http://translate.google.com/translate_a/t?client=t&text=$LBUFFER&sl=auto&tl=ru" | sed 's/\[\[\[\"//' | cut -d \" -f 1 )
+  LBUFFER=$( wget -U "Mozilla/5.0" -qO - "http://translate.google.com/translate_a/t?client=t&text=$LBUFFER&sl=auto&tl=$(locale | grep LANG= | awk -F "=" '{print $2}' | awk -F "_" '{print $1}')" | sed 's/\[\[\[\"//' | cut -d \" -f 1 )
 }
 zle -N translator
 bindkey '^T' translator
