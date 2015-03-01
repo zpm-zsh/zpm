@@ -125,3 +125,18 @@ function zshrc-install(){
     scp ~/.zshrc $1:.zshrc 
 }
 
+function zpm-update(){
+    olddir=`pwd`
+    cd $ZPM_DIR
+    echo "Updating ZPM"
+    git pull
+    cd custom
+    for i in *
+    do
+        echo "Updating: $i"
+        cd $i
+        git pull
+        cd ..
+    done
+    cd $olddir
+}
