@@ -5,21 +5,18 @@ fi
 source ~/.zpm/zpm.zsh
 
 
-Plug npm nvm rvm gvm pip pyenv golang  #Package managers & langs
+Plug nvm rvm gvm pip pyenv golang  #Package managers & langs
 
-Plug horosgrisa/zsh-completions pidof docker   #Completions for programs
-
-Plug datauri ansiweather ack ls++ ls-- dropbox myip extract horosgrisa/mysql-colorize q hr pass  marks sshrc servers tor tmux genpasswd viewer desktop  #Programs
+Plug datauri ack ls++ ls-- dropbox myip extract pass sshrc servers tor tmux genpasswd viewer desktop hosts translator command-not-found  #Programs
 
 Plug colors grc dircolors  #Colors
 
-Plug rationalise-dot zsh-core human ls cd zsh-recompile  #ZSH
+Plug rationalise-dot human zsh-core ls cd  #ZSH
 
 Plug battery node status path git  #Prompt
 
-Plug voronkovich/gitignore.plugin.zsh zsh-users/zsh-syntax-highlighting horosgrisa/zsh-history-substring-search horosgrisa/zsh-autosuggestions horosgrisa/autoenv
+Plug horosgrisa/zsh-marks horosgrisa/zsh-completions voronkovich/gitignore.plugin.zsh zsh-users/zsh-syntax-highlighting horosgrisa/zsh-history-substring-search horosgrisa/zsh-autosuggestions horosgrisa/autoenv horosgrisa/zsh-fasd horosgrisa/mysql-colorize 
 
-Plug hosts translator command-not-found horosgrisa/zsh-fasd  #Plugins
 
 
 ZPM_init

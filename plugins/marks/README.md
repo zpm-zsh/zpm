@@ -1,4 +1,0 @@
-zshmarks
-========
-
-Bookmarks for zsh
