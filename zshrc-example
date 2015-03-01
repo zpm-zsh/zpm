@@ -14,7 +14,7 @@ Plug rationalise-dot human zsh-core ls cd  #ZSH
 
 Plug battery node status path git  #Prompt
 
-Plug horosgrisa/zsh-marks horosgrisa/zsh-completions voronkovich/gitignore.plugin.zsh zsh-users/zsh-syntax-highlighting horosgrisa/zsh-history-substring-search horosgrisa/zsh-autosuggestions horosgrisa/autoenv horosgrisa/zsh-fasd horosgrisa/mysql-colorize 
+Plug horosgrisa/zsh-marks horosgrisa/zsh-completions voronkovich/gitignore.plugin.zsh zsh-users/zsh-syntax-highlighting horosgrisa/zsh-history-substring-search horosgrisa/zsh-autosuggestions horosgrisa/autoenv horosgrisa/zsh-fasd horosgrisa/mysql-colorize nviennot/zsh-vim-plugin
 
 ZPM_init
 

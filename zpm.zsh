@@ -119,7 +119,7 @@ function Plug(){
 }
 
 function zshrc-install(){
-    scp ~/.zshrc $1:.zshrc 
+    ssh $1 "git clone --recursive https://github.com/horosgrisa/ZPM ~/.zpm; ln -s ~/.zpm/zshrc-example ~/.zshrc"
 }
 
 function zpm-update(){
