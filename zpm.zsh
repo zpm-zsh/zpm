@@ -1,10 +1,9 @@
 #!/usr/bin/env zsh
 
-if [[ -z $plugins ]]; then
-    plugins=( );
-fi
-
 function ZPM_init(){
+    if [[ -z $plugins ]]; then
+        plugins=( );
+    fi
 
     if [[ -z $COLORS ]]; then
         export COLORS=true
@@ -13,7 +12,6 @@ function ZPM_init(){
     if [[ -z $MANPATH ]]; then
         export MANPATH=$(manpath)
     fi
-    
     
     if [[ -z $ZPM ]]; then
         ZPM=true
@@ -55,8 +53,6 @@ function ZPM_init(){
             fi
         done
     
-    
-    
         for plugin ($plugins); do
             if [[ -d $ZPM_DIR/plugins/$plugin ]]; then
                 fpath=( $ZPM_DIR/plugins/$plugin $fpath )
@@ -66,7 +62,6 @@ function ZPM_init(){
                 fi
             fi
         done
-    
     
         for plugin ($plugins); do
             if [[ -d $ZPM_DIR/plugins/$plugin/bin ]]; then
@@ -87,39 +82,41 @@ function ZPM_init(){
                 fi
             fi
         done
-    
+       
         for plugin ($plugins); do
-            if [[ -f $ZPM_DIR/plugins/$plugin/$plugin.plugin.zsh ]]; then
+            if [[ ! $plugin == */* ]] && [[ -f $ZPM_DIR/plugins/$plugin/$plugin.plugin.zsh ]]; then
                 source $ZPM_DIR/plugins/$plugin/$plugin.plugin.zsh 
-            else
-                if [[ $plugin == */* ]] && [[ -f $ZPM_DIR/custom/${plugin##*\/}/${plugin##*\/}.plugin.zsh ]]; then
-                    source $ZPM_DIR/custom/${plugin##*\/}/${plugin##*\/}.plugin.zsh
-                fi
             fi
         done
-    
         for plugin ($plugins); do
-            if [[ $plugin == *.plugin.zsh ]]; then
-                if [[ -f $ZPM_DIR/plugins/$plugin/$plugin ]]; then
-                    source $ZPM_DIR/plugins/$plugin/$plugin 
-                else
-                    if [[ $plugin == */* ]] && [[ -f $ZPM_DIR/custom/${plugin##*\/}/${plugin##*\/} ]]; then
-                        source $ZPM_DIR/custom/${plugin##*\/}/${plugin##*\/}
-                    fi
-                fi
+            if [[ $plugin == */* ]] && [[ -f $ZPM_DIR/custom/${plugin##*\/}/${plugin##*\/}.plugin.zsh ]]; then
+                source $ZPM_DIR/custom/${plugin##*\/}/${plugin##*\/}.plugin.zsh 
+            fi
+        done
+        for plugin ($plugins); do
+            if [[ $plugin == */*.plugin.zsh ]] && [[ -f $ZPM_DIR/custom/${plugin##*\/}/${plugin##*\/} ]]; then
+                source $ZPM_DIR/custom/${plugin##*\/}/${plugin##*\/} 
+            fi
+        done
+        for plugin ($plugins); do
+            if [[ $plugin == */zsh-* ]] && [[ -f $ZPM_DIR/custom/${plugin##*\/}/${${plugin##*\/}:4}.plugin.zsh ]]; then
+                source $ZPM_DIR/custom/${plugin##*\/}/${${plugin##*\/}:4}.plugin.zsh
+            fi
+        done
+        for plugin ($plugins); do
+            if [[ $plugin == */zsh-*.plugin.zsh ]] && [[ -f $ZPM_DIR/custom/${plugin##*\/}/${${plugin##*\/}:4} ]]; then
+                source $ZPM_DIR/custom/${plugin##*\/}/${${plugin##*\/}:4}
             fi
         done
         unset plugin
         compinit
     
     fi
-
 }
 
 function Plug(){
     plugins+=( $@ )
 }
-
 
 function zshrc-install(){
     scp ~/.zshrc $1:.zshrc 
