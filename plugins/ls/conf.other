@@ -37,5 +37,5 @@ regexp=(?<=[-bcCdDlMnpPs?][-r][-w][-xsStT][-r][-w][-xsStT])(-|(r))(-|(w))(-|([xs
 colours=unchanged,unchanged,red,unchanged,red,unchanged,red
 =======
 # user
-regexp=([a-z]+)\ +([a-z]+)|wheel(?=\s|$)
+regexp=(\ [a-z]+)\ +([a-z]+\ )|wheel(?=\s|$)
 colours=magenta
