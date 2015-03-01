@@ -71,7 +71,7 @@ _git_prompt() {
         fi
         if [ "$git_vars[7]" -eq 1 ]; then 
             if [[ $COLORS == "true" ]]; then
-                clean=" %{$fg[green]%}$GIT_CLEAN"
+                clean=" %{$fg[yellow]%}$GIT_CLEAN"
             else
                 clean=" $GIT_CLEAN"
             fi
