@@ -122,6 +122,13 @@ function zshrc-install(){
     ssh $1 "git clone --recursive https://github.com/horosgrisa/ZPM ~/.zpm; ln -s ~/.zpm/zshrc-example ~/.zshrc"
 }
 
+function zpm-compile(){
+    find $ZPM_DIR/plugins -name "*.zsh" | while read line
+    do
+        zcompile $line
+    done
+}
+
 function zpm-update(){
     olddir=`pwd`
     cd $ZPM_DIR
