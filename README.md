@@ -1,1 +1,5 @@
-`curl -L https://github.com/horosgrisa/ZPM/raw/master/installer.zsh  | zsh`
+# ZPM - Zsh Plugin Manager
+
+Zsh plugin manager similar to vim-plug, but compatible with oh-my-zsh
+
+
