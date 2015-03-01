@@ -19,7 +19,7 @@ Plug battery node status path git  #Prompt
 
 Plug voronkovich/gitignore.plugin.zsh zsh-users/zsh-syntax-highlighting horosgrisa/zsh-history-substring-search horosgrisa/zsh-autosuggestions horosgrisa/autoenv
 
-Plug hosts translator command-not-found fasd  #Plugins
+Plug hosts translator command-not-found horosgrisa/zsh-fasd  #Plugins
 
 
 ZPM_init
