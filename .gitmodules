@@ -1,9 +1,0 @@
-[submodule "plugins/hr/hr"]
-	path = plugins/hr/hr
-	url = https://github.com/LuRsT/hr.git
-[submodule "plugins/sshrc/sshrc"]
-	path = plugins/sshrc/sshrc
-	url = https://github.com/Russell91/sshrc.git
-[submodule "plugins/zsh-completions/zsh-completions"]
-	path = plugins/zsh-completions/zsh-completions
-	url = https://github.com/zsh-users/zsh-completions.git
