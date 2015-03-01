@@ -8,7 +8,7 @@ _status() {
   RETVAL=$?
     if [ $RETVAL -eq 0 ]; then
         if [[ $COLORS == "true" ]]; then
-            export last_status="%{$fg[green]%}$LAST_STATUS_TRUE%{$reset_color%}"
+            export last_status="%{$fg[yellow]%}$LAST_STATUS_TRUE%{$reset_color%}"
         else
             export last_status="$LAST_STATUS_TRUE"
         fi
