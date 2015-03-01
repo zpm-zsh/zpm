@@ -118,7 +118,7 @@ function Plug(){
     plugins+=( $@ )
 }
 
-function zshrc-install(){
+function zpm-install(){
     ssh $1 "git clone --recursive https://github.com/horosgrisa/ZPM ~/.zpm; ln -s ~/.zpm/zshrc-example ~/.zshrc"
 }
 
