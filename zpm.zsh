@@ -122,6 +122,10 @@ function zpm-install(){
     ssh $1 "git clone --recursive https://github.com/horosgrisa/ZPM ~/.zpm; ln -s ~/.zpm/zshrc-example ~/.zshrc"
 }
 
+function zshrc-install(){
+    scp ~/.zshrc $1:.zshrc
+}
+
 function zpm-compile(){
     find $ZPM_DIR/plugins -name "*.zsh" | while read line
     do

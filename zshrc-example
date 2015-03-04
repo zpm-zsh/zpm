@@ -2,8 +2,6 @@ if [[ ! -f ~/.zpm/zpm.zsh ]]; then
 	git clone --recursive https://github.com/horosgrisa/ZPM ~/.zpm
 fi
 
-alias pygmentize='pygmentize -O style=solarizeddark'
-
 source ~/.zpm/zpm.zsh
 
 Plug nvm rvm gvm pip pyenv golang  #Package managers & langs
@@ -26,7 +24,6 @@ PROMPT='%{$fg[magenta]%} %M %{$fg[yellow]%}➜ %{$reset_color%}'
 RPROMPT=' $last_status$node_version$gitprompt$battery_charge$current_path%{$reset_color%}'
 PS2="%{$fg[green]%}%_>%{$reset_color%}"
 WORDCHARS='*?_-[]~=&;!#$%^(){}<>:.'
-
 
 CURRENT_PATH_PREFIX=" "
 GIT_PREFIX=" "
@@ -55,14 +52,3 @@ ZSH_HIGHLIGHT_PATTERNS+=('\|' 'fg=red,bold')
 
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern line)
 
-# Aliaces
-
-alias f='fasd -f -e vim'
-alias o='fasd -e xdg-open'
-alias d='fasd_cd -d -i'
-alias j='fasd_cd -d -i'
-alias \$=""
-
-alias screenfetch='screenfetch -c 1,2'
-
-BATTERY=false
