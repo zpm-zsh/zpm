@@ -1,11 +1,3 @@
-# CAPS LINE
-regexp=^[A-Z\s%]*([A-Z]{3})[A-Z\s%]*$
-colours=underline 
-=======
-# Capd Line
-regexp=^([A-Z][-a-z0-9]+(\s+|$)){3,}$
-colours=underline
-=======
 # text:
 regexp=^([-a-z0-9]+):\s
 colours=unchanged,yellow
@@ -13,14 +5,6 @@ colours=unchanged,yellow
 # /full/path
 regexp=(\s|^)/[-\w\d.]+/[-\w\d./]+
 colours=white
-=======
-# -options
-regexp=(?<=\s)-[\w\d]+(?=\s|$)
-colours=yellow
-=======
-# --long-option=
-regexp=(?<=\s)--[-\w\d]+[\w\d](?==|\s|$)(=?)
-colours=cyan,white
 =======
 # [text]
 regexp=\[[-\w\d:/]+\]
@@ -38,52 +22,15 @@ colours=cyan
 regexp=(\s|^)\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}(?=[\s,]|$)
 colours=magenta
 =======
-# ip4 mask
-regexp=(\s|^)(0|255)\.(0|255)\.(0|255)\.(0|255)(?=[\s,]|$)
-colours=magenta
-=======
 # size
 regexp=(\s|^)\d+([.,]\d+)?\s?([kKMG][bB]|[bB]|[kKMG])(?=[\s,]|$)
 colours=yellow
-=======
-# n/n/n
-regexp=(\s|^)\d+(\/\d+)+(\/\d+)+(?=[\s,]|$)
-colours=green
-=======
-# n:n
-regexp=(\s|^)\d+(:\d+)+(?=[\s,]|$)
-colours=green
 =======
 regexp=(?<=\d):(?=\d)
 colours=yellow
 =======
 regexp=(?<=\d)\/(?=\d)
 colours=yellow
-=======
-# -rwxrwxrwx
-regexp=(-|([bcCdDlMnpPs?]))(?=[-r][-w][-xsStT][-r][-w][-xsStT][-r][-w][-xsStT])
-colours=unchanged,unchanged,blue
-=======
-regexp=(?<=[-bcCdDlMnpPs?])(-|(r))(-|(w))(-|([xsStT]))(?=[-r][-w][-xsStT][-r][-w][-xsStT])
-colours=unchanged,unchanged,green,unchanged,green,unchanged,green
-=======
-regexp=(?<=[-bcCdDlMnpPs?][-r][-w][-xsStT])(-|(r))(-|(w))(-|([xsStT]))(?=[-r][-w][-xsStT])
-colours=unchanged,unchanged,yellow,unchanged,yellow,unchanged,yellow
-=======
-regexp=(?<=[-bcCdDlMnpPs?][-r][-w][-xsStT][-r][-w][-xsStT])(-|(r))(-|(w))(-|([xsStT]))
-colours=unchanged,unchanged,red,unchanged,red,unchanged,red
-=======
-# root
-regexp=root\ +root|wheel(?=\s|$)
-colours=red
-=======
-# grisa
-regexp=grisa\ +grisa|wheel(?=\s|$)
-colours=magenta
-=======
-# Linux kernel
-regexp=[Ll]inux\s*([\w\d]+\s*)?(\d+\.\d+\.\d+\-\d+)(\-[\w\d]+)?
-colours=cyan,yellow,green,green
 =======
 # /dev/sda
 regexp=(\s|^)(/dev/)?[hs]d[a-f][0-9]*(?=[^\w\d]|$)

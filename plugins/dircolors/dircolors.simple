@@ -108,28 +108,18 @@ EXEC 33  # Unix
 .sh  33  # Unix
 .csh 33  # Unix
 .zsh 33  # Unix
+.bin 33  # Unix
+.class 33  # Java
 
 ### Text formats
 
 # Text that we can edit with a regular editor
-.txt 32
-.org 32
-.md 32
-.mkd 32
-.htm 32
-.html 32
-*README 32
-*LICENSE 32
-
-# Files wih data
-.json 01;31
-.yml 01;31
-.yaml 01;31
-.conf 01;31
-.ini 01;31
-.sql 01;31
-
-
+.txt 34
+.org 34
+.md 34
+.mkd 34
+*README 34
+*LICENSE 34
 
 ### Multimedia formats
 
@@ -145,7 +135,6 @@ EXEC 33  # Unix
 .svgz 31
 .tif 31
 .tiff 31
-
 
 # Audio
 .aac 01;31
@@ -221,7 +210,6 @@ EXEC 33  # Unix
 .xpi  01;35
 .crx  01;35
 
-
 #############################################################################
 # Your customizations
 
@@ -229,7 +217,6 @@ EXEC 33  # Unix
 .bak 01;32
 .zwc 01;32
 *~ 01;32
-
 
 .gpg  32
 .pgp  32
@@ -258,20 +245,34 @@ EXEC 33  # Unix
 .rb 33
 .hs 33
 .php 33
-.shtml 33
 .erb 33
-.haml 33
-.xml 33
 .rdf 33
-.css 33
-.sass 33
-.scss 33
-.less 33
-.js 33
-.coffee 33
 .l 33
 .n 33
 .p 33
 .pod 33
 .tex 33
 .go 33
+
+.js 01;31
+.coffee 01;31
+
+.css 32
+.sass 32
+.scss 32
+.less 32
+
+.haml 34
+.xml 34
+.shtml 34
+.htm 34
+.html 34
+
+
+# Files wih data
+.json 01;35
+.yml 01;35
+.yaml 01;35
+.conf 01;35
+.ini 01;35
+.sql 01;35

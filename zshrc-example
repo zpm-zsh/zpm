@@ -2,6 +2,8 @@ if [[ ! -f ~/.zpm/zpm.zsh ]]; then
 	git clone --recursive https://github.com/horosgrisa/ZPM ~/.zpm
 fi
 
+alias pygmentize='pygmentize -O style=solarizeddark'
+
 source ~/.zpm/zpm.zsh
 
 Plug nvm rvm gvm pip pyenv golang  #Package managers & langs

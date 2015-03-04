@@ -8,7 +8,7 @@ htmlcat() {
     else
         file=$1
     fi
-  html-beautify $file | pygmentize -f 256 -g
+  html-beautify $file | `whence pygmentize` -f 256 -g
 }
 alias xmlcat=htmlcat
 
@@ -20,7 +20,7 @@ csscat() {
     else
         file=$1
     fi
-  cssbeautify $file | pygmentize -f 256 -g 
+  cssbeautify $file | `whence pygmentize` -f 256 -g 
 }
 
 jscat() {
@@ -31,7 +31,7 @@ jscat() {
     else
         file=$1
     fi
-  js-beautify $file | pygmentize -f 256 -g 
+  js-beautify $file | `whence pygmentize` -f 256 -g 
 }
 
 jsoncat(){
@@ -46,7 +46,7 @@ cppcat() {
     else
         file=$1
     fi
-  astyle < $file | pygmentize -f 256 -g 
+  astyle < $file | `whence pygmentize` -f 256 -g 
 }
 alias javacat=cppcat
 
@@ -59,7 +59,7 @@ hcat() {
     else
         file=$1
     fi
-  pygmentize -f 256 -g $file
+  `whence pygmentize` -f 256 -g $file
 }
 
 
