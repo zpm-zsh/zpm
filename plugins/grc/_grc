@@ -1,0 +1,14 @@
+#compdef - grc
+
+# Completions for grc
+
+shift words
+(( CURRENT-- ))
+
+while [[ $( echo $words| head -c 1 )   == '-' ]]
+do
+	shift words
+	(( CURRENT-- ))
+done
+
+_normal
