@@ -1,4 +1,7 @@
-export NULLCMD=true
-export READNULLCMD=less
-export PAGER="less"
-export EDITOR="vim"
+if [[ -z $PAGER ]]; then
+    export PAGER=less
+fi
+
+if [[ -z $EDITOR ]]; then
+    export EDITOR=vim
+fi
