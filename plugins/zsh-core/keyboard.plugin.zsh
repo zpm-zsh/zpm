@@ -16,4 +16,5 @@ bindkey '^[[1;5B' history-beginning-search-forward
 bindkey '^[OB' history-beginning-search-forward
 
 bindkey '^K' clear-screen
+bindkey "^W" backward-kill-word
 bindkey -M menuselect " " accept-and-menu-complete
