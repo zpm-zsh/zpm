@@ -34,8 +34,16 @@ jscat() {
   js-beautify $file | `whence pygmentize` -f 256 -g 
 }
 
-jsoncat(){
-    prettyjson $1
+
+jsoncat() {
+  if [[ $1 == "http:"* ]] || [[ $1 == "https:"* ]] || [[ $1 == "ftp:"* ]]
+    then
+    curl -L --silent $1 > /tmp/.tmp.text.js
+    file=/tmp/.tmp.text.js
+    else
+        file=$1
+    fi
+  cat $file | prettyjson
 }
 
 cppcat() {
