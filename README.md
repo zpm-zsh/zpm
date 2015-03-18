@@ -2,4 +2,4 @@
 
 Zsh plugin manager similar to vim-plug, but compatible with oh-my-zsh
 
-see `zshrc-example` 
+see `zshrc-example`
