@@ -15,7 +15,7 @@ if [[ ! -f ~/.zpm/zpm.zsh ]]; then
 fi
 ```
 into `.zshrc`
-
+  
 2. If you don't have `.zshrc` copy example of zshrc from ZPM
 ```
 cp ~/.zpm/zshrc-example ~/.zshrc
