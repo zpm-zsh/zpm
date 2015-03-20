@@ -4,13 +4,13 @@ fi
 
 source ~/.zpm/zpm.zsh
 
-Plug nvm rvm  pip pyenv golang horosgrisa/zsh-gvm  #Package managers & langs
+Plug nvm golang horosgrisa/zsh-gvm  #Package managers & langs
 
-Plug datauri ack ls++ ls-- dropbox myip extract pass sshrc servers tor tmux genpasswd viewer desktop hosts translator command-not-found  #Programs
+Plug datauri ack dropbox myip extract pass tor tmux genpasswd viewer desktop hosts command-not-found rmate  #Programs
 
 Plug colors grc dircolors  #Colors
 
-Plug rationalise-dot human zsh-core ls cd  #ZSH
+Plug human zsh-core ls cd  #ZSH
 
 Plug battery node status path git  #Prompt
 
@@ -64,9 +64,3 @@ alias o='fasd -e xdg-open'
 alias d='fasd_cd -d -i'
 alias j='fasd_cd -d -i'
 alias \$=""
-alias pygmentize='pygmentize -O style=solarizeddark'
-alias pbcopy="xclip -sel clip"
-alias pbpaste="xclip -selection clipboard -o"
-alias screenfetch='screenfetch -c 1,2'
-
-BATTERY=false
