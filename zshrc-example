@@ -4,7 +4,7 @@ fi
 
 source ~/.zpm/zpm.zsh
 
-Plug nvm rvm gvm pip pyenv golang  #Package managers & langs
+Plug nvm rvm  pip pyenv golang horosgrisa/zsh-gvm  #Package managers & langs
 
 Plug datauri ack ls++ ls-- dropbox myip extract pass sshrc servers tor tmux genpasswd viewer desktop hosts translator command-not-found  #Programs
 
@@ -14,7 +14,11 @@ Plug rationalise-dot human zsh-core ls cd  #ZSH
 
 Plug battery node status path git  #Prompt
 
-Plug horosgrisa/zsh-marks horosgrisa/zsh-completions voronkovich/gitignore.plugin.zsh zsh-users/zsh-syntax-highlighting horosgrisa/zsh-history-substring-search horosgrisa/zsh-autosuggestions horosgrisa/autoenv horosgrisa/zsh-fasd horosgrisa/mysql-colorize nviennot/zsh-vim-plugin
+Plug horosgrisa/zsh-marks horosgrisa/zsh-completions voronkovich/gitignore.plugin.zsh zsh-users/zsh-syntax-highlighting horosgrisa/zsh-history-substring-search horosgrisa/zsh-autosuggestions horosgrisa/autoenv horosgrisa/fasd  horosgrisa/mysql-colorize
+
+plugins=( lol )
+
+Plug oh-my-zsh-wrapper
 
 ZPM_init
 
@@ -23,7 +27,8 @@ ZPM_init
 PROMPT='%{$fg[magenta]%} %M %{$fg[yellow]%}➜ %{$reset_color%}'
 RPROMPT=' $last_status$node_version$gitprompt$battery_charge$current_path%{$reset_color%}'
 PS2="%{$fg[green]%}%_>%{$reset_color%}"
-WORDCHARS='*?_-[]~=&;!#$%^(){}<>:.'
+PROMPT_EOL_MARK="%{$bg[cyan]%}%{$fg[white]%}⏎%{$reset_color%}"
+WORDCHARS='*?_-~=&;!#$%^()[]{}<>:.'
 
 CURRENT_PATH_PREFIX=" "
 GIT_PREFIX=" "
@@ -52,3 +57,16 @@ ZSH_HIGHLIGHT_PATTERNS+=('\|' 'fg=red,bold')
 
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern line)
 
+# Aliaces
+
+alias f='fasd -f -e vim'
+alias o='fasd -e xdg-open'
+alias d='fasd_cd -d -i'
+alias j='fasd_cd -d -i'
+alias \$=""
+alias pygmentize='pygmentize -O style=solarizeddark'
+alias pbcopy="xclip -sel clip"
+alias pbpaste="xclip -selection clipboard -o"
+alias screenfetch='screenfetch -c 1,2'
+
+BATTERY=false
