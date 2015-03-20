@@ -6,7 +6,7 @@ ZPM ( Zsh plugin manager ) is an yet another plugin manager for [zsh](http://www
 * `git`
 * `zsh`
 
-## Instalaton 
+## Instalation 
 
 1. Add 
 ```
