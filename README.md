@@ -8,15 +8,15 @@ ZPM ( Zsh plugin manager ) is an yet another plugin manager for [zsh](http://www
 
 ## Instalation 
 
-1. Add 
+* Add 
 ```
 if [[ ! -f ~/.zpm/zpm.zsh ]]; then
     git clone --recursive https://github.com/horosgrisa/ZPM ~/.zpm
 fi
 ```
 into `.zshrc`
-  
-2. If you don't have `.zshrc` copy example of zshrc from ZPM
+
+* If you don't have `.zshrc` copy example of zshrc from ZPM
 ```
 cp ~/.zpm/zshrc-example ~/.zshrc
 ```
