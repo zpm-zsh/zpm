@@ -207,14 +207,14 @@ EXEC 33  # Unix
 ### Text formats
 
 # Text that we can edit with a regular editor
-.txt 01;34
-.org 01;34
-.md 01;34
-.mkd 01;34
-.todo 01;34
-.srt 01;34
-*README 01;34
-*LICENSE 01;34
+.txt 01;31
+.org 01;31
+.md 01;31
+.mkd 01;31
+.todo 01;31
+.srt 01;31
+*README 01;31
+*LICENSE 01;31
 
 # Files wih data
 .json 36
