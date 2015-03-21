@@ -38,6 +38,15 @@ zstyle ':completion::complete:*' use-cache 1
 zstyle ':completion::complete:*' cache-path ~/.cache/zsh
 autoload -U compinit && compinit
 
+function _ZPM_End_hook(){
+    if [[ -z $after ]]; then
+        compinit
+        export after=true
+    fi
+}
+
+precmd_functions+=(_ZPM_End_hook)
+
 function zpm-install(){
 
     ssh $1 "git clone --recursive https://github.com/horosgrisa/ZPM ~/.zpm; ln -s ~/.zpm/zshrc-example ~/.zshrc"
@@ -47,7 +56,7 @@ function zpm-install(){
 function zshrc-install(){
 
     scp ~/.zshrc $1:.zshrc
-    
+
 }
 
 function zpm-compile(){
