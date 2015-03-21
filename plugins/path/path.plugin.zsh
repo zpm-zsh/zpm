@@ -15,16 +15,16 @@ path() {
 
 p() {
     pa=$(pwd)
-    pa=${pa//\//$fg[magenta]\/$fg[cyan]}
-    pa=$fg[cyan]$pa
+    pa=${pa//\//$fg[red]\/$fg[blue]}
+    pa=$fg[blue]$pa
     echo $pa
 }
 
 _current_path() {
     pa=$(print -Pn %2~)
     if [[ $COLORS == "true" ]]; then
-        pa=${pa//\//%{$fg[magenta]%}\/%{$fg[cyan]%}}
-        export current_path="%{$fg[cyan]%}$CURRENT_PATH_PREFIX$pa$CURRENT_PATH_SUFIX%{$reset_color%}"
+        pa=${pa//\//%{$fg[red]%}\/%{$fg[blue]%}}
+        export current_path="%{$fg[blue]%}$CURRENT_PATH_PREFIX$pa$CURRENT_PATH_SUFIX%{$reset_color%}"
     else
         export current_path="$CURRENT_PATH_PREFIX$pa$CURRENT_PATH_SUFIX"
     fi

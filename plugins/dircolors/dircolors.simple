@@ -111,16 +111,6 @@ EXEC 33  # Unix
 .bin 33  # Unix
 .class 33  # Java
 
-### Text formats
-
-# Text that we can edit with a regular editor
-.txt 34
-.org 34
-.md 34
-.mkd 34
-*README 34
-*LICENSE 34
-
 ### Multimedia formats
 
 # Image
@@ -137,14 +127,14 @@ EXEC 33  # Unix
 .tiff 31
 
 # Audio
-.aac 01;31
-.flac 01;31
-.m4a 01;31
-.mid 01;31
-.midi 01;31
-.mp3 01;31
-.ogg  01;31
-.wav 01;31
+.aac 32
+.flac 32
+.m4a 32
+.mid 32
+.midi 32
+.mp3 32
+.ogg  32
+.wav 32
 
 # Video
 .avi 35
@@ -165,41 +155,41 @@ EXEC 33  # Unix
 ### Misc
 
 # Binary document formats and multimedia source
-.doc 36
-.docx 36
-.rtf 36
-.dot 36
-.dotx 36
-.xls 36
-.xlsx 36
-.ppt 36
-.pptx 36
-.fla 36
-.psd 36
-.pdf 36
-.fb2 36
-.epub 36
+.doc 01;35
+.docx 01;35
+.rtf 01;35
+.dot 01;35
+.dotx 01;35
+.xls 01;35
+.xlsx 01;35
+.ppt 01;35
+.pptx 01;35
+.fla 01;35
+.psd 01;35
+.pdf 01;35
+.fb2 01;35
+.epub 01;35
 
 # Archives, compressed
-.7z   00;35
-.arj  00;35
-.bz   00;35
-.bz2  00;35
-.cab  00;35
-.gem  00;35
-.gz   00;35
-.iso  00;35
-.rar  00;35
-.tar  00;35
-.tbz  00;35
-.tbz2 00;35
-.tgz  00;35
-.tx   00;35
-.war  00;35
-.xz   00;35
-.z    00;35
-.Z    00;35
-.zip  00;35
+.7z   01;31
+.arj  01;31
+.bz   01;31
+.bz2  01;31
+.cab  01;31
+.gem  01;31
+.gz   01;31
+.iso  01;31
+.rar  01;31
+.tar  01;31
+.tbz  01;31
+.tbz2 01;31
+.tgz  01;31
+.tx   01;31
+.war  01;31
+.xz   01;31
+.z    01;31
+.Z    01;31
+.zip  01;31
 
 .apk  01;35
 .jar  01;35
@@ -210,7 +200,32 @@ EXEC 33  # Unix
 .xpi  01;35
 .crx  01;35
 
+
+
 #############################################################################
+
+### Text formats
+
+# Text that we can edit with a regular editor
+.txt 01;34
+.org 01;34
+.md 01;34
+.mkd 01;34
+.todo 01;34
+.srt 01;34
+*README 01;34
+*LICENSE 01;34
+
+# Files wih data
+.json 36
+.yml 36
+.yaml 36
+.conf 36
+.ini 36
+.desktop 36
+.sql 36
+
+
 # Your customizations
 
 .log 01;32
@@ -225,8 +240,11 @@ EXEC 33  # Unix
 .aes  32
 .enc  32
 
-.sqlite 34
+.db 01;33
+.sqlite 01;33
 
+
+.torrent 32
 
 # Source text
 .vim 33
@@ -267,12 +285,3 @@ EXEC 33  # Unix
 .shtml 34
 .htm 34
 .html 34
-
-
-# Files wih data
-.json 01;35
-.yml 01;35
-.yaml 01;35
-.conf 01;35
-.ini 01;35
-.sql 01;35
