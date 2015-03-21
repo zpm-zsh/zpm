@@ -7,7 +7,8 @@ if [[ "$COLORS" == "true" ]]; then
 else
     zstyle ':completion:*:warnings' format $'No matches for: %d'
 fi
-zstyle ':completion:*:processes' command "ps -au$USER"
+# zstyle ':completion:*:processes' command "ps -au$USER"
+zstyle ':completion:*:processes' command "ps -u $USER -o pid,comm"
 zstyle ':completion:*:processes' sort false
 zstyle ':completion:*:processes-names' command "ps xho command"
 

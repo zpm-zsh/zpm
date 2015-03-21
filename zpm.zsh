@@ -40,9 +40,9 @@ autoload -U compinit && compinit
 
 function _ZPM_End_hook(){
 
-    if [[ -z $after ]]; then
+    if [[ -z $_ZPM_End ]]; then
         compinit
-        export after=true
+        export _ZPM_End=true
     fi
     
 }
@@ -160,3 +160,12 @@ function Plug(){
     done
 
 }
+
+function _ZPM_Hosts(){
+    _arguments \
+     ':remote:_hosts'
+
+}
+
+compdef _ZPM_Hosts zshrc-install
+compdef _ZPM_Hosts zpm-install
