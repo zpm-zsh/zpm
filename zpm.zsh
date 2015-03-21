@@ -39,10 +39,12 @@ zstyle ':completion::complete:*' cache-path ~/.cache/zsh
 autoload -U compinit && compinit
 
 function _ZPM_End_hook(){
+
     if [[ -z $after ]]; then
         compinit
         export after=true
     fi
+    
 }
 
 precmd_functions+=(_ZPM_End_hook)
