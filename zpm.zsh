@@ -157,6 +157,7 @@ function Plug(){
 }
 
 function _ZPM_Hosts(){
+
     _arguments \
      ':remote:_hosts'
 
@@ -167,4 +168,3 @@ compdef _ZPM_Hosts zpm-install
 
 zstyle ":completion:*:*:zshrc-install:*" sort false
 zstyle ":completion:*:*:zpm-install:*" sort false
-

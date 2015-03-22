@@ -15,5 +15,3 @@ done
 for plugin ($plugins); do
     fpath=(~/.oh-my-zsh/plugins/$plugin $fpath)
 done
-
-unset ZSH
