@@ -210,6 +210,7 @@ EXEC 33  # Unix
 .txt 01;31
 .org 01;31
 .md 01;31
+.markdown 01;31
 .mkd 01;31
 .todo 01;31
 .srt 01;31
@@ -224,6 +225,9 @@ EXEC 33  # Unix
 .ini 36
 .desktop 36
 .sql 36
+*Makefile 36
+*.gitignore 36
+*.npmignore 36
 
 
 # Your customizations
@@ -231,6 +235,7 @@ EXEC 33  # Unix
 .log 01;32
 .bak 01;32
 .zwc 01;32
+.pyc 01;32
 *~ 01;32
 
 .gpg  32

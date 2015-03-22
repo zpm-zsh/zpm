@@ -20,13 +20,8 @@ if [ -z "$HISTFILE" ]; then
     HISTFILE=$HOME/.zsh_history
 fi
 
-if [ -z "$HISTSIZE" ]; then
-    HISTSIZE=9999
-fi
-
-if [ -z "$SAVEHIST" ]; then
-    SAVEHIST=9999
-fi
+HISTSIZE=9999
+SAVEHIST=9999
 
 if [[ "$COLORS" == "true" ]]; then
     autoload -U colors && colors
@@ -169,3 +164,7 @@ function _ZPM_Hosts(){
 
 compdef _ZPM_Hosts zshrc-install
 compdef _ZPM_Hosts zpm-install
+
+zstyle ":completion:*:*:zshrc-install:*" sort false
+zstyle ":completion:*:*:zpm-install:*" sort false
+

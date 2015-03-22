@@ -14,5 +14,5 @@ export LESS_TERMCAP_ue=$'\E[0m'
 export LESS='-R -M'
            
 if hash pygmentize 2>/dev/null; then
-    export LESSOPEN='|pygmentize -f 256 -g %s'
+    export LESSOPEN="|pygmentize -f 256 -g %s"
 fi
