@@ -191,14 +191,14 @@ EXEC 33  # Unix
 .Z    01;31
 .zip  01;31
 
-.apk  01;35
-.jar  01;35
-.deb  01;35
-.rpm  01;35
-.dmg  01;35
-.msi  01;35
-.xpi  01;35
-.crx  01;35
+.apk  01;31
+.jar  01;31
+.deb  01;31
+.rpm  01;31
+.dmg  01;31
+.msi  01;31
+.xpi  01;31
+.crx  01;31
 
 
 
@@ -207,15 +207,15 @@ EXEC 33  # Unix
 ### Text formats
 
 # Text that we can edit with a regular editor
-.txt 01;31
-.org 01;31
-.md 01;31
-.markdown 01;31
-.mkd 01;31
-.todo 01;31
-.srt 01;31
-*README 01;31
-*LICENSE 01;31
+.txt 01;35
+.org 01;35
+.md 01;35
+.markdown 01;35
+.mkd 01;35
+.todo 01;35
+.srt 01;35
+*README 01;35
+*LICENSE 01;35
 
 # Files wih data
 .json 36
