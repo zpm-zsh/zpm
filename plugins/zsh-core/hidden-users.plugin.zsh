@@ -12,7 +12,7 @@ backup festival irc list sshd usbmux colord debian-spamd kdm man gdm  \
 uucp sync rtkit kernoops gnats messagebus adm audio plugdev  \
 sambashare libvirt-dnsmasq libvirt-qemu mongodb mysql motion \
 freeswitch landscape red5 redis lightdm nvidia-persistenced smmsp \
-davfs2 debian-tor statd saned sys smmta winbindd_priv vboxusers \
+davfs2 debian-tor statd saned sys smmta winbindd_priv vboxusers minidlna \
 nova uuidd whoopsie systemd-bus-proxy sddm systemd \
 guest systemd-network systemd-resolve systemd-timesync
 
