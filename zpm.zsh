@@ -37,7 +37,7 @@ function _ZPM_End_hook(){
 
     if [[ -z $_ZPM_End ]]; then
         compinit
-        export _ZPM_End=true
+        _ZPM_End=true
     fi
     
 }
