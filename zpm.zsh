@@ -106,10 +106,10 @@ function Plug(){
     
     for plugin ($@); do
         if [[ -d $ZPM_DIR/plugins/$plugin/bin ]]; then
-            path=( $path $ZPM_DIR/plugins/$plugin/bin )
+            path=( $ZPM_DIR/plugins/$plugin/bin $path )
         else
             if [[ $plugin == */* ]] && [[ -d $ZPM_DIR/custom/${plugin##*\/}/bin ]]; then
-                path=( $path $ZPM_DIR/custom/${plugin##*\/}/bin )
+                path=( $ZPM_DIR/custom/${plugin##*\/}/bin $path )
             fi
         fi
     done
