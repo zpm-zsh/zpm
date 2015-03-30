@@ -5,6 +5,3 @@ setopt extended_glob
 setopt interactive_comments
 setopt nohup
 setopt nobeep
-
-autoload -U url-quote-magic
-zle -N self-insert url-quote-magic

@@ -31,11 +31,17 @@ fi
 setopt prompt_subst
 zstyle ':completion::complete:*' use-cache 1
 zstyle ':completion::complete:*' cache-path ~/.cache/zsh
-autoload -U compinit && compinit
+autoload -U compinit
+
+_ZPM_update_hooks=()
+_ZPM_End_hooks=()
 
 function _ZPM_End_hook(){
 
     if [[ -z $_ZPM_End ]]; then
+        for ZPM_End_hook ( $_ZPM_End_hooks ); do
+            $ZPM_End_hook
+        done
         compinit
         _ZPM_End=true
     fi
@@ -67,19 +73,23 @@ function zpm-compile(){
 
 function zpm-update(){
 
-    olddir=`pwd`
+    _olddir=`pwd`
     cd $ZPM_DIR
     echo "Updating ZPM"
     git pull
     cd custom
     for i in *
     do
-        echo "Updating: $i"
+        echo "> Updating: $i"
         cd $i
         git pull
         cd ..
     done
-    cd $olddir
+    cd $_olddir
+    for zpm_update_hook ( $_ZPM_update_hooks ); do
+        $zpm_update_hook
+    done
+    unset _olddir
 
 }
 
