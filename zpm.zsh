@@ -169,7 +169,7 @@ function Plug(){
 function _ZPM_Hosts(){
 
     _arguments \
-     ':remote:_hosts'
+        ':remote:_hosts'
 
 }
 
