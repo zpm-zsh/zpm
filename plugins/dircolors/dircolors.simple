@@ -222,6 +222,7 @@ EXEC 33  # Unix
 .yml 36
 .yaml 36
 .conf 36
+.cfg 36
 .ini 36
 .desktop 36
 .sql 36
