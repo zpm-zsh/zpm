@@ -4,9 +4,12 @@ if [[ -z $TMUX_AUTOSTART  && -n "$SSH_CONNECTION" ]]; then
     TMUX_AUTOSTART="true"
 fi
 
+function _tmux_autostart(){
+  if [[ "$TMUX_AUTOSTART" == "true" && -z "$TMUX" ]]
+  then
+      tmux
+      exit 0
+  fi
+}
 
-if [[ "$TMUX_AUTOSTART" == "true" && -z "$TMUX" ]]
-then
-    tmux
-    exit 0
-fi
+_ZPM_End_hooks=( $_ZPM_End_hooks _tmux_autostart )
