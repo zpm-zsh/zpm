@@ -1,11 +1,17 @@
 #!/usr/bin/env zsh
 
-if [[ -z $COLORS ]]; then
+
+
+if [[  $COLORS != true && $COLORS != false ]]; then
     export COLORS=true
 fi
     
 if [[ -z $MANPATH ]]; then
-    export MANPATH=$(manpath)
+    if hash manpath 2>/dev/null; then
+        export MANPATH=$(manpath)
+    else
+        export MANPATH=(  )
+    fi
 fi
     
 if [[ -z $ZSH_COMPDUMP ]]; then
