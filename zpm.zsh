@@ -9,8 +9,6 @@ fi
 if [[ -z $MANPATH ]]; then
     if hash manpath 2>/dev/null; then
         export MANPATH=$(manpath)
-    else
-        # export MANPATH=(  )
     fi
 fi
     
