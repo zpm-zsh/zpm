@@ -31,7 +31,7 @@ fi
 setopt prompt_subst
 zstyle ':completion::complete:*' use-cache 1
 zstyle ':completion::complete:*' cache-path ~/.cache/zsh
-autoload -U compinit
+autoload -U compinit && compinit
 
 _ZPM_update_hooks=()
 _ZPM_End_hooks=()
