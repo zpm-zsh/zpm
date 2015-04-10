@@ -111,12 +111,6 @@ function _ZPM_End_hook(){
 
 precmd_functions+=(_ZPM_End_hook)
 
-function zpm-install(){
-
-    ssh $1 "git clone --recursive https://github.com/horosgrisa/ZPM ~/.zpm; ln -s ~/.zpm/zshrc-example ~/.zshrc"
-
-}
-
 function zshrc-install(){
 
     scp ~/.zshrc $1:.zshrc
