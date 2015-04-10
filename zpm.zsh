@@ -1,11 +1,9 @@
 #!/usr/bin/env zsh
 
-
-
 if [[  $COLORS != true && $COLORS != false ]]; then
     export COLORS=true
 fi
-    
+
 if [[ -z $MANPATH ]]; then
     if hash manpath 2>/dev/null; then
         export MANPATH=$(manpath)
@@ -39,6 +37,65 @@ autoload -U compinit && compinit
 
 _ZPM_update_hooks=()
 _ZPM_End_hooks=()
+
+_ZPM_Initialize_Plugin(){
+
+    plugin=$1
+    if [[ ! "$plugin" == */* ]]; then
+
+        fpath=( $ZPM_DIR/plugins/$plugin $fpath )
+
+        if [[ -d $ZPM_DIR/plugins/$plugin/bin ]]; then
+            path=( $ZPM_DIR/plugins/$plugin/bin $path )
+        fi
+
+        if [[ -d $ZPM_DIR/plugins/$plugin/man ]]; then
+            manpath=( $ZPM_DIR/plugins/$plugin/man $manpath )
+        fi
+        
+        if [[ -f $ZPM_DIR/plugins/$plugin/$plugin.plugin.zsh ]]; then
+            source $ZPM_DIR/plugins/$plugin/$plugin.plugin.zsh
+        fi
+
+        return
+    fi
+
+    _plugin_name=$plugin
+    _plugin_name=${_plugin_name##*\/}
+    if [[ $_plugin_name == zsh-*  ]]; then
+        _plugin_name=${_plugin_name:4}
+    fi
+    if [[ $_plugin_name == *.zsh  ]]; then
+        _plugin_name=${_plugin_name:0:-4}
+    fi
+    if [[ $_plugin_name == *.plugin  ]]; then
+        _plugin_name=${_plugin_name:0:-7}
+    fi
+
+    if [[ ! -d $ZPM_DIR/custom/$_plugin_name ]]; then
+        echo "Installing $plugin from github"
+        git clone --recursive "https://github.com/"$plugin".git" $ZPM_DIR/custom/$_plugin_name
+    fi
+
+    fpath=( $ZPM_DIR/custom/$_plugin_name $fpath )
+
+    if [[ -d $ZPM_DIR/custom/$_plugin_name/bin ]]; then
+        path=( $ZPM_DIR/custom/$_plugin_name/bin $path )
+    fi
+
+    if [[ -d $ZPM_DIR/custom/$_plugin_name/man ]]; then
+        manpath=( $ZPM_DIR/custom/$_plugin_name/man $manpath )
+    fi
+
+    if [[ -f $ZPM_DIR/custom/$_plugin_name/$_plugin_name.plugin.zsh ]]; then
+        source $ZPM_DIR/custom/$_plugin_name/$_plugin_name.plugin.zsh
+    fi
+
+    if [[ -f $ZPM_DIR/custom/$_plugin_name/zsh-$_plugin_name.plugin.zsh ]]; then
+        source $ZPM_DIR/custom/$_plugin_name/zsh-$_plugin_name.plugin.zsh
+    fi
+
+}
 
 function _ZPM_End_hook(){
 
@@ -100,72 +157,7 @@ function zpm-update(){
 function Plug(){
 
     for plugin ($@); do
-        if [[ $plugin == */* ]]; then
-            if [[ ! -d $ZPM_DIR/custom/${plugin##*\/} ]]; then
-                echo "Installing plugin from github"
-                git clone --recursive "https://github.com/"$plugin".git" $ZPM_DIR/custom/${plugin##*\/}
-            fi
-        fi
-    done
-    
-    for plugin ($@); do
-        if [[ -d $ZPM_DIR/plugins/$plugin ]]; then
-            fpath=( $ZPM_DIR/plugins/$plugin $fpath )
-        else
-            if [[ $plugin == */* ]] && [[ -d $ZPM_DIR/custom/${plugin##*\/} ]]; then
-                fpath=( $ZPM_DIR/custom/${plugin##*\/} $fpath )
-            fi
-        fi
-    done
-    
-    for plugin ($@); do
-        if [[ -d $ZPM_DIR/plugins/$plugin/bin ]]; then
-            path=( $ZPM_DIR/plugins/$plugin/bin $path )
-        else
-            if [[ $plugin == */* ]] && [[ -d $ZPM_DIR/custom/${plugin##*\/}/bin ]]; then
-                path=( $ZPM_DIR/custom/${plugin##*\/}/bin $path )
-            fi
-        fi
-    done
-    
-    for plugin ($@); do
-        if [[ -d $ZPM_DIR/plugins/$plugin/man ]]; then
-            manpath=( $ZPM_DIR/plugins/$plugin/man $manpath )
-        else
-            if [[ $plugin == */* ]] && [[ -d $ZPM_DIR/custom/${plugin##*\/}/man ]]; then
-                manpath=( $ZPM_DIR/custom/${plugin##*\/}/man $manpath )
-            fi
-        fi
-    done
-    
-    for plugin ($@); do
-        if [[ ! $plugin == */* ]] && [[ -f $ZPM_DIR/plugins/$plugin/$plugin.plugin.zsh ]]; then
-            source $ZPM_DIR/plugins/$plugin/$plugin.plugin.zsh 
-        fi
-    done
-
-    for plugin ($@); do
-        if [[ $plugin == */* ]] && [[ -f $ZPM_DIR/custom/${plugin##*\/}/${plugin##*\/}.plugin.zsh ]]; then
-            source $ZPM_DIR/custom/${plugin##*\/}/${plugin##*\/}.plugin.zsh 
-        fi
-    done
-
-    for plugin ($@); do
-        if [[ $plugin == */*.plugin.zsh ]] && [[ -f $ZPM_DIR/custom/${plugin##*\/}/${plugin##*\/} ]]; then
-            source $ZPM_DIR/custom/${plugin##*\/}/${plugin##*\/} 
-        fi
-    done
-
-    for plugin ($@); do
-        if [[ $plugin == */zsh-* ]] && [[ -f $ZPM_DIR/custom/${plugin##*\/}/${${plugin##*\/}:4}.plugin.zsh ]]; then
-            source $ZPM_DIR/custom/${plugin##*\/}/${${plugin##*\/}:4}.plugin.zsh
-        fi
-    done
-
-    for plugin ($@); do
-        if [[ $plugin == */zsh-*.plugin.zsh ]] && [[ -f $ZPM_DIR/custom/${plugin##*\/}/${${plugin##*\/}:4} ]]; then
-            source $ZPM_DIR/custom/${plugin##*\/}/${${plugin##*\/}:4}
-        fi
+        _ZPM_Initialize_Plugin $plugin
     done
 
 }
