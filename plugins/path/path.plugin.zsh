@@ -2,6 +2,7 @@
 
 CURRENT_PATH_PREFIX=${CURRENT_PATH_PREFIX:-""}
 CURRENT_PATH_SUFIX=${CURRENT_PATH_SUFIX:-""}
+
 path() {
     echo $PATH | tr ":" "\n" | \
         awk "{ sub(\"/usr\",\"$fg_no_bold[green]/usr$reset_color\"); \
@@ -34,3 +35,4 @@ precmd_functions+=(_current_path)
 
 
 [[ -d ~/.bin ]] && export PATH=$PATH:~/.bin
+[[ -d ~/.local/bin ]] && export PATH=$PATH:~/.local/bin
