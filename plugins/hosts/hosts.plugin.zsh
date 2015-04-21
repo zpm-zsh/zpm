@@ -14,8 +14,8 @@ else
 fi
 
 
-zstyle ':completion:*:(ssh|scp|sshfs):*' tag-order '! users'
-zstyle ':completion:*:(ssh|scp|sshfs):*' sort false
+zstyle ':completion:*:(ssh|scp|sshfs|mosh):*' tag-order '! users'
+zstyle ':completion:*:(ssh|scp|sshfs|mosh):*' sort false
 
 zstyle ':completion:*:hosts' hosts $hosts 
 
