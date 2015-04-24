@@ -1,75 +1,111 @@
 #!/usr/bin/env zsh
-#
+
 htmlcat() {
-  if [[ $1 == "http:"* ]] || [[ $1 == "https:"* ]] || [[ $1 == "ftp:"* ]]
-    then
-    curl -L --silent $1 > /tmp/.tmp.text.html
+  if [[ -z $1 ]]; then
+    cat >/tmp/.tmp.text.html
     file=/tmp/.tmp.text.html
+  else
+    if [[ $1 == "http:"* ]] || [[ $1 == "https:"* ]] || [[ $1 == "ftp:"* ]]; then
+      curl -L --silent $1 > /tmp/.tmp.text.html
+      file=/tmp/.tmp.text.html
     else
-        file=$1
+      file=$1
     fi
+  fi
   html-beautify $file | `whence pygmentize` -f 256 -g
 }
 alias xmlcat=htmlcat
 
 csscat() {
-  if [[ $1 == "http:"* ]] || [[ $1 == "https:"* ]] || [[ $1 == "ftp:"* ]]
-    then
-    curl -L --silent $1 > /tmp/.tmp.text.css
+  if [[ -z $1 ]]; then
+    cat >/tmp/.tmp.text.css
     file=/tmp/.tmp.text.css
+  else
+    if [[ $1 == "http:"* ]] || [[ $1 == "https:"* ]] || [[ $1 == "ftp:"* ]]; then
+      curl -L --silent $1 > /tmp/.tmp.text.css
+      file=/tmp/.tmp.text.css
     else
-        file=$1
+      file=$1
     fi
+  fi
   cssbeautify $file | `whence pygmentize` -f 256 -g 
 }
 
 jscat() {
-  if [[ $1 == "http:"* ]] || [[ $1 == "https:"* ]] || [[ $1 == "ftp:"* ]]
-    then
-    curl -L --silent $1 > /tmp/.tmp.text.js
-    file=/tmp/.tmp.text.js
+  if [[ -z $1 ]]; then
+    cat >/tmp/.tmp.text.css
+    file=/tmp/.tmp.text.css
+  else
+    if [[ $1 == "http:"* ]] || [[ $1 == "https:"* ]] || [[ $1 == "ftp:"* ]]; then
+      curl -L --silent $1 > /tmp/.tmp.text.js
+      file=/tmp/.tmp.text.js
     else
-        file=$1
+      file=$1
     fi
+  fi
   js-beautify $file | `whence pygmentize` -f 256 -g 
 }
 
-
 jsoncat() {
-  if [[ $1 == "http:"* ]] || [[ $1 == "https:"* ]] || [[ $1 == "ftp:"* ]]
-    then
-    curl -L --silent $1 > /tmp/.tmp.text.js
+  if [[ -z $1 ]]; then
+    cat >/tmp/.tmp.text.js
     file=/tmp/.tmp.text.js
+  else
+    if [[ $1 == "http:"* ]] || [[ $1 == "https:"* ]] || [[ $1 == "ftp:"* ]]; then
+      curl -L --silent $1 > /tmp/.tmp.text.js
+      file=/tmp/.tmp.text.js
     else
-        file=$1
+      file=$1
     fi
+  fi
   cat $file | prettyjson
 }
 
 cppcat() {
-  if [[ $1 == "http:"* ]] || [[ $1 == "https:"* ]] || [[ $1 == "ftp:"* ]]
-    then
-    curl -L --silent $1 > /tmp/.tmp.text.c
-    file=/tmp/.tmp.text.c
+  if [[ -z $1 ]]; then
+    cat >/tmp/.tmp.text.cpp
+    file=/tmp/.tmp.text.cpp
+  else
+    if [[ $1 == "http:"* ]] || [[ $1 == "https:"* ]] || [[ $1 == "ftp:"* ]]; then
+      curl -L --silent $1 > /tmp/.tmp.text.cpp
+      file=/tmp/.tmp.text.c
     else
-        file=$1
+      file=$1
     fi
+  fi
   astyle < $file | `whence pygmentize` -f 256 -g 
 }
 alias javacat=cppcat
 
-
-hcat() {
-  if [[ $1 == "http:"* ]] || [[ $1 == "https:"* ]] || [[ $1 == "ftp:"* ]]
-    then
-    curl -L --silent $1 > /tmp/.tmp.text.file
-    file=/tmp/.tmp.text.file
+mdcat() {
+  if [[ -z $1 ]]; then
+    cat >/tmp/.tmp.text.md
+    file=/tmp/.tmp.text.md
+  else
+    if [[ $1 == "http:"* ]] || [[ $1 == "https:"* ]] || [[ $1 == "ftp:"* ]]; then
+        curl -L --silent $1 > /tmp/.tmp.text.md
+        file=/tmp/.tmp.text.md
     else
         file=$1
     fi
-  `whence pygmentize` -f 256 -g $file
+  fi  
+  markdown $file | elinks -dump -dump-color-mode 1  
 }
 
+hcat() {
+  if [[ -z $1 ]]; then
+    cat >/tmp/.tmp.text.file
+    file=/tmp/.tmp.text.file
+  else
+    if [[ $1 == "http:"* ]] || [[ $1 == "https:"* ]] || [[ $1 == "ftp:"* ]]; then
+      curl -L --silent $1 > /tmp/.tmp.text.file
+      file=/tmp/.tmp.text.file
+    else
+      file=$1
+    fi
+  fi
+  `whence pygmentize` -f 256 -g $file
+}
 
 imgcat() {
 if [ ! -z "$1" ]; then
@@ -109,18 +145,4 @@ if [ ! -z "$1" ]; then
 else
     echo "Usege: image <path-to-image>"
 fi
-}
-
-mdcat() {
-    if [ ! -z "$1" ]; then
-        if [[ $1 == "http:"* ]] || [[ $1 == "https:"* ]] || [[ $1 == "ftp:"* ]]; then
-            curl -L --silent $1 > /tmp/.tmp.text.file
-            file=/tmp/.tmp.text.file
-        else
-            file=$1
-        fi
-        markdown $file | elinks -dump -dump-color-mode 1  
-    else
-        echo "Usage: mdcat <path-to-md-file-or-url>"
-    fi       
 }
