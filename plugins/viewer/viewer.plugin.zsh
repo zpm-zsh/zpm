@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 
-htmlcat() {
+function htmlcat() {
   if [[ -z $1 ]]; then
     cat >/tmp/.tmp.text.html
     file=/tmp/.tmp.text.html
@@ -16,7 +16,7 @@ htmlcat() {
 }
 alias xmlcat=htmlcat
 
-csscat() {
+function csscat() {
   if [[ -z $1 ]]; then
     cat >/tmp/.tmp.text.css
     file=/tmp/.tmp.text.css
@@ -31,7 +31,7 @@ csscat() {
   cssbeautify $file | `whence pygmentize` -f 256 -g 
 }
 
-jscat() {
+function jscat() {
   if [[ -z $1 ]]; then
     cat >/tmp/.tmp.text.css
     file=/tmp/.tmp.text.css
@@ -46,7 +46,7 @@ jscat() {
   js-beautify $file | `whence pygmentize` -f 256 -g 
 }
 
-jsoncat() {
+function jsoncat() {
   if [[ -z $1 ]]; then
     cat >/tmp/.tmp.text.js
     file=/tmp/.tmp.text.js
@@ -61,7 +61,7 @@ jsoncat() {
   cat $file | prettyjson
 }
 
-cppcat() {
+function cppcat() {
   if [[ -z $1 ]]; then
     cat >/tmp/.tmp.text.cpp
     file=/tmp/.tmp.text.cpp
@@ -77,7 +77,7 @@ cppcat() {
 }
 alias javacat=cppcat
 
-mdcat() {
+function mdcat() {
   if [[ -z $1 ]]; then
     cat >/tmp/.tmp.text.md
     file=/tmp/.tmp.text.md
@@ -92,7 +92,7 @@ mdcat() {
   markdown $file | elinks -dump -dump-color-mode 1  
 }
 
-hcat() {
+function hcat() {
   if [[ -z $1 ]]; then
     cat >/tmp/.tmp.text.file
     file=/tmp/.tmp.text.file
@@ -107,8 +107,8 @@ hcat() {
   `whence pygmentize` -f 256 -g $file
 }
 
-imgcat() {
-if [ ! -z "$1" ]; then
+function imgcat() {
+  if [ ! -z "$1" ]; then
     if [[ $1 == "http:"* ]] || [[ $1 == "https:"* ]] || [[ $1 == "ftp:"* ]]; then
         wget --quiet --output-document /tmp/.tmp.img.file $1
         convert /tmp/.tmp.img.file /tmp/.tmp.img.png
@@ -142,7 +142,7 @@ if [ ! -z "$1" ]; then
             ;;
         esac
     fi
-else
+  else
     echo "Usege: image <path-to-image>"
-fi
+  fi
 }
