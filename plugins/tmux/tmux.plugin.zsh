@@ -1,5 +1,11 @@
 alias tmux="TERM=xterm-256color tmux -2 attach || TERM=xterm-256color tmux -2 -f${0:a:h}/tmux.conf new"
 
+export TMUX_PP="~/.zpm/plugins/tmux/bin/_tmux-resurrect-install"
+
+if [[ ! -d ~/.tmux/plugins/tpm ]]; then
+  git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+fi
+
 if [[ -z $TMUX_AUTOSTART  && -n "$SSH_CONNECTION" ]]; then
     TMUX_AUTOSTART="true"
 fi
@@ -10,6 +16,15 @@ function _tmux_autostart(){
       tmux
       exit 0
   fi
+    precmd_functions=(${precmd_functions#_tmux_autostart})
 }
 
-_ZPM_End_hooks=( $_ZPM_End_hooks _tmux_autostart )
+function _tpm-update-hook(){
+    _tpm_old_path="$PWD"
+    cd ~/.tmux/plugins/tpm
+    echo ">> Updating hook: TPM"
+    git pull
+    cd $_tpm_old_path
+}
+
+precmd_functions+=( _tmux_autostart )

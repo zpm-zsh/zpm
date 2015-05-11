@@ -35,12 +35,15 @@ zstyle ':completion::complete:*' use-cache 1
 zstyle ':completion::complete:*' cache-path ~/.cache/zsh
 autoload -U compinit && compinit
 
-_ZPM_update_hooks=()
-_ZPM_End_hooks=()
+# ----------
+# ZPM Plugin
+# ----------
+
+_ZPM_Plugins=()
 
 _ZPM_Initialize_Plugin(){
 
-    plugin=$1
+    local plugin=$1
     if [[ ! "$plugin" == */* ]]; then
 
         fpath=( $ZPM_DIR/plugins/$plugin $fpath )
@@ -56,6 +59,8 @@ _ZPM_Initialize_Plugin(){
         if [[ -f $ZPM_DIR/plugins/$plugin/$plugin.plugin.zsh ]]; then
             source $ZPM_DIR/plugins/$plugin/$plugin.plugin.zsh
         fi
+
+        _ZPM_Plugins+=( $plugin )
 
         return
     fi
@@ -94,22 +99,27 @@ _ZPM_Initialize_Plugin(){
     if [[ -f $ZPM_DIR/custom/$_plugin_name/zsh-$_plugin_name.plugin.zsh ]]; then
         source $ZPM_DIR/custom/$_plugin_name/zsh-$_plugin_name.plugin.zsh
     fi
+    _ZPM_Plugins+=( $_plugin_name )
 
 }
 
-function _ZPM_End_hook(){
+function Plug(){
 
-    if [[ -z $_ZPM_End ]]; then
-        for ZPM_End_hook ( $_ZPM_End_hooks ); do
-            $ZPM_End_hook
-        done
-        compinit
-        _ZPM_End=true
-    fi
-    
+    for plugin ($@); do
+        _ZPM_Initialize_Plugin $plugin
+    done
+
 }
 
-precmd_functions+=(_ZPM_End_hook)
+function _ZPM_Init(){
+    compinit
+    precmd_functions=(${precmd_functions#_ZPM_Init})
+}
+
+
+# ----------
+# ZPM Functions
+# ----------
 
 function zshrc-install(){
 
@@ -126,36 +136,6 @@ function zpm-compile(){
 
 }
 
-function zpm-update(){
-
-    _olddir=`pwd`
-    cd $ZPM_DIR
-    echo "Updating ZPM"
-    git pull
-    cd custom
-    for i in *
-    do
-        echo "> Updating: $i"
-        cd $i
-        git pull
-        cd ..
-    done
-    cd $_olddir
-    for zpm_update_hook ( $_ZPM_update_hooks ); do
-        $zpm_update_hook
-    done
-    unset _olddir
-
-}
-
-function Plug(){
-
-    for plugin ($@); do
-        _ZPM_Initialize_Plugin $plugin
-    done
-
-}
-
 function _ZPM_Hosts(){
 
     _arguments \
@@ -168,3 +148,41 @@ compdef _ZPM_Hosts zpm-install
 
 zstyle ":completion:*:*:zshrc-install:*" sort false
 zstyle ":completion:*:*:zpm-install:*" sort false
+
+
+
+# ----------
+# ZPM Upgrade Hooks
+# ----------
+
+function ZPM-Upgrade(){
+_Plugins_Upgrade=()
+
+    if [[ -z $@ ]]; then
+        echo "> Updating ZPM"
+        git --git-dir="$ZPM_DIR/.git/" --work-tree="$ZPM_DIR/" pull
+        _Plugins_Upgrade+=($_ZPM_Plugins)
+    else
+        _Plugins_Upgrade+=($@)
+    fi
+
+    for i ($_Plugins_Upgrade); do
+        if [[ -d $ZPM_DIR/custom/$i ]]; then
+            echo "> Updating: $i"
+            git --git-dir="$ZPM_DIR/custom/$i/.git/" --work-tree="$ZPM_DIR/custom/$i/" pull
+        fi
+        $i-upgrade-hook 2>/dev/null || true
+    done
+
+}
+
+
+function _ZPM-Upgrade(){
+
+    _arguments "*: :($(echo $_ZPM_Plugins))"
+
+}
+
+compdef _ZPM-Upgrade ZPM-Upgrade
+
+precmd_functions+=(_ZPM_Init)

@@ -17,19 +17,14 @@ function _oh_my_zsh_apply(){
     for plugin ($plugins); do
         fpath=(~/.oh-my-zsh/plugins/$plugin $fpath)
     done
+    compinit
+    precmd_functions=(${precmd_functions#_oh_my_zsh_apply})
+}
+
+function oh-my-zsh-wrapper-upgrade-hook(){
+
+    git --git-dir="$HOME/.oh-my-zsh/.git/" --work-tree="$HOME/.oh-my-zsh/" pull
 
 }
 
-function _oh-my-zsh-update-hook(){
-
-    _oh_my_zsh_old_path="$PWD"
-    cd ~/.oh-my-zsh
-    echo ">> Updating hook: Oh-my-zsh"
-    git pull
-    cd $_oh_my_zsh_old_path
-
-}
-
-_ZPM_update_hooks=( $_ZPM_update_hooks _oh-my-zsh-update-hook )
-
-_ZPM_End_hooks=( $_ZPM_End_hooks _oh_my_zsh_apply )
+precmd_functions+=( _oh_my_zsh_apply )
