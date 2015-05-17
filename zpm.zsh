@@ -121,13 +121,8 @@ function _ZPM_Init(){
 # ZPM Functions
 # ----------
 
-function zshrc-install(){
 
-    scp ~/.zshrc $1:.zshrc
-
-}
-
-function zpm-compile(){
+function ZPM-Compile(){
 
     find $ZPM_DIR/plugins -name "*.zsh" | while read line
     do
@@ -135,19 +130,6 @@ function zpm-compile(){
     done
 
 }
-
-function _ZPM_Hosts(){
-
-    _arguments \
-        ':remote:_hosts'
-
-}
-
-compdef _ZPM_Hosts zshrc-install
-compdef _ZPM_Hosts zpm-install
-
-zstyle ":completion:*:*:zshrc-install:*" sort false
-zstyle ":completion:*:*:zpm-install:*" sort false
 
 
 
