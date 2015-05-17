@@ -6,7 +6,7 @@ source ~/.zpm/zpm.zsh
 
 Plug nvm golang horosgrisa/zsh-gvm  #Package managers & langs
 
-Plug datauri horosgrisa/zsh-ack myip extract pass tor tmux genpasswd viewer desktop hosts rmate horosgrisa/zsh-dropbox  #Programs
+Plug datauri myip extract pass tor tmux genpasswd viewer desktop hosts rmate horosgrisa/zsh-dropbox  #Programs
 
 Plug colors grc dircolors  #Colors
 
