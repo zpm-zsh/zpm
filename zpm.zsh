@@ -40,6 +40,8 @@ autoload -U compinit && compinit
 # ----------
 
 _ZPM_Plugins=()
+_ZPM_GitHub_Plugins+=()
+
 
 _ZPM_Initialize_Plugin(){
 
@@ -100,6 +102,7 @@ _ZPM_Initialize_Plugin(){
         source $ZPM_DIR/custom/$_plugin_name/zsh-$_plugin_name.plugin.zsh
     fi
     _ZPM_Plugins+=( $_plugin_name )
+    _ZPM_GitHub_Plugins+=( $_plugin_name )
 
 }
 
@@ -167,7 +170,7 @@ _Plugins_Upgrade=()
 
 function _ZPM-Upgrade(){
 
-    _arguments "*: :($(echo $_ZPM_Plugins))"
+    _arguments "*: :($(echo core; echo $_ZPM_GitHub_Plugins))"
 
 }
 
