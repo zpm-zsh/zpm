@@ -140,6 +140,12 @@ function ZPM-Compile(){
 function ZPM-Upgrade(){
 _Plugins_Upgrade=()
 
+    if [[ $1 == 'core' ]]; then
+        echo "> Updating ZPM"
+        git --git-dir="$ZPM_DIR/.git/" --work-tree="$ZPM_DIR/" pull
+        return
+    fi
+
     if [[ -z $@ ]]; then
         echo "> Updating ZPM"
         git --git-dir="$ZPM_DIR/.git/" --work-tree="$ZPM_DIR/" pull
