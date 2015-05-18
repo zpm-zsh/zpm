@@ -34,6 +34,10 @@ function _tmux_motd(){
 	if [[ $TMUX_MOTD != false && ! -z $TMUX  &&  $(\tmux list-windows | wc -l | tr -d ' ') == 1 ]]; then
 		if [[ -f /etc/debian_version ]]; then
 			run-parts /etc/update-motd.d/
+			return 0
+		fi
+		if [[ "$OSTYPE" == "freebsd*" ]]; then
+			cat /etc/motd
 		fi
 	fi
 }
