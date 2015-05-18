@@ -36,7 +36,7 @@ function _tmux_motd(){
 			run-parts /etc/update-motd.d/
 			return 0
 		fi
-		if [[ "$OSTYPE" == "freebsd*" ]]; then
+		if [[ "$OSTYPE" == "freebsd"* ]]; then
 			cat /etc/motd
 		fi
 	fi
