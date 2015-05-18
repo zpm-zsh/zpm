@@ -69,7 +69,7 @@ alias delmark='deletemark'
 
 # Fasd
 alias f='fasd -f -e vim'
-alias o='fasd -e xdg-open'
+alias o='fasd -e xdg-open 1>/dev/null 2>/dev/null'
 alias d='fasd_cd -d -i'
 alias j='fasd_cd -d -i'
 
