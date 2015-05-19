@@ -20,11 +20,8 @@ function _tmux_autostart(){
 }
 
 function _tmux-update-hook(){
-    _tpm_old_path="$PWD"
-    cd ~/.tmux/plugins/tpm
-    echo ">> Updating hook: TPM"
-    git pull
-    cd $_tpm_old_path
+    echo ">> Updating hook: tmux"
+    git --git-dir="$HOME/.tmux/plugins/tpm/.git" --work-tree="$HOME/.tmux/plugins/tpm" pull
 }
 
 precmd_functions+=( _tmux_autostart )

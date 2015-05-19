@@ -41,6 +41,8 @@ autoload -U compinit && compinit
 
 _ZPM_Plugins=()
 _ZPM_GitHub_Plugins+=()
+_ZPM_Core_Plugins+=()
+
 
 
 _ZPM_Initialize_Plugin(){
@@ -63,6 +65,8 @@ _ZPM_Initialize_Plugin(){
         fi
 
         _ZPM_Plugins+=( $plugin )
+        _ZPM_Core_Plugins+=( $plugin )
+
 
         return
     fi
@@ -145,9 +149,10 @@ _Plugins_Upgrade=()
 
     if [[ $1 == 'core' ]]; then
         echo "> Updating ZPM"
-        git --git-dir="$ZPM_DIR/.git/" --work-tree="$ZPM_DIR/" pull
-        _tmux-update-hook
-        _oh-my-zsh-wrapper-update-hook
+        git --git-dir="$ZPM_DIR/.git/" --work-tree="$ZPM_DIR/" pull       
+        for plugg ($_ZPM_Core_Plugins); do
+            _$plugg-update-hook 2>/dev/null
+        done
         return
     fi
 
@@ -155,6 +160,9 @@ _Plugins_Upgrade=()
         echo "> Updating ZPM"
         git --git-dir="$ZPM_DIR/.git/" --work-tree="$ZPM_DIR/" pull
         _Plugins_Upgrade+=($_ZPM_Plugins)
+        for plugg ($_ZPM_Core_Plugins); do
+            _$plugg-update-hook 2>/dev/null
+        done
     else
         _Plugins_Upgrade+=($@)
     fi

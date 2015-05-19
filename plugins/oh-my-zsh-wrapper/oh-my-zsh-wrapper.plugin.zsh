@@ -22,7 +22,7 @@ function _oh_my_zsh_apply(){
 }
 
 function _oh-my-zsh-wrapper-update-hook(){
-
+	echo ">> Updating hook: oh-my-zsh"
     git --git-dir="$HOME/.oh-my-zsh/.git/" --work-tree="$HOME/.oh-my-zsh/" pull
 
 }
