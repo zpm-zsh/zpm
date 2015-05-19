@@ -19,7 +19,7 @@ function _tmux_autostart(){
     precmd_functions=(${precmd_functions#_tmux_autostart})
 }
 
-function _tpm-update-hook(){
+function _tmux-update-hook(){
     _tpm_old_path="$PWD"
     cd ~/.tmux/plugins/tpm
     echo ">> Updating hook: TPM"
@@ -35,9 +35,6 @@ function _tmux_motd(){
 		if [[ -f /etc/debian_version ]]; then
 			run-parts /etc/update-motd.d/
 			return 0
-		fi
-		if [[ "$OSTYPE" == "freebsd"* ]]; then
-			cat /etc/motd
 		fi
 	fi
 }
