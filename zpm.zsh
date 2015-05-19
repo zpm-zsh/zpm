@@ -146,6 +146,8 @@ _Plugins_Upgrade=()
     if [[ $1 == 'core' ]]; then
         echo "> Updating ZPM"
         git --git-dir="$ZPM_DIR/.git/" --work-tree="$ZPM_DIR/" pull
+        _tmux-update-hook
+        _oh-my-zsh-wrapper-update-hook
         return
     fi
 
