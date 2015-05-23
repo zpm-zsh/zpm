@@ -226,6 +226,7 @@ EXEC 33  # Unix
 .ini 36
 .desktop 36
 .sql 36
+.list 36
 *Makefile 36
 *.gitignore 36
 *.npmignore 36
