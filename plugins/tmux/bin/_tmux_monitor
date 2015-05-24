@@ -1,107 +1,71 @@
 #!/usr/bin/env bash
-# unset any variable which system may be using
 
-
-unset tecreset os architecture kernelrelease internalip externalip nameserver loadaverage
-
-while getopts iv name
-do
-        case $name in
-          i)iopt=1;;
-          v)vopt=1;;
-          *)echo "Invalid arg";;
-        esac
-done
-
-if [[ ! -z $iopt ]]
-then
-{
-wd=$(pwd)
-basename "$(test -L "$0" && readlink "$0" || echo "$0")" > /tmp/scriptname
-scriptname=$(echo -e -n $wd/ && cat /tmp/scriptname)
-su -c "cp $scriptname /usr/bin/monitor" root && echo "Congratulations! Script Installed, now run monitor Command" || echo "Installation failed"
-}
-fi
-
-if [[ ! -z $vopt ]]
-then
-{
-echo -e "tecmint_monitor version 0.1\nDesigned by Tecmint.com\nReleased Under Apache 2.0 License"
-}
-fi
-
-if [[ $# -eq 0 ]]
-then
-{
-
-
-# Define Variable tecreset
 tecreset=$(tput sgr0)
 
-# Check if connected to Internet or not
-\ping -c 1 google.com &> /dev/null && echo -e '\E[32m'"Internet: $tecreset Connected" || echo -e '\E[32m'"Internet: $tecreset Disconnected"
+if [[ "$(uname)" == "Linux" ]]; then
 
-# Check OS Type
-os=$(\uname -o)
-echo -e '\E[32m'"Operating System Type:" $tecreset $os
+  \ping -c 1 google.com &> /dev/null && echo -e "\E[32mInternet: \E[36mConnected" || echo -e "\E[32mInternet: \E[36mDisconnected"
 
-# Check OS Release Version and Name
-cat /etc/os-release | grep 'NAME\|VERSION' | grep -v 'VERSION_ID' | grep -v 'PRETTY_NAME' > /tmp/osrelease
-echo -n -e '\E[32m'"OS Name :" $tecreset  && cat /tmp/osrelease | grep -v "VERSION" | cut -f2 -d\"
-echo -n -e '\E[32m'"OS Version :" $tecreset && cat /tmp/osrelease | grep -v "NAME" | cut -f2 -d\"
+  echo -e "\E[32mOperating System Type: \E[36m$(\uname -o)"
 
-# Check Architecture
-architecture=$(\uname -m)
-echo -e '\E[32m'"Architecture:" $tecreset $architecture
+  echo -e "\E[32mOS Name: \E[36m$(lsb_release -si)"
 
-# Check Kernel Release
-kernelrelease=$(\uname -r)
-echo -e '\E[32m'"Kernel Release:" $tecreset $kernelrelease
+  echo -e "\E[32mOS Version: \E[36m$(echo -n $(lsb_release -si)\ ; lsb_release -sr)"
 
-# Check hostname
-echo -e '\E[32m'"Hostname:" $tecreset $HOSTNAME
+  echo -e "\E[32mArchitecture: \E[36m$(\uname -m)"
 
-# Check Internal IP
-internalip=$(\hostname -I)
-echo -e '\E[32m'"Internal IP:" $tecreset $internalip
+  echo -e "\E[32mKernel Release: \E[36m$(\uname -r)"
 
-# Check External IP
-externalip=$(curl -s ipecho.net/plain;echo)
-echo -e '\E[32m'"External IP: $tecreset "$externalip
+  echo -e "\E[32mHostname: \E[36m$(\hostname)"
 
-# Check DNS
-nameservers=$(cat /etc/resolv.conf | grep 'nameserver' | awk '{print $2}' | sed -n '1 p')
-echo -e '\E[32m'"Name Servers:" $tecreset $nameservers 
+  echo -e "\E[32mInternal IP: \E[36m$(\hostname -I)"
 
-# Check Logged In Users
-who>/tmp/who
-echo -e '\E[32m'"Logged In users:" $tecreset && cat /tmp/who 
+  echo -e "\E[32mExternal IP: \E[36m$(_tmux_myip)"
 
-# Check RAM and SWAP Usages
-\free -h | grep -v + > /tmp/ramcache
-echo -e '\E[32m'"Ram Usages:" $tecreset
-cat /tmp/ramcache 
+  echo -e "\E[32mName Servers: \E[36m$(cat /etc/resolv.conf | grep 'nameserver' | awk '{print $2}' | sed -n '1 p')" 
 
+  echo -e "\E[32mLogged In users: \E[36m\n$(who)"
 
-# Check Disk Usages
-\df -h | sed -n '1 p' > /tmp/diskusage
-\df -h | grep '^/dev/*' >> /tmp/diskusage
-echo -e '\E[32m'"Disk Usages:" $tecreset 
-cat /tmp/diskusage
+  echo -e "\E[32mRam Usages: \E[36m\n $(\free -h | grep -v +)"
 
-# Check Load Average
-loadaverage=$(\uptime | awk '{print $10,$11,$12}')
-echo -e '\E[32m'"Load Average:" $tecreset $loadaverage
+  echo -e "\E[32mDisk Usages: \E[36m\n $(\df -h | sed -n '1 p') $(\df -h | grep '^/dev/*')"
 
-# Check System Uptime
-tecuptime=$(\uptime | awk '{print $3,$4,$5}' |cut -f1 | sed 's/.$//')
-echo -e '\E[32m'"System Uptime Days/(HH:MM):" $tecreset $tecuptime
+  echo -e "\E[32mLoad Average: \E[36m$(\uptime | awk '{print $10,$11,$12}')"
 
-# Unset Variables
-unset tecreset os architecture kernelrelease internalip externalip nameserver loadaverage
+  echo -e "\E[32mSystem Uptime: \E[36m$(\uptime | awk '{print $3,$4,$5}' |cut -f1 | sed 's/.$//')"
 
-# Remove Temporary Files
-rm /tmp/osrelease /tmp/who /tmp/ramcache /tmp/diskusage
-}
+  echo -e "$tecreset"
+
 fi
-shift $(($OPTIND -1))
+
+if [[ "$(uname)" == "FreeBSD" ]]; then
+
+  \ping -c 1 google.com &> /dev/null && echo -e "\E[32mInternet: \E[36mConnected" || echo -e "\E[32mInternet: \E[36mDisconnected"
+
+  echo -e "\E[32mOperating System Type: \E[36m$(\uname -o)"
+
+  echo -e "\E[32mOS Name: \E[36m$(\uname -o)"
+  
+  echo -e "\E[32mOS Version: \E[36m$(echo -n $(uname)\ ; uname -r)"
+
+  echo -e "\E[32mArchitecture: \E[36m$(\uname -m)"
+
+  echo -e "\E[32mKernel Release: \E[36m$(\uname -r)"
+
+  echo -e "\E[32mHostname: \E[36m$(\hostname)"
+
+  echo -e "\E[32mExternal IP: \E[36m$(_tmux_myip)"
+
+  echo -e "\E[32mName Servers: \E[36m$(cat /etc/resolv.conf | grep 'nameserver' | awk '{print $2}' | sed -n '1 p')" 
+
+  echo -e "\E[32mLogged In users: \E[36m\n$(who)"
+
+  echo -e "\E[32mDisk Usages: \E[36m\n $(\df -h | sed -n '1 p') $(\df -h | grep '^/dev/*')"
+
+  echo -e "\E[32mLoad Average: \E[36m$(\uptime | awk '{print $10,$11,$12}')"
+
+  echo -e "\E[32mSystem Uptime: \E[36m$(\uptime | awk '{print $3,$4,$5}' |cut -f1 | sed 's/.$//')"
+
+  echo -e "$tecreset"
+
+fi

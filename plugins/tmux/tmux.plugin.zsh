@@ -34,7 +34,7 @@ function _tmux_motd(){
 			return 0
 		fi
 		if [[ "$OSTYPE" == freebsd* ]]; then
-			cat /etc/motd
+			_tmux_monitor
 			return 0
 		fi
 	fi
