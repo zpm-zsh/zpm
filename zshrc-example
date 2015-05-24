@@ -6,26 +6,25 @@ source ~/.zpm/zpm.zsh
 
 Plug nvm golang horosgrisa/zsh-gvm  #Package managers & langs
 
-Plug datauri myip extract pass tor tmux genpasswd viewer desktop hosts rmate horosgrisa/zsh-dropbox  #Programs
+Plug myip extract tmux genpasswd viewer desktop hosts rmate horosgrisa/zsh-dropbox  #Programs
 
 Plug colors grc dircolors  #Colors
 
 Plug human zsh-core ls cd  #ZSH
 
-Plug battery node status path git  #Prompt
+Plug node status path git  #Prompt
 
-Plug jocelynmallon/zshmarks horosgrisa/zsh-completions voronkovich/gitignore.plugin.zsh zsh-users/zsh-syntax-highlighting horosgrisa/zsh-history-substring-search horosgrisa/zsh-autosuggestions horosgrisa/autoenv horosgrisa/fasd  horosgrisa/mysql-colorize horosgrisa/zsh-konsole-theme-changer
+Plug horosgrisa/zsh-completions horosgrisa/zsh-history-substring-search horosgrisa/zsh-autosuggestions horosgrisa/autoenv horosgrisa/mysql-colorize horosgrisa/zsh-konsole-theme-changer
 
-Plug sickill/bitpocket horosgrisa/shipit
+Plug jocelynmallon/zshmarks voronkovich/gitignore.plugin.zsh zsh-users/zsh-syntax-highlighting sickill/bitpocket horosgrisa/shipit
 
 Plug oh-my-zsh-wrapper
 
 plugins=( lol taskwarrior httpie emoji-clock pip themes command-not-found themes ubuntu )
 
-
 # ZSH
-PROMPT='%{$fg[yellow]%} ➜ %{$reset_color%}'
-RPROMPT=' $last_status$node_version$gitprompt$battery_charge$current_path%{$reset_color%}'
+PROMPT=' %{$fg[yellow]%} ➜ %{$reset_color%}'
+RPROMPT=' $last_status$node_version$gitprompt$current_path%{$reset_color%}'
 PS2="%{$fg[green]%}%_>%{$reset_color%}"
 PROMPT_EOL_MARK="%{$bg[cyan]%}%{$fg[white]%}⏎%{$reset_color%}"
 WORDCHARS='*?_-~=&;!#$%^()[]{}<>:.'
@@ -66,12 +65,6 @@ alias mark='bookmark'
 alias c='jump'
 alias marks='showmarks'
 alias delmark='deletemark'
-
-# Fasd
-alias f='fasd -f -e vim'
-alias o='fasd -e xdg-open 1>/dev/null 2>/dev/null'
-alias d='fasd_cd -d -i'
-alias j='fasd_cd -d -i'
 
 # Alias
 alias \$=""

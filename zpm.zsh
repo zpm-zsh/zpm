@@ -147,15 +147,6 @@ function ZPM-Compile(){
 function ZPM-Upgrade(){
 _Plugins_Upgrade=()
 
-    if [[ $1 == 'core' ]]; then
-        echo "> Updating ZPM"
-        git --git-dir="$ZPM_DIR/.git/" --work-tree="$ZPM_DIR/" pull
-        for plugg ($_ZPM_Core_Plugins); do
-            _$plugg-update-hook 2>/dev/null
-        done
-        return
-    fi
-
     if [[ -z $@ ]]; then
         echo "> Updating ZPM"
         git --git-dir="$ZPM_DIR/.git/" --work-tree="$ZPM_DIR/" pull
@@ -168,11 +159,20 @@ _Plugins_Upgrade=()
     fi
 
     for i ($_Plugins_Upgrade); do
-        if [[ -d $ZPM_DIR/custom/$i ]]; then
-            echo "> Updating: $i"
-            git --git-dir="$ZPM_DIR/custom/$i/.git/" --work-tree="$ZPM_DIR/custom/$i/" pull
+        if [[ "$i" == 'core' ]]; then
+            echo "> Updating ZPM"
+            git --git-dir="$ZPM_DIR/.git/" --work-tree="$ZPM_DIR/" pull
+            for plugg ($_ZPM_Core_Plugins); do
+                _$plugg-update-hook 2>/dev/null
+            done
+        else
+            if [[ -d $ZPM_DIR/custom/$i ]]; then
+                echo "> Updating: $i"
+                git --git-dir="$ZPM_DIR/custom/$i/.git/" --work-tree="$ZPM_DIR/custom/$i/" pull
+            fi
+            $i-upgrade-hook 2>/dev/null || true
+
         fi
-        $i-upgrade-hook 2>/dev/null || true
     done
 
 }
