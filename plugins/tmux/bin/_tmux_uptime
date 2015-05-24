@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 # _tmux_uptime
 # get uptime from /proc/uptime
 
