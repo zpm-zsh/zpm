@@ -111,11 +111,9 @@ _ZPM_Initialize_Plugin(){
 }
 
 function Plug(){
-
     for plugin ($@); do
         _ZPM_Initialize_Plugin $plugin
     done
-
 }
 
 function _ZPM_Init(){
@@ -130,12 +128,10 @@ function _ZPM_Init(){
 
 
 function ZPM-Compile(){
-
     find $ZPM_DIR/plugins -name "*.zsh" | while read line
     do
         zcompile $line
     done
-
 }
 
 
@@ -171,10 +167,8 @@ _Plugins_Upgrade=()
                 git --git-dir="$ZPM_DIR/custom/$i/.git/" --work-tree="$ZPM_DIR/custom/$i/" pull
             fi
             $i-upgrade-hook 2>/dev/null || true
-
         fi
     done
-
 }
 
 

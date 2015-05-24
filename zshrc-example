@@ -23,7 +23,7 @@ Plug oh-my-zsh-wrapper
 plugins=( lol taskwarrior httpie emoji-clock pip themes command-not-found themes ubuntu )
 
 # ZSH
-PROMPT=' %{$fg[yellow]%} ➜ %{$reset_color%}'
+PROMPT='%{$fg[yellow]%} ➜ %{$reset_color%}'
 RPROMPT=' $last_status$node_version$gitprompt$current_path%{$reset_color%}'
 PS2="%{$fg[green]%}%_>%{$reset_color%}"
 PROMPT_EOL_MARK="%{$bg[cyan]%}%{$fg[white]%}⏎%{$reset_color%}"
