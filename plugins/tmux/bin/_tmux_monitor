@@ -32,7 +32,7 @@ if [[ "$(uname)" == "Linux" ]]; then
 
   echo -e "\E[32mSystem Uptime: \E[36m$(\uptime | awk '{print $3,$4,$5}' |cut -f1 | sed 's/.$//')"
 
-  echo -e "$tecreset"
+  echo -en "$tecreset"
 
 fi
 
@@ -64,6 +64,6 @@ if [[ "$(uname)" == "FreeBSD" ]]; then
 
   echo -e "\E[32mSystem Uptime: \E[36m$(\uptime | awk '{print $3,$4,$5}' |cut -f1 | sed 's/.$//')"
 
-  echo -e "$tecreset"
+  echo -en "$tecreset"
 
 fi
