@@ -18,8 +18,6 @@ if [[ "$(uname)" == "Linux" ]]; then
 
   echo -e "\E[32mHostname: \E[36m$(\hostname)"
 
-  echo -e "\E[32mInternal IP: \E[36m$(\hostname -I)"
-
   echo -e "\E[32mExternal IP: \E[36m$(_tmux_myip)"
 
   echo -e "\E[32mName Servers: \E[36m$(cat /etc/resolv.conf | grep 'nameserver' | awk '{print $2}' | sed -n '1 p')" 
