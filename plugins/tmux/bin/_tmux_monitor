@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 # unset any variable which system may be using
 
-# clear the screen
-clear
 
 unset tecreset os architecture kernelrelease internalip externalip nameserver loadaverage
 
@@ -87,7 +85,7 @@ echo -e '\E[32m'"Swap Usages :" $tecreset
 cat /tmp/ramcache | grep -v "Mem"
 
 # Check Disk Usages
-df -h| grep 'Filesystem\|/dev/sda*' > /tmp/diskusage
+df -h| grep 'Filesystem\|/dev/*' > /tmp/diskusage
 echo -e '\E[32m'"Disk Usages :" $tecreset 
 cat /tmp/diskusage
 
