@@ -94,7 +94,7 @@ loadaverage=$(\uptime | awk '{print $10,$11,$12}')
 echo -e '\E[32m'"Load Average:" $tecreset $loadaverage
 
 # Check System Uptime
-tecuptime=$(\uptime | awk '{print $3,$4}' | cut -f1 -d,)
+tecuptime=$(\uptime | awk '{print $3,$4,$5}' |cut -f1 | sed 's/.$//')
 echo -e '\E[32m'"System Uptime Days/(HH:MM):" $tecreset $tecuptime
 
 # Unset Variables
