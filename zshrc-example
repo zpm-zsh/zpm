@@ -4,7 +4,7 @@ fi
 
 source ~/.zpm/zpm.zsh
 
-Plug nvm golang horosgrisa/zsh-gvm  #Package managers & langs
+Plug nvm horosgrisa/zsh-gvm  #Package managers & langs
 
 Plug myip extract tmux genpasswd viewer desktop hosts rmate horosgrisa/zsh-dropbox  #Programs
 
@@ -20,7 +20,7 @@ Plug jocelynmallon/zshmarks voronkovich/gitignore.plugin.zsh zsh-users/zsh-synta
 
 Plug oh-my-zsh-wrapper
 
-plugins=( lol taskwarrior httpie emoji-clock pip themes command-not-found themes ubuntu )
+plugins=( lol emoji-clock pip command-not-found golang )
 
 # ZSH
 PROMPT='%{$fg[yellow]%} ➜ %{$reset_color%}'
