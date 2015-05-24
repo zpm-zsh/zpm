@@ -20,7 +20,7 @@ if [[ "$(uname)" == "Linux" ]]; then
 
   echo -e "\E[32mExternal IP: \E[36m$(_tmux_myip)"
 
-  echo -e "\E[32mName Servers: \E[36m$(cat /etc/resolv.conf | grep 'nameserver' | awk '{print $2}' | sed -n '1 p')" 
+  echo -e "\E[32mName Servers: \E[36m$(cat /etc/resolv.conf | grep 'nameserver' | awk '{print $2}' | xargs)" 
 
   echo -e "\E[32mLogged In users: \E[36m\n$(who)"
 
@@ -54,7 +54,7 @@ if [[ "$(uname)" == "FreeBSD" ]]; then
 
   echo -e "\E[32mExternal IP: \E[36m$(_tmux_myip)"
 
-  echo -e "\E[32mName Servers: \E[36m$(cat /etc/resolv.conf | grep 'nameserver' | awk '{print $2}' | sed -n '1 p')" 
+  echo -e "\E[32mName Servers: \E[36m$(cat /etc/resolv.conf | grep 'nameserver' | awk '{print $2}' | xargs)" 
 
   echo -e "\E[32mLogged In users: \E[36m\n$(who)"
 
