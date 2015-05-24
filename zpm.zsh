@@ -128,7 +128,7 @@ function _ZPM_Init(){
 
 
 function ZPM-Compile(){
-    find $ZPM_DIR/plugins -name "*.zsh" | while read line
+    find $ZPM_DIR/ -name "*.zsh" | while read line
     do
         zcompile $line
     done

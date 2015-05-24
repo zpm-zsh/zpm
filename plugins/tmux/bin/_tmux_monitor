@@ -6,15 +6,14 @@ if [[ "$(uname)" == "Linux" ]]; then
 
   \ping -c 1 google.com &> /dev/null && echo -e "\E[32mInternet: \E[36mConnected" || echo -e "\E[32mInternet: \E[36mDisconnected"
 
-  echo -e "\E[32mOperating System Type: \E[36m$(\uname -o)"
+  echo -ne "\E[32mOperating System Type: \E[36m"
+  echo -ne "$(\uname -o) "
+  echo -ne "$(lsb_release -si) "
+  echo -e "$(lsb_release -sr)"
 
-  echo -e "\E[32mOS Name: \E[36m$(lsb_release -si)"
-
-  echo -e "\E[32mOS Version: \E[36m$(echo -n $(lsb_release -si)\ ; lsb_release -sr)"
-
-  echo -e "\E[32mArchitecture: \E[36m$(\uname -m)"
-
-  echo -e "\E[32mKernel Release: \E[36m$(\uname -r)"
+  echo -ne "\E[32mKernel: \E[36m"
+  echo -ne  "$(\uname -r) "
+  echo -e  "$(\uname -m) "
 
   echo -e "\E[32mHostname: \E[36m$(\hostname)"
 
@@ -40,16 +39,14 @@ if [[ "$(uname)" == "FreeBSD" ]]; then
 
   \ping -c 1 google.com &> /dev/null && echo -e "\E[32mInternet: \E[36mConnected" || echo -e "\E[32mInternet: \E[36mDisconnected"
 
-  echo -e "\E[32mOperating System Type: \E[36m$(\uname -o)"
+  echo -ne "\E[32mOperating System Type: \E[36m"
+  echo -ne "$(\uname -o) "
+  echo -e "$(uname -r) "
 
-  echo -e "\E[32mOS Name: \E[36m$(\uname -o)"
+  echo -ne "\E[32mKernel: \E[36m"
+  echo -ne  "$(\uname -r) "
+  echo -e  "$(\uname -m) "
   
-  echo -e "\E[32mOS Version: \E[36m$(echo -n $(uname)\ ; uname -r)"
-
-  echo -e "\E[32mArchitecture: \E[36m$(\uname -m)"
-
-  echo -e "\E[32mKernel Release: \E[36m$(\uname -r)"
-
   echo -e "\E[32mHostname: \E[36m$(\hostname)"
 
   echo -e "\E[32mExternal IP: \E[36m$(_tmux_myip)"
