@@ -216,6 +216,7 @@ EXEC 33  # Unix
 .srt 01;35
 *README 01;35
 *LICENSE 01;35
+*INSTALL 01;35
 
 # Files wih data
 .json 36

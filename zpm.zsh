@@ -1,25 +1,25 @@
 #!/usr/bin/env zsh
 
-if [[  $COLORS != true && $COLORS != false ]]; then
+if [[  "$COLORS" != true && "$COLORS" != false ]]; then
     export COLORS=true
 fi
 
-if [[ -z $MANPATH ]]; then
+if [[ -z "$MANPATH" ]]; then
     if hash manpath 2>/dev/null; then
         export MANPATH=$(manpath)
     fi
 fi
-    
-if [[ -z $ZSH_COMPDUMP ]]; then
-    export ZSH_COMPDUMP=$HOME/.zcompdump
+
+if [[ -z "$ZSH_COMPDUMP" ]]; then
+    export ZSH_COMPDUMP="$HOME/.zcompdump"
 fi
-    
-if [[ -z $ZPM_DIR ]]; then
-    export ZPM_DIR=$HOME/.zpm
+
+if [[ -z "$ZPM_DIR" ]]; then
+    export ZPM_DIR="$HOME/.zpm"
 fi
 
 if [ -z "$HISTFILE" ]; then
-    HISTFILE=$HOME/.zsh_history
+    HISTFILE="$HOME/.zsh_history"
 fi
 
 HISTSIZE=9999
@@ -59,7 +59,7 @@ _ZPM_Initialize_Plugin(){
         if [[ -d $ZPM_DIR/plugins/$plugin/man ]]; then
             manpath=( $ZPM_DIR/plugins/$plugin/man $manpath )
         fi
-        
+
         if [[ -f $ZPM_DIR/plugins/$plugin/$plugin.plugin.zsh ]]; then
             source $ZPM_DIR/plugins/$plugin/$plugin.plugin.zsh
         fi
@@ -149,7 +149,7 @@ _Plugins_Upgrade=()
 
     if [[ $1 == 'core' ]]; then
         echo "> Updating ZPM"
-        git --git-dir="$ZPM_DIR/.git/" --work-tree="$ZPM_DIR/" pull       
+        git --git-dir="$ZPM_DIR/.git/" --work-tree="$ZPM_DIR/" pull
         for plugg ($_ZPM_Core_Plugins); do
             _$plugg-update-hook 2>/dev/null
         done
