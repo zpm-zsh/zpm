@@ -28,7 +28,7 @@ if [[ "$(uname)" == "Linux" ]]; then
 
   echo -e "\E[32mRam Usages: \E[36m\n $(\free -h | grep -v +)"
 
-  echo -e "\E[32mDisk Usages: \E[36m\n $(\df -h | sed -n '1 p') $(\df -h | grep '^/dev/*')"
+  echo -e "\E[32mDisk Usages: \E[36m\n $(\df -h | sed -n '1 p') \n$(\df -h | grep '^/dev/*')"
 
   echo -e "\E[32mLoad Average: \E[36m$(\uptime | awk '{print $10,$11,$12}')"
 
@@ -60,7 +60,7 @@ if [[ "$(uname)" == "FreeBSD" ]]; then
 
   echo -e "\E[32mLogged In users: \E[36m\n$(who)"
 
-  echo -e "\E[32mDisk Usages: \E[36m\n $(\df -h | sed -n '1 p') $(\df -h | grep '^/dev/*')"
+  echo -e "\E[32mDisk Usages: \E[36m\n $(\df -h | sed -n '1 p') \n$(\df -h | grep '^/dev/*')"
 
   echo -e "\E[32mLoad Average: \E[36m$(\uptime | awk '{print $10,$11,$12}')"
 
