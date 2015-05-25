@@ -92,19 +92,14 @@ function mdcat() {
   markdown $file | elinks -dump -dump-color-mode 1  
 }
 
-function hcat() {
-  if [[ -z $1 ]]; then
-    cat >/tmp/.tmp.text.file
-    file=/tmp/.tmp.text.file
+function pdfcat() {
+  if [[ $1 == "http:"* ]] || [[ $1 == "https:"* ]] || [[ $1 == "ft"* ]]; then
+    curl -L --silent $1 > /tmp/.tmp.pdf
+    file=/tmp/.tmp.pdf
   else
-    if [[ $1 == "http:"* ]] || [[ $1 == "https:"* ]] || [[ $1 == "ftp:"* ]]; then
-      curl -L --silent $1 > /tmp/.tmp.text.file
-      file=/tmp/.tmp.text.file
-    else
-      file=$1
-    fi
+    file=$1
   fi
-  `whence pygmentize` -f 256 -g $file
+  pdftotext -f 13 -l 17 -layout -opw supersecret -upw secret -eol unix -nopgbrk "$file" -
 }
 
 function imgcat() {
@@ -145,4 +140,19 @@ function imgcat() {
   else
     echo "Usege: image <path-to-image>"
   fi
+}
+
+function hcat() {
+  if [[ -z $1 ]]; then
+    cat >/tmp/.tmp.text.file
+    file=/tmp/.tmp.text.file
+  else
+    if [[ $1 == "http:"* ]] || [[ $1 == "https:"* ]] || [[ $1 == "ftp:"* ]]; then
+      curl -L --silent $1 > /tmp/.tmp.text.file
+      file=/tmp/.tmp.text.file
+    else
+      file=$1
+    fi
+  fi
+  `whence pygmentize` -f 256 -g $file
 }
