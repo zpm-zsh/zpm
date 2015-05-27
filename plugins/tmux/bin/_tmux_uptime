@@ -1,15 +1,2 @@
 #!/bin/sh
-# _tmux_uptime
-# get uptime from /proc/uptime
-
-# uptime=$(</proc/uptime)
-# uptime=${uptime%%.*}
-
-# seconds=$(( uptime%60 ))
-# minutes=$(( uptime/60%60 ))
-# hours=$(( uptime/60/60%24 ))
-# days=$(( uptime/60/60/24 ))
-
-# echo "$days days, $hours hours"
-
-\uptime | awk '{print $3,$4,$5}' |cut -f1 | sed 's/.$//'
+\uptime | xargs| sed -e 's/.*up\ \(.*\),\ [0-9]*\ .*/\1/g'
