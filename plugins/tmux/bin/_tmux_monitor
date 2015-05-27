@@ -27,9 +27,7 @@ if [[ "$(uname)" == "Linux" ]]; then
 
   echo -e "\E[32mDisk Usages: \E[36m\n $(\df -h | sed -n '1 p') \n$(\df -h | grep '^/dev/*')"
 
-  echo -e "\E[32mLoad Average: \E[36m$(\uptime | awk '{print $10,$11,$12}')"
-
-  echo -e "\E[32mSystem Uptime: \E[36m$(\uptime | awk '{print $3,$4,$5}' |cut -f1 | sed 's/.$//')"
+  echo -e "\E[32mSystem Uptime: \E[36m$(\uptime | xargs| sed -e 's/.*up\ \(.*\),\ [0-9]*\ .*/\1/g')"
 
   echo -en "$tecreset"
 
@@ -57,9 +55,7 @@ if [[ "$(uname)" == "FreeBSD" ]]; then
 
   echo -e "\E[32mDisk Usages: \E[36m\n $(\df -h | sed -n '1 p') \n$(\df -h | grep '^/dev/*')"
 
-  echo -e "\E[32mLoad Average: \E[36m$(\uptime | awk '{print $10,$11,$12}')"
-
-  echo -e "\E[32mSystem Uptime: \E[36m$(\uptime | awk '{print $3,$4,$5}' |cut -f1 | sed 's/.$//')"
+  echo -e "\E[32mSystem Uptime: \E[36m$(\uptime | xargs| sed -e 's/.*up\ \(.*\),\ [0-9]*\ .*/\1/g')"
 
   echo -en "$tecreset"
 
