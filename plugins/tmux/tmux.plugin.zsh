@@ -40,4 +40,7 @@ function _tmux_motd(){
 	fi
 }
 
-_tmux_motd
+
+if [[ $TMUX_MOTD != false ]]; then
+    _tmux_motd
+fi
