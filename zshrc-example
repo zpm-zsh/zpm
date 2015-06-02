@@ -70,6 +70,10 @@ alias delmark='deletemark'
 alias \$=""
 alias pygmentize='pygmentize -O style=vim'
 
+if [[ "$USER" == "root" ]]; then
+    alias sudo=""
+fi
+
 if [[ -f $HOME/.zshrc.desktop ]]; then
     source $HOME/.zshrc.desktop
 fi
