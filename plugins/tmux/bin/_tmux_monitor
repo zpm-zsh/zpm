@@ -29,6 +29,8 @@ if [[ "$(uname)" == "Linux" ]]; then
 
   echo -e "\E[32mSystem Uptime: \E[36m$(\uptime | xargs| sed -e 's/.*up\ \(.*\),\ [0-9]*\ .*/\1/g')"
 
+  echo -e "\E[32mFailed login: \E[36m$(cat /var/log/auth.log | grep sshd | grep Fail | wc -l  )"
+
   echo -en "$tecreset"
 
 fi
