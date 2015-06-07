@@ -2,8 +2,6 @@ if [[ ! -d ~/.zpm ]]; then
         git clone --recursive https://github.com/horosgrisa/ZPM ~/.zpm
 fi
 
-export TMUX_MOTD=false
-
 source ~/.zpm/zpm.zsh
 
 Plug nvm horosgrisa/zsh-gvm  #Package managers & langs
