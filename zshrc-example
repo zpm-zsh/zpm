@@ -2,6 +2,8 @@ if [[ ! -d ~/.zpm ]]; then
         git clone --recursive https://github.com/horosgrisa/ZPM ~/.zpm
 fi
 
+export TMUX_MOTD=false
+
 source ~/.zpm/zpm.zsh
 
 Plug nvm horosgrisa/zsh-gvm  #Package managers & langs
@@ -45,8 +47,9 @@ ZSH_HIGHLIGHT_STYLES[double-quoted-argument]='fg=yellow'
 ZSH_HIGHLIGHT_STYLES[bracket-error]='fg=white,bg=red'
 ZSH_HIGHLIGHT_STYLES[bracket-level-1]='fg=blue'
 ZSH_HIGHLIGHT_STYLES[bracket-level-2]='fg=green'
-ZSH_HIGHLIGHT_STYLES[bracket-level-3]='fg=yellow'
-ZSH_HIGHLIGHT_STYLES[bracket-level-4]='fg=magenta'
+ZSH_HIGHLIGHT_STYLES[bracket-level-3]='fg=cyan'
+ZSH_HIGHLIGHT_STYLES[bracket-level-4]='fg=red'
+ZSH_HIGHLIGHT_STYLES[bracket-level-5]='fg=yellow'
 ZSH_HIGHLIGHT_STYLES[cursor-matchingbracket]='fg=red,bg=blue' 
 ZSH_HIGHLIGHT_STYLES[alias]='fg=green'
 ZSH_HIGHLIGHT_STYLES[path]='fg=blue'

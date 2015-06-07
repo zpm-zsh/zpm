@@ -3,7 +3,7 @@
 if [[ "$COLORS" == "true" ]]; then
     zstyle ':completion:*:*:kill:*:processes' list-colors "=(#b) #([0-9]#)*=36=31"
     zstyle ':completion:*:warnings' format $'%{\e[0;31m%}No matches for:%{\e[0m%} %d'
-    zstyle -e ':completion:*:default' list-colors 'reply=("${PREFIX:+=(#bi)($PREFIX:t)*==00;33=00;33}:${(s.:.)LS_COLORS}")';
+    zstyle -e ':completion:*:default' list-colors 'reply=("${PREFIX:+=(#bi)($PREFIX:t)*==00;32=00;32}:${(s.:.)LS_COLORS}")';
 else
     zstyle ':completion:*:warnings' format $'No matches for: %d'
 fi
