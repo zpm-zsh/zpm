@@ -114,7 +114,7 @@ function pdfcat() {
   else
     file=$1
   fi
-  pdftotext -f 13 -l 17 -layout -opw supersecret -upw secret -eol unix -nopgbrk "$file" -
+  pdftotext -eol unix -nopgbrk "$file" -
 }
 
 function imgcat() {
