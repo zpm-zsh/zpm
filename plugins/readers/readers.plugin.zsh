@@ -77,6 +77,21 @@ function cppcat() {
 }
 alias javacat=cppcat
 
+function hcat() {
+  if [[ -z $1 ]]; then
+    cat >/tmp/.tmp.text.file
+    file=/tmp/.tmp.text.file
+  else
+    if [[ $1 == "http:"* ]] || [[ $1 == "https:"* ]] || [[ $1 == "ftp:"* ]]; then
+      curl -L --silent $1 > /tmp/.tmp.text.file
+      file=/tmp/.tmp.text.file
+    else
+      file=$1
+    fi
+  fi
+  `whence pygmentize` -f 256 -g $file
+}
+
 function mdcat() {
   if [[ -z $1 ]]; then
     cat >/tmp/.tmp.text.md
@@ -142,17 +157,19 @@ function imgcat() {
   fi
 }
 
-function hcat() {
+
+function gpgcat() {
   if [[ -z $1 ]]; then
-    cat >/tmp/.tmp.text.file
-    file=/tmp/.tmp.text.file
+    cat >/tmp/.tmp.text.gpg
+    file=/tmp/.tmp.text.gpg
   else
     if [[ $1 == "http:"* ]] || [[ $1 == "https:"* ]] || [[ $1 == "ftp:"* ]]; then
-      curl -L --silent $1 > /tmp/.tmp.text.file
-      file=/tmp/.tmp.text.file
+        curl -L --silent $1 > /tmp/.tmp.text.gpg
+        file=/tmp/.tmp.text.gpg
     else
-      file=$1
+        file=$1
     fi
-  fi
-  `whence pygmentize` -f 256 -g $file
+  fi  
+  gpg --quiet --batch -d $file 
 }
+

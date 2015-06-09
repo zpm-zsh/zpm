@@ -6,7 +6,7 @@ source ~/.zpm/zpm.zsh
 
 Plug nvm horosgrisa/zsh-gvm  #Package managers & langs
 
-Plug myip extract tmux genpasswd viewer desktop hosts rmate horosgrisa/zsh-dropbox  #Programs
+Plug myip extract tmux genpasswd readers desktop hosts rmate horosgrisa/zsh-dropbox  #Programs
 
 Plug colors grc dircolors  #Colors
 
