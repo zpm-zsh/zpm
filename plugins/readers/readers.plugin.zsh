@@ -104,7 +104,7 @@ function mdcat() {
         file=$1
     fi
   fi  
-  markdown $file | elinks -dump -dump-color-mode 1  
+  markdown $file | html2text
 }
 
 function pdfcat() {

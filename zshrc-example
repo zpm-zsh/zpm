@@ -20,7 +20,7 @@ Plug jocelynmallon/zshmarks voronkovich/gitignore.plugin.zsh zsh-users/zsh-synta
 
 Plug oh-my-zsh-wrapper
 
-plugins=( lol emoji-clock pip command-not-found golang )
+plugins=( emoji-clock pip command-not-found golang )
 
 # ZSH
 PROMPT='%{$fg[yellow]%} ➜ %{$reset_color%}'

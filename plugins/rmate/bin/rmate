@@ -33,8 +33,8 @@
 
 # init
 #
-version="0.9.3"
-version_date="2015-03-03"
+version="0.9.5"
+version_date="2015-05-24"
 version_string="rmate-sh $version ($version_date)"
 
 # determine hostname
@@ -109,6 +109,7 @@ function showusage {
 -l, --line LINE  Place caret on line number after loading file.
 -m, --name NAME  The display name shown in TextMate.
 -t, --type TYPE  Treat file as having specified type.
+-n, --new        Open in a new window (Sublime Text).
 -f, --force      Open even if file is not writable.
 -v, --verbose    Verbose logging messages.
 -h, --help       Display this usage information.
@@ -174,6 +175,9 @@ while test "${1:0:1}" = "-"; do
             filetype=$2
             shift
             ;;
+        -n|--new)
+            new=true
+            ;;
         -f|--force)
             force=true
             ;;
@@ -200,13 +204,24 @@ done
 filepath="$1"
 
 if [ "$filepath" = "" ]; then
-    showusage
-    exit 1
+    if [[ $nowait = false ]]; then
+        filepath='-'
+    else
+        case "$-" in
+            *i*)
+                showusage
+                exit 1
+                ;;
+            *)
+                filepath='-'
+                ;;
+        esac
+    fi
 fi
 
 shift
 if [ ! "${#@}" -eq 0 ]; then
-    echo "There are more than one files specified. Opening only $filepath and ignoring other."
+    echo "There is more than one file specified. Opening only $filepath and ignoring other."
 fi
 
 if [ "$filepath" != "-" ]; then
@@ -284,10 +299,15 @@ function handle_connection {
 
         if [[ "$cmd" = "close" ]]; then
             log "Closing $token"
+            if [[ "$token" == "-" ]]; then
+                echo -n "$CONTENT"
+            fi
         elif [[ "$cmd" = "save" ]]; then
             log "Saving $token"
             if [ "$token" != "-" ]; then
                 cat "$tmp" > "$token"
+            else
+                CONTENT=`cat "$tmp"`
             fi
             rm "$tmp"
         fi
@@ -315,6 +335,10 @@ echo "real-path: $realpath" 1>&3
 echo "data-on-save: yes" 1>&3
 echo "re-activate: yes" 1>&3
 echo "token: $filepath" 1>&3
+
+if [[ $new = true ]]; then
+    echo "new: yes"  1>&3
+fi
 
 if [ "$selection" != "" ]; then
     echo "selection: $selection" 1>&3

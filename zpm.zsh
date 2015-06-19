@@ -53,11 +53,11 @@ _ZPM_Initialize_Plugin(){
         fpath=( $ZPM_DIR/plugins/$plugin $fpath )
 
         if [[ -d $ZPM_DIR/plugins/$plugin/bin ]]; then
-            path=( $ZPM_DIR/plugins/$plugin/bin $path )
+            path=( $path $ZPM_DIR/plugins/$plugin/bin )
         fi
 
         if [[ -d $ZPM_DIR/plugins/$plugin/man ]]; then
-            manpath=( $ZPM_DIR/plugins/$plugin/man $manpath )
+            manpath=( $manpath $ZPM_DIR/plugins/$plugin/man )
         fi
 
         if [[ -f $ZPM_DIR/plugins/$plugin/$plugin.plugin.zsh ]]; then
@@ -91,11 +91,11 @@ _ZPM_Initialize_Plugin(){
     fpath=( $ZPM_DIR/custom/$_plugin_name $fpath )
 
     if [[ -d $ZPM_DIR/custom/$_plugin_name/bin ]]; then
-        path=( $ZPM_DIR/custom/$_plugin_name/bin $path )
+        path=( $path $ZPM_DIR/custom/$_plugin_name/bin )
     fi
 
     if [[ -d $ZPM_DIR/custom/$_plugin_name/man ]]; then
-        manpath=( $ZPM_DIR/custom/$_plugin_name/man $manpath )
+        manpath=( $manpath $ZPM_DIR/custom/$_plugin_name/man )
     fi
 
     if [[ -f $ZPM_DIR/custom/$_plugin_name/$_plugin_name.plugin.zsh ]]; then
