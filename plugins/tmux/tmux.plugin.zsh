@@ -19,7 +19,7 @@ function _tmux_autostart(){
     precmd_functions=(${precmd_functions#_tmux_autostart})
 }
 
-function _tmux-update-hook(){
+function _tmux-upgrade(){
     echo ">> Updating hook: tmux"
     git --git-dir="$HOME/.tmux/plugins/tpm/.git" --work-tree="$HOME/.tmux/plugins/tpm" pull
 }

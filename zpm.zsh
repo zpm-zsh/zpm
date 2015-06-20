@@ -159,14 +159,14 @@ _Plugins_Upgrade=()
             echo "> Updating ZPM"
             git --git-dir="$ZPM_DIR/.git/" --work-tree="$ZPM_DIR/" pull
             for plugg ($_ZPM_Core_Plugins); do
-                _$plugg-update-hook 2>/dev/null
+                _$plugg-upgrade 2>/dev/null
             done
         else
             if [[ -d $ZPM_DIR/custom/$i ]]; then
                 echo "> Updating: $i"
                 git --git-dir="$ZPM_DIR/custom/$i/.git/" --work-tree="$ZPM_DIR/custom/$i/" pull
             fi
-            $i-upgrade-hook 2>/dev/null || true
+            $i-upgrade 2>/dev/null || true
         fi
     done
 }
