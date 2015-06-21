@@ -232,7 +232,10 @@ EXEC 33  # Unix
 *Makefile 36
 *.gitignore 36
 *.npmignore 36
-
+.crt 36
+.csr 36
+.key 36 
+.pem 36 
 
 # Your customizations
 
