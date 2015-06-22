@@ -4,8 +4,6 @@ tecreset=$(tput sgr0)
 
 if [[ "$(uname)" == "Linux" ]]; then
 
-  \ping -c 1 google.com &> /dev/null && echo -e "\E[32mInternet: \E[36mConnected" || echo -e "\E[32mInternet: \E[36mDisconnected"
-
   echo -ne "\E[32mOperating System: \E[36m"
   echo -ne "$(\uname -o) "
   echo -ne "$(lsb_release -si) "
@@ -36,8 +34,6 @@ if [[ "$(uname)" == "Linux" ]]; then
 fi
 
 if [[ "$(uname)" == "FreeBSD" ]]; then
-
-  \ping -c 1 google.com &> /dev/null && echo -e "\E[32mInternet: \E[36mConnected" || echo -e "\E[32mInternet: \E[36mDisconnected"
 
   echo -ne "\E[32mOperating System: \E[36m"
   echo -ne "$(\uname -o) "
