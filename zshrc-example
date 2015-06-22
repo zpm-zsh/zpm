@@ -1,3 +1,5 @@
+#!/usr/bin/env zsh
+
 if [[ ! -d ~/.zpm ]]; then
         git clone --recursive https://github.com/horosgrisa/ZPM ~/.zpm
 fi
