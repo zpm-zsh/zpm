@@ -218,6 +218,7 @@ EXEC 33  # Unix
 *COPYRIGHT 01;35
 *LICENSE 01;35
 *INSTALL 01;35
+*CHANGELOG 01;35
 
 # Files wih data
 .json 36
