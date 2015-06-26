@@ -230,6 +230,7 @@ EXEC 33  # Unix
 .sql 36
 .list 36
 *Makefile 36
+*Dockerfile 36
 *.gitignore 36
 *.npmignore 36
 .crt 36
