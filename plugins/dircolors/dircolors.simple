@@ -231,6 +231,7 @@ EXEC 33  # Unix
 .desktop 36
 .sql 36
 .list 36
+.map 36
 *Makefile 36
 *Dockerfile 36
 *.gitignore 36
