@@ -298,8 +298,10 @@ EXEC 33  # Unix
 .scss 32
 .less 32
 
-.haml 34
 .xml 34
 .shtml 34
 .htm 34
 .html 34
+.hjs 34
+.jade 34
+.haml 34
