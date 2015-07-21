@@ -75,6 +75,9 @@ e() {
             (*.rpm)
                 rpm2cpio "$1" | cpio -idmv
             ;;
+            (*.exe)
+                cabextract "$1" 
+            ;;
             (*.deb)
                 mkdir -p "$extract_dir/control"
                 mkdir -p "$extract_dir/data"

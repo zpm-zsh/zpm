@@ -119,7 +119,7 @@ function gpgcat() {
         	FILE=$1
     	fi
   	fi  
-  	gpg --quiet --batch -d $file 
+  	gpg --quiet --batch -d $FILE 
 }
 
 function pdfcat() {
