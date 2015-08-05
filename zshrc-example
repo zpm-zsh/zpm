@@ -1,10 +1,11 @@
 #!/usr/bin/env zsh
 
-if [[ ! -d ~/.zpm ]]; then
-        git clone --recursive https://github.com/horosgrisa/ZPM ~/.zpm
+if [[ -f /usr/share/zpm/zpm.zsh ]]; then
+	source /usr/share/zpm/zpm.zsh
+else
+	git clone --recursive https://github.com/horosgrisa/zpm ~/.zpm
+	source ~/.zpm/zpm.zsh
 fi
-
-source ~/.zpm/zpm.zsh
 
 Plug nvm horosgrisa/zsh-gvm  #Package managers & langs
 
