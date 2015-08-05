@@ -15,7 +15,7 @@ if [[ -z "$ZSH_COMPDUMP" ]]; then
 fi
 
 if [[ -z "$ZPM_DIR" ]]; then
-    export ZPM_DIR="$HOME/.zpm"
+    export ZPM_DIR="${0:a:h}"
 fi
 
 if [ -z "$HISTFILE" ]; then
@@ -34,6 +34,8 @@ setopt prompt_subst
 zstyle ':completion::complete:*' use-cache 1
 zstyle ':completion::complete:*' cache-path ~/.cache/zsh
 autoload -U compinit && compinit
+mkdir -p ~/.cache/zpm/plugins
+rm -rf $ZPM_DIR/custom
 
 # ----------
 # ZPM Plugin
@@ -83,27 +85,27 @@ _ZPM_Initialize_Plugin(){
         _plugin_name=${_plugin_name:0:-7}
     fi
 
-    if [[ ! -d $ZPM_DIR/custom/$_plugin_name ]]; then
+    if [[ ! -d ~/.cache/zpm/plugins/$_plugin_name ]]; then
         echo "Installing $plugin from github"
-        git clone --recursive "https://github.com/"$plugin".git" $ZPM_DIR/custom/$_plugin_name
+        git clone --recursive "https://github.com/"$plugin".git" ~/.cache/zpm/plugins/$_plugin_name
     fi
 
-    fpath=( $ZPM_DIR/custom/$_plugin_name $fpath )
+    fpath=( ~/.cache/zpm/plugins/$_plugin_name $fpath )
 
-    if [[ -d $ZPM_DIR/custom/$_plugin_name/bin ]]; then
-        path=( $path $ZPM_DIR/custom/$_plugin_name/bin )
+    if [[ -d ~/.cache/zpm/plugins/$_plugin_name/bin ]]; then
+        path=( $path ~/.cache/zpm/plugins/$_plugin_name/bin )
     fi
 
-    if [[ -d $ZPM_DIR/custom/$_plugin_name/man ]]; then
-        manpath=( $manpath $ZPM_DIR/custom/$_plugin_name/man )
+    if [[ -d ~/.cache/zpm/plugins/$_plugin_name/man ]]; then
+        manpath=( $manpath ~/.cache/zpm/plugins/$_plugin_name/man )
     fi
 
-    if [[ -f $ZPM_DIR/custom/$_plugin_name/$_plugin_name.plugin.zsh ]]; then
-        source $ZPM_DIR/custom/$_plugin_name/$_plugin_name.plugin.zsh
+    if [[ -f ~/.cache/zpm/plugins/$_plugin_name/$_plugin_name.plugin.zsh ]]; then
+        source ~/.cache/zpm/plugins/$_plugin_name/$_plugin_name.plugin.zsh
     fi
 
-    if [[ -f $ZPM_DIR/custom/$_plugin_name/zsh-$_plugin_name.plugin.zsh ]]; then
-        source $ZPM_DIR/custom/$_plugin_name/zsh-$_plugin_name.plugin.zsh
+    if [[ -f ~/.cache/zpm/plugins/$_plugin_name/zsh-$_plugin_name.plugin.zsh ]]; then
+        source ~/.cache/zpm/plugins/$_plugin_name/zsh-$_plugin_name.plugin.zsh
     fi
     _ZPM_Plugins+=( $_plugin_name )
     _ZPM_GitHub_Plugins+=( $_plugin_name )
@@ -162,9 +164,9 @@ _Plugins_Upgrade=()
                 _$plugg-upgrade 2>/dev/null
             done
         else
-            if [[ -d $ZPM_DIR/custom/$i ]]; then
+            if [[ -d ~/.cache/zpm/plugins/$i ]]; then
                 echo "> Updating: $i"
-                git --git-dir="$ZPM_DIR/custom/$i/.git/" --work-tree="$ZPM_DIR/custom/$i/" pull
+                git --git-dir="~/.cache/zpm/plugins/$i/.git/" --work-tree="~/.cache/zpm/plugins/$i/" pull
             fi
             $i-upgrade 2>/dev/null || true
         fi
