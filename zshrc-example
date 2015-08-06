@@ -1,9 +1,11 @@
 #!/usr/bin/env zsh
 
-if [[ -f /usr/share/zpm/zpm.zsh ]]; then
+if [[ -f ~/.zpm/zpm.zsh ]]; then # If you use zpm from git
+	source ~/.zpm/zpm.zsh
+elif [[ -f /usr/share/zpm/zpm.zsh ]]; then # If you use zpm from package
 	source /usr/share/zpm/zpm.zsh
 else
-	git clone --recursive https://github.com/horosgrisa/zpm ~/.zpm
+	git clone --recursive https://github.com/horosgrisa/zpm ~/.zpm # If you don't have zpm
 	source ~/.zpm/zpm.zsh
 fi
 
