@@ -137,7 +137,7 @@ _Plugins_Upgrade=()
         git --git-dir="$ZPM_DIR/.git/" --work-tree="$ZPM_DIR/" pull
         _Plugins_Upgrade+=($_ZPM_Plugins)
         for plugg ($_ZPM_Core_Plugins); do
-            _$plugg-update-hook 2>/dev/null
+            _$plugg-upgrade 2>/dev/null
         done
     else
         _Plugins_Upgrade+=($@)
