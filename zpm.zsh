@@ -94,9 +94,7 @@ _ZPM_Initialize_Plugin(){
 
     if [[ -f ~/.cache/zpm/plugins/$_plugin_name/$_plugin_name.plugin.zsh ]]; then
         source ~/.cache/zpm/plugins/$_plugin_name/$_plugin_name.plugin.zsh
-    fi
-
-    if [[ -f ~/.cache/zpm/plugins/$_plugin_name/zsh-$_plugin_name.plugin.zsh ]]; then
+    elif [[ -f ~/.cache/zpm/plugins/$_plugin_name/zsh-$_plugin_name.plugin.zsh ]]; then
         source ~/.cache/zpm/plugins/$_plugin_name/zsh-$_plugin_name.plugin.zsh
     fi
     _ZPM_Plugins+=( $_plugin_name )
