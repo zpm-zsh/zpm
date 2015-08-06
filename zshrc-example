@@ -25,7 +25,7 @@ Plug voronkovich/gitignore.plugin.zsh zsh-users/zsh-syntax-highlighting horosgri
 
 Plug oh-my-zsh-wrapper
 
-plugins=( emoji-clock pip command-not-found golang )
+plugins=( emoji-clock golang )
 
 # ZSH
 PROMPT='%{$fg[yellow]%} ➜ %{$reset_color%}'
