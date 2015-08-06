@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 
-if [[  "$COLORS" != true && "$COLORS" != false ]]; then
+if [[  "$COLORS" != true && "$COLORS" != false ]]; then # Dirty hook for Centos
     export COLORS=true
 fi
 
@@ -10,24 +10,17 @@ if [[ -z "$MANPATH" ]]; then
     fi
 fi
 
-if [[ -z "$ZSH_COMPDUMP" ]]; then
-    export ZSH_COMPDUMP="$HOME/.zcompdump"
-fi
-
-if [[ -z "$ZPM_DIR" ]]; then
-    export ZPM_DIR="${0:a:h}"
-fi
-
-if [ -z "$HISTFILE" ]; then
-    HISTFILE="$HOME/.zsh_history"
-fi
-
-HISTSIZE=9999
-SAVEHIST=9999
-
 if [[ "$COLORS" == "true" ]]; then
     autoload -U colors && colors
 fi
+
+ZSH_COMPDUMP="$HOME/.zcompdump"
+ZPM_DIR="${0:a:h}"
+HISTFILE="$HOME/.zsh_history"
+HISTSIZE=9999
+SAVEHIST=9999
+
+
 
 # Some modules
 setopt prompt_subst
@@ -35,7 +28,6 @@ zstyle ':completion::complete:*' use-cache 1
 zstyle ':completion::complete:*' cache-path ~/.cache/zsh
 autoload -U compinit && compinit
 mkdir -p ~/.cache/zpm/plugins
-rm -rf $ZPM_DIR/custom
 
 # ----------
 # ZPM Plugin
@@ -112,29 +104,24 @@ _ZPM_Initialize_Plugin(){
 
 }
 
-function Plug(){
-    for plugin ($@); do
-        _ZPM_Initialize_Plugin $plugin
-    done
-}
 
 function _ZPM_Init(){
     compinit
     precmd_functions=(${precmd_functions#_ZPM_Init})
 }
 
+function _ZPM-Upgrade(){
 
-# ----------
-# ZPM Functions
-# ----------
+    _arguments "*: :($(echo core; echo $_ZPM_GitHub_Plugins))"
 
+}
 
-function ZPM-Compile(){
-    find $ZPM_DIR/ -name "*.zsh" | while read line
-    do
-        zcompile $line
+function Plug(){
+    for plugin ($@); do
+        _ZPM_Initialize_Plugin $plugin
     done
 }
+
 
 
 
@@ -174,11 +161,6 @@ _Plugins_Upgrade=()
 }
 
 
-function _ZPM-Upgrade(){
-
-    _arguments "*: :($(echo core; echo $_ZPM_GitHub_Plugins))"
-
-}
 
 compdef _ZPM-Upgrade ZPM-Upgrade
 
