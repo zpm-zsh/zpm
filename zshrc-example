@@ -9,13 +9,13 @@ else
 	source ~/.zpm/zpm.zsh
 fi
 
-Plug nvm horosgrisa/zsh-gvm  #Package managers & langs
+Plug nvm horosgrisa/zsh-gvm  #Package managers
 
-Plug myip extract tmux genpasswd readers desktop hosts rmate horosgrisa/zsh-dropbox  #Programs
+Plug myip extract tmux genpasswd readers desktop rmate horosgrisa/zsh-dropbox  #Programs
 
 Plug colors grc dircolors  #Colors
 
-Plug human zsh-core ls cd  #ZSH
+Plug human zsh-core ls cd hosts  #ZSH
 
 Plug node status path git  #Prompt
 

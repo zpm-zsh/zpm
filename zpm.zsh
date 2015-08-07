@@ -133,12 +133,21 @@ function ZPM-Upgrade(){
 _Plugins_Upgrade=()
 
     if [[ -z $@ ]]; then
-        echo "> Updating ZPM"
-        git --git-dir="$ZPM_DIR/.git/" --work-tree="$ZPM_DIR/" pull
-        _Plugins_Upgrade+=($_ZPM_Plugins)
-        for plugg ($_ZPM_Core_Plugins); do
-            _$plugg-upgrade 2>/dev/null
-        done
+        if [[ -d "$ZPM_DIR/.git/" ]]; then
+			echo "> Updating ZPM"
+        	git --git-dir="$ZPM_DIR/.git/" --work-tree="$ZPM_DIR/" pull
+        	_Plugins_Upgrade+=($_ZPM_Plugins)
+			echo "Run plugin hooks"
+        	for plugg ($_ZPM_Core_Plugins); do
+            	_$plugg-upgrade 2>/dev/null
+        	done
+        else
+        	echo "Use package manager for upgrading ZPM"
+        	echo "Run plugin hooks"
+        	for plugg ($_ZPM_Core_Plugins); do
+        	    _$plugg-upgrade 2>/dev/null
+        	done
+        fi
     else
         _Plugins_Upgrade+=($@)
     fi
