@@ -20,8 +20,6 @@ HISTFILE="$HOME/.zsh_history"
 HISTSIZE=9999
 SAVEHIST=9999
 
-
-
 # Some modules
 setopt prompt_subst
 zstyle ':completion::complete:*' use-cache 1
@@ -36,7 +34,6 @@ mkdir -p $HOME/.local/share/zpm/plugins
 _ZPM_Plugins=()
 _ZPM_GitHub_Plugins+=()
 _ZPM_Core_Plugins+=()
-
 
 
 _ZPM_Initialize_Plugin(){
@@ -60,7 +57,6 @@ _ZPM_Initialize_Plugin(){
 
         _ZPM_Plugins+=( $plugin )
         _ZPM_Core_Plugins+=( $plugin )
-
 
         return
     fi
@@ -110,7 +106,15 @@ function _ZPM_Init(){
 
 function _ZPM-Upgrade(){
 
-    _arguments "*: :($(echo core; echo $_ZPM_GitHub_Plugins))"
+    _ZPM_Hooks=( $_ZPM_GitHub_Plugins )
+
+    for plugg ($_ZPM_Core_Plugins); do
+        if type _$plugg-upgrade | grep 'shell function' >/dev/null; then
+            _ZPM_Hooks+=($plugg)
+        fi
+    done
+
+    _arguments "*: :($(echo core; echo $_ZPM_Hooks))"
 
 }
 
@@ -119,8 +123,6 @@ function Plug(){
         _ZPM_Initialize_Plugin $plugin
     done
 }
-
-
 
 
 # ----------
@@ -143,11 +145,20 @@ _Plugins_Upgrade=()
 
     for i ($_Plugins_Upgrade); do
         if [[ "$i" == 'core' ]]; then
-            echo "> Updating ZPM"
-            git --git-dir="$ZPM_DIR/.git/" --work-tree="$ZPM_DIR/" pull
-            for plugg ($_ZPM_Core_Plugins); do
-                _$plugg-upgrade 2>/dev/null
-            done
+            if [[ -d "$ZPM_DIR/.git/" ]]; then
+                echo "> Updating ZPM"
+                git --git-dir="$ZPM_DIR/.git/" --work-tree="$ZPM_DIR/" pull
+                echo "Run plugin hooks"
+                for plugg ($_ZPM_Core_Plugins); do
+                    _$plugg-upgrade 2>/dev/null
+                done
+            else
+                echo "Use package manager for upgrading ZPM"
+                echo "Run plugin hooks"
+                for plugg ($_ZPM_Core_Plugins); do
+                    _$plugg-upgrade 2>/dev/null
+                done
+            fi
         else
             if [[ -d $HOME/.local/share/zpm/plugins/$i ]]; then
                 echo "> Updating: $i"
@@ -157,8 +168,6 @@ _Plugins_Upgrade=()
         fi
     done
 }
-
-
 
 compdef _ZPM-Upgrade ZPM-Upgrade
 
