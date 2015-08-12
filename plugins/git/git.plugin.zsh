@@ -33,7 +33,7 @@ _git_prompt() {
         else 
             remote=""
         fi 
-        if [ $git_vars[3] -eq "0" ]; then
+        if [[] $git_vars[3] ==  "0" ]]; then
             staged=""
         else
             if [[ $COLORS == "true" ]]; then
@@ -42,7 +42,7 @@ _git_prompt() {
                 staged=" $GIT_NOT_COMMITED"$git_vars[3]
             fi
         fi
-        if [ "$git_vars[4]" -eq "0" ]; then
+        if [[ "$git_vars[4]" == "0" ]]; then
             conflicts=""
         else
             if [[ $COLORS == "true" ]]; then
@@ -51,7 +51,7 @@ _git_prompt() {
                 conflicts=" $GIT_CONFLICT"$git_vars[4]
             fi
         fi
-        if [ "$git_vars[5]" -eq 0 ]; then
+        if [[ "$git_vars[5]" == 0 ]]; then
             changed=""
         else
             if [[ $COLORS == "true" ]]; then
@@ -60,7 +60,7 @@ _git_prompt() {
                 changed=" $GIT_CHANGED"$git_vars[5]
             fi
         fi
-        if [ "$git_vars[6]" -eq 0 ]; then
+        if [[ "$git_vars[6]" == 0 ]]; then
             untracked=""
         else
             if [[ $COLORS == "true" ]]; then
@@ -69,7 +69,7 @@ _git_prompt() {
                 untracked=" $GIT_UNTRACKED"$git_vars[6]
             fi
         fi
-        if [ "$git_vars[7]" -eq 1 ]; then 
+        if [[ "$git_vars[7]" == 1 ]]; then 
             if [[ $COLORS == "true" ]]; then
                 clean=" %{$fg[yellow]%}$GIT_CLEAN"
             else
