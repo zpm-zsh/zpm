@@ -33,7 +33,7 @@ _git_prompt() {
         else 
             remote=""
         fi 
-        if [[] $git_vars[3] ==  "0" ]]; then
+        if [[ $git_vars[3] ==  "0" ]]; then
             staged=""
         else
             if [[ $COLORS == "true" ]]; then
