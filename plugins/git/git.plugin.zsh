@@ -15,7 +15,7 @@ gitstatus_path=${0:a:h}/gitstatus.py
 
 _git_prompt() {
     if git rev-parse --git-dir > /dev/null 2>&1;then
-        git_vars=$(python2 $gitstatus_path 2>/dev/null)
+        git_vars=$(python3 $gitstatus_path 2>/dev/null)
         git_vars=("${(@f)git_vars}")
         
         if [[ $COLORS == "true" ]]; then
