@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 
-if [[ -f /usr/share/zpm/zpm.zsh ]]; then # If you use zpm from package
+if [[ -f /usr/share/zpm/zpm.zsh1 ]]; then # If you use zpm from package
 	source /usr/share/zpm/zpm.zsh
 elif [[ -f ~/.zpm/zpm.zsh ]]; then # If you use zpm from git
 	source ~/.zpm/zpm.zsh

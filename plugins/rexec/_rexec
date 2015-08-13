@@ -1,0 +1,6 @@
+#compdef s
+
+shift words
+  (( CURRENT -- ))
+
+_normal
