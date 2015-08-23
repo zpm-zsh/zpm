@@ -214,6 +214,7 @@ EXEC 33  # Unix
 .mkd 01;35
 .todo 01;35
 .srt 01;35
+.tex 33
 *README 01;35
 *COPYRIGHT 01;35
 *LICENSE 01;35
@@ -289,8 +290,8 @@ EXEC 33  # Unix
 .n 33
 .p 33
 .pod 33
-.tex 33
 .go 33
+.lua 33
 
 .js 01;31
 .coffee 01;31
