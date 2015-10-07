@@ -17,8 +17,8 @@ fi
 ZSH_COMPDUMP="$HOME/.zcompdump"
 ZPM_DIR="${0:a:h}"
 HISTFILE="$HOME/.zsh_history"
-HISTSIZE=9999
-SAVEHIST=9999
+HISTSIZE=999
+SAVEHIST=999
 
 # Some modules
 setopt prompt_subst
