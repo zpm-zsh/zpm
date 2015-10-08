@@ -1,9 +1,9 @@
 #!/usr/bin/env zsh
 
-source ${0:a:h}/completions.plugin.zsh
-source ${0:a:h}/correct.plugin.zsh
-source ${0:a:h}/hidden-users.plugin.zsh
-source ${0:a:h}/history.plugin.zsh
-source ${0:a:h}/keyboard.plugin.zsh
-source ${0:a:h}/modules.plugin.zsh
-source ${0:a:h}/variables.plugin.zsh
+source ${${(%):-%x}:a:h}/completions.plugin.zsh
+source ${${(%):-%x}:a:h}/correct.plugin.zsh
+source ${${(%):-%x}:a:h}/hidden-users.plugin.zsh
+source ${${(%):-%x}:a:h}/history.plugin.zsh
+source ${${(%):-%x}:a:h}/keyboard.plugin.zsh
+source ${${(%):-%x}:a:h}/modules.plugin.zsh
+source ${${(%):-%x}:a:h}/variables.plugin.zsh

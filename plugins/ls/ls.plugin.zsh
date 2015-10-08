@@ -3,8 +3,8 @@
 if ls --version >/dev/null 2>&1 ; then
     if [[ $COLORS == "true" ]]; then
         if hash grc 2>/dev/null; then
-            alias ll="grc --config=${0:a:h}/conf.other ls -lFh --color  --group-directories-first --time-style=+%Y/%m/%d\ %H:%M"
-            alias lsd="grc --config=${0:a:h}/conf.other ls -lFh --color  --group-directories-first --time-style=+%Y/%m/%d\ %H:%M -d *(-/DN)"
+            alias ll="grc --config=${${(%):-%x}:a:h}/conf.other ls -lFh --color  --group-directories-first --time-style=+%Y/%m/%d\ %H:%M"
+            alias lsd="grc --config=${${(%):-%x}:a:h}/conf.other ls -lFh --color  --group-directories-first --time-style=+%Y/%m/%d\ %H:%M -d *(-/DN)"
         else
             alias ll="ls -lFh --color  --group-directories-first --time-style=+%Y/%m/%d\ %H:%M"
             alias lsd="ls -lFh --color  --group-directories-first --time-style=+%Y/%m/%d\ %H:%M -d *(-/DN)"

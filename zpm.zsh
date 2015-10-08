@@ -15,7 +15,7 @@ if [[ "$COLORS" == "true" ]]; then
 fi
 
 ZSH_COMPDUMP="$HOME/.zcompdump"
-ZPM_DIR="${0:a:h}"
+ZPM_DIR="${${(%):-%x}:a:h}"
 HISTFILE="$HOME/.zsh_history"
 HISTSIZE=999
 SAVEHIST=999

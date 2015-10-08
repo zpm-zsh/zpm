@@ -1,4 +1,4 @@
-#!/usr/bin/etc zsh
+#!/usr/bin/env zsh
 
 hosts=()
 if [ -f ~/.ssh/config ]; then

@@ -10,7 +10,7 @@ export GIT_CLEAN=${GIT_CLEAN:-'●'}
 export GIT_PUSH=${GIT_PUSH:-'↑'}
 export GIT_PULL=${GIT_PULL:-'↓'}
 
-gitstatus_path=${0:a:h}/gitstatus.py
+gitstatus_path=${${(%):-%x}:a:h}/gitstatus.py
 
 
 _git_prompt() {

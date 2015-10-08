@@ -1,4 +1,4 @@
-alias tmux="TERM=xterm-256color tmux -2 attach || TERM=xterm-256color tmux -2 -f${0:a:h}/tmux.conf new"
+alias tmux="TERM=xterm-256color tmux -2 attach || TERM=xterm-256color tmux -2 -f${${(%):-%x}:a:h}/tmux.conf new"
 
 export TMUX_PP="~/.zpm/plugins/tmux/bin/_tmux-resurrect-install"
 
