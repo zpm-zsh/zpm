@@ -19,7 +19,7 @@ Plug human zsh-core ls cd hosts  #ZSH
 
 Plug node status path git  #Prompt
 
-Plug horosgrisa/zsh-completions horosgrisa/autoenv horosgrisa/mysql-colorize horosgrisa/zsh-konsole-theme-changer horosgrisa/zsh-backup jocelynmallon/zshmarks
+Plug horosgrisa/zsh-completions horosgrisa/autoenv horosgrisa/mysql-colorize jocelynmallon/zshmarks
 
 Plug voronkovich/gitignore.plugin.zsh zsh-users/zsh-syntax-highlighting horosgrisa/zsh-history-substring-search horosgrisa/zsh-autosuggestions
 
