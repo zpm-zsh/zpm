@@ -12,6 +12,17 @@ export LESS_TERMCAP_us=$'\E[00;32m'
 export LESS_TERMCAP_ue=$'\E[0m'
 export LESS='-R -M'
            
-if hash pygmentize 2>/dev/null; then
-    export LESSOPEN="|pygmentize -f 256 -g %s"
-fi
+
+export PYGMENTIZE_THEME=${PYGMENTIZE_THEME:-"monokai"}
+
+_pygmentize_theme(){
+    if hash pygmentize 2>/dev/null; then
+        export LESSOPEN="|pygmentize -f 256 -O style=$PYGMENTIZE_THEME -g %s"
+    fi
+    alias pygmentize="pygmentize -O style=$PYGMENTIZE_THEME"
+    precmd_functions=(${precmd_functions#_pygmentize_theme})
+
+}
+
+
+precmd_functions+=( _pygmentize_theme )

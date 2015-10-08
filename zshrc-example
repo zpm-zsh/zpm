@@ -72,11 +72,13 @@ alias c='jump'
 alias marks='showmarks'
 alias delmark='deletemark'
 
+# colors
+PYGMENTIZE_THEME=vim
+
+
 ### Aliases
 
 alias \$=""
-alias pygmentize='pygmentize -O style=vim'
-
 if [[ "$USER" == "root" ]]; then
     alias sudo=""
 fi
