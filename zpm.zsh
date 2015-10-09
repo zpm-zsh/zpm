@@ -114,7 +114,7 @@ function _ZPM-Upgrade(){
         fi
     done
 
-    _arguments "*: :($(echo core; echo $_ZPM_Hooks))"
+    _arguments "*: :($(echo ZPM; echo $_ZPM_Hooks))"
 
 }
 
@@ -142,6 +142,7 @@ _Plugins_Upgrade=()
             	_$plugg-upgrade 2>/dev/null
         	done
         else
+            _Plugins_Upgrade+=($_ZPM_GitHub_Plugins)
         	echo "Use package manager for upgrading ZPM"
         	echo "Run plugin hooks"
         	for plugg ($_ZPM_Core_Plugins); do
@@ -153,7 +154,7 @@ _Plugins_Upgrade=()
     fi
 
     for i ($_Plugins_Upgrade); do
-        if [[ "$i" == 'core' ]]; then
+        if [[ "$i" == 'ZPM' ]]; then
             if [[ -d "$ZPM_DIR/.git/" ]]; then
                 echo "> Updating ZPM"
                 git --git-dir="$ZPM_DIR/.git/" --work-tree="$ZPM_DIR/" pull
@@ -163,7 +164,7 @@ _Plugins_Upgrade=()
                 done
             else
                 echo "Use package manager for upgrading ZPM"
-                echo "Run plugin hooks"
+                echo "Run ZPM plugin hooks"
                 for plugg ($_ZPM_Core_Plugins); do
                     _$plugg-upgrade 2>/dev/null
                 done
