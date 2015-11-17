@@ -14,7 +14,8 @@ gitstatus_path=${${(%):-%x}:a:h}/gitstatus.py
 
 
 _git_prompt() {
-    if git rev-parse --git-dir > /dev/null 2>&1;then
+    if [ "$(command git config --get --bool oh-my-zsh.hide-status 2>/dev/null)" != "true" ] \
+       && git rev-parse --git-dir > /dev/null 2>&1; then
         git_vars=$(python3 $gitstatus_path 2>/dev/null)
         git_vars=("${(@f)git_vars}")
         
