@@ -9,8 +9,8 @@ colours=yellow
 regexp=(\s|^)\d+([.,]\d+)?\s?([kKMG][bB]|[bB]|[kKMG])(?=[\s,]|$)
 colours=yellow
 =======
-# n/n/n
-regexp=(\s|^)\d+(\/\d+)+(\/\d+)+(?=[\s,]|$)
+# n-n-n
+regexp=(\s|^)\d+(\-\d+)+(\-\d+)+(?=[\s,]|$)
 colours=green
 =======
 # n:n
@@ -20,7 +20,7 @@ colours=green
 regexp=(?<=\d):(?=\d)
 colours=yellow
 =======
-regexp=(?<=\d)\/(?=\d)
+regexp=(?<=\d)\-(?=\d)
 colours=yellow
 =======
 # -rwxrwxrwx
