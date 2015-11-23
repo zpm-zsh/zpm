@@ -10,19 +10,12 @@ else
 fi
 
 Plug nvm horosgrisa/zsh-gvm  #Package managers
-
 Plug myip extract tmux genpasswd readers desktop rmate horosgrisa/zsh-dropbox  #Programs
-
 Plug colors grc dircolors  #Colors
-
 Plug human zsh-core ls cd hosts  #ZSH
-
 Plug node status path git  #Prompt
-
 Plug horosgrisa/zsh-completions horosgrisa/autoenv horosgrisa/mysql-colorize jocelynmallon/zshmarks
-
 Plug voronkovich/gitignore.plugin.zsh zsh-users/zsh-syntax-highlighting horosgrisa/zsh-history-substring-search horosgrisa/zsh-autosuggestions
-
 Plug oh-my-zsh-wrapper # Wrapper for oh-my-zsh
 
 plugins=( emoji-clock golang )
@@ -33,12 +26,6 @@ RPROMPT=' $last_status$node_version$gitprompt$current_path%{$reset_color%}'
 PS2="%{$fg[green]%}%_>%{$reset_color%}"
 PROMPT_EOL_MARK="%{$bg[cyan]%}%{$fg[white]%}⏎%{$reset_color%}"
 WORDCHARS='*?_-~=&;!#$%^()[]{}<>:.'
-
-# Prompt
-CURRENT_PATH_PREFIX=" "
-GIT_PREFIX=" "
-NODE_VERSION_PREFIX=" "
-BATTERY_CHARGE_PREFIX=" "
 
 #################
 ###  Plugins  ###
@@ -75,14 +62,4 @@ alias delmark='deletemark'
 # colors
 PYGMENTIZE_THEME=vim
 
-
-### Aliases
-
-alias \$=""
-if [[ "$USER" == "root" ]]; then
-    alias sudo=""
-fi
-
-if [[ -f $HOME/.zshrc.desktop ]]; then
-    source $HOME/.zshrc.desktop
-fi
+[[ -f $HOME/.zshrc.desktop ]] && source $HOME/.zshrc.desktop

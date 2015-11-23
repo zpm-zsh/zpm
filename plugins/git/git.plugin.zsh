@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 
-export GIT_PREFIX=${GIT_PREFIX:-''}
+export GIT_PREFIX=${GIT_PREFIX:-' '}
 export GIT_SUFIX=${GIT_SUFIX:-''}
 export GIT_NOT_COMMITED=${GIT_NOT_COMMITED:-'▸'}
 export GIT_CONFLICT=${GIT_CONFLICT:-'✖'}
