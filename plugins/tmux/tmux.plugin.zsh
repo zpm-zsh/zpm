@@ -7,7 +7,9 @@ if [[ ! -d ~/.tmux/plugins/tpm ]]; then
 fi
 
 if [[ -z $TMUX_AUTOSTART  && -n "$SSH_CONNECTION" ]]; then
-    TMUX_AUTOSTART="true"
+    if hash tmux 2>/dev/null; then
+        TMUX_AUTOSTART="true"
+    fi
 fi
 
 function _tmux_autostart(){
@@ -29,11 +31,7 @@ precmd_functions+=( _tmux_autostart )
 
 function _tmux_motd(){
 	if [[ $TMUX_MOTD != false && ! -z $TMUX  &&  $(\tmux list-windows | wc -l | tr -d ' ') == 1 ]]; then
-		if [[ "$OSTYPE" == linux* ]]; then
-			_tmux_monitor
-			return 0
-		fi
-		if [[ "$OSTYPE" == freebsd* ]]; then
+		if [[ "$OSTYPE" == linux* || "$OSTYPE" == freebsd*  ]]; then
 			_tmux_monitor
 			return 0
 		fi
