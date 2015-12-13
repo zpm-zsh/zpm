@@ -14,6 +14,10 @@ if [[ "$COLORS" == "true" ]]; then
     autoload -U colors && colors
 fi
 
+if [[ -z "$SHELL" ]]; then
+    export SHELL=$(which zsh)
+fi
+
 ZSH_COMPDUMP="$HOME/.zcompdump"
 ZPM_DIR="${${(%):-%x}:a:h}"
 HISTFILE="$HOME/.zsh_history"
