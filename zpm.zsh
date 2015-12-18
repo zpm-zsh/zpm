@@ -179,7 +179,7 @@ _Plugins_Upgrade=()
                 echo "> Updating: $i"
                 git --git-dir="$ZPM_PLUGIN_DIR/$i/.git/" --work-tree="$ZPM_PLUGIN_DIR/$i/" pull
             fi
-            $i-upgrade 2>/dev/null || true
+            _$i-upgrade 2>/dev/null || true
         fi
     done
 }
