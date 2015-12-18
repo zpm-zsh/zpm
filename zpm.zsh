@@ -145,13 +145,13 @@ _Plugins_Upgrade=()
             git --git-dir="$ZPM_DIR/.git/" --work-tree="$ZPM_DIR/" pull
             echo "Run plugin hooks"
             for plugg ($_ZPM_Core_Plugins); do
-                _$plugg-upgrade 2>/dev/null || true
+                type _$plugg-upgrade | grep -q 'shell function' && _$plugg-upgrade
             done
         else
             echo "Use package manager for upgrading ZPM"
             echo "Run plugin hooks"
             for plugg ($_ZPM_Core_Plugins); do
-                _$plugg-upgrade 2>/dev/null || true
+                type _$plugg-upgrade | grep -q 'shell function' && _$plugg-upgrade
             done
         fi
     else
@@ -165,13 +165,13 @@ _Plugins_Upgrade=()
                 git --git-dir="$ZPM_DIR/.git/" --work-tree="$ZPM_DIR/" pull
                 echo "Run plugin hooks"
                 for plugg ($_ZPM_Core_Plugins); do
-                    _$plugg-upgrade 2>/dev/null || true
+                    type _$plugg-upgrade | grep -q 'shell function' && _$plugg-upgrade
                 done
             else
                 echo "Use package manager for upgrading ZPM"
                 echo "Run plugin hooks"
                 for plugg ($_ZPM_Core_Plugins); do
-                    _$plugg-upgrade 2>/dev/null || true
+                    type _$plugg-upgrade | grep -q 'shell function' && _$plugg-upgrade
                 done
             fi
         else
@@ -179,7 +179,7 @@ _Plugins_Upgrade=()
                 echo "> Updating: $i"
                 git --git-dir="$ZPM_PLUGIN_DIR/$i/.git/" --work-tree="$ZPM_PLUGIN_DIR/$i/" pull
             fi
-            _$i-upgrade 2>/dev/null || true
+            type _$i-upgrade | grep -q 'shell function' && _$plugg-upgrade
         fi
     done
 }
