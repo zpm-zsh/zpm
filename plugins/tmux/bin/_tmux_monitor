@@ -37,7 +37,7 @@ fi
 if [[ "$OSTYPE" == "linux-android"* ]]; then
 
   echo -ne "\E[32mOperating System: \E[36m"
-  echo -ne "$(uname -o) "
+  echo -n "$(uname -o) "
 
   echo -ne "\E[32mKernel: \E[36m"
   echo -ne  "$(uname -r) "
