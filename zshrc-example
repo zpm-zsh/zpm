@@ -18,7 +18,7 @@ Plug horosgrisa/zsh-completions horosgrisa/autoenv horosgrisa/mysql-colorize joc
 Plug voronkovich/gitignore.plugin.zsh zsh-users/zsh-syntax-highlighting horosgrisa/zsh-history-substring-search horosgrisa/zsh-autosuggestions
 Plug oh-my-zsh-wrapper # Wrapper for oh-my-zsh
 
-plugins=( emoji-clock golang composer ) # Plugins from oh-my-zsh
+plugins=( emoji-clock golang ) # Plugins from oh-my-zsh
 
 # ZSH
 PROMPT='%{$fg[yellow]%} ➜ %{$reset_color%}'
