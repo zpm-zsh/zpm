@@ -142,6 +142,7 @@ _Plugins_Upgrade=()
         _Plugins_Upgrade+=($_ZPM_GitHub_Plugins)
         if [[ -d "$ZPM_DIR/.git/" ]]; then
             echo "> Updating ZPM"
+            git --git-dir="$ZPM_DIR/.git/" --work-tree="$ZPM_DIR/" checkout "$ZPM_DIR/"
             git --git-dir="$ZPM_DIR/.git/" --work-tree="$ZPM_DIR/" pull
             echo "Run plugin hooks"
             for plugg ($_ZPM_Core_Plugins); do
@@ -162,6 +163,7 @@ _Plugins_Upgrade=()
         if [[ "$i" == 'ZPM' ]]; then
             if [[ -d "$ZPM_DIR/.git/" ]]; then
                 echo "> Updating ZPM"
+                git --git-dir="$ZPM_DIR/.git/" --work-tree="$ZPM_DIR/" checkout "$ZPM_DIR/"
                 git --git-dir="$ZPM_DIR/.git/" --work-tree="$ZPM_DIR/" pull
                 echo "Run plugin hooks"
                 for plugg ($_ZPM_Core_Plugins); do
@@ -177,6 +179,7 @@ _Plugins_Upgrade=()
         else
             if [[ -d $ZPM_PLUGIN_DIR/$i ]]; then
                 echo "> Updating: $i"
+                git --git-dir="$ZPM_PLUGIN_DIR/$i/.git/" --work-tree="$ZPM_PLUGIN_DIR/$i/" checkout "$ZPM_PLUGIN_DIR/$i/"
                 git --git-dir="$ZPM_PLUGIN_DIR/$i/.git/" --work-tree="$ZPM_PLUGIN_DIR/$i/" pull
             fi
             type _$i-upgrade | grep -q 'shell function' && _$plugg-upgrade
