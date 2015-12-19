@@ -1,6 +1,6 @@
 # ZPM - Zsh Plugin Manager
 
-ZPM ( Zsh plugin manager ) is an yet another plugin manager for [zsh](http://www.zsh.org/) similar to vim-plug. ZPM plugins is compatible with [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh). ZPM run on Linux, Android, FreeBSD and OS X.
+ZPM ( Zsh plugin manager ) is an yet another plugin manager for [zsh](http://www.zsh.org/) similar to vim-plug. ZPM plugins are compatible with [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh). ZPM runs on Linux, Android, FreeBSD and OS X.
 
 ## Dependences
 * git
