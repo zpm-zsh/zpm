@@ -15,7 +15,7 @@ Plug colors grc dircolors  #Colors
 Plug human zsh-core ls cd hosts  #ZSH
 Plug node status path git  #Prompt
 Plug horosgrisa/zsh-completions horosgrisa/autoenv horosgrisa/mysql-colorize jocelynmallon/zshmarks
-Plug voronkovich/gitignore.plugin.zsh zsh-users/zsh-syntax-highlighting horosgrisa/zsh-history-substring-search horosgrisa/zsh-autosuggestions
+Plug voronkovich/gitignore.plugin.zsh zsh-users/zsh-syntax-highlighting horosgrisa/zsh-history-substring-search tarruda/zsh-autosuggestions
 Plug oh-my-zsh-wrapper termux # Wrapper for oh-my-zsh
 
 plugins=( emoji-clock golang ) # Plugins from oh-my-zsh
