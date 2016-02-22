@@ -108,8 +108,6 @@ _ZPM_Initialize_Plugin(){
 function _ZPM_Init(){
     compinit
     precmd_functions=(${precmd_functions#_ZPM_Init})
-    unset ZPM_DIR ZPM_PLUGIN_DIR
-
 }
 
 function _ZPM-Upgrade(){
