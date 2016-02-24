@@ -18,11 +18,24 @@ if [[ -z "$SHELL" ]]; then
     export SHELL=$(which zsh)
 fi
 
+if [[ -z "$ZPM_DIR" ]]; then
+  _ZPM_DIR="${${(%):-%x}:a:h}"
+else
+    _ZPM_DIR=$ZPM_DIR;
+    unset ZPM_DIR
+fi
+
+if [[ -z "$ZPM_PLUGIN_DIR" ]]; then
+  _ZPM_PLUGIN_DIR=${XDG_DATA_HOME:-$HOME/.local/share}/zpm/plugins
+else
+  _ZPM_PLUGIN_DIR=$ZPM_PLUGIN_DIR
+  unset ZPM_PLUGIN_DIR
+fi
+
 ZSH_COMPDUMP="$HOME/.zcompdump"
-ZPM_DIR="${${(%):-%x}:a:h}"
 HISTFILE="$HOME/.zsh_history"
-HISTSIZE=999
-SAVEHIST=999
+HISTSIZE=9999
+SAVEHIST=9999
 
 # Some modules
 setopt prompt_subst
@@ -30,8 +43,8 @@ zstyle ':completion::complete:*' use-cache 1
 zstyle ':completion::complete:*' cache-path ~/.cache/zsh
 autoload -U compinit && compinit
 
-ZPM_PLUGIN_DIR=${XDG_DATA_HOME:-$HOME/.local/share}/zpm/plugins
-mkdir -p $ZPM_PLUGIN_DIR
+
+mkdir -p $_ZPM_PLUGIN_DIR
 
 # ----------
 # ZPM Plugin
@@ -47,18 +60,18 @@ _ZPM_Initialize_Plugin(){
     local plugin=$1
     if [[ ! "$plugin" == */* ]]; then
 
-        fpath=( $ZPM_DIR/plugins/$plugin $fpath )
+        fpath=( $_ZPM_DIR/plugins/$plugin $fpath )
 
-        if [[ -d $ZPM_DIR/plugins/$plugin/bin ]]; then
-            path=( $path $ZPM_DIR/plugins/$plugin/bin )
+        if [[ -d $_ZPM_DIR/plugins/$plugin/bin ]]; then
+            path=( $path $_ZPM_DIR/plugins/$plugin/bin )
         fi
 
-        if [[ -d $ZPM_DIR/plugins/$plugin/man ]]; then
-            manpath=( $manpath $ZPM_DIR/plugins/$plugin/man )
+        if [[ -d $_ZPM_DIR/plugins/$plugin/man ]]; then
+            manpath=( $manpath $_ZPM_DIR/plugins/$plugin/man )
         fi
 
-        if [[ -f $ZPM_DIR/plugins/$plugin/$plugin.plugin.zsh ]]; then
-            source $ZPM_DIR/plugins/$plugin/$plugin.plugin.zsh
+        if [[ -f $_ZPM_DIR/plugins/$plugin/$plugin.plugin.zsh ]]; then
+            source $_ZPM_DIR/plugins/$plugin/$plugin.plugin.zsh
         fi
 
         _ZPM_Plugins+=( $plugin )
@@ -79,25 +92,25 @@ _ZPM_Initialize_Plugin(){
         _plugin_name=${_plugin_name:0:-7}
     fi
 
-    if [[ ! -d $ZPM_PLUGIN_DIR/$_plugin_name ]]; then
+    if [[ ! -d $_ZPM_PLUGIN_DIR/$_plugin_name ]]; then
         echo "Installing $plugin from github"
-        git clone --recursive "https://github.com/"$plugin".git" $ZPM_PLUGIN_DIR/$_plugin_name
+        git clone --recursive "https://github.com/"$plugin".git" $_ZPM_PLUGIN_DIR/$_plugin_name
     fi
 
-    fpath=( $ZPM_PLUGIN_DIR/$_plugin_name $fpath )
+    fpath=( $_ZPM_PLUGIN_DIR/$_plugin_name $fpath )
 
-    if [[ -d $ZPM_PLUGIN_DIR/$_plugin_name/bin ]]; then
-        path=( $path $ZPM_PLUGIN_DIR/$_plugin_name/bin )
+    if [[ -d $_ZPM_PLUGIN_DIR/$_plugin_name/bin ]]; then
+        path=( $path $_ZPM_PLUGIN_DIR/$_plugin_name/bin )
     fi
 
-    if [[ -d $ZPM_PLUGIN_DIR/$_plugin_name/man ]]; then
-        manpath=( $manpath $ZPM_PLUGIN_DIR/$_plugin_name/man )
+    if [[ -d $_ZPM_PLUGIN_DIR/$_plugin_name/man ]]; then
+        manpath=( $manpath $_ZPM_PLUGIN_DIR/$_plugin_name/man )
     fi
 
-    if [[ -f $ZPM_PLUGIN_DIR/$_plugin_name/$_plugin_name.plugin.zsh ]]; then
-        source $ZPM_PLUGIN_DIR/$_plugin_name/$_plugin_name.plugin.zsh
-    elif [[ -f $ZPM_PLUGIN_DIR/$_plugin_name/zsh-$_plugin_name.plugin.zsh ]]; then
-        source $ZPM_PLUGIN_DIR/$_plugin_name/zsh-$_plugin_name.plugin.zsh
+    if [[ -f $_ZPM_PLUGIN_DIR/$_plugin_name/$_plugin_name.plugin.zsh ]]; then
+        source $_ZPM_PLUGIN_DIR/$_plugin_name/$_plugin_name.plugin.zsh
+    elif [[ -f $_ZPM_PLUGIN_DIR/$_plugin_name/zsh-$_plugin_name.plugin.zsh ]]; then
+        source $_ZPM_PLUGIN_DIR/$_plugin_name/zsh-$_plugin_name.plugin.zsh
     fi
     _ZPM_Plugins+=( $_plugin_name )
     _ZPM_GitHub_Plugins+=( $_plugin_name )
@@ -140,10 +153,10 @@ _Plugins_Upgrade=()
 
     if [[ -z $@ ]]; then
         _Plugins_Upgrade+=($_ZPM_GitHub_Plugins)
-        if [[ -d "$ZPM_DIR/.git/" ]]; then
+        if [[ -d "$_ZPM_DIR/.git/" ]]; then
             echo "> Updating ZPM"
-            git --git-dir="$ZPM_DIR/.git/" --work-tree="$ZPM_DIR/" checkout "$ZPM_DIR/"
-            git --git-dir="$ZPM_DIR/.git/" --work-tree="$ZPM_DIR/" pull
+            git --git-dir="$_ZPM_DIR/.git/" --work-tree="$_ZPM_DIR/" checkout "$_ZPM_DIR/"
+            git --git-dir="$_ZPM_DIR/.git/" --work-tree="$_ZPM_DIR/" pull
             echo "Run plugin hooks"
             for plugg ($_ZPM_Core_Plugins); do
                 type _$plugg-upgrade | grep -q 'shell function' && _$plugg-upgrade
@@ -161,10 +174,10 @@ _Plugins_Upgrade=()
 
     for i ($_Plugins_Upgrade); do
         if [[ "$i" == 'ZPM' ]]; then
-            if [[ -d "$ZPM_DIR/.git/" ]]; then
+            if [[ -d "$_ZPM_DIR/.git/" ]]; then
                 echo "> Updating ZPM"
-                git --git-dir="$ZPM_DIR/.git/" --work-tree="$ZPM_DIR/" checkout "$ZPM_DIR/"
-                git --git-dir="$ZPM_DIR/.git/" --work-tree="$ZPM_DIR/" pull
+                git --git-dir="$_ZPM_DIR/.git/" --work-tree="$_ZPM_DIR/" checkout "$_ZPM_DIR/"
+                git --git-dir="$_ZPM_DIR/.git/" --work-tree="$_ZPM_DIR/" pull
                 echo "Run plugin hooks"
                 for plugg ($_ZPM_Core_Plugins); do
                     type _$plugg-upgrade | grep -q 'shell function' && _$plugg-upgrade
@@ -177,10 +190,10 @@ _Plugins_Upgrade=()
                 done
             fi
         else
-            if [[ -d $ZPM_PLUGIN_DIR/$i ]]; then
+            if [[ -d $_ZPM_PLUGIN_DIR/$i ]]; then
                 echo "> Updating: $i"
-                git --git-dir="$ZPM_PLUGIN_DIR/$i/.git/" --work-tree="$ZPM_PLUGIN_DIR/$i/" checkout "$ZPM_PLUGIN_DIR/$i/"
-                git --git-dir="$ZPM_PLUGIN_DIR/$i/.git/" --work-tree="$ZPM_PLUGIN_DIR/$i/" pull
+                git --git-dir="$_ZPM_PLUGIN_DIR/$i/.git/" --work-tree="$_ZPM_PLUGIN_DIR/$i/" checkout "$_ZPM_PLUGIN_DIR/$i/"
+                git --git-dir="$_ZPM_PLUGIN_DIR/$i/.git/" --work-tree="$_ZPM_PLUGIN_DIR/$i/" pull
             fi
             type _$i-upgrade | grep -q 'shell function' && _$plugg-upgrade
         fi
