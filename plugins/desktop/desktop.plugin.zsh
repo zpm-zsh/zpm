@@ -1,5 +1,8 @@
 #!/usr/bin/env zsh
 
+
+source ${${(%):-%x}:a:h}/clipboard.plugin.zsh
+
 alias open="xdg-open"
 alias kdis='while /bin/true; do qdbus org.freedesktop.ScreenSaver /ScreenSaver SimulateUserActivity > /dev/null; sleep 10; done'
 alias night="xgamma -rgamma 0.64 -ggamma 0.51 -bgamma 0.69"
