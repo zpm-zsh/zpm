@@ -104,7 +104,9 @@ function mdcat() {
         	FILE=$1
     	fi
   	fi  
-  	markdown $FILE | html2text
+        HTMLFILE=$(mktemp -t XXXXX.html)
+  	markdown $FILE >$HTMLFILE
+        w3m -dump $HTMLFILE
 }
 
 function gpgcat() {
