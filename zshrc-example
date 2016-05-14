@@ -62,4 +62,4 @@ alias delmark='deletemark'
 # colors
 PYGMENTIZE_THEME=vim
 
-[[ -f $HOME/.zshrc.desktop ]] && source $HOME/.zshrc.desktop
+[[ -f $HOME/.zshrc.desktop ]] && source $HOME/.zshrc.desktop || true
