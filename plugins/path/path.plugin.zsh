@@ -22,7 +22,7 @@ p() {
 }
 
 _current_path() {
-    pa=$(print -Pn %2~)
+    local pa=$(print -Pn %2~)
     if [[ $COLORS == "true" ]]; then
         pa=${pa//\//%{$fg[red]%}\/%{$fg[blue]%}}
         export current_path="%{$fg[blue]%}$CURRENT_PATH_PREFIX$pa$CURRENT_PATH_SUFIX%{$reset_color%}"
