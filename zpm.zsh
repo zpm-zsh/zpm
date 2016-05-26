@@ -182,6 +182,9 @@ _Plugins_Upgrade=()
                 for plugg ($_ZPM_Core_Plugins); do
                     type _$plugg-upgrade | grep -q 'shell function' && _$plugg-upgrade
                 done
+                find "$_ZPM_DIR" -name "*.zsh" | while read zsh_file; do
+                    zcompile $zsh_file
+                done
             else
                 echo "Use package manager for upgrading ZPM"
                 echo "Run plugin hooks"
@@ -196,6 +199,9 @@ _Plugins_Upgrade=()
                 git --git-dir="$_ZPM_PLUGIN_DIR/$i/.git/" --work-tree="$_ZPM_PLUGIN_DIR/$i/" pull
             fi
             type _$i-upgrade | grep -q 'shell function' && _$plugg-upgrade
+            find "$_ZPM_PLUGIN_DIR/$i" -name "*.zsh" | while read zsh_file; do
+                zcompile $zsh_file
+            done
         fi
     done
 }
