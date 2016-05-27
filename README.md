@@ -4,13 +4,13 @@ ZPM ( Zsh plugin manager ) is an yet another plugin manager for [zsh](http://www
 
 ## Dependences
 * git
-* zsh
+* zshz
 * [Termux](http://termux.com/) for Android
 
-## Instalation 
+## Instalation
 **From GitHub**
 
-* Add 
+* Add
 ```sh
 if [[ ! -f ~/.zpm/zpm.zsh ]]; then
     git clone --recursive https://github.com/horosgrisa/zpm ~/.zpm
@@ -25,7 +25,7 @@ cp ~/.zpm/zshrc-example ~/.zshrc
 
 **From Aur (Arch Linux)**
 ```sh
-$ yaourt zpm
+$ yaourt -S zpm
 $ cp /usr/share/zpm/zshrc-example ~/.zshrc
 ```
 
@@ -33,4 +33,3 @@ $ cp /usr/share/zpm/zshrc-example ~/.zshrc
 
 * Add `Plug some-plugin` for enabling plugin from `~/.zpm/plugins`
 * Or add `Plug github-user/github-repo` for enabling plugin from github.
-

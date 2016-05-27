@@ -28,7 +28,7 @@ function csscat() {
             FILE=$1
         fi
     fi
-    css-beautify $FILE | `whence pygmentize` -f 256 -g 
+    css-beautify $FILE | `whence pygmentize` -f 256 -g
 }
 
 function jscat() {
@@ -43,7 +43,7 @@ function jscat() {
       		FILE=$1
     	fi
   	fi
-  	js-beautify $FILE | `whence pygmentize` -f 256 -g 
+  	js-beautify $FILE | `whence pygmentize` -f 256 -g
 }
 
 function jsoncat() {
@@ -73,7 +73,7 @@ function cppcat() {
       		FILE=$1
     	fi
   	fi
-  	astyle < $FILE | `whence pygmentize` -f 256 -g 
+  	astyle < $FILE | `whence pygmentize` -f 256 -g
 }
 alias javacat=cppcat
 
@@ -103,7 +103,7 @@ function mdcat() {
     	else
         	FILE=$1
     	fi
-  	fi  
+  	fi
         HTMLFILE=$(mktemp -t XXXXX.html)
   	markdown $FILE >$HTMLFILE
         w3m -dump $HTMLFILE
@@ -120,8 +120,8 @@ function gpgcat() {
     	else
         	FILE=$1
     	fi
-  	fi  
-  	gpg --quiet --batch -d $FILE 
+  	fi
+  	gpg --quiet --batch -d $FILE
 }
 
 function pdfcat() {
@@ -152,7 +152,7 @@ function imgcat() {
     	FILESIZE=$(stat -c%s "$FILERAW")
     	FILE=$(mktemp -t XXXXX.png)
     	convert $FILERAW $FILE
-    	
+
     	if [[ $FILESIZE -gt 1048576 ]]; then
         	mogrify -resize $width $FILE
         	picture-tube --cols $width $FILE
@@ -164,5 +164,4 @@ function imgcat() {
   	fi
 }
 
-
-
+DEPENDENCES_ARCH+=( curl imagemagick astyle pygmentize markdown w3m gnupg  )

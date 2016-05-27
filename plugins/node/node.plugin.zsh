@@ -37,3 +37,4 @@ _node_version() {
 }
 
 precmd_functions+=(_node_version)
+DEPENDENCES_ARCH+=( nodejs )

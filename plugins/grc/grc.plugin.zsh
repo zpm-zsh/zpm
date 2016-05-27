@@ -7,3 +7,4 @@ if hash grc 2>/dev/null; then
   alias ifconfig="grc --config=${${(%):-%x}:a:h}/conf.ifconfig $(whence ifconfig)"
   alias cal="grc --config=${${(%):-%x}:a:h}/conf.cal $(whence cal)"
 fi
+DEPENDENCES_ARCH+=( grc )
