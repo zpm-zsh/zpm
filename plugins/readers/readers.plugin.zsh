@@ -165,3 +165,4 @@ function imgcat() {
 }
 
 DEPENDENCES_ARCH+=( curl imagemagick astyle pygmentize markdown w3m gnupg  )
+DEPENDENCES_NPM+=( picture-tube js-beautify )
