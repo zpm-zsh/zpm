@@ -129,7 +129,7 @@ _ZPM_Initialize_Plugin(){
 
 function _ZPM_Init(){
     compinit
-    _ZPM_Check_Deps
+#    _ZPM_Check_Deps
     precmd_functions=(${precmd_functions#_ZPM_Init})
 }
 
