@@ -36,5 +36,9 @@ _node_version() {
     fi
 }
 
+function install_npm (){
+    curl -L https://www.npmjs.com/install.sh | sudo sh
+}
+
 precmd_functions+=(_node_version)
 DEPENDENCES_ARCH+=( nodejs )

@@ -104,9 +104,7 @@ function mdcat() {
         	FILE=$1
     	fi
   	fi
-        HTMLFILE=$(mktemp -t XXXXX.html)
-  	markdown $FILE >$HTMLFILE
-        w3m -dump $HTMLFILE
+    mdless --no-pager "$FILE"  	
 }
 
 function gpgcat() {
