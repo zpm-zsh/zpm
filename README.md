@@ -4,7 +4,7 @@ ZPM ( Zsh plugin manager ) is an yet another plugin manager for [zsh](http://www
 
 ## Dependences
 * git
-* zshz
+* zsh
 * [Termux](http://termux.com/) for Android
 
 ## Instalation
