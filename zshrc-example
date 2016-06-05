@@ -14,8 +14,8 @@ Plug myip extract tmux genpasswd readers desktop rmate horosgrisa/zsh-dropbox ho
 Plug colors grc dircolors  #Colors
 Plug human zsh-core ls cd hosts  #ZSH
 Plug node status path git  #Prompt
-Plug horosgrisa/zsh-completions horosgrisa/autoenv horosgrisa/mysql-colorize jocelynmallon/zshmarks
-Plug voronkovich/gitignore.plugin.zsh zsh-users/zsh-syntax-highlighting horosgrisa/zsh-history-substring-search tarruda/zsh-autosuggestions
+Plug zsh-users/zsh-completions horosgrisa/autoenv horosgrisa/mysql-colorize jocelynmallon/zshmarks
+Plug voronkovich/gitignore.plugin.zsh zsh-users/zsh-syntax-highlighting zsh-users/zsh-history-substring-search tarruda/zsh-autosuggestions
 Plug oh-my-zsh-wrapper termux # Wrapper for oh-my-zsh
 
 plugins=( emoji-clock golang ) # Plugins from oh-my-zsh
@@ -30,6 +30,11 @@ WORDCHARS='*?_-~=&;!#$%^()[]{}<>:.'
 #################
 ###  Plugins  ###
 #################
+
+# zsh-history-substring-search
+bindkey "$terminfo[kcuu1]" history-substring-search-up
+bindkey "$terminfo[kcud1]" history-substring-search-down
+
 
 # zsh-syntax-highlighting
 ZSH_HIGHLIGHT_STYLES[single-quoted-argument]='fg=yellow'
