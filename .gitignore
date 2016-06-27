@@ -1,4 +1,5 @@
 .directory
 *.zwc
 *.old
+*.bak
 custom/*
