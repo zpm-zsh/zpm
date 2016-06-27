@@ -15,10 +15,9 @@ function Check-Deps(){
 # NPM Deps
   if hash npm 2>/dev/null; then
     local DEPENDENCES_NPM_MISSING=()
-    local NPM_PATH="$( npm config get prefix )/lib/node_modules"
-    if [[ -d "$NPM_PATH" ]]; then
+    local NPM_PACKAGES=$( npm list --depth=0 -g 2>/dev/null| sed 1d | sed 's/^....//')
       for i ($DEPENDENCES_NPM); do
-        if [[ ! -d "$NPM_PATH/$i"  ]] ; then
+        if [[ ! $(echo $NPM_PACKAGES | grep "$i") ]]; then
           DEPENDENCES_NPM_MISSING+=$i
         fi
       done
@@ -26,7 +25,6 @@ function Check-Deps(){
         echo Please install missing packages using \`npm i -g $DEPENDENCES_NPM_MISSING\`
       fi
     fi
-  fi
 }
 
 function _check_deps(){
