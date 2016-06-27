@@ -20,7 +20,9 @@ function Check-Deps(){
         if [[ ! ${DEPENDENCES_NPM_MISSING[(r)$i]} == $i ]] && DEPENDENCES_NPM_MISSING+=( $i )
       fi
     done
-    if [ ! -z "$DEPENDENCES_NPM_MISSING" ] && echo Please install missing packages using sudo npm install -g $DEPENDENCES_NPM_MISSING
+    if [ ! -z "$DEPENDENCES_NPM_MISSING" ]; then
+      echo Please install missing packages using \`sudo npm install -g $DEPENDENCES_NPM_MISSING\`
+    fi
   fi
 }
 
