@@ -29,6 +29,6 @@ function _check_deps(){
   precmd_functions=(${precmd_functions#_check_deps})
 }
 
-if [[ "$CHECK_DEPS_AT_START" == "true" ]]; then
+if [[ "$CHECK_DEPS_AT_START" != "false" ]]; then
   precmd_functions+=( _check_deps )
 fi
