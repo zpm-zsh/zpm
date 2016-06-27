@@ -20,7 +20,7 @@ into `.zshrc`
 
 * If you don't have `.zshrc` copy example of `.zshrc` from zpm
 ```sh
-cp ~/.zpm/zshrc-example ~/.zshrc
+cp ~/.zpm/zshrc-example.zsh ~/.zshrc
 ```
 
 **From Aur (Arch Linux)**

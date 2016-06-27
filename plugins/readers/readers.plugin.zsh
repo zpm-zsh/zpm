@@ -165,4 +165,3 @@ function imgcat() {
     	echo "Usege: image <path-to-image>"
   	fi
 }
-DEPENDENCES_NPM+=( picture-tube js-beautify )
