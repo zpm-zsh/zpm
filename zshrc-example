@@ -63,4 +63,4 @@ alias delmark='deletemark'
 # colors
 PYGMENTIZE_THEME=monokai
 
-[[ -f $HOME/.zshrc.desktop ]] && source $HOME/.zshrc.desktop || true
+[[ -f $HOME/.zshrc.custom ]] && source $HOME/.zshrc.custom || true
