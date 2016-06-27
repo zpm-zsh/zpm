@@ -29,9 +29,7 @@ function Check-Deps(){
 
 function _check_deps(){
   Check-Deps
-  echo OK
   precmd_functions=(${precmd_functions#_check_deps})
-  echo OK
 }
 
 if [[ "$CHECK_DEPS_AT_START" != "false" ]]; then
