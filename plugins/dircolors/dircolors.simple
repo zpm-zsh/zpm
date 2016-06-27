@@ -77,13 +77,13 @@ NORMAL 00
 # normal file
 FILE 00
 # directory
-DIR 34
+DIR 36
 # 777 directory
 OTHER_WRITABLE 34;40
 # symbolic link
 LINK target
 
-# pipe, socket, block device, character device 
+# pipe, socket, block device, character device
 FIFO 30
 SOCK 35
 DOOR 35 # Solaris 2.5 and later
@@ -244,8 +244,8 @@ EXEC 33  # Unix
 *.npmignore 36
 .crt 36
 .csr 36
-.key 36 
-.pem 36 
+.key 36
+.pem 36
 
 # Your customizations
 

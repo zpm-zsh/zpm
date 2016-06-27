@@ -3,7 +3,6 @@
 hosts=()
 if [ -f ~/.ssh/config ]; then
     hosts=(
-        #${${${(@M)${(f)"$(cat ~/.ssh/config)"}:#Host *}#Host }:#*[*?]*}
         `grep '^Host' ~/.ssh/config | awk '{first = $1; $1 = ""; print $0; }' | xargs`
     )
 fi
