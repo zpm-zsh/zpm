@@ -16,13 +16,15 @@ function Check-Deps(){
   if hash npm 2>/dev/null; then
     local DEPENDENCES_NPM_MISSING=()
     local NPM_PATH="$( npm config get prefix )/lib/node_modules"
-    for i ($DEPENDENCES_NPM); do
-      if [[ ! -d "$NPM_PATH/$i"  ]] ; then
-        DEPENDENCES_NPM_MISSING+=$i
+    if [[ -d "$NPM_PATH" ]]; then
+      for i ($DEPENDENCES_NPM); do
+        if [[ ! -d "$NPM_PATH/$i"  ]] ; then
+          DEPENDENCES_NPM_MISSING+=$i
+        fi
+      done
+      if [[ ! -z "$DEPENDENCES_NPM_MISSING" ]]; then
+        echo Please install missing packages using \`npm i -g $DEPENDENCES_NPM_MISSING\`
       fi
-    done
-    if [[ ! -z "$DEPENDENCES_NPM_MISSING" ]]; then
-      echo Please install missing packages using \`npm i -g $DEPENDENCES_NPM_MISSING\`
     fi
   fi
 }
