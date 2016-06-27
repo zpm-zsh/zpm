@@ -10,7 +10,7 @@ else
 fi
 
 Plug zsh-core human ls cd hosts desktop  #ZSH
-Plug colors grc dircolors  #Colors
+Plug colors dircolors  #Colors
 Plug left-prompt node status path git  #Prompt
 Plug myip extract tmux genpasswd readers rmate horosgrisa/zsh-dropbox horosgrisa/utils  #Programs
 Plug nvm  #Package managers
