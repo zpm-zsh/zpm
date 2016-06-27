@@ -8,12 +8,12 @@ function Check-Deps(){
       fi
     done
     if [[ ! -z "$DEPENDENCES_ARCH_MISSING" ]]; then
-      echo Please install missing packages using sudo pacman -S $DEPENDENCES_ARCH_MISSING
+      echo Please install missing packages using \`sudo pacman -S $DEPENDENCES_ARCH_MISSING\`
     fi
   fi
 
 # NPM Deps
-  if hash node 2>/dev/null; then
+  if hash npm 2>/dev/null; then
     local DEPENDENCES_NPM_MISSING=()
     local NPM_PATH="$( npm config get prefix )/lib/node_modules"
     for i ($DEPENDENCES_NPM); do
@@ -21,7 +21,9 @@ function Check-Deps(){
         DEPENDENCES_NPM_MISSING+=$i
       fi
     done
-    if [ ! -z "$DEPENDENCES_NPM_MISSING" ] && echo Please install missing packages using sudo npm install -g $DEPENDENCES_NPM_MISSING
+    if [[ ! -z "$DEPENDENCES_NPM_MISSING" ]]; then
+      echo Please install missing packages using \`npm i -g $DEPENDENCES_NPM_MISSING\`
+    fi
   fi
 }
 

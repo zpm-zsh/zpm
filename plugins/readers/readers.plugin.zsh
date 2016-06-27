@@ -1,5 +1,7 @@
 #!/usr/bin/env zsh
+DEPENDENCES_ARCH+=( curl )
 
+DEPENDENCES_NPM+=( js-beautify )
 function htmlcat() {
     if [[ -z $1 ]]; then
   	    FILE=$(mktemp -t XXXXX.html)
@@ -61,6 +63,7 @@ function jsoncat() {
   	cat $FILE | prettyjson
 }
 
+DEPENDENCES_ARCH+=( astyle )
 function cppcat() {
   	if [[ -z $1 ]]; then
   	    FILE=$(mktemp -t XXXXX.cpp)
@@ -77,6 +80,7 @@ function cppcat() {
 }
 alias javacat=cppcat
 
+DEPENDENCES_ARCH+=( pygmentize )
 function hcat() {
   	if [[ -z $1 ]]; then
   	    FILE=$(mktemp -t XXXXX)
@@ -104,9 +108,9 @@ function mdcat() {
         	FILE=$1
     	fi
   	fi
-    mdless --no-pager "$FILE"  	
+    mdless --no-pager "$FILE"
 }
-
+DEPENDENCES_ARCH+=( gnupg )
 function gpgcat() {
   	if [[ -z $1 ]]; then
     	FILE=$(mktemp -t XXXXX.gpg)
@@ -131,7 +135,7 @@ function pdfcat() {
   	fi
   	pdftotext -eol unix -nopgbrk "$FILE" -
 }
-
+DEPENDENCES_NPM+=( picture-tube )
 function imgcat() {
   	if [ ! -z "$1" ]; then
     	if [[ $1 == "http:"* ]] || [[ $1 == "https:"* ]] || [[ $1 == "ftp:"* ]]; then
@@ -161,6 +165,4 @@ function imgcat() {
     	echo "Usege: image <path-to-image>"
   	fi
 }
-
-DEPENDENCES_ARCH+=( curl imagemagick astyle pygmentize markdown w3m gnupg  )
 DEPENDENCES_NPM+=( picture-tube js-beautify )
