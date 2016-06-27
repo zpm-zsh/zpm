@@ -12,5 +12,7 @@ function _nvm-upgrade(){
 if ! hash nvm 2>/dev/null; then
     function nvm-install(){
         git clone https://github.com/creationix/nvm ~/.nvm
+				[[ -s ~/.nvm/nvm.sh ]] && . ~/.nvm/nvm.sh
+				nvm alias default system
     }
 fi
