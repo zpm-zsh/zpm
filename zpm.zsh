@@ -147,31 +147,6 @@ function _ZPM-Upgrade(){
 
 }
 
-function _ZPM_Check_Deps(){
-    #Arch System Deps
-    if hash pacman 2>/dev/null; then
-        local DEPENDENCES_ARCH_MISSING=()
-        for i ($DEPENDENCES_ARCH); do
-             if (! pacman -Q $i 1>/dev/null 2>/dev/null) ; then
-                 DEPENDENCES_ARCH_MISSING+=$i
-             fi
-        done
-        if [ ! -z "$DEPENDENCES_ARCH_MISSING" ] && echo Please install missing packages using sudo pacman -S $DEPENDENCES_ARCH_MISSING
-    fi
-
-    # NPM Deps
-    if hash node 2>/dev/null; then
-        local DEPENDENCES_NPM_MISSING=()
-        local NPM_PATH="$( npm config get prefix )/lib/node_modules"
-        for i ($DEPENDENCES_NPM); do
-             if [[ ! -d "$NPM_PATH/$i"  ]] ; then
-                 DEPENDENCES_NPM_MISSING+=$i
-             fi
-        done
-        if [ ! -z "$DEPENDENCES_NPM_MISSING" ] && echo Please install missing packages using sudo npm install -g $DEPENDENCES_NPM_MISSING
-    fi
-}
-
 function Plug(){
     for plugin ($@); do
         _ZPM_Initialize_Plugin $plugin
