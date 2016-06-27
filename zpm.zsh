@@ -12,6 +12,7 @@ fi
 
 if [[ "$COLORS" == "true" ]]; then
   autoload -U colors && colors
+  export TERM='xterm-256color'
 fi
 
 if [[ -z "$SHELL" ]]; then
@@ -62,30 +63,30 @@ _ZPM_Core_Plugins+=()
 
 
 _ZPM_Initialize_Plugin(){
-  
+
   local plugin=$1
   if [[ ! "$plugin" == */* ]]; then
-    
+
     fpath=( $_ZPM_DIR/plugins/$plugin $fpath )
-    
+
     if [[ -d $_ZPM_DIR/plugins/$plugin/bin ]]; then
       path=( $path $_ZPM_DIR/plugins/$plugin/bin )
     fi
-    
+
     if [[ -d $_ZPM_DIR/plugins/$plugin/man ]]; then
       manpath=( $manpath $_ZPM_DIR/plugins/$plugin/man )
     fi
-    
+
     if [[ -f $_ZPM_DIR/plugins/$plugin/$plugin.plugin.zsh ]]; then
       source $_ZPM_DIR/plugins/$plugin/$plugin.plugin.zsh
     fi
-    
+
     _ZPM_Plugins+=( $plugin )
     _ZPM_Core_Plugins+=( $plugin )
-    
+
     return
   fi
-  
+
   _plugin_name=$plugin
   _plugin_name=${_plugin_name##*\/}
   if [[ $_plugin_name == zsh-*  ]]; then
@@ -97,7 +98,7 @@ _ZPM_Initialize_Plugin(){
   if [[ $_plugin_name == *.plugin  ]]; then
     _plugin_name=${_plugin_name:0:-7}
   fi
-  
+
   if [[ ! -d $_ZPM_PLUGIN_DIR/$_plugin_name ]]; then
     echo "Installing $plugin from github"
     git clone --recursive "https://github.com/"$plugin".git" "$_ZPM_PLUGIN_DIR/$_plugin_name"
@@ -105,17 +106,17 @@ _ZPM_Initialize_Plugin(){
       zcompile $zsh_file
     done
   fi
-  
+
   fpath=( $_ZPM_PLUGIN_DIR/$_plugin_name $fpath )
-  
+
   if [[ -d $_ZPM_PLUGIN_DIR/$_plugin_name/bin ]]; then
     path=( $path $_ZPM_PLUGIN_DIR/$_plugin_name/bin )
   fi
-  
+
   if [[ -d $_ZPM_PLUGIN_DIR/$_plugin_name/man ]]; then
     manpath=( $manpath $_ZPM_PLUGIN_DIR/$_plugin_name/man )
   fi
-  
+
   if [[ -f $_ZPM_PLUGIN_DIR/$_plugin_name/$_plugin_name.plugin.zsh ]]; then
     source $_ZPM_PLUGIN_DIR/$_plugin_name/$_plugin_name.plugin.zsh
   elif [[ -f $_ZPM_PLUGIN_DIR/$_plugin_name/zsh-$_plugin_name.plugin.zsh ]]; then
@@ -123,7 +124,7 @@ _ZPM_Initialize_Plugin(){
   fi
   _ZPM_Plugins+=( $_plugin_name )
   _ZPM_GitHub_Plugins+=( $_plugin_name )
-  
+
 }
 
 
@@ -134,17 +135,17 @@ function _ZPM_Init(){
 }
 
 function _ZPM-Upgrade(){
-  
+
   _ZPM_Hooks=( $_ZPM_GitHub_Plugins )
-  
+
   for plugg ($_ZPM_Core_Plugins); do
     if type _$plugg-upgrade | grep 'shell function' >/dev/null; then
       _ZPM_Hooks+=($plugg)
     fi
   done
-  
+
   _arguments "*: :($(echo ZPM; echo $_ZPM_Hooks))"
-  
+
 }
 
 function Plug(){
@@ -160,7 +161,7 @@ function Plug(){
 
 function ZPM-Upgrade(){
   _Plugins_Upgrade=()
-  
+
   if [[ -z $@ ]]; then
     _Plugins_Upgrade+=($_ZPM_GitHub_Plugins)
     if [[ -d "$_ZPM_DIR/.git/" ]]; then
@@ -184,7 +185,7 @@ function ZPM-Upgrade(){
   else
     _Plugins_Upgrade+=($@)
   fi
-  
+
   for i ($_Plugins_Upgrade); do
     if [[ "$i" == 'ZPM' ]]; then
       if [[ -d "$_ZPM_DIR/.git/" ]]; then
