@@ -13,23 +13,25 @@ function Check-Deps(){
   fi
 
 # NPM Deps
-  if hash npm 2>/dev/null; then
-    local DEPENDENCES_NPM_MISSING=()
-    local NPM_PACKAGES=$( npm list --depth=0 -g 2>/dev/null| sed 1d | sed 's/^....//' )
-      for i ($DEPENDENCES_NPM); do
-        if ! ( echo $NPM_PACKAGES | grep -q "$i" ); then
-          DEPENDENCES_NPM_MISSING+=$i
-        fi
-      done
-      if [[ ! -z "$DEPENDENCES_NPM_MISSING" ]]; then
-        echo Please install missing packages using \`npm i -g $DEPENDENCES_NPM_MISSING\`
-      fi
-    fi
+  # if hash npm 2>/dev/null; then
+  #   local DEPENDENCES_NPM_MISSING=()
+  #   local NPM_PACKAGES=$( npm list --depth=0 -g 2>/dev/null| sed 1d | sed 's/^....//' )
+  #     for i ($DEPENDENCES_NPM); do
+  #       if ! ( echo $NPM_PACKAGES | grep -q "$i" ); then
+  #         DEPENDENCES_NPM_MISSING+=$i
+  #       fi
+  #     done
+  #     if [[ ! -z "$DEPENDENCES_NPM_MISSING" ]]; then
+  #       echo Please install missing packages using \`npm i -g $DEPENDENCES_NPM_MISSING\`
+  #     fi
+  #   fi
 }
 
 function _check_deps(){
   Check-Deps
+  echo OK
   precmd_functions=(${precmd_functions#_check_deps})
+  echo OK
 }
 
 if [[ "$CHECK_DEPS_AT_START" != "false" ]]; then
