@@ -17,7 +17,7 @@ function Check-Deps(){
     local DEPENDENCES_NPM_MISSING=()
     local NPM_PACKAGES=$( npm list --depth=0 -g 2>/dev/null| sed 1d | sed 's/^....//')
       for i ($DEPENDENCES_NPM); do
-        if [[ ! $(echo $NPM_PACKAGES | grep "$i") ]]; then
+        if echo $NPM_PACKAGES | grep -q "$i"; then
           DEPENDENCES_NPM_MISSING+=$i
         fi
       done
