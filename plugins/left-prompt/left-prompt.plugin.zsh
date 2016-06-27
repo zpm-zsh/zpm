@@ -13,7 +13,7 @@ _left_prompt() {
     fi
   else
     if [[ $COLORS == "true" ]]; then
-      export left_prompt="%{$fg[green]%}$LEFT_PROMPT_PREFIX$LEFT_PROMPT_USER$LEFT_PROMPT_SUFIX%{$reset_color%}"
+      export left_prompt="%{$fg[yellow]%}$LEFT_PROMPT_PREFIX$LEFT_PROMPT_USER$LEFT_PROMPT_SUFIX%{$reset_color%}"
     else
       export left_prompt="$LEFT_PROMPT_PREFIX$LEFT_PROMPT_USER$LEFT_PROMPT_SUFIX"
     fi

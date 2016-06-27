@@ -9,14 +9,15 @@ else
 	source ~/.zpm/zpm.zsh
 fi
 
-Plug nvm  #Package managers
-Plug myip extract tmux genpasswd readers desktop rmate horosgrisa/zsh-dropbox horosgrisa/utils  #Programs
+Plug zsh-core human ls cd hosts desktop  #ZSH
 Plug colors grc dircolors  #Colors
-Plug human zsh-core ls cd hosts  #ZSH
-Plug node status path git prompt  #Prompt
+Plug left-prompt node status path git  #Prompt
+Plug myip extract tmux genpasswd readers rmate horosgrisa/zsh-dropbox horosgrisa/utils  #Programs
+Plug nvm  #Package managers
 Plug zsh-users/zsh-completions horosgrisa/autoenv horosgrisa/mysql-colorize jocelynmallon/zshmarks
 Plug voronkovich/gitignore.plugin.zsh zsh-users/zsh-syntax-highlighting horosgrisa/zsh-history-substring-search tarruda/zsh-autosuggestions
-Plug oh-my-zsh-wrapper termux command-not-found check-deps # Wrapper for oh-my-zsh
+Plug oh-my-zsh-wrapper  # Wrapper for oh-my-zsh
+Plug termux command-not-found check-deps  # Compatibility
 
 plugins=( emoji-clock golang ) # Plugins from oh-my-zsh
 
@@ -60,6 +61,6 @@ alias marks='showmarks'
 alias delmark='deletemark'
 
 # colors
-PYGMENTIZE_THEME=vim
+PYGMENTIZE_THEME=monokai
 
 [[ -f $HOME/.zshrc.desktop ]] && source $HOME/.zshrc.desktop || true
