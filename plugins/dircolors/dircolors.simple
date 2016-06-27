@@ -97,6 +97,8 @@ ORPHAN  05;37;41
 # ... and the files that orphaned symlinks point to
 MISSING 05;37;41
 
+#################################
+
 # files with execute permission
 EXEC 33  # Unix
 .cmd 33  # Win
@@ -169,6 +171,7 @@ EXEC 33  # Unix
 .pdf 01;35
 .fb2 01;35
 .epub 01;35
+.odt 01;35
 
 # Archives, compressed
 .7z   01;31
@@ -308,3 +311,4 @@ EXEC 33  # Unix
 .hjs 34
 .jade 34
 .haml 34
+.pug 34
