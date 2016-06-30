@@ -28,7 +28,7 @@ function Check-Deps(){
   # fi
 
   if hash npm 2>/dev/null; then
-    local DEPENDENCES_NPM_MISSING=()
+    DEPENDENCES_NPM_MISSING=()
     local NPM_PATH="$( npm config get prefix )/lib/node_modules"
     for i ($DEPENDENCES_NPM); do
       if [[ ! -d "$NPM_PATH/$i"  ]] ; then
