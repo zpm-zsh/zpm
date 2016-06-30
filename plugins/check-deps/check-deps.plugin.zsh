@@ -1,3 +1,9 @@
+DEPENDENCES_NPM=()
+DEPENDENCES_PIP=()
+DEPENDENCES_GEM=()
+DEPENDENCES_ARCH=()
+DEPENDENCES_DEBIAN=()
+
 function Check-Deps(){
   #Arch System Deps
   if hash pacman 2>/dev/null; then
