@@ -17,8 +17,7 @@ function Check-Deps(){
     DEPENDENCES_DEBIAN_MISSING=()
     _DEB_PACKAGES="$(dpkg --list|awk '{print $2}'|awk -F':' '{print $1}'|xargs)"
     for i ($DEPENDENCES_DEBIAN); do
-      if [[ ! $( grep -q $i <<< $_DEB_PACKAGES ) ]]; then
-        echo "$i"
+      if [[ $( echo $_DEB_PACKAGES | grep -v -q $i ) ]]; then
         if [[ ! ${DEPENDENCES_DEBIAN_MISSING[(r)$i]} == $i ]] && DEPENDENCES_DEBIAN_MISSING+=( $i )
       fi
     done
