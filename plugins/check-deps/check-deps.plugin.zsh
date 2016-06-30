@@ -14,12 +14,12 @@ function Check-Deps(){
   fi
 
   if hash dpkg 2>/dev/null; then
-    echo $DEPENDENCES_DEBIAN
     DEPENDENCES_DEBIAN_MISSING=()
     _DEB_PACKAGES="$(dpkg --list|awk '{print $2}'|awk -F':' '{print $1}'|xargs)"
     for i ($DEPENDENCES_DEBIAN); do
-      echo "$i"
       if [[ ! $( grep -q "$i" <<< $DEPENDENCES_DEBIAN ) ]]; then
+        echo "$i"
+
         if [[ ! ${DEPENDENCES_DEBIAN_MISSING[(r)$i]} == $i ]] && DEPENDENCES_DEBIAN_MISSING+=( $i )
       fi
     done
