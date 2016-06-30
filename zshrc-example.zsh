@@ -9,7 +9,6 @@ else
 	source ~/.zpm/zpm.zsh
 fi
 
-Plug termux command-not-found check-deps  # Compatibility
 Plug zsh-core human ls cd hosts desktop  #ZSH
 Plug colors dircolors  #Colors
 Plug left-prompt node status path git  #Prompt
@@ -17,6 +16,7 @@ Plug myip extract tmux genpasswd readers rmate horosgrisa/zsh-dropbox horosgrisa
 Plug nvm  #Package managers
 Plug zsh-users/zsh-completions horosgrisa/autoenv horosgrisa/mysql-colorize jocelynmallon/zshmarks
 Plug voronkovich/gitignore.plugin.zsh zsh-users/zsh-syntax-highlighting horosgrisa/zsh-history-substring-search tarruda/zsh-autosuggestions
+Plug termux command-not-found check-deps  # Compatibility
 Plug oh-my-zsh-wrapper  # Wrapper for oh-my-zsh
 
 plugins=( emoji-clock golang ) # Plugins from oh-my-zsh
