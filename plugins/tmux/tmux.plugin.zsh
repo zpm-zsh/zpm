@@ -43,3 +43,4 @@ if [[ $TMUX_MOTD != false ]]; then
     _tmux_motd
 fi
 DEPENDENCES_ARCH+=( tmux )
+DEPENDENCES_DEBIAN+=( tmux )

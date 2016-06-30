@@ -1,5 +1,6 @@
 #!/usr/bin/env zsh
 DEPENDENCES_ARCH+=( curl )
+DEPENDENCES_DEBIAN+=( curl )
 
 DEPENDENCES_NPM+=( js-beautify )
 function htmlcat() {
@@ -64,6 +65,7 @@ function jsoncat() {
 }
 
 DEPENDENCES_ARCH+=( astyle )
+DEPENDENCES_DEBIAN+=( astyle )
 function cppcat() {
   	if [[ -z $1 ]]; then
   	    FILE=$(mktemp -t XXXXX.cpp)
@@ -81,6 +83,7 @@ function cppcat() {
 alias javacat=cppcat
 
 DEPENDENCES_ARCH+=( pygmentize )
+DEPENDENCES_DEBIAN+=( python-pygments )
 function hcat() {
   	if [[ -z $1 ]]; then
   	    FILE=$(mktemp -t XXXXX)
@@ -111,6 +114,7 @@ function mdcat() {
     mdless --no-pager "$FILE"
 }
 DEPENDENCES_ARCH+=( gnupg )
+DEPENDENCES_DEBIAN+=( gnupg )
 function gpgcat() {
   	if [[ -z $1 ]]; then
     	FILE=$(mktemp -t XXXXX.gpg)

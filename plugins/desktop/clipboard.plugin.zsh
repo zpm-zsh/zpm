@@ -85,3 +85,4 @@ function clippaste() {
   fi
 }
 DEPENDENCES_ARCH+=( xclip xsel )
+DEPENDENCES_DEBIAN+=( xclip xsel )

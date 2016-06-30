@@ -47,12 +47,6 @@ autoload -U compinit && compinit
 
 mkdir -p $_ZPM_PLUGIN_DIR
 
-DEPENDENCES_NPM=()
-DEPENDENCES_PIP=()
-DEPENDENCES_GEM=()
-DEPENDENCES_ARCH=()
-DEPENDENCES_DEBIAN=()
-
 # ----------
 # ZPM Plugin
 # ----------
