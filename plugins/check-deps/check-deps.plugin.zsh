@@ -12,6 +12,18 @@ function Check-Deps(){
     fi
   fi
 
+  if hash dpkg 2>/dev/null; then
+    local DEPENDENCES_DEBIAN_MISSING=()
+    for i ($DEPENDENCES_DEBIAN); do
+      if (! dpkg -s $i 1>/dev/null 2>/dev/null) ; then
+        DEPENDENCES_DEBIAN_MISSING+=( $i )
+      fi
+    done
+    if [[ ! -z "$DEPENDENCES_DEBIAN_MISSING" ]]; then
+      echo Please install missing packages using \`sudo apt install $DEPENDENCES_DEBIAN_MISSING\`
+    fi
+  fi
+
   if hash npm 2>/dev/null; then
     DEPENDENCES_NPM_MISSING=()
     local NPM_PATH="$( npm config get prefix )/lib/node_modules"
@@ -22,18 +34,6 @@ function Check-Deps(){
     done
     if [ ! -z "$DEPENDENCES_NPM_MISSING" ]; then
       echo Please install missing packages using \`sudo npm install -g $DEPENDENCES_NPM_MISSING\`
-    fi
-  fi
-
-  if hash dpkg 2>/dev/null; then
-    local DEPENDENCES_DEBIAN_MISSING=()
-    for i ($DEPENDENCES_DEBIAN); do
-      if (! dpkg -s $i 1>/dev/null 2>/dev/null) ; then
-        DEPENDENCES_DEBIAN_MISSING+=( $i )
-      fi
-    done
-    if [[ ! -z "$DEPENDENCES_DEBIAN_MISSING" ]]; then
-      echo Please install missing packages using \`sudo apt install $DEPENDENCES_DEBIAN_MISSING\`
     fi
   fi
 }
