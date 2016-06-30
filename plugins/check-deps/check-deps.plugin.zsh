@@ -14,10 +14,10 @@ function Check-Deps(){
   fi
 
   if hash dpkg 2>/dev/null; then
-    DEPENDENCES_DEBIAN_MISSING=()
-    local DEB_PACKAGES=$(dpkg --list| awk '{print $2}'|awk -F':' '{print $1}')
+    local DEPENDENCES_DEBIAN_MISSING=()
+    _DEB_PACKAGES=$(dpkg --list| awk '{print $2}'|awk -F':' '{print $1}')
     for i ($DEPENDENCES_DEBIAN); do
-      if [[ ! $(echo $DEPENDENCES_DEBIAN | grep -q $i ) ]]; then
+      if [[ ! $(echo $_DEB_PACKAGES | grep -q $i ) ]]; then
         if [[ ! ${DEPENDENCES_DEBIAN_MISSING[(r)$i]} == $i ]] && DEPENDENCES_DEBIAN_MISSING+=( $i )
       fi
     done
@@ -27,7 +27,7 @@ function Check-Deps(){
   fi
 
   if hash npm 2>/dev/null; then
-    DEPENDENCES_NPM_MISSING=()
+    local DEPENDENCES_NPM_MISSING=()
     local NPM_PATH="$( npm config get prefix )/lib/node_modules"
     for i ($DEPENDENCES_NPM); do
       if [[ ! -d "$NPM_PATH/$i"  ]] ; then
