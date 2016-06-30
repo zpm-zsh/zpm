@@ -19,13 +19,14 @@ function Check-Deps(){
   fi
 
   if hash dpkg 2>/dev/null; then
-    local DEPENDENCES_DEBIAN_MISSING=()
+    DEPENDENCES_DEBIAN_MISSING=()
+    local DEB_PACKAGES="dpkg --list| awk '{print $2}'|awk -F':' '{print $1}'"
     for i ($DEPENDENCES_DEBIAN); do
-      if (! dpkg -s $i 1>/dev/null 2>/dev/null) ; then
-        DEPENDENCES_DEBIAN_MISSING+=( $i )
+      if ! (echo $DEPENDENCES_DEBIAN | grep -q $i ) ; then
+        if [[ ! ${DEPENDENCES_DEBIAN_MISSING[(r)$i]} == $i ]] && DEPENDENCES_DEBIAN_MISSING+=( $i )
       fi
     done
-    if [[ ! -z "$DEPENDENCES_DEBIAN_MISSING" ]]; then
+    if [ ! -z "$DEPENDENCES_DEBIAN_MISSING" ]; then
       echo Please install missing packages using \`sudo apt install $DEPENDENCES_DEBIAN_MISSING\`
     fi
   fi
