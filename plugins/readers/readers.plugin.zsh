@@ -140,6 +140,8 @@ function pdfcat() {
   	pdftotext -eol unix -nopgbrk "$FILE" -
 }
 DEPENDENCES_NPM+=( picture-tube )
+DEPENDENCES_ARCH+=( imagemagick )
+DEPENDENCES_DEBIAN+=( imagemagick )
 function imgcat() {
   	if [ ! -z "$1" ]; then
     	if [[ $1 == "http:"* ]] || [[ $1 == "https:"* ]] || [[ $1 == "ftp:"* ]]; then
