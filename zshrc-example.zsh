@@ -53,7 +53,7 @@ ZSH_HIGHLIGHT_STYLES[double-quoted-argument]='fg=yellow'
 ZSH_HIGHLIGHT_STYLES[bracket-error]='fg=white,bg=red'
 
 ZSH_HIGHLIGHT_STYLES[path]='fg=cyan'
-ZSH_HIGHLIGHT_STYLES[default]='fg=cyan,bold'
+ZSH_HIGHLIGHT_STYLES[default]='fg=blue'
 
 ZSH_HIGHLIGHT_PATTERNS+=('rm -rf *' 'fg=white,bg=red')
 ZSH_HIGHLIGHT_PATTERNS+=('\|' 'fg=red,bold')
