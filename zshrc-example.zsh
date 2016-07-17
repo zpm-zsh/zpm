@@ -43,15 +43,15 @@ ZSH_HIGHLIGHT_STYLES[alias]='fg=26,bold'
 ZSH_HIGHLIGHT_STYLES[suffix-alias]='fg=26,bold'
 ZSH_HIGHLIGHT_STYLES[command]='fg=26,bold'
 
-ZSH_HIGHLIGHT_STYLES[single-hyphen-option]='fg=cyan,bold'
-ZSH_HIGHLIGHT_STYLES[double-hyphen-option]='fg=cyan,bold'
-ZSH_HIGHLIGHT_STYLES[redirection]='fg=cyan,bold'
+ZSH_HIGHLIGHT_STYLES[single-hyphen-option]='fg=33,bold'
+ZSH_HIGHLIGHT_STYLES[double-hyphen-option]='fg=33,bold'
+ZSH_HIGHLIGHT_STYLES[redirection]='fg=33,bold'
 
 ZSH_HIGHLIGHT_STYLES[commandseparator]='fg=magenta'
 
-ZSH_HIGHLIGHT_STYLES[single-quoted-argument]='fg=yellow'
-ZSH_HIGHLIGHT_STYLES[double-quoted-argument]='fg=yellow'
-ZSH_HIGHLIGHT_STYLES[back-quoted-argument]='fg=yellow'
+ZSH_HIGHLIGHT_STYLES[single-quoted-argument]='fg=214'
+ZSH_HIGHLIGHT_STYLES[double-quoted-argument]='fg=214'
+ZSH_HIGHLIGHT_STYLES[back-quoted-argument]='fg=214'
 
 ZSH_HIGHLIGHT_STYLES[bracket-error]='fg=white,bg=red'
 
