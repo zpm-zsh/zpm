@@ -139,9 +139,9 @@ function pdfcat() {
   	fi
   	pdftotext -eol unix -nopgbrk "$FILE" -
 }
-DEPENDENCES_NPM+=( picture-tube )
-DEPENDENCES_ARCH+=( imagemagick )
-DEPENDENCES_DEBIAN+=( imagemagick )
+
+DEPENDENCES_ARCH+=( timg )
+DEPENDENCES_DEBIAN+=( timg )
 function imgcat() {
   	if [ ! -z "$1" ]; then
     	if [[ $1 == "http:"* ]] || [[ $1 == "https:"* ]] || [[ $1 == "ftp:"* ]]; then
@@ -151,22 +151,11 @@ function imgcat() {
         	FILERAW="$1"
     	fi
 
-    	if [[ $COLUMNS -gt 128 ]]; then
-        	width=$(( ($COLUMNS/3)*2 ))
-    	else
-        	width=$(( $COLUMNS-1 ))
-    	fi
 
     	FILESIZE=$(stat -c%s "$FILERAW")
     	FILE=$(mktemp -t XXXXX.png)
     	convert $FILERAW $FILE
-
-    	if [[ $FILESIZE -gt 1048576 ]]; then
-        	mogrify -resize $width $FILE
-        	picture-tube --cols $width $FILE
-    	else
-        	picture-tube --cols $width $FILE
-    	fi
+      timg $FILE
   	else
     	echo "Usege: image <path-to-image>"
   	fi
