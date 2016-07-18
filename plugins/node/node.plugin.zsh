@@ -20,7 +20,7 @@ _node_version() {
         if hash node 2>/dev/null; then
             nodev=$(node -v)
             if [[ $COLORS == "true" ]]; then
-                export node_version="%{$fg[cyan]%}$NODE_VERSION_PREFIX$nodev$NODE_VERSION_SUFIX%{$reset_color%}"
+                export node_version="%{$fg_bold[blue]%}$NODE_VERSION_PREFIX$nodev$NODE_VERSION_SUFIX%{$reset_color%}"
             else
                 export node_version="$NODE_VERSION_PREFIX$nodev$NODE_VERSION_SUFIX"
             fi
