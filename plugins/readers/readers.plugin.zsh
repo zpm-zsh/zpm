@@ -145,7 +145,7 @@ DEPENDENCES_DEBIAN+=( timg )
 function imgcat() {
   	if [ ! -z "$1" ]; then
     	if [[ $1 == "http:"* ]] || [[ $1 == "https:"* ]] || [[ $1 == "ftp:"* ]]; then
-    		FILERAW=$(mktemp -t XXXXX.img)
+    		FILERAW=$(mktemp -t XXXXX)
     		curl -L --silent $1 > $FILERAW
     	else
         	FILERAW="$1"
