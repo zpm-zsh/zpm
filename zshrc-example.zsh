@@ -11,7 +11,7 @@ fi
 
 Plug zsh-core human ls cd hosts desktop  #ZSH
 Plug colors dircolors  #Colors
-Plug left-prompt node status path git  #Prompt
+Plug user-prompt node status path git  #Prompt
 Plug myip extract tmux genpasswd readers rmate horosgrisa/zsh-dropbox horosgrisa/utils  #Programs
 Plug nvm  #Package managers
 Plug zsh-users/zsh-completions horosgrisa/autoenv horosgrisa/mysql-colorize jocelynmallon/zshmarks
@@ -22,7 +22,7 @@ Plug oh-my-zsh-wrapper  # Wrapper for oh-my-zsh
 plugins=( emoji-clock golang ) # Plugins from oh-my-zsh
 
 # ZSH
-PROMPT='$left_prompt'
+PROMPT='$user_prompt'
 RPROMPT=' $last_status$node_version$gitprompt$current_path%{$reset_color%}'
 PS2="%{$fg[green]%}%_>%{$reset_color%}"
 PROMPT_EOL_MARK="%{$bg[cyan]%}%{$fg[white]%}⏎%{$reset_color%}"
