@@ -19,6 +19,7 @@ _node_version() {
     if [ -d "./node_modules" -o -d "../node_modules" -o -d "../../node_modules" -o -d "../../../node_modules" ]; then
         if hash node 2>/dev/null; then
             nodev=$(node -v)
+            nodev=${nodev#'v'}
             if [[ $COLORS == "true" ]]; then
                 export node_version="%{$fg_bold[blue]%}$NODE_VERSION_PREFIX$nodev$NODE_VERSION_SUFIX%{$reset_color%}"
             else
