@@ -140,8 +140,8 @@ function pdfcat() {
   	pdftotext -eol unix -nopgbrk "$FILE" -
 }
 
-DEPENDENCES_ARCH+=( icat )
-DEPENDENCES_DEBIAN+=( icat )
+DEPENDENCES_ARCH+=( icat graphicsmagick )
+DEPENDENCES_DEBIAN+=( icat graphicsmagick )
 function imgcat() {
   	if [ ! -z "$1" ]; then
     	if [[ $1 == "http:"* ]] || [[ $1 == "https:"* ]] || [[ $1 == "ftp:"* ]]; then
@@ -154,7 +154,7 @@ function imgcat() {
 
     	FILESIZE=$(stat -c%s "$FILERAW")
     	FILE=$(mktemp -t XXXXX.png)
-    	convert $FILERAW $FILE
+      gm convert $FILERAW $FILE
       icat -m 24bit $FILERAW
   	else
     	echo "Usege: image <path-to-image>"
