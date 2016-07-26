@@ -1,0 +1,61 @@
+#!/usr/bin/env zsh
+# Colors
+color_red='38;05;161' #
+color_orange='38;05;108'
+color_yellow='38;05;214' #
+color_chartreuse='38;05;185'
+color_green='38;05;71' #
+color_cyan='38;05;38'
+color_blue='38;05;33' #
+color_purple='38;05;127'
+color_white='38;05;231'
+color_grey='38;05;145'
+
+##################################
+red=()
+orange=()
+yellow=()
+chartreuse=()
+green=()
+cyan=()
+blue=()
+purple=()
+white=()
+grey=()
+
+##################################
+#Text
+white+=(.txt .tex .org .md .markdown .mkd .todo .srt '*README' '*COPYRIGHT' '*LICENSE' '*INSTALL' '*CHANGELOG' '*AUTHORS')
+#Audio
+purple+=(.aac .flac .m4a .mid .midi .mp3 .ogg .wav)
+#Video
+red+=(.avi .flv .mkv .mov .MOV .mp4 .mpeg .mpg .ogm .ogv .ogx .vob .webm .wmv)
+#Images
+green+=(.jpg .jpeg .png .gif .bmp .svg .svgz .tif .tiff)
+#Application archives
+green+=(.apk .jar .deb .rpm .dmg .msi .xpi .crx)
+#Books
+red+=(.pdf .epub .fb2)
+#Archives
+purple+=(.7z .arj .bz .bz2 .cab .gem .gz .iso .rar .tar .tbz .tbz2 .tgz .tx .war .xz .z .Z .zip)
+#Documents
+cyan+=(.doc .docx .odt)
+
+## Source files
+orange+=(.py .c .cpp .h .lua)
+yellow+=(.css .less .sass .scss)
+chartreuse+=(.html .pug .jade .hjs .haml )
+orange+=(.js .coffee)
+blue+=(.yml .yaml .xml .json .cson .ini .desktop)
+
+
+#Other
+grey+=(.log .bak .aux .~)
+#################################
+
+cp dircolors.simple dircolors
+for color in red orange yellow chartreuse green cyan blue purple white grey; do
+  for ex in `eval 'echo \$'$color`; do
+    echo $ex `eval 'echo $color_'$color` >>dircolors
+  done
+done

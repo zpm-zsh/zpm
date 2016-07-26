@@ -32,3 +32,6 @@ if [[ "$COLORS" == "true" ]]; then
 else
     zstyle ':completion:*:warnings' format $'No matches for: %d'
 fi
+
+autoload -Uz url-quote-magic
+zle -N self-insert url-quote-magic

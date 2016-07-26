@@ -1,4 +1,4 @@
-
+#!/usr/bin/env zsh
 function Check-Deps(){
   #Arch System Deps
   if hash pacman 2>/dev/null; then
