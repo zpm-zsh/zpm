@@ -9,10 +9,11 @@ else
 	source ~/.zpm/zpm.zsh
 fi
 
-Plug zsh-core human ls cd hosts desktop  #ZSH
+Plug zsh-core human ls cd desktop  #ZSH
 Plug colors dircolors  #Colors
 Plug user-prompt node status path git  #Prompt
-Plug myip extract tmux genpasswd readers rmate horosgrisa/zsh-dropbox horosgrisa/utils  #Programs
+Plug myip extract tmux genpasswd readers rmate ssh
+Plug horosgrisa/zsh-dropbox horosgrisa/utils  #Programs
 Plug nvm  #Package managers
 Plug zsh-users/zsh-completions horosgrisa/autoenv horosgrisa/mysql-colorize
 Plug jocelynmallon/zshmarks voronkovich/gitignore.plugin.zsh zsh-users/zsh-syntax-highlighting
