@@ -14,8 +14,9 @@ Plug colors dircolors  #Colors
 Plug user-prompt node status path git  #Prompt
 Plug myip extract tmux genpasswd readers rmate horosgrisa/zsh-dropbox horosgrisa/utils  #Programs
 Plug nvm  #Package managers
-Plug zsh-users/zsh-completions horosgrisa/autoenv horosgrisa/mysql-colorize jocelynmallon/zshmarks
-Plug voronkovich/gitignore.plugin.zsh zsh-users/zsh-syntax-highlighting horosgrisa/zsh-history-substring-search tarruda/zsh-autosuggestions
+Plug zsh-users/zsh-completions horosgrisa/autoenv horosgrisa/mysql-colorize
+Plug jocelynmallon/zshmarks voronkovich/gitignore.plugin.zsh zsh-users/zsh-syntax-highlighting
+Plug tarruda/zsh-autosuggestions horosgrisa/zsh-history-substring-search
 Plug termux command-not-found check-deps  # Compatibility
 Plug oh-my-zsh-wrapper  # Wrapper for oh-my-zsh
 

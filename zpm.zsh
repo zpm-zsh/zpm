@@ -43,7 +43,7 @@ setopt prompt_subst
 zstyle ':completion::complete:*' use-cache 1
 zstyle ':completion::complete:*' cache-path ~/.cache/zsh
 autoload -U compinit && compinit
-
+zmodload zsh/terminfo
 
 mkdir -p $_ZPM_PLUGIN_DIR
 
@@ -217,3 +217,11 @@ function ZPM-Upgrade(){
 compdef _ZPM-Upgrade ZPM-Upgrade
 
 precmd_functions+=(_ZPM_Init)
+
+{
+  # Compile the completion dump to increase startup speed.
+  zcompdump="${ZDOTDIR:-$HOME}/.zcompdump"
+  if [[ -s "$zcompdump" && (! -s "${zcompdump}.zwc" || "$zcompdump" -nt "${zcompdump}.zwc") ]]; then
+    zcompile "$zcompdump"
+  fi
+} &!
