@@ -1,25 +1,35 @@
 #!/usr/bin/env zsh
 # Colors
-color_red='38;05;161' #
-color_orange='38;05;108'
-color_yellow='38;05;214' #
-color_chartreuse='38;05;185'
-color_green='38;05;71' #
-color_cyan='38;05;38'
-color_blue='38;05;33' #
-color_purple='38;05;127'
-color_white='38;05;231'
-color_grey='38;05;145'
+color_red='31'
+color_red_l='1;31'
+color_green='32'
+color_green_l='1;32'
+color_yellow='33'
+color_yellow_l='1;33'
+color_blue='34'
+color_blue_l='1;34'
+color_purple='35'
+color_purple_l='1;35'
+color_cyan='36'
+color_cyan_l='1;36'
+
+color_white='37'
+color_grey='38;05;246'
 
 ##################################
 red=()
-orange=()
-yellow=()
-chartreuse=()
+red_l=()
 green=()
-cyan=()
+green_l=()
+yellow=()
+yellow_l=()
 blue=()
+blue_l=()
 purple=()
+purple_l=()
+cyan=()
+cyan_l=()
+
 white=()
 grey=()
 
@@ -42,11 +52,11 @@ purple+=(.7z .arj .bz .bz2 .cab .gem .gz .iso .rar .tar .tbz .tbz2 .tgz .tx .war
 cyan+=(.doc .docx .odt)
 
 ## Source files
-orange+=(.py .c .cpp .h .lua)
-yellow+=(.css .less .sass .scss)
-chartreuse+=(.html .pug .jade .hjs .haml )
-orange+=(.js .coffee)
-blue+=(.yml .yaml .xml .json .cson .ini .desktop)
+yellow+=(.py .c .cpp .h .lua)
+yellow_l+=(.css .less .sass .scss)
+blue+=(.html .pug .jade .hjs .haml )
+yellow+=(.js .coffee)
+blue_l+=(.yml .yaml .xml .json .cson .ini .desktop)
 
 
 #Other
@@ -54,7 +64,8 @@ grey+=(.log .bak .aux .~)
 #################################
 
 cp dircolors.simple dircolors
-for color in red orange yellow chartreuse green cyan blue purple white grey; do
+for color in red red_l green green_l yellow yellow_l \
+  blue blue_l purple purple_l cyan cyan_l white grey; do
   for ex in `eval 'echo \$'$color`; do
     echo $ex `eval 'echo $color_'$color` >>dircolors
   done

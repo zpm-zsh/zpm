@@ -20,6 +20,7 @@ Add following text into `.zshrc`
 ```sh
 if [[ ! -f ~/.zpm/zpm.zsh ]]; then
     git clone --recursive https://github.com/horosgrisa/zpm ~/.zpm
+    source ~/.zpm/zpm.zsh
 fi
 ```
 
