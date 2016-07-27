@@ -156,10 +156,6 @@ EXEC 33  # Unix
 .lua 33
 .js 33
 .coffee 33
-.css 1;33
-.less 1;33
-.sass 1;33
-.scss 1;33
 .html 34
 .pug 34
 .jade 34
@@ -202,6 +198,10 @@ EXEC 33  # Unix
 .doc 36
 .docx 36
 .odt 36
+.css 1;36
+.less 1;36
+.sass 1;36
+.scss 1;36
 .txt 37
 .tex 37
 .org 37

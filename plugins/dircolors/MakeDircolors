@@ -53,9 +53,11 @@ cyan+=(.doc .docx .odt)
 
 ## Source files
 yellow+=(.py .c .cpp .h .lua)
-yellow_l+=(.css .less .sass .scss)
+
 blue+=(.html .pug .jade .hjs .haml )
+cyan_l+=(.css .less .sass .scss)
 yellow+=(.js .coffee)
+
 blue_l+=(.yml .yaml .xml .json .cson .ini .desktop)
 
 
