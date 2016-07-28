@@ -13,7 +13,7 @@ color_purple_l='1;35'
 color_cyan='36'
 color_cyan_l='1;36'
 
-color_white='37'
+color_base='37'
 color_grey='38;05;246'
 
 ##################################
@@ -30,12 +30,14 @@ purple_l=()
 cyan=()
 cyan_l=()
 
-white=()
+base=()
 grey=()
 
 ##################################
+#Executables
+yellow+=(EXEC .cmd .exe .com .bat .reg .app .sh .csh .zsh .bin .class)
 #Text
-white+=(.txt .tex .org .md .markdown .mkd .todo .srt '*README' '*COPYRIGHT' '*LICENSE' '*INSTALL' '*CHANGELOG' '*AUTHORS')
+base+=(.txt .tex .org .md .markdown .mkd .todo .srt '*README' '*COPYRIGHT' '*LICENSE' '*INSTALL' '*CHANGELOG' '*AUTHORS')
 #Audio
 purple+=(.aac .flac .m4a .mid .midi .mp3 .ogg .wav)
 #Video
@@ -60,14 +62,13 @@ yellow+=(.js .coffee)
 
 blue_l+=(.yml .yaml .xml .json .cson .ini .desktop)
 
-
 #Other
 grey+=(.log .bak .aux .~)
 #################################
 
 cp dircolors.simple dircolors
 for color in red red_l green green_l yellow yellow_l \
-  blue blue_l purple purple_l cyan cyan_l white grey; do
+  blue blue_l purple purple_l cyan cyan_l base grey; do
   for ex in `eval 'echo \$'$color`; do
     echo $ex `eval 'echo $color_'$color` >>dircolors
   done

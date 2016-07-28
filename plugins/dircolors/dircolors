@@ -97,22 +97,6 @@ ORPHAN  05;37;41
 # ... and the files that orphaned symlinks point to
 MISSING 05;37;41
 
-#################################
-
-# files with execute permission
-EXEC 33  # Unix
-.cmd 33  # Win
-.exe 33  # Win
-.com 33  # Win
-.bat 33  # Win
-.reg 33  # Win
-.app 33  # OSX
-.sh  33  # Unix
-.csh 33  # Unix
-.zsh 33  # Unix
-.bin 33  # Unix
-.class 33  # Java
-
 
 #################################
 .avi 31
@@ -149,6 +133,18 @@ EXEC 33  # Unix
 .msi 32
 .xpi 32
 .crx 32
+EXEC 33
+.cmd 33
+.exe 33
+.com 33
+.bat 33
+.reg 33
+.app 33
+.sh 33
+.csh 33
+.zsh 33
+.bin 33
+.class 33
 .py 33
 .c 33
 .cpp 33

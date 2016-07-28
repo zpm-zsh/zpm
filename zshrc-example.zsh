@@ -25,7 +25,7 @@ plugins=( emoji-clock golang ) # Plugins from oh-my-zsh
 
 # ZSH
 PROMPT='$user_prompt'
-RPROMPT=' $last_status$node_version$gitprompt$current_path%{$reset_color%}'
+RPROMPT='$last_status$node_version$gitprompt$current_path%{$reset_color%}'
 PS2="%{$fg[green]%}%_>%{$reset_color%}"
 PROMPT_EOL_MARK="%{$bg[cyan]%}%{$fg[white]%}⏎%{$reset_color%}"
 WORDCHARS='*?_-~=&;!#$%^()[]{}<>:.'

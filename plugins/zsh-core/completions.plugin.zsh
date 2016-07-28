@@ -8,10 +8,10 @@ zstyle ':completion:*:processes-names' command "ps xho command"
 zstyle ':completion:*' completer _expand _complete _correct _approximate
 zstyle -e ':completion:*:approximate:*' max-errors 'reply=($((($#PREFIX+$#SUFFIX)/3))numeric)'
 
-
 zstyle '*' single-ignored show
 zstyle ':completion:*:*:*:*:*' menu select
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+zstyle ':completion:*' special-dirs true
 
 zstyle ':completion:*:messages' format '%d'
 
