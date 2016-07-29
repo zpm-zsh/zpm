@@ -7,7 +7,9 @@ bindkey "^[[5~" up-line-or-history
 bindkey "^[[6~" down-line-or-history
 
 bindkey "^[OH" beginning-of-line
+bindkey "^[[H" beginning-of-line
 bindkey "^[OF"  end-of-line
+bindkey "^[[F"  end-of-line
 
 bindkey '^[[1;5C' forward-word
 bindkey '^[[C' forward-word
