@@ -13,8 +13,8 @@ color_purple_l='1;35'
 color_cyan='36'
 color_cyan_l='1;36'
 
-color_base='37'
-color_grey='38;05;246'
+color_base='1;37'
+color_grey='1;30'
 
 ##################################
 red=()
@@ -34,36 +34,40 @@ base=()
 grey=()
 
 ##################################
-#Executables
-yellow+=(EXEC .cmd .exe .com .bat .reg .app .sh .csh .zsh .bin .class)
+#  #ecf0f1 #93a1a1
+#  #da322f #27ad60 #d15400 #268ad1 #d5005f #00bad2
+#  #e15c59 #2ecb71 #e47d22 #4da1de #fd0a77 #05e1fd
+##################################
+
 #Text
 base+=(.txt .tex .org .md .markdown .mkd .todo .srt '*README' '*COPYRIGHT' '*LICENSE' '*INSTALL' '*CHANGELOG' '*AUTHORS')
-#Audio
-purple+=(.aac .flac .m4a .mid .midi .mp3 .ogg .wav)
+#Other
+grey+=(.log .bak .aux .~ .zwc .pyc)
+#Documents
+cyan_l+=(.doc .docx .odt)
 #Video
 red+=(.avi .flv .mkv .mov .MOV .mp4 .mpeg .mpg .ogm .ogv .ogx .vob .webm .wmv)
 #Images
 green+=(.jpg .jpeg .png .gif .bmp .svg .svgz .tif .tiff)
+#Audio
+purple+=(.aac .flac .m4a .mid .midi .mp3 .ogg .wav)
 #Application archives
-green+=(.apk .jar .deb .rpm .dmg .msi .xpi .crx)
+blue+=(.apk .jar .deb .rpm .dmg .msi .xpi .crx)
 #Books
-red+=(.pdf .epub .fb2)
+red_l+=(.pdf .epub .fb2)
 #Archives
-purple+=(.7z .arj .bz .bz2 .cab .gem .gz .iso .rar .tar .tbz .tbz2 .tgz .tx .war .xz .z .Z .zip)
-#Documents
-cyan+=(.doc .docx .odt)
-
+purple_l+=(.7z .arj .bz .bz2 .cab .gem .gz .iso .rar .tar .tbz .tbz2 .tgz .tx .war .xz .z .Z .zip)
+#Executables
+yellow_l+=(EXEC .cmd .exe .com .reg .app .bin .class)
+# Scripts
+yellow+=(.bat .sh .csh .zsh .js .coffee .py .pl .php )
 ## Source files
-yellow+=(.py .c .cpp .h .lua)
+cyan_l+=(.c .cpp .h .lua .rs .pas .go .java )
 
 blue+=(.html .pug .jade .hjs .haml )
-cyan_l+=(.css .less .sass .scss)
-yellow+=(.js .coffee)
+blue_l+=(.css .less .sass .scss)
 
-blue_l+=(.yml .yaml .xml .json .cson .ini .desktop)
-
-#Other
-grey+=(.log .bak .aux .~)
+green+=(.yml .yaml .xml .json .cson .ini .desktop)
 #################################
 
 cp dircolors.simple dircolors
