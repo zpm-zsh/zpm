@@ -13,10 +13,8 @@ bindkey "^[[F"  end-of-line
 
 bindkey '^[[1;5C' forward-word
 bindkey '^[[C' forward-word
-bindkey '^[OC' forward-word
 bindkey '^[[1;5D' backward-word
 bindkey '^[[D' backward-word
-bindkey '^[OD' backward-word
 
 bindkey '^[[C' forward-char
 bindkey '^[[D' backward-char
