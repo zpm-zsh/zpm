@@ -1,5 +1,5 @@
 if [[ $OSTYPE == "linux"* || $OSTYPE == *"bsd"* ]]; then
-  users=$(cat /etc/passwd|awk -F':' '{ if ( $3>999 && $3<64999 ) { print $1 } }'|xargs)
+  users=($(cat /etc/passwd|awk -F':' '{ if ( $3>999 && $3<64999 ) { print $1 } }'|xargs))
   zstyle ':completion:*:*:*:users' users $users
 else
   zstyle ':completion:*:*:*:users' ignored-patterns \
