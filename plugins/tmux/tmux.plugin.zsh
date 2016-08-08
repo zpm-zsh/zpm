@@ -30,7 +30,7 @@ precmd_functions+=( _tmux_autostart )
 
 
 function _tmux_motd(){
-  if [[ $TMUX_MOTD != false && ! -z $TMUX  &&  $(\tmux list-windows | wc -l | tr -d ' ') == 1 && $( \tmux list-windows | tr -d ' '|grep 1panes ) ]]; then
+  if [[ $TMUX_MOTD != false && ! -z $TMUX  &&  $(\tmux list-windows | wc -l | tr -d ' ') == 1 ]] && ( \tmux list-windows | tr -d ' '|grep -q 1panes  ); then
 		if [[ "$OSTYPE" == linux* || "$OSTYPE" == freebsd*  ]]; then
 			_tmux_monitor
 			return 0
