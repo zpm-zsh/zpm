@@ -130,6 +130,7 @@ MISSING 05;37;41
 .xml 32
 .json 32
 .cson 32
+.sql 32
 .ini 32
 .desktop 32
 .bat 33

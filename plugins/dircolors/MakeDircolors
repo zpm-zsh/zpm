@@ -67,7 +67,7 @@ cyan_l+=(.c .cpp .h .lua .rs .pas .go .java )
 blue+=(.html .pug .jade .hjs .haml )
 blue_l+=(.css .less .sass .scss)
 
-green+=(.yml .yaml .xml .json .cson .ini .desktop)
+green+=(.yml .yaml .xml .json .cson .sql .ini .desktop)
 #################################
 
 cp dircolors.simple dircolors
