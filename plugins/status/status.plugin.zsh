@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 
-export LAST_STATUS_TRUE=${LAST_STATUS_TRUE:-'✔'}
-export LAST_STATUS_FALSE=${LAST_STATUS_FALSE:-'✘'}
+export LAST_STATUS_TRUE=${LAST_STATUS_TRUE:-'✓'}
+export LAST_STATUS_FALSE=${LAST_STATUS_FALSE:-'✗'}
 
 
 _status() {
