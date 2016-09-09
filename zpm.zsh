@@ -90,7 +90,7 @@ _ZPM_Initialize_Plugin(){
     _plugin_name=${_plugin_name:0:${#_plugin_name}-4}
   fi
   if [[ $_plugin_name == *.plugin  ]]; then
-    _plugin_name=${_plugin_name:0:-7}
+    _plugin_name=${_plugin_name:0:${#_plugin_name}-7}
   fi
 
   if [[ ! -d $_ZPM_PLUGIN_DIR/$_plugin_name ]]; then
