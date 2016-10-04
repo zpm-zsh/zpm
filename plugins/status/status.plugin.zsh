@@ -1,7 +1,12 @@
 #!/usr/bin/env zsh
 
-LAST_STATUS_TRUE=${LAST_STATUS_TRUE:-'✓'}
-LAST_STATUS_FALSE=${LAST_STATUS_FALSE:-'✗'}
+if [[ $EMOJI == "true" ]]; then
+  LAST_STATUS_TRUE=${LAST_STATUS_TRUE:-'%{✅%2G%}'}
+  LAST_STATUS_FALSE=${LAST_STATUS_FALSE:-'%{❌%2G%}'}
+else
+  LAST_STATUS_TRUE=${LAST_STATUS_TRUE:-'✓'}
+  LAST_STATUS_FALSE=${LAST_STATUS_FALSE:-'✗'}
+fi
 
 _status() {
   RETVAL=$?
