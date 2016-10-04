@@ -1,14 +1,16 @@
 #!/usr/bin/env zsh
 
-export GIT_PREFIX=${GIT_PREFIX:-' '}
-export GIT_SUFIX=${GIT_SUFIX:-''}
-export GIT_NOT_COMMITED=${GIT_NOT_COMMITED:-'▸'}
-export GIT_CONFLICT=${GIT_CONFLICT:-'✖'}
-export GIT_CHANGED=${GIT_CHANGED:-'✚'}
-export GIT_UNTRACKED=${GIT_UNTRACKED:-'✚'}
-export GIT_CLEAN=${GIT_CLEAN:-'●'}
-export GIT_PUSH=${GIT_PUSH:-'↑'}
-export GIT_PULL=${GIT_PULL:-'↓'}
+GIT_PREFIX=${GIT_PREFIX:-' '}
+GIT_SUFIX=${GIT_SUFIX:-''}
+
+GIT_NOT_COMMITED=${GIT_NOT_COMMITED:-'▸'}
+GIT_CONFLICT=${GIT_CONFLICT:-'x'}
+GIT_CHANGED=${GIT_CHANGED:-'+'}
+GIT_UNTRACKED=${GIT_UNTRACKED:-'+'}
+GIT_CLEAN=${GIT_CLEAN:-'●'}
+GIT_PUSH=${GIT_PUSH:-'↑'}
+GIT_PULL=${GIT_PULL:-'↓'}
+
 
 gitstatus_path=${${(%):-%x}:a:h}/gitstatus.py
 
@@ -16,9 +18,9 @@ gitstatus_path=${${(%):-%x}:a:h}/gitstatus.py
 _git_prompt() {
     if [ "$(command git config --get --bool oh-my-zsh.hide-status 2>/dev/null)" != "true" ] \
        && git rev-parse --git-dir > /dev/null 2>&1; then
-        git_vars=$(python3 $gitstatus_path 2>/dev/null)
+        git_vars=$(GIT_PUSH="$GIT_PUSH" GIT_PULL="$GIT_PULL" python3 $gitstatus_path 2>/dev/null)
         git_vars=("${(@f)git_vars}")
-        
+
         if [[ $COLORS == "true" ]]; then
             branch="%{$fg[green]%}"$git_vars[1]
         else
@@ -31,9 +33,9 @@ _git_prompt() {
             else
                 remote=" "$git_vars[2]
             fi
-        else 
+        else
             remote=""
-        fi 
+        fi
         if [[ $git_vars[3] ==  "0" ]]; then
             staged=""
         else
@@ -70,7 +72,7 @@ _git_prompt() {
                 untracked=" $GIT_UNTRACKED"$git_vars[6]
             fi
         fi
-        if [[ "$git_vars[7]" == 1 ]]; then 
+        if [[ "$git_vars[7]" == 1 ]]; then
             if [[ $COLORS == "true" ]]; then
                 clean=" %{$fg[yellow]%}$GIT_CLEAN"
             else
@@ -106,4 +108,3 @@ _git_prompt() {
 }
 
 precmd_functions+=(_git_prompt)
-
