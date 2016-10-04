@@ -15,6 +15,10 @@ if [[ "$COLORS" == "true" ]]; then
   export TERM='xterm-256color'
 fi
 
+if [[ -z "$EMOJI" ]]; then
+  export EMOJI='true'
+fi
+
 if [[ -z "$SHELL" ]]; then
   export SHELL=$(which zsh)
 fi
