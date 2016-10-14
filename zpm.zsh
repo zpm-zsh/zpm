@@ -41,6 +41,7 @@ ZSH_COMPDUMP="$HOME/.zcompdump"
 HISTFILE="$HOME/.zsh_history"
 HISTSIZE=9999
 SAVEHIST=9999
+WORDCHARS='*?_-~=&;!#$%^()[]{}<>:.'
 
 # Some modules
 setopt prompt_subst
