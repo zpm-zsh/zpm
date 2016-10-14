@@ -13,7 +13,7 @@ export LESS_TERMCAP_ue=$'\E[0m'
 export LESS='-R -M'
 
 
-export PYGMENTIZE_THEME=${PYGMENTIZE_THEME:-"monokai"}
+PYGMENTIZE_THEME=${PYGMENTIZE_THEME:-"monokai"}
 
 _pygmentize_theme(){
   if hash pygmentize 2>/dev/null; then

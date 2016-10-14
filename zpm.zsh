@@ -1,26 +1,26 @@
 #!/usr/bin/env zsh
 
 if [[  "$COLORS" != true && "$COLORS" != false ]]; then # Dirty hook for Centos
-  export COLORS=true
+  COLORS=true
 fi
 
 if [[ -z "$MANPATH" ]]; then
   if hash manpath 2>/dev/null; then
-    export MANPATH=$(manpath)
+    MANPATH=$(manpath)
   fi
 fi
 
 if [[ "$COLORS" == "true" ]]; then
   autoload -U colors && colors
-  export TERM='xterm-256color'
+  TERM='xterm-256color'
 fi
 
 if [[ -z "$EMOJI" ]]; then
-  export EMOJI='true'
+  EMOJI='true'
 fi
 
 if [[ -z "$SHELL" ]]; then
-  export SHELL=$(which zsh)
+  SHELL=$(which zsh)
 fi
 
 if [[ -z "$ZPM_DIR" ]]; then

@@ -1,11 +1,11 @@
 if [[ -z $PAGER ]]; then
-    export PAGER=less
+    PAGER=less
 fi
 
 if [[ -z $EDITOR ]]; then
-    export EDITOR=vim
+    EDITOR=vim
 fi
 
 if [[ -z $LISTMAX ]]; then
-    export LISTMAX=9999
+    LISTMAX=9999
 fi
