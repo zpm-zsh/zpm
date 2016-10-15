@@ -11,7 +11,7 @@ fi
 
 Plug zsh-core human ls cd desktop  #ZSH
 Plug colors dircolors  #Colors
-Plug user-prompt node status path git  #Prompt
+Plug whoami node status path git ps2 eol title  #Prompt
 Plug myip extract tmux genpasswd readers rmate ssh
 Plug horosgrisa/zsh-dropbox horosgrisa/utils  #Programs
 Plug nvm brew  #Package managers
@@ -25,10 +25,10 @@ plugins=( emoji-clock golang ) # Plugins from oh-my-zsh
 
 # ZSH
 PROMPT='$user_prompt'
-RPROMPT='$last_status$node_version$gitprompt$current_path%{$reset_color%}'
-PS2="%{$fg[green]%}%_>%{$reset_color%}"
-PROMPT_EOL_MARK="%{$bg[cyan]%}%{$fg[white]%}⏎%{$reset_color%}"
-WORDCHARS='*?_-~=&;!#$%^()[]{}<>:.'
+RPROMPT='$last_status$node_version$gitprompt$current_path'
+PROMPT2='$ps2'
+PROMPT_EOL_MARK='$eol'
+TITLE='$title'
 
 #################
 ###  Plugins  ###
@@ -78,3 +78,4 @@ alias delmark='deletemark'
 PYGMENTIZE_THEME=monokai
 
 [[ -f $HOME/.zshrc.custom ]] && source $HOME/.zshrc.custom || true
+
