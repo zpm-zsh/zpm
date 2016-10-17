@@ -1,11 +1,16 @@
 if [[ -z $PAGER ]]; then
-    PAGER=less
+  PAGER=less
 fi
 
 if [[ -z $EDITOR ]]; then
-    EDITOR=vim
+  EDITOR=vim
 fi
 
+if [[ -z $VISUAL ]]; then
+  VISUAL=vim           
+fi                       
+
+
 if [[ -z $LISTMAX ]]; then
-    LISTMAX=9999
+  LISTMAX=9999
 fi

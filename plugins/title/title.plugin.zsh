@@ -1,13 +1,28 @@
 #!/usr/bin/env zsh
 
-title="%n@%m: %2~"
-
-function _title(){
-  print -Pn $( eval "echo '\e]0;'$TITLE'\a'")
+title="%2~"
+function _precmd_title(){
+  local program=zsh
+  if [[ ! -z $TMUX ]]; then
+    print -Pn $( eval "echo '\033k'$TITLE'\033\\'")
+  else
+    print -Pn $( eval "echo '\e]0;'$TITLE'\a'")    
+  fi
 }
 
-precmd_functions+=(_title)
+function _title(){
+  local program=$(echo "$1" | cut -d" " -f1)
+  if [[ ! -z $TMUX ]]; then                          
+    print -Pn $( eval "echo '\033k'$TITLE'\033\\'")
+  else                                             
+    print -Pn $( eval "echo '\e]0;'$TITLE'\a'")    
+  fi                                               
 
+}
+
+preexec_functions+=(_title)
+
+precmd_functions+=(_precmd_title)
 
 
 
