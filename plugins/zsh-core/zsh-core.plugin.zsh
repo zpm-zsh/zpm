@@ -6,4 +6,3 @@ source ${${(%):-%x}:a:h}/hidden-users.plugin.zsh
 source ${${(%):-%x}:a:h}/history.plugin.zsh
 source ${${(%):-%x}:a:h}/keyboard.plugin.zsh
 source ${${(%):-%x}:a:h}/modules.plugin.zsh
-source ${${(%):-%x}:a:h}/variables.plugin.zsh
