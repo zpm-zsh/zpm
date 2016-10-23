@@ -19,7 +19,6 @@ bindkey '^[[D' backward-word
 bindkey '^[[C' forward-char
 bindkey '^[[D' backward-char
 
-
 bindkey '^?' backward-delete-char
 
 bindkey "^[[3~" delete-char

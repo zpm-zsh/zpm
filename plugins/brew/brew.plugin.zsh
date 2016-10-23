@@ -1,23 +1,21 @@
-# The addition 'nvm install' attempts in ~/.profile
+#!/usr/bin/env zsh
 
 if [[ -d ~/.linuxbrew ]]; then
   export PATH="/home/user/.linuxbrew/bin:$PATH"
   export MANPATH="/home/user/.linuxbrew/share/man:$MANPATH"
   export INFOPATH="/home/user/.linuxbrew/share/info:$INFOPATH"
-elif hash brew 2>/dev/null; then
-  #statements
 fi
 
 
 function _brew-upgrade(){
-  if hash brew 2>/dev/null; then
+  if (( $+commands[brew] )); then
     echo ">> Updating hook: brew"
     brew update
   fi
 }
 
-if ! hash brew 2>/dev/null; then
-  function nvm-install(){
+if ! (( $+commands[brew] )); then
+  function brew-install(){
     ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install)"
     export PATH="/home/user/.linuxbrew/bin:$PATH"
     export MANPATH="/home/user/.linuxbrew/share/man:$MANPATH"

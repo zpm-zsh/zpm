@@ -11,13 +11,12 @@ function node-docs {
   else
     open_cmd='xdg-open'
   fi
-
   $open_cmd "http://nodejs.org/docs/$(node --version)/api/all.html#all_$1"
 }
 
 _node_version() {
   if [ -d "./node_modules" -o -d "../node_modules" -o -d "../../node_modules" -o -d "../../../node_modules" ]; then
-    if hash node 2>/dev/null; then
+    if (( $+commands[node] )); then
       nodev=$(node -v)
       nodev=${nodev#'v'}
       if [[ $COLORS == "true" ]]; then

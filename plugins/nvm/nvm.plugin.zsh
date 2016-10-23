@@ -9,7 +9,7 @@ function _nvm-upgrade(){
   fi
 }
 
-if ! hash nvm 2>/dev/null; then
+if ! (( $+commands[nvm] )); then
   function nvm-install(){
     git clone https://github.com/creationix/nvm ~/.nvm
     [[ -s ~/.nvm/nvm.sh ]] && . ~/.nvm/nvm.sh

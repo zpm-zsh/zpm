@@ -16,10 +16,10 @@ export LESS='-R -M'
 PYGMENTIZE_THEME=${PYGMENTIZE_THEME:-"monokai"}
 
 _pygmentize_theme(){
-  if hash pygmentize 2>/dev/null; then
+  if (( $+commands[pygmentize] )); then
     export LESSOPEN="|pygmentize -f 256 -O style=$PYGMENTIZE_THEME -g %s"
+    alias pygmentize="pygmentize -O style=$PYGMENTIZE_THEME"
   fi
-  alias pygmentize="pygmentize -O style=$PYGMENTIZE_THEME"
   precmd_functions=(${precmd_functions#_pygmentize_theme})
 }
 

@@ -1,6 +1,6 @@
 #!/bin/sh
 
-if hash lsb_release 2>/dev/null; then
+if (( $+commands[lsb_release] )); then
     echo -n $(lsb_release -si; lsb_release -sr)
 else
 	echo -n $(uname)

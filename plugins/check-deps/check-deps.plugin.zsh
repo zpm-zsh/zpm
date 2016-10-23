@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 function Check-Deps(){
   #Arch System Deps
-  if hash pacman 2>/dev/null; then
+  if (( $+commands[pacman] )); then
     local DEPENDENCES_ARCH_MISSING=()
     for i ($DEPENDENCES_ARCH); do
       if (! pacman -Q $i 1>/dev/null 2>/dev/null) ; then
@@ -9,11 +9,11 @@ function Check-Deps(){
       fi
     done
     if [[ ! -z "$DEPENDENCES_ARCH_MISSING" ]]; then
-      echo Please install missing packages using \`sudo pacman -S $DEPENDENCES_ARCH_MISSING\`
+      echo "Please install missing packages using \`sudo pacman -S $DEPENDENCES_ARCH_MISSING\`"
     fi
   fi
 
-  if hash dpkg 2>/dev/null; then
+  if (( $+commands[dpkg] )); then
     DEPENDENCES_DEBIAN_MISSING=()
     _DEB_PACKAGES="$(dpkg --list|awk '{print $2}'|awk -F':' '{print $1}'|xargs)"
     for i ($DEPENDENCES_DEBIAN); do
@@ -22,11 +22,11 @@ function Check-Deps(){
       fi
     done
     if [ ! -z "$DEPENDENCES_DEBIAN_MISSING" ]; then
-      echo Please install missing packages using \`sudo apt install $DEPENDENCES_DEBIAN_MISSING\`
+      echo "Please install missing packages using \`sudo apt install $DEPENDENCES_DEBIAN_MISSING\`"
     fi
   fi
 
-  if hash npm 2>/dev/null; then
+  if (( $+commands[npm] )); then
     DEPENDENCES_NPM_MISSING=()
     local NPM_PATH="$( npm config get prefix )/lib/node_modules"
     for i ($DEPENDENCES_NPM); do
@@ -35,7 +35,7 @@ function Check-Deps(){
       fi
     done
     if [ ! -z "$DEPENDENCES_NPM_MISSING" ]; then
-      echo Please install missing packages using \`sudo npm install -g $DEPENDENCES_NPM_MISSING\`
+      echo "Please install missing packages using \`sudo npm install -g $DEPENDENCES_NPM_MISSING\`"
     fi
   fi
 }
