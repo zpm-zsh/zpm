@@ -2,4 +2,4 @@
 *.zwc
 *.old
 *.bak
-custom/*
+*~

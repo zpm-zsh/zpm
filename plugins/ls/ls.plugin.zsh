@@ -1,4 +1,4 @@
-  #!/usr/bin/env zsh
+#!/usr/bin/env zsh
 
 if ls --version >/dev/null 2>&1 ; then
   if [[ $COLORS == "true" ]]; then

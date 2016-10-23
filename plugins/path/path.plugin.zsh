@@ -4,14 +4,7 @@ CURRENT_PATH_PREFIX=${CURRENT_PATH_PREFIX:-" "}
 CURRENT_PATH_SUFIX=${CURRENT_PATH_SUFIX:-""}
 
 path() {
-  echo $PATH | tr ":" "\n" | \
-    awk "{ sub(\"/usr\",\"$fg_no_bold[green]/usr$reset_color\"); \
-           sub(\"/bin\",\"$fg_no_bold[cyan]/bin$reset_color\"); \
-           sub(\"/games\",\"$fg_no_bold[magenta]/games$reset_color\"); \
-           sub(\"/opt\",\"$fg_no_bold[cyan]/opt$reset_color\"); \
-           sub(\"/sbin\",\"$fg_no_bold[magenta]/sbin$reset_color\"); \
-           sub(\"/local\",\"$fg_no_bold[yellow]/local$reset_color\"); \
-           print }"
+  echo $PATH | tr ":" "\n" | awk "{ sub(\"/usr\",\"$fg_no_bold[green]/usr$reset_color\"); sub(\"/bin\",\"$fg_no_bold[cyan]/bin$reset_color\"); sub(\"/games\",\"$fg_no_bold[magenta]/games$reset_color\"); sub(\"/opt\",\"$fg_no_bold[cyan]/opt$reset_color\"); sub(\"/sbin\",\"$fg_no_bold[magenta]/sbin$reset_color\"); sub(\"/local\",\"$fg_no_bold[yellow]/local$reset_color\"); print }"
 }
 
 p() {
@@ -35,4 +28,3 @@ precmd_functions+=(_current_path)
 
 [[ -d ~/.bin ]] && PATH=$PATH:~/.bin
 [[ -d ~/.local/bin ]] && PATH=$PATH:~/.local/bin
-

@@ -99,7 +99,7 @@ function _ZPM_Initialize_Plugin(){
   if [[ "$plugin_name" == *.plugin  ]]; then
     plugin_name=${plugin_name:0:${#plugin_name}-7}
   fi
-
+  
   if [[ ! -d "$_ZPM_PLUGIN_DIR/$plugin_name" ]]; then
     echo "Installing $plugin from GitHub"
     git clone --recursive "https://github.com/"$plugin".git" "$_ZPM_PLUGIN_DIR/$plugin_name"
@@ -136,7 +136,7 @@ function _ZPM_Init(){
 
 function _ZPM-Upgrade(){
   _ZPM_Hooks=( "$_ZPM_GitHub_Plugins" )
-x
+  x
   for plugg ($_ZPM_Core_Plugins); do
     if type _$plugg-upgrade | grep "shell function" >/dev/null; then
       _ZPM_Hooks+=($plugg)

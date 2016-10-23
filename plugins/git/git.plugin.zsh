@@ -17,7 +17,7 @@ gitstatus_path=${${(%):-%x}:a:h}/gitstatus.py
 
 _git_prompt() {
   if [ "$(command git config --get --bool oh-my-zsh.hide-status 2>/dev/null)" != "true" ] \
-    && git rev-parse --git-dir > /dev/null 2>&1; then
+  && git rev-parse --git-dir > /dev/null 2>&1; then
     git_vars=$(GIT_PUSH="$GIT_PUSH" GIT_PULL="$GIT_PULL" python3 $gitstatus_path 2>/dev/null)
     git_vars=("${(@f)git_vars}")
     if [[ $COLORS == "true" ]]; then
@@ -25,7 +25,7 @@ _git_prompt() {
     else
       branch=$git_vars[1]
     fi
-
+    
     if [ -n "$git_vars[2]" ]; then
       if [[ $COLORS == "true" ]]; then
         remote=" %{$fg[yellow]%}"$git_vars[2]

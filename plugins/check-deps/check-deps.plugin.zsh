@@ -12,7 +12,7 @@ function Check-Deps(){
       echo "Please install missing packages using \`sudo pacman -S $DEPENDENCES_ARCH_MISSING\`"
     fi
   fi
-
+  
   if (( $+commands[dpkg] )); then
     DEPENDENCES_DEBIAN_MISSING=()
     _DEB_PACKAGES="$(dpkg --list|awk '{print $2}'|awk -F':' '{print $1}'|xargs)"
@@ -25,7 +25,7 @@ function Check-Deps(){
       echo "Please install missing packages using \`sudo apt install $DEPENDENCES_DEBIAN_MISSING\`"
     fi
   fi
-
+  
   if (( $+commands[npm] )); then
     DEPENDENCES_NPM_MISSING=()
     local NPM_PATH="$( npm config get prefix )/lib/node_modules"
