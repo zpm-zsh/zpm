@@ -15,9 +15,11 @@ Plug whoami node status path git ps2 eol title  #Prompt
 Plug myip extract tmux genpasswd readers rmate ssh
 Plug horosgrisa/zsh-dropbox horosgrisa/utils  #Programs
 Plug nvm brew  #Package managers
+### 3party plugins
 Plug zsh-users/zsh-completions horosgrisa/autoenv horosgrisa/mysql-colorize
 Plug jocelynmallon/zshmarks voronkovich/gitignore.plugin.zsh zsh-users/zsh-syntax-highlighting
 Plug tarruda/zsh-autosuggestions horosgrisa/zsh-history-substring-search
+###
 Plug termux command-not-found check-deps  # Compatibility
 Plug oh-my-zsh-wrapper  # Wrapper for oh-my-zsh
 
@@ -28,7 +30,7 @@ PROMPT='$user_prompt'
 RPROMPT='$last_status$node_version$gitprompt$current_path'
 PROMPT2='$ps2'
 PROMPT_EOL_MARK='$eol'
-TITLE='$title'
+TITLE='$program:$title'
 
 #################
 ###  Plugins  ###
@@ -78,4 +80,3 @@ alias delmark='deletemark'
 PYGMENTIZE_THEME=monokai
 
 [[ -f $HOME/.zshrc.custom ]] && source $HOME/.zshrc.custom || true
-
