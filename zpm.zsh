@@ -136,7 +136,6 @@ function _ZPM_Init(){
 
 function _ZPM-Upgrade(){
   _ZPM_Hooks=( "$_ZPM_GitHub_Plugins" )
-  x
   for plugg ($_ZPM_Core_Plugins); do
     if type _$plugg-upgrade | grep "shell function" >/dev/null; then
       _ZPM_Hooks+=($plugg)
