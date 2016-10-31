@@ -8,7 +8,6 @@ function _precmd_title(){
   else
     print -Pn $( eval "echo '\e]0;'$TITLE'\a'")
   fi
-  precmd_functions=(${precmd_functions#_precmd_title})
 }
 
 function _title(){
