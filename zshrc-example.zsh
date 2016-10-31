@@ -28,7 +28,7 @@ PROMPT='$user_prompt'
 RPROMPT='$last_status$node_version$gitprompt$current_path'
 PROMPT2='$ps2'
 PROMPT_EOL_MARK='$eol'
-TITLE='$program:$title'
+TITLE='$program:$shortpath'
 
 #################
 ###  Plugins  ###

@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 
-title="%2~"
+shortpath="%2~"
 function _precmd_title(){
   local program=zsh
   if [[ ! -z $TMUX ]]; then
