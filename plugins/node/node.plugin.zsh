@@ -41,5 +41,5 @@ function install_npm (){
 }
 
 precmd_functions+=(_node_version)
-DEPENDENCES_ARCH+=( nodejs )
-DEPENDENCES_DEBIAN+=( nodejs )
+DEPENDENCES_ARCH+=( node@nodejs )
+DEPENDENCES_DEBIAN+=( node@nodejs )

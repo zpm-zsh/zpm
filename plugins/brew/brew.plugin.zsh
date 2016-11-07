@@ -22,5 +22,5 @@ if ! (( $+commands[brew] )); then
     export INFOPATH="/home/user/.linuxbrew/share/info:$INFOPATH"
   }
 fi
-DEPENDENCES_ARCH+=( curl git python-setuptools ruby )
-DEPENDENCES_DEBIAN+=( build-essential curl git python-setuptools ruby )
+DEPENDENCES_ARCH+=( curl git easy_install@python-setuptools ruby )
+DEPENDENCES_DEBIAN+=( make@build-essential curl git easy_install@python-setuptools ruby )

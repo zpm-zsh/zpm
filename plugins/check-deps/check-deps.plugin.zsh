@@ -4,8 +4,15 @@ function Check-Deps(){
   if (( $+commands[pacman] )); then
     local DEPENDENCES_ARCH_MISSING=()
     for i ($DEPENDENCES_ARCH); do
-      if (! pacman -Q $i 1>/dev/null 2>/dev/null) ; then
-        DEPENDENCES_ARCH_MISSING+=( $i )
+      if [[ ! "$i" == *@* ]]; then
+        executable=$(echo $i|awk -F'@' '{print $1}')
+        package=$(echo $i|awk -F'@' '{print $2}')
+      else
+        executable=$(echo $i|awk -F'@' '{print $1}')
+        package=$(echo $i|awk -F'@' '{print $1}')
+      fi
+      if (! hash $executable 1>/dev/null 2>/dev/null) ; then
+        DEPENDENCES_ARCH_MISSING+=( $package )
       fi
     done
     if [[ ! -z "$DEPENDENCES_ARCH_MISSING" ]]; then
@@ -17,8 +24,15 @@ function Check-Deps(){
     DEPENDENCES_DEBIAN_MISSING=()
     _DEB_PACKAGES="$(dpkg --list|awk '{print $2}'|awk -F':' '{print $1}'|xargs)"
     for i ($DEPENDENCES_DEBIAN); do
-      if $( echo "$_DEB_PACKAGES" | grep -v -q $i ); then
-        if [[ ! ${DEPENDENCES_DEBIAN_MISSING[(r)$i]} == $i ]] && DEPENDENCES_DEBIAN_MISSING+=( $i )
+      if [[ ! "$i" == *@* ]]; then
+        executable=$(echo $i|awk -F'@' '{print $1}')
+        package=$(echo $i|awk -F'@' '{print $2}')
+      else
+        executable=$(echo $i|awk -F'@' '{print $1}')
+        package=$(echo $i|awk -F'@' '{print $1}')
+      fi
+      if (! hash $executable 1>/dev/null 2>/dev/null) ; then
+        DEPENDENCES_DEBIAN_MISSING+=( $package )
       fi
     done
     if [ ! -z "$DEPENDENCES_DEBIAN_MISSING" ]; then
@@ -28,10 +42,16 @@ function Check-Deps(){
   
   if (( $+commands[npm] )); then
     DEPENDENCES_NPM_MISSING=()
-    local NPM_PATH="$( npm config get prefix )/lib/node_modules"
     for i ($DEPENDENCES_NPM); do
-      if [[ ! -d "$NPM_PATH/$i"  ]] ; then
-        if [[ ! ${DEPENDENCES_NPM_MISSING[(r)$i]} == $i ]] && DEPENDENCES_NPM_MISSING+=( $i )
+      if [[ ! "$i" == *@* ]]; then
+        executable=$(echo $i|awk -F'@' '{print $1}')
+        package=$(echo $i|awk -F'@' '{print $2}')
+      else
+        executable=$(echo $i|awk -F'@' '{print $1}')
+        package=$(echo $i|awk -F'@' '{print $1}')
+      fi
+      if (! hash $executable 1>/dev/null 2>/dev/null) ; then
+        DEPENDENCES_NPM_MISSING+=( $package )
       fi
     done
     if [ ! -z "$DEPENDENCES_NPM_MISSING" ]; then
