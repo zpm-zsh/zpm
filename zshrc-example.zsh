@@ -10,7 +10,7 @@ fi
 Plug zsh-core human ls cd desktop  #ZSH
 Plug colors dircolors  #Colors
 Plug user_prompt status node git path ps2 eol title  #Prompt
-Plug myip extract tmux genpasswd readers rmate ssh
+Plug myip extract tmux genpasswd readers ssh
 Plug horosgrisa/zsh-dropbox horosgrisa/utils  #Programs
 Plug nvm brew  #Package managers
 ### 3party plugins
