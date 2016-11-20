@@ -10,15 +10,13 @@ fi
 Plug zsh-core human ls cd desktop  #ZSH
 Plug colors dircolors  #Colors
 Plug user_prompt status node git path ps2 eol title  #Prompt
-Plug myip extract tmux genpasswd readers ssh
+Plug extract tmux readers ssh
 Plug horosgrisa/zsh-dropbox horosgrisa/utils  #Programs
-Plug nvm brew  #Package managers
 ### 3party plugins
 Plug zsh-users/zsh-completions horosgrisa/autoenv horosgrisa/mysql-colorize jocelynmallon/zshmarks voronkovich/gitignore.plugin.zsh
 Plug zsh-users/zsh-syntax-highlighting tarruda/zsh-autosuggestions horosgrisa/zsh-history-substring-search
 ###
-Plug termux command-not-found check-deps  # Compatibility
-Plug oh-my-zsh-wrapper  # Wrapper for oh-my-zsh
+Plug termux check-deps oh-my-zsh-wrapper # Compatibility
 
 plugins=( emoji-clock golang ) # Plugins from oh-my-zsh
 

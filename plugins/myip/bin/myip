@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-
-curl -s icanhazip.com || echo No IP
