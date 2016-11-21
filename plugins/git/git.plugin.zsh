@@ -86,6 +86,8 @@ _git_prompt() {
     fi
     if [[ $COLORS == "true" ]]; then
       gitprompt="%{$fg[green]%}"
+    else
+      gitprompt=""
     fi
     gitprompt+="$GIT_PREFIX"
     gitprompt+=$clean
