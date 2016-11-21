@@ -21,9 +21,9 @@ _git_prompt() {
     git_vars=$(GIT_PUSH="$GIT_PUSH" GIT_PULL="$GIT_PULL" python3 $gitstatus_path 2>/dev/null)
     git_vars=("${(@f)git_vars}")
     if [[ $COLORS == "true" ]]; then
-      branch="%{$fg[green]%}"$git_vars[1]
+      branch=" ""%{$fg[green]%}"$git_vars[1]
     else
-      branch=$git_vars[1]
+      branch=" "$git_vars[1]
     fi
     
     if [ -n "$git_vars[2]" ]; then
@@ -88,13 +88,13 @@ _git_prompt() {
       gitprompt="%{$fg[green]%}"
     fi
     gitprompt+="$GIT_PREFIX"
+    gitprompt+=$clean
     gitprompt+=$branch
     gitprompt+=$remote
     gitprompt+=$conflicts
     gitprompt+=$untracked
     gitprompt+=$staged
     gitprompt+=$changed
-    gitprompt+=$clean
     if [[ $COLORS == "true" ]]; then
       gitprompt+="%{$reset_color%}"
     fi

@@ -1,0 +1,12 @@
+#!/bin/zsh
+
+pwd_length=14
+
+newPWD="${1/$HOME/~}"
+
+if [ $(echo -n "$newPWD" | wc -c | tr -d " ") -gt $pwd_length ]; then
+  newPWD=$(echo -n "$newPWD" | awk -F '/' '{print $(NF-1) "/" $(NF)}')
+fi
+
+echo -n "$newPWD"
+

@@ -15,12 +15,14 @@ p() {
 }
 
 _current_path() {
-  local pa=$(print -Pn %2~)
-  if [[ $COLORS == "true" ]]; then
-    pa=${pa//\//%{$fg[magenta]%}\/%{$fg[cyan]%}}
-    current_path="%{$fg[cyan]%}$CURRENT_PATH_PREFIX$pa$CURRENT_PATH_SUFIX%{$reset_color%}"
-  else
-    current_path="$CURRENT_PATH_PREFIX$pa$CURRENT_PATH_SUFIX"
+  if [[ -z "$TMUX" ]]; then
+    local pa=$(print -Pn %2~)
+    if [[ $COLORS == "true" ]]; then
+      pa=${pa//\//%{$fg[magenta]%}\/%{$fg[cyan]%}}
+      current_path="%{$fg[cyan]%}$CURRENT_PATH_PREFIX$pa$CURRENT_PATH_SUFIX%{$reset_color%}"
+    else
+      current_path="$CURRENT_PATH_PREFIX$pa$CURRENT_PATH_SUFIX"
+    fi
   fi
 }
 

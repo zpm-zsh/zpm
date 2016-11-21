@@ -5,20 +5,33 @@ USER_PROMPT_PREFIX=${USER_PROMPT_PREFIX:-" "}
 USER_PROMPT_SUFIX=${USER_PROMPT_SUFIX:-" "}
 
 
-_whoami() {
+_user_prompt.plugin() {
+  local RETVAL=$?
+  local symbol=''
+  local prefix=''
   if [[ "$EUID" == 0 ]]; then
-    if [[ $COLORS == "true" ]]; then
-      user_prompt="%{$fg[red]%}$USER_PROMPT_PREFIX$USER_PROMPT_ROOT$USER_PROMPT_SUFIX%{$reset_color%}"
+    symbol="$USER_PROMPT_ROOT"
+  else
+    symbol="$USER_PROMPT_USER"
+  fi
+  if [[ $COLORS == "true" ]]; then
+    if [ $RETVAL -eq 0 ]; then
+      prefix="$USER_PROMPT_PREFIX%{$fg[yellow]%}"
     else
-      user_prompt="$USER_PROMPT_PREFIX$USER_PROMPT_ROOT$USER_PROMPT_SUFIX"
+      prefix="$USER_PROMPT_PREFIX%{$fg[red]%}"
     fi
   else
-    if [[ $COLORS == "true" ]]; then
-      user_prompt="%{$fg[yellow]%}$USER_PROMPT_PREFIX$USER_PROMPT_USER$USER_PROMPT_SUFIX%{$reset_color%}"
+    if [ $RETVAL -eq 0 ]; then
+      prefix="+"
     else
-      user_prompt="$USER_PROMPT_PREFIX$USER_PROMPT_USER$USER_PROMPT_SUFIX"
+      prefix="-"
     fi
+  fi
+  if [[ $COLORS == "true" ]]; then
+    user_prompt="$prefix$symbol$USER_PROMPT_SUFIX%{$reset_color%}"
+  else
+    user_prompt="$prefix$symbol$USER_PROMPT_SUFIX"
   fi
 }
 
-precmd_functions+=(_whoami)
+precmd_functions+=(_user_prompt.plugin)

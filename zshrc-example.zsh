@@ -9,7 +9,7 @@ fi
 
 Plug zsh-core human ls cd desktop  #ZSH
 Plug colors dircolors  #Colors
-Plug user_prompt status node git path ps2 eol title  #Prompt
+Plug user_prompt node git path ps2 eol title  #Prompt
 Plug extract tmux readers ssh
 Plug horosgrisa/zsh-dropbox horosgrisa/utils  #Programs
 ### 3party plugins
@@ -22,9 +22,9 @@ plugins=( emoji-clock golang ) # Plugins from oh-my-zsh
 
 # ZSH
 PROMPT='$user_prompt'
-RPROMPT='$last_status$node_version$gitprompt$current_path'
+RPROMPT='$node_version$gitprompt$current_path'
 PROMPT2='$ps2'
 PROMPT_EOL_MARK='$eol'
-TITLE='$program:$shortpath'
+TITLE='$program'
 
 [[ -f $HOME/.zshrc.custom ]] && source $HOME/.zshrc.custom || true
