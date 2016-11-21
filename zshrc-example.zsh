@@ -14,7 +14,7 @@ Plug tmux readers ssh
 Plug horosgrisa/zsh-dropbox horosgrisa/utils  #Programs
 ### 3party plugins
 Plug zsh-users/zsh-completions horosgrisa/autoenv horosgrisa/mysql-colorize jocelynmallon/zshmarks voronkovich/gitignore.plugin.zsh
-Plug zsh-users/zsh-syntax-highlighting tarruda/zsh-autosuggestions horosgrisa/zsh-history-substring-search
+Plug zsh-users/zsh-syntax-highlighting tarruda/zsh-autosuggestions
 ###
 Plug termux check-deps oh-my-zsh-wrapper # Compatibility
 

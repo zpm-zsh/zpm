@@ -27,12 +27,12 @@ function _tmux-upgrade(){
 
 precmd_functions+=( _tmux_autostart )
 
-
-function _tmux_refresh(){
-  \tmux refresh-client -S
-}
-
-chpwd_functions+=( _tmux_refresh )
+if [[ ! -z $TMUX ]]; then
+  function _tmux_refresh(){
+    \tmux refresh-client -S
+  }
+  chpwd_functions+=( _tmux_refresh ) 
+fi
 
 function _tmux_motd(){
   if [[ $TMUX_MOTD != false && ! -z $TMUX  &&  $(\tmux list-windows | wc -l | tr -d ' ') == 1 ]] && ( \tmux list-windows | tr -d ' '|grep -q 1panes  ); then
