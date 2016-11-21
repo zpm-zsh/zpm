@@ -10,7 +10,7 @@ fi
 Plug zsh-core human ls cd desktop  #ZSH
 Plug colors dircolors  #Colors
 Plug user_prompt node git path ps2 eol title  #Prompt
-Plug extract tmux readers ssh
+Plug tmux readers ssh
 Plug horosgrisa/zsh-dropbox horosgrisa/utils  #Programs
 ### 3party plugins
 Plug zsh-users/zsh-completions horosgrisa/autoenv horosgrisa/mysql-colorize jocelynmallon/zshmarks voronkovich/gitignore.plugin.zsh
