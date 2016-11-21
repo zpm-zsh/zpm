@@ -11,15 +11,6 @@ if [[ -z $TMUX_AUTOSTART  && -n "$SSH_CONNECTION" ]]; then
   fi
 fi
 
-function _tmux_autostart(){
-  if [[ "$TMUX_AUTOSTART" == "true" && -z "$TMUX" ]]
-  then
-    tmux
-    exit 0
-  fi
-  precmd_functions=(${precmd_functions#_tmux_autostart})
-}
-
 function _tmux-upgrade(){
   echo ">> Updating hook: tmux"
   git --git-dir="$HOME/.tmux/plugins/tpm/.git" --work-tree="$HOME/.tmux/plugins/tpm" pull
