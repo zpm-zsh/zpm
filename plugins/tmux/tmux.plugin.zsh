@@ -28,6 +28,12 @@ function _tmux-upgrade(){
 precmd_functions+=( _tmux_autostart )
 
 
+function _tmux_refresh(){
+  \tmux refresh-client -S
+}
+
+precmd_functions+=( _tmux_refresh )
+
 function _tmux_motd(){
   if [[ $TMUX_MOTD != false && ! -z $TMUX  &&  $(\tmux list-windows | wc -l | tr -d ' ') == 1 ]] && ( \tmux list-windows | tr -d ' '|grep -q 1panes  ); then
     if [[ "$OSTYPE" == linux* || "$OSTYPE" == freebsd*  ]]; then
