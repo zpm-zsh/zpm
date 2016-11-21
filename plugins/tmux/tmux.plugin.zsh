@@ -32,7 +32,7 @@ function _tmux_refresh(){
   \tmux refresh-client -S
 }
 
-precmd_functions+=( _tmux_refresh )
+chpwd_functions+=( _tmux_refresh )
 
 function _tmux_motd(){
   if [[ $TMUX_MOTD != false && ! -z $TMUX  &&  $(\tmux list-windows | wc -l | tr -d ' ') == 1 ]] && ( \tmux list-windows | tr -d ' '|grep -q 1panes  ); then
