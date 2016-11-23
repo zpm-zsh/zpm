@@ -15,8 +15,6 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
 
   echo -e "\E[32mHostname: \E[36m$(hostname)"
 
-  echo -e "\E[32mExternal IP: \E[36m$(_tmux_myip)"
-
   echo -e "\E[32mName Servers: \E[36m$(cat /etc/resolv.conf | grep 'nameserver' | awk '{print $2}' | xargs)" 
 
   echo -e "\E[32mLogged In Users: \E[36m\n$(who)"
@@ -45,8 +43,6 @@ if [[ "$OSTYPE" == "linux-android"* ]]; then
 
   echo -e "\E[32mHostname: \E[36m$(hostname)"
 
-  echo -e "\E[32mExternal IP: \E[36m$(_tmux_myip)"
-
   echo -e "\E[32mRam Usages: \E[36m\n $(\free -m | grep -v +)"
 
   echo -e "\E[32mDisk Usages: \E[36m\n $(\df -h | sed -n '1 p') \n$(\df -h | grep '^/dev/*')"
@@ -68,8 +64,6 @@ if [[ "$(uname)" == "FreeBSD" ]]; then
   echo -e  "$(uname -m) "
 
   echo -e "\E[32mHostname: \E[36m$(hostname)"
-
-  echo -e "\E[32mExternal IP: \E[36m$(_tmux_myip)"
 
   echo -e "\E[32mName Servers: \E[36m$(cat /etc/resolv.conf | grep 'nameserver' | awk '{print $2}' | xargs)" 
 
