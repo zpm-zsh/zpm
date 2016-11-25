@@ -16,6 +16,14 @@ function _tmux-upgrade(){
   git --git-dir="$HOME/.tmux/plugins/tpm/.git" --work-tree="$HOME/.tmux/plugins/tpm" pull
 }
 
+function _tmux_autostart(){
+  if [[ "$TMUX_AUTOSTART" == "true" && -z "$TMUX" ]]; then
+    tmux
+    exit 0
+  fi
+  precmd_functions=(${precmd_functions#_tmux_autostart})
+}
+
 precmd_functions+=( _tmux_autostart )
 
 if [[ ! -z $TMUX ]]; then
