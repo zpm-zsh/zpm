@@ -9,7 +9,7 @@ fi
 
 Plug zsh-core human ls cd desktop  #ZSH
 Plug colors dircolors  #Colors
-Plug user_prompt node git path ps2 eol title  #Prompt
+Plug noempty user_prompt node git path ps2 eol title  #Prompt
 Plug tmux readers ssh
 Plug horosgrisa/zsh-dropbox horosgrisa/utils  #Programs
 ### 3party plugins
