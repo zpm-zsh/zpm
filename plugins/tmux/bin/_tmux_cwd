@@ -1,8 +1,8 @@
-#!/bin/zsh
+#!/bin/bash
 
 pwd_length=14
 
-newPWD="${1/$HOME/~}"
+newPWD=$(echo $1| sed 's/^\/home\/grisa/~/g')
 
 if [ $(echo -n "$newPWD" | wc -c | tr -d " ") -gt $pwd_length ]; then
   newPWD=$(echo -n "$newPWD" | awk -F '/' '{print $(NF-1) "/" $(NF)}')
