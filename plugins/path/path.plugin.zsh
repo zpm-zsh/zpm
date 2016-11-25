@@ -24,9 +24,8 @@ _current_path() {
           newPWD=$(echo -n "$newPWD" | awk -F '/' '{print $(NF-1) "/" $(NF)}')
         fi
 
-    local pa=$(print -Pn %2~)
     if [[ $COLORS == "true" ]]; then
-      newPWD=${//\//%{$fg[magenta]%}\/%{$fg[cyan]%}}
+      newPWD=${newPWD//\//%{$fg[magenta]%}\/%{$fg[cyan]%}}
       current_path="%{$fg[cyan]%}$CURRENT_PATH_PREFIX$newPWD$CURRENT_PATH_SUFIX%{$reset_color%}"
     else
       current_path="$CURRENT_PATH_PREFIX$newPWD$CURRENT_PATH_SUFIX"
