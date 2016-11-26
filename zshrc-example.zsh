@@ -21,7 +21,7 @@ Plug termux check-deps oh-my-zsh-wrapper # Compatibility
 plugins=( emoji-clock golang ) # Plugins from oh-my-zsh
 
 # ZSH
-PROMPT='$user_prompt'
+PROMPT=' $user_prompt'
 RPROMPT='$node_version$gitprompt$current_path'
 PROMPT2='$ps2'
 PROMPT_EOL_MARK='$eol'
