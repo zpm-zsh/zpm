@@ -16,15 +16,15 @@ _user_prompt.plugin() {
   fi
   if [[ $COLORS == "true" ]]; then
     if [ $RETVAL -eq 0 ]; then
-      prefix="$USER_PROMPT_PREFIX%{$fg[yellow]%}"
+      prefix="$USER_PROMPT_PREFIX %{$fg[yellow]%}"
     else
-      prefix="$USER_PROMPT_PREFIX%{$fg[red]%}"
+      prefix="$USER_PROMPT_PREFIX %{$fg[red]%}"
     fi
   else
     if [ $RETVAL -eq 0 ]; then
-      prefix="+"
+      prefix="$USER_PROMPT_PREFIX+"
     else
-      prefix="-"
+      prefix="$USER_PROMPT_PREFIX-"
     fi
   fi
   if [[ $COLORS == "true" ]]; then
