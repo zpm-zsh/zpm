@@ -35,11 +35,11 @@ _node_version() {
     node_version=""
   fi
 }
+chpwd_functions+=(_node_version)
 
 function install_npm (){
   curl -L https://www.npmjs.com/install.sh | sudo sh
 }
 
-precmd_functions+=(_node_version)
 DEPENDENCES_ARCH+=( node@nodejs )
 DEPENDENCES_DEBIAN+=( node@nodejs )
