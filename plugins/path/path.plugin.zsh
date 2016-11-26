@@ -16,14 +16,11 @@ p() {
 
 _current_path() {
   if [[ -z "$TMUX" ]]; then
-
-      newHOME=$(echo $HOME | sed 's/\//\\\//g')
-      newPWD=$(echo $PWD| sed 's/^'$newHOME'/~/g')
-
-      if [ $(echo -n "$newPWD" | wc -c | tr -d " ") -gt 20 ]; then
-          newPWD=$(echo -n "$newPWD" | awk -F '/' '{print $(NF-1) "/" $(NF)}')
-        fi
-
+    newHOME=$(echo $HOME | sed 's/\//\\\//g')
+    newPWD=$(echo $PWD| sed 's/^'$newHOME'/~/g')
+    if [ $(echo -n "$newPWD" | wc -c | tr -d " ") -gt 2 ]; then
+      newPWD=$(echo -n "$newPWD" | awk -F '/' '{print $(NF-1) "/" $(NF)}')
+    fi
     if [[ $COLORS == "true" ]]; then
       newPWD=${newPWD//\//%{$fg[magenta]%}\/%{$fg[cyan]%}}
       current_path="%{$fg[cyan]%}$CURRENT_PATH_PREFIX$newPWD$CURRENT_PATH_SUFIX%{$reset_color%}"
