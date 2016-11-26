@@ -23,7 +23,7 @@ _current_path() {
     fi
     if [[ $COLORS == "true" ]]; then
       newPWD=${newPWD//\//%{$fg[magenta]%}\/%{$fg[cyan]%}}
-      current_path="%{$fg[cyan]%}$CURRENT_PATH_PREFIX$newPWD$CURRENT_PATH_SUFIX%{$reset_color%}"
+      current_path="$CURRENT_PATH_PREFIX%{$fg[cyan]%}$newPWD$CURRENT_PATH_SUFIX%{$reset_color%}"
     else
       current_path="$CURRENT_PATH_PREFIX$newPWD$CURRENT_PATH_SUFIX"
     fi

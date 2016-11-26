@@ -20,15 +20,15 @@ _node_version() {
       nodev=$(node -v)
       nodev=${nodev#'v'}
       if [[ $COLORS == "true" ]]; then
-        node_version="%{$fg_bold[blue]%}$NODE_VERSION_PREFIX$nodev$NODE_VERSION_SUFIX%{$reset_color%}"
+        node_version="$NODE_VERSION_PREFIX%{$fg_bold[blue]%}$nodev$NODE_VERSION_SUFIX%{$reset_color%}"
       else
         node_version="$NODE_VERSION_PREFIX$nodev$NODE_VERSION_SUFIX"
       fi
     else
       if [[ $COLORS == "true" ]]; then
-        node_version="%{$fg[yellow]%}$NODE_VERSION_PREFIX""Node.js not found""$NODE_VERSION_SUFIX%{$reset_color%}"
+        node_version="$NODE_VERSION_PREFIX%{$fg[red]%}Node.js not found$NODE_VERSION_SUFIX%{$reset_color%}"
       else
-        node_version="$NODE_VERSION_PREFIX""Node.js not found""$NODE_VERSION_SUFIX"
+        node_version="$NODE_VERSION_PREFIXNode.js not found$NODE_VERSION_SUFIX"
       fi
     fi
   else
