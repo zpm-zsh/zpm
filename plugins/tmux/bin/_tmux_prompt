@@ -1,0 +1,16 @@
+#!/bin/zsh
+
+cd $1 || exit
+
+newPWD=$(print -Pn %3~)
+newHOME=$(echo $HOME | sed 's/\//\\\//g')
+newPWD=$(echo $newPWD| sed 's/^'$newHOME'/~/g')
+newPWD=$(echo $newPWD | sed 's/\//#[fg=red]\/#[fg=cyan]/g')
+
+# echo $newPWD
+
+echo -n "#[fg=green]$(whoami)"
+echo -n "#[fg=blue]@"
+echo -n "#[fg=green]$(hostname)"
+echo -n "#[fg=white,bold]:"
+echo -n "#[fg=cyan]$newPWD"
