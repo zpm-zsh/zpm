@@ -35,6 +35,7 @@ _node_version() {
     node_version=""
   fi
 }
+_node_version
 chpwd_functions+=(_node_version)
 
 function install_npm (){

@@ -10,6 +10,10 @@ if [[ -z "$MANPATH" ]]; then
   fi
 fi
 
+if [[ -z "$PERIOD" ]]; then
+  PERIOD=6
+fi
+
 if [[ "$COLORS" == "true" ]]; then
   autoload -U colors && colors
   TERM="xterm-256color"
