@@ -7,18 +7,18 @@ else
   source ~/.zpm/zpm.zsh
 fi
 
-Plug zsh-core human ls cd desktop  #ZSH
-Plug colors dircolors  #Colors
-Plug noempty user_prompt node git path ps2 eol title  #Prompt
-Plug tmux readers ssh
-Plug horosgrisa/zsh-dropbox horosgrisa/utils  #Programs
+Plug zsh-core human ls cd colors dircolors tmux
+Plug desktop node git readers ssh
+Plug noempty user_prompt path ps2 eol title
 ### 3party plugins
-Plug zsh-users/zsh-completions horosgrisa/autoenv horosgrisa/mysql-colorize jocelynmallon/zshmarks voronkovich/gitignore.plugin.zsh
-Plug zsh-users/zsh-syntax-highlighting tarruda/zsh-autosuggestions
+Plug zsh-users/zsh-completions horosgrisa/autoenv 
+Plug horosgrisa/mysql-colorize horosgrisa/zsh-dropbox
+Plug jocelynmallon/zshmarks voronkovich/gitignore.plugin.zsh 
+Plug zsh-users/zsh-syntax-highlighting tarruda/zsh-autosuggestions horosgrisa/utils
 ###
 Plug termux check-deps oh-my-zsh-wrapper # Compatibility
 
-plugins=( emoji-clock golang ) # Plugins from oh-my-zsh
+plugins=( emoji-clock ) # Plugins from oh-my-zsh
 
 # ZSH
 PROMPT='$user_prompt'
