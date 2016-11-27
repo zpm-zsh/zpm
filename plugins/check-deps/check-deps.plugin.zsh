@@ -1,15 +1,16 @@
 #!/usr/bin/env zsh
+
 function Check-Deps(){
   #Arch System Deps
   if (( $+commands[pacman] )); then
     local DEPENDENCES_ARCH_MISSING=()
     for i ($DEPENDENCES_ARCH); do
-      if [[ ! "$i" == *@* ]]; then
-        executable=$(echo $i|awk -F'@' '{print $1}')
-        package=$(echo $i|awk -F'@' '{print $2}')
+      if [[ "$i" == *@* ]]; then
+        executable=$(echo -n $i|awk -F'@' '{print $1}')
+        package=$(echo -n $i|awk -F'@' '{print $2}')
       else
-        executable=$(echo $i|awk -F'@' '{print $1}')
-        package=$(echo $i|awk -F'@' '{print $1}')
+        package="$i"
+        executable="$i"
       fi
       if (! hash $executable 1>/dev/null 2>/dev/null) ; then
         DEPENDENCES_ARCH_MISSING+=( $package )
@@ -22,14 +23,14 @@ function Check-Deps(){
   
   if (( $+commands[dpkg] )); then
     DEPENDENCES_DEBIAN_MISSING=()
-    _DEB_PACKAGES="$(dpkg --list|awk '{print $2}'|awk -F':' '{print $1}'|xargs)"
+    _DEB_packageS="$(dpkg --list|awk '{print $2}'|awk -F':' '{print $1}'|xargs)"
     for i ($DEPENDENCES_DEBIAN); do
-      if [[ ! "$i" == *@* ]]; then
-        executable=$(echo $i|awk -F'@' '{print $1}')
-        package=$(echo $i|awk -F'@' '{print $2}')
+      if [[ "$i" == *@* ]]; then
+        executable=$(echo -n $i|awk -F'@' '{print $1}')
+        package=$(echo -n $i|awk -F'@' '{print $2}')
       else
-        executable=$(echo $i|awk -F'@' '{print $1}')
-        package=$(echo $i|awk -F'@' '{print $1}')
+        package="$i"
+        executable="$i"
       fi
       if (! hash $executable 1>/dev/null 2>/dev/null) ; then
         DEPENDENCES_DEBIAN_MISSING+=( $package )
@@ -43,12 +44,12 @@ function Check-Deps(){
   if (( $+commands[npm] )); then
     DEPENDENCES_NPM_MISSING=()
     for i ($DEPENDENCES_NPM); do
-      if [[ ! "$i" == *@* ]]; then
-        executable=$(echo $i|awk -F'@' '{print $1}')
-        package=$(echo $i|awk -F'@' '{print $2}')
+      if [[ "$i" == *@* ]]; then
+        executable=$(echo -n $i|awk -F'@' '{print $1}')
+        package=$(echo -n $i|awk -F'@' '{print $2}')
       else
-        executable=$(echo $i|awk -F'@' '{print $1}')
-        package=$(echo $i|awk -F'@' '{print $1}')
+        package="$i"
+        executable="$i"
       fi
       if (! hash $executable 1>/dev/null 2>/dev/null) ; then
         DEPENDENCES_NPM_MISSING+=( $package )

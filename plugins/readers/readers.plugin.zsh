@@ -83,7 +83,7 @@ function cppcat() {
 alias javacat=cppcat
 
 DEPENDENCES_ARCH+=( pygmentize )
-DEPENDENCES_DEBIAN+=( python-pygments )
+DEPENDENCES_DEBIAN+=( pygmentize@python-pygments )
 function hcat() {
   if [[ -z $1 ]]; then
     FILE=$(mktemp -t XXXXX)
@@ -99,6 +99,7 @@ function hcat() {
   `whence pygmentize` -f 256 -g $FILE
 }
 
+DEPENDENCES_NPM+=( mdy )
 function mdcat() {
   if [[ -z $1 ]]; then
     FILE=$(mktemp -t XXXXX.md)
@@ -113,8 +114,8 @@ function mdcat() {
   fi
   mdless --no-pager "$FILE"
 }
-DEPENDENCES_ARCH+=( gnupg )
-DEPENDENCES_DEBIAN+=( gnupg )
+DEPENDENCES_ARCH+=( gpg@gnupg )
+DEPENDENCES_DEBIAN+=( gpg@gnupg )
 function gpgcat() {
   if [[ -z $1 ]]; then
     FILE=$(mktemp -t XXXXX.gpg)
@@ -140,8 +141,8 @@ function pdfcat() {
   pdftotext -eol unix -nopgbrk "$FILE" -
 }
 
-DEPENDENCES_ARCH+=( icat graphicsmagick )
-DEPENDENCES_DEBIAN+=( icat graphicsmagick )
+DEPENDENCES_ARCH+=( icat convert@graphicsmagick )
+DEPENDENCES_DEBIAN+=( icat convert@graphicsmagick )
 function imgcat() {
   if [ ! -z "$1" ]; then
     if [[ $1 == "http:"* ]] || [[ $1 == "https:"* ]] || [[ $1 == "ftp:"* ]]; then
