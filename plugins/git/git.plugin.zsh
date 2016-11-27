@@ -102,5 +102,4 @@ _git_prompt() {
   fi
 }
 
-chpwd_functions+=(_git_prompt)
-periodic_functions+=(_git_prompt)
+precmd_functions+=(_git_prompt)

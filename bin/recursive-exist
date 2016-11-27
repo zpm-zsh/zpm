@@ -1,0 +1,25 @@
+#!/bin/bash
+
+DIR=$PWD
+exist=false
+
+if [[ -d "$DIR/$1" || -f "$DIR/$1" ]]; then
+  exist=true
+  echo "$DIR/$1"
+fi
+while [[ "$DIR" != "" ]]; do
+  DIR=$(dirname $DIR)
+  if [[ "$DIR" == '/' ]]; then
+    DIR=""
+  fi
+  if [[ -d "$DIR/$1" || -f "$DIR/$1" ]]; then
+    exist=true
+    echo "$DIR/$1"
+  fi
+done
+
+if [[ "$exist" == false ]]; then
+  exit 1
+fi
+
+
