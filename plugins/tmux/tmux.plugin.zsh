@@ -43,7 +43,7 @@ function _tmux_motd(){
 }
 
 
-if [[ $TMUX_MOTD != false ]]; then
+if [[ $TMUX_AUTOSTART == true ]]; then
   _tmux_motd
 fi
 DEPENDENCES_ARCH+=( tmux )
