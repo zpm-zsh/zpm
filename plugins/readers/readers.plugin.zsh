@@ -112,7 +112,7 @@ function mdcat() {
       FILE=$1
     fi
   fi
-  mdless --no-pager "$FILE"
+  mdy "$FILE"
 }
 DEPENDENCES_ARCH+=( gpg@gnupg )
 DEPENDENCES_DEBIAN+=( gpg@gnupg )

@@ -4,7 +4,6 @@ USER_PROMPT_USER=${USER_PROMPT_USER:-'$'}
 USER_PROMPT_PREFIX=${USER_PROMPT_PREFIX:-''}
 USER_PROMPT_SUFIX=${USER_PROMPT_SUFIX:-' '}
 
-
 _user_prompt() {
   local RETVAL=$?
   local symbol=''
