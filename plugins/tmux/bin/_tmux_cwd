@@ -1,9 +1,0 @@
-#!/bin/bash
-
-newHOME=$(echo $HOME | sed 's/\//\\\//g')
-newPWD=$(echo $1| sed 's/^'$newHOME'/~/g')
-if [ $(echo -n "$newPWD" | wc -c | tr -d " ") -gt 2 ]; then
-  newPWD=$(echo -n "$newPWD" | awk -F '/' '{print $(NF-1) "/" $(NF)}')
-fi
-echo -n "$newPWD"
-

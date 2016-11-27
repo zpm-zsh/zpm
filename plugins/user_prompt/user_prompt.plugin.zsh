@@ -5,7 +5,7 @@ USER_PROMPT_PREFIX=${USER_PROMPT_PREFIX:-''}
 USER_PROMPT_SUFIX=${USER_PROMPT_SUFIX:-' '}
 
 
-_user_prompt.plugin() {
+_user_prompt() {
   local RETVAL=$?
   local symbol=''
   local prefix=''
@@ -34,4 +34,4 @@ _user_prompt.plugin() {
   fi
 }
 
-precmd_functions+=(_user_prompt.plugin)
+precmd_functions+=(_user_prompt)

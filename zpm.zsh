@@ -11,7 +11,7 @@ if [[ -z "$MANPATH" ]]; then
 fi
 
 if [[ -z "$PERIOD" ]]; then
-  PERIOD=6
+  PERIOD=10
 fi
 
 if [[ "$COLORS" == "true" ]]; then
