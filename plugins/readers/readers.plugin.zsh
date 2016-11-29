@@ -2,7 +2,6 @@
 DEPENDENCES_ARCH+=( curl )
 DEPENDENCES_DEBIAN+=( curl )
 
-DEPENDENCES_NPM+=( js-beautify )
 function htmlcat() {
   if [[ -z $1 ]]; then
     FILE=$(mktemp -t XXXXX.html)
@@ -15,7 +14,7 @@ function htmlcat() {
       FILE="$1"
     fi
   fi
-  html-beautify $FILE | `whence pygmentize` -f 256 -g -l html
+  `whence pygmentize` -f 256 -g -l html $FILE 
 }
 alias xmlcat=htmlcat
 
@@ -31,7 +30,7 @@ function csscat() {
       FILE=$1
     fi
   fi
-  css-beautify $FILE | `whence pygmentize` -f 256 -g -l css
+  `whence pygmentize` -f 256 -g -l css $FILE 
 }
 
 function jscat() {
@@ -46,7 +45,7 @@ function jscat() {
       FILE=$1
     fi
   fi
-  js-beautify $FILE | `whence pygmentize` -f 256 -g -l javascript
+  `whence pygmentize` -f 256 -g -l javascript $FILE
 }
 
 function jsoncat() {
@@ -61,7 +60,7 @@ function jsoncat() {
       FILE=$1
     fi
   fi
-  cat $FILE | prettyjson
+  prettyjson $FILE
 }
 
 DEPENDENCES_ARCH+=( astyle )
@@ -78,7 +77,7 @@ function cppcat() {
       FILE=$1
     fi
   fi
-  astyle < $FILE | `whence pygmentize` -f 256 -g
+  astyle < $FILE | `whence pygmentize` -f 256 -g c_cpp
 }
 alias javacat=cppcat
 
