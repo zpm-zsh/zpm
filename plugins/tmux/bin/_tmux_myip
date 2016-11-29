@@ -1,0 +1,3 @@
+#!/bin/sh
+
+curl -s icanhazip.com || echo No IP
