@@ -15,7 +15,7 @@ function htmlcat() {
       FILE="$1"
     fi
   fi
-  html-beautify $FILE | `whence pygmentize` -f 256 -g
+  html-beautify $FILE | `whence pygmentize` -f 256 -g -l html
 }
 alias xmlcat=htmlcat
 
@@ -31,7 +31,7 @@ function csscat() {
       FILE=$1
     fi
   fi
-  css-beautify $FILE | `whence pygmentize` -f 256 -g
+  css-beautify $FILE | `whence pygmentize` -f 256 -g -l css
 }
 
 function jscat() {
@@ -46,7 +46,7 @@ function jscat() {
       FILE=$1
     fi
   fi
-  js-beautify $FILE | `whence pygmentize` -f 256 -g
+  js-beautify $FILE | `whence pygmentize` -f 256 -g -l javascript
 }
 
 function jsoncat() {
