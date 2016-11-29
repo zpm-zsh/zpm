@@ -12,7 +12,6 @@ export LESS_TERMCAP_us=$'\E[00;32m'
 export LESS_TERMCAP_ue=$'\E[0m'
 export LESS='-R -M'
 
-
 PYGMENTIZE_THEME=${PYGMENTIZE_THEME:-"monokai"}
 
 _pygmentize_theme(){
@@ -22,6 +21,5 @@ _pygmentize_theme(){
   fi
   precmd_functions=(${precmd_functions#_pygmentize_theme})
 }
-
 
 precmd_functions+=( _pygmentize_theme )

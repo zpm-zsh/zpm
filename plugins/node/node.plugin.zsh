@@ -3,16 +3,6 @@
 DEPENDENCES_ARCH+=( node@nodejs )
 DEPENDENCES_DEBIAN+=( node@nodejs )
 
-function node-docs {
-  local open_cmd
-  if [[ "$OSTYPE" = darwin* ]]; then
-    open_cmd='open'
-  else
-    open_cmd='xdg-open'
-  fi
-  $open_cmd "http://nodejs.org/docs/$(node --version)/api/all.html#all_$1"
-}
-
 function install_npm (){
   curl -L https://www.npmjs.com/install.sh | sudo sh
 }
@@ -42,7 +32,7 @@ chpwd_functions+=(_node_version_pre)
 periodic_functions+=(_node_version_pre)
 
 _node_version() {
-  if [ -d "./node_modules" -o -d "../node_modules" -o -d "../../node_modules" -o -d "../../../node_modules" ]; then
+  if recursive-exist node_modules >/dev/null; then
     node_version="$node_version_pre"
   else
     node_version=""
