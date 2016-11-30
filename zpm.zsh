@@ -56,7 +56,7 @@ LISTMAX=9999
 # Some modules
 setopt prompt_subst
 zstyle ":completion::complete:*" use-cache 1
-zstyle ":completion::complete:*" cache-path "~/.cache/zsh"
+zstyle ":completion::complete:*" cache-path "$HOME/.cache/zsh"
 autoload -U compinit && compinit
 zmodload zsh/terminfo
 
