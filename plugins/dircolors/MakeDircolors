@@ -60,7 +60,7 @@ purple_l+=(.7z .arj .bz .bz2 .cab .gem .gz .iso .rar .tar .tbz .tbz2 .tgz .tx .w
 #Executables
 yellow_l+=(EXEC .cmd .exe .com .reg .app .bin .class)
 # Scripts
-yellow+=(.bat .sh .csh .zsh .js .coffee .py .pl .php )
+yellow+=(.bat .sh .csh .zsh .js .jsx .coffee .py .pl .php )
 ## Source files
 cyan_l+=(.c .cpp .h .lua .rs .pas .go .java )
 

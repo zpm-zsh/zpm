@@ -4,7 +4,7 @@ CURRENT_PATH_PREFIX=${CURRENT_PATH_PREFIX:-" "}
 CURRENT_PATH_SUFIX=${CURRENT_PATH_SUFIX:-""}
 
 _current_path() {
-  newPWD=$(print -Pn %3~)
+  newPWD=$(print -Pn %2~)
   newHOME=$(echo $HOME | sed 's/\//\\\//g')
   newPWD=$(echo $newPWD| sed 's/^'$newHOME'/~/g')
   if [[ $COLORS == "true" ]]; then
