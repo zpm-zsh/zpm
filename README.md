@@ -5,7 +5,7 @@ ZPM ( Zsh plugin manager ) is an yet another plugin manager for
 ZPM plugins are compatible with [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh).
 ZPM runs on Linux, Android, FreeBSD and OS X.
 
-## Dependences
+## Base dependences
 
 * git
 * zsh
@@ -30,13 +30,6 @@ If you don't have `.zshrc` copy example of `.zshrc` from zpm
 
 ```sh
 cp ~/.zpm/zshrc-example.zsh ~/.zshrc
-```
-
-#### From Aur (Arch Linux)
-
-```sh
-yaourt -S zpm
-cp /usr/share/zpm/zshrc-example.zsh ~/.zshrc
 ```
 
 ## Using plugins
