@@ -11,7 +11,7 @@ export NVM_LAZY_LOAD=true
 
 Plug jreese/zsh-titles
 
-plugins=(extract emoji-clock command-not-found systemd history-substring-search fancy-ctrl-z)
+Plug extract emoji-clock command-not-found systemd history-substring-search fancy-ctrl-z # Plugins from oh-my-zsh
 
 #################
 ###  Plugins  ###

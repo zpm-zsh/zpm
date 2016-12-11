@@ -41,6 +41,10 @@ else
   unset ZPM_PLUGIN_DIR
 fi
 
+if  [[ -z $ZSH ]]; then
+  ZSH=$HOME/.oh-my-zsh # Compatibility with oh-my-zsh
+fi
+
 PATH=$PATH:$_ZPM_DIR/bin
 ZSH_COMPDUMP="$HOME/.zcompdump"
 HISTFILE="$HOME/.zsh_history"
@@ -76,20 +80,35 @@ function _ZPM_Initialize_Plugin(){
   _ZPM_Core_Plugins+=( $plugin )
   local plugin=$1
   if [[ ! "$plugin" == */* ]]; then
-    FPATH="$FPATH:$_ZPM_DIR/plugins/$plugin"
+    if [[ -d "$_ZPM_DIR/plugins/$plugin" ]]; then
+      FPATH="$FPATH:$_ZPM_DIR/plugins/$plugin"
 
-    if [[ -d "$_ZPM_DIR/plugins/$plugin/bin" ]]; then
-      PATH="$PATH:$_ZPM_DIR/plugins/$plugin/bin"
+      if [[ -d "$_ZPM_DIR/plugins/$plugin/bin" ]]; then
+        PATH="$PATH:$_ZPM_DIR/plugins/$plugin/bin"
+      fi
+
+      if [[ -d "$_ZPM_DIR/plugins/$plugin/man" ]]; then
+        MANPATH="$MANPATH:$_ZPM_DIR/plugins/$plugin/man"
+      fi
+
+      if [[ -f "$_ZPM_DIR/plugins/$plugin/$plugin.plugin.zsh" ]]; then
+        source "$_ZPM_DIR/plugins/$plugin/$plugin.plugin.zsh"
+      fi
+    elif [[ "~/.oh-my-zsh/plugins/$plugin" ]]; then
+      FPATH="$FPATH:~/.oh-my-zsh/plugins/$plugin"
+
+      if [[ -d "~/.oh-my-zsh/plugins/$plugin/bin" ]]; then
+        PATH="$PATH:~/.oh-my-zsh/plugins/$plugin/bin"
+      fi
+
+      if [[ -d "~/.oh-my-zsh/plugins/$plugin/man" ]]; then
+        MANPATH="$MANPATH:~/.oh-my-zsh/plugins/$plugin/man"
+      fi
+
+      if [[ -f "~/.oh-my-zsh/plugins/$plugin/$plugin.plugin.zsh" ]]; then
+        source "~/.oh-my-zsh/plugins/$plugin/$plugin.plugin.zsh"
+      fi
     fi
-
-    if [[ -d "$_ZPM_DIR/plugins/$plugin/man" ]]; then
-      MANPATH="$MANPATH:$_ZPM_DIR/plugins/$plugin/man"
-    fi
-
-    if [[ -f "$_ZPM_DIR/plugins/$plugin/$plugin.plugin.zsh" ]]; then
-      source "$_ZPM_DIR/plugins/$plugin/$plugin.plugin.zsh"
-    fi
-
     return
   fi
 
