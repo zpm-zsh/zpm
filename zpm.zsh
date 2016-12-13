@@ -94,7 +94,7 @@ function _ZPM_Initialize_Plugin(){
       if [[ -f "$_ZPM_DIR/plugins/$plugin/$plugin.plugin.zsh" ]]; then
         source "$_ZPM_DIR/plugins/$plugin/$plugin.plugin.zsh"
       fi
-    elif [[ "~/.oh-my-zsh/plugins/$plugin" ]]; then
+    elif [[ -d "~/.oh-my-zsh/plugins/$plugin" ]]; then
       FPATH="$FPATH:~/.oh-my-zsh/plugins/$plugin"
 
       if [[ -d "~/.oh-my-zsh/plugins/$plugin/bin" ]]; then
