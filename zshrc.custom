@@ -1,4 +1,4 @@
-re(){
+  re(){
    sudo pacman -Rns $(pacman -Qttdq)
    sudo pacman -Scc
 }

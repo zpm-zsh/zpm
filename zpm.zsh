@@ -94,19 +94,19 @@ function _ZPM_Initialize_Plugin(){
       if [[ -f "$_ZPM_DIR/plugins/$plugin/$plugin.plugin.zsh" ]]; then
         source "$_ZPM_DIR/plugins/$plugin/$plugin.plugin.zsh"
       fi
-    elif [[ -d "~/.oh-my-zsh/plugins/$plugin" ]]; then
-      FPATH="$FPATH:~/.oh-my-zsh/plugins/$plugin"
+    elif [[ -d "$HOME/.oh-my-zsh/plugins/$plugin" ]]; then
+      FPATH="$FPATH:$HOME/.oh-my-zsh/plugins/$plugin"
 
-      if [[ -d "~/.oh-my-zsh/plugins/$plugin/bin" ]]; then
-        PATH="$PATH:~/.oh-my-zsh/plugins/$plugin/bin"
+      if [[ -d "$HOME/.oh-my-zsh/plugins/$plugin/bin" ]]; then
+        PATH="$PATH:$HOME/.oh-my-zsh/plugins/$plugin/bin"
       fi
 
-      if [[ -d "~/.oh-my-zsh/plugins/$plugin/man" ]]; then
-        MANPATH="$MANPATH:~/.oh-my-zsh/plugins/$plugin/man"
+      if [[ -d "$HOME/.oh-my-zsh/plugins/$plugin/man" ]]; then
+        MANPATH="$MANPATH:$HOME/.oh-my-zsh/plugins/$plugin/man"
       fi
 
-      if [[ -f "~/.oh-my-zsh/plugins/$plugin/$plugin.plugin.zsh" ]]; then
-        source "~/.oh-my-zsh/plugins/$plugin/$plugin.plugin.zsh"
+      if [[ -f "$HOME/.oh-my-zsh/plugins/$plugin/$plugin.plugin.zsh" ]]; then
+        source "$HOME/.oh-my-zsh/plugins/$plugin/$plugin.plugin.zsh"
       fi
     fi
     return
