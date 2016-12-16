@@ -7,9 +7,7 @@ Plug akoenig/gulp.plugin.zsh
 Plug maxmellon/yarn_completion
 Plug lukechilds/zsh-better-npm-completion
 export NVM_LAZY_LOAD=true
-#Plug lukechilds/zsh-nvm
-
-Plug jreese/zsh-titles
+Plug lukechilds/zsh-nvm
 
 Plug extract emoji-clock command-not-found systemd history-substring-search fancy-ctrl-z # Plugins from oh-my-zsh
 

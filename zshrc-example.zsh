@@ -25,6 +25,5 @@ PROMPT='$user_prompt'
 RPROMPT='$node_version$gitprompt$current_path'
 PROMPT2='$ps2'
 PROMPT_EOL_MARK='$eol'
-TITLE='$program'
 
 [[ -f $HOME/.zshrc.custom ]] && source $HOME/.zshrc.custom || true
