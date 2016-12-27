@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DIR=$PWD
+DIR="$PWD"
 exist=false
 
 if [[ -d "$DIR/$1" || -f "$DIR/$1" ]]; then
@@ -8,7 +8,7 @@ if [[ -d "$DIR/$1" || -f "$DIR/$1" ]]; then
   echo "$DIR/$1"
 fi
 while [[ "$DIR" != "" ]]; do
-  DIR=$(dirname $DIR)
+  DIR=$(dirname "$DIR")
   if [[ "$DIR" == '/' ]]; then
     DIR=""
   fi
