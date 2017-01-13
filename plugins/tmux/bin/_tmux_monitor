@@ -26,7 +26,8 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
   echo -e "\E[32mSystem Uptime: \E[36m$(uptime | xargs| sed -e 's/.*up\ \(.*\),\ [0-9]*\ .*/\1/g')"
 
   [[ -f /var/log/auth.log ]] && \
-  echo -e "\E[32mFailed Login: \E[36m$(cat /var/log/auth.log | grep sshd | grep Fail | wc -l  )"
+  echo -e "\E[32mFailed Login: \E[36m$(cat /var/log/auth.log | grep sshd | grep Fail | wc -l )" || \
+  echo -e "\E[32mFailed Login: \E[36m$( journalctl -u sshd | grep Fail | wc -l )"
 
   echo -en "$tecreset"
 
