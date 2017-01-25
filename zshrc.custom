@@ -8,6 +8,7 @@ Plug maxmellon/yarn_completion
 Plug lukechilds/zsh-better-npm-completion
 export NVM_LAZY_LOAD=true
 Plug lukechilds/zsh-nvm
+Plug unixorn/warhol.plugin.zsh
 
 Plug extract emoji-clock command-not-found systemd history-substring-search fancy-ctrl-z # Plugins from oh-my-zsh
 
