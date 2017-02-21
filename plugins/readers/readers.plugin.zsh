@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
-DEPENDENCES_ARCH+=( curl )
-DEPENDENCES_DEBIAN+=( curl )
+DEPENDENCES_ARCH+=( curl pygmentize@pygmentize )
+DEPENDENCES_DEBIAN+=( curl pygmentize@python-pygments )
 
 function htmlcat() {
   if [[ -z $1 ]]; then
@@ -81,8 +81,6 @@ function cppcat() {
 }
 alias javacat=cppcat
 
-DEPENDENCES_ARCH+=( pygmentize )
-DEPENDENCES_DEBIAN+=( pygmentize@python-pygments )
 function hcat() {
   if [[ -z $1 ]]; then
     FILE=$(mktemp -t XXXXX)
@@ -140,8 +138,8 @@ function pdfcat() {
   pdftotext -eol unix -nopgbrk "$FILE" -
 }
 
-DEPENDENCES_ARCH+=( icat convert@graphicsmagick )
-DEPENDENCES_DEBIAN+=( icat convert@graphicsmagick )
+DEPENDENCES_ARCH+=( icat convert@imagemagick )
+DEPENDENCES_DEBIAN+=( icat convert@imagemagick )
 function imgcat() {
   if [ ! -z "$1" ]; then
     if [[ $1 == "http:"* ]] || [[ $1 == "https:"* ]] || [[ $1 == "ftp:"* ]]; then
@@ -152,7 +150,7 @@ function imgcat() {
     fi
     FILESIZE=$(stat -c%s "$FILERAW")
     FILE=$(mktemp -t XXXXX.png)
-    gm convert $FILERAW $FILE
+    convert $FILERAW $FILE
     icat -m 24bit $FILERAW
   else
     echo "Usege: image <path-to-image>"
