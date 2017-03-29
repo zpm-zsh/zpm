@@ -2,7 +2,7 @@ alias tmux="TERM=xterm-256color tmux -2 attach || TERM=xterm-256color tmux -2 -f
 
 
 if [[ ! -d ~/.tmux/plugins/tpm ]]; then
-  git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+  git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm </dev/null >/dev/null 2>/dev/null &!
 fi
 
 if [[ -z $TMUX_AUTOSTART  && -n "$SSH_CONNECTION" ]]; then
@@ -18,8 +18,7 @@ function _tmux-upgrade(){
 
 function _tmux_autostart(){
   if [[ "$TMUX_AUTOSTART" == "true" && -z "$TMUX" ]]; then
-    tmux
-    exit 0
+    exec tmux
   fi
   precmd_functions=(${precmd_functions#_tmux_autostart})
 }
