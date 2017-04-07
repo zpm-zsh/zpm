@@ -18,7 +18,7 @@ function _tmux-upgrade(){
 
 function _tmux_autostart(){
   if [[ "$TMUX_AUTOSTART" == "true" && -z "$TMUX" ]]; then
-    exec env TERM=xterm-256color tmux -2 -f/home/grisa/.zpm/plugins/tmux/tmux.conf new
+    exec env TERM=xterm-256color tmux -2 -f`echo $HOME`/.zpm/plugins/tmux/tmux.conf new
   fi
   precmd_functions=(${precmd_functions#_tmux_autostart})
 }
