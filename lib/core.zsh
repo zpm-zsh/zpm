@@ -50,10 +50,10 @@ else
   unset ZPM_DIR
 fi
 
-if [[ -z "$ZPM_PLUGIN_DIR" ]]; then
+if [[ -z "${ZPM_PLUGIN_DIR}" ]]; then
   _ZPM_PLUGIN_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/zpm"
 else
-  _ZPM_PLUGIN_DIR="$ZPM_PLUGIN_DIR"
+  _ZPM_PLUGIN_DIR="${ZPM_PLUGIN_DIR}"
   unset ZPM_PLUGIN_DIR
 fi
 
