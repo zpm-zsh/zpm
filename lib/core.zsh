@@ -44,7 +44,7 @@ if [[ -z "$PERIOD" ]]; then
 fi
 
 if [[ -z "$ZPM_DIR" ]]; then
-  _ZPM_DIR="${${(%):-%x}:a:h}/../"
+  _ZPM_DIR="${${(%):-%x}:a:h}/.."
 else
   _ZPM_DIR="$ZPM_DIR"
   unset ZPM_DIR
