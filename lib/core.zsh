@@ -61,7 +61,10 @@ if  [[ -z $ZSH ]]; then
   ZSH=$HOME/.oh-my-zsh # Compatibility with oh-my-zsh
 fi
 
-PATH=$PATH:$_ZPM_DIR/bin
+[[ ":$PATH:" != *":${_ZPM_DIR}/bin:"* ]] && PATH=$PATH:$_ZPM_DIR/bin
+[[ ":$PATH:" != *":${HOME}/.bin:"* ]] && PATH=$PATH:${HOME}/.bin
+[[ ":$PATH:" != *":${HOME}/.local/bin:"* ]] && PATH=$PATH:${HOME}/.local/bin
+
 ZSH_COMPDUMP="$HOME/.zcompdump"
 HISTFILE="$HOME/.zsh_history"
 HISTSIZE=9999

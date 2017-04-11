@@ -63,7 +63,7 @@ function _ZPM_Initialize_Plugin(){
   [[ ":$FPATH:" != *":${_ZPM_PLUGIN_DIR}/${plugin_name}:"* ]] && FPATH="$FPATH:${_ZPM_PLUGIN_DIR}/${plugin_name}"
 
   if [[ -d ${_ZPM_PLUGIN_DIR}/${plugin_name}/bin ]]; then
-    PATH="$PATH:${_ZPM_PLUGIN_DIR}/${plugin_name}/bin"
+    [[ ":$PATH:" != *":${_ZPM_PLUGIN_DIR}/${plugin_name}/bin:"* ]] && PATH="$PATH:${_ZPM_PLUGIN_DIR}/${plugin_name}/bin"
   fi
 
   if [[ -d ${_ZPM_PLUGIN_DIR}/${plugin_name}/man ]]; then
@@ -84,6 +84,7 @@ function _ZPM_Initialize_Plugin(){
 }
 
 function _ZPM_Init(){
+  compinit
   precmd_functions=(${precmd_functions#_ZPM_Init})
 }
 precmd_functions+=(_ZPM_Init) 
