@@ -125,8 +125,12 @@ function _ZPM_Initialize_Plugin(){
   fi
 
   if [[ ! -d "$_ZPM_PLUGIN_DIR/$plugin_name" ]]; then
-    echo "Installing $plugin from GitHub"
-    git clone --recursive "https://github.com/"$plugin".git" "$_ZPM_PLUGIN_DIR/$plugin_name"
+    if [[ $COLORS=="true" ]]; then
+      echo "$fg[green]Installing$fg[red] ${plugin} ${fg[green]}from ${fg[blue]}GitHub${reset_color}"
+    else
+      echo "Installing $plugin from GitHub"
+    fi
+    git clone --recursive "https://github.com/"$plugin".git" "$_ZPM_PLUGIN_DIR/$plugin_name" </dev/null >/dev/null 2>/dev/null 
     find "$_ZPM_PLUGIN_DIR/$plugin_name" -name "*.zsh" | while read zsh_file; do
       zcompile "$zsh_file"
     done
