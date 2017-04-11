@@ -18,6 +18,7 @@ function _ZPM_Initialize_Plugin(){
 
     if [[ -d "${_ZPM_DIR}/plugins/${plugin}" ]]; then
       
+
       [[ ":$FPATH:" != *":${_ZPM_DIR}/plugins/${plugin}:"* ]] && FPATH="$FPATH:${_ZPM_DIR}/plugins/${plugin}"
 
       if [[ -d "${_ZPM_DIR}/plugins/${plugin}/bin" ]]; then
