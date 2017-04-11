@@ -10,84 +10,77 @@ _ZPM_Core_Plugins+=()
 
 
 function _ZPM_Initialize_Plugin(){
-  _ZPM_Plugins+=( $plugin )
-  _ZPM_Core_Plugins+=( $plugin )
-  local plugin=$1
-  if [[ ! "$plugin" == */* ]]; then
-    if [[ -d "$_ZPM_DIR/plugins/$plugin" ]]; then
-      FPATH="$FPATH:$_ZPM_DIR/plugins/$plugin"
+  _ZPM_Plugins+=(${plugin})
+  _ZPM_Core_Plugins+=(${plugin})
+  local plugin=${1}
 
-      if [[ -d "$_ZPM_DIR/plugins/$plugin/bin" ]]; then
-        PATH="$PATH:$_ZPM_DIR/plugins/$plugin/bin"
+  if [[ ! "${plugin}" == */* ]]; then
+
+    if [[ -d "${_ZPM_DIR}/plugins/${plugin}" ]]; then
+      
+      [[ ":$FPATH:" != *":${_ZPM_DIR}/plugins/${plugin}:"* ]] && FPATH="$FPATH:${_ZPM_DIR}/plugins/${plugin}"
+
+      if [[ -d "${_ZPM_DIR}/plugins/${plugin}/bin" ]]; then
+        [[ ":$PATH:" != *":${_ZPM_DIR}/plugins/${plugin}/bin:"* ]] && PATH="$PATH:${_ZPM_DIR}/plugins/${plugin}/bin"
       fi
 
-      if [[ -d "$_ZPM_DIR/plugins/$plugin/man" ]]; then
-        MANPATH="$MANPATH:$_ZPM_DIR/plugins/$plugin/man"
+      if [[ -d "${_ZPM_DIR}/plugins/${plugin}/man" ]]; then
+        [[ ":$MANPATH:" != *":${_ZPM_DIR}/plugins/${plugin}/man:"* ]] && MANPATH="$MANPATH:${_ZPM_DIR}/plugins/${plugin}/man"
       fi
 
-      if [[ -f "$_ZPM_DIR/plugins/$plugin/$plugin.plugin.zsh" ]]; then
-        source "$_ZPM_DIR/plugins/$plugin/$plugin.plugin.zsh"
-      fi
-    elif [[ -d "$HOME/.oh-my-zsh/plugins/$plugin" ]]; then
-      FPATH="$FPATH:$HOME/.oh-my-zsh/plugins/$plugin"
-
-      if [[ -d "$HOME/.oh-my-zsh/plugins/$plugin/bin" ]]; then
-        PATH="$PATH:$HOME/.oh-my-zsh/plugins/$plugin/bin"
+      if [[ -f "${_ZPM_DIR}/plugins/${plugin}/${plugin}.plugin.zsh" ]]; then
+        source "${_ZPM_DIR}/plugins/${plugin}/${plugin}.plugin.zsh"
       fi
 
-      if [[ -d "$HOME/.oh-my-zsh/plugins/$plugin/man" ]]; then
-        MANPATH="$MANPATH:$HOME/.oh-my-zsh/plugins/$plugin/man"
+    elif [[ -d "${HOME}/.oh-my-zsh/plugins/${plugin}" ]]; then
+
+      [[ ":$FPATH:" != *":${HOME}/.oh-my-zsh/plugins/${plugin}:"* ]] && FPATH="$FPATH:${HOME}/.oh-my-zsh/plugins/${plugin}"
+
+      if [[ -f "${HOME}/.oh-my-zsh/plugins/${plugin}/${plugin}.plugin.zsh" ]]; then
+        source "${HOME}/.oh-my-zsh/plugins/${plugin}/${plugin}.plugin.zsh"
       fi
 
-      if [[ -f "$HOME/.oh-my-zsh/plugins/$plugin/$plugin.plugin.zsh" ]]; then
-        source "$HOME/.oh-my-zsh/plugins/$plugin/$plugin.plugin.zsh"
-      fi
     fi
+
     return
+
   fi
 
-  local plugin_name="$plugin"
+  local plugin_name="${plugin}"
   plugin_name=${plugin_name##*\/}
-  if [[ "$plugin_name" == zsh-*  ]]; then
+  if [[ "${plugin_name}" == zsh-*  ]]; then
     plugin_name=${plugin_name:4}
   fi
-  if [[ "$plugin_name" == *.zsh  ]]; then
+  if [[ "${plugin_name}" == *.zsh  ]]; then
     plugin_name=${plugin_name:0:${#plugin_name}-4}
   fi
-  if [[ "$plugin_name" == *.plugin  ]]; then
+  if [[ "${plugin_name}" == *.plugin  ]]; then
     plugin_name=${plugin_name:0:${#plugin_name}-7}
   fi
 
-  if [[ ! -d "$_ZPM_PLUGIN_DIR/$plugin_name" ]]; then
-    if [[ $COLORS=="true" ]]; then
-      echo "$fg[green]Installing$fg[red] ${plugin} ${fg[green]}from ${fg[blue]}GitHub${reset_color}"
-    else
-      echo "Installing $plugin from GitHub"
-    fi
-    git clone --recursive "https://github.com/"$plugin".git" "$_ZPM_PLUGIN_DIR/$plugin_name" </dev/null >/dev/null 2>/dev/null 
-    find "$_ZPM_PLUGIN_DIR/$plugin_name" -name "*.zsh" | while read zsh_file; do
-    done
+  _Install_from_GitHub ${plugin_name} ${plugin}
+
+  [[ ":$FPATH:" != *":${_ZPM_PLUGIN_DIR}/${plugin_name}:"* ]] && FPATH="$FPATH:${_ZPM_PLUGIN_DIR}/${plugin_name}"
+
+  if [[ -d ${_ZPM_PLUGIN_DIR}/${plugin_name}/bin ]]; then
+    PATH="$PATH:${_ZPM_PLUGIN_DIR}/${plugin_name}/bin"
   fi
 
-  FPATH="$FPATH:$_ZPM_PLUGIN_DIR/$plugin_name"
-
-  if [[ -d $_ZPM_PLUGIN_DIR/$plugin_name/bin ]]; then
-    PATH="$PATH:$_ZPM_PLUGIN_DIR/$plugin_name/bin"
+  if [[ -d ${_ZPM_PLUGIN_DIR}/${plugin_name}/man ]]; then
+    [[ ":$MANPATH:" != *":${_ZPM_PLUGIN_DIR}/${plugin_name}/man:"* ]] && MANPATH="$MANPATH:${_ZPM_PLUGIN_DIR}/${plugin_name}/man"
   fi
 
-  if [[ -d $_ZPM_PLUGIN_DIR/$plugin_name/man ]]; then
-    MANPATH="$MANPATH:$_ZPM_PLUGIN_DIR/$plugin_name/man"
+  if [[ -f ${_ZPM_PLUGIN_DIR}/${plugin_name}/${plugin_name}.plugin.zsh ]]; then
+    source ${_ZPM_PLUGIN_DIR}/${plugin_name}/${plugin_name}.plugin.zsh
+  elif [[ -f ${_ZPM_PLUGIN_DIR}/${plugin_name}/zsh-${plugin_name}.plugin.zsh ]]; then
+    source ${_ZPM_PLUGIN_DIR}/${plugin_name}/zsh-${plugin_name}.plugin.zsh
+  elif [[ -f ${_ZPM_PLUGIN_DIR}/${plugin_name}/${plugin_name}.zsh ]]; then
+    source ${_ZPM_PLUGIN_DIR}/${plugin_name}/${plugin_name}.zsh
   fi
 
-  if [[ -f $_ZPM_PLUGIN_DIR/$plugin_name/$plugin_name.plugin.zsh ]]; then
-    source $_ZPM_PLUGIN_DIR/$plugin_name/$plugin_name.plugin.zsh
-  elif [[ -f $_ZPM_PLUGIN_DIR/$plugin_name/zsh-$plugin_name.plugin.zsh ]]; then
-    source $_ZPM_PLUGIN_DIR/$plugin_name/zsh-$plugin_name.plugin.zsh
-  elif [[ -f $_ZPM_PLUGIN_DIR/$plugin_name/$plugin_name.zsh ]]; then
-    source $_ZPM_PLUGIN_DIR/$plugin_name/$plugin_name.zsh
-  fi
-  _ZPM_Plugins+=( $plugin_name )
-  _ZPM_GitHub_Plugins+=( $plugin_name )
+  _ZPM_Plugins+=(${plugin_name})
+  _ZPM_GitHub_Plugins+=(${plugin_name})
+
 }
 
 function _ZPM_Init(){
