@@ -85,6 +85,8 @@ function _ZPM_Initialize_Plugin(){
 }
 
 function _ZPM_Init(){
+  export PATH
+  export MANPATH
   compinit
   precmd_functions=(${precmd_functions#_ZPM_Init})
 }
