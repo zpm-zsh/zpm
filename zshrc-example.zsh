@@ -14,7 +14,8 @@ Plug noempty user_prompt path ps2 eol title
 Plug zsh-users/zsh-completions horosgrisa/autoenv 
 Plug horosgrisa/mysql-colorize horosgrisa/zsh-dropbox
 Plug jocelynmallon/zshmarks voronkovich/gitignore.plugin.zsh 
-Plug zsh-users/zsh-syntax-highlighting tarruda/zsh-autosuggestions horosgrisa/utils
+Plug psprint/history-search-multi-word
+Plug zdharma/fast-syntax-highlighting tarruda/zsh-autosuggestions horosgrisa/utils
 ###
 Plug termux check-deps oh-my-zsh-wrapper # Compatibility
 
