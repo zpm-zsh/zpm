@@ -66,7 +66,6 @@ function _ZPM_Initialize_Plugin(){
     fi
     git clone --recursive "https://github.com/"$plugin".git" "$_ZPM_PLUGIN_DIR/$plugin_name" </dev/null >/dev/null 2>/dev/null 
     find "$_ZPM_PLUGIN_DIR/$plugin_name" -name "*.zsh" | while read zsh_file; do
-      zcompile "$zsh_file"
     done
   fi
 
