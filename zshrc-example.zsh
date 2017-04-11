@@ -8,8 +8,8 @@ else
 fi
 
 Plug zsh-core human ls cd colors dircolors tmux
-Plug node git readers ssh
-Plug noempty user-prompt path ps2 eol title
+Plug noempty user-prompt 
+Plug node git path ps2 eol title
 Plug termux check-deps oh-my-zsh-wrapper # Compatibility
 
 # ZSH
