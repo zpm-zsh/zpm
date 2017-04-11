@@ -17,3 +17,5 @@ _current_path() {
 _current_path
 chpwd_functions+=(_current_path)
 
+[[ -d ~/.bin ]] && PATH=$PATH:~/.bin
+[[ -d ~/.local/bin ]] && PATH=$PATH:~/.local/bin
