@@ -7,7 +7,7 @@ else
   source ~/.zpm/zpm.zsh
 fi
 
-Plug zsh-core human ls cd colors dircolors tmux
+Plug zsh-core human ls cd dircolors tmux
 Plug noempty user-prompt 
 Plug node git path ps2 eol title
 Plug termux check-deps oh-my-zsh-wrapper # Compatibility
@@ -19,3 +19,4 @@ PROMPT2='$ps2'
 PROMPT_EOL_MARK='$eol'
 
 [[ -f $HOME/.zshrc.custom ]] && source $HOME/.zshrc.custom || true
+
