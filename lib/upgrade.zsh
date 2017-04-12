@@ -22,8 +22,8 @@ function _Upgrade-core(){
     echo -en "Updating ZPM  ${spin[0]}"
   fi
 
-
-  while [[ $( kill -0 $pid 2>/dev/null) && upgraded=false ]]; do
+  kill -0 $pid
+  while [[ $?==0  && $upgraded=="false" ]]; do
     for i in "${spin[@]}"
     do
       echo -ne "\b$i"
@@ -57,7 +57,8 @@ function _Upgrade-plugin(){
       echo -en "Updating ${1} from GitHub  ${spin[0]}"
     fi
 
-    while [[ $( kill -0 $pid 2>/dev/null) && upgraded=false ]]; do
+    kill -0 $pid
+    while [[ $?==0  && $upgraded=="false" ]]; do
       for i in "${spin[@]}"
       do
         echo -ne "\b$i"
