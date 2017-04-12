@@ -17,7 +17,9 @@ function _ZPM-load-plugin(){
     _ZPM-install-plugin $1
   fi
 
-  FPATH="$FPATH:${Plugin_path}"
+  if if-fpath-files ${Plugin_path}; then
+    FPATH="$FPATH:${Plugin_path}"
+  fi
 
   if [[ -d ${Plugin_path}/bin ]]; then
     PATH="$PATH:${Plugin_path}/bin"

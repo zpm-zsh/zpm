@@ -1,0 +1,14 @@
+#!/usr/bin/env zsh
+
+local exist=false
+
+for i in $1/_*(N); do
+  exist=true
+done
+
+
+if [[ $exist == true ]]; then
+  exit 0
+else
+  exit -1
+fi
