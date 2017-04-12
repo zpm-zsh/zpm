@@ -8,10 +8,6 @@ function _Upgrade-core(){
   git --git-dir="$_ZPM_DIR/.git/" --work-tree="$_ZPM_DIR/" pull </dev/null >/dev/null 2>/dev/null  &!
   pid=$!
 
-   for i ($_ZPM_Core_Plugins); do
-     type _${i}-upgrade | grep -q "shell function" && _${i}-upgrade >/dev/null 2>/dev/null &!
-   done
-
   if [[ $COLORS=="true" ]]; then
     echo -en "$fg[green]Updating ZPM  ${fg[yellow]}${spin[0]}"
   else
@@ -27,7 +23,9 @@ function _Upgrade-core(){
   done
   echo -e "\b✓${reset_color}"
 
-
+  for i ($_ZPM_Core_Plugins); do
+    type _${i}-upgrade | grep -q "shell function" && _${i}-upgrade >/dev/null 2>/dev/null &!
+  done
 
 }
 
@@ -41,19 +39,13 @@ function _Upgrade-plugin(){
     git --git-dir="$_ZPM_PLUGIN_DIR/$i/.git/" --work-tree="$_ZPM_PLUGIN_DIR/$i/" pull</dev/null >/dev/null 2>/dev/null &!
     pid=$!
 
-     if {type _${1}-upgrade | grep -q "shell function"}; then
-      _${1}-upgrade >/dev/null 2>/dev/null &!
-      upgraded=true
-    fi
-
     if [[ $COLORS=="true" ]]; then
       echo -en "${fg[green]}Updating ${fg[cyan]}${1}${fg[green]} from ${fg[blue]}GitHub  ${fg[yellow]}${spin[0]}"
     else
       echo -en "Updating ${1} from GitHub  ${spin[0]}"
     fi
 
-    kill -0 $pid
-    while [[ $?==0  && $upgraded=="false" ]]; do
+    while $(kill -0 $pid 2>/dev/null); do
       for i in "${spin[@]}"
       do
         echo -ne "\b$i"
@@ -63,7 +55,9 @@ function _Upgrade-plugin(){
     echo -e "\b✓${reset_color}"
   fi
 
-
+   if {type _${1}-upgrade | grep -q "shell function"}; then
+    _${1}-upgrade >/dev/null 2>/dev/null &!
+  fi
 
 }
 
