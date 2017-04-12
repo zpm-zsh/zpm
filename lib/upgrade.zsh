@@ -23,7 +23,7 @@ function _Upgrade-core(){
   echo -e "\b✓${reset_color}"
 
   for i ($_ZPM_Core_Plugins); do
-    type _${i}-upgrade | grep -q "shell function" && _${i}-upgrade &
+    type _${i}-upgrade | grep -q "shell function" && _${i}-upgrade &!
   done
 
 }
@@ -52,7 +52,7 @@ function _Upgrade-plugin(){
     done
     echo -e "\b✓${reset_color}"
   fi
-  type _${i}-upgrade | grep -q "shell function" && _$plugg-upgrade &
+  type _${i}-upgrade | grep -q "shell function" && _$plugg-upgrade &!
 
 }
 
