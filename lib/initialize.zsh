@@ -19,7 +19,7 @@ function _ZPM_Initialize_Plugin(){
     if [[ -d "${_ZPM_DIR}/plugins/${plugin}" ]]; then
       
 
-      [[ ":$FPATH:" != *":${_ZPM_DIR}/plugins/${plugin}:"* ]] && FPATH="$FPATH:${_ZPM_DIR}/plugins/${plugin}"
+      FPATH="$FPATH:${_ZPM_DIR}/plugins/${plugin}"
 
       if [[ -d "${_ZPM_DIR}/plugins/${plugin}/bin" ]]; then
         [[ ":$PATH:" != *":${_ZPM_DIR}/plugins/${plugin}/bin:"* ]] && PATH="$PATH:${_ZPM_DIR}/plugins/${plugin}/bin"
@@ -35,7 +35,7 @@ function _ZPM_Initialize_Plugin(){
 
     elif [[ -d "${HOME}/.oh-my-zsh/plugins/${plugin}" ]]; then
 
-      [[ ":$FPATH:" != *":${HOME}/.oh-my-zsh/plugins/${plugin}:"* ]] && FPATH="$FPATH:${HOME}/.oh-my-zsh/plugins/${plugin}"
+      FPATH="$FPATH:${HOME}/.oh-my-zsh/plugins/${plugin}"
 
       if [[ -f "${HOME}/.oh-my-zsh/plugins/${plugin}/${plugin}.plugin.zsh" ]]; then
         source "${HOME}/.oh-my-zsh/plugins/${plugin}/${plugin}.plugin.zsh"
@@ -61,7 +61,7 @@ function _ZPM_Initialize_Plugin(){
 
   _Install_from_GitHub ${plugin_name} ${plugin}
 
-  [[ ":$FPATH:" != *":${_ZPM_PLUGIN_DIR}/${plugin_name}:"* ]] && FPATH="$FPATH:${_ZPM_PLUGIN_DIR}/${plugin_name}"
+  FPATH="$FPATH:${_ZPM_PLUGIN_DIR}/${plugin_name}"
 
   if [[ -d ${_ZPM_PLUGIN_DIR}/${plugin_name}/bin ]]; then
     [[ ":$PATH:" != *":${_ZPM_PLUGIN_DIR}/${plugin_name}/bin:"* ]] && PATH="$PATH:${_ZPM_PLUGIN_DIR}/${plugin_name}/bin"
