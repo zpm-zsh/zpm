@@ -3,8 +3,8 @@
 _ZPM-install-from-GitHub(){
   declare -a spin
   spin=('◐' '◓' '◑' '◒') 
-  local Plugin_path=$(_ZPM-get-path $1)
-  local Plugin_name=$(_ZPM-get-name $1)
+  local Plugin_path=$(_ZPM-plugin-path $1)
+  local Plugin_name=$(_ZPM-plugin-name $1)
 
   git clone --recursive "https://github.com/"${1}".git" "$Plugin_path" </dev/null >/dev/null 2>/dev/null &!
   pid=$!
