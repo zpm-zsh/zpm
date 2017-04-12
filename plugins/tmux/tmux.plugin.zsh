@@ -17,7 +17,7 @@ function _tmux-upgrade(){
 
 function _tmux_autostart(){
   if [[ "$TMUX_AUTOSTART" == "true" && -z "$TMUX" ]]; then
-    tmux
+    TERM=xterm-256color tmux -2 attach || TERM=xterm-256color tmux -2 -f${${(%):-%x}:a:h}/tmux.conf new
     exit 0
   fi
   precmd_functions=(${precmd_functions#_tmux_autostart})
