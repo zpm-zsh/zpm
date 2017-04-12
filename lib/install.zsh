@@ -8,7 +8,7 @@ _Install_from_GitHub(){
   if [[ ! -d "$_ZPM_PLUGIN_DIR/$1" ]]; then
 
 
-    git clone --recursive "https://github.com/"${2}".git" "$_ZPM_PLUGIN_DIR/$1" </dev/null >/dev/null 2>/dev/null &
+    git clone --recursive "https://github.com/"${2}".git" "$_ZPM_PLUGIN_DIR/$1" </dev/null >/dev/null 2>/dev/null &!
     pid=$!
 
     if [[ $COLORS=="true" ]]; then
