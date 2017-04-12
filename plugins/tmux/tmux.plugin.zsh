@@ -12,8 +12,7 @@ if [[ -z $TMUX_AUTOSTART  && -n "$SSH_CONNECTION" ]]; then
 fi
 
 function _tmux-upgrade(){
-  echo ">> Updating hook: tmux"
-  git --git-dir="$HOME/.tmux/plugins/tpm/.git" --work-tree="$HOME/.tmux/plugins/tpm" pull
+  git --git-dir="$HOME/.tmux/plugins/tpm/.git" --work-tree="$HOME/.tmux/plugins/tpm" pull </dev/null >/dev/null 2>/dev/null 
 }
 
 function _tmux_autostart(){
