@@ -4,8 +4,8 @@ function _ZPM-upgrade(){
   declare -a spin
   spin=('◐' '◓' '◑' '◒') 
 
-  git --git-dir="${2}/.git/" --work-tree="${2}/" checkout "${2}/" </dev/null >/dev/null 2>/dev/null &!
-  git --git-dir="${2}/.git/" --work-tree="${2}/" pull </dev/null >/dev/null 2>/dev/null  &!
+  git --git-dir="${2}/.git/" --work-tree="${2}/" checkout "${2}/" # </dev/null >/dev/null 2>/dev/null &!
+  git --git-dir="${2}/.git/" --work-tree="${2}/" pull </dev/null # >/dev/null 2>/dev/null  &!
   pid=$!
 
 
@@ -43,7 +43,7 @@ function ZPM-upgrade(){
 
   for i ($_Plugins_Upgrade); do
     if [[ "$i" == "ZPM" ]]; then
-      _ZPM-upgrade
+      _ZPM-upgrade $(_ZPM-plugin-name "ZPM") $(_ZPM-plugin-path $_ZPM_DIR) 
     else
       _ZPM-upgrade $(_ZPM-plugin-name $i) $(_ZPM-plugin-path $i) 
     fi
