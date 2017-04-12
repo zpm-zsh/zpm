@@ -5,9 +5,26 @@ function ZPM-Upgrade(){
 
   if [[ -z $@ ]]; then
     _Plugins_Upgrade+=( $_ZPM_GitHub_Plugins )
-    echo "> Updating ZPM"
     git --git-dir="$_ZPM_DIR/.git/" --work-tree="$_ZPM_DIR/" checkout "$_ZPM_DIR/"
     git --git-dir="$_ZPM_DIR/.git/" --work-tree="$_ZPM_DIR/" pull
+    pid=$!
+
+    if [[ $COLORS=="true" ]]; then
+      echo -en "$fg[green]Updating ZPM  ${fg[yellow]}${spin[0]}"
+    else
+      echo -en "Updating ZPM  ${spin[0]}"
+    fi
+
+    while $( kill -0 $pid 2>/dev/null)
+    do
+      for i in "${spin[@]}"
+      do
+        echo -ne "\b$i"
+        sleep 0.1
+      done
+    done
+    echo -e "\b✓"
+
     echo "Run plugin hooks"
     for plugg ($_ZPM_Core_Plugins); do
       type _$plugg-upgrade | grep -q "shell function" && _$plugg-upgrade
