@@ -3,7 +3,7 @@
 function _Upgrade-core(){
   declare -a spin
   spin=('-' '\' '|' '/')
-  local upgraded=false
+  local upgraded=true
 
   git --git-dir="$_ZPM_DIR/.git/" --work-tree="$_ZPM_DIR/" checkout "$_ZPM_DIR/" </dev/null >/dev/null 2>/dev/null &!
   git --git-dir="$_ZPM_DIR/.git/" --work-tree="$_ZPM_DIR/" pull </dev/null >/dev/null 2>/dev/null  &!
@@ -20,7 +20,7 @@ function _Upgrade-core(){
   fi
 
   kill -0 $pid >/dev/null 2>/dev/null 
-  while [[ $?==0  && $upgraded=="false" ]]; do
+  while [[ $?==0  || ${upgraded}=="true" ]]; do
     for i in "${spin[@]}"
     do
       echo -ne "\b$i"
