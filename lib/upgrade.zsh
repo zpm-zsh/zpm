@@ -37,7 +37,7 @@ function _Upgrade-plugin(){
     pid=$!
 
     if [[ $COLORS=="true" ]]; then
-      echo -en "${fg[green]}Updating ${fg[cyan]} ${1} ${fg[green]} from ${fg[blue]}GitHub  ${fg[yellow]}${spin[0]}"
+      echo -en "${fg[green]}Updating ${fg[cyan]}${1}${fg[green]} from ${fg[blue]}GitHub  ${fg[yellow]}${spin[0]}"
     else
       echo -en "Updating ${1} from GitHub  ${spin[0]}"
     fi
