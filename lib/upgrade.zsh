@@ -39,7 +39,7 @@ function _ZPM-upgrade(){
 
 
 function ZPM-upgrade(){
-  local _Plugins_Upgrade=()
+  declare -a _Plugins_Upgrade
 
   if [[ -z $@ ]]; then
     _Plugins_Upgrade+=( "ZPM" $_ZPM_Plugins_3rdparty )
