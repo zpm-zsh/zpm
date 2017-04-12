@@ -43,7 +43,7 @@ function ZPM-upgrade(){
 
   for i ($_Plugins_Upgrade); do
     if [[ "$i" == "ZPM" ]]; then
-      _ZPM-upgrade $(_ZPM-plugin-name "ZPM") $(_ZPM-plugin-path $_ZPM_DIR) 
+      _ZPM-upgrade $(_ZPM-plugin-name "ZPM") $_ZPM_DIR
     else
       _ZPM-upgrade $(_ZPM-plugin-name $i) $(_ZPM-plugin-path $i) 
     fi
