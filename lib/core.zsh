@@ -4,17 +4,6 @@ if [[ -z "$COLORS" ]]; then
   export COLORS=true
 fi
 
-if [[ -z "$MANPATH" ]]; then
-  if hash manpath 2>/dev/null; then
-    export MANPATH="$(manpath)"
-  fi
-fi
-
-if [[ "$COLORS" == "true" ]]; then
-  autoload -U colors && colors
-  export TERM="xterm-256color"
-fi
-
 if [[ -z "$EMOJI" ]]; then
   export EMOJI="true"
 fi
@@ -43,6 +32,11 @@ if [[ -z "$PERIOD" ]]; then
   export PERIOD=10
 fi
 
+if [[ "$COLORS" == "true" ]]; then
+  autoload -U colors && colors
+  export TERM="xterm-256color"
+fi
+
 if [[ -z "$ZPM_DIR" ]]; then
   _ZPM_DIR="${${(%):-%x}:a:h}/.."
 else
@@ -61,7 +55,7 @@ if  [[ -z $ZSH ]]; then
   ZSH=$HOME/.oh-my-zsh # Compatibility with oh-my-zsh
 fi
 
-[[ ":$PATH:" != *":${_ZPM_DIR}/bin:"* ]] && PATH=$PATH:$_ZPM_DIR/bin
+PATH=$PATH:$_ZPM_DIR/bin
 [[ ":$PATH:" != *":${HOME}/.bin:"* ]] && PATH=$PATH:${HOME}/.bin
 [[ ":$PATH:" != *":${HOME}/.local/bin:"* ]] && PATH=$PATH:${HOME}/.local/bin
 

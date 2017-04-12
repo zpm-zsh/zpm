@@ -17,16 +17,11 @@ function _ZPM_Initialize_Plugin(){
   if [[ ! "${plugin}" == */* ]]; then
 
     if [[ -d "${_ZPM_DIR}/plugins/${plugin}" ]]; then
-      
 
       FPATH="$FPATH:${_ZPM_DIR}/plugins/${plugin}"
 
       if [[ -d "${_ZPM_DIR}/plugins/${plugin}/bin" ]]; then
-        [[ ":$PATH:" != *":${_ZPM_DIR}/plugins/${plugin}/bin:"* ]] && PATH="$PATH:${_ZPM_DIR}/plugins/${plugin}/bin"
-      fi
-
-      if [[ -d "${_ZPM_DIR}/plugins/${plugin}/man" ]]; then
-        [[ ":$MANPATH:" != *":${_ZPM_DIR}/plugins/${plugin}/man:"* ]] && MANPATH="$MANPATH:${_ZPM_DIR}/plugins/${plugin}/man"
+        PATH="$PATH:${_ZPM_DIR}/plugins/${plugin}/bin"
       fi
 
       if [[ -f "${_ZPM_DIR}/plugins/${plugin}/${plugin}.plugin.zsh" ]]; then
@@ -64,11 +59,7 @@ function _ZPM_Initialize_Plugin(){
   FPATH="$FPATH:${_ZPM_PLUGIN_DIR}/${plugin_name}"
 
   if [[ -d ${_ZPM_PLUGIN_DIR}/${plugin_name}/bin ]]; then
-    [[ ":$PATH:" != *":${_ZPM_PLUGIN_DIR}/${plugin_name}/bin:"* ]] && PATH="$PATH:${_ZPM_PLUGIN_DIR}/${plugin_name}/bin"
-  fi
-
-  if [[ -d ${_ZPM_PLUGIN_DIR}/${plugin_name}/man ]]; then
-    [[ ":$MANPATH:" != *":${_ZPM_PLUGIN_DIR}/${plugin_name}/man:"* ]] && MANPATH="$MANPATH:${_ZPM_PLUGIN_DIR}/${plugin_name}/man"
+    PATH="$PATH:${_ZPM_PLUGIN_DIR}/${plugin_name}/bin"
   fi
 
   if [[ -f ${_ZPM_PLUGIN_DIR}/${plugin_name}/${plugin_name}.plugin.zsh ]]; then
@@ -85,8 +76,6 @@ function _ZPM_Initialize_Plugin(){
 }
 
 function _ZPM_Init(){
-  export PATH
-  export MANPATH
   compinit
   precmd_functions=(${precmd_functions#_ZPM_Init})
 }
