@@ -10,7 +10,7 @@ function _ZPM-upgrade(){
 
   local update_info=""
 
-  if [[ $COLORS=="true" ]]; then
+  if [[ "$COLORS" = "true" ]]; then
     update_info+="${fg[green]}Updating ${fg[cyan]}${1//\//$fg[red]/$fg[cyan]}${fg[yellow]}  ${spin[0]}"
   else
     update_info+="Updating ${1}  ${spin[0]}"
