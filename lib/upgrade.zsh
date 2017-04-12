@@ -3,10 +3,18 @@
 function _Upgrade-core(){
   declare -a spin
   spin=('-' '\' '|' '/')
+  local upgraded=false
 
   git --git-dir="$_ZPM_DIR/.git/" --work-tree="$_ZPM_DIR/" checkout "$_ZPM_DIR/" </dev/null >/dev/null 2>/dev/null 
   git --git-dir="$_ZPM_DIR/.git/" --work-tree="$_ZPM_DIR/" pull </dev/null >/dev/null 2>/dev/null 
   pid=$!
+
+  for i ($_ZPM_Core_Plugins); do
+    if {type _${i}-upgrade | grep -q "shell function"}; then
+     _${i}-upgrade >/dev/null 2>/dev/null
+     upgraded=true
+   fi
+  done
 
   if [[ $COLORS=="true" ]]; then
     echo -en "$fg[green]Updating ZPM  ${fg[yellow]}${spin[0]}"
@@ -14,8 +22,7 @@ function _Upgrade-core(){
     echo -en "Updating ZPM  ${spin[0]}"
   fi
 
-  while $( kill -0 $pid 2>/dev/null)
-  do
+  while [[ $( kill -0 $pid 2>/dev/null) && upgraded=false ]]; do
     for i in "${spin[@]}"
     do
       echo -ne "\b$i"
@@ -24,9 +31,7 @@ function _Upgrade-core(){
   done
   echo -e "\b✓${reset_color}"
 
-  for i ($_ZPM_Core_Plugins); do
-    type _${i}-upgrade | grep -q "shell function" && _${i}-upgrade >/dev/null 2>/dev/null
-  done
+
 
 }
 
