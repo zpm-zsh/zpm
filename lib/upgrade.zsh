@@ -19,7 +19,7 @@ function _Upgrade-core(){
     echo -en "Updating ZPM  ${spin[0]}"
   fi
 
-  while $(kill -0 $pid); do
+  while $(kill -0 $pid 2>/dev/null); do
     for i in "${spin[@]}"
     do
       echo -ne "\b$i"
