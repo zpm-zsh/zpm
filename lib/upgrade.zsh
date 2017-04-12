@@ -20,7 +20,7 @@ function _Upgrade-core(){
   fi
 
   kill -0 $pid >/dev/null 2>/dev/null 
-  while [[ $?==0  || ${upgraded}=="true" ]]; do
+  while [[ $?==0  && ${upgraded}=="true" ]]; do
     for i in "${spin[@]}"
     do
       echo -ne "\b$i"
