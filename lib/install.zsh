@@ -10,7 +10,7 @@ function _ZPM-install-from-GitHub(){
   pid=$!
 
   if [[ "$COLORS" == "true" ]]; then
-    echo -en "$fg[green]Installing $fg[cyan]${1//\//$fg[red]/$fg[cyan]}${fg[yellow]}  ${spin[0]}"
+    echo -en "$fg[green]Installing $fg[cyan]${1//\//$fg[red]/$fg[cyan]}${fg[yellow]}  ${spin[0]}${reset_color}"
   else
     echo -en "Installing ${1} from GitHub  ${spin[0]}"
   fi
@@ -19,10 +19,14 @@ function _ZPM-install-from-GitHub(){
   do
     for i in "${spin[@]}"
     do
-      echo -ne "\b$i"
+      [[ "$COLORS" == "true" ]] && \
+      echo -en "\b${fg[yellow]}${i}${reset_color}" || \
+      echo -en "\b${i}"
       sleep 0.2
     done
   done
+  [[ "$COLORS" == "true" ]] && \
+  echo -e "\b${fg[yellow]}✓${reset_color}" || \
   echo -e "\b✓"
 
 }

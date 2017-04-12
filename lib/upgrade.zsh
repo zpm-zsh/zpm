@@ -11,7 +11,7 @@ function _ZPM-upgrade(){
   local update_info=""
 
   if [[ "$COLORS" == "true" ]]; then
-    update_info+="${fg[green]}Updating ${fg[cyan]}${1//\//$fg[red]/$fg[cyan]}${fg[yellow]}  ${spin[0]}"
+    update_info+="${fg[green]}Updating ${fg[cyan]}${1//\//$fg[red]/$fg[cyan]}${fg[yellow]}  ${spin[0]}${reset_color}"
   else
     update_info+="Updating ${1}  ${spin[0]}"
   fi
@@ -20,11 +20,15 @@ function _ZPM-upgrade(){
   while $(kill -0 $pid 2>/dev/null); do
     for i in "${spin[@]}"
     do
-      echo -ne "\b$i"
+      [[ "$COLORS" == "true" ]] && \
+      echo -en "\b${fg[yellow]}${i}${reset_color}" || \
+      echo -en "\b${i}"
       sleep 0.2
     done
   done
-  echo -e "\b✓${reset_color}"
+  [[ "$COLORS" == "true" ]] && \
+  echo -e "\b${fg[yellow]}✓${reset_color}" || \
+  echo -e "\b✓"
 
   for i ($_ZPM_Core_Plugins); do
     type _${i}-upgrade | grep -q "shell function" && _${i}-upgrade >/dev/null 2>/dev/null &!
