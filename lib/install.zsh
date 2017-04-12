@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 
-_ZPM-install-from-GitHub(){
+function _ZPM-install-from-GitHub(){
   declare -a spin
   spin=('◐' '◓' '◑' '◒') 
   local Plugin_path=$(_ZPM-plugin-path $1)
@@ -27,7 +27,7 @@ _ZPM-install-from-GitHub(){
 
 }
 
-_ZPM-install-plugin(){
+function _ZPM-install-plugin(){
   if [[ $(_ZPM-plugin-type $1) == 'github' ]]; then
     _ZPM-install-from-GitHub $1
   fi
