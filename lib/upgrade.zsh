@@ -3,15 +3,14 @@
 function _Upgrade-core(){
   declare -a spin
   spin=('-' '\' '|' '/')
-  local upgraded=true
 
   git --git-dir="$_ZPM_DIR/.git/" --work-tree="$_ZPM_DIR/" checkout "$_ZPM_DIR/" </dev/null >/dev/null 2>/dev/null &!
   git --git-dir="$_ZPM_DIR/.git/" --work-tree="$_ZPM_DIR/" pull </dev/null >/dev/null 2>/dev/null  &!
   pid=$!
 
-   # for i ($_ZPM_Core_Plugins); do
-   #   type _${i}-upgrade | grep -q "shell function" && _${i}-upgrade >/dev/null 2>/dev/null 
-   # done  && upgraded=true
+   for i ($_ZPM_Core_Plugins); do
+     type _${i}-upgrade | grep -q "shell function" && _${i}-upgrade >/dev/null 2>/dev/null &!
+   done
 
   if [[ $COLORS=="true" ]]; then
     echo -en "$fg[green]Updating ZPM  ${fg[yellow]}${spin[0]}"
