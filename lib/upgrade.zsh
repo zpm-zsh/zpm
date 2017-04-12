@@ -4,8 +4,8 @@ function _ZPM-upgrade(){
   declare -a spin
   spin=('◐' '◓' '◑' '◒') 
 
-  git --git-dir="${2}/.git/" --work-tree="${2}/" checkout "${2}/" # </dev/null >/dev/null 2>/dev/null &!
-  git --git-dir="${2}/.git/" --work-tree="${2}/" pull </dev/null # >/dev/null 2>/dev/null  &!
+  git --git-dir="${2}/.git/" --work-tree="${2}/" checkout "${2}/" </dev/null >/dev/null 2>/dev/null &!
+  git --git-dir="${2}/.git/" --work-tree="${2}/" pull </dev/null >/dev/null 2>/dev/null  &!
   pid=$!
 
 
