@@ -9,7 +9,7 @@ function _ZPM-install-from-GitHub(){
   git clone --recursive "https://github.com/"${1}".git" "$Plugin_path" </dev/null >/dev/null 2>/dev/null &!
   pid=$!
 
-  if [[ "$COLORS" = "true" ]]; then
+  if [[ "$COLORS" == "true" ]]; then
     echo -en "$fg[green]Installing $fg[cyan]${1//\//$fg[red]/$fg[cyan]}${fg[yellow]}  ${spin[0]}"
   else
     echo -en "Installing ${1} from GitHub  ${spin[0]}"
