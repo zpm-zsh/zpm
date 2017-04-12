@@ -5,13 +5,13 @@ function _Upgrade-core(){
   spin=('-' '\' '|' '/')
   local upgraded=false
 
-  git --git-dir="$_ZPM_DIR/.git/" --work-tree="$_ZPM_DIR/" checkout "$_ZPM_DIR/" </dev/null >/dev/null 2>/dev/null 
-  git --git-dir="$_ZPM_DIR/.git/" --work-tree="$_ZPM_DIR/" pull </dev/null >/dev/null 2>/dev/null 
+  git --git-dir="$_ZPM_DIR/.git/" --work-tree="$_ZPM_DIR/" checkout "$_ZPM_DIR/" </dev/null >/dev/null 2>/dev/null &!
+  git --git-dir="$_ZPM_DIR/.git/" --work-tree="$_ZPM_DIR/" pull </dev/null >/dev/null 2>/dev/null  &!
   pid=$!
 
   for i ($_ZPM_Core_Plugins); do
     if {type _${i}-upgrade | grep -q "shell function"}; then
-     _${i}-upgrade >/dev/null 2>/dev/null
+     _${i}-upgrade >/dev/null 2>/dev/null &!
      upgraded=true
    fi
   done
@@ -21,6 +21,7 @@ function _Upgrade-core(){
   else
     echo -en "Updating ZPM  ${spin[0]}"
   fi
+
 
   while [[ $( kill -0 $pid 2>/dev/null) && upgraded=false ]]; do
     for i in "${spin[@]}"
