@@ -10,7 +10,7 @@ _ZPM-install-from-GitHub(){
   pid=$!
 
   if [[ $COLORS=="true" ]]; then
-    echo -en "$fg[green]Installing$fg[cyan] ${1} ${fg[green]}from ${fg[blue]}GitHub  ${fg[yellow]}${spin[0]}"
+    echo -en "$fg[green]Installing $fg[cyan]${1//\//$fg[red]/$fg[cyan]}${fg[yellow]}  ${spin[0]}"
   else
     echo -en "Installing ${1} from GitHub  ${spin[0]}"
   fi
