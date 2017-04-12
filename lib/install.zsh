@@ -2,7 +2,7 @@
 
 _Install_from_GitHub(){
   declare -a spin
-  spin=('-' '\' '|' '/')
+  spin=('◐' '◓' '◑' '◒') 
 
 
   if [[ ! -d "$_ZPM_PLUGIN_DIR/$1" ]]; then
@@ -22,7 +22,7 @@ _Install_from_GitHub(){
       for i in "${spin[@]}"
       do
         echo -ne "\b$i"
-        sleep 0.1
+        sleep 0.2
       done
     done
     echo -e "\b✓"

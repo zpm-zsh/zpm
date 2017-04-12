@@ -2,7 +2,7 @@
 
 function _Upgrade-core(){
   declare -a spin
-  spin=('-' '\' '|' '/')
+  spin=('◐' '◓' '◑' '◒') 
 
   git --git-dir="$_ZPM_DIR/.git/" --work-tree="$_ZPM_DIR/" checkout "$_ZPM_DIR/" </dev/null >/dev/null 2>/dev/null &!
   git --git-dir="$_ZPM_DIR/.git/" --work-tree="$_ZPM_DIR/" pull </dev/null >/dev/null 2>/dev/null  &!
@@ -18,7 +18,7 @@ function _Upgrade-core(){
     for i in "${spin[@]}"
     do
       echo -ne "\b$i"
-      sleep 0.1
+      sleep 0.2
     done
   done
   echo -e "\b✓${reset_color}"
@@ -31,7 +31,7 @@ function _Upgrade-core(){
 
 function _Upgrade-plugin(){
   declare -a spin
-  spin=('-' '\' '|' '/')
+  spin=('◐' '◓' '◑' '◒') 
   
   if [[ -d $_ZPM_PLUGIN_DIR/$i ]]; then
 
@@ -49,7 +49,7 @@ function _Upgrade-plugin(){
       for i in "${spin[@]}"
       do
         echo -ne "\b$i"
-        sleep 0.1
+        sleep 0.2
       done
     done
     echo -e "\b✓${reset_color}"
