@@ -52,7 +52,7 @@ function _Upgrade-plugin(){
     done
     echo -e "\b✓${reset_color}"
   fi
-  type _${i}-upgrade | grep -q "shell function" && _$plugg-upgrade
+  type _${i}-upgrade | grep -q "shell function" && _$plugg-upgrade &
 
 }
 
