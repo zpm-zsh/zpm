@@ -42,9 +42,14 @@ function _Upgrade-plugin(){
   
   if [[ -d $_ZPM_PLUGIN_DIR/$i ]]; then
 
-    git --git-dir="$_ZPM_PLUGIN_DIR/$i/.git/" --work-tree="$_ZPM_PLUGIN_DIR/$i/" checkout "$_ZPM_PLUGIN_DIR/$i/" </dev/null >/dev/null 2>/dev/null 
-    git --git-dir="$_ZPM_PLUGIN_DIR/$i/.git/" --work-tree="$_ZPM_PLUGIN_DIR/$i/" pull</dev/null >/dev/null 2>/dev/null 
+    git --git-dir="$_ZPM_PLUGIN_DIR/$i/.git/" --work-tree="$_ZPM_PLUGIN_DIR/$i/" checkout "$_ZPM_PLUGIN_DIR/$i/" </dev/null >/dev/null 2>/dev/null &!
+    git --git-dir="$_ZPM_PLUGIN_DIR/$i/.git/" --work-tree="$_ZPM_PLUGIN_DIR/$i/" pull</dev/null >/dev/null 2>/dev/null &!
     pid=$!
+
+     if {type _${1}-upgrade | grep -q "shell function"}; then
+      _${1}-upgrade >/dev/null 2>/dev/null &!
+      upgraded=true
+    fi
 
     if [[ $COLORS=="true" ]]; then
       echo -en "${fg[green]}Updating ${fg[cyan]}${1}${fg[green]} from ${fg[blue]}GitHub  ${fg[yellow]}${spin[0]}"
@@ -52,8 +57,7 @@ function _Upgrade-plugin(){
       echo -en "Updating ${1} from GitHub  ${spin[0]}"
     fi
 
-    while $( kill -0 $pid 2>/dev/null)
-    do
+    while [[ $( kill -0 $pid 2>/dev/null) && upgraded=false ]]; do
       for i in "${spin[@]}"
       do
         echo -ne "\b$i"
@@ -62,7 +66,8 @@ function _Upgrade-plugin(){
     done
     echo -e "\b✓${reset_color}"
   fi
-  type _${i}-upgrade | grep -q "shell function" && _$plugg-upgrade >/dev/null 2>/dev/null
+
+
 
 }
 
