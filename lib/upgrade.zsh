@@ -8,12 +8,14 @@ function _ZPM-upgrade(){
   git --git-dir="${2}/.git/" --work-tree="${2}/" pull </dev/null >/dev/null 2>/dev/null  &!
   pid=$!
 
+  local update_info=""
 
   if [[ $COLORS=="true" ]]; then
-    echo -en "$fg[green]Updating ${1} ${2}  ${fg[yellow]}${spin[0]}"
+    update_info+="$fg[green]Updating ${1} ${fg[yellow]}${spin[0]}"
   else
-    echo -en "Updating ${1} ${2}  ${spin[0]}"
+    update_info+="Updating ${1}  ${spin[0]}"
   fi
+  echo -en ${update_info}
 
   while $(kill -0 $pid 2>/dev/null); do
     for i in "${spin[@]}"
@@ -43,9 +45,9 @@ function ZPM-upgrade(){
 
   for i ($_Plugins_Upgrade); do
     if [[ "$i" == "ZPM" ]]; then
-      _ZPM-upgrade $(_ZPM-plugin-name "ZPM") $_ZPM_DIR
+      _ZPM-upgrade "ZPM" $_ZPM_DIR
     else
-      _ZPM-upgrade $(_ZPM-plugin-name $i) $(_ZPM-plugin-path $i) 
+      _ZPM-upgrade $i $(_ZPM-plugin-path $i) 
     fi
   done
   return 0
