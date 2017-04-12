@@ -73,6 +73,7 @@ function ZPM-Upgrade(){
       _Upgrade-plugin $i
     fi
   done
+  return 0
 }
 
 function _ZPM-Upgrade(){
