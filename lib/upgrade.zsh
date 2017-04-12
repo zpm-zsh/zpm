@@ -5,8 +5,8 @@ function ZPM-Upgrade(){
 
   if [[ -z $@ ]]; then
     _Plugins_Upgrade+=( $_ZPM_GitHub_Plugins )
-    git --git-dir="$_ZPM_DIR/.git/" --work-tree="$_ZPM_DIR/" checkout "$_ZPM_DIR/"
-    git --git-dir="$_ZPM_DIR/.git/" --work-tree="$_ZPM_DIR/" pull
+    git --git-dir="$_ZPM_DIR/.git/" --work-tree="$_ZPM_DIR/" checkout "$_ZPM_DIR/" </dev/null >/dev/null 2>/dev/null 
+    git --git-dir="$_ZPM_DIR/.git/" --work-tree="$_ZPM_DIR/" pull </dev/null >/dev/null 2>/dev/null 
     pid=$!
 
     if [[ $COLORS=="true" ]]; then
@@ -23,7 +23,7 @@ function ZPM-Upgrade(){
         sleep 0.1
       done
     done
-    echo -e "\b✓"
+    echo -e "\b✓${reset_color}"
 
     echo "Run plugin hooks"
     for plugg ($_ZPM_Core_Plugins); do
