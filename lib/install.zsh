@@ -1,31 +1,34 @@
 #!/usr/bin/env zsh
 
-_Install_from_GitHub(){
+_ZPM-install-from-GitHub(){
   declare -a spin
   spin=('◐' '◓' '◑' '◒') 
+  local Plugin_path=$(_ZPM-get-path $1)
+  local Plugin_name=$(_ZPM-get-name $1)
 
+  git clone --recursive "https://github.com/"${1}".git" "$Plugin_path" </dev/null >/dev/null 2>/dev/null &!
+  pid=$!
 
-  if [[ ! -d "$_ZPM_PLUGIN_DIR/$1" ]]; then
+  if [[ $COLORS=="true" ]]; then
+    echo -en "$fg[green]Installing$fg[cyan] ${1} ${fg[green]}from ${fg[blue]}GitHub  ${fg[yellow]}${spin[0]}"
+  else
+    echo -en "Installing ${1} from GitHub  ${spin[0]}"
+  fi
 
-
-    git clone --recursive "https://github.com/"${2}".git" "$_ZPM_PLUGIN_DIR/$1" </dev/null >/dev/null 2>/dev/null &!
-    pid=$!
-
-    if [[ $COLORS=="true" ]]; then
-      echo -en "$fg[green]Installing$fg[cyan] ${2} ${fg[green]}from ${fg[blue]}GitHub  ${fg[yellow]}${spin[0]}"
-    else
-      echo -en "Installing ${2} from GitHub  ${spin[0]}"
-    fi
-
-    while $( kill -0 $pid 2>/dev/null)
+  while $( kill -0 $pid 2>/dev/null)
+  do
+    for i in "${spin[@]}"
     do
-      for i in "${spin[@]}"
-      do
-        echo -ne "\b$i"
-        sleep 0.2
-      done
+      echo -ne "\b$i"
+      sleep 0.2
     done
-    echo -e "\b✓"
+  done
+  echo -e "\b✓"
 
+}
+
+_ZPM-install-plugin(){
+  if [[ $(_ZPM-plugin-type $1) == 'github' ]]; then
+    _ZPM-install-from-GitHub $1
   fi
 }

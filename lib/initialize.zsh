@@ -5,79 +5,48 @@
 # ----------
 
 _ZPM_Plugins=()
-_ZPM_GitHub_Plugins+=()
-_ZPM_Core_Plugins+=()
+_ZPM_Plugins_3rdparty=()
+_ZPM_Plugins_core=()
 
+function _ZPM-load-plugin(){
 
-function _ZPM_Initialize_Plugin(){
-  _ZPM_Plugins+=(${plugin})
-  _ZPM_Core_Plugins+=(${plugin})
-  local plugin=${1}
+  local Plugin_path=$(_ZPM-plugin-path $1)
+  local Plugin_name=$(_ZPM-plugin-name $1)
 
-  if [[ ! "${plugin}" == */* ]]; then
-
-    if [[ -d "${_ZPM_DIR}/plugins/${plugin}" ]]; then
-
-      FPATH="$FPATH:${_ZPM_DIR}/plugins/${plugin}"
-
-      if [[ -d "${_ZPM_DIR}/plugins/${plugin}/bin" ]]; then
-        PATH="$PATH:${_ZPM_DIR}/plugins/${plugin}/bin"
-      fi
-
-      if [[ -f "${_ZPM_DIR}/plugins/${plugin}/${plugin}.plugin.zsh" ]]; then
-        source "${_ZPM_DIR}/plugins/${plugin}/${plugin}.plugin.zsh"
-      fi
-
-    elif [[ -d "${HOME}/.oh-my-zsh/plugins/${plugin}" ]]; then
-
-      FPATH="$FPATH:${HOME}/.oh-my-zsh/plugins/${plugin}"
-
-      if [[ -f "${HOME}/.oh-my-zsh/plugins/${plugin}/${plugin}.plugin.zsh" ]]; then
-        source "${HOME}/.oh-my-zsh/plugins/${plugin}/${plugin}.plugin.zsh"
-      fi
-
-    fi
-
-    return
-
+  if [[ ! -d $Plugin_path ]]; then
+    _ZPM-install-plugin $1
   fi
 
-  local plugin_name="${plugin}"
-  plugin_name=${plugin_name##*\/}
-  if [[ "${plugin_name}" == zsh-*  ]]; then
-    plugin_name=${plugin_name:4}
-  fi
-  if [[ "${plugin_name}" == *.zsh  ]]; then
-    plugin_name=${plugin_name:0:${#plugin_name}-4}
-  fi
-  if [[ "${plugin_name}" == *.plugin  ]]; then
-    plugin_name=${plugin_name:0:${#plugin_name}-7}
+  FPATH="$FPATH:${Plugin_path}"
+
+  if [[ -d ${Plugin_path}/bin ]]; then
+    PATH="$PATH:${Plugin_path}/bin"
   fi
 
-  _Install_from_GitHub ${plugin_name} ${plugin}
-
-  FPATH="$FPATH:${_ZPM_PLUGIN_DIR}/${plugin_name}"
-
-  if [[ -d ${_ZPM_PLUGIN_DIR}/${plugin_name}/bin ]]; then
-    PATH="$PATH:${_ZPM_PLUGIN_DIR}/${plugin_name}/bin"
+  if [[ -f ${Plugin_path}/${Plugin_name}.plugin.zsh ]]; then
+    source ${Plugin_path}/${Plugin_name}.plugin.zsh
+  elif [[ -f ${Plugin_path}/zsh-${Plugin_name}.plugin.zsh ]]; then
+    source ${Plugin_path}/zsh-${Plugin_name}.plugin.zsh
+  elif [[ -f ${Plugin_path}/${Plugin_name}.zsh ]]; then
+    source ${Plugin_path}/${Plugin_name}.zsh
   fi
-
-  if [[ -f ${_ZPM_PLUGIN_DIR}/${plugin_name}/${plugin_name}.plugin.zsh ]]; then
-    source ${_ZPM_PLUGIN_DIR}/${plugin_name}/${plugin_name}.plugin.zsh
-  elif [[ -f ${_ZPM_PLUGIN_DIR}/${plugin_name}/zsh-${plugin_name}.plugin.zsh ]]; then
-    source ${_ZPM_PLUGIN_DIR}/${plugin_name}/zsh-${plugin_name}.plugin.zsh
-  elif [[ -f ${_ZPM_PLUGIN_DIR}/${plugin_name}/${plugin_name}.zsh ]]; then
-    source ${_ZPM_PLUGIN_DIR}/${plugin_name}/${plugin_name}.zsh
-  fi
-
-  _ZPM_Plugins+=(${plugin_name})
-  _ZPM_GitHub_Plugins+=(${plugin_name})
-
 }
 
-function _ZPM_Init(){
+function _ZPM-initialize-plugin(){
+  _ZPM_Plugins+=($1)
+  if [[ $(_ZPM-plugin-type $1) == 'core' ]]; then
+    _ZPM_Plugins_core+=($1)
+  else
+    _ZPM_Plugins_3rdparty+=($1)
+  fi
+
+  _ZPM-load-plugin $1
+}
+
+
+function _ZPM-init(){
   compinit
-  precmd_functions=(${precmd_functions#_ZPM_Init})
+  precmd_functions=(${precmd_functions#_ZPM-init})
 }
-precmd_functions+=(_ZPM_Init) 
+precmd_functions+=(_ZPM-init) 
 

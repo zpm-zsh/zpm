@@ -7,11 +7,11 @@
     zcompile "$zcompdump"
   fi
 
-  find ${_ZPM_DIR}/ -name "*.zsh" | while read file; do
+  find ${_ZPM_DIR}/ -type f -name "*.zsh" | while read file; do
     zcompile $file
   done
 
-  find ${_ZPM_PLUGIN_DIR}/ -name "*.zsh" | while read file; do
+  find ${_ZPM_PLUGIN_DIR}/ -type f -name "*.zsh" | while read file; do
     zcompile $file
   done
 

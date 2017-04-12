@@ -2,6 +2,6 @@
 
 function Plug(){
   for plugin ($@); do
-    _ZPM_Initialize_Plugin $plugin
+    _ZPM-initialize-plugin $plugin
   done
 }
