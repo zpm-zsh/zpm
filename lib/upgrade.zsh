@@ -9,12 +9,9 @@ function _Upgrade-core(){
   git --git-dir="$_ZPM_DIR/.git/" --work-tree="$_ZPM_DIR/" pull </dev/null >/dev/null 2>/dev/null  &!
   pid=$!
 
-  for i ($_ZPM_Core_Plugins); do
-    if {type _${i}-upgrade | grep -q "shell function"}; then
-     _${i}-upgrade >/dev/null 2>/dev/null &!
-     upgraded=true
-   fi
-  done
+  {for i ($_ZPM_Core_Plugins); do
+    type _${i}-upgrade | grep -q "shell function"} && _${i}-upgrade >/dev/null 2>/dev/null 
+  done} && upgraded=true
 
   if [[ $COLORS=="true" ]]; then
     echo -en "$fg[green]Updating ZPM  ${fg[yellow]}${spin[0]}"
