@@ -1,6 +1,8 @@
 #!/usr/bin/env zsh
 
 function _Upgrade-core(){
+  declare -a spin
+  spin=('-' '\' '|' '/')
 
   git --git-dir="$_ZPM_DIR/.git/" --work-tree="$_ZPM_DIR/" checkout "$_ZPM_DIR/" </dev/null >/dev/null 2>/dev/null 
   git --git-dir="$_ZPM_DIR/.git/" --work-tree="$_ZPM_DIR/" pull </dev/null >/dev/null 2>/dev/null 
@@ -29,7 +31,9 @@ function _Upgrade-core(){
 }
 
 function _Upgrade-plugin(){
-
+  declare -a spin
+  spin=('-' '\' '|' '/')
+  
   if [[ -d $_ZPM_PLUGIN_DIR/$i ]]; then
 
     git --git-dir="$_ZPM_PLUGIN_DIR/$i/.git/" --work-tree="$_ZPM_PLUGIN_DIR/$i/" checkout "$_ZPM_PLUGIN_DIR/$i/" </dev/null >/dev/null 2>/dev/null 
