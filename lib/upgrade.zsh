@@ -1,17 +1,18 @@
 #!/usr/bin/env zsh
 
-function _Upgrade-core(){
+function _ZPM-upgrade(){
   declare -a spin
   spin=('◐' '◓' '◑' '◒') 
 
-  git --git-dir="$_ZPM_DIR/.git/" --work-tree="$_ZPM_DIR/" checkout "$_ZPM_DIR/" </dev/null >/dev/null 2>/dev/null &!
-  git --git-dir="$_ZPM_DIR/.git/" --work-tree="$_ZPM_DIR/" pull </dev/null >/dev/null 2>/dev/null  &!
+  git --git-dir="${2}/.git/" --work-tree="${2}/" checkout "${2}/" </dev/null >/dev/null 2>/dev/null &!
+  git --git-dir="${2}/.git/" --work-tree="${2}/" pull </dev/null >/dev/null 2>/dev/null  &!
   pid=$!
 
+
   if [[ $COLORS=="true" ]]; then
-    echo -en "$fg[green]Updating ZPM  ${fg[yellow]}${spin[0]}"
+    echo -en "$fg[green]Updating ${1} ${2}  ${fg[yellow]}${spin[0]}"
   else
-    echo -en "Updating ZPM  ${spin[0]}"
+    echo -en "Updating ${1} ${2}  ${spin[0]}"
   fi
 
   while $(kill -0 $pid 2>/dev/null); do
@@ -29,53 +30,22 @@ function _Upgrade-core(){
 
 }
 
-function _Upgrade-plugin(){
-  declare -a spin
-  spin=('◐' '◓' '◑' '◒') 
-  
-  if [[ -d $_ZPM_PLUGIN_DIR/$i ]]; then
-
-    git --git-dir="$_ZPM_PLUGIN_DIR/$i/.git/" --work-tree="$_ZPM_PLUGIN_DIR/$i/" checkout "$_ZPM_PLUGIN_DIR/$i/" </dev/null >/dev/null 2>/dev/null &!
-    git --git-dir="$_ZPM_PLUGIN_DIR/$i/.git/" --work-tree="$_ZPM_PLUGIN_DIR/$i/" pull</dev/null >/dev/null 2>/dev/null &!
-    pid=$!
-
-    if [[ $COLORS=="true" ]]; then
-      echo -en "${fg[green]}Updating ${fg[cyan]}${1}${fg[green]} from ${fg[blue]}GitHub  ${fg[yellow]}${spin[0]}"
-    else
-      echo -en "Updating ${1} from GitHub  ${spin[0]}"
-    fi
-
-    while $(kill -0 $pid 2>/dev/null); do
-      for i in "${spin[@]}"
-      do
-        echo -ne "\b$i"
-        sleep 0.2
-      done
-    done
-    echo -e "\b✓${reset_color}"
-  fi
-
-   if {type _${1}-upgrade | grep -q "shell function"}; then
-    _${1}-upgrade >/dev/null 2>/dev/null &!
-  fi
-
-}
 
 
-function ZPM-Upgrade(){
-  _Plugins_Upgrade=()
+function ZPM-upgrade(){
+  local _Plugins_Upgrade=()
 
   if [[ -z $@ ]]; then
-    _Plugins_Upgrade+=( "ZPM" $_ZPM_GitHub_Plugins )
+    _Plugins_Upgrade+=( "ZPM" $_ZPM_Plugins_3rdparty )
   else
     _Plugins_Upgrade+=($@)
   fi
 
   for i ($_Plugins_Upgrade); do
     if [[ "$i" == "ZPM" ]]; then
-      _Upgrade-core
+      _ZPM-upgrade
     else
-      _Upgrade-plugin $i
+      _ZPM-upgrade $(_ZPM-plugin-name $i) $(_ZPM-plugin-path $i) 
     fi
   done
   return 0
