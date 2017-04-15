@@ -13,7 +13,11 @@ source ${${(%):-%x}:a:h}/lib/upgrade.zsh
 
 source ${${(%):-%x}:a:h}/lib/compile.zsh
 
-function ZPM(){
+function zpm(){
+  if [[ "$1" == 'upgrade' ]]; then
+    shift
+    ZPM-upgrade $@
+  fi
   for plugin ($@); do
     _ZPM-initialize-plugin $plugin
   done
@@ -21,6 +25,6 @@ function ZPM(){
 
 function Plug(){
   echo This function depricated, change Plug to ZPM
-  ZPM $@
+  zpm $@
 }
 
