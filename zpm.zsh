@@ -19,5 +19,8 @@ function ZPM(){
   done
 }
 
-alias Plug=ZPM
+function Plug(){
+  echo This function depricated, change Plug to ZPM
+  ZPM $@
+}
 
