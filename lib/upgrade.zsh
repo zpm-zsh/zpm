@@ -1,6 +1,7 @@
 #!/usr/bin/env zsh
 
 function _ZPM-upgrade(){
+  _ZPM-log $1 $2
   declare -a spin
   spin=('◐' '◓' '◑' '◒') 
 

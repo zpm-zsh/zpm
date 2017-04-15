@@ -1,5 +1,10 @@
 #!/usr/bin/env zsh
 
+function _ZPM-log(){
+  if [[ "$DEBUG" == 'true' ]]; then
+    echo $@
+  fi
+}
 
 function _ZPM-plugin-type(){
   if [[ ${1} == 'ZPM' ]]; then
