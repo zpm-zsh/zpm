@@ -9,11 +9,15 @@ source ${${(%):-%x}:a:h}/lib/install.zsh
 
 source ${${(%):-%x}:a:h}/lib/initialize.zsh
 
-source ${${(%):-%x}:a:h}/lib/plug.zsh
-
 source ${${(%):-%x}:a:h}/lib/upgrade.zsh
 
 source ${${(%):-%x}:a:h}/lib/compile.zsh
 
+function ZPM(){
+  for plugin ($@); do
+    _ZPM-initialize-plugin $plugin
+  done
+}
 
+alias Plug=ZPM
 
