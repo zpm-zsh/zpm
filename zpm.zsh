@@ -19,6 +19,10 @@ function zpm(){
   if [[ "$1" == 'upgrade' ]]; then
     shift
     ZPM-upgrade $@
+    return 0
+  fi
+  if [[ "$1" == 'load' ]]; then
+    shift
   fi
   for plugin ($@); do
     _ZPM-initialize-plugin $plugin
