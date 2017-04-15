@@ -37,13 +37,11 @@ function _ZPM-upgrade(){
 
 }
 
-
-
 function ZPM-upgrade(){
   declare -a _Plugins_Upgrade
 
   if [[ -z $@ ]]; then
-    _Plugins_Upgrade+=( "ZPM" $_ZPM_Plugins_3rdparty )
+    _Plugins_Upgrade+=( "zpm" $_ZPM_Plugins_3rdparty )
   else
     _Plugins_Upgrade+=($@)
   fi
@@ -61,7 +59,7 @@ function _ZPM-upgrade-compl(){
       _ZPM_Hooks+=($plugg)
     fi
   done
-  _arguments "*: :($(echo "ZPM"; echo $_ZPM_Plugins_3rdparty))"
+  _arguments "*: :($(echo "zpm"; echo $_ZPM_Plugins_3rdparty))"
 }
 
 compdef _ZPM-upgrade-compl ZPM-upgrade

@@ -7,7 +7,7 @@ function _ZPM-log(){
 }
 
 function _ZPM-plugin-type(){
-  if [[ ${1} == 'ZPM' ]]; then
+  if [[ ${1} == 'zpm' ]]; then
     echo zpm
   elif [[ ${1} == *'/'* ]]; then
     echo github
