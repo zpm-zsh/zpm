@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env -i bash --noprofile --norc
 
 DIR="$PWD"
 exist=false

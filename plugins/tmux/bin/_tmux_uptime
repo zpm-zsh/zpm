@@ -1,2 +1,3 @@
-#!/bin/sh
+#!/usr/bin/env -i bash --noprofile --norc
+
 \uptime | xargs| sed -e 's/.*up\ \(.*\),\ [0-9]*\ .*/\1/g'

@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env -i bash --noprofile --norc
 
 if hash lsb_release 2>/dev/null; then
     echo -n $(lsb_release -si; lsb_release -sr)

@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env -i bash --noprofile --norc
 
 tecreset='\e[0m'
 

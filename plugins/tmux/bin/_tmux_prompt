@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env -i bash --noprofile --norc
 
 echo -n "#[fg=green]$(whoami)"
 echo -n "#[fg=blue]@"
