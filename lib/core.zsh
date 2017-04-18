@@ -58,6 +58,8 @@ fi
 PATH=$PATH:$_ZPM_DIR/bin
 [[ ":$PATH:" != *":${HOME}/.bin:"* ]] && PATH=$PATH:${HOME}/.bin
 [[ ":$PATH:" != *":${HOME}/.local/bin:"* ]] && PATH=$PATH:${HOME}/.local/bin
+FPATH=$FPATH:$_ZPM_DIR
+
 
 ZSH_COMPDUMP="$HOME/.zcompdump"
 HISTFILE="$HOME/.zsh_history"

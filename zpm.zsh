@@ -11,8 +11,6 @@ source ${${(%):-%x}:a:h}/lib/initialize.zsh
 
 source ${${(%):-%x}:a:h}/lib/upgrade.zsh
 
-source ${${(%):-%x}:a:h}/lib/completions.zsh
-
 source ${${(%):-%x}:a:h}/lib/compile.zsh
 
 function zpm(){
