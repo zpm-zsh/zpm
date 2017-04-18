@@ -34,6 +34,6 @@ function Plug(){
 
 function ZPM-upgrade(){
   echo 'This function depricated, change `ZPM-upgrade` to `zpm upgrade`'
-  zpm $@
+  _ZPM-upgrade $@
 }
 
