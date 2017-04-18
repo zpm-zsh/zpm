@@ -1,4 +1,4 @@
-#!/usr/bin/env -i zsh
+#!/usr/bin/env zsh
 
 local exist=false
 
