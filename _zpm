@@ -3,29 +3,24 @@
 
 local -a _1st_arguments
 _1st_arguments=(
-  'upgrade:Upgrade plugins'
+  'upgrade:Upgrade plugin'
+  'load:Load plugin'
 )
-
-local -a _ZPM_Plugins_core__unused
-for plugin in "$_ZPM_DIR/plugins/"*; do
- _ZPM_Plugins_core__unused+=$( basename "$plugin")
-done
 
 _arguments \
     '*:: :->subcmds' && return 0
 
 if (( CURRENT == 1 )); then
   _describe -t commands "zpm subcommand" _1st_arguments
-  _describe -t commands "zpm plugins" _ZPM_Plugins_core__unused
   return
 fi
 
 if (( CURRENT > 1 )); then
   case "$words[1]" in
-    upgrade)
+    u|up|upgrade)
       _describe -t commands "zpm plugins" _ZPM_Plugins_3rdparty
     ;;
-    *)
+    l|load)
       _describe -t commands "zpm plugins" _ZPM_Plugins_core
     ;;
   esac
