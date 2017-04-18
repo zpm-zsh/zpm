@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 
-function _ZPM-upgrade(){
+function _ZPM-upgrade-plugin(){
   _ZPM-log $1 $2
   declare -a spin
   spin=('◐' '◓' '◑' '◒') 
@@ -37,7 +37,7 @@ function _ZPM-upgrade(){
 
 }
 
-function ZPM-upgrade(){
+function _ZPM-upgrade(){
   declare -a _Plugins_Upgrade
 
   if [[ -z $@ ]]; then
@@ -47,7 +47,7 @@ function ZPM-upgrade(){
   fi
 
   for i ($_Plugins_Upgrade); do
-    _ZPM-upgrade $i $(_ZPM-plugin-path $i) 
+    _ZPM-upgrade-plugin $i $(_ZPM-plugin-path $i) 
   done
   return 0
 }

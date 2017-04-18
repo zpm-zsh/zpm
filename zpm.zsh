@@ -14,7 +14,7 @@ source ${${(%):-%x}:a:h}/lib/upgrade.zsh
 source ${${(%):-%x}:a:h}/lib/compile.zsh
 
 function zpm(){
-  if [[ "$1" == 'upgrade' ]]; then
+  if [[ "$1" == 'u' || "$1" == 'up' || "$1" == 'upgrade' ]]; then
     shift
     ZPM-upgrade $@
     return 0
@@ -28,7 +28,12 @@ function zpm(){
 }
 
 function Plug(){
-  echo This function depricated, change Plug to ZPM
+  echo 'This function depricated, change `Plug` to `zpm load`'
+  zpm $@
+}
+
+function ZPM-upgrade(){
+  echo 'This function depricated, change `ZPM-upgrade` to `zpm upgrade`'
   zpm $@
 }
 
