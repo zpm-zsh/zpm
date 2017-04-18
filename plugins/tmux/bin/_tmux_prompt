@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 echo -n "#[fg=green]$(whoami)"
 echo -n "#[fg=blue]@"
