@@ -7,6 +7,20 @@ _1st_arguments=(
   'load:Load plugin'
 )
 
+local -a _ZPM_Plugins_core__unused
+for plugin in "$_ZPM_DIR/plugins/"*; do
+ _ZPM_Plugins_core__unused+=$( basename "$plugin")
+done
+
+local -a _ZPM_Plugins_3rdparty__unused
+for plugin in "$_ZPM_PLUGIN_DIR/"*---*; do
+  local unused=$( basename "$plugin")
+ _ZPM_Plugins_3rdparty__unused+=${unused//---/\/}
+done
+
+local -a _ZPM_Plugins_upgradable
+_ZPM_Plugins_upgradable=( ${_ZPM_Plugins_core__unused[@]} ${_ZPM_Plugins_3rdparty__unused[@]})
+
 _arguments \
     '*:: :->subcmds' && return 0
 
@@ -21,7 +35,7 @@ if (( CURRENT > 1 )); then
       _describe -t commands "zpm plugins" _ZPM_Plugins_3rdparty
     ;;
     l|load)
-      _describe -t commands "zpm plugins" _ZPM_Plugins_core
+      _describe -t commands "zpm plugins" _ZPM_Plugins_upgradable
     ;;
   esac
 fi

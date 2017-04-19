@@ -37,3 +37,4 @@ function ZPM-upgrade(){
   _ZPM-upgrade $@
 }
 
+zstyle ':completion:*:(zpm):*' sort false

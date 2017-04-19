@@ -22,7 +22,7 @@ function _ZPM-plugin-path() {
   elif [[ $(_ZPM-plugin-type $1) == 'core' ]]; then
     echo "${_ZPM_DIR}/plugins/${1}"
   else
-    echo "${_ZPM_PLUGIN_DIR}/${1//\//--}"
+    echo "${_ZPM_PLUGIN_DIR}/${1//\//---}"
   fi
 }
 
