@@ -52,4 +52,31 @@ if [[ "$_LS_IS_GNU_LS" == "true" ]]; then
   }
   compdef ls=ls
 
+else
+
+  function ll(){
+    eval "$_LS_GRC $_LS_LS $_LS_COLOR -lFh"
+  }
+  compdef ll=ls
+
+  function lsd(){
+    eval "$_LS_GRC $_LS_LS $_LS_COLOR -lFh -d *(-/DN)"
+  }
+  compdef lsd=ls
+
+  function la(){
+    eval "$_LS_LS $_LS_COLOR -CFlxBh -A"
+  }
+  compdef la=ls
+
+  function l(){
+    eval "$_LS_LS $_LS_COLOR -CFlxBh"
+  }
+  compdef l=ls
+
+  function ls(){
+    eval "$_LS_LS $_LS_COLOR -CFlxBh"
+  }
+  compdef ls=ls
+
 fi
