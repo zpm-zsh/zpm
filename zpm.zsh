@@ -16,7 +16,7 @@ source ${${(%):-%x}:a:h}/lib/compile.zsh
 function zpm(){
   if [[ "$1" == 'u' || "$1" == 'up' || "$1" == 'upgrade' ]]; then
     shift
-    ZPM-upgrade $@
+    _ZPM-upgrade $@
     return 0
   fi
   if [[ "$1" == 'load' ]]; then
