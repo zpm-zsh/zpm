@@ -56,6 +56,13 @@ if [[ "$_LS_IS_GNU_LS" == "true" ]]; then
 
 else
 
+  if [[ "$COLORS" == "true" ]]; then
+    _LS_COLOR="-G"
+  else
+    _LS_COLOR=""
+    _LS_GRC=""
+  fi
+
   function ll(){
     eval "$_LS_GRC $_LS_LS $_LS_COLOR -lFh"
   }
