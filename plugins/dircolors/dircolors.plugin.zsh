@@ -8,3 +8,5 @@ else
   fi
   
 fi
+
+export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx
