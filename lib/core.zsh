@@ -35,6 +35,7 @@ fi
 if [[ "$COLORS" == "true" ]]; then
   autoload -U colors && colors
   export TERM="xterm-256color"
+  export CLICOLOR=1
 fi
 
 if [[ -z "$ZPM_DIR" ]]; then
