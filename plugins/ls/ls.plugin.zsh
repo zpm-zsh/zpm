@@ -33,7 +33,7 @@ if [[ "$_LS_IS_GNU_LS" == "true" ]]; then
   compdef ll=ls
 
   function lsd(){
-    eval "$_LS_GRC $_LS_LS $_LS_COLOR -lFh  --group-directories-first --time-style=+%Y-%m-%d\ %H:%M -d *(-/DN)"
+    eval "$_LS_GRC $_LS_LS $_LS_COLOR -lFh --group-directories-first --time-style=+%Y-%m-%d\ %H:%M -d *(-/DN)"
   }
   compdef lsd=ls
 
@@ -51,5 +51,5 @@ if [[ "$_LS_IS_GNU_LS" == "true" ]]; then
     eval "$_LS_LS $_LS_COLOR -CFlxBh --group-directories-first"
   }
   compdef ls=ls
-  # alias ls='$LS $COLOR -CFlxBh --group-directories-first'
+
 fi
