@@ -18,14 +18,16 @@ if (( $+commands[grc] )); then
 fi
 
 _LS_COLOR=""
-if [[ "$COLORS" == "true" ]]; then
-  _LS_COLOR="--color"
-else
-  _LS_COLOR="--color=never"
-  _LS_GRC=""
-fi
+
 
 if [[ "$_LS_IS_GNU_LS" == "true" ]]; then
+  
+  if [[ "$COLORS" == "true" ]]; then
+    _LS_COLOR="--color"
+  else
+    _LS_COLOR="--color=never"
+    _LS_GRC=""
+  fi
 
   function ll(){
     eval "$_LS_GRC $_LS_LS $_LS_COLOR -lFh --group-directories-first --time-style=+%Y-%m-%d\ %H:%M"
