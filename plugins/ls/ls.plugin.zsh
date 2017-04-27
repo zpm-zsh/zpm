@@ -30,27 +30,27 @@ if [[ "$_LS_IS_GNU_LS" == "true" ]]; then
   fi
 
   function ll(){
-    eval "$_LS_GRC $_LS_LS $_LS_COLOR -lFh --group-directories-first --time-style=+%Y-%m-%d\ %H:%M"
+    eval "$_LS_GRC $_LS_LS $_LS_COLOR -lFh --group-directories-first --time-style=+%Y-%m-%d\ %H:%M $@"
   }
   compdef ll=ls
 
   function lsd(){
-    eval "$_LS_GRC $_LS_LS $_LS_COLOR -lFh --group-directories-first --time-style=+%Y-%m-%d\ %H:%M -d *(-/DN)"
+    eval "$_LS_GRC $_LS_LS $_LS_COLOR -lFh --group-directories-first --time-style=+%Y-%m-%d\ %H:%M -d $@ *(-/DN)"
   }
   compdef lsd=ls
 
   function la(){
-    eval "$_LS_LS $_LS_COLOR -CFlxBh --group-directories-first -A"
+    eval "$_LS_LS $_LS_COLOR -CFlxBh --group-directories-first -A $@"
   }
   compdef la=ls
 
   function l(){
-    eval "$_LS_LS $_LS_COLOR -CFlxBh --group-directories-first"
+    eval "$_LS_LS $_LS_COLOR -CFlxBh --group-directories-first $@"
   }
   compdef l=ls
 
   function ls(){
-    eval "$_LS_LS $_LS_COLOR -CFlxBh --group-directories-first"
+    eval "$_LS_LS $_LS_COLOR -CFlxBh --group-directories-first $@"
   }
   compdef ls=ls
 
@@ -64,27 +64,27 @@ else
   fi
 
   function ll(){
-    eval "$_LS_GRC $_LS_LS $_LS_COLOR -lFh"
+    eval "$_LS_GRC $_LS_LS $_LS_COLOR -lFh $@"
   }
   compdef ll=ls
 
   function lsd(){
-    eval "$_LS_GRC $_LS_LS $_LS_COLOR -lFh -d *(-/DN)"
+    eval "$_LS_GRC $_LS_LS $_LS_COLOR -lFh -d $@ *(-/DN)"
   }
   compdef lsd=ls
 
   function la(){
-    eval "$_LS_LS $_LS_COLOR -CFlxBh -A"
+    eval "$_LS_LS $_LS_COLOR -CFlxBh -A $@"
   }
   compdef la=ls
 
   function l(){
-    eval "$_LS_LS $_LS_COLOR -CFlxBh"
+    eval "$_LS_LS $_LS_COLOR -CFlxBh $@"
   }
   compdef l=ls
 
   function ls(){
-    eval "$_LS_LS $_LS_COLOR -CFlxBh"
+    eval "$_LS_LS $_LS_COLOR -CFlxBh $@"
   }
   compdef ls=ls
 
