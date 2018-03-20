@@ -34,8 +34,8 @@ cp ~/.zpm/zshrc-example.zsh ~/.zshrc
 
 ## Using plugins
 
-Add `Plug some-plugin` for enabling plugin from `~/.zpm/plugins`.  
-Or add `Plug github-user/github-repo` for enabling plugin from github.
+Add `zpm load some-plugin` for enabling plugin from `~/.zpm/plugins`.  
+Or add `zpm load github-user/github-repo` for enabling plugin from github.
 
 ## Upgrade
 
