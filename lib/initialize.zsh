@@ -17,12 +17,12 @@ function _ZPM-load-plugin() {
     _ZPM-install-plugin $1
   fi
 
-  if if-fpath-files ${Plugin_path}; then
-    FPATH="$FPATH:${Plugin_path}"
+  if $_ZPM_DIR/bin/if-fpath-files ${Plugin_path}; then
+    FPATH="$FPATH:$(realpath ${Plugin_path})"
   fi
 
   if [[ -d ${Plugin_path}/bin ]]; then
-    PATH="$PATH:${Plugin_path}/bin"
+    PATH="$PATH:$(realpath ${Plugin_path}/bin)"
   fi
 
   if [[ -f ${Plugin_path}/${Plugin_name}.plugin.zsh ]]; then

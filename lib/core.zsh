@@ -56,9 +56,8 @@ if  [[ -z $ZSH ]]; then
   ZSH=$HOME/.oh-my-zsh # Compatibility with oh-my-zsh
 fi
 
-PATH=$PATH:$_ZPM_DIR/bin
-[[ ":$PATH:" != *":${HOME}/.bin:"* ]] && PATH=$PATH:${HOME}/.bin
-[[ ":$PATH:" != *":${HOME}/.local/bin:"* ]] && PATH=$PATH:${HOME}/.local/bin
+[[ ":$PATH:" != *":${HOME}/.bin:"* ]] && PATH=${HOME}/.bin:$PATH
+[[ ":$PATH:" != *":${HOME}/.local/bin:"* ]] && PATH=${HOME}/.local/bin:$PATH
 FPATH=$FPATH:$_ZPM_DIR
 
 

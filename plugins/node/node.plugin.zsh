@@ -32,7 +32,7 @@ chpwd_functions+=(_node_version_pre)
 periodic_functions+=(_node_version_pre)
 
 _node_version() {
-  if recursive-exist node_modules >/dev/null; then
+  if $_ZPM_DIR/bin/recursive-exist node_modules >/dev/null; then
     node_version="$node_version_pre"
   else
     node_version=""
@@ -40,4 +40,3 @@ _node_version() {
 
 }
 precmd_functions+=(_node_version)
-
