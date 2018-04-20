@@ -8,4 +8,3 @@ setopt hist_ignore_dups
 setopt hist_verify
 setopt inc_append_history
 
-alias h="history"
