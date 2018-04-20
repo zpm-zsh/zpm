@@ -4,10 +4,6 @@ if [[ -z "$COLORS" ]]; then
   export COLORS=true
 fi
 
-if [[ -z "$EMOJI" ]]; then
-  export EMOJI="true"
-fi
-
 if [[ -z "$DEBUG" ]]; then
   export DEBUG="false"
 fi
@@ -52,15 +48,9 @@ else
   unset ZPM_PLUGIN_DIR
 fi
 
-if  [[ -z $ZSH ]]; then
-  ZSH=$HOME/.oh-my-zsh # Compatibility with oh-my-zsh
-fi
 
-[[ ":$PATH:" != *":${HOME}/.bin:"* ]] && PATH=${HOME}/.bin:$PATH
-[[ ":$PATH:" != *":${HOME}/.local/bin:"* ]] && PATH=${HOME}/.local/bin:$PATH
+
 FPATH=$FPATH:$_ZPM_DIR
-
-
 ZSH_COMPDUMP="$HOME/.zcompdump"
 HISTFILE="$HOME/.zsh_history"
 HISTSIZE=9999

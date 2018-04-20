@@ -29,9 +29,9 @@ function _ZPM-plugin-path() {
 function _ZPM-plugin-name() {
   local plugin_name="${1}"
   plugin_name=${plugin_name##*\/}
-  if [[ "${plugin_name}" == 'oh-my-zsh-'* ]]; then
-    plugin_name=${plugin_name:10}
-  fi
+  # if [[ "${plugin_name}" == 'oh-my-zsh-'* ]]; then
+  #   plugin_name=${plugin_name:10}
+  # fi
   if [[ "${plugin_name}" == 'zsh-'* ]]; then
     plugin_name=${plugin_name:4}
   fi

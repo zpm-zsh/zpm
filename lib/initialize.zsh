@@ -18,11 +18,11 @@ function _ZPM-load-plugin() {
   fi
 
   if $_ZPM_DIR/bin/if-fpath-files ${Plugin_path}; then
-    FPATH="$FPATH:$(realpath ${Plugin_path})"
+    FPATH="$FPATH:${Plugin_path}"
   fi
 
   if [[ -d ${Plugin_path}/bin ]]; then
-    PATH="$PATH:$(realpath ${Plugin_path}/bin)"
+    PATH="$PATH:${Plugin_path}/bin"
   fi
 
   if [[ -f ${Plugin_path}/${Plugin_name}.plugin.zsh ]]; then

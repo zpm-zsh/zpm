@@ -13,6 +13,8 @@ source ${${(%):-%x}:a:h}/lib/upgrade.zsh
 
 source ${${(%):-%x}:a:h}/lib/compile.zsh
 
+source ${${(%):-%x}:a:h}/lib/post.zsh
+
 function zpm(){
   if [[ "$1" == 'u' || "$1" == 'up' || "$1" == 'upgrade' ]]; then
     shift
