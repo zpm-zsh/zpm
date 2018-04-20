@@ -2,9 +2,9 @@
 
 setopt autocd
 
-alias cd/="cd /"
 alias tmp='cd $(mktemp -d)'
-alias cdo='cd $OLDPWD'
+alias cdo='cd -'
+alias -- -='cd -'
 
 alias ..='cd ../'
 alias ...='cd ../../'
