@@ -35,7 +35,8 @@ if [[ "$COLORS" == "true" ]]; then
 fi
 
 if [[ -z "$ZPM_DIR" ]]; then
-  _ZPM_DIR="$(realpath ${${(%):-%x}:a:h}/..)"
+  _ZPM_DIR="${${(%):-%x}:a:h}/.."
+  _ZPM_DIR="${_ZPM_DIR:A}"
 else
   _ZPM_DIR="$ZPM_DIR"
   unset ZPM_DIR
