@@ -6,7 +6,7 @@ if [[ ! -d ~/.tmux/plugins/tpm ]]; then
 fi
 
 if [[ -z $TMUX_AUTOSTART  && -n "$SSH_CONNECTION" ]]; then
-  if hash tmux 2>/dev/null; then
+  if (( $+commands[tmux] )); then
     TMUX_AUTOSTART="true"
   fi
 fi
