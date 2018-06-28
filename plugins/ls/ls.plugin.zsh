@@ -3,7 +3,7 @@
 _LS=(=ls)
 
 if (( $+commands[gls] )); then
-  _LS=(\=gls)
+  _LS=(=gls)
 fi
 
 _LS_IS_GNU="false" # FIXME: Doesn't work on BSD* systems
