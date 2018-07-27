@@ -12,7 +12,7 @@ function Check-Deps(){
         package="$i"
         executable="$i"
       fi
-      if (! hash $executable 1>/dev/null 2>/dev/null) ; then
+      if (( ! $+commands[$executable] )); then
         DEPENDENCES_ARCH_MISSING+=( $package )
       fi
     done
@@ -20,7 +20,7 @@ function Check-Deps(){
       echo "Please install missing packages using \`sudo pacman -S $DEPENDENCES_ARCH_MISSING\`"
     fi
   fi
-  
+
   if (( $+commands[dpkg] )); then
     DEPENDENCES_DEBIAN_MISSING=()
     _DEB_packageS="$(dpkg --list|awk '{print $2}'|awk -F':' '{print $1}'|xargs)"
@@ -32,7 +32,7 @@ function Check-Deps(){
         package="$i"
         executable="$i"
       fi
-      if (! hash $executable 1>/dev/null 2>/dev/null) ; then
+      if (( ! $+commands[$executable] )); then
         DEPENDENCES_DEBIAN_MISSING+=( $package )
       fi
     done
@@ -40,7 +40,7 @@ function Check-Deps(){
       echo "Please install missing packages using \`sudo apt install $DEPENDENCES_DEBIAN_MISSING\`"
     fi
   fi
-  
+
   if (( $+commands[npm] )); then
     DEPENDENCES_NPM_MISSING=()
     for i ($DEPENDENCES_NPM); do
@@ -51,7 +51,7 @@ function Check-Deps(){
         package="$i"
         executable="$i"
       fi
-      if (! hash $executable 1>/dev/null 2>/dev/null) ; then
+      if (( ! $+commands[$executable] )); then
         DEPENDENCES_NPM_MISSING+=( $package )
       fi
     done
