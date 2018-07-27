@@ -9,6 +9,10 @@ fi
 
 
 function _tmux_autostart(){
+  if [[ ! -f ~/.tmux.conf ]]; then
+    touch ~/.tmux.conf
+  fi
+  
   if [[ "$TMUX_AUTOSTART" == "true" && -z "$TMUX" ]]; then
     TERM=xterm-256color \tmux -2 attach || TERM=xterm-256color \tmux -2 -f${${(%):-%x}:a:h}/tmux.conf new
     exit 0
