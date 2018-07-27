@@ -11,7 +11,7 @@ bindkey "^[[6~" down-line-or-history
 
 bindkey "^[OH" beginning-of-line
 bindkey "^[[H" beginning-of-line
-i
+
 bindkey "^[OF"  end-of-line
 bindkey "^[[F"  end-of-line
 
