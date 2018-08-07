@@ -37,6 +37,5 @@ bindkey '^H' backward-delete-word
 autoload -U edit-command-line
 zle -N edit-command-line
 bindkey '^X^E' edit-command-line
-bindkey '^K' clear-screen
 
 bindkey -M menuselect " " accept-and-menu-complete
