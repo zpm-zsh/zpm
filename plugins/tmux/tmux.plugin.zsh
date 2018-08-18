@@ -1,4 +1,4 @@
-alias tmux="TERM=xterm-256color tmux -2 attach || TERM=xterm-256color tmux -2 -f${${(%):-%x}:a:h}/tmux.conf new"
+alias tmux="TERM=xterm-256color tmux -2 attach || TERM=xterm-256color tmux -2 new"
 
 
 [[ ! -f ~/.tmux.conf ]] && touch ~/.tmux.conf
@@ -15,7 +15,7 @@ fi
 function _tmux_autostart(){
 
   if [[ "$TMUX_AUTOSTART" == "true" && -z "$TMUX" ]]; then
-    TERM=xterm-256color \tmux -2 attach || TERM=xterm-256color \tmux -2 -f${${(%):-%x}:a:h}/tmux.conf new
+    TERM=xterm-256color \tmux -2 attach || TERM=xterm-256color \tmux -2 new
     exit 0
   fi
   precmd_functions=(${precmd_functions#_tmux_autostart})
