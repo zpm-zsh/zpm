@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-
-\uptime | xargs| sed -e 's/.*up\ \(.*\),\ [0-9]*\ .*/\1/g'
