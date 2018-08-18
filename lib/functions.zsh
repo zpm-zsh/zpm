@@ -43,3 +43,12 @@ function _ZPM-plugin-name() {
   fi
   echo ${plugin_name}
 }
+
+_ZPM-appendpath () {
+    case ":$PATH:" in
+        *:"$1":*)
+            ;;
+        *)
+            PATH="${PATH:+$PATH:}$1"
+    esac
+}

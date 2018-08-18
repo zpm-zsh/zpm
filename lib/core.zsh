@@ -42,6 +42,7 @@ else
   unset ZPM_DIR
 fi
 
+
 if [[ -z "${ZPM_PLUGIN_DIR}" ]]; then
   _ZPM_PLUGIN_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/zpm"
 else
@@ -67,3 +68,5 @@ autoload -U compinit && compinit
 zmodload zsh/terminfo
 
 mkdir -p "$_ZPM_PLUGIN_DIR"
+
+_ZPM-appendpath $_ZPM_DIR/bin
