@@ -27,9 +27,9 @@ _user_prompt() {
     fi
   fi
   if [[ $COLORS == "true" ]]; then
-    user_prompt="$prefix$symbol%{$reset_color%}$USER_PROMPT_SUFIX"
+    ps_user="$prefix$symbol%{$reset_color%}$USER_PROMPT_SUFIX"
   else
-    user_prompt="$prefix$symbol$USER_PROMPT_SUFIX"
+    ps_user="$prefix$symbol$USER_PROMPT_SUFIX"
   fi
 }
 

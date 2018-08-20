@@ -30,9 +30,9 @@ periodic_functions+=(_node_version_pre)
 
 _node_version() {
   if recursive-exist node_modules >/dev/null; then
-    node_version="$node_version_pre"
+    ps_node="$node_version_pre"
   else
-    node_version=""
+    ps_node=""
   fi
 
 }
