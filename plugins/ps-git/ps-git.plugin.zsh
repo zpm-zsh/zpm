@@ -17,7 +17,7 @@ gitstatus_path=${${(%):-%x}:a:h}/gitstatus.py
 
 _git_prompt() {
   if [ "$(command git config --get --bool oh-my-zsh.hide-status 2>/dev/null)" != "true" ] \
-  && recursive-exist .git > /dev/null 2>&1; then
+  && _ZPM-recursive-exist .git > /dev/null 2>&1; then
     git_vars=$(GIT_PUSH="$GIT_PUSH" GIT_PULL="$GIT_PULL" python3 $gitstatus_path 2>/dev/null)
     git_vars=("${(@f)git_vars}")
     if [[ "$git_vars[7]" == 1 ]]; then

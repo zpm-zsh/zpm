@@ -68,5 +68,3 @@ autoload -U compinit && compinit
 zmodload zsh/terminfo
 
 mkdir -p "$_ZPM_PLUGIN_DIR"
-
-_ZPM-appendpath $_ZPM_DIR/bin

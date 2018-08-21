@@ -52,3 +52,44 @@ _ZPM-appendpath () {
             PATH="${PATH:+$PATH:}$1"
     esac
 }
+
+_ZPM-if-fpath-not-empty(){
+  local exist=false
+
+  for i in $1/_*(N); do
+    exist=true
+  done
+
+  if [[ $exist == true ]]; then
+    return 0
+  else
+    return -1
+  fi
+
+}
+
+_ZPM-recursive-exist(){
+  DIR="$PWD"
+  exist=false
+
+  if [[ -d "$DIR/$1" || -f "$DIR/$1" ]]; then
+    exist=true
+    echo "$DIR/$1"
+  fi
+  while [[ "$DIR" != "" ]]; do
+    DIR=$(dirname "$DIR")
+    if [[ "$DIR" == '/' ]]; then
+      DIR=""
+    fi
+    if [[ -d "$DIR/$1" || -f "$DIR/$1" ]]; then
+      exist=true
+      echo "$DIR/$1"
+    fi
+  done
+
+  if [[ "$exist" == false ]]; then
+    return -1
+  fi
+  return 0
+
+}

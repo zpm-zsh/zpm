@@ -17,7 +17,7 @@ function _ZPM-load-plugin() {
     _ZPM-install-plugin $1
   fi
 
-  if $_ZPM_DIR/bin/if-fpath-files ${Plugin_path}; then
+  if  _ZPM-if-fpath-not-empty ${Plugin_path} ; then
     FPATH="$FPATH:${Plugin_path}"
   fi
 
