@@ -84,21 +84,21 @@ _git_prompt() {
         untracked=" $GIT_UNTRACKED$git_vars[6]"
       fi
     fi
-    ps_git=""
-    ps_git+="$GIT_PREFIX"
-    ps_git+=$clean
-    ps_git+=$branch
-    ps_git+=$remote
-    ps_git+=$conflicts
-    ps_git+=$untracked
-    ps_git+=$staged
-    ps_git+=$changed
+    pr_git=""
+    pr_git+="$GIT_PREFIX"
+    pr_git+=$clean
+    pr_git+=$branch
+    pr_git+=$remote
+    pr_git+=$conflicts
+    pr_git+=$untracked
+    pr_git+=$staged
+    pr_git+=$changed
     if [[ $COLORS == "true" ]]; then
-      ps_git+="%{$reset_color%}"
+      pr_git+="%{$reset_color%}"
     fi
-    ps_git+=$GIT_SUFIX
+    pr_git+=$GIT_SUFIX
   else
-    ps_git=""
+    pr_git=""
   fi
 }
 

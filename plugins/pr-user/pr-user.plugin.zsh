@@ -4,7 +4,7 @@ USER_PROMPT_USER=${USER_PROMPT_USER:-'$'}
 USER_PROMPT_PREFIX=${USER_PROMPT_PREFIX:-''}
 USER_PROMPT_SUFIX=${USER_PROMPT_SUFIX:-' '}
 
-_user_prompt() {
+_pr_user() {
   local RETVAL=$?
   local symbol=''
   local prefix=''
@@ -27,10 +27,10 @@ _user_prompt() {
     fi
   fi
   if [[ $COLORS == "true" ]]; then
-    ps_user="$prefix$symbol%{$reset_color%}$USER_PROMPT_SUFIX"
+    pr_user="$prefix$symbol%{$reset_color%}$USER_PROMPT_SUFIX"
   else
-    ps_user="$prefix$symbol$USER_PROMPT_SUFIX"
+    pr_user="$prefix$symbol$USER_PROMPT_SUFIX"
   fi
 }
 
-precmd_functions+=(_user_prompt)
+precmd_functions+=(_pr_user)
