@@ -15,9 +15,9 @@ _pr_user() {
   fi
   if [[ $COLORS == "true" ]]; then
     if [ $RETVAL -eq 0 ]; then
-      prefix="$USER_PROMPT_PREFIX %{$fg[yellow]%}"
+      prefix="$USER_PROMPT_PREFIX %{$fg_bold[yellow]%}"
     else
-      prefix="$USER_PROMPT_PREFIX %{$fg[red]%}"
+      prefix="$USER_PROMPT_PREFIX %{$fg_bold[red]%}"
     fi
   else
     if [ $RETVAL -eq 0 ]; then

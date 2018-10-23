@@ -22,26 +22,26 @@ _git_prompt() {
     git_vars=("${(@f)git_vars}")
     if [[ "$git_vars[7]" == 1 ]]; then
       if [[ $COLORS == "true" ]]; then
-        clean="%{$fg[yellow]%}$GIT_CLEAN"
+        clean="%{$fg_bold[yellow]%}$GIT_CLEAN"
       else
         clean="$GIT_CLEAN"
       fi
     else
       if [[ $COLORS == "true" ]]; then
-        clean="%{$fg[red]%}$GIT_CLEAN"
+        clean="%{$fg_bold[red]%}$GIT_CLEAN"
       else
         clean="$GIT_CLEAN"
       fi
     fi
     if [[ $COLORS == "true" ]]; then
-      branch="%{$fg[green]%} $git_vars[1]"
+      branch="%{$fg_bold[green]%} $git_vars[1]"
     else
       branch=" $git_vars[1]"
     fi
 
     if [ -n "$git_vars[2]" ]; then
       if [[ $COLORS == "true" ]]; then
-        remote=" %{$fg[yellow]%}$git_vars[2]"
+        remote=" %{$fg_bold[yellow]%}$git_vars[2]"
       else
         remote=" $git_vars[2]"
       fi
@@ -52,7 +52,7 @@ _git_prompt() {
       staged=""
     else
       if [[ $COLORS == "true" ]]; then
-        staged=" %{$fg[cyan]%}$GIT_NOT_COMMITED$git_vars[3]"
+        staged=" %{$fg_bold[cyan]%}$GIT_NOT_COMMITED$git_vars[3]"
       else
         staged=" $GIT_NOT_COMMITED$git_vars[3]"
       fi
@@ -61,7 +61,7 @@ _git_prompt() {
       conflicts=""
     else
       if [[ $COLORS == "true" ]]; then
-        conflicts=" %{$fg[red]%}$GIT_CONFLICT$git_vars[4]"
+        conflicts=" %{$fg_bold[red]%}$GIT_CONFLICT$git_vars[4]"
       else
         conflicts=" $GIT_CONFLICT$git_vars[4]"
       fi
@@ -70,7 +70,7 @@ _git_prompt() {
       changed=""
     else
       if [[ $COLORS == "true" ]]; then
-        changed=" %{$fg[red]%}$GIT_CHANGED$git_vars[5]"
+        changed=" %{$fg_bold[red]%}$GIT_CHANGED$git_vars[5]"
       else
         changed=" $GIT_CHANGED$git_vars[5]"
       fi
@@ -79,7 +79,7 @@ _git_prompt() {
       untracked=""
     else
       if [[ $COLORS == "true" ]]; then
-        untracked=" %{$fg[magenta]%}$GIT_UNTRACKED$git_vars[6]"
+        untracked=" %{$fg_bold[magenta]%}$GIT_UNTRACKED$git_vars[6]"
       else
         untracked=" $GIT_UNTRACKED$git_vars[6]"
       fi

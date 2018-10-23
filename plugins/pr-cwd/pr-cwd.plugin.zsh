@@ -9,8 +9,8 @@ _pr_cwd() {
   local newPWD=$(print -Pn %2~)
   local newPWD=$(echo $newPWD| sed 's/^'$_pr_cwd_HOME_'/~/g')
   if [[ $COLORS == "true" ]]; then
-    newPWD=${newPWD//\//%{$fg[red]%}\/%{$fg[cyan]%}}
-    pr_cwd="$CURRENT_PATH_PREFIX%{$fg[cyan]%}$newPWD$CURRENT_PATH_SUFIX%{$reset_color%}"
+    newPWD=${newPWD//\//%{$fg_bold[red]%}\/%{$fg_bold[cyan]%}}
+    pr_cwd="$CURRENT_PATH_PREFIX%{$fg_bold[cyan]%}$newPWD$CURRENT_PATH_SUFIX%{$reset_color%}"
   else
     pr_cwd="$CURRENT_PATH_PREFIX$newPWD$CURRENT_PATH_SUFIX"
   fi
