@@ -7,7 +7,7 @@ GIT_NOT_COMMITED=${GIT_NOT_COMMITED:-'▸'}
 GIT_CONFLICT=${GIT_CONFLICT:-'x'}
 GIT_CHANGED=${GIT_CHANGED:-'+'}
 GIT_UNTRACKED=${GIT_UNTRACKED:-'+'}
-GIT_CLEAN=${GIT_CLEAN:-'●'}
+GIT_SYMBOL=${GIT_SYMBOL:-'●'}
 GIT_PUSH=${GIT_PUSH:-'↑'}
 GIT_PULL=${GIT_PULL:-'↓'}
 
@@ -22,15 +22,15 @@ _git_prompt() {
     git_vars=("${(@f)git_vars}")
     if [[ "$git_vars[7]" == 1 ]]; then
       if [[ $COLORS == "true" ]]; then
-        clean="%{$fg_bold[yellow]%}$GIT_CLEAN"
+        clean="%{$fg_bold[yellow]%}$GIT_SYMBOL"
       else
-        clean="$GIT_CLEAN"
+        clean="$GIT_SYMBOL"
       fi
     else
       if [[ $COLORS == "true" ]]; then
-        clean="%{$fg_bold[red]%}$GIT_CLEAN"
+        clean="%{$fg_bold[red]%}$GIT_SYMBOL"
       else
-        clean="$GIT_CLEAN"
+        clean="$GIT_SYMBOL"
       fi
     fi
     if [[ $COLORS == "true" ]]; then
