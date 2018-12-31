@@ -1,9 +1,9 @@
 #!/usr/bin/env zsh
 
 # zstyle ':completion:*:processes' command "ps -au$USER"
-zstyle ':completion:*:processes' command "ps -u $USER -o pid,comm"
+zstyle ':completion:*:processes' command "ps f -u $USER -o pid,comm"
 zstyle ':completion:*:processes' sort false
-zstyle ':completion:*:processes-names' command "ps xho command"
+zstyle ':completion:*:processes-names' command "ps xhof command"
 
 zstyle ':completion:*' completer _expand _complete _correct _approximate
 zstyle -e ':completion:*:approximate:*' max-errors 'reply=($((($#PREFIX+$#SUFFIX)/3))numeric)'
