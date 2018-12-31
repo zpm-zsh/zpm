@@ -3,7 +3,7 @@
 function _ZPM-upgrade-plugin(){
   _ZPM-log $1 $2
   declare -a spin
-  spin=('◐' '◓' '◑' '◒') 
+  spin=('◐' '◓' '◑' '◒')
 
   git --git-dir="${2}/.git/" --work-tree="${2}/" checkout "${2}/" </dev/null >/dev/null 2>/dev/null &!
   git --git-dir="${2}/.git/" --work-tree="${2}/" pull </dev/null >/dev/null 2>/dev/null  &!
@@ -11,7 +11,7 @@ function _ZPM-upgrade-plugin(){
 
   local update_info=""
 
-  if [[ "$COLORS" == "true" ]]; then
+  if [[ "$CLICOLOR" = 1 ]]; then
     update_info+="${fg[green]}Updating ${fg[cyan]}${1//\//$fg[red]/$fg[cyan]}${fg[yellow]}  ${spin[0]}${reset_color}"
   else
     update_info+="Updating ${1}  ${spin[0]}"
@@ -21,13 +21,13 @@ function _ZPM-upgrade-plugin(){
   while $(kill -0 $pid 2>/dev/null); do
     for i in "${spin[@]}"
     do
-      [[ "$COLORS" == "true" ]] && \
+      [[ "$CLICOLOR" = 1 ]] && \
       echo -en "\b${fg[yellow]}${i}${reset_color}" || \
       echo -en "\b${i}"
       sleep 0.2
     done
   done
-  [[ "$COLORS" == "true" ]] && \
+  [[ "$CLICOLOR" = 1 ]] && \
   echo -e "\b${fg[yellow]}✓${reset_color}" || \
   echo -e "\b✓"
 
@@ -47,7 +47,7 @@ function _ZPM-upgrade(){
   fi
 
   for i ($_Plugins_Upgrade); do
-    _ZPM-upgrade-plugin $i $(_ZPM-plugin-path $i) 
+    _ZPM-upgrade-plugin $i $(_ZPM-plugin-path $i)
   done
   return 0
 }

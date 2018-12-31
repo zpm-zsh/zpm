@@ -13,7 +13,7 @@ _node_version_pre() {
       pr_node="$NODE_VERSION_PREFIX"
 
       if _ZPM-recursive-exist gulpfile.js   >/dev/null || _ZPM-recursive-exist gulpfile.babel.js >/dev/null ; then
-        if [[ $COLORS == "true" ]]; then
+        if [[ $CLICOLOR = 1 ]]; then
           pr_node+="%{$fg_bold[green]%} "
         else
           pr_node+=" "
@@ -21,7 +21,7 @@ _node_version_pre() {
       fi
 
       if _ZPM-recursive-exist Gruntfile.js   >/dev/null ; then
-        if [[ $COLORS == "true" ]]; then
+        if [[ $CLICOLOR = 1 ]]; then
           pr_node+="%{$fg_bold[green]%} "
         else
           pr_node+=" "
@@ -29,7 +29,7 @@ _node_version_pre() {
       fi
 
       if _ZPM-recursive-exist webpack.config.js   >/dev/null ; then
-        if [[ $COLORS == "true" ]]; then
+        if [[ $CLICOLOR = 1 ]]; then
           pr_node+="%{$fg_bold[green]%}ﰩ "
         else
           pr_node+="ﰩ "
@@ -38,7 +38,7 @@ _node_version_pre() {
 
       nodev=$(node -v)
       nodev=${nodev#'v'}
-      if [[ $COLORS == "true" ]]; then
+      if [[ $CLICOLOR = 1 ]]; then
         pr_node+="%{$fg_bold[green]%} %{$fg_bold[blue]%}$nodev%{$reset_color%}"
       else
         pr_node+=" $nodev"

@@ -13,7 +13,7 @@ _pr_user() {
   else
     symbol="$USER_PROMPT_USER"
   fi
-  if [[ $COLORS == "true" ]]; then
+  if [[ $CLICOLOR = 1 ]]; then
     if [ $RETVAL -eq 0 ]; then
       prefix="$USER_PROMPT_PREFIX %{$fg_bold[yellow]%}"
     else
@@ -26,7 +26,7 @@ _pr_user() {
       prefix="$USER_PROMPT_PREFIX-"
     fi
   fi
-  if [[ $COLORS == "true" ]]; then
+  if [[ $CLICOLOR = 1 ]]; then
     pr_user="$prefix$symbol%{$reset_color%}$USER_PROMPT_SUFIX"
   else
     pr_user="$prefix$symbol$USER_PROMPT_SUFIX"

@@ -2,14 +2,14 @@
 
 function _ZPM-install-from-GitHub(){
   declare -a spin
-  spin=('◐' '◓' '◑' '◒') 
+  spin=('◐' '◓' '◑' '◒')
   local Plugin_path=$(_ZPM-plugin-path $1)
   local Plugin_name=$(_ZPM-plugin-name $1)
 
   git clone --recursive "https://github.com/"${1}".git" "$Plugin_path" </dev/null >/dev/null 2>/dev/null &!
   pid=$!
 
-  if [[ "$COLORS" == "true" ]]; then
+  if [[ "$CLICOLOR" = 1 ]]; then
     echo -en "$fg[green]Installing $fg[cyan]${1//\//$fg[red]/$fg[cyan]}${fg[yellow]}  ${spin[0]}${reset_color}"
   else
     echo -en "Installing ${1} from GitHub  ${spin[0]}"
@@ -19,13 +19,13 @@ function _ZPM-install-from-GitHub(){
   do
     for i in "${spin[@]}"
     do
-      [[ "$COLORS" == "true" ]] && \
+      [[ "$CLICOLOR" = 1 ]] && \
       echo -en "\b${fg[yellow]}${i}${reset_color}" || \
       echo -en "\b${i}"
       sleep 0.2
     done
   done
-  [[ "$COLORS" == "true" ]] && \
+  [[ "$CLICOLOR" = 1 ]] && \
   echo -e "\b${fg[yellow]}✓${reset_color}" || \
   echo -e "\b✓"
 

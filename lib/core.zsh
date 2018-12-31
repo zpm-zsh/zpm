@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 
-if [[ -z "$COLORS" ]]; then
-  export COLORS=true
+if [[ -z "$CLICOLOR" ]]; then
+  export CLICOLOR=1
 fi
 
 if [[ -z "$DEBUG" ]]; then
@@ -28,7 +28,7 @@ if [[ -z "$PERIOD" ]]; then
   export PERIOD=10
 fi
 
-if [[ "$COLORS" == "true" ]]; then
+if [[ "$CLICOLOR" = 1 ]]; then
   autoload -U colors && colors
   export TERM="xterm-256color"
   export CLICOLOR=1
