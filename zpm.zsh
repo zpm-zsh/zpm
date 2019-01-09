@@ -27,15 +27,3 @@ function zpm(){
     _ZPM-initialize-plugin $plugin
   done
 }
-
-function Plug(){
-  echo 'This function depricated, change `Plug` to `zpm load`'
-  zpm $@
-}
-
-function ZPM-upgrade(){
-  echo 'This function depricated, change `ZPM-upgrade` to `zpm upgrade`'
-  _ZPM-upgrade $@
-}
-
-zstyle ':completion:*:(zpm):*' sort false

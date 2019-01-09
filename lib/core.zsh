@@ -44,7 +44,7 @@ fi
 
 
 if [[ -z "${ZPM_PLUGIN_DIR}" ]]; then
-  _ZPM_PLUGIN_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/zpm"
+  _ZPM_PLUGIN_DIR="$HOME/.local/lib/zpm"
 else
   _ZPM_PLUGIN_DIR="${ZPM_PLUGIN_DIR}"
   unset ZPM_PLUGIN_DIR
@@ -65,6 +65,5 @@ setopt prompt_subst
 zstyle ":completion::complete:*" use-cache 1
 zstyle ":completion::complete:*" cache-path "$HOME/.cache/zsh"
 autoload -U compinit && compinit
-zmodload zsh/terminfo
 
 mkdir -p "$_ZPM_PLUGIN_DIR"
