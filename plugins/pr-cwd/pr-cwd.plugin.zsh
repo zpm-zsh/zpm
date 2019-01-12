@@ -18,9 +18,9 @@ _pr_cwd() {
   if [[ $CLICOLOR = 1 ]]; then
     newPWD=${newPWD//\//%{$fg_bold[red]%}\/%{$fg_bold[cyan]%}}
     newPWD=$'%{\033]8;;file://'"$PWD"$'\a%}'$newPWD$'%{\033]8;;\a%}'
-    short_PWD="$CURRENT_PATH_PREFIX%{$fg[red]%}$lockIcon%{$fg_bold[cyan]%}$newPWD$CURRENT_PATH_SUFIX%{$reset_color%}"
+    pr_cwd="$CURRENT_PATH_PREFIX%{$fg[red]%}$lockIcon%{$fg_bold[cyan]%}$newPWD$CURRENT_PATH_SUFIX%{$reset_color%}"
   else
-    short_PWD="$CURRENT_PATH_PREFIX$lockIcon$newPWD$CURRENT_PATH_SUFIX"
+    pr_cwd="$CURRENT_PATH_PREFIX$lockIcon$newPWD$CURRENT_PATH_SUFIX"
   fi
   
 }
