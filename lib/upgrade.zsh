@@ -15,7 +15,7 @@ function _ZPM-upgrade-plugin(){
     if [[ $(_ZPM-plugin-type $1) == 'github' ]]; then
       echo -en $'\033]8;;https://github.com/'"$1"$'\a'
     else
-      echo -en $'\033]8;;file://'"$2"$'\a'
+      echo -en $'\033]8;;https://github.com/zpm-zsh/zpm\a'
     fi
     echo -en "${1//\//$fg[red]/$fg[cyan]}"
     echo -en $'\033]8;;\a'
