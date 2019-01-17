@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 
 function _ZPM-log() {
-  if [[ "$DEBUG" == 'true' ]]; then
+  if [[ ! -z "$DEBUG" ]]; then
     echo $@
   fi
 }
@@ -65,39 +65,30 @@ _ZPM-if-fpath-not-empty(){
   local exist=false
 
   for i in $1/_*(N); do
-    exist=true
-  done
-
-  if [[ $exist == true ]]; then
-    return 0
-  else
     return -1
-  fi
+  done
+  
+  return 0
 
 }
 
 _ZPM-recursive-exist(){
-  DIR="$PWD"
-  exist=false
+  local r_dir="$PWD"
 
-  if [[ -d "$DIR/$1" || -f "$DIR/$1" ]]; then
-    exist=true
-    echo "$DIR/$1"
+  if [[ -d "$r_dir/$1" || -f "$r_dir/$1" ]]; then
+    return 0
+    echo "$r_dir/$1"
   fi
-  while [[ "$DIR" != "" ]]; do
-    DIR=$(dirname "$DIR")
-    if [[ "$DIR" == '/' ]]; then
-      DIR=""
+  while [[ "$r_dir" != "" ]]; do
+    r_dir=$(dirname "$r_dir")
+    if [[ "$r_dir" == '/' ]]; then
+      r_dir=""
     fi
-    if [[ -d "$DIR/$1" || -f "$DIR/$1" ]]; then
-      exist=true
-      echo "$DIR/$1"
+    if [[ -d "$r_dir/$1" || -f "$r_dir/$1" ]]; then
+      return 0
     fi
   done
 
-  if [[ "$exist" == false ]]; then
-    return -1
-  fi
-  return 0
+  return -1
 
 }

@@ -4,10 +4,6 @@ if [[ -z "$CLICOLOR" ]]; then
   export CLICOLOR=1
 fi
 
-if [[ -z "$DEBUG" ]]; then
-  export DEBUG="false"
-fi
-
 if [[ -z "$EDITOR" ]]; then
   export EDITOR="vim"
 fi
@@ -31,7 +27,6 @@ fi
 if [[ "$CLICOLOR" = 1 ]]; then
   autoload -U colors && colors
   export TERM="xterm-256color"
-  export CLICOLOR=1
 fi
 
 if [[ -z "$ZPM_DIR" ]]; then

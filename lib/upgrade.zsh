@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 
 function _ZPM-upgrade-plugin(){
-  _ZPM-log $1 $2
+  _ZPM-log $1 
   declare -a spin
   spin=('◐' '◓' '◑' '◒')
 
@@ -10,8 +10,8 @@ function _ZPM-upgrade-plugin(){
   local Plugin_owner=$(_ZPM-plugin-owner $1)
 
 
-  git --git-dir="${2}/.git/" --work-tree="${2}/" checkout "${2}/" </dev/null >/dev/null 2>/dev/null &!
-  git --git-dir="${2}/.git/" --work-tree="${2}/" pull </dev/null >/dev/null 2>/dev/null  &!
+  git --git-dir="${Plugin_path}/.git/" --work-tree="${Plugin_path}/" checkout "${Plugin_path}/" </dev/null >/dev/null 2>/dev/null &!
+  git --git-dir="${Plugin_path}/.git/" --work-tree="${Plugin_path}/" pull </dev/null >/dev/null 2>/dev/null  &!
   pid=$!
 
 
@@ -54,7 +54,7 @@ function _ZPM-upgrade(){
   fi
 
   for i ($_Plugins_Upgrade); do
-    _ZPM-upgrade-plugin $i $(_ZPM-plugin-path $i)
+    _ZPM-upgrade-plugin $i
   done
   return 0
 }

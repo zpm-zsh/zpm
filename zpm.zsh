@@ -18,7 +18,7 @@ function zpm(){
     _ZPM-upgrade $@
     return 0
   fi
-  if [[ "$1" == 'load' ]]; then
+  if [[ "$1" == 'i' || "$1" == 'l' || "$1" == 'install' || "$1" == 'load' ]]; then
     shift
   fi
   for plugin ($@); do
