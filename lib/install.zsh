@@ -5,16 +5,17 @@ function _ZPM-install-from-GitHub(){
   spin=('◐' '◓' '◑' '◒')
   local Plugin_path=$(_ZPM-plugin-path $1)
   local Plugin_name=$(_ZPM-plugin-name $1)
+  local Plugin_owner=$(_ZPM-plugin-owner $1)
 
   git clone --recursive "https://github.com/"${1}".git" "$Plugin_path" </dev/null >/dev/null 2>/dev/null &!
   pid=$!
 
   if [[ "$CLICOLOR" = 1 ]]; then
-    echo -en "$fg[green]Installing $fg[cyan]"
+    echo -en "$fg_bold[green]Installing "
     echo -en $'\033]8;;https://github.com/'"$1"$'\a'
-    echo -en "${1//\//$fg[red]/$fg[cyan]}"
+    echo -en "$fg_bold[blue]${Plugin_owner}$fg_bold[red]/$fg_bold[blue]${Plugin_name}"
     echo -en $'\033]8;;\a'
-    echo -en "${fg[yellow]}  ${spin[0]}${reset_color}"
+    echo -en "${fg_bold[yellow]}  ${spin[0]}${reset_color}"
   else
     echo -en "Installing ${1} from GitHub  ${spin[0]}"
   fi

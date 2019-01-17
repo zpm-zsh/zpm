@@ -5,21 +5,22 @@ function _ZPM-upgrade-plugin(){
   declare -a spin
   spin=('◐' '◓' '◑' '◒')
 
+  local Plugin_path=$(_ZPM-plugin-path $1)
+  local Plugin_name=$(_ZPM-plugin-name $1)
+  local Plugin_owner=$(_ZPM-plugin-owner $1)
+
+
   git --git-dir="${2}/.git/" --work-tree="${2}/" checkout "${2}/" </dev/null >/dev/null 2>/dev/null &!
   git --git-dir="${2}/.git/" --work-tree="${2}/" pull </dev/null >/dev/null 2>/dev/null  &!
   pid=$!
 
 
   if [[ "$CLICOLOR" = 1 ]]; then
-    echo -en "${fg[green]}Updating ${fg[cyan]}"
-    if [[ $(_ZPM-plugin-type $1) == 'github' ]]; then
-      echo -en $'\033]8;;https://github.com/'"$1"$'\a'
-    else
-      echo -en $'\033]8;;https://github.com/zpm-zsh/zpm\a'
-    fi
-    echo -en "${1//\//$fg[red]/$fg[cyan]}"
+    echo -en "${fg_bold[green]}Updating "
+    echo -en $'\033]8;;https://github.com/'"$1"$'\a'
+    echo -en "$fg_bold[blue]${Plugin_owner}$fg_bold[red]/$fg_bold[blue]${Plugin_name}"
     echo -en $'\033]8;;\a'
-    echo -en "${fg[yellow]}  ${spin[0]}${reset_color}"
+    echo -en "${fg_bold[yellow]}  ${spin[0]}${reset_color}"
   else
     echo -en "Updating ${1}  ${spin[0]}"
   fi
