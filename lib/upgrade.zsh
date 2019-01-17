@@ -9,22 +9,20 @@ function _ZPM-upgrade-plugin(){
   git --git-dir="${2}/.git/" --work-tree="${2}/" pull </dev/null >/dev/null 2>/dev/null  &!
   pid=$!
 
-  local update_info=""
 
   if [[ "$CLICOLOR" = 1 ]]; then
-    update_info+="${fg[green]}Updating ${fg[cyan]}"
+    echo -en "${fg[green]}Updating ${fg[cyan]}"
     if [[ $(_ZPM-plugin-type $1) == 'github' ]]; then
-      update_info+=$'\033]8;;https://github.com/'"$1"$'\a'
+      echo -en $'\033]8;;https://github.com/'"$1"$'\a'
     else
-      update_info+=$'\033]8;;file://'"$2"$'\a'
+      echo -en $'\033]8;;file://'"$2"$'\a'
     fi
-    update_info+="${1//\//$fg[red]/$fg[cyan]}"
-    update_info+=$'\033]8;;\a'
-    update_info+="${fg[yellow]}  ${spin[0]}${reset_color}"
+    echo -en "${1//\//$fg[red]/$fg[cyan]}"
+    echo -en $'\033]8;;\a'
+    echo -en "${fg[yellow]}  ${spin[0]}${reset_color}"
   else
-    update_info+="Updating ${1}  ${spin[0]}"
+    echo -en "Updating ${1}  ${spin[0]}"
   fi
-  echo -en ${update_info}
 
   while $(kill -0 $pid 2>/dev/null); do
     for i in "${spin[@]}"
