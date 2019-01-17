@@ -12,7 +12,15 @@ function _ZPM-upgrade-plugin(){
   local update_info=""
 
   if [[ "$CLICOLOR" = 1 ]]; then
-    update_info+="${fg[green]}Updating ${fg[cyan]}${1//\//$fg[red]/$fg[cyan]}${fg[yellow]}  ${spin[0]}${reset_color}"
+    update_info+="${fg[green]}Updating ${fg[cyan]}"
+    if [[ $(_ZPM-plugin-type $1) == 'github' ]]; then
+      update_info+=$'\033]8;;https://github.com/'"$1"$'\a'
+    else
+      update_info+=$'\033]8;;file://'"$2"$'\a'
+    fi
+    update_info+="${1//\//$fg[red]/$fg[cyan]}"
+    update_info+=$'\033]8;;\a'
+    update_info+="${fg[yellow]}  ${spin[0]}${reset_color}"
   else
     update_info+="Updating ${1}  ${spin[0]}"
   fi
