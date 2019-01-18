@@ -18,6 +18,7 @@ function _ZPM-load-plugin() {
   fi
 
   if  _ZPM-if-fpath-not-empty ${Plugin_path} ; then
+    _ZPM-log "Add to FPATH ${Plugin_path}" 
     FPATH="$FPATH:${Plugin_path}"
   fi
 

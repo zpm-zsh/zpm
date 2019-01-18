@@ -62,13 +62,12 @@ _ZPM-appendpath () {
 }
 
 _ZPM-if-fpath-not-empty(){
-  local exist=false
 
   for i in $1/_*(N); do
-    return -1
+    return 0
   done
   
-  return 0
+  return 1
 
 }
 
