@@ -1,35 +1,21 @@
 #!/usr/bin/env zsh
-USER_PROMPT_ROOT=${USER_PROMPT_ROOT:-'#'}
-USER_PROMPT_USER=${USER_PROMPT_USER:-'$'}
-USER_PROMPT_PREFIX=${USER_PROMPT_PREFIX:-''}
-USER_PROMPT_SUFIX=${USER_PROMPT_SUFIX:-' '}
+PR_PROMPT_PREFIX=${PR_PROMPT_PREFIX:-' '}
+PR_PROMPT_SUFIX=${PR_PROMPT_SUFIX:-''}
 
 _pr_user() {
   local RETVAL=$?
-  local symbol=''
-  local prefix=''
-  if [[ "$EUID" == 0 ]]; then
-    symbol="$USER_PROMPT_ROOT"
-  else
-    symbol="$USER_PROMPT_USER"
-  fi
   if [[ $CLICOLOR = 1 ]]; then
     if [ $RETVAL -eq 0 ]; then
-      prefix="$USER_PROMPT_PREFIX %{$fg_bold[yellow]%}"
+      pr_user="$PR_PROMPT_PREFIX%{$fg_bold[yellow]%}"'$'"%{$reset_color%}$PR_PROMPT_SUFIX"
     else
-      prefix="$USER_PROMPT_PREFIX %{$fg_bold[red]%}"
+      pr_user="$PR_PROMPT_PREFIX%{$fg_bold[red]%}"'$'"%{$reset_color%}$PR_PROMPT_SUFIX"
     fi
   else
     if [ $RETVAL -eq 0 ]; then
-      prefix="$USER_PROMPT_PREFIX+"
+      pr_user="$PR_PROMPT_PREFIX+$PR_PROMPT_SUFIX"
     else
-      prefix="$USER_PROMPT_PREFIX-"
+      pr_user="$PR_PROMPT_PREFIX-$PR_PROMPT_SUFIX"
     fi
-  fi
-  if [[ $CLICOLOR = 1 ]]; then
-    pr_user="$prefix$symbol%{$reset_color%}$USER_PROMPT_SUFIX"
-  else
-    pr_user="$prefix$symbol$USER_PROMPT_SUFIX"
   fi
 }
 
