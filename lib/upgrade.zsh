@@ -6,8 +6,6 @@ function _ZPM-upgrade-plugin(){
   spin=('◐' '◓' '◑' '◒')
 
   local Plugin_path=$(_ZPM-plugin-path $1)
-  local Plugin_name=$(_ZPM-plugin-name $1)
-  local Plugin_owner=$(_ZPM-plugin-owner $1)
 
 
   git --git-dir="${Plugin_path}/.git/" --work-tree="${Plugin_path}/" checkout "${Plugin_path}/" </dev/null >/dev/null 2>/dev/null &!
@@ -18,7 +16,7 @@ function _ZPM-upgrade-plugin(){
   if [[ "$CLICOLOR" = 1 ]]; then
     echo -en "${fg_bold[green]}Updating "
     echo -en $'\033]8;;https://github.com/'"$1"$'\a'
-    echo -en "$fg_bold[blue]${Plugin_owner}$fg_bold[red]/$fg_bold[blue]${Plugin_name}"
+    echo -en "$fg_bold[blue]${1}"
     echo -en $'\033]8;;\a'
     echo -en "${fg_bold[yellow]}  ${spin[0]}${reset_color}"
   else

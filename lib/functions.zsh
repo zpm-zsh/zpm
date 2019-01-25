@@ -30,9 +30,9 @@ function _ZPM-plugin-name() {
   local plugin_name="${1}"
   plugin_name=${plugin_name##*\/}
   local plugin_owner=${plugin_name##*\/}
-  # if [[ "${plugin_name}" == 'oh-my-zsh-'* ]]; then
-  #   plugin_name=${plugin_name:10}
-  # fi
+  if [[ "${plugin_name}" == 'oh-my-zsh-'* ]]; then
+    plugin_name=${plugin_name:10}
+  fi
   if [[ "${plugin_name}" == 'zsh-'* ]]; then
     plugin_name=${plugin_name:4}
   fi
@@ -44,13 +44,7 @@ function _ZPM-plugin-name() {
   fi
   echo ${plugin_name}
 }
-function _ZPM-plugin-owner() {
-  if [[ $(_ZPM-plugin-type $1) == 'github' ]]; then
-    echo -en "${1%\/*}"
-  else
-    echo -en "zpm-zsh"
-  fi
-}
+
 
 _ZPM-appendpath () {
     case ":$PATH:" in
