@@ -29,7 +29,7 @@ fi
 If you don't have `.zshrc` copy example of `.zshrc` from zpm
 
 ```sh
-cp ~/.zpm/zshrc-example.zsh ~/.zshrc
+cp ~/.zpm/zshrc ~/.zshrc
 ```
 
 ## Using plugins
@@ -39,4 +39,4 @@ Or add `zpm load github-user/github-repo` for enabling plugin from github.
 
 ## Upgrade
 
-Run `ZPM-Upgrade` for upgrading, or run `ZPM-Upgrade some-plugin` if you want upgrade this plugin
+Run `zpm upgrade` for upgrading, or run `zpm upgrade some-plugin` if you want upgrade this plugin
