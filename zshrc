@@ -38,11 +38,3 @@ PROMPT2='$pr_2'
 PROMPT_EOL_MARK='$pr_eol'
 PROMPT_TITLE='$USER@$HOST:$PWD'
 
-
-
-if [[ -f ~/.zshrc.local ]]; then
-  source ~/.zshrc.local 
-fi
-if [[ -f ~/.zshrc.theme ]]; then
-  source ~/.zshrc.theme 
-fi
