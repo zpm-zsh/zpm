@@ -10,8 +10,8 @@ _ZPM_Plugins_core=()
 
 function _ZPM-load-plugin() {
 
-  local Plugin_path=$(_ZPM-plugin-path $1)
-  local Plugin_name=$(_ZPM-plugin-name $1)
+  local Plugin_path=$(_ZPM-get-plugin-path $1)
+  local Plugin_name=$(_ZPM-get-plugin-basename $1)
 
   if [[ ! -d $Plugin_path ]]; then
     _ZPM-install-plugin $1

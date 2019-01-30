@@ -16,7 +16,7 @@ function _ZPM-plugin-type() {
   fi
 }
 
-function _ZPM-plugin-path() {
+function _ZPM-get-plugin-path() {
   if [[ $(_ZPM-plugin-type $1) == 'zpm' ]]; then
     echo ${_ZPM_DIR}
   elif [[ $(_ZPM-plugin-type $1) == 'core' ]]; then
@@ -26,7 +26,7 @@ function _ZPM-plugin-path() {
   fi
 }
 
-function _ZPM-plugin-name() {
+function _ZPM-get-plugin-basename() {
   local plugin_name="${1}"
   plugin_name=${plugin_name##*\/}
   local plugin_owner=${plugin_name##*\/}
@@ -43,6 +43,16 @@ function _ZPM-plugin-name() {
     plugin_name=${plugin_name:0:${#plugin_name}-7}
   fi
   echo ${plugin_name}
+}
+
+function _ZPM-get-plugin-url() {
+
+  if [[ $(_ZPM-plugin-type $1) == 'zpm' ]]; then
+    echo "https://github.com/zpm-zsh/zpm"
+  elif [[ $(_ZPM-plugin-type $1) == 'github' ]]; then
+    echo "https://github.com/$1"
+  fi
+
 }
 
 
