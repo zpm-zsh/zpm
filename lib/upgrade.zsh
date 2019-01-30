@@ -17,7 +17,7 @@ function _ZPM-upgrade-plugin(){
   if [[ "$CLICOLOR" = 1 ]]; then
     echo -en "${fg_bold[green]}Updating "
     echo -en $'\033]8;;'"$Plugin_url"$'\a'
-    echo -en "$fg_bold[blue]${1}"
+    echo -en "$fg_bold[blue]${fg[blue]}${1//\//$fg[red]/$fg[blue]}${fg[blue]}"
     echo -en $'\033]8;;\a'
     echo -en "${fg_bold[yellow]}  ${spin[0]}${reset_color}"
   else

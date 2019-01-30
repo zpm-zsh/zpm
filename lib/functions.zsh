@@ -21,8 +21,10 @@ function _ZPM-get-plugin-path() {
     echo ${_ZPM_DIR}
   elif [[ $(_ZPM-plugin-type $1) == 'core' ]]; then
     echo "${_ZPM_DIR}/plugins/${1}"
-  else
+  elif [[ $(_ZPM-plugin-type $1) == 'github' ]]; then
     echo "${_ZPM_PLUGIN_DIR}/${1//\//---}"
+  else
+    echo Unknown plugin
   fi
 }
 
@@ -51,6 +53,8 @@ function _ZPM-get-plugin-url() {
     echo "https://github.com/zpm-zsh/zpm"
   elif [[ $(_ZPM-plugin-type $1) == 'github' ]]; then
     echo "https://github.com/$1"
+  else
+    echo Unknown plugin
   fi
 
 }
