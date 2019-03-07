@@ -11,7 +11,7 @@ function _ZPM-install-from-GitHub(){
   if [[ "$CLICOLOR" = 1 ]]; then
     echo -en "$fg_bold[green]Installing "
     echo -en $'\033]8;;https://github.com/'"$1"$'\a'
-    echo -en "$fg_bold[blue]${1}"
+    echo -en "$fg_bold[blue]${fg[blue]}${1//\//$fg[red]/$fg[blue]}${fg[blue]}"
     echo -en $'\033]8;;\a'
     echo -en "${fg_bold[yellow]}  ${spin[0]}${reset_color}"
   else
