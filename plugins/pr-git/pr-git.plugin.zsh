@@ -29,7 +29,7 @@ _git-info() {
   fi
   if [[ $CLICOLOR = 1 ]]; then
 
-  git_branch="%{$fg_bold[green]%}${ref#refs/heads/}%{$reset_color%}"
+  git_branch="%{$fg_bold[yellow]%}${ref#refs/heads/}%{$reset_color%}"
   else
   git_branch="${ref#refs/heads/}"
 
