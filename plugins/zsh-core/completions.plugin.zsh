@@ -1,9 +1,9 @@
 #!/usr/bin/env zsh
 
-# zstyle ':completion:*:processes' command "ps -au$USER"
-zstyle ':completion:*:processes' command "ps f -u $USER -o pid,comm"
+zstyle ':completion:*:processes' command 'NOCOLORS=1 ps -U $(whoami)|sed "/ps/d"'
+zstyle ':completion:*:processes' insert-ids menu yes select
+zstyle ':completion:*:processes-names' command 'NOCOLORS=1 ps xho command|sed "s/://g"'
 zstyle ':completion:*:processes' sort false
-zstyle ':completion:*:processes-names' command "ps xhof command"
 
 zstyle ':completion:*' completer _expand _complete _correct _approximate
 zstyle -e ':completion:*:approximate:*' max-errors 'reply=($((($#PREFIX+$#SUFFIX)/3))numeric)'
