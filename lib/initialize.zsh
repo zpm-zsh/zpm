@@ -17,10 +17,8 @@ function _ZPM-load-plugin() {
     _ZPM-install-plugin $1
   fi
 
-  if  _ZPM-if-fpath-not-empty ${Plugin_path} ; then
-    _ZPM-log "Add to FPATH ${Plugin_path}" 
-    FPATH="$FPATH:${Plugin_path}"
-  fi
+  _ZPM-log "Add to FPATH ${Plugin_path}" 
+  FPATH="$FPATH:${Plugin_path}"
 
   if [[ -d ${Plugin_path}/bin ]]; then
     PATH="$PATH:${Plugin_path}/bin"
