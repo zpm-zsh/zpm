@@ -6,7 +6,6 @@
 
 _ZPM_Plugins=()
 _ZPM_Plugins_3rdparty=()
-_ZPM_Plugins_core=()
 
 function _ZPM-load-plugin() {
 
@@ -35,11 +34,8 @@ function _ZPM-load-plugin() {
 
 function _ZPM-initialize-plugin() {
   _ZPM_Plugins+=($1)
-  if [[ $(_ZPM-plugin-type $1) == 'core' ]]; then
-    _ZPM_Plugins_core+=($1)
-  else
-    _ZPM_Plugins_3rdparty+=($1)
-  fi
+  
+  _ZPM_Plugins_3rdparty+=($1)
 
   _ZPM-load-plugin $1
 }

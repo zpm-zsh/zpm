@@ -37,7 +37,7 @@ function _ZPM-upgrade-plugin(){
   echo -e "\b${fg[yellow]}✓${reset_color}" || \
   echo -e "\b✓"
 
-  for i ($_ZPM_Core_Plugins); do
+  for i ($_ZPM_Plugins_3rdparty); do
     type _${i}-upgrade | grep -q "shell function" && _${i}-upgrade >/dev/null 2>/dev/null &!
   done
 

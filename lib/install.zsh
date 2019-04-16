@@ -18,10 +18,8 @@ function _ZPM-install-from-GitHub(){
     echo -en "Installing ${1} from GitHub  ${spin[0]}"
   fi
 
-  while $( kill -0 $pid 2>/dev/null)
-  do
-    for i in "${spin[@]}"
-    do
+  while $( kill -0 $pid 2>/dev/null); do
+    for i in "${spin[@]}"; do
       [[ "$CLICOLOR" = 1 ]] && \
       echo -en "\b${fg[yellow]}${i}${reset_color}" || \
       echo -en "\b${i}"

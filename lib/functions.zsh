@@ -12,15 +12,13 @@ function _ZPM-plugin-type() {
   elif [[ ${1} == *'/'* ]]; then
     echo github
   else
-    echo core
+    echo unknown
   fi
 }
 
 function _ZPM-get-plugin-path() {
   if [[ $(_ZPM-plugin-type $1) == 'zpm' ]]; then
     echo ${_ZPM_DIR}
-  elif [[ $(_ZPM-plugin-type $1) == 'core' ]]; then
-    echo "${_ZPM_DIR}/plugins/${1}"
   elif [[ $(_ZPM-plugin-type $1) == 'github' ]]; then
     echo "${_ZPM_PLUGIN_DIR}/${1//\//---}"
   else
@@ -61,41 +59,12 @@ function _ZPM-get-plugin-url() {
 
 
 _ZPM-appendpath () {
-    case ":$PATH:" in
-        *:"$1":*)
-            ;;
-        *)
-            PATH="${PATH:+$PATH:}$1"
-    esac
+  case ":$PATH:" in
+    *:"$1":*)
+    ;;
+    *)
+    PATH="${PATH:+$PATH:}$1"
+  esac
 }
 
-_ZPM-if-fpath-not-empty(){
 
-  for i in $1/_*(N); do
-    return 0
-  done
-  
-  return 1
-
-}
-
-_ZPM-recursive-exist(){
-  local r_dir="$PWD"
-
-  if [[ -d "$r_dir/$1" || -f "$r_dir/$1" ]]; then
-    return 0
-    echo "$r_dir/$1"
-  fi
-  while [[ "$r_dir" != "" ]]; do
-    r_dir=$(dirname "$r_dir")
-    if [[ "$r_dir" == '/' ]]; then
-      r_dir=""
-    fi
-    if [[ -d "$r_dir/$1" || -f "$r_dir/$1" ]]; then
-      return 0
-    fi
-  done
-
-  return -1
-
-}
