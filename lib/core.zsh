@@ -59,6 +59,13 @@ LISTMAX=9999
 setopt prompt_subst
 zstyle ":completion::complete:*" use-cache 1
 zstyle ":completion::complete:*" cache-path "$HOME/.cache/zsh"
-autoload -U compinit && compinit
+
+autoload -Uz compinit 
+if [[ -n ${ZDOTDIR}/.zcompdump(#qN.mh+24) ]]; then
+	compinit;
+else
+	compinit -C;
+fi
+
 
 mkdir -p "$_ZPM_PLUGIN_DIR"

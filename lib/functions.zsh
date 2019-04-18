@@ -12,7 +12,7 @@ function _ZPM-plugin-type() {
   elif [[ ${1} == *'/'* ]]; then
     echo github
   else
-    echo unknown
+    echo Unknown plugin
   fi
 }
 
@@ -39,6 +39,9 @@ function _ZPM-get-plugin-basename() {
   if [[ "${plugin_name}" == *'.zsh' ]]; then
     plugin_name=${plugin_name:0:${#plugin_name}-4}
   fi
+  if [[ "${plugin_name}" == *'-zsh' ]]; then
+    plugin_name=${plugin_name:0:${#plugin_name}-4}
+  fi
   if [[ "${plugin_name}" == *'.plugin' ]]; then
     plugin_name=${plugin_name:0:${#plugin_name}-7}
   fi
@@ -56,15 +59,3 @@ function _ZPM-get-plugin-url() {
   fi
 
 }
-
-
-_ZPM-appendpath () {
-  case ":$PATH:" in
-    *:"$1":*)
-    ;;
-    *)
-    PATH="${PATH:+$PATH:}$1"
-  esac
-}
-
-

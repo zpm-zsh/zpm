@@ -12,14 +12,14 @@ for plugin in "$_ZPM_DIR/plugins/"*; do
  _ZPM_Plugins_core__unused+=$( basename "$plugin")
 done
 
-local -a _ZPM_Plugins_3rdparty__unused
+local -a _ZPM_Plugins__unused
 for plugin in "$_ZPM_PLUGIN_DIR/"*---*; do
   local unused=$( basename "$plugin")
- _ZPM_Plugins_3rdparty__unused+=${unused//---/\/}
+ _ZPM_Plugins__unused+=${unused//---/\/}
 done
 
 local -a _ZPM_Plugins_upgradable
-_ZPM_Plugins_upgradable=( ${_ZPM_Plugins_core__unused[@]} ${_ZPM_Plugins_3rdparty__unused[@]})
+_ZPM_Plugins_upgradable=( ${_ZPM_Plugins_core__unused[@]} ${_ZPM_Plugins__unused[@]})
 
 _arguments \
     '*:: :->subcmds' && return 0
@@ -32,7 +32,7 @@ fi
 if (( CURRENT > 1 )); then
   case "$words[1]" in
     u|up|upgrade)
-      _describe -t commands "zpm plugins" _ZPM_Plugins_3rdparty
+      _describe -t commands "zpm plugins" _ZPM_Plugins
     ;;
     l|load)
       _describe -t commands "zpm plugins" _ZPM_Plugins_upgradable
