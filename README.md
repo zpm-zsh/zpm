@@ -35,6 +35,7 @@ cp ~/.zpm/zshrc ~/.zshrc
 Add `zpm load github-user/github-repo` for enabling plugin from github.
 
 Or `zpm load-if condition github-user/github-repo` for conditionally loading plugin
+
 Or `zpm load-if-not condition github-user/github-repo` for loading plugin if condition is not met 
 
 Conditions:
