@@ -18,12 +18,10 @@ ZPM runs on Linux, Android, FreeBSD and OS X.
 Add following text into `.zshrc`
 
 ```sh
-if [[ -f ~/.zpm/zpm.zsh ]]; then
-	source ~/.zpm/zpm.zsh
-else
-	git clone --recursive https://github.com/horosgrisa/zpm ~/.zpm
-	source ~/.zpm/zpm.zsh
+if [[ ! -f ~/.zpm/zpm.zsh ]]; then
+  git clone --recursive https://github.com/horosgrisa/zpm ~/.zpm
 fi
+source ~/.zpm/zpm.zsh
 ```
 
 If you don't have `.zshrc` copy example of `.zshrc` from zpm
@@ -34,8 +32,18 @@ cp ~/.zpm/zshrc ~/.zshrc
 
 ## Using plugins
 
-Add `zpm load some-plugin` for enabling plugin from `~/.zpm/plugins`.  
-Or add `zpm load github-user/github-repo` for enabling plugin from github.
+Add `zpm load github-user/github-repo` for enabling plugin from github.
+
+Or `zpm load-if condition github-user/github-repo` for conditionally loading plugin
+Or `zpm load-if-not condition github-user/github-repo` for loading plugin if condition is not met 
+
+Conditions:
+* `linux` - if current OS is Linux
+* `bsd` - if current OS is *BSD
+* `macos` - if current OS is macOS
+* `termux` - if current session run in [Termux](http://termux.com/)
+* `ssh` - if session run on remote host
+* `tmux` - if session run in Tmux
 
 ## Upgrade
 
