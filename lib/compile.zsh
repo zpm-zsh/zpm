@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 
 {
-  zcompdump="${ZDOTDIR:-$HOME}/.zcompdump"
+  zcompdump="${HOME}/.zcompdump"
 
   if [[ -s "$zcompdump" && (! -s "${zcompdump}.zwc" || "$zcompdump" -nt "${zcompdump}.zwc") ]]; then
     zcompile "$zcompdump" 1>/dev/null  2>/dev/null

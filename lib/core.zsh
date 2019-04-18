@@ -61,7 +61,7 @@ zstyle ":completion::complete:*" use-cache 1
 zstyle ":completion::complete:*" cache-path "$HOME/.cache/zsh"
 
 autoload -Uz compinit 
-if [[ -n ${ZDOTDIR}/.zcompdump(#qN.mh+24) ]]; then
+if [[ -n "${ZSH_COMPDUMP}"(#qN.mh+24) ]]; then
 	compinit;
 else
 	compinit -C;
