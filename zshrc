@@ -6,14 +6,9 @@ fi
 source ~/.zpm/zpm.zsh
 
 ### Core plugins
-zpm zsh-core path-fix check-deps
-
-zpm pr-jobs pr-is-root pr-user # PROMPT 
-zpm pr-exec-time pr-cwd # RPROMPT
-zpm pr-2 # PROMPT2
-zpm pr-eol # PROMPT_EOL_MARK
-zpm zpm-zsh/title # PROMPT_TITLE
-
+zpm zpm-zsh/core-config
+zpm zpm-zsh/check-deps
+zpm load-if termux zpm-zsh/termux # Compatibility
 
 ### 3party plugins
 zpm zpm-zsh/ls
@@ -27,14 +22,28 @@ zpm zsh-users/zsh-completions
 
 zpm horosgrisa/utils
 
-#################
-###  Plugins  ###
-#################
+zpm load-if-not ssh zpm-zsh/dropbox zpm-zsh/insync
+zpm load-if-not ssh zpm-zsh/readers zpm-zsh/clipboard
+zpm load-if-not ssh zpm-zsh/autoenv
+zpm load-if-not ssh zpm-zsh/mysql-colorize
 
-# ZSH
-PROMPT='$pr_jobs$pr_is_root$pr_user '
-RPROMPT='$pr_exec_time$pr_node$pr_git$pr_cwd'
-PROMPT2='$pr_2'
-PROMPT_EOL_MARK='$pr_eol'
-PROMPT_TITLE='$USER@$HOST:$PWD'
+zpm load-if-not ssh jocelynmallon/zshmarks
+zpm load-if-not ssh voronkovich/gitignore.plugin.zsh
+zpm load-if-not ssh psprint/history-search-multi-word
+zpm load-if-not ssh zdharma/fast-syntax-highlighting
+zpm load-if-not ssh tarruda/zsh-autosuggestions
 
+zpm zpm-zsh/minimal-theme
+
+# zshmarks
+alias mark='bookmark'
+alias c='jump'
+alias marks='showmarks'
+alias delmark='deletemark'
+
+# colors
+PYGMENTIZE_THEME=material
+
+if [[ -f ~/.zshrc.local ]]; then
+  source ~/.zshrc.local 
+fi
