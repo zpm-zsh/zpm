@@ -61,11 +61,13 @@ zstyle ":completion::complete:*" use-cache 1
 zstyle ":completion::complete:*" cache-path "$HOME/.cache/zsh"
 
 autoload -Uz compinit 
-if [[ -n "${ZSH_COMPDUMP}"(#qN.mh+24) ]]; then
-	compinit;
-else
-	compinit -C;
-fi
+compinit
 
+function _ZPM_Post_Initialization(){
+  	compinit;
+    precmd_functions=(${precmd_functions#_ZPM_Post_Initialization})
+}
+
+precmd_functions+=(_ZPM_Post_Initialization)
 
 mkdir -p "$_ZPM_PLUGIN_DIR"
