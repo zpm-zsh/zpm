@@ -1,18 +1,6 @@
 #!/usr/bin/env zsh
 
 {
-  zcompdump="${HOME}/.zcompdump"
-
-  if [[ -s "$zcompdump" && (! -s "${zcompdump}.zwc" || "$zcompdump" -nt "${zcompdump}.zwc") ]]; then
-    zcompile "$zcompdump" 1>/dev/null  2>/dev/null
-  fi
-
-  find ${_ZPM_DIR}/ -type f -name "*.zsh" | while read file; do
-    zcompile $file 1>/dev/null  2>/dev/null
-  done
-
-  find ${_ZPM_PLUGIN_DIR}/ -type f -name "*.zsh" | while read file; do
-    zcompile $file 1>/dev/null  2>/dev/null
-  done
-
+  autoload -Uz zrecompile
+  zrecompile "~/.zshrc" "${HOME}/.zcompdump" ${_ZPM_DIR}/**/*.zsh ${_ZPM_PLUGIN_DIR}/**/*.zsh
 } &!
