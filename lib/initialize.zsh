@@ -29,6 +29,8 @@ function _ZPM-load-plugin() {
     source ${Plugin_path}/zsh-${Plugin_name}.plugin.zsh
   elif [[ -f ${Plugin_path}/${Plugin_name}.zsh ]]; then
     source ${Plugin_path}/${Plugin_name}.zsh
+  elif [[ -f ${Plugin_path}/${Plugin_name}.zsh-theme ]]; then
+    source ${Plugin_path}/${Plugin_name}.zsh-theme
   fi
 }
 

@@ -2,5 +2,5 @@
 
 {
   autoload -Uz zrecompile
-  zrecompile -q "~/.zshrc" "${HOME}/.zcompdump" ${_ZPM_DIR}/**/*.zsh ${_ZPM_PLUGIN_DIR}/**/*.zsh
+  zrecompile -q "~/.zshrc" "${HOME}/.zcompdump" ${_ZPM_DIR}/**/*.zsh ${_ZPM_PLUGIN_DIR}/**/*.zsh ${_ZPM_PLUGIN_DIR}/**/*.zsh-theme
 } &!
