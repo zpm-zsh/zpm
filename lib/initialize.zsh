@@ -19,17 +19,21 @@ function _ZPM-load-plugin() {
   FPATH="$FPATH:${Plugin_path}"
   
   if [[ -d ${Plugin_path}/bin ]]; then
-  _ZPM-log "Add to PATH ${Plugin_path}/bin"
+    _ZPM-log "Add to PATH ${Plugin_path}/bin"
     PATH="$PATH:${Plugin_path}/bin"
   fi
   
   if [[ -f ${Plugin_path}/${Plugin_name}.plugin.zsh ]]; then
+    _ZPM-log "Source ${Plugin_path}/${Plugin_name}.plugin.zsh"
     source ${Plugin_path}/${Plugin_name}.plugin.zsh
   elif [[ -f ${Plugin_path}/zsh-${Plugin_name}.plugin.zsh ]]; then
+    _ZPM-log "Source ${Plugin_path}/zsh-${Plugin_name}.plugin.zsh"
     source ${Plugin_path}/zsh-${Plugin_name}.plugin.zsh
   elif [[ -f ${Plugin_path}/${Plugin_name}.zsh ]]; then
+    _ZPM-log "Source ${Plugin_path}/${Plugin_name}.zsh"
     source ${Plugin_path}/${Plugin_name}.zsh
   elif [[ -f ${Plugin_path}/${Plugin_name}.zsh-theme ]]; then
+    _ZPM-log "Source ${Plugin_path}/${Plugin_name}.zsh-theme"
     source ${Plugin_path}/${Plugin_name}.zsh-theme
   fi
 }
