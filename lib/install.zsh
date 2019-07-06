@@ -10,35 +10,20 @@ function _ZPM-install-from-GitHub(){
   git clone --recursive "https://github.com/"${1}".git" "$Plugin_path" </dev/null >/dev/null 2>/dev/null &!
   pid=$!
   
+  
+  install_string=""
+  
   if [[ "$CLICOLOR" = 1 ]]; then
-    
-    echo -en "$fg_bold[green]Installing "
-    echo -en $'\033]8;;https://github.com/'"$1"$'\a'
-    echo -en "$fg_bold[blue]${1//\//$fg_bold[red]/$fg_bold[blue]}"
-    echo -en $'\033]8;;\a'
-    echo -en "${fg_bold[yellow]}  ${spin_color[0]}${reset_color}"
-    
-    while $( kill -0 $pid 2>/dev/null); do
-      for i in "${spin_color[@]}"; do
-        echo -en "\b${fg_bold[yellow]}${i}${reset_color}"
-        sleep 0.2
-      done
-    done
-    echo -e "\b${fg_bold[green]}✓${reset_color}"
-    
+    install_string+="$fg_bold[green]Installing "
+    install_string+=$'\033]8;;https://github.com/'"$1"$'\a'
+    install_string+="$fg_bold[blue]${1//\//$fg_bold[red]/$fg_bold[blue]}"
+    install_string+=$'\033]8;;\a'
+    install_string+="$fg_bold[green] from $fg_bold[cyan]GitHub"
   else
-    
-    echo -en "Installing ${1} from GitHub  ${spin_no_color[0]}"
-
-    while $( kill -0 $pid 2>/dev/null); do
-      for i in "${spin_no_color[@]}"; do
-        echo -en "\b${i}"
-        sleep 0.2
-      done
-    done
-    echo -e "\b+"
-    
+    install_string+="Installing ${1} from GitHub"
   fi
+  
+  _ZPM-spinner-for-backgroud-process $install_string $pid
   
 }
 

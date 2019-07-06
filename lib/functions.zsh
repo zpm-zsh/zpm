@@ -49,7 +49,7 @@ function _ZPM-get-plugin-basename() {
 }
 
 function _ZPM-get-plugin-url() {
-
+  
   if [[ $(_ZPM-plugin-type $1) == 'zpm' ]]; then
     echo "https://github.com/zpm-zsh/zpm"
   elif [[ $(_ZPM-plugin-type $1) == 'github' ]]; then
@@ -57,5 +57,43 @@ function _ZPM-get-plugin-url() {
   else
     echo Unknown plugin
   fi
+  
+}
 
+_ZPM-spinner-for-backgroud-process() {
+  declare -a spin_color
+  declare -a spin_no_color
+  spin_color=('◐' '◓' '◑' '◒')
+  spin_no_color=('-' '\' '|' '/')
+  
+  if [[ "$CLICOLOR" = 1 ]]; then
+    
+    echo -en "${1}  ${spin_color[0]}"
+    
+    while $(kill -0 $2 2>/dev/null); do
+      for i in "${spin_color[@]}"
+      do
+        echo -en "\b${fg_bold[yellow]}${i}"
+        sleep 0.2
+      done
+    done
+    
+    echo -e "\b${fg_bold[green]}✓${reset_color}"
+    
+  else
+    
+    echo -en "${1}  ${spin_no_color[0]}"
+    
+    while $(kill -0 $2 2>/dev/null); do
+      for i in "${spin_no_color[@]}"
+      do
+        echo -en "\b${i}"
+        sleep 0.2
+      done
+    done
+    
+    echo -e "\b+"
+    
+  fi
+  
 }
