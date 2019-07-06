@@ -7,6 +7,9 @@ _1st_arguments=(
   'load:Load plugin'
 )
 
+local -a _ZPM_Plugins_upgradable
+_ZPM_Plugins_upgradable=("zpm" ${_ZPM_Plugins[@]})
+
 local -a _ZPM_Plugins_installed
 for plugin in "$_ZPM_PLUGIN_DIR/"*---*; do
   local unused=$( basename "$plugin")
@@ -28,7 +31,7 @@ fi
 if (( CURRENT > 1 )); then
   case "$words[1]" in
     u|up|upgrade)
-      _describe -t commands "zpm plugins" _ZPM_Plugins
+      _describe -t commands "zpm plugins" _ZPM_Plugins_upgradable
     ;;
     l|load)
       _describe -t commands "zpm plugins" _ZPM_Plugins_loadable
