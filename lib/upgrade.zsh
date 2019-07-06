@@ -32,7 +32,7 @@ function _ZPM-upgrade-plugin(){
       done
     done
     
-    echo -e "\b${fg[yellow]}✓${reset_color}"
+    echo -e "\b${fg[green]}✓${reset_color}"
     
   else
   
