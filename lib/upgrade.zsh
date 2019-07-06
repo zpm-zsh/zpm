@@ -20,19 +20,19 @@ function _ZPM-upgrade-plugin(){
 
     echo -en "${fg_bold[green]}Updating "
     echo -en $'\033]8;;'"$Plugin_url"$'\a'
-    echo -en "$fg_bold[blue]${fg[blue]}${1//\//$fg[red]/$fg[blue]}${fg[blue]}"
+    echo -en "$fg_bold[blue]${1//\//$fg_bold[red]/$fg_bold[blue]}"
     echo -en $'\033]8;;\a'
     echo -en "${fg_bold[yellow]}  ${spin_color[0]}${reset_color}"
     
     while $(kill -0 $pid 2>/dev/null); do
       for i in "${spin_color[@]}"
       do
-        echo -en "\b${fg[yellow]}${i}${reset_color}"
+        echo -en "\b${fg_bold[yellow]}${i}${reset_color}"
         sleep 0.2
       done
     done
     
-    echo -e "\b${fg[green]}✓${reset_color}"
+    echo -e "\b${fg_bold[green]}✓${reset_color}"
     
   else
   
@@ -46,7 +46,7 @@ function _ZPM-upgrade-plugin(){
       done
     done
     
-    echo -e "\b✓"
+    echo -e "\b+"
     
   fi  
   
