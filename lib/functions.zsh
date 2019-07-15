@@ -78,7 +78,7 @@ _ZPM-spinner-for-backgroud-process() {
       done
     done
     
-    echo -e "\b${fg_bold[green]}✓${reset_color}"
+    echo -e "\b${fg_bold[green]}✔${reset_color}"
     
   else
     
