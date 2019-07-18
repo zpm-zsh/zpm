@@ -1,32 +1,32 @@
 #!/usr/bin/env zsh
 
 if [[ -z "$CLICOLOR" ]]; then
-  export CLICOLOR=1
+  CLICOLOR=1
 fi
 
 if [[ -z "$EDITOR" ]]; then
-  export EDITOR="vim"
+  EDITOR="vim"
 fi
 
 if [[ -z "$VISUAL" ]]; then
-  export VISUAL="vim"
+  VISUAL="vim"
 fi
 
 if [[ -z "$PAGER" ]]; then
-  export PAGER="less"
+  PAGER="less"
 fi
 
 if [[ -z "$SHELL" ]]; then
-  export SHELL="$(which zsh)"
+  SHELL="$(command -v zsh)"
 fi
 
 if [[ -z "$PERIOD" ]]; then
-  export PERIOD=10
+  PERIOD=10
 fi
 
 if [[ "$CLICOLOR" = 1 ]]; then
   autoload -U colors && colors
-  export TERM="xterm-256color"
+  TERM="xterm-256color"
 fi
 
 if [[ -z "$ZPM_DIR" ]]; then
@@ -45,15 +45,21 @@ else
   unset ZPM_PLUGIN_DIR
 fi
 
+export CLICOLOR
+export EDITOR
+export VISUAL
+export PAGER
+export PERIOD
+export TERM
+export SHELL
 
-
-FPATH=$FPATH:$_ZPM_DIR
-ZSH_COMPDUMP="$HOME/.zcompdump"
-HISTFILE="$HOME/.zsh_history"
-HISTSIZE=9999
-SAVEHIST=9999
-WORDCHARS="*?_-~=&;!#$%^()[]{}<>:."
-LISTMAX=9999
+export FPATH=$FPATH:$_ZPM_DIR
+export ZSH_COMPDUMP="$HOME/.zcompdump"
+export HISTFILE="$HOME/.zsh_history"
+export HISTSIZE=9999
+export SAVEHIST=9999
+export WORDCHARS="*?_-~=&;!#$%^()[]{}<>:."
+export LISTMAX=9999
 
 # Some modules
 setopt prompt_subst
