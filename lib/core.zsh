@@ -7,6 +7,18 @@
 export CLICOLOR
 export SHELL
 
+: ${HISTSIZE:=9999}
+: ${SAVEHIST:=9999}
+: ${LISTMAX:=9999}
+
+export HISTSIZE
+export SAVEHIST
+export LISTMAX
+
+WORDCHARS='*?_[]~=&;!#$%^(){}<>:.'
+HISTFILE="$HOME/.zsh_history"
+ZSH_COMPDUMP="$HOME/.zcompdump"
+
 if [[ -z "$ZPM_DIR" ]]; then
   _ZPM_DIR="${${(%):-%x}:a:h}/.."
   _ZPM_DIR="${_ZPM_DIR:A}"
