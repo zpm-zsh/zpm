@@ -7,14 +7,9 @@
 export CLICOLOR
 export SHELL
 
-: ${HISTSIZE:=9999}
-: ${SAVEHIST:=9999}
-: ${LISTMAX:=9999}
-
-export HISTSIZE
-export SAVEHIST
-export LISTMAX
-
+HISTSIZE=9999
+SAVEHIST=9999
+LISTMAX=9999
 WORDCHARS='*?_[]~=&;!#$%^(){}<>:.'
 HISTFILE="$HOME/.zsh_history"
 ZSH_COMPDUMP="$HOME/.zcompdump"
