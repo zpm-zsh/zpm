@@ -43,7 +43,7 @@ function _ZPM-load-plugin() {
 function _ZPM-initialize-plugin() {
   if [[ ! " ${_ZPM_Plugins[*]} " == *"$1"* ]]; then
     _ZPM-log "Initialize $1"
-
+    
     _ZPM_Plugins+=("$1")
     _ZPM-load-plugin "$1"
   else

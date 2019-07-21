@@ -3,9 +3,8 @@
 function _ZPM-install-from-GitHub(){
   local Plugin_path=$(_ZPM-get-plugin-path $1)
   
-  git clone --recursive "https://github.com/"${1}".git" "$Plugin_path" </dev/null >/dev/null 2>/dev/null &! 
+  git clone --recursive "https://github.com/"${1}".git" "$Plugin_path" </dev/null >/dev/null 2>/dev/null &!
   pid=$!
-  
   
   install_string=""
   
