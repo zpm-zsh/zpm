@@ -15,11 +15,11 @@ function _ZPM-upgrade-plugin(){
   upgrade_string=""
   
   if [[ "$CLICOLOR" = 1 ]]; then
-    upgrade_string+="${fg_bold[green]}Updating "
+    upgrade_string+="[1m[32mUpdating[0m "
     upgrade_string+=$'\033]8;;'"$Plugin_url"$'\a'
-    upgrade_string+="$fg_bold[blue]${1//\//$fg_bold[red]/$fg_bold[blue]}"
+    upgrade_string+="[1m[34m${1//\//[1m[31m/[1m[34m}"
     upgrade_string+=$'\033]8;;\a'
-    upgrade_string+="${fg_bold[yellow]}"
+    upgrade_string+="[0m"
   else
     upgrade_string+="Updating ${1}"
   fi

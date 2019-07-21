@@ -9,11 +9,11 @@ function _ZPM-install-from-GitHub(){
   install_string=""
   
   if [[ "$CLICOLOR" = 1 ]]; then
-    install_string+="$fg_bold[green]Installing "
+    install_string+="[1m[32mInstalling[0m "
     install_string+=$'\033]8;;https://github.com/'"$1"$'\a'
-    install_string+="$fg_bold[blue]${1//\//$fg_bold[red]/$fg_bold[blue]}"
+    install_string+="[1m[34m${1//\//[1m[31m/[1m[34m}"
     install_string+=$'\033]8;;\a'
-    install_string+="$fg_bold[green] from $fg_bold[cyan]GitHub"
+    install_string+="[0m"
   else
     install_string+="Installing ${1} from GitHub"
   fi
