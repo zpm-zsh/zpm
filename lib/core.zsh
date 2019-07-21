@@ -71,7 +71,7 @@ compinit
 autoload -U add-zsh-hook
 
 function _ZPM_Post_Initialization(){
-  	compinit;
+    compinit;
     precmd_functions=(${precmd_functions#_ZPM_Post_Initialization})
 }
 

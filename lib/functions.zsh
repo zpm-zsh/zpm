@@ -96,3 +96,40 @@ _ZPM-spinner-for-backgroud-process() {
   fi
   
 }
+
+
+_ZPM-appendpath () {
+  case ":$PATH:" in
+    *:"$1":*)
+    ;;
+    *)
+    PATH="${PATH:+$PATH:}$1"
+  esac
+}
+
+_ZPM-prependpath () {
+  case ":$PATH:" in
+    *:"$1":*)
+    ;;
+    *)
+    PATH="$1${PATH:+$PATH:}"
+  esac
+}
+
+_ZPM-appendfpath () {
+  case ":$FPATH:" in
+    *:"$1":*)
+    ;;
+    *)
+    FPATH="${FPATH:+$FPATH:}$1"
+  esac
+}
+
+_ZPM-prependfpath () {
+  case ":$FPATH:" in
+    *:"$1":*)
+    ;;
+    *)
+    FPATH="$1${FPATH:+$FPATH:}"
+  esac
+}

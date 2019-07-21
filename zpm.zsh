@@ -39,5 +39,4 @@ function zpm(){
   done
 }
 
-zpm load zpm-zsh/helpers
 

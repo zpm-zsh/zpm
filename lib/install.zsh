@@ -1,10 +1,6 @@
 #!/usr/bin/env zsh
 
 function _ZPM-install-from-GitHub(){
-  declare -a spin_color
-  declare -a spin_no_color
-  spin_color=('◐' '◓' '◑' '◒')
-  spin_no_color=('-' '\' '|' '/')
   local Plugin_path=$(_ZPM-get-plugin-path $1)
   
   git clone --recursive "https://github.com/"${1}".git" "$Plugin_path" </dev/null >/dev/null 2>/dev/null &! 
