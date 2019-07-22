@@ -72,12 +72,12 @@ _ZPM-spinner-for-backgroud-process() {
     while kill -0 "$2" 2>/dev/null; do
       for i in "${spin_color[@]}"
       do
-        echo -en "\b[1m[33m${i}"
+        echo -en "\b${c[yellow]}${c_bold}${i}"
         sleep 0.2
       done
     done
     
-    echo -e "\b[1m[32m✔[0m"
+    echo -e "\b${c[green]}${c_bold}✔${c_reset}"
     
   else
     
