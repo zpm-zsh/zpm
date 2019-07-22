@@ -10,7 +10,7 @@ export SHELL
 HISTSIZE=9999
 SAVEHIST=9999
 LISTMAX=9999
-WORDCHARS='*?_[]~=&;!#$%^(){}<>:.'
+WORDCHARS='*?_[]~=&;!#$%^(){}<>:.-'
 HISTFILE="$HOME/.zsh_history"
 ZSH_COMPDUMP="$HOME/.zcompdump"
 
