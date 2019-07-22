@@ -32,4 +32,4 @@ function zpm(){
   done
 }
 
-zpm zpm-zsh/helpers zpm-zsh/colors zpm-zsh/figures
+zpm zpm-zsh/helpers zpm-zsh/colors
