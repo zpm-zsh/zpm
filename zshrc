@@ -17,6 +17,7 @@ zpm zpm-zsh/colorize
 zpm zpm-zsh/ssh
 zpm zpm-zsh/dot
 zpm zpm-zsh/dircolors-material
+zpm zpm-zsh/undollar
 zpm zsh-users/zsh-completions
 
 zpm load-if-not ssh zpm-zsh/readers zpm-zsh/clipboard
@@ -26,9 +27,7 @@ zpm load-if-not ssh zpm-zsh/mysql-colorize
 zpm load-if-not ssh jocelynmallon/zshmarks
 zpm load-if-not ssh voronkovich/gitignore.plugin.zsh
 zpm load-if-not ssh psprint/history-search-multi-word
-
 zpm load-if-not ssh zdharma/fast-syntax-highlighting
-
 zpm load-if-not ssh tarruda/zsh-autosuggestions
 
 zpm zpm-zsh/minimal-theme
