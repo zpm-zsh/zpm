@@ -38,7 +38,7 @@ zstyle ":completion::complete:*" cache-path "$HOME/.cache/zsh"
 
 autoload -Uz compinit
 compinit
-autoload -U add-zsh-hook
+autoload -Uz add-zsh-hook
 
 function _ZPM_Post_Initialization(){
   compinit;
