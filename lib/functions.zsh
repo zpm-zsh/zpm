@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 
 function _ZPM-log() {
-  if [[ -n "$DEBUG" ]]; then
+  if [[ "$1" == "$DEBUG"*  ]]; then
     echo "$@"
   fi
 }
