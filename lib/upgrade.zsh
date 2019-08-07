@@ -12,7 +12,7 @@ function _ZPM-upgrade-plugin(){
   pid=$!
   
   
-  upgrade_string=""
+  local upgrade_string=""
   
   if [[ "$CLICOLOR" = 1 ]]; then
     upgrade_string+="${c[green]}${c_bold}Updating${c_reset} "

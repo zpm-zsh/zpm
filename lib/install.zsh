@@ -6,7 +6,7 @@ function _ZPM-install-from-GitHub(){
   git clone --recursive "https://github.com/"${1}".git" "$Plugin_path" </dev/null >/dev/null 2>/dev/null &!
   pid=$!
   
-  install_string=""
+  local install_string=""
   
   if [[ "$CLICOLOR" = 1 ]]; then
     install_string+="${c[green]}${c_bold}Installing${c_reset} "
