@@ -1,33 +1,24 @@
 #!/usr/bin/env zsh
 
 : ${CLICOLOR:=1}
-: ${SHELL:="$(command -v zsh)"}
-: ${PERIOD:=10}
 
 export CLICOLOR
-export SHELL
 
+SHELL=zsh
 HISTSIZE=9999
 SAVEHIST=9999
 LISTMAX=9999
-WORDCHARS='*?_[]~=&;!#$%^(){}<>:.-'
 HISTFILE="$HOME/.zsh_history"
 ZSH_COMPDUMP="$HOME/.zcompdump"
+PERIOD=10
 
-if [[ -z "$ZPM_DIR" ]]; then
-  _ZPM_DIR="${${(%):-%x}:a:h}/.."
-  _ZPM_DIR="${_ZPM_DIR:A}"
-else
-  _ZPM_DIR="$ZPM_DIR"
-  unset ZPM_DIR
-fi
+_ZPM_DIR=${ZPM_DIR:-"${${(%):-%x}:a:h}/.."}
+_ZPM_DIR="${_ZPM_DIR:A}"
+unset ZPM_DIR
 
-if [[ -z "${ZPM_PLUGIN_DIR}" ]]; then
-  _ZPM_PLUGIN_DIR="$HOME/.local/lib/zpm"
-else
-  _ZPM_PLUGIN_DIR="${ZPM_PLUGIN_DIR}"
-  unset ZPM_PLUGIN_DIR
-fi
+_ZPM_PLUGIN_DIR=${ZPM_PLUGIN_DIR:-"$HOME/.local/lib/zpm"}
+_ZPM_PLUGIN_DIR="${_ZPM_PLUGIN_DIR:A}"
+unset ZPM_PLUGIN_DIR
 
 _ZPM-appendfpath "$_ZPM_DIR"
 
@@ -39,13 +30,13 @@ zstyle ":completion::complete:*" cache-path "$HOME/.cache/zsh"
 
 autoload -Uz compinit
 compinit
-autoload -Uz add-zsh-hook
 
 function _ZPM_Post_Initialization(){
-  compinit;
+  compinit
   add-zsh-hook -d precmd _ZPM_Post_Initialization
 }
 
+autoload -Uz add-zsh-hook
 add-zsh-hook precmd _ZPM_Post_Initialization
 
 mkdir -p "$_ZPM_PLUGIN_DIR"
