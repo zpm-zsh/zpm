@@ -41,7 +41,8 @@ function _ZPM-load-plugin() {
 }
 
 function _ZPM-initialize-plugin() {
-  if [[ ! " ${_ZPM_Plugins[*]} " == *"$1"* ]]; then
+  # Check if plugin isn't loaded
+  if [[ " ${_ZPM_Plugins[*]} " != *"$1"* ]]; then
     _ZPM-log zpm:init "Initialize $1"
     
     _ZPM_Plugins+=("$1")
