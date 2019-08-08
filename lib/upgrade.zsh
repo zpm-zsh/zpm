@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 
 function _ZPM-upgrade-plugin(){
-  _ZPM-log zpm:upgrade $1
+  _ZPM-log zpm:upgrade "Upgrade ${1}"
   
   local Plugin_path=$(_ZPM-get-plugin-path $1)
   local Plugin_url=$(_ZPM-get-plugin-url $1)

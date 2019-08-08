@@ -17,25 +17,25 @@ function _ZPM-load-plugin() {
     _ZPM-install-plugin "$1"
   fi
   
-  _ZPM-log zpm:init "Add to FPATH ${Plugin_path}"
+  _ZPM-log zpm:init:fpath "Add to FPATH ${1}"
   _ZPM-appendfpath "$Plugin_path"
   
   if [[ -d ${Plugin_path}/bin ]]; then
-    _ZPM-log zpm:init "Add to PATH ${Plugin_path}/bin"
+    _ZPM-log zpm:init:path "Add to PATH ${1}/bin"
     _ZPM-appendpath "${Plugin_path}/bin"
   fi
   
   if [[ -f "${Plugin_path}/${Plugin_name}.plugin.zsh" ]]; then
-    _ZPM-log zpm:init "Source ${Plugin_path}/${Plugin_name}.plugin.zsh"
+    _ZPM-log zpm:init:source "Source ${1}"
     source "${Plugin_path}/${Plugin_name}.plugin.zsh"
   elif [[ -f "${Plugin_path}/zsh-${Plugin_name}.plugin.zsh" ]]; then
-    _ZPM-log zpm:init "Source ${Plugin_path}/zsh-${Plugin_name}.plugin.zsh"
+    _ZPM-log zpm:init:source "Source ${1}"
     source "${Plugin_path}/zsh-${Plugin_name}.plugin.zsh"
   elif [[ -f "${Plugin_path}/${Plugin_name}.zsh" ]]; then
-    _ZPM-log zpm:init "Source ${Plugin_path}/${Plugin_name}.zsh"
+    _ZPM-log zpm:init:source "Source ${1}"
     source "${Plugin_path}/${Plugin_name}.zsh"
   elif [[ -f "${Plugin_path}/${Plugin_name}.zsh-theme" ]]; then
-    _ZPM-log zpm:init "Source ${Plugin_path}/${Plugin_name}.zsh-theme"
+    _ZPM-log zpm:init:source "Source ${1}"
     source "${Plugin_path}/${Plugin_name}.zsh-theme"
   fi
 }
@@ -48,6 +48,6 @@ function _ZPM-initialize-plugin() {
     _ZPM_Plugins+=("$1")
     _ZPM-load-plugin "$1"
   else
-    _ZPM-log zpm:init "Skip initialization $1"
+    _ZPM-log zpm:init:skip "Skip initialization $1"
   fi
 }

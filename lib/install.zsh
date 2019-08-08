@@ -23,7 +23,9 @@ function _ZPM-install-from-GitHub(){
 }
 
 function _ZPM-install-plugin(){
+  _ZPM-log zpm:install:try "Try to install ${1}"
   if [[ $(_ZPM-plugin-type $1) == 'github' ]]; then
+    _ZPM-log zpm:install:github "Install ${1} form GiHub"
     _ZPM-install-from-GitHub $1
   fi
 }
