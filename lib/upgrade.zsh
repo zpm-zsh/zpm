@@ -14,15 +14,11 @@ function _ZPM-upgrade-plugin(){
   
   local upgrade_string=""
   
-  if [[ "$CLICOLOR" = 1 ]]; then
-    upgrade_string+="${c[green]}${c_bold}Updating${c_reset} "
-    upgrade_string+=$'\033]8;;'"$Plugin_url"$'\a'
-    upgrade_string+="${c[blue]}${c_bold}${1//\//${c[red]}${c_bold}/${c[blue]}${c_bold}}"
-    upgrade_string+=$'\033]8;;\a'
-    upgrade_string+="${c_reset}"
-  else
-    upgrade_string+="Updating ${1}"
-  fi
+  upgrade_string+="${c[green]}${c_bold}Updating${c_reset} "
+  upgrade_string+=$'\033]8;;'"$Plugin_url"$'\a'
+  upgrade_string+="${c[blue]}${c_bold}${1//\//${c[red]}${c_bold}/${c[blue]}${c_bold}}"
+  upgrade_string+=$'\033]8;;\a'
+  upgrade_string+="${c_reset}"
   
   _ZPM-spinner-for-backgroud-process $upgrade_string $pid
   

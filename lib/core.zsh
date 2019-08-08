@@ -7,9 +7,6 @@ LISTMAX=9999
 HISTFILE="$HOME/.zsh_history"
 ZSH_COMPDUMP="$HOME/.zcompdump"
 PERIOD=10
-CLICOLOR=1
-
-export CLICOLOR
 
 _ZPM_DIR=${ZPM_DIR:-"${${(%):-%x}:a:h}/.."}
 _ZPM_DIR="${_ZPM_DIR:A}"
