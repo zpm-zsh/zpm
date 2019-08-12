@@ -38,3 +38,4 @@ autoload -Uz add-zsh-hook
 add-zsh-hook precmd _ZPM_Post_Initialization
 
 mkdir -p "$_ZPM_PLUGIN_DIR"
+zpm zpm-zsh/helpers zpm-zsh/colors
