@@ -37,9 +37,9 @@ cp ~/.zpm/zshrc ~/.zshrc
 
 Add `zpm load github-user/github-repo` for enabling plugin from github.
 
-Or `zpm load-if condition github-user/github-repo` for conditionally loading plugin
+Or `zpm if condition load github-user/github-repo` for conditionally loading plugin
 
-Or `zpm load-if-not condition github-user/github-repo` for loading plugin if condition is not met 
+Or `zpm if-not condition load github-user/github-repo` for loading plugin if condition is not met 
 
 Conditions:
 * `linux` - if current OS is Linux
@@ -48,6 +48,8 @@ Conditions:
 * `termux` - if current session run in [Termux](http://termux.com/)
 * `ssh` - if session run on remote host
 * `tmux` - if session run in Tmux
+
+Condition can be combined `zpm if ssh if tmux if-not macos load repo/plugin`
 
 ## Upgrade
 

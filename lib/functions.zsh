@@ -120,20 +120,20 @@ function zpm(){
     shift
   fi
   
-  if [[ "$1" == 'load-if' ]]; then
+  if [[ "$1" == 'load-if' || "$1" == 'if' ]]; then
     if check-if "$2"; then
       shift 2
-    else
-      return 0
+      zpm $@
     fi
+    return 0
   fi
   
-  if [[ "$1" == 'load-if-not' ]]; then
+  if [[ "$1" == 'load-if-not' || "$1" == 'if-not' ]]; then
     if ! check-if "$2"; then
       shift 2
-    else
-      return 0
+      zpm $@
     fi
+    return 0
   fi
   
   _ZPM-initialize-plugin $@
