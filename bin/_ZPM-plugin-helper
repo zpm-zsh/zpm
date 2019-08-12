@@ -19,18 +19,32 @@ if [[ "$CLICOLOR" == "1" ]]; then
   
 fi
 
+if [[ "$1" == "upgrade" ]]; then
+  type="Upgrade"
+else
+  type="Install"
+fi
+shift
+
 _ZPM-log zpm:upgrade "Upgrade ${1}"
 
 local Plugin_path=$(_ZPM-get-plugin-path $1)
 local Plugin_url=$(_ZPM-get-plugin-url $1)
 
+echo OOOO  $1
 
-git --git-dir="${Plugin_path}/.git/" --work-tree="${Plugin_path}/" checkout "${Plugin_path}/" </dev/null >/dev/null 2>/dev/null
-git --git-dir="${Plugin_path}/.git/" --work-tree="${Plugin_path}/" pull </dev/null >/dev/null 2>/dev/null
+if [[ "$type" == "Upgrade" ]]; then
+  git --git-dir="${Plugin_path}/.git/" --work-tree="${Plugin_path}/" checkout "${Plugin_path}/" </dev/null >/dev/null 2>/dev/null
+  git --git-dir="${Plugin_path}/.git/" --work-tree="${Plugin_path}/" pull </dev/null >/dev/null 2>/dev/null
+else
+  git clone --recursive "https://github.com/"${1}".git" "$Plugin_path" # </dev/null >/dev/null 2>/dev/null
+  
+fi
+
 
 local upgrade_string=""
 
-upgrade_string+="${c[green]}${c_bold}Upgrade${c_reset} "
+upgrade_string+="${c[green]}${c_bold}${type}${c_reset} "
 upgrade_string+=$'\033]8;;'"$Plugin_url"$'\a'
 upgrade_string+="${c[blue]}${c_bold}${1//\//${c[red]}${c_bold}/${c[blue]}${c_bold}}"
 upgrade_string+=$'\033]8;;\a'

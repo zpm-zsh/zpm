@@ -27,9 +27,7 @@ function zpm(){
     fi
   fi
   
-  for plugin ($@); do
-    _ZPM-initialize-plugin $plugin
-  done
+    _ZPM-initialize-plugin $@
 }
 
 zpm zpm-zsh/helpers zpm-zsh/colors
