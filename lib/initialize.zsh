@@ -54,7 +54,7 @@ function _ZPM-initialize-plugin() {
   if [[ -n "$_Plugins_Install[@]" ]]; then;
     
     printf '%s\n' "${_Plugins_Install[@]}" | \
-    xargs -P8 -n1 "${${(%):-%x}:a:h}/../bin/_ZPM-plugin-helper" install
+    xargs -P0 -n1 "${${(%):-%x}:a:h}/../bin/_ZPM-plugin-helper" install
     
   fi
   
