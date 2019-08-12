@@ -14,6 +14,7 @@ zpm                     \
 zpm load-if termux      \
   zpm-zsh/termux        \
 
+zpm zpm-zsh/minimal-theme
 
 ### 3party plugins
 zpm                          \
@@ -38,8 +39,6 @@ zpm load-if-not ssh                  \
   zdharma/fast-syntax-highlighting   \
   tarruda/zsh-autosuggestions        \
 
-
-zpm zpm-zsh/minimal-theme
 
 if [[ -f ~/.zshrc.local ]]; then
   source ~/.zshrc.local 
