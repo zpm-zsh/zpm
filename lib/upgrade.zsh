@@ -9,7 +9,7 @@ function _ZPM-upgrade(){
     _Plugins_Upgrade+=($@)
   fi
   
-  printf '%s\n' "${_Plugins_Upgrade[@]}" | xargs -P8 -I {} "${${(%):-%x}:a:h}/../bin/_ZPM-helper" upgrade {}
+  printf '%s\n' "${_Plugins_Upgrade[@]}" | xargs -P8 -n1 "${${(%):-%x}:a:h}/../bin/_ZPM-helper" upgrade
 
   return 0
 }
