@@ -10,10 +10,12 @@ PERIOD=10
 
 _ZPM_DIR=${ZPM_DIR:-"${${(%):-%x}:a:h}/.."}
 _ZPM_DIR="${_ZPM_DIR:A}"
+export _ZPM_DIR
 unset ZPM_DIR
 
 _ZPM_PLUGIN_DIR=${ZPM_PLUGIN_DIR:-"$HOME/.local/lib/zpm"}
 _ZPM_PLUGIN_DIR="${_ZPM_PLUGIN_DIR:A}"
+export _ZPM_PLUGIN_DIR
 unset ZPM_PLUGIN_DIR
 
 _ZPM-appendfpath "$_ZPM_DIR"
