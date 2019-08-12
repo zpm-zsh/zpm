@@ -10,22 +10,23 @@ zpm                     \
   zpm-zsh/core-config   \
   zpm-zsh/check-deps    \
 
+
 ### Compatibility
 zpm load-if termux      \
   zpm-zsh/termux        \
 
-zpm zpm-zsh/minimal-theme
 
 ### 3party plugins
-zpm                          \
-  zpm-zsh/ls                 \
-  zpm-zsh/tmux               \
-  zpm-zsh/colorize           \
-  zpm-zsh/ssh                \
-  zpm-zsh/dot                \
-  zpm-zsh/dircolors-material \
-  zpm-zsh/undollar           \
-  zsh-users/zsh-completions  \
+zpm                           \
+  zpm-zsh/minimal-theme       \
+  zpm-zsh/ls                  \
+  zpm-zsh/tmux                \
+  zpm-zsh/colorize            \
+  zpm-zsh/ssh                 \
+  zpm-zsh/dot                 \
+  zpm-zsh/dircolors-material  \
+  zpm-zsh/undollar            \
+  zsh-users/zsh-completions   \
 
 
 zpm load-if-not ssh                  \
