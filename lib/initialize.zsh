@@ -54,7 +54,7 @@ function _ZPM-initialize-plugin() {
   if [[ -n "$_Plugins_Install[@]" ]]; then;
     
     printf '%s\n' "${_Plugins_Install[@]}" | \
-    xargs -P0 -n1 "${${(%):-%x}:a:h}/../bin/_ZPM-plugin-helper" install
+    xargs -P8 -n1 "${${(%):-%x}:a:h}/../bin/_ZPM-plugin-helper" install
     
   fi
   
@@ -68,6 +68,6 @@ function _ZPM-initialize-plugin() {
     else
       _ZPM-log zpm:init:skip "Skip initialization $1"
     fi
-    
+
   done
 }
