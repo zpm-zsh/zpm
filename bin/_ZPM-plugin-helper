@@ -31,13 +31,12 @@ _ZPM-log zpm:upgrade "Upgrade ${1}"
 local Plugin_path=$(_ZPM-get-plugin-path $1)
 local Plugin_url=$(_ZPM-get-plugin-url $1)
 
-echo OOOO  $1
 
 if [[ "$type" == "Upgrade" ]]; then
   git --git-dir="${Plugin_path}/.git/" --work-tree="${Plugin_path}/" checkout "${Plugin_path}/" </dev/null >/dev/null 2>/dev/null
   git --git-dir="${Plugin_path}/.git/" --work-tree="${Plugin_path}/" pull </dev/null >/dev/null 2>/dev/null
 else
-  git clone --recursive "https://github.com/"${1}".git" "$Plugin_path" # </dev/null >/dev/null 2>/dev/null
+  git clone --recursive "https://github.com/"${1}".git" "$Plugin_path" </dev/null >/dev/null 2>/dev/null
   
 fi
 
