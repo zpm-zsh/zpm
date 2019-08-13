@@ -36,8 +36,10 @@ if [[ "$type" == "Upgrade" ]]; then
   git --git-dir="${Plugin_path}/.git/" --work-tree="${Plugin_path}/" checkout "${Plugin_path}/" </dev/null >/dev/null 2>/dev/null
   git --git-dir="${Plugin_path}/.git/" --work-tree="${Plugin_path}/" pull </dev/null >/dev/null 2>/dev/null
 else
+  if [[ -d "$Plugin_path" ]]; then
+    exit 0 
+  fi
   git clone --recursive "https://github.com/"${1}".git" --depth 1 --single-branch -j 8 "$Plugin_path" </dev/null >/dev/null 2>/dev/null
-  
 fi
 
 
