@@ -20,7 +20,7 @@ function _ZPM-log() {
 function _ZPM-get-plugin-base() {
   if [[  "$1" != *","* ]]; then
     echo "$1"
-  else 
+  else
     echo "$1" | awk -F',' '{print $1}'
   fi
 }
@@ -29,7 +29,7 @@ function _ZPM-get-plugin-path() {
   local plugin_name=$(_ZPM-get-plugin-base $1)
   if [[  "$plugin_name" == 'zpm' ]]; then
     echo "${_ZPM_DIR}"
-  else 
+  else
     echo "${_ZPM_PLUGIN_DIR}/${plugin_name//\//---}"
   fi
 }
@@ -60,7 +60,7 @@ function _ZPM-get-plugin-url() {
   
   if [[  "$plugin_name" == 'zpm' ]]; then
     echo "https://github.com/zpm-zsh/zpm"
-    else
+  else
     echo "https://github.com/${plugin_name}"
   fi
   
