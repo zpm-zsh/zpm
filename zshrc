@@ -12,7 +12,7 @@ zpm                     \
 
 
 ### Compatibility
-zpm load-if termux      \
+zpm if termux           \
   zpm-zsh/termux        \
 
 
@@ -29,7 +29,7 @@ zpm                           \
   zsh-users/zsh-completions   \
 
 
-zpm load-if-not ssh                  \
+zpm if-not ssh                       \
   zpm-zsh/readers                    \
   zpm-zsh/clipboard                  \
   zpm-zsh/autoenv                    \
