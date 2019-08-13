@@ -9,8 +9,8 @@ function _ZPM-upgrade(){
     _Plugins_Upgrade+=($@)
   fi
   
-  printf '%s\n' "${_Plugins_Upgrade[@]}" | \
-  xargs -P0 -n1 "${${(%):-%x}:a:h}/../bin/_ZPM-plugin-helper" upgrade
+  printf '%s\0' "${_Plugins_Upgrade[@]}" | \
+  xargs -0 -P0 -n1 "${${(%):-%x}:a:h}/../bin/_ZPM-plugin-helper" upgrade
   
   for plugin ($@); do
     

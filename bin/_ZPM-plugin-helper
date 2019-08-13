@@ -40,7 +40,7 @@ else
   if [[ -d "$Plugin_path" ]]; then
     exit 0 
   fi
-  git clone --recursive "https://github.com/"${1}".git" --depth 1 --single-branch -j 8 "$Plugin_path" </dev/null >/dev/null 2>/dev/null
+  git clone --recursive "https://github.com/"${Plugin_base}".git" --depth 1 --single-branch -j 8 "$Plugin_path"  </dev/null >/dev/null 2>/dev/null
 fi
 
 

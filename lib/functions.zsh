@@ -69,7 +69,7 @@ function _ZPM-get-plugin-url() {
 function zpm(){
   if [[ "$1" == 'u' || "$1" == 'up' || "$1" == 'upgrade' ]]; then
     shift
-    _ZPM-upgrade $@
+    _ZPM-upgrade "$@"
     return 0
   fi
   
@@ -80,7 +80,7 @@ function zpm(){
   if [[ "$1" == 'load-if' || "$1" == 'if' ]]; then
     if check-if "$2"; then
       shift 2
-      zpm $@
+      zpm "$@"
     fi
     return 0
   fi
@@ -88,12 +88,12 @@ function zpm(){
   if [[ "$1" == 'load-if-not' || "$1" == 'if-not' ]]; then
     if ! check-if "$2"; then
       shift 2
-      zpm $@
+      zpm "$@"
     fi
     return 0
   fi
   
-  _ZPM-initialize-plugin $@
+  _ZPM-initialize-plugin "$@"
 }
 
 _ZPM-appendpath () {

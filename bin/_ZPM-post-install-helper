@@ -1,0 +1,26 @@
+#!/usr/bin/env zsh
+
+source ${${(%):-%x}:a:h}/../lib/functions.zsh
+
+local Plugin_base=$(_ZPM-get-plugin-base "$1")
+local Plugin_path=$(_ZPM-get-plugin-path $1)
+local Plugin_url=$(_ZPM-get-plugin-url $1)
+
+
+if [[ "$1" == *",hook:"* ]]; then
+  
+
+  local hook=$(
+    echo "$1" | awk -F'hook:' '{print $2}' | awk -F',' '{print $1}'
+  )
+
+  cd "$Plugin_path"
+
+  echo ----
+  pwd
+
+  eval "$hook"
+
+  echo $1 $Plugin_path
+  
+fi
