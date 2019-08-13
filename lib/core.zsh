@@ -18,8 +18,6 @@ _ZPM_PLUGIN_DIR="${_ZPM_PLUGIN_DIR:A}"
 export _ZPM_PLUGIN_DIR
 unset ZPM_PLUGIN_DIR
 
-_ZPM-appendfpath "$_ZPM_DIR"
-
 # Some modules
 unsetopt BG_NICE
 setopt prompt_subst

@@ -77,7 +77,7 @@ function _ZPM-load-plugin() {
 }
 
 function _ZPM-initialize-plugin() {
-
+  
   # Check if plugin isn't loaded
   declare -a _Plugins_Install
   
@@ -91,7 +91,7 @@ function _ZPM-initialize-plugin() {
     
   done
   
-
+  
   if [[ -n "$_Plugins_Install[@]" ]]; then;
     
     printf '%s\0' "${_Plugins_Install[@]}" | \
@@ -100,7 +100,7 @@ function _ZPM-initialize-plugin() {
   fi
   
   for plugin ($_Plugins_Install); do
-
+    
     if [[ "$plugin" == *",hook:"* ]]; then
       ${${(%):-%x}:a:h}/../bin/_ZPM-post-install-helper "$plugin"
     fi
@@ -110,7 +110,7 @@ function _ZPM-initialize-plugin() {
   for plugin ($@); do
     
     if [[ " ${_ZPM_Plugins[*]} " != *"$plugin"* ]]; then
-
+      
       _ZPM-log zpm:init "Initialize $plugin"
       _ZPM_Plugins+=("$plugin")
       _ZPM-load-plugin "$plugin"
@@ -120,5 +120,5 @@ function _ZPM-initialize-plugin() {
     fi
     
   done
-
+  
 }
