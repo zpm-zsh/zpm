@@ -17,16 +17,16 @@ zpm if termux           \
 
 
 ### 3party plugins
-zpm                           \
-  zpm-zsh/minimal-theme       \
-  zpm-zsh/ls                  \
-  zpm-zsh/tmux                \
-  zpm-zsh/colorize            \
-  zpm-zsh/ssh                 \
-  zpm-zsh/dot                 \
-  zpm-zsh/dircolors-material  \
-  zpm-zsh/undollar            \
-  zsh-users/zsh-completions   \
+zpm                                          \
+  zpm-zsh/minimal-theme                      \
+  zpm-zsh/ls                                 \
+  zpm-zsh/tmux                               \
+  zpm-zsh/colorize                           \
+  zpm-zsh/ssh                                \
+  zpm-zsh/dot                                \
+  zpm-zsh/dircolors-material                 \
+  zpm-zsh/undollar                           \
+  zsh-users/zsh-completions,fpath-only:/src  \
 
 
 zpm if-not ssh                       \

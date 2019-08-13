@@ -17,17 +17,25 @@ function _ZPM-log() {
   fi
 }
 
+function _ZPM-get-plugin-base() {
+  if [[  "$1" != *","* ]]; then
+    echo "$1"
+  else 
+    echo "$1" | awk -F',' '{print $1}'
+  fi
+}
 
 function _ZPM-get-plugin-path() {
-  if [[  "$1" == 'zpm' ]]; then
+  local plugin_name=$(_ZPM-get-plugin-base $1)
+  if [[  "$plugin_name" == 'zpm' ]]; then
     echo "${_ZPM_DIR}"
   else 
-    echo "${_ZPM_PLUGIN_DIR}/${1//\//---}"
+    echo "${_ZPM_PLUGIN_DIR}/${plugin_name//\//---}"
   fi
 }
 
 function _ZPM-get-plugin-basename() {
-  local plugin_name="${1}"
+  local plugin_name=$(_ZPM-get-plugin-base $1)
   plugin_name=${plugin_name##*\/}
   if [[ "${plugin_name}" == 'oh-my-zsh-'* ]]; then
     plugin_name=${plugin_name:10}
@@ -48,11 +56,12 @@ function _ZPM-get-plugin-basename() {
 }
 
 function _ZPM-get-plugin-url() {
+  local plugin_name=$(_ZPM-get-plugin-base $1)
   
-  if [[  "$1" == 'zpm' ]]; then
+  if [[  "$plugin_name" == 'zpm' ]]; then
     echo "https://github.com/zpm-zsh/zpm"
     else
-    echo "https://github.com/$1"
+    echo "https://github.com/${plugin_name}"
   fi
   
 }

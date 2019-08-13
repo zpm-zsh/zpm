@@ -23,6 +23,8 @@ _ZPM-appendfpath "$_ZPM_DIR"
 # Some modules
 unsetopt BG_NICE
 setopt prompt_subst
+setopt +o nomatch
+
 zstyle ":completion::complete:*" use-cache 1
 zstyle ":completion::complete:*" cache-path "$HOME/.cache/zsh"
 
