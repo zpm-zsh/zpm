@@ -27,10 +27,16 @@ zstyle ":completion::complete:*" use-cache 1
 zstyle ":completion::complete:*" cache-path "$HOME/.cache/zsh"
 
 autoload -Uz compinit
-compinit
+_comp_files=(${ZDOTDIR:-$HOME}/.zcompdump(Nm-20))
+if (( $#_comp_files )); then
+  compinit -i -C
+else
+  compinit -i
+fi
+unset _comp_files
 
 function _ZPM_Post_Initialization(){
-  compinit
+  compinit -i -C
   add-zsh-hook -d precmd _ZPM_Post_Initialization
 }
 
