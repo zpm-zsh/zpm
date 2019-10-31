@@ -1,9 +1,13 @@
 #!/usr/bin/env zsh
 
-if [[ ! -f ~/.zpm/zpm.zsh ]]; then
-  git clone --recursive https://github.com/zpm-zsh/zpm ~/.zpm
+if [[ -f ~/.zsh.cache ]]; then
+  source ~/.zsh.cache
+else
+  if [[ ! -f ~/.zpm/zpm.zsh ]]; then
+    git clone --recursive https://github.com/zpm-zsh/zpm ~/.zpm
+  fi
+  source ~/.zpm/zpm.zsh
 fi
-source ~/.zpm/zpm.zsh
 
 ### Core plugins
 zpm                     \

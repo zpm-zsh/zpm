@@ -96,38 +96,36 @@ function zpm(){
   _ZPM-initialize-plugin "$@"
 }
 
-_ZPM-appendpath () {
+_ZPM-addpath () {
   case ":$PATH:" in
     *:"$1":*)
     ;;
     *)
-      PATH="${PATH:+$PATH:}${1:A}"
+      PATH="${1:A}:$PATH"
+      ZPM_PATH="${1:A}:$ZPM_PATH"
   esac
 }
 
-_ZPM-prependpath () {
-  case ":$PATH:" in
-    *:"$1":*)
-    ;;
-    *)
-      PATH="${1:A}${PATH:+$PATH:}"
-  esac
-}
 
-_ZPM-appendfpath () {
+
+_ZPM-addfpath () {
   case ":$FPATH:" in
     *:"$1":*)
     ;;
     *)
-      FPATH="${FPATH:+$FPATH:}${1:A}"
+      fpath=("${1:A}" $fpath )
+      ZPM_fpath=("${1:A}" $ZPM_fpath )
   esac
 }
 
-_ZPM-prependfpath () {
-  case ":$FPATH:" in
-    *:"$1":*)
-    ;;
-    *)
-      FPATH="${1:A}${FPATH:+$FPATH:}"
-  esac
+# Fake source
+source () {
+    if [[ -f "$1" && ( ! -s "$1.zwc" || "$1" -nt "$1.zwc") ]]; then; zcompile "$1" 2>/dev/null; fi; 
+    builtin source "$1"
+}
+
+_ZPM_source () {
+  source "$1"
+  echo 'source "'"$1"'"' >> ~/.zsh.cache
+
 }
