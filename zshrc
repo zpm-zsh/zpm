@@ -1,5 +1,7 @@
 #!/usr/bin/env zsh
 
+zmodload zsh/zprof
+
 if [[ ! -f ~/.zpm/zpm.zsh ]]; then
   git clone https://github.com/zpm-zsh/zpm ~/.zpm
 fi
@@ -46,3 +48,6 @@ zpm if-not ssh                       \
 if [[ -f ~/.zshrc.local ]]; then
   source ~/.zshrc.local 
 fi
+
+#zprof
+

@@ -134,7 +134,9 @@ _ZPM_async_source () {
 
 post_fn(){
   echo 'PERIOD=5' >> "$_ZPM_CACHE"
+  
   echo >> "$_ZPM_CACHE"
+
   echo 'zpm () {}' >> "$_ZPM_CACHE"
 
   echo >> "$_ZPM_CACHE"
@@ -146,10 +148,10 @@ post_fn(){
   echo >> "$_ZPM_CACHE"
 
   echo 'export PATH="'"${ZPM_PATH}"'${PATH}"' >> "$_ZPM_CACHE"
+
   echo >> "$_ZPM_CACHE"
+
   echo 'fpath=( '$ZPM_fpath' $fpath )' >> "$_ZPM_CACHE"
-  echo >> "$_ZPM_CACHE"
-  echo '_ZPM_Plugins=( '$_ZPM_Plugins' )' >> "$_ZPM_CACHE"
 
   echo >> "$_ZPM_CACHE"
 
