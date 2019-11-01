@@ -21,7 +21,7 @@ zpm if termux           \
 ### 3party plugins
 zpm                                                 \
   zpm-zsh/minimal-theme                             \
-  zpm-zsh/ls,apply:async                                        \
+  zpm-zsh/ls                                        \
   zpm-zsh/tmux                                      \
   zpm-zsh/colorize,apply:async                                  \
   zpm-zsh/ssh,apply:async                                       \

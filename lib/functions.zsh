@@ -161,12 +161,12 @@ post_fn(){
 
   echo >> "$_ZPM_CACHE"
 
-  echo '  periodic_functions=(${periodic_functions:#_ZPM_post_fn})' >> "$_ZPM_CACHE"
+  echo '  add-zsh-hook -d background _ZPM_post_fn' >> "$_ZPM_CACHE"
   echo '}' >> "$_ZPM_CACHE"
 
   echo >> "$_ZPM_CACHE"
 
-  echo 'periodic_functions+=(_ZPM_post_fn)' >> "$_ZPM_CACHE"
+  echo 'add-zsh-hook background _ZPM_post_fn' >> "$_ZPM_CACHE"
   zcompile "$_ZPM_CACHE"
   zcompile ~/.zshrc
 }

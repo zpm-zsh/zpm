@@ -11,5 +11,5 @@ else
   
   source ${${(%):-%x}:a:h}/lib/completion.zsh
   
-  zpm zpm-zsh/helpers zpm-zsh/colors
+  zpm zpm-zsh/helpers zpm-zsh/colors zpm-zsh/background
 fi
