@@ -15,7 +15,7 @@ zpm                     \
 
 ### Compatibility
 zpm if termux           \
-  zpm-zsh/termux,apply:async        \
+  zpm-zsh/termux,async        \
 
 
 ### 3party plugins
@@ -23,21 +23,21 @@ zpm                                                 \
   zpm-zsh/minimal-theme                             \
   zpm-zsh/ls                                        \
   zpm-zsh/tmux                                      \
-  zpm-zsh/colorize,apply:async                                  \
-  zpm-zsh/ssh,apply:async                                       \
-  zpm-zsh/dot,apply:async                                       \
-  zpm-zsh/dircolors-material,apply:async                        \
-  zpm-zsh/undollar,apply:async                                  \
+  zpm-zsh/colorize,async                                  \
+  zpm-zsh/ssh,async                                       \
+  zpm-zsh/dot,async                                       \
+  zpm-zsh/dircolors-material,async                        \
+  zpm-zsh/undollar,async                                  \
   zsh-users/zsh-completions,apply:fpath,fpath:/src  \
 
 
 zpm if-not ssh                       \
-  zpm-zsh/readers,apply:async                    \
-  zpm-zsh/clipboard,apply:async                  \
+  zpm-zsh/readers,async                    \
+  zpm-zsh/clipboard,async                  \
   zpm-zsh/autoenv                    \
-  zpm-zsh/mysql-colorize,apply:async             \
-  zpm-zsh/zshmarks,apply:async                   \
-  voronkovich/gitignore.plugin.zsh,apply:async   \
+  zpm-zsh/mysql-colorize,async             \
+  zpm-zsh/zshmarks,async                   \
+  voronkovich/gitignore.plugin.zsh,async   \
   psprint/history-search-multi-word  \
   zdharma/fast-syntax-highlighting   \
   tarruda/zsh-autosuggestions        \

@@ -61,7 +61,6 @@ Zpm supports tags for plugins:
 This tag have 4 posible arguments: 
 
 * `source` - for source this plugin, enabled by default
-* `async` - similar with `source`, but will load plugin async, disabled by default
 * `path` - add `/bin` folder to your `$PATH`, only if it exist, enabled by default
 * `fpath` - add plugin folder to your `$fpath`, only if exist at least one `_*` file, enabled by default
 
@@ -73,6 +72,10 @@ Using this tags you can change destination of folders which will be added to `$P
 zpm some/plugin,path:/other-bin-folder
 zpm another/plugin,fpath:/completions
 ```
+
+##### `async` tag
+
+If this tag is present, zsh plugin will be loaded async
 
 ## Upgrade
 
