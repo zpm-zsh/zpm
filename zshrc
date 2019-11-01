@@ -22,13 +22,16 @@ zpm if termux           \
 zpm                                                 \
   zpm-zsh/minimal-theme                             \
   zpm-zsh/ls                                        \
-  zpm-zsh/tmux                                      \
   zpm-zsh/colorize,async                            \
   zpm-zsh/ssh,async                                 \
   zpm-zsh/dot,async                                 \
   zpm-zsh/dircolors-material                        \
   zpm-zsh/undollar,async                            \
   zsh-users/zsh-completions,apply:fpath,fpath:/src  \
+
+
+zpm if ssh                                          \
+  zpm-zsh/tmux                                      \
 
 
 zpm if-not ssh                             \
@@ -38,7 +41,7 @@ zpm if-not ssh                             \
   zpm-zsh/mysql-colorize,async             \
   zpm-zsh/zshmarks,async                   \
   voronkovich/gitignore.plugin.zsh,async   \
-  psprint/history-search-multi-word        \
+  psprint/history-search-multi-word,async  \
   zdharma/fast-syntax-highlighting         \
   tarruda/zsh-autosuggestions              \
 

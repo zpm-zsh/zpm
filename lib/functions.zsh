@@ -159,8 +159,16 @@ post_fn(){
 
   echo >> "$_ZPM_CACHE"
 
+  echo '  TMOUT=5' >> "$_ZPM_CACHE"
+
+  echo >> "$_ZPM_CACHE"
+
   echo '  add-zsh-hook -d background _ZPM_post_fn' >> "$_ZPM_CACHE"
   echo '}' >> "$_ZPM_CACHE"
+
+  echo >> "$_ZPM_CACHE"
+
+  echo 'TMOUT=1' >> "$_ZPM_CACHE"
 
   echo >> "$_ZPM_CACHE"
 
