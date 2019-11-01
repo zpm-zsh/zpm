@@ -5,8 +5,6 @@ if [[ ! -f ~/.zpm/zpm.zsh ]]; then
 fi
 source ~/.zpm/zpm.zsh
 
-# zpm a/b,apply:async
-
 ### Core plugins
 zpm                     \
   zpm-zsh/core-config   \
