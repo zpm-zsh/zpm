@@ -133,10 +133,6 @@ _ZPM_async_source () {
 }
 
 post_fn(){
-  echo 'PERIOD=5' >> "$_ZPM_CACHE"
-  
-  echo >> "$_ZPM_CACHE"
-
   echo 'zpm () {}' >> "$_ZPM_CACHE"
 
   echo >> "$_ZPM_CACHE"
