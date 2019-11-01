@@ -137,17 +137,17 @@ post_fn(){
 
   echo >> "$_ZPM_CACHE"
 
-  for file in $ZPM_files_for_source; do
-    echo "source '$file'" >> "$_ZPM_CACHE"
-  done
-
-  echo >> "$_ZPM_CACHE"
-
   echo 'export PATH="'"${ZPM_PATH}"'${PATH}"' >> "$_ZPM_CACHE"
 
   echo >> "$_ZPM_CACHE"
 
   echo 'fpath=( '$ZPM_fpath' $fpath )' >> "$_ZPM_CACHE"
+
+  echo >> "$_ZPM_CACHE"
+
+  for file in $ZPM_files_for_source; do
+    echo "source '$file'" >> "$_ZPM_CACHE"
+  done
 
   echo >> "$_ZPM_CACHE"
 
