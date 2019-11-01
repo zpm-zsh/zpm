@@ -1,13 +1,9 @@
 #!/usr/bin/env zsh
 
-if [[ -f ~/.zpm-cache.zsh ]]; then
-  source ~/.zpm-cache.zsh
-else
-  if [[ ! -f ~/.zpm/zpm.zsh ]]; then
-    git clone https://github.com/zpm-zsh/zpm ~/.zpm
-  fi
-  source ~/.zpm/zpm.zsh
+if [[ ! -f ~/.zpm/zpm.zsh ]]; then
+  git clone https://github.com/zpm-zsh/zpm ~/.zpm
 fi
+source ~/.zpm/zpm.zsh
 
 zpm a/b,apply:path,path:AQ
 
