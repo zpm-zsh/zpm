@@ -15,6 +15,7 @@ function _ZPM-load-plugin() {
   Plugin_name=$(_ZPM-get-plugin-basename "$1")
   
   local _ZPM_local_source=true
+  local _ZPM_local_async=false
   local _ZPM_local_path=true
   local _ZPM_local_fpath=true
   
@@ -32,7 +33,15 @@ function _ZPM-load-plugin() {
     if $(echo "$_ZPM_tag_str" | grep -v -q 'fpath' ); then
       _ZPM_local_fpath=false
     fi
+
+    if $(echo "$_ZPM_tag_str" | grep -q 'async' ); then
+      _ZPM_local_async=true
+    fi
+
+
   fi
+  
+
   
   if [[ "$_ZPM_local_fpath"  == "true" ]]; then
     if [[ "$1"  == *",fpath:"* ]]; then
@@ -70,6 +79,26 @@ function _ZPM-load-plugin() {
     elif [[ -f "${Plugin_path}/${Plugin_name}.zsh-theme" ]]; then
       _ZPM-log zpm:init:source "Source ${Plugin_base}"
       _ZPM_source "${Plugin_path}/${Plugin_name}.zsh-theme"
+    fi
+  fi
+
+    
+  if [[ "$_ZPM_local_async"  == "true" ]]; then
+    if [[ "$1"  == *",source:"* ]]; then
+      _ZPM-log zpm:init:async "Async source ${Plugin_base}/$(echo "$1" | awk -F',source:' '{print $2}' | awk -F',' '{print $1}')"
+      _ZPM_async_source "${Plugin_path}/$(echo "$1" | awk -F',source:' '{print $2}' | awk -F',' '{print $1}')"
+    elif [[ -f "${Plugin_path}/${Plugin_name}.plugin.zsh" ]]; then
+      _ZPM-log zpm:init:async "Async source ${Plugin_base}"
+      _ZPM_async_source "${Plugin_path}/${Plugin_name}.plugin.zsh"
+    elif [[ -f "${Plugin_path}/zsh-${Plugin_name}.plugin.zsh" ]]; then
+      _ZPM-log zpm:init:async "Async source ${Plugin_base}"
+      _ZPM_async_source "${Plugin_path}/zsh-${Plugin_name}.plugin.zsh"
+    elif [[ -f "${Plugin_path}/${Plugin_name}.zsh" ]]; then
+      _ZPM-log zpm:init:async "Async source ${Plugin_base}"
+      _ZPM_async_source "${Plugin_path}/${Plugin_name}.zsh"
+    elif [[ -f "${Plugin_path}/${Plugin_name}.zsh-theme" ]]; then
+      _ZPM-log zpm:init:async "Async source ${Plugin_base}"
+      _ZPM_async_source "${Plugin_path}/${Plugin_name}.zsh-theme"
     fi
   fi
 }

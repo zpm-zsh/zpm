@@ -124,15 +124,49 @@ source () {
 
 _ZPM_source () {
   source "$1"
-  echo "source \"$1\"" >> "$_ZPM_CACHE"
-  
+  ZPM_files_for_source+=("${1:A}")
+}
+
+_ZPM_async_source () {
+  source "$1"
+  ZPM_files_for_async_source+=("${1:A}" )
 }
 
 post_fn(){
-  echo 'export PATH="'"${ZPM_PATH}"'${PATH}"' >> "$_ZPM_CACHE"
-  echo 'fpath=( '$ZPM_fpath' $fpath )' >> "$_ZPM_CACHE"
-  echo '_ZPM_Plugins=( '$_ZPM_Plugins' )' >> "$_ZPM_CACHE"
+  echo 'PERIOD=5' >> "$_ZPM_CACHE"
+  echo >> "$_ZPM_CACHE"
   echo 'zpm () {}' >> "$_ZPM_CACHE"
+
+  echo >> "$_ZPM_CACHE"
+
+  for file in $ZPM_files_for_source; do
+    echo "source '$file'" >> "$_ZPM_CACHE"
+  done
+
+  echo >> "$_ZPM_CACHE"
+
+  echo 'export PATH="'"${ZPM_PATH}"'${PATH}"' >> "$_ZPM_CACHE"
+  echo >> "$_ZPM_CACHE"
+  echo 'fpath=( '$ZPM_fpath' $fpath )' >> "$_ZPM_CACHE"
+  echo >> "$_ZPM_CACHE"
+  echo '_ZPM_Plugins=( '$_ZPM_Plugins' )' >> "$_ZPM_CACHE"
+
+  echo >> "$_ZPM_CACHE"
+
+  echo '_ZPM_post_fn () {' >> "$_ZPM_CACHE"
+
+  for file in $ZPM_files_for_async_source; do
+    echo "  source '$file'" >> "$_ZPM_CACHE"
+  done
+
+  echo >> "$_ZPM_CACHE"
+
+  echo '  periodic_functions=(${periodic_functions:#_ZPM_post_fn})' >> "$_ZPM_CACHE"
+  echo '}' >> "$_ZPM_CACHE"
+
+  echo >> "$_ZPM_CACHE"
+
+  echo 'periodic_functions+=(_ZPM_post_fn)' >> "$_ZPM_CACHE"
   zcompile "$_ZPM_CACHE"
   zcompile ~/.zshrc
 }
