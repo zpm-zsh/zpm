@@ -8,8 +8,8 @@ _zpm(){
     'if:Load plugin if condition true'
     'if-not:Load plugin if condition false'
   )
-
-    local -a _1st_arguments_full
+  
+  local -a _1st_arguments_full
   _1st_arguments_full=(
     'upgrade:Upgrade plugin'
     'load:Load plugin'
@@ -84,4 +84,4 @@ _zpm(){
   
 }
 
-compdef _zpm zpm
+# compdef _zpm zpm

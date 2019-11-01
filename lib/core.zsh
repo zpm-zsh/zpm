@@ -1,12 +1,8 @@
 #!/usr/bin/env zsh
 
-SHELL=zsh
-HISTSIZE=9999
-SAVEHIST=9999
-LISTMAX=9999
-HISTFILE="$HOME/.zsh_history"
-ZSH_COMPDUMP="$HOME/.zcompdump"
-PERIOD=10
+
+ZPM_PATH=""
+ZPM_fpath=()
 
 _ZPM_DIR=${ZPM_DIR:-"${${(%):-%x}:a:h}/.."}
 _ZPM_DIR="${_ZPM_DIR:A}"
@@ -18,17 +14,13 @@ _ZPM_PLUGIN_DIR="${_ZPM_PLUGIN_DIR:A}"
 export _ZPM_PLUGIN_DIR
 unset ZPM_PLUGIN_DIR
 
-# Some modules
-unsetopt BG_NICE
-setopt prompt_subst
-setopt +o nomatch
-
-zstyle ":completion::complete:*" use-cache 1
-zstyle ":completion::complete:*" cache-path "$HOME/.cache/zsh"
+_ZPM_CACHE=${ZPM_CACHE:-"$HOME/.zpm-cache.zsh"}
+_ZPM_CACHE="${_ZPM_CACHE:A}"
+export _ZPM_CACHE
+unset ZPM_CACHE
 
 function _ZPM_Post_Initialization(){
   post_fn
-  compinit -i -C
   add-zsh-hook -d precmd _ZPM_Post_Initialization
 }
 
@@ -36,4 +28,6 @@ autoload -Uz add-zsh-hook
 add-zsh-hook precmd _ZPM_Post_Initialization
 
 mkdir -p "$_ZPM_PLUGIN_DIR"
-zpm zpm-zsh/helpers zpm-zsh/colors
+
+rm "$_ZPM_CACHE" 2>/dev/null
+touch "$_ZPM_CACHE"

@@ -106,8 +106,6 @@ _ZPM-addpath () {
   esac
 }
 
-
-
 _ZPM-addfpath () {
   case ":$FPATH:" in
     *:"$1":*)
@@ -120,12 +118,21 @@ _ZPM-addfpath () {
 
 # Fake source
 source () {
-    if [[ -f "$1" && ( ! -s "$1.zwc" || "$1" -nt "$1.zwc") ]]; then; zcompile "$1" 2>/dev/null; fi; 
-    builtin source "$1"
+  if [[ -f "$1" && ( ! -s "$1.zwc" || "$1" -nt "$1.zwc") ]]; then; zcompile "$1" 2>/dev/null; fi;
+  builtin source "$1"
 }
 
 _ZPM_source () {
   source "$1"
-  echo 'source "'"$1"'"' >> ~/.zsh.cache
+  echo "source \"$1\"" >> "$_ZPM_CACHE"
+  
+}
 
+post_fn(){
+  echo 'export PATH="'"${ZPM_PATH}"'${PATH}"' >> "$_ZPM_CACHE"
+  echo 'fpath=( '$ZPM_fpath' $fpath )' >> "$_ZPM_CACHE"
+  echo '_ZPM_Plugins=( '$_ZPM_Plugins' )' >> "$_ZPM_CACHE"
+  echo 'zpm () {}' >> "$_ZPM_CACHE"
+  zcompile "$_ZPM_CACHE"
+  zcompile ~/.zshrc
 }
