@@ -1,12 +1,12 @@
 # ZPM - Zsh Plugin Manager
 
-ZPM ( Zsh plugin manager ) is an yet another plugin manager for [zsh](http://www.zsh.org/).
+ZPM ( Zsh plugin manager ) is *NOT* an yet another plugin manager for [zsh](http://www.zsh.org/).
 
 * ZPM plugins are compatible with [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh).
 * ZPM runs on Linux, Android, FreeBSD and macOS.
 * It supports dependencies between packages. 
-* Upgrade hooks
-
+* And it is very, very fast
+* Alslo, it supports async load of plugins
 
 ## Base dependences
 
@@ -15,8 +15,6 @@ ZPM ( Zsh plugin manager ) is an yet another plugin manager for [zsh](http://www
 * [Termux](http://termux.com/) for Android
 
 ## Instalation
-
-#### From GitHub
 
 Add following text into `.zshrc`
 
@@ -33,7 +31,7 @@ If you don't have `.zshrc` copy example of `.zshrc` from zpm
 cp ~/.zpm/zshrc ~/.zshrc
 ```
 
-## Using plugins
+# How to use
 
 Add `zpm load github-user/github-repo` for enabling plugin from github.
 
@@ -41,7 +39,8 @@ Or `zpm if condition load github-user/github-repo` for conditionally loading plu
 
 Or `zpm if-not condition load github-user/github-repo` for loading plugin if condition is not met 
 
-Conditions:
+### Conditions:
+
 * `linux` - if current OS is Linux
 * `bsd` - if current OS is *BSD
 * `macos` - if current OS is macOS
@@ -50,6 +49,30 @@ Conditions:
 * `tmux` - if session run in Tmux
 
 Condition can be combined `zpm if ssh if tmux if-not macos load repo/plugin`
+
+### Tags
+
+Zpm supports tags for plugins:
+
+##### `apply` tag
+
+`some/plugin,apply:source:path:fpath`
+
+This tag have 4 posible arguments: 
+
+* `source` - for source this plugin, enabled by default
+* `async` - similar with `source`, but will load plugin async, disabled by default
+* `path` - add `/bin` folder to your `$PATH`, only if it exist, enabled by default
+* `fpath` - add plugin folder to your `$fpath`, only if exist at least one `_*` file, enabled by default
+
+##### `path` and `fpath` tags
+
+Using this tags you can change destination of folders which will be added to `$PATH` or `$fpath`
+
+```sh
+zpm some/plugin,path:/other-bin-folder
+zpm another/plugin,fpath:/completions
+```
 
 ## Upgrade
 
