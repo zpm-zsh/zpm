@@ -1,11 +1,24 @@
 #!/usr/bin/env zsh
 
+touch "$_ZPM_CACHE"
 _ZPM_Plugins=()
 
-mkdir -p "$_ZPM_PLUGIN_DIR"
-
-rm "$_ZPM_CACHE" 2>/dev/null
-touch "$_ZPM_CACHE"
+function _ZPM-upgrade(){
+  declare -a _Plugins_Upgrade
+  
+  if [[ -z $@ ]]; then
+    _Plugins_Upgrade+=( "zpm" $_ZPM_Plugins )
+  else
+    _Plugins_Upgrade+=($@)
+  fi
+  
+  printf '%s\0' "${_Plugins_Upgrade[@]}" | \
+  xargs -0 -P16 -n1 "${${(%):-%x}:a:h}/../bin/_ZPM-plugin-helper" upgrade
+  
+  for plugin ($@); do
+    local plugin_basename=$(_ZPM-get-plugin-basename $plugin)
+  done
+}
 
 function zpm(){
   if [[ "$1" == 'u' || "$1" == 'up' || "$1" == 'upgrade' ]]; then
@@ -59,11 +72,10 @@ post_fn(){
   done
   echo >> "$_ZPM_CACHE"
   
-  echo "  source '${_ZPM_DIR}/lib/core.zsh'" >> "$_ZPM_CACHE"
   echo "  source '${_ZPM_DIR}/lib/functions.zsh'" >> "$_ZPM_CACHE"
+  echo "  source '${_ZPM_DIR}/lib/core.zsh'" >> "$_ZPM_CACHE"
   echo "  source '${_ZPM_DIR}/lib/initialize.zsh'" >> "$_ZPM_CACHE"
   echo "  source '${_ZPM_DIR}/lib/declarative.zsh'" >> "$_ZPM_CACHE"
-  echo "  source '${_ZPM_DIR}/lib/upgrade.zsh'" >> "$_ZPM_CACHE"
   echo "  source '${_ZPM_DIR}/lib/completion.zsh'" >> "$_ZPM_CACHE"
   
   echo >> "$_ZPM_CACHE"
