@@ -1,9 +1,9 @@
 #!/usr/bin/env zsh
 
-ZPM_PATH=""
-ZPM_fpath=()
-ZPM_files_for_source=()
-ZPM_files_for_async_source=()
+_ZPM_PATH=""
+_ZPM_fpath=()
+_ZPM_files_for_source=()
+_ZPM_files_for_async_source=()
 
 _ZPM_DIR=${ZPM_DIR:-"${${(%):-%x}:a:h}/.."}
 _ZPM_DIR="${_ZPM_DIR:A}"

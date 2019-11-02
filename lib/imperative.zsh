@@ -3,23 +3,6 @@
 touch "$_ZPM_CACHE"
 _ZPM_Plugins=()
 
-function _ZPM-upgrade(){
-  declare -a _Plugins_Upgrade
-  
-  if [[ -z $@ ]]; then
-    _Plugins_Upgrade+=( "zpm" $_ZPM_Plugins )
-  else
-    _Plugins_Upgrade+=($@)
-  fi
-  
-  printf '%s\0' "${_Plugins_Upgrade[@]}" | \
-  xargs -0 -P16 -n1 "${${(%):-%x}:a:h}/../bin/_ZPM-plugin-helper" upgrade
-  
-  for plugin ($@); do
-    local plugin_basename=$(_ZPM-get-plugin-basename $plugin)
-  done
-}
-
 function zpm(){
   if [[ "$1" == 'u' || "$1" == 'up' || "$1" == 'upgrade' ]]; then
     shift
@@ -54,20 +37,20 @@ post_fn(){
   echo 'zpm () {}' >> "$_ZPM_CACHE"
   echo >> "$_ZPM_CACHE"
   
-  echo 'export PATH="'"${ZPM_PATH}"'${PATH}"' >> "$_ZPM_CACHE"
+  echo 'export PATH="'"${_ZPM_PATH}"'${PATH}"' >> "$_ZPM_CACHE"
   echo >> "$_ZPM_CACHE"
   
-  echo 'fpath=( $fpath '$ZPM_fpath' )' >> "$_ZPM_CACHE"
+  echo 'fpath=( $fpath '$_ZPM_fpath' )' >> "$_ZPM_CACHE"
   echo >> "$_ZPM_CACHE"
   
-  for file in $ZPM_files_for_source; do
+  for file in $_ZPM_files_for_source; do
     echo "source '$file'" >> "$_ZPM_CACHE"
   done
   echo >> "$_ZPM_CACHE"
   
   echo '_ZPM_post_fn () {' >> "$_ZPM_CACHE"
   
-  for file in $ZPM_files_for_async_source; do
+  for file in $_ZPM_files_for_async_source; do
     echo "  source '$file'" >> "$_ZPM_CACHE"
   done
   echo >> "$_ZPM_CACHE"

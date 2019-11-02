@@ -7,7 +7,7 @@ function _ZPM-log() {
     for i in $(seq 1 ${#1}); do
       num=$(( $num + $(LC_CTYPE=C printf '%d' "'${1[$i]})") ))
     done
-    
+
     color=$(( $num % 6 + 1 ))
     
     echo -n "[1;3${color}m$1 [0m"
@@ -90,7 +90,7 @@ _ZPM-addpath () {
     ;;
     *)
       PATH="${1:A}:$PATH"
-      ZPM_PATH="${1:A}:$ZPM_PATH"
+      _ZPM_PATH="${1:A}:$_ZPM_PATH"
   esac
 }
 
@@ -100,7 +100,7 @@ _ZPM-addfpath () {
     ;;
     *)
       fpath=("${1:A}" $fpath )
-      ZPM_fpath=("${1:A}" $ZPM_fpath )
+      _ZPM_fpath=("${1:A}" $_ZPM_fpath )
   esac
 }
 
@@ -115,11 +115,11 @@ source () {
 
 _ZPM_source () {
   source "$1"
-  ZPM_files_for_source+=("${1:A}")
+  _ZPM_files_for_source+=("${1:A}")
 }
 
 _ZPM_async_source () {
   source "$1"
-  ZPM_files_for_async_source+=("${1:A}" )
+  _ZPM_files_for_async_source+=("${1:A}" )
 }
 
