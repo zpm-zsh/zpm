@@ -2,6 +2,7 @@
 
 function _ZPM-upgrade(){
   declare -a _Plugins_Upgrade
+  rm "$_ZPM_CACHE"
   
   if [[ -z $@ ]]; then
     _Plugins_Upgrade+=( "zpm" $_ZPM_Plugins )

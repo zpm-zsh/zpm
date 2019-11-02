@@ -1,6 +1,5 @@
 #!/usr/bin/env zsh
 
-touch "$_ZPM_CACHE"
 _ZPM_Plugins=()
 
 function zpm(){
@@ -34,7 +33,7 @@ function zpm(){
 }
 
 post_fn(){
-  echo 'zpm () {}' >> "$_ZPM_CACHE"
+  echo 'zpm () {}' > "$_ZPM_CACHE"
   echo >> "$_ZPM_CACHE"
   
   echo 'export PATH="'"${_ZPM_PATH}"'${PATH}"' >> "$_ZPM_CACHE"
