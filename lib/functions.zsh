@@ -55,7 +55,9 @@ function _ZPM-get-plugin-path() {
 
 function _ZPM-get-plugin-basename() {
   local plugin_name=$(_ZPM-get-plugin-name $1)
+
   plugin_name=${plugin_name##*\/}
+  
   if [[ "${plugin_name}" == 'oh-my-zsh-'* ]]; then
     plugin_name=${plugin_name:10}
   fi
