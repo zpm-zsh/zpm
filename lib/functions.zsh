@@ -134,53 +134,42 @@ _ZPM_async_source () {
 
 post_fn(){
   echo 'zpm () {}' >> "$_ZPM_CACHE"
-
   echo >> "$_ZPM_CACHE"
-
-  echo 'PATH="'"${ZPM_PATH}"'${PATH}"' >> "$_ZPM_CACHE"
-
+  
+  echo 'export PATH="'"${ZPM_PATH}"'${PATH}"' >> "$_ZPM_CACHE"
   echo >> "$_ZPM_CACHE"
-
-  echo 'typeset -aU path' >> "$_ZPM_CACHE"
-
-  echo >> "$_ZPM_CACHE"
-
-  echo 'export PATH' >> "$_ZPM_CACHE"
-
-  echo >> "$_ZPM_CACHE"
-
+  
   echo 'fpath=( $fpath '$ZPM_fpath' )' >> "$_ZPM_CACHE"
-
   echo >> "$_ZPM_CACHE"
-
+  
   for file in $ZPM_files_for_source; do
     echo "source '$file'" >> "$_ZPM_CACHE"
   done
-
   echo >> "$_ZPM_CACHE"
-
+  
   echo '_ZPM_post_fn () {' >> "$_ZPM_CACHE"
-
+  
   for file in $ZPM_files_for_async_source; do
     echo "  source '$file'" >> "$_ZPM_CACHE"
   done
-
   echo >> "$_ZPM_CACHE"
-
+  
   echo '  TMOUT=5' >> "$_ZPM_CACHE"
-
-
   echo >> "$_ZPM_CACHE"
-
+  
   echo '  add-zsh-hook -d background _ZPM_post_fn' >> "$_ZPM_CACHE"
   echo '}' >> "$_ZPM_CACHE"
-
   echo >> "$_ZPM_CACHE"
-
+  
+  echo 'typeset -aU path' >> "$_ZPM_CACHE"
+  echo >> "$_ZPM_CACHE"
+  
+  echo 'export PATH' >> "$_ZPM_CACHE"
+  echo >> "$_ZPM_CACHE"
+  
   echo 'TMOUT=1' >> "$_ZPM_CACHE"
-
   echo >> "$_ZPM_CACHE"
-
+  
   echo 'add-zsh-hook background _ZPM_post_fn' >> "$_ZPM_CACHE"
   zcompile "$_ZPM_CACHE"
   zcompile ~/.zshrc
