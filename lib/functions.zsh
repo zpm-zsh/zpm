@@ -106,7 +106,10 @@ _ZPM-addfpath () {
 
 # Fake source
 source () {
-  if [[ -f "$1" && ( ! -s "$1.zwc" || "$1" -nt "$1.zwc") ]]; then; zcompile "$1" 2>/dev/null; fi;
+  if [[ -f "$1" && ( ! -s "$1.zwc" || "$1" -nt "$1.zwc") ]]; then;
+    zcompile "$1" 2>/dev/null; 
+  fi;
+  
   builtin source "$1"
 }
 

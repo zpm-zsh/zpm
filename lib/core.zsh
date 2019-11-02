@@ -1,6 +1,5 @@
 #!/usr/bin/env zsh
 
-
 ZPM_PATH=""
 ZPM_fpath=()
 ZPM_files_for_source=()

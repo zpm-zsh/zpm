@@ -70,7 +70,7 @@ This tag have 4 posible arguments:
 Using this tags you can change destination of folders which will be added to `$PATH` or `$fpath`
 
 ```sh
-zpm some/plugin,path:/other-bin-folder
+zpm some/plugin,path:/executables
 zpm another/plugin,fpath:/completions
 ```
 
