@@ -40,7 +40,7 @@ _zpm(){
   
   for plugin ($_ZPM_Plugins); do
     
-    _ZPM_Plugins_upgradable+=($(_ZPM-get-plugin-base "$plugin"))
+    _ZPM_Plugins_upgradable+=($(_ZPM-get-plugin-name "$plugin"))
     
   done
   
@@ -84,4 +84,4 @@ _zpm(){
   
 }
 
-# compdef _zpm zpm
+compdef _zpm zpm

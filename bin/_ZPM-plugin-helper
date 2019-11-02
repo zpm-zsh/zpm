@@ -3,7 +3,6 @@
 source ${${(%):-%x}:a:h}/../lib/functions.zsh
 
 if [[ "$CLICOLOR" == "1" ]]; then
-  
   typeset -gA c
   
   c_reset="[0m"
@@ -17,40 +16,50 @@ if [[ "$CLICOLOR" == "1" ]]; then
   c[magenta]="[35m"
   c[cyan]="[36m"
   c[grey]="[37m"
-  
 fi
+
+local Plugin_name=$(_ZPM-get-plugin-name "$2")
+local Plugin_path=$(_ZPM-get-plugin-path "$2")
+local Plugin_link=$(_ZPM-get-plugin-link "$2")
+local Plugin_type=$(_ZPM-get-plugin-type "$2")
 
 if [[ "$1" == "upgrade" ]]; then
-  type="Upgrade"
-else
-  type="Install"
-fi
-shift
-
-_ZPM-log zpm:upgrade "Upgrade ${1}"
-
-local Plugin_base=$(_ZPM-get-plugin-base "$1")
-local Plugin_path=$(_ZPM-get-plugin-path $1)
-local Plugin_url=$(_ZPM-get-plugin-url $1)
-
-
-if [[ "$type" == "Upgrade" ]]; then
+  _ZPM-log zpm:upgrade "Upgrade ${2}"
   git --git-dir="${Plugin_path}/.git/" --work-tree="${Plugin_path}/" checkout "${Plugin_path}/" </dev/null >/dev/null 2>/dev/null
   git --git-dir="${Plugin_path}/.git/" --work-tree="${Plugin_path}/" pull </dev/null >/dev/null 2>/dev/null
 else
-  if [[ -d "$Plugin_path" ]]; then
-    exit 0
+  if [[ "$Plugin_type" == "github" ]];then
+    git clone --recursive "https://github.com/"${Plugin_name}".git" --depth 1 --single-branch -j 8 "$Plugin_path"  </dev/null >/dev/null 2>/dev/null
+  elif [[ "$Plugin_type" == "gitlab" ]];then
+    git clone --recursive "https://gitlab.com/"${Plugin_name}".git" --depth 1 --single-branch -j 8 "$Plugin_path"  </dev/null >/dev/null 2>/dev/null
+  elif [[ "$Plugin_type" == "bitbucket" ]];then
+    git clone --recursive "https://bitbucket.com/"${Plugin_name}".git" --depth 1 --single-branch -j 8 "$Plugin_path"  </dev/null >/dev/null 2>/dev/null
+  elif [[ "$Plugin_type" == "omz" ]];then
+    if [[ ! -e "${HOME}/.oh-my-zsh" ]]; then
+      git clone --recursive "https://github.com/robbyrussell/oh-my-zsh.git" --depth 1 --single-branch -j 8 "${HOME}/.oh-my-zsh"  </dev/null >/dev/null 2>/dev/null
+    fi
+    ln -s "${HOME}/.oh-my-zsh/plugins/${Plugin_name}" "$Plugin_path" 2>/dev/null
   fi
-  git clone --recursive "https://github.com/"${Plugin_base}".git" --depth 1 --single-branch -j 8 "$Plugin_path"  </dev/null >/dev/null 2>/dev/null
 fi
 
 
-local upgrade_string=""
+local status_string=""
 
-upgrade_string+="${c[green]}${c_bold}${type}${c_reset} "
-upgrade_string+="\033]8;;${Plugin_url}\a"
-upgrade_string+="${c[blue]}${c_bold}${Plugin_base//\//${c[red]}${c_bold}/${c[blue]}${c_bold}}"
-upgrade_string+="\033]8;;\a${c_reset}"
-upgrade_string+=" ${c[green]}✔${c_reset}"
+if [[ "$1" == "upgrade" ]]; then
+  status_string+="${c[green]}${c_bold}Upgrade${c_reset} "
+else
+  status_string+="${c[green]}${c_bold}Install${c_reset} "
+fi
 
-echo $upgrade_string
+if [[ -z "$Plugin_link" ]]; then
+  status_string+="${c[blue]}${c_bold}${Plugin_name//\//${c[red]}${c_bold}/${c[blue]}${c_bold}}"
+  status_string+="${c_reset}"
+else
+  status_string+="\033]8;;${Plugin_link}\a"
+  status_string+="${c[blue]}${c_bold}${Plugin_name//\//${c[red]}${c_bold}/${c[blue]}${c_bold}}"
+  status_string+="\033]8;;\a${c_reset}"
+fi
+
+status_string+=" ${c[green]}✔${c_reset}"
+
+echo $status_string

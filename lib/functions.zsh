@@ -17,25 +17,33 @@ function _ZPM-log() {
   fi
 }
 
-function _ZPM-get-plugin-base() {
-  if [[  "$1" != *","* ]]; then
-    echo "$1"
-  else
-    echo "$1" | awk -F',' '{print $1}'
+function _ZPM-get-plugin-type() {
+  local type='github'
+  
+  local _ZPM_tag_str=$(echo "$1" | awk -F'type:' '{print $2}' | awk -F',' '{print $1}')
+  
+  if [[ "$_ZPM_tag_str" == *'gitlab'* ]]; then
+    type='gitlab'
+  elif [[ "$_ZPM_tag_str" == *'bitbucket'* ]]; then
+    type='bitbucket'
+  elif [[ "$_ZPM_tag_str" == *'omz'* ]]; then
+    type='omz'
   fi
+  
+  echo "$type"
+}
+
+function _ZPM-get-plugin-name() {
+  echo "$1" | awk -F',' '{print $1}'
 }
 
 function _ZPM-get-plugin-path() {
-  local plugin_name=$(_ZPM-get-plugin-base $1)
-  if [[  "$plugin_name" == 'zpm' ]]; then
-    echo "${_ZPM_DIR}"
-  else
-    echo "${_ZPM_PLUGIN_DIR}/${plugin_name//\//---}"
-  fi
+  local plugin_name=$(_ZPM-get-plugin-name $1)
+  echo "${_ZPM_PLUGIN_DIR}/${plugin_name//\//---}"
 }
 
 function _ZPM-get-plugin-basename() {
-  local plugin_name=$(_ZPM-get-plugin-base $1)
+  local plugin_name=$(_ZPM-get-plugin-name $1)
   plugin_name=${plugin_name##*\/}
   if [[ "${plugin_name}" == 'oh-my-zsh-'* ]]; then
     plugin_name=${plugin_name:10}
@@ -55,45 +63,25 @@ function _ZPM-get-plugin-basename() {
   echo "${plugin_name}"
 }
 
-function _ZPM-get-plugin-url() {
-  local plugin_name=$(_ZPM-get-plugin-base $1)
+function _ZPM-get-plugin-link() {
+  local plugin_name=$(_ZPM-get-plugin-name $1)
+  local plugin_type=$(_ZPM-get-plugin-type $1)
   
   if [[  "$plugin_name" == 'zpm' ]]; then
     echo "https://github.com/zpm-zsh/zpm"
   else
-    echo "https://github.com/${plugin_name}"
-  fi
-  
-}
-
-function zpm(){
-  if [[ "$1" == 'u' || "$1" == 'up' || "$1" == 'upgrade' ]]; then
-    shift
-    _ZPM-upgrade "$@"
-    return 0
-  fi
-  
-  if [[ "$1" == 'load' ]]; then
-    shift
-  fi
-  
-  if [[ "$1" == 'load-if' || "$1" == 'if' ]]; then
-    if check-if "$2"; then
-      shift 2
-      zpm "$@"
+    if [[ "$plugin_type" == 'github' ]]; then
+      echo "https://github.com/${plugin_name}"
+    elif [[ "$plugin_type" == 'gitlab' ]]; then
+      echo "https://gitlab.com/${plugin_name}"
+    elif [[ "$plugin_type" == 'bitbucket' ]]; then
+      echo "https://bitbucket.com/${plugin_name}"
+    elif [[ "$plugin_type" == 'omz' ]]; then
+      echo "https://github.com/robbyrussell/oh-my-zsh/tree/master/plugins/${plugin_name}"
+    else
+      echo
     fi
-    return 0
   fi
-  
-  if [[ "$1" == 'load-if-not' || "$1" == 'if-not' ]]; then
-    if ! check-if "$2"; then
-      shift 2
-      zpm "$@"
-    fi
-    return 0
-  fi
-  
-  _ZPM-initialize-plugin "$@"
 }
 
 _ZPM-addpath () {
@@ -130,47 +118,4 @@ _ZPM_source () {
 _ZPM_async_source () {
   source "$1"
   ZPM_files_for_async_source+=("${1:A}" )
-}
-
-post_fn(){
-  echo 'zpm () {}' >> "$_ZPM_CACHE"
-  echo >> "$_ZPM_CACHE"
-  
-  echo 'export PATH="'"${ZPM_PATH}"'${PATH}"' >> "$_ZPM_CACHE"
-  echo >> "$_ZPM_CACHE"
-  
-  echo 'fpath=( $fpath '$ZPM_fpath' )' >> "$_ZPM_CACHE"
-  echo >> "$_ZPM_CACHE"
-  
-  for file in $ZPM_files_for_source; do
-    echo "source '$file'" >> "$_ZPM_CACHE"
-  done
-  echo >> "$_ZPM_CACHE"
-  
-  echo '_ZPM_post_fn () {' >> "$_ZPM_CACHE"
-  
-  for file in $ZPM_files_for_async_source; do
-    echo "  source '$file'" >> "$_ZPM_CACHE"
-  done
-  echo >> "$_ZPM_CACHE"
-  
-  echo '  TMOUT=5' >> "$_ZPM_CACHE"
-  echo >> "$_ZPM_CACHE"
-  
-  echo '  add-zsh-hook -d background _ZPM_post_fn' >> "$_ZPM_CACHE"
-  echo '}' >> "$_ZPM_CACHE"
-  echo >> "$_ZPM_CACHE"
-  
-  echo 'typeset -aU path' >> "$_ZPM_CACHE"
-  echo >> "$_ZPM_CACHE"
-  
-  echo 'export PATH' >> "$_ZPM_CACHE"
-  echo >> "$_ZPM_CACHE"
-  
-  echo 'TMOUT=1' >> "$_ZPM_CACHE"
-  echo >> "$_ZPM_CACHE"
-  
-  echo 'add-zsh-hook background _ZPM_post_fn' >> "$_ZPM_CACHE"
-  zcompile "$_ZPM_CACHE"
-  zcompile ~/.zshrc
 }

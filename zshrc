@@ -44,6 +44,7 @@ zpm if-not ssh                             \
   tarruda/zsh-autosuggestions              \
   zpm-zsh/tmux,async                       \
 
+# zpm shyran/zsh-nvm,type:gitlab
 
 
 if [[ -f ~/.zshrc.local ]]; then
