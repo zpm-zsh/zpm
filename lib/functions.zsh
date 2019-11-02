@@ -163,6 +163,10 @@ post_fn(){
 
   echo >> "$_ZPM_CACHE"
 
+  echo '  typeset -aU path' >> "$_ZPM_CACHE"
+
+  echo >> "$_ZPM_CACHE"
+
   echo '  add-zsh-hook -d background _ZPM_post_fn' >> "$_ZPM_CACHE"
   echo '}' >> "$_ZPM_CACHE"
 
