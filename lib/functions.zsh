@@ -82,47 +82,47 @@ function _ZPM-get-plugin-link() {
     echo "https://github.com/${plugin_name}"
     return 0
   fi
-  
+
   if [[ "$plugin_type" == 'gitlab' ]]; then
     echo "https://gitlab.com/${plugin_name}"
     return 0
   fi
-  
+
   if [[ "$plugin_type" == 'bitbucket' ]]; then
     echo "https://bitbucket.com/${plugin_name}"
     return 0
   fi
-  
+
   if [[ "$plugin_type" == 'zpm' ]]; then
     echo "https://github.com/zpm-zsh/zpm"
     return 0
   fi
-  
+
   if [[ "$plugin_type" == 'omz' ]]; then
     echo "https://github.com/robbyrussell/oh-my-zsh/tree/master/plugins/${plugin_name}"
-    return 0
-  fi
   
+  fi
+
   echo
 }
 
 _ZPM-addpath () {
+  _ZPM_PATH="${1:A}:$_ZPM_PATH"
   case ":$PATH:" in
     *:"$1":*)
     ;;
     *)
       PATH="${1:A}:$PATH"
-      _ZPM_PATH="${1:A}:$_ZPM_PATH"
   esac
 }
 
 _ZPM-addfpath () {
+  _ZPM_fpath=("${1:A}" $_ZPM_fpath )
   case ":$FPATH:" in
     *:"$1":*)
     ;;
     *)
       fpath=("${1:A}" $fpath )
-      _ZPM_fpath=("${1:A}" $_ZPM_fpath )
   esac
 }
 
