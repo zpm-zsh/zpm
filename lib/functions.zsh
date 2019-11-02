@@ -7,30 +7,41 @@ function _ZPM-log() {
     for i in $(seq 1 ${#1}); do
       num=$(( $num + $(LC_CTYPE=C printf '%d' "'${1[$i]})") ))
     done
-
+    
     color=$(( $num % 6 + 1 ))
     
     echo -n "[1;3${color}m$1 [0m"
-
+    
     shift
     echo "$@"
   fi
 }
 
 function _ZPM-get-plugin-type() {
-  local type='github'
+  
+  if [[ "$1" == 'zpm' ]]; then
+    echo 'zpm'
+    return 0
+  fi
   
   local _ZPM_tag_str=$(echo "$1" | awk -F'type:' '{print $2}' | awk -F',' '{print $1}')
   
   if [[ "$_ZPM_tag_str" == *'gitlab'* ]]; then
-    type='gitlab'
-  elif [[ "$_ZPM_tag_str" == *'bitbucket'* ]]; then
-    type='bitbucket'
-  elif [[ "$_ZPM_tag_str" == *'omz'* ]]; then
-    type='omz'
+    echo 'gitlab'
+    return 0
   fi
   
-  echo "$type"
+  if [[ "$_ZPM_tag_str" == *'bitbucket'* ]]; then
+    echo 'bitbucket'
+    return 0
+  fi
+  
+  if [[ "$_ZPM_tag_str" == *'omz'* ]]; then
+    echo 'omz'
+    return 0
+  fi
+  
+  echo "github"
 }
 
 function _ZPM-get-plugin-name() {
@@ -67,21 +78,32 @@ function _ZPM-get-plugin-link() {
   local plugin_name=$(_ZPM-get-plugin-name $1)
   local plugin_type=$(_ZPM-get-plugin-type $1)
   
-  if [[  "$plugin_name" == 'zpm' ]]; then
-    echo "https://github.com/zpm-zsh/zpm"
-  else
-    if [[ "$plugin_type" == 'github' ]]; then
-      echo "https://github.com/${plugin_name}"
-    elif [[ "$plugin_type" == 'gitlab' ]]; then
-      echo "https://gitlab.com/${plugin_name}"
-    elif [[ "$plugin_type" == 'bitbucket' ]]; then
-      echo "https://bitbucket.com/${plugin_name}"
-    elif [[ "$plugin_type" == 'omz' ]]; then
-      echo "https://github.com/robbyrussell/oh-my-zsh/tree/master/plugins/${plugin_name}"
-    else
-      echo
-    fi
+  if [[ "$plugin_type" == 'github' ]]; then
+    echo "https://github.com/${plugin_name}"
+    return 0
   fi
+  
+  if [[ "$plugin_type" == 'gitlab' ]]; then
+    echo "https://gitlab.com/${plugin_name}"
+    return 0
+  fi
+  
+  if [[ "$plugin_type" == 'bitbucket' ]]; then
+    echo "https://bitbucket.com/${plugin_name}"
+    return 0
+  fi
+  
+  if [[ "$plugin_type" == 'zpm' ]]; then
+    echo "https://github.com/zpm-zsh/zpm"
+    return 0
+  fi
+  
+  if [[ "$plugin_type" == 'omz' ]]; then
+    echo "https://github.com/robbyrussell/oh-my-zsh/tree/master/plugins/${plugin_name}"
+    return 0
+  fi
+  
+  echo
 }
 
 _ZPM-addpath () {
@@ -107,7 +129,7 @@ _ZPM-addfpath () {
 # Fake source
 source () {
   if [[ -f "$1" && ( ! -s "$1.zwc" || "$1" -nt "$1.zwc") ]]; then;
-    zcompile "$1" 2>/dev/null; 
+    zcompile "$1" 2>/dev/null;
   fi;
   
   builtin source "$1"

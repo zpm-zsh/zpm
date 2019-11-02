@@ -24,9 +24,35 @@ local Plugin_link=$(_ZPM-get-plugin-link "$2")
 local Plugin_type=$(_ZPM-get-plugin-type "$2")
 
 if [[ "$1" == "upgrade" ]]; then
-  _ZPM-log zpm:upgrade "Upgrade ${2}"
-  git --git-dir="${Plugin_path}/.git/" --work-tree="${Plugin_path}/" checkout "${Plugin_path}/" </dev/null >/dev/null 2>/dev/null
-  git --git-dir="${Plugin_path}/.git/" --work-tree="${Plugin_path}/" pull </dev/null >/dev/null 2>/dev/null
+  local status_string="${c[green]}${c_bold}Upgrade${c_reset} "
+  
+  
+  if [[ "$Plugin_type" == 'zpm' ]]; then
+    _ZPM-log zpm:upgrade "Upgrade zpm"
+    git --git-dir="${_ZPM_DIR}/.git/" --work-tree="${_ZPM_DIR}/" checkout "${_ZPM_DIR}/" </dev/null >/dev/null 2>/dev/null
+    git --git-dir="${_ZPM_DIR}/.git/" --work-tree="${_ZPM_DIR}/" pull </dev/null >/dev/null 2>/dev/null
+  elif [[ "$Plugin_type" == 'omz' ]]; then
+    git --git-dir="${HOME}/.oh-my-zsh/.git/" --work-tree="${HOME}/.oh-my-zsh/" checkout "${HOME}/.oh-my-zsh/" </dev/null >/dev/null 2>/dev/null
+    git --git-dir="${HOME}/.oh-my-zsh/.git/" --work-tree="${HOME}/.oh-my-zsh/" pull </dev/null >/dev/null 2>/dev/null
+  else
+    _ZPM-log zpm:upgrade "Upgrade ${2}"
+    git --git-dir="${Plugin_path}/.git/" --work-tree="${Plugin_path}/" checkout "${Plugin_path}/" </dev/null >/dev/null 2>/dev/null
+    git --git-dir="${Plugin_path}/.git/" --work-tree="${Plugin_path}/" pull </dev/null >/dev/null 2>/dev/null
+  fi
+  
+  
+  if [[ -z "$Plugin_link" ]]; then
+    status_string+="${c[blue]}${c_bold}${Plugin_name//\//${c[red]}${c_bold}/${c[blue]}${c_bold}}"
+    status_string+="${c_reset}"
+  else
+    status_string+="\033]8;;${Plugin_link}\a"
+    status_string+="${c[blue]}${c_bold}${Plugin_name//\//${c[red]}${c_bold}/${c[blue]}${c_bold}}"
+    status_string+="\033]8;;\a${c_reset}"
+  fi
+  
+  status_string+=" ${c[green]}✔${c_reset}"
+  
+  echo $status_string
 else
   if [[ "$Plugin_type" == "github" ]];then
     git clone --recursive "https://github.com/"${Plugin_name}".git" --depth 1 --single-branch -j 8 "$Plugin_path"  </dev/null >/dev/null 2>/dev/null
@@ -40,26 +66,23 @@ else
     fi
     ln -s "${HOME}/.oh-my-zsh/plugins/${Plugin_name}" "$Plugin_path" 2>/dev/null
   fi
+  
+  
+  local status_string="${c[green]}${c_bold}Install${c_reset} "
+  
+  if [[ -z "$Plugin_link" ]]; then
+    status_string+="${c[blue]}${c_bold}${Plugin_name//\//${c[red]}${c_bold}/${c[blue]}${c_bold}}"
+    status_string+="${c_reset}"
+  else
+    status_string+="\033]8;;${Plugin_link}\a"
+    status_string+="${c[blue]}${c_bold}${Plugin_name//\//${c[red]}${c_bold}/${c[blue]}${c_bold}}"
+    status_string+="\033]8;;\a${c_reset}"
+  fi
+  
+  status_string+=" ${c[green]}✔${c_reset}"
+  
+  echo $status_string
 fi
 
 
-local status_string=""
 
-if [[ "$1" == "upgrade" ]]; then
-  status_string+="${c[green]}${c_bold}Upgrade${c_reset} "
-else
-  status_string+="${c[green]}${c_bold}Install${c_reset} "
-fi
-
-if [[ -z "$Plugin_link" ]]; then
-  status_string+="${c[blue]}${c_bold}${Plugin_name//\//${c[red]}${c_bold}/${c[blue]}${c_bold}}"
-  status_string+="${c_reset}"
-else
-  status_string+="\033]8;;${Plugin_link}\a"
-  status_string+="${c[blue]}${c_bold}${Plugin_name//\//${c[red]}${c_bold}/${c[blue]}${c_bold}}"
-  status_string+="\033]8;;\a${c_reset}"
-fi
-
-status_string+=" ${c[green]}✔${c_reset}"
-
-echo $status_string
