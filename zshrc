@@ -6,6 +6,10 @@ fi
 source ~/.zpm/zpm.zsh
 
 ### Core plugins
+zpm if ssh              \
+  zpm-zsh/tmux          \
+
+
 zpm                     \
   zpm-zsh/core-config   \
   zpm-zsh/check-deps    \
@@ -28,10 +32,6 @@ zpm                                                 \
   zsh-users/zsh-completions,apply:fpath,fpath:/src  \
 
 
-zpm if ssh                                          \
-  zpm-zsh/tmux                                      \
-
-
 zpm if-not ssh                             \
   zpm-zsh/readers,async                    \
   zpm-zsh/clipboard,async                  \
@@ -42,6 +42,8 @@ zpm if-not ssh                             \
   psprint/history-search-multi-word,async  \
   zdharma/fast-syntax-highlighting         \
   tarruda/zsh-autosuggestions              \
+  zpm-zsh/tmux,async                       \
+
 
 
 if [[ -f ~/.zshrc.local ]]; then
