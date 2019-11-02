@@ -45,7 +45,7 @@ function _ZPM-get-plugin-type() {
 }
 
 function _ZPM-get-plugin-name() {
-  echo "$1" | awk -F',' '{print $1}'
+  echo "${1%%,*}"
 }
 
 function _ZPM-get-plugin-path() {

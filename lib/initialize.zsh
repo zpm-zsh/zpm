@@ -17,7 +17,8 @@ function _ZPM-load-plugin() {
   local _ZPM_local_fpath=true
   
   if [[ "$1"  == *",apply:"* ]]; then
-    local _ZPM_tag_str=$(echo "$1" | awk -F'apply:' '{print $2}' | awk -F',' '{print $1}')
+    local _ZPM_tag_str=$(echo "$1" | awk -F'apply:' '{print $2}')
+    _ZPM_tag_str=${_ZPM_tag_str%%,*}
     
     if [[ "$_ZPM_tag_str" == *'source'* ]]; then
       _ZPM_local_source=false
@@ -38,7 +39,8 @@ function _ZPM-load-plugin() {
   
   if [[ "$_ZPM_local_fpath"  == "true" ]]; then
     if [[ "$1"  == *",fpath:"* ]]; then
-      local zpm_fpath=$(echo "$1" | awk -F',fpath:' '{print $2}' | awk -F',' '{print $1}')
+      local zpm_fpath=$(echo "$1" | awk -F',fpath:' '{print $2}')
+      zpm_fpath=${zpm_fpath%%,*}
       _ZPM-log zpm:init:fpath "Add to FPATH ${Plugin_basename:A}/${zpm_fpath}"
       _ZPM-addfpath "${Plugin_path:A}/${zpm_fpath}"
     elif [[ ! -z $(find "${Plugin_path:A}" -maxdepth 1 -name '_*' -print -quit) ]]; then
@@ -49,7 +51,8 @@ function _ZPM-load-plugin() {
   
   if [[ "$_ZPM_local_path"  == "true" ]]; then
     if [[ "$1"  == *",path:"* ]]; then
-      local zpm_path=$(echo "$1" | awk -F',path:' '{print $2}' | awk -F',' '{print $1}')
+      local zpm_path=$(echo "$1" | awk -F',path:' '{print $2}')
+      zpm_path=${zpm_path%%,*}
       _ZPM-log zpm:init:path "Add to PATH ${Plugin_basename}/${zpm_path}"
       _ZPM-addpath "${Plugin_path:A}/${zpm_path}"
     elif [[ -d ${Plugin_path:A}/bin ]]; then
@@ -61,7 +64,8 @@ function _ZPM-load-plugin() {
   if [[ "$_ZPM_local_source"  == "true" ]]; then
     if [[ "$_ZPM_local_async"  == "true" ]]; then
       if [[ "$1"  == *",source:"* ]]; then
-        local zpm_source=$(echo "$1" | awk -F',source:' '{print $2}' | awk -F',' '{print $1}')
+        local zpm_source=$(echo "$1" | awk -F',source:' '{print $2}')
+        zpm_source=${zpm_source%%,*}
         _ZPM-log zpm:init:path "Source ${Plugin_basename}/${zpm_source}"
         _ZPM_async_source "${Plugin_path}/${zpm_source}"
       elif [[ -f "${Plugin_path}/${Plugin_basename}.plugin.zsh" ]]; then
@@ -79,7 +83,8 @@ function _ZPM-load-plugin() {
       fi
     else
       if [[ "$1"  == *",source:"* ]]; then
-        local zpm_source=$(echo "$1" | awk -F',source:' '{print $2}' | awk -F',' '{print $1}')
+        local zpm_source=$(echo "$1" | awk -F',source:' '{print $2}')
+        zpm_source=${zpm_source%%,*}
         _ZPM-log zpm:init:path "Source ${Plugin_basename}/${zpm_source}"
         _ZPM_source "${Plugin_path}/${zpm_source}"
       elif [[ -f "${Plugin_path}/${Plugin_basename}.plugin.zsh" ]]; then
