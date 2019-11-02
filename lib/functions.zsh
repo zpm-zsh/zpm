@@ -137,11 +137,19 @@ post_fn(){
 
   echo >> "$_ZPM_CACHE"
 
-  echo 'export PATH="'"${ZPM_PATH}"'${PATH}"' >> "$_ZPM_CACHE"
+  echo 'PATH="'"${ZPM_PATH}"'${PATH}"' >> "$_ZPM_CACHE"
 
   echo >> "$_ZPM_CACHE"
 
-  echo 'fpath=( '$ZPM_fpath' $fpath )' >> "$_ZPM_CACHE"
+  echo 'typeset -aU path' >> "$_ZPM_CACHE"
+
+  echo >> "$_ZPM_CACHE"
+
+  echo 'export PATH' >> "$_ZPM_CACHE"
+
+  echo >> "$_ZPM_CACHE"
+
+  echo 'fpath=( $fpath '$ZPM_fpath' )' >> "$_ZPM_CACHE"
 
   echo >> "$_ZPM_CACHE"
 
@@ -161,9 +169,6 @@ post_fn(){
 
   echo '  TMOUT=5' >> "$_ZPM_CACHE"
 
-  echo >> "$_ZPM_CACHE"
-
-  echo '  typeset -aU path' >> "$_ZPM_CACHE"
 
   echo >> "$_ZPM_CACHE"
 
