@@ -11,7 +11,7 @@ function _ZPM-upgrade(){
   fi
   
   printf '%s\0' "${_Plugins_Upgrade[@]}" | \
-  xargs -0 -P16 -n1 "${${(%):-%x}:a:h}/../bin/_ZPM-plugin-helper" upgrade
+  xargs -0 -P0 -n1 "${${(%):-%x}:a:h}/../bin/_ZPM-plugin-helper" upgrade
   
   for plugin ($@); do
     local plugin_basename=$(_ZPM-get-plugin-basename $plugin)
