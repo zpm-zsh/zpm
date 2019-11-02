@@ -32,7 +32,7 @@ If you don't have `.zshrc` copy example of `.zshrc` from zpm
 cp ~/.zpm/zshrc ~/.zshrc
 ```
 
-# How to use
+## How to use
 
 Add `zpm load github-user/github-repo` for enabling plugin from github.
 
