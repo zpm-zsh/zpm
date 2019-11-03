@@ -42,6 +42,12 @@ post_fn(){
   echo 'zpm () {}' > "$_ZPM_CACHE"
   echo >> "$_ZPM_CACHE"
   
+  echo 'export PATH="'"${_ZPM_PATH}"'${PATH}"' >> "$_ZPM_CACHE"
+  echo >> "$_ZPM_CACHE"
+  
+  echo 'fpath=( $fpath '$_ZPM_fpath' )' >> "$_ZPM_CACHE"
+  echo >> "$_ZPM_CACHE"
+
   echo 'autoload -Uz compinit' >> "$_ZPM_CACHE"
   echo '_comp_files=(${HOME}/.zcompdump(Nm-20))' >> "$_ZPM_CACHE"
   echo 'if (( $#_comp_files )); then' >> "$_ZPM_CACHE"
@@ -50,13 +56,6 @@ post_fn(){
   echo '  compinit -i' >> "$_ZPM_CACHE"
   echo 'fi' >> "$_ZPM_CACHE"
   echo 'unset _comp_files' >> "$_ZPM_CACHE"
-  
-  echo >> "$_ZPM_CACHE"
-  
-  echo 'export PATH="'"${_ZPM_PATH}"'${PATH}"' >> "$_ZPM_CACHE"
-  echo >> "$_ZPM_CACHE"
-  
-  echo 'fpath=( $fpath '$_ZPM_fpath' )' >> "$_ZPM_CACHE"
   echo >> "$_ZPM_CACHE"
   
   for file in $_ZPM_files_for_source; do
@@ -103,6 +102,7 @@ post_fn(){
 }
 
 function _ZPM_Post_Initialization(){
+  compinit
   post_fn
   add-zsh-hook -d precmd _ZPM_Post_Initialization
 }
