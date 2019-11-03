@@ -65,11 +65,15 @@ Zpm supports tags for plugins:
 
 `some/plugin,apply:source:path:fpath`
 
-This tag have 4 posible arguments: 
+This tag have 3 posible arguments: 
 
 * `source` - for source this plugin, enabled by default
 * `path` - add `/bin` folder to your `$PATH`, only if it exist, enabled by default
 * `fpath` - add plugin folder to your `$fpath`, only if exist at least one `_*` file, enabled by default
+
+##### `async` tag
+
+If this tag is present, zsh plugin will be loaded async
 
 ##### `path` and `fpath` tags
 
@@ -80,9 +84,19 @@ zpm some/plugin,path:/executables
 zpm another/plugin,fpath:/completions
 ```
 
-##### `async` tag
+##### `type` tag
 
-If this tag is present, zsh plugin will be loaded async
+This tag has following parameters:
+
+* `type:gitlab` - plugin will be downloaded from GitLab
+* `type:bitbucket` - plugin will be downloaded from Bitbucket
+* `type:omz` - zpm  will use plugin from oh-my-zsh, oh-my-zsh will be download if not installed
+
+```sh
+plugin-from/gitlab,type:gitlab
+plugin-from/bitbucket,type:bitbucket
+plugin-form-oh-my-zsh,type:omz
+```
 
 ## Upgrade
 
