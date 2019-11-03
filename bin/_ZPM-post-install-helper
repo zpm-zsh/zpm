@@ -4,15 +4,11 @@ source ${${(%):-%x}:a:h}/../lib/functions.zsh
 
 local Plugin_path=$(_ZPM-get-plugin-path $1)
 
-
 if [[ "$1" == *",hook:"* ]]; then
-  
-  local hook=$(
-    echo "$1" | awk -F'hook:' '{print $2}' | awk -F',' '{print $1}'
-  )
+  local hook=${1##*,hook:}
+  hook=${hook%%\,*}
   
   cd "$Plugin_path"
   
   eval "$hook"
-  
 fi

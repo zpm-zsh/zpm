@@ -32,7 +32,7 @@ function _ZPM-upgrade(){
   fi
   
   printf '%s\0' "${_Plugins_Upgrade[@]}" | \
-  xargs -0 -P0 -n1 "${${(%):-%x}:a:h}/../bin/_ZPM-plugin-helper" upgrade
+  xargs -0 -P32 -n1 "${${(%):-%x}:a:h}/../bin/_ZPM-plugin-helper" upgrade
   
   for plugin ($@); do
     local plugin_basename=$(_ZPM-get-plugin-basename $plugin)
@@ -40,13 +40,13 @@ function _ZPM-upgrade(){
 }
 
 function _ZPM-get-plugin-type() {
-  
   if [[ "$1" == 'zpm' ]]; then
     echo 'zpm'
     return 0
   fi
-  
-  local _ZPM_tag_str=$(echo "$1" | awk -F'type:' '{print $2}' | awk -F',' '{print $1}')
+    
+  local _ZPM_tag_str=${1##*,type:}
+  _ZPM_tag_str=${_ZPM_tag_str%%\,*}
   
   if [[ "$_ZPM_tag_str" == *'gitlab'* ]]; then
     echo 'gitlab'
@@ -124,7 +124,7 @@ function _ZPM-get-plugin-link() {
   
   if [[ "$plugin_type" == 'omz' ]]; then
     echo "https://github.com/robbyrussell/oh-my-zsh/tree/master/plugins/${plugin_name}"
-    
+    return 0
   fi
   
   echo
