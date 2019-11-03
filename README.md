@@ -17,8 +17,9 @@ zpm ( ZSH Plugin Manager ) is a plugin manager for ZSH who combines the imperati
 
 ## Base dependences
 
-* git
 * zsh
+* git
+* xargs
 * [Termux](http://termux.com/) for Android
 
 ## Instalation
@@ -89,6 +90,14 @@ This tag has 3 possible arguments:
 
 If this tag is present, zsh plugin will be loaded async
 
+##### `source` tag
+
+Define own file woh will be load
+
+```sh
+zpm some/plugin,source:/other.file.zsh
+```
+
 ##### `path` and `fpath` tags
 
 Using these tags you can change the destination of folders which will be added to `$PATH` or `$fpath`
@@ -110,6 +119,14 @@ This tag has the following parameters:
 plugin-from/gitlab,type:gitlab
 plugin-from/bitbucket,type:bitbucket
 plugin-form-oh-my-zsh,type:omz
+```
+
+##### `hook` tag
+
+This tag param contain command who will be run in plugin directory 
+
+```sh
+zpm plugin/name,hook:"make; make install"
 ```
 
 ## Upgrade
