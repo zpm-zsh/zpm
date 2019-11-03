@@ -40,13 +40,24 @@ cp ~/.zpm/zshrc ~/.zshrc
 
 ## How to use
 
-Add `zpm load github-user/github-repo` for enabling plugin from github.
+```sh
+zpm load github-user/github-repo # Download and enable plugin from GitHub
 
-Or `zpm if condition load github-user/github-repo` for conditionally loading plugin
+zpm if linux load github-user/github-repo # Load plugin only on Linux
 
-Or `zpm if-not condition load github-user/github-repo` for loading plugin if condition is not met 
+zpm if-not linux load github-user/github-repo # Don't load plugin on Linux
 
-### Conditions:
+zpm load gitlab-user/gitlab-repo,type:gitlab # Download and enable plugin from GitLab
+
+zpm load bitbucket-user/bitbucket-repo,type:bitbucket # Download and enable plugin from Bitbucket
+
+zpm load plugin-form-oh-my-zsh,type:omz # Load plugin form oh-my-zsh
+
+zpm load github-user/github-repo,async # Async load
+
+```
+
+### `if` conditions:
 
 * `linux` - if current OS is Linux
 * `bsd` - if current OS is *BSD
