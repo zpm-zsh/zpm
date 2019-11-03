@@ -3,18 +3,18 @@
 _ZPM_Plugins_comp_upgradable=(zpm)
 for plugin in $_ZPM_Plugins; do
   local unused=${plugin//:/\\:}
-  _ZPM_Plugins_comp_upgradable+=$unused
+  _ZPM_Plugins_comp_upgradable+=( $unused )
 done
 
 _ZPM_Plugins_comp_local=()
 for plugin in "$_ZPM_PLUGIN_DIR/"*; do
   local unused=${plugin:t}
-  _ZPM_Plugins_comp_local+=${unused//---/\/}
+  _ZPM_Plugins_comp_local+=( ${unused//---/\/} )
 done
 
 _ZPM_Plugins_comp_loaded=()
 for plugin ($_ZPM_Plugins); do
-  _ZPM_Plugins_comp_loaded+=($(_ZPM-get-plugin-name "$plugin"))
+  _ZPM_Plugins_comp_loaded+=( $(_ZPM-get-plugin-name "$plugin") )
 done
 
 _ZPM_Plugins_comp_loadable=($(
@@ -29,6 +29,7 @@ _zpm_1st_arguments=(
 )
 
 _1st_arguments_full=(
+  'clean:Remove zpm cache'
   'upgrade:Upgrade plugin'
   'load:Load plugin'
   'if:Load plugin if condition true'
@@ -52,6 +53,10 @@ _zpm(){
   
   if (( CURRENT == 1 )); then
     _describe -t commands "zpm subcommand" _1st_arguments_full
+    return
+  fi
+  
+  if [[ "$words[1]" == 'clean' ]]; then
     return
   fi
   

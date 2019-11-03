@@ -8,7 +8,13 @@ else
   source ${${(%):-%x}:a:h}/lib/initialize.zsh
   
   source ${${(%):-%x}:a:h}/lib/imperative.zsh
+fi
 
+function _post_fn () {
+  TMOUT=5
   source ${${(%):-%x}:a:h}/lib/completion.zsh
+}
 
-  fi
+TMOUT=1
+
+add-zsh-hook background _post_fn

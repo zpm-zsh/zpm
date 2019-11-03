@@ -17,9 +17,13 @@ function _ZPM-log() {
   fi
 }
 
+function _ZPM_clean(){
+  rm "$_ZPM_CACHE" 2>/dev/null
+}
+
 function _ZPM-upgrade(){
   declare -a _Plugins_Upgrade
-  rm "$_ZPM_CACHE"
+  rm "$_ZPM_CACHE" 2>/dev/null
   
   if [[ -z $@ ]]; then
     _Plugins_Upgrade+=( "zpm" $_ZPM_Plugins )
@@ -73,7 +77,7 @@ function _ZPM-get-plugin-path() {
 
 function _ZPM-get-plugin-basename() {
   local plugin_name=$(_ZPM-get-plugin-name $1)
-
+  
   plugin_name=${plugin_name##*\/}
   
   if [[ "${plugin_name}" == 'oh-my-zsh-'* ]]; then
@@ -102,27 +106,27 @@ function _ZPM-get-plugin-link() {
     echo "https://github.com/${plugin_name}"
     return 0
   fi
-
+  
   if [[ "$plugin_type" == 'gitlab' ]]; then
     echo "https://gitlab.com/${plugin_name}"
     return 0
   fi
-
+  
   if [[ "$plugin_type" == 'bitbucket' ]]; then
     echo "https://bitbucket.com/${plugin_name}"
     return 0
   fi
-
+  
   if [[ "$plugin_type" == 'zpm' ]]; then
     echo "https://github.com/zpm-zsh/zpm"
     return 0
   fi
-
+  
   if [[ "$plugin_type" == 'omz' ]]; then
     echo "https://github.com/robbyrussell/oh-my-zsh/tree/master/plugins/${plugin_name}"
-  
+    
   fi
-
+  
   echo
 }
 

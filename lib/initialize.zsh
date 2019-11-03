@@ -36,7 +36,7 @@ function _ZPM-load-plugin() {
   if [[ "$1"  == *",async"* ]]; then
     _ZPM_local_async=true
   fi
-
+  
   if [[ "$_ZPM_local_fpath"  == "true" ]]; then
     if [[ "$1"  == *",fpath:"* ]]; then
       local zpm_fpath=${1##*,fpath:}
@@ -48,9 +48,9 @@ function _ZPM-load-plugin() {
       _ZPM-addfpath "${Plugin_path:A}"
     fi
   fi
-
+  
   if [[ "$_ZPM_local_path"  == "true" ]]; then
-
+    
     if [[ "$1"  == *",path:"* ]]; then
       local zpm_path=${1##*,path:}
       zpm_path=${zpm_path%%,*}

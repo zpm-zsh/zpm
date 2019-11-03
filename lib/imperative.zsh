@@ -3,6 +3,12 @@
 _ZPM_Plugins=()
 
 function zpm(){
+  if [[ "$1" == 'c' || "$1" == 'cl' || "$1" == 'clean' ]]; then
+    shift
+    _ZPM_clean
+    return 0
+  fi
+  
   if [[ "$1" == 'u' || "$1" == 'up' || "$1" == 'upgrade' ]]; then
     shift
     _ZPM-upgrade "$@"
@@ -44,9 +50,9 @@ post_fn(){
   echo '  compinit -i' >> "$_ZPM_CACHE"
   echo 'fi' >> "$_ZPM_CACHE"
   echo 'unset _comp_files' >> "$_ZPM_CACHE"
-
+  
   echo >> "$_ZPM_CACHE"
-
+  
   echo 'export PATH="'"${_ZPM_PATH}"'${PATH}"' >> "$_ZPM_CACHE"
   echo >> "$_ZPM_CACHE"
   
