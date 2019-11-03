@@ -8,4 +8,7 @@ else
   source ${${(%):-%x}:a:h}/lib/initialize.zsh
   
   source ${${(%):-%x}:a:h}/lib/imperative.zsh
+
+  source ${${(%):-%x}:a:h}/lib/completion.zsh
+
   fi
