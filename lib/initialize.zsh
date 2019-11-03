@@ -120,12 +120,12 @@ function _ZPM-initialize-plugin() {
   
   if [[ -n "$_Plugins_Install[@]" ]]; then;
     printf '%s\0' "${_Plugins_Install[@]}" | \
-    xargs -0 -P0 -n1 "${${(%):-%x}:a:h}/../bin/_ZPM-plugin-helper" install
+    xargs -0 -P0 -n1 "${_ZPM_DIR}/bin/_ZPM-plugin-helper" install
   fi
   
   for plugin ($_Plugins_Install); do
     if [[ "$plugin" == *",hook:"* ]]; then
-      ${${(%):-%x}:a:h}/../bin/_ZPM-post-install-helper "$plugin"
+      ${_ZPM_DIR}/bin/_ZPM-post-install-helper "$plugin"
     fi
   done
   

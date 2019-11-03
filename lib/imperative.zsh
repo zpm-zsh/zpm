@@ -72,7 +72,6 @@ post_fn(){
   echo >> "$_ZPM_CACHE"
   
   echo "  source '${_ZPM_DIR}/lib/functions.zsh'" >> "$_ZPM_CACHE"
-  echo "  source '${_ZPM_DIR}/lib/core.zsh'" >> "$_ZPM_CACHE"
   echo "  source '${_ZPM_DIR}/lib/initialize.zsh'" >> "$_ZPM_CACHE"
   echo "  source '${_ZPM_DIR}/lib/declarative.zsh'" >> "$_ZPM_CACHE"
   echo "  source '${_ZPM_DIR}/lib/completion.zsh'" >> "$_ZPM_CACHE"
@@ -120,6 +119,6 @@ else
 fi
 unset _comp_files
 
-zcompile ${${(%):-%x}:a:h}/functions.zsh
+zcompile ${_ZPM_DIR}/lib/functions.zsh
 
 zpm zpm-zsh/helpers zpm-zsh/colors zpm-zsh/background
