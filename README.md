@@ -115,24 +115,3 @@ plugin-form-oh-my-zsh,type:omz
 ## Upgrade
 
 Run `zpm upgrade` for upgrading, or run `zpm upgrade some-plugin another-plugin` if you want to upgrade only these plugins
-
-
-## TODO:
-
-Make zpm compatible with [Zsh Plugin Standard](http://zdharma.org/Zsh-100-Commits-Club/Zsh-Plugin-Standard.html)
-
-* [x] Impliment [Standardized $0 Handling](http://zdharma.org/Zsh-100-Commits-Club/Zsh-Plugin-Standard.html#zpfx)
-
-This is reduidant, because `$ZERO` var important if you load plugins with eval, zpm uses only `source`
-  
-* [x] Impliment [@zsh-plugin-run-on-unload](http://zdharma.org/Zsh-100-Commits-Club/Zsh-Plugin-Standard.html#unload-register-call) 
-
-zpm doesn't have posibility to unload plugin
-
-* [ ] Impliment [@zsh-plugin-run-on-update](http://zdharma.org/Zsh-100-Commits-Club/Zsh-Plugin-Standard.html#update-register-call)
-
-* [ ] Impliment [Plugin Manager Activity Indicator](http://zdharma.org/Zsh-100-Commits-Club/Zsh-Plugin-Standard.html#indicator)
-
-* [x] Impliment [Global Parameter With PREFIX](http://zdharma.org/Zsh-100-Commits-Club/Zsh-Plugin-Standard.html#zpfx)
-
-We already have `~/.local/{bin,lib,share}`, so we don't need special folder for local installation
