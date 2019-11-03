@@ -8,8 +8,4 @@ else
   source ${${(%):-%x}:a:h}/lib/initialize.zsh
   
   source ${${(%):-%x}:a:h}/lib/imperative.zsh
-  
-  zcompile ${${(%):-%x}:a:h}/lib/functions.zsh
-
-  zpm zpm-zsh/helpers zpm-zsh/colors zpm-zsh/background
-fi
+  fi

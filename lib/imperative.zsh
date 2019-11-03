@@ -36,6 +36,17 @@ post_fn(){
   echo 'zpm () {}' > "$_ZPM_CACHE"
   echo >> "$_ZPM_CACHE"
   
+  echo 'autoload -Uz compinit' >> "$_ZPM_CACHE"
+  echo '_comp_files=(${ZDOTDIR:-$HOME}/.zcompdump(Nm-20))' >> "$_ZPM_CACHE"
+  echo 'if (( $#_comp_files )); then' >> "$_ZPM_CACHE"
+  echo '  compinit -i -C' >> "$_ZPM_CACHE"
+  echo 'else' >> "$_ZPM_CACHE"
+  echo '  compinit -i' >> "$_ZPM_CACHE"
+  echo 'fi' >> "$_ZPM_CACHE"
+  echo 'unset _comp_files' >> "$_ZPM_CACHE"
+
+  echo >> "$_ZPM_CACHE"
+
   echo 'export PATH="'"${_ZPM_PATH}"'${PATH}"' >> "$_ZPM_CACHE"
   echo >> "$_ZPM_CACHE"
   
@@ -93,3 +104,16 @@ function _ZPM_Post_Initialization(){
 
 autoload -Uz add-zsh-hook
 add-zsh-hook precmd _ZPM_Post_Initialization
+
+autoload -Uz compinit
+_comp_files=(${ZDOTDIR:-$HOME}/.zcompdump(Nm-20))
+if (( $#_comp_files )); then
+  compinit -i -C
+else
+  compinit -i
+fi
+unset _comp_files
+
+zcompile ${${(%):-%x}:a:h}/functions.zsh
+
+zpm zpm-zsh/helpers zpm-zsh/colors zpm-zsh/background
