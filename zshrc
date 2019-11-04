@@ -32,19 +32,33 @@ zpm                                                 \
   zsh-users/zsh-completions,apply:fpath,fpath:/src  \
 
 
-zpm if-not ssh                             \
-  zpm-zsh/readers,async                    \
-  zpm-zsh/clipboard,async                  \
-  zpm-zsh/autoenv                          \
-  zpm-zsh/mysql-colorize,async             \
-  zpm-zsh/zshmarks,async                   \
-  voronkovich/gitignore.plugin.zsh,async   \
-  psprint/history-search-multi-word,async  \
-  zdharma/fast-syntax-highlighting         \
-  tarruda/zsh-autosuggestions              \
-  zpm-zsh/tmux,async                       \
+zpm if-not ssh                                        \
+  zpm-zsh/dropbox,async                               \
+  lukechilds/zsh-better-npm-completion,async          \
+  tj/git-extras,source:/etc/git-extras-completion.zsh \
+  horosgrisa/utils,async                              \
+                                                      \
+  zpm-zsh/readers,async                               \
+  zpm-zsh/clipboard,async                             \
+  zpm-zsh/mysql-colorize,async                        \
+  zpm-zsh/zshmarks,async                              \
+  voronkovich/gitignore.plugin.zsh,async              \
+  zpm-zsh/autoenv,async                               \
+                                                      \
+  mdumitru/fancy-ctrl-z,async                         \
+  jimhester/per-directory-history                     \
+  hlissner/zsh-autopair,async                         \
+  psprint/history-search-multi-word,async             \
+  zsh-users/zsh-history-substring-search              \
+  zdharma/fast-syntax-highlighting                    \
+  tarruda/zsh-autosuggestions                         \
 
-# zpm shyran/zsh-nvm,type:gitlab
+
+zpm                                 \
+  pip,type:omz,async                \
+  extract,type:omz,async            \
+  command-not-found,type:omz,async  \
+  wp-cli,type:omz,async             \
 
 
 if [[ -f ~/.zshrc.local ]]; then
