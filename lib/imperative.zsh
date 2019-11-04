@@ -88,8 +88,6 @@ post_fn(){
   echo >> "$_ZPM_CACHE"
 
   echo 'typeset -aU path' >> "$_ZPM_CACHE"
-  echo >> "$_ZPM_CACHE"
-  
   echo 'export PATH' >> "$_ZPM_CACHE"
   echo >> "$_ZPM_CACHE"
   
@@ -98,7 +96,7 @@ post_fn(){
   
   echo 'add-zsh-hook background _ZPM_post_fn' >> "$_ZPM_CACHE"
   echo >> "$_ZPM_CACHE"
-  
+
   zcompile "$_ZPM_CACHE"
   zcompile ~/.zshrc
 }
