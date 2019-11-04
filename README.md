@@ -123,7 +123,7 @@ plugin-form-oh-my-zsh,type:omz
 
 ##### `hook` tag
 
-This tag param contain command who will be run in plugin directory 
+This tag param contains command who will be run in the plugin directory
 
 ```sh
 zpm plugin/name,hook:"make; make install"
