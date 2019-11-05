@@ -6,8 +6,8 @@ zpm ( ZSH Plugin Manager ) is a plugin manager for ZSH who combines the imperati
 * Fastest plugin manager (Really, after the first run, zpm will not be used at all)
 * Support for async loading
 * Dependencies between packages
-* ZPM plugins are compatible with [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh).
-* ZPM runs on Linux, Android, FreeBSD and macOS.
+* ZPM plugins are compatible with [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh)
+* ZPM runs on Linux, Android, FreeBSD and macOS
 
 #### Stats
 
