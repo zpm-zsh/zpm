@@ -78,6 +78,9 @@ function _ZPM-load-plugin() {
       elif [[ -f "${Plugin_path}/${Plugin_basename}.zsh" ]]; then
         _ZPM-log zpm:init:source "Source ${Plugin_basename}"
         _ZPM_async_source "${Plugin_path}/${Plugin_basename}.zsh"
+      elif [[ -f "${Plugin_path}/init.zsh" ]]; then
+        _ZPM-log zpm:init:source "Source ${Plugin_basename}"
+        _ZPM_async_source "${Plugin_path}/init.zsh"
       elif [[ -f "${Plugin_path}/${Plugin_basename}.zsh-theme" ]]; then
         _ZPM-log zpm:init:source "Source ${Plugin_basename}"
         _ZPM_async_source "${Plugin_path}/${Plugin_basename}.zsh-theme"
@@ -97,6 +100,9 @@ function _ZPM-load-plugin() {
       elif [[ -f "${Plugin_path}/${Plugin_basename}.zsh" ]]; then
         _ZPM-log zpm:init:source "Source ${Plugin_basename}"
         _ZPM_source "${Plugin_path}/${Plugin_basename}.zsh"
+      elif [[ -f "${Plugin_path}/init.zsh" ]]; then
+        _ZPM-log zpm:init:source "Source ${Plugin_basename}"
+        _ZPM_source "${Plugin_path}/init.zsh"
       elif [[ -f "${Plugin_path}/${Plugin_basename}.zsh-theme" ]]; then
         _ZPM-log zpm:init:source "Source ${Plugin_basename}"
         _ZPM_source "${Plugin_path}/${Plugin_basename}.zsh-theme"
