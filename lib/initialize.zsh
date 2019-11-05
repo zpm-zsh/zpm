@@ -43,7 +43,7 @@ function _ZPM-load-plugin() {
       zpm_fpath=${zpm_fpath%%,*}
       _ZPM-log zpm:init:fpath "Add to FPATH ${Plugin_basename:A}/${zpm_fpath}"
       _ZPM-addfpath "${Plugin_path:A}/${zpm_fpath}"
-    elif [[ ! -z $(find "${Plugin_path:A}" -maxdepth 1 -name '_*' -print -quit) ]]; then
+    elif [[ -n "${Plugin_path:A}/_"*(#qN)  ]]; then
       _ZPM-log zpm:init:fpath "Add to FPATH ${Plugin_basename:A}"
       _ZPM-addfpath "${Plugin_path:A}"
     fi
