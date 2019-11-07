@@ -10,26 +10,23 @@ zpm if ssh              \
   zpm-zsh/tmux          \
 
 
-zpm                     \
-  zpm-zsh/core-config   \
-  zpm-zsh/check-deps    \
-
-
 ### Compatibility
 zpm if termux           \
   zpm-zsh/termux,async  \
 
 
 ### 3party plugins
-zpm                                                 \
-  zpm-zsh/minimal-theme                             \
-  zpm-zsh/ls                                        \
-  zpm-zsh/colorize,async                            \
-  zpm-zsh/ssh,async                                 \
-  zpm-zsh/dot,async                                 \
-  zpm-zsh/dircolors-material                        \
-  zpm-zsh/undollar,async                            \
-  zsh-users/zsh-completions,apply:fpath,fpath:/src  \
+zpm                                                   \
+  zpm-zsh/core-config                                 \
+  zpm-zsh/check-deps                                  \
+  zpm-zsh/minimal-theme                               \
+  zpm-zsh/ls                                          \
+  zpm-zsh/colorize,async                              \
+  zpm-zsh/ssh,async                                   \
+  zpm-zsh/dot,async                                   \
+  zpm-zsh/dircolors-material                          \
+  zpm-zsh/undollar,async                              \
+  zsh-users/zsh-completions,apply:fpath,fpath:/src    \
 
 
 zpm if-not ssh                                        \
