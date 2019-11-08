@@ -14,13 +14,13 @@ _ZPM_PLUGIN_DIR="${_ZPM_PLUGIN_DIR:A}"
 export _ZPM_PLUGIN_DIR
 unset ZPM_PLUGIN_DIR
 
-_ZPM_CACHE=${ZPM_CACHE:-"$HOME/.zpm-cache.zsh"}
+_ZPM_CACHE=${ZPM_CACHE:-"${TMPDIR:-/tmp}/.zpm-cache-${USER}.zsh"}
 _ZPM_CACHE="${_ZPM_CACHE:A}"
 export _ZPM_CACHE
 unset ZPM_CACHE
 
-if [[ -f ~/.zpm-cache.zsh ]]; then
-  source ~/.zpm-cache.zsh
+if [[ -f "${_ZPM_CACHE}" ]]; then
+  source "${_ZPM_CACHE}"
 else
   source "${_ZPM_DIR}/lib/functions.zsh"
   source "${_ZPM_DIR}/lib/initialize.zsh"
