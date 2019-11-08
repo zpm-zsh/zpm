@@ -1,8 +1,8 @@
 #!/usr/bin/env zsh
 
-source ${${(%):-%x}:a:h}/../lib/functions.zsh
+source ${_ZPM_DIR}/lib/functions.zsh
 
-if [[ "$CLICOLOR" == "1" ]]; then
+if [[ "$CLICOLOR" != "0" ]]; then
   typeset -gA c
   
   c_reset="[0m"
@@ -26,7 +26,6 @@ local Plugin_type=$(_ZPM-get-plugin-type "$2")
 if [[ "$1" == "upgrade" ]]; then
   local status_string="${c[green]}${c_bold}Upgrade${c_reset} "
   
-  
   if [[ "$Plugin_type" == 'zpm' ]]; then
     _ZPM-log zpm:upgrade "Upgrade zpm"
     git --git-dir="${_ZPM_DIR}/.git/" --work-tree="${_ZPM_DIR}/" checkout "${_ZPM_DIR}/" </dev/null >/dev/null 2>/dev/null
@@ -39,7 +38,6 @@ if [[ "$1" == "upgrade" ]]; then
     git --git-dir="${Plugin_path}/.git/" --work-tree="${Plugin_path}/" checkout "${Plugin_path}/" </dev/null >/dev/null 2>/dev/null
     git --git-dir="${Plugin_path}/.git/" --work-tree="${Plugin_path}/" pull </dev/null >/dev/null 2>/dev/null
   fi
-  
   
   if [[ -z "$Plugin_link" ]]; then
     status_string+="${c[blue]}${c_bold}${Plugin_name//\//${c[red]}${c_bold}/${c[blue]}${c_bold}}"
@@ -99,6 +97,3 @@ else
     echo $status_string
   fi
 fi
-
-
-
