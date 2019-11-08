@@ -4,6 +4,8 @@ _ZPM_PATH=""
 _ZPM_fpath=()
 _ZPM_files_for_source=()
 _ZPM_files_for_async_source=()
+_ZPM_files_for_inline_source=()
+_ZPM_files_for_inline_async_source=()
 
 _ZPM_DIR=${ZPM_DIR:-"${${(%):-%x}:A:h}"}
 export _ZPM_DIR

@@ -39,6 +39,39 @@ function _ZPM-upgrade(){
   done
 }
 
+function _ZPM-get-plugin-file-path() {
+  if [[ ! -z "${3}" ]]; then
+    echo "${1}/${3}"
+    return 0
+  fi
+
+  if [[ -e "${1}/${2}.plugin.zsh" ]]; then
+    echo "${1}/${2}.plugin.zsh"
+    return 0
+  fi
+  if [[ -e "${1}/zsh-${2}.plugin.zsh" ]]; then
+    echo "${1}/zsh-${2}.plugin.zsh"
+    return 0
+  fi
+
+  if [[ -e "${1}/${2}.zsh" ]]; then
+    echo "${1}/${2}.zsh"
+    return 0
+  fi
+
+  if [[ -e "${1}/${2}.zsh-theme" ]]; then
+    echo "${1}/${2}.zsh-theme"
+    return 0
+  fi
+
+  if [[ -e "${1}/init.zsh" ]]; then
+    echo "${1}/init.zsh"
+    return 0
+  fi
+
+  return -1
+}
+
 function _ZPM-get-plugin-type() {
   if [[ "$1" == 'zpm' ]]; then
     echo 'zpm'
@@ -167,5 +200,15 @@ _ZPM_source () {
 _ZPM_async_source () {
   source "$1"
   _ZPM_files_for_async_source+=("${1:A}" )
+}
+
+_ZPM_inline_source () {
+  source "$1"
+  _ZPM_files_for_inline_source+=("${1:A}")
+}
+
+_ZPM_inline_async_source () {
+  source "$1"
+  _ZPM_files_for_inline_async_source+=("${1:A}" )
 }
 
