@@ -43,7 +43,6 @@ zpm if-not ssh                                               \
   zpm-zsh/autoenv,async,inline                               \
                                                              \
   mdumitru/fancy-ctrl-z,async,inline                         \
-  jimhester/per-directory-history,inline                     \
   hlissner/zsh-autopair,async,inline                         \
   psprint/history-search-multi-word,async                    \
   zsh-users/zsh-history-substring-search                     \
