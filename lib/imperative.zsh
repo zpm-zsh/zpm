@@ -58,30 +58,26 @@ post_fn(){
   echo >> "$_ZPM_CACHE"
   
   for file in $_ZPM_files_for_source; do
-    echo "source '$file'" >> "$_ZPM_CACHE"
-  done
-  echo >> "$_ZPM_CACHE"
-  
-  for file in $_ZPM_files_for_inline_source; do
-    echo "# Inlined from '$file'" >> "$_ZPM_CACHE"
-    echo "ZERO='$file'" >> "$_ZPM_CACHE"
-    cat "$file" >> "$_ZPM_CACHE"
-    echo >> "$_ZPM_CACHE"
+    echo "ZERO='${file%%:_ZPM_inline}'" >> "$_ZPM_CACHE"
+    if [[ "$file" == *"_ZPM_inline" ]]; then
+      echo "# Inlined from '${file%%:_ZPM_inline}'" >> "$_ZPM_CACHE"
+      cat "${file%%:_ZPM_inline}" >> "$_ZPM_CACHE"
+    else
+      echo "source '${file}'" >> "$_ZPM_CACHE"
+    fi
   done
   echo >> "$_ZPM_CACHE"
   
   echo '_ZPM_post_fn () {' >> "$_ZPM_CACHE"
   
   for file in $_ZPM_files_for_async_source; do
-    echo "  source '$file'" >> "$_ZPM_CACHE"
-  done
-  echo >> "$_ZPM_CACHE"
-  
-  for file in $_ZPM_files_for_inline_async_source; do
-    echo "# Inlined from '$file'" >> "$_ZPM_CACHE"
-    echo "ZERO='$file'" >> "$_ZPM_CACHE"
-    cat "$file" >> "$_ZPM_CACHE"
-    echo >> "$_ZPM_CACHE"
+    echo "ZERO='${file%%:_ZPM_inline}'" >> "$_ZPM_CACHE"
+    if [[ "$file" == *"_ZPM_inline" ]]; then
+      echo "# Inlined from '${file%%:_ZPM_inline}'" >> "$_ZPM_CACHE"
+      cat "${file%%:_ZPM_inline}" >> "$_ZPM_CACHE"
+    else
+      echo "  source '$file'" >> "$_ZPM_CACHE"
+    fi
   done
   echo >> "$_ZPM_CACHE"
   
@@ -138,4 +134,4 @@ unset _comp_files
 
 zcompile ${_ZPM_DIR}/lib/functions.zsh
 
-zpm zpm-zsh/helpers zpm-zsh/colors zpm-zsh/background
+zpm zpm-zsh/helpers,inline zpm-zsh/colors,inline zpm-zsh/background,inline

@@ -197,18 +197,18 @@ _ZPM_source () {
   _ZPM_files_for_source+=("${1:A}")
 }
 
+_ZPM_inline_source () {
+  source "$1"
+  _ZPM_files_for_source+=("${1:A}:_ZPM_inline")
+}
+
 _ZPM_async_source () {
   source "$1"
   _ZPM_files_for_async_source+=("${1:A}" )
 }
 
-_ZPM_inline_source () {
-  source "$1"
-  _ZPM_files_for_inline_source+=("${1:A}")
-}
-
 _ZPM_inline_async_source () {
   source "$1"
-  _ZPM_files_for_inline_async_source+=("${1:A}" )
+  _ZPM_files_for_async_source+=("${1:A}:_ZPM_inline" )
 }
 
