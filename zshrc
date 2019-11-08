@@ -17,14 +17,14 @@ zpm if termux                  \
 
 ### 3party plugins
 zpm                                                          \
-  zpm-zsh/core-config                                        \
+  zpm-zsh/core-config,inline                                 \
   zpm-zsh/check-deps,inline                                  \
   zpm-zsh/minimal-theme,inline                               \
-  zpm-zsh/ls                                                 \
+  zpm-zsh/ls,inline                                          \
   zpm-zsh/colorize,async,inline                              \
   zpm-zsh/ssh,async,inline                                   \
   zpm-zsh/dot,async,inline                                   \
-  zpm-zsh/dircolors-material                                 \
+  zpm-zsh/dircolors-material,inline                          \
   zpm-zsh/undollar,async,inline                              \
   zsh-users/zsh-completions,apply:fpath,fpath:/src           \
 
@@ -37,7 +37,7 @@ zpm if-not ssh                                               \
                                                              \
   zpm-zsh/readers,async,inline                               \
   zpm-zsh/clipboard,async,inline                             \
-  zpm-zsh/mysql-colorize,async                               \
+  zpm-zsh/mysql-colorize,async,inline                        \
   zpm-zsh/zshmarks,async,inline                              \
   voronkovich/gitignore.plugin.zsh,async,inline              \
   zpm-zsh/autoenv,async,inline                               \
