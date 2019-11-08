@@ -45,26 +45,30 @@ function _ZPM-load-plugin() {
   if [[ "$_ZPM_local_fpath"  == "true" ]]; then
     if [[ "$1"  == *",fpath:"* ]]; then
       local zpm_fpath=${${1##*,fpath:}%%,*}
-      local _ZPM_path="${Plugin_path}/${zpm_fpath}"
-      _ZPM-log zpm:init:fpath "Add to FPATH ${Plugin_basename:A}/${zpm_fpath}"
-      fpath=( $fpath "${_ZPM_path:A}") 
+      local _local_path="${Plugin_path}/${zpm_fpath}"
+      _ZPM-log zpm:init:fpath "Add to \$fpath ${Plugin_basename:A}/${zpm_fpath}"
+      _ZPM_fpath=("${_local_path:A}" $_ZPM_fpath )
+      fpath=( $fpath "${_local_path:A}")
     elif [[ -n "${Plugin_path:A}/_"*(#qN)  ]]; then
-      local _ZPM_path="${Plugin_path}"
-      _ZPM-log zpm:init:fpath "Add to FPATH ${Plugin_basename:A}"
-      fpath=( $fpath "${_ZPM_path:A}")  
+      local _local_path="${Plugin_path}"
+      _ZPM-log zpm:init:fpath "Add to \$fpath ${Plugin_basename:A}"
+      _ZPM_fpath=("${_local_path:A}" $_ZPM_fpath )
+      fpath=( $fpath "${_local_path:A}")
     fi
   fi
   
   if [[ "$_ZPM_local_path"  == "true" ]]; then
     if [[ "$1"  == *",path:"* ]]; then
       local zpm_path=${${1##*,path:}%%,*}
-      local _ZPM_path="${Plugin_path}/${zpm_path}"
+      local _local_path="${Plugin_path}/${zpm_path}"
       _ZPM-log zpm:init:path "Add to PATH ${Plugin_basename}/${zpm_path}"
-      export path=("${_ZPM_path:A}" $path) 
+      export PATH="${_local_path:A}:$PATH"
+      _ZPM_PATH="${_local_path:A}:$_ZPM_PATH"
     elif [[ -d ${Plugin_path:A}/bin ]]; then
-      local _ZPM_path="${Plugin_path}/bin"
+      local _local_path="${Plugin_path}/bin"
       _ZPM-log zpm:init:path "Add to PATH ${Plugin_basename}/bin"
-      export path=("${_ZPM_path:A}" $path) 
+      export PATH="${_local_path:A}:$PATH"
+      _ZPM_PATH="${_local_path:A}:$_ZPM_PATH"
     fi
   fi
   
