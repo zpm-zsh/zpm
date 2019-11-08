@@ -67,21 +67,37 @@ else
     ln -s "${HOME}/.oh-my-zsh/plugins/${Plugin_name}" "$Plugin_path" 2>/dev/null
   fi
   
-  
-  local status_string="${c[green]}${c_bold}Install${c_reset} "
-  
-  if [[ -z "$Plugin_link" ]]; then
-    status_string+="${c[blue]}${c_bold}${Plugin_name//\//${c[red]}${c_bold}/${c[blue]}${c_bold}}"
-    status_string+="${c_reset}"
+  if [[ "$?" == "0" ]]; then
+    local status_string="${c[green]}${c_bold}Install${c_reset} "
+    
+    if [[ -z "$Plugin_link" ]]; then
+      status_string+="${c[blue]}${c_bold}${Plugin_name//\//${c[red]}${c_bold}/${c[blue]}${c_bold}}"
+      status_string+="${c_reset}"
+    else
+      status_string+="\033]8;;${Plugin_link}\a"
+      status_string+="${c[blue]}${c_bold}${Plugin_name//\//${c[red]}${c_bold}/${c[blue]}${c_bold}}"
+      status_string+="\033]8;;\a${c_reset}"
+    fi
+    
+    status_string+=" ${c[green]}✔${c_reset}"
+    
+    echo $status_string
   else
-    status_string+="\033]8;;${Plugin_link}\a"
-    status_string+="${c[blue]}${c_bold}${Plugin_name//\//${c[red]}${c_bold}/${c[blue]}${c_bold}}"
-    status_string+="\033]8;;\a${c_reset}"
+    local status_string="${c[red]}${c_bold}Can't install${c_reset} "
+
+    if [[ -z "$Plugin_link" ]]; then
+      status_string+="${c[blue]}${c_bold}${Plugin_name//\//${c[red]}${c_bold}/${c[blue]}${c_bold}}"
+      status_string+="${c_reset}"
+    else
+      status_string+="\033]8;;${Plugin_link}\a"
+      status_string+="${c[blue]}${c_bold}${Plugin_name//\//${c[red]}${c_bold}/${c[blue]}${c_bold}}"
+      status_string+="\033]8;;\a${c_reset}"
+    fi
+
+    status_string+=" ${c[red]}${c_bold}✖${c_reset}"
+    
+    echo $status_string
   fi
-  
-  status_string+=" ${c[green]}✔${c_reset}"
-  
-  echo $status_string
 fi
 
 
