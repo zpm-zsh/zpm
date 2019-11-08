@@ -47,13 +47,11 @@ function _ZPM-load-plugin() {
       local zpm_fpath=${${1##*,fpath:}%%,*}
       local _local_path="${Plugin_path}/${zpm_fpath}"
       _ZPM-log zpm:init:fpath "Add to \$fpath ${Plugin_basename:A}/${zpm_fpath}"
-      _ZPM_fpath=("${_local_path:A}" $_ZPM_fpath )
-      fpath=( $fpath "${_local_path:A}")
+      _ZPM-addfpath "${_local_path:A}"
     elif [[ -n "${Plugin_path:A}/_"*(#qN)  ]]; then
       local _local_path="${Plugin_path}"
       _ZPM-log zpm:init:fpath "Add to \$fpath ${Plugin_basename:A}"
-      _ZPM_fpath=("${_local_path:A}" $_ZPM_fpath )
-      fpath=( $fpath "${_local_path:A}")
+      _ZPM-addfpath "${_local_path:A}"
     fi
   fi
   
@@ -62,13 +60,11 @@ function _ZPM-load-plugin() {
       local zpm_path=${${1##*,path:}%%,*}
       local _local_path="${Plugin_path}/${zpm_path}"
       _ZPM-log zpm:init:path "Add to PATH ${Plugin_basename}/${zpm_path}"
-      export PATH="${_local_path:A}:$PATH"
-      _ZPM_PATH="${_local_path:A}:$_ZPM_PATH"
+      _ZPM-addpath "${_local_path:A}"
     elif [[ -d ${Plugin_path:A}/bin ]]; then
       local _local_path="${Plugin_path}/bin"
       _ZPM-log zpm:init:path "Add to PATH ${Plugin_basename}/bin"
-      export PATH="${_local_path:A}:$PATH"
-      _ZPM_PATH="${_local_path:A}:$_ZPM_PATH"
+      _ZPM-addpath "${_local_path:A}"
     fi
   fi
   

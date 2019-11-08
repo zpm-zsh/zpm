@@ -19,6 +19,7 @@ if [[ "$CLICOLOR" != "0" ]]; then
 fi
 
 local Plugin_name=$(_ZPM-get-plugin-name "$2")
+local Plugin_basename=$(_ZPM-get-plugin-basename "$2")
 local Plugin_path=$(_ZPM-get-plugin-path "$2")
 local Plugin_link=$(_ZPM-get-plugin-link "$2")
 local Plugin_type=$(_ZPM-get-plugin-type "$2")
@@ -62,7 +63,7 @@ else
     if [[ ! -e "${HOME}/.oh-my-zsh" ]]; then
       git clone --recursive "https://github.com/robbyrussell/oh-my-zsh.git" --depth 1 --single-branch -j 8 "${HOME}/.oh-my-zsh"  </dev/null >/dev/null 2>/dev/null
     fi
-    ln -s "${HOME}/.oh-my-zsh/plugins/${Plugin_name}" "$Plugin_path" 2>/dev/null
+    ln -s "${HOME}/.oh-my-zsh/plugins/${Plugin_basename}" "$Plugin_path" 2>/dev/null
   fi
   
   if [[ "$?" == "0" ]]; then

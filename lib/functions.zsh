@@ -91,6 +91,11 @@ function _ZPM-get-plugin-type() {
     return 0
   fi
   
+  if [[ "$1" == 'omz/'* ]]; then
+    echo 'omz'
+    return 0
+  fi
+
   if [[ "$_ZPM_tag_str" == *'omz'* ]]; then
     echo 'omz'
     return 0

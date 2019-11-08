@@ -52,10 +52,10 @@ zpm if-not ssh                                               \
 
 
 zpm                                        \
-  pip,type:omz,async,inline                \
-  extract,type:omz,async,inline            \
-  command-not-found,type:omz,async,inline  \
-  wp-cli,type:omz,async,inline             \
+  omz/pip,async,inline                \
+  omz/extract,async,inline            \
+  omz/command-not-found,async,inline  \
+  omz/wp-cli,async,inline             \
 
 
 if [[ -f ~/.zshrc.local ]]; then
