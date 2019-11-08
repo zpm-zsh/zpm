@@ -38,7 +38,7 @@ function zpm(){
   _ZPM-initialize-plugin "$@"
 }
 
-post_fn(){
+function _ZPM_Post_Initialization(){
   echo > "$_ZPM_CACHE"
   
   echo 'export PATH="'"${_ZPM_PATH}"'${PATH}"' >> "$_ZPM_CACHE"
@@ -110,13 +110,17 @@ post_fn(){
   
   echo 'zpm () {}' >> "$_ZPM_CACHE"
   
-  zcompile "$_ZPM_CACHE"
-  zcompile ~/.zshrc
-}
+  unset _ZPM_PATH
+  unset _ZPM_fpath
+  unset _ZPM_files_for_source
+  unset _ZPM_files_for_async_source
 
-function _ZPM_Post_Initialization(){
+  zcompile "$_ZPM_CACHE" 2>/dev/null
+  zcompile "${HOME}/.zshrc" 2>/dev/null
+  zcompile "${HOME}/.zshrc.local" 2>/dev/null
+  zcompile "${_ZPM_DIR}/zpm.zsh" 2>/dev/null
+
   compinit
-  post_fn
   add-zsh-hook -d precmd _ZPM_Post_Initialization
 }
 

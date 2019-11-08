@@ -18,7 +18,7 @@ function _ZPM-log() {
 }
 
 function _ZPM_clean(){
-  rm "$_ZPM_CACHE" 2>/dev/null
+  rm -f "${_ZPM_CACHE}" "${_ZPM_CACHE}.zwc" "${HOME}/.zcompdump" "${HOME}/.zcompdump.zwc" 2>/dev/null
 }
 
 function _ZPM-upgrade(){
