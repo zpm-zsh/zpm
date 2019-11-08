@@ -5,14 +5,14 @@ if [[ ! -f ~/.zpm/zpm.zsh ]]; then
 fi
 source ~/.zpm/zpm.zsh
 
-### Core plugins
-zpm if ssh                     \
-  zpm-zsh/tmux,inline          \
+# ### Core plugins
+zpm if ssh                    \
+  zpm-zsh/tmux,inline         \
 
 
 ### Compatibility
-zpm if termux                  \
-  zpm-zsh/termux,async,inline  \
+zpm if termux                 \
+  zpm-zsh/termux,async,inline \
 
 
 ### 3party plugins
@@ -45,7 +45,7 @@ zpm if-not ssh                                               \
   mdumitru/fancy-ctrl-z,async,inline                         \
   jimhester/per-directory-history,inline                     \
   hlissner/zsh-autopair,async,inline                         \
-  psprint/history-search-multi-word,async,inline             \
+  psprint/history-search-multi-word,async                    \
   zsh-users/zsh-history-substring-search                     \
   zdharma/fast-syntax-highlighting                           \
   tarruda/zsh-autosuggestions                                \
