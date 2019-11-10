@@ -46,15 +46,15 @@ zpm if-not ssh                                               \
   hlissner/zsh-autopair,async,inline                         \
   psprint/history-search-multi-word,async                    \
   zsh-users/zsh-history-substring-search                     \
-  zdharma/fast-syntax-highlighting                           \
+  zdharma/fast-syntax-highlighting,inline                    \
   tarruda/zsh-autosuggestions                                \
 
 
-zpm                                        \
-  omz/pip,async,inline                \
-  omz/extract,async,inline            \
-  omz/command-not-found,async,inline  \
-  omz/wp-cli,async,inline             \
+zpm                                  \
+  omz/pip,async,inline               \
+  omz/extract,async,inline           \
+  omz/command-not-found,async,inline \
+  omz/wp-cli,async,inline            \
 
 
 if [[ -f ~/.zshrc.local ]]; then
