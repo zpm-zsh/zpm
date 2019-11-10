@@ -1,7 +1,5 @@
 #!/usr/bin/env zsh
 
-_ZPM_Plugins=()
-
 function zpm(){
   if [[ "$1" == 'c' || "$1" == 'cl' || "$1" == 'clean' ]]; then
     shift
@@ -39,8 +37,13 @@ function zpm(){
 }
 
 function _ZPM_Post_Initialization(){
+  
   echo > "$_ZPM_CACHE"
   
+  echo 'export ZPFX="${HOME}/.local"' >> "$_ZPM_CACHE"
+  echo 'typeset -a zsh_loaded_plugins' >> "$_ZPM_CACHE"
+  echo >> "$_ZPM_CACHE"
+
   echo 'export PATH="'"${_ZPM_PATH}"'${PATH}"' >> "$_ZPM_CACHE"
   echo >> "$_ZPM_CACHE"
   
@@ -57,11 +60,14 @@ function _ZPM_Post_Initialization(){
   echo 'unset _comp_files' >> "$_ZPM_CACHE"
   echo >> "$_ZPM_CACHE"
   
-  for file in $_ZPM_files_for_source; do
-    echo "ZERO='${file%%:_ZPM_inline}'" >> "$_ZPM_CACHE"
-    if [[ "$file" == *"_ZPM_inline" ]]; then
-      echo "# Inlined from '${file%%:_ZPM_inline}'" >> "$_ZPM_CACHE"
-      cat "${file%%:_ZPM_inline}" >> "$_ZPM_CACHE"
+  for plugin in ${_ZPM_plugins_for_source}; do
+    echo >> "$_ZPM_CACHE"  
+    local file="$_ZPM_file_for_source["$plugin"]"
+    echo "zsh_loaded_plugins+=('$plugin')" >> "$_ZPM_CACHE"
+    echo "ZERO='${file%%___ZPM_inline}'" >> "$_ZPM_CACHE"
+    if [[ "$file" == *"___ZPM_inline" ]]; then
+      echo "# Inlined from '${file%%___ZPM_inline}'" >> "$_ZPM_CACHE"
+      cat "${file%%___ZPM_inline}" >> "$_ZPM_CACHE"
     else
       echo "source '${file}'" >> "$_ZPM_CACHE"
     fi
@@ -70,34 +76,34 @@ function _ZPM_Post_Initialization(){
   
   echo '_ZPM_post_fn () {' >> "$_ZPM_CACHE"
   
-  for file in $_ZPM_files_for_async_source; do
-    echo "ZERO='${file%%:_ZPM_inline}'" >> "$_ZPM_CACHE"
-    if [[ "$file" == *"_ZPM_inline" ]]; then
-      echo "# Inlined from '${file%%:_ZPM_inline}'" >> "$_ZPM_CACHE"
-      cat "${file%%:_ZPM_inline}" >> "$_ZPM_CACHE"
+  for plugin in ${_ZPM_plugins_for_async_source}; do
+    echo >> "$_ZPM_CACHE"  
+    local file="$_ZPM_file_for_async_source["$plugin"]"
+    echo "zsh_loaded_plugins+=('$plugin')" >> "$_ZPM_CACHE"
+    echo "ZERO='${file%%___ZPM_inline}'" >> "$_ZPM_CACHE"
+    if [[ "$file" == *"___ZPM_inline" ]]; then
+      echo "# Inlined from '${file%%___ZPM_inline}'" >> "$_ZPM_CACHE"
+      cat "${file%%___ZPM_inline}" >> "$_ZPM_CACHE"
     else
-      echo "  source '$file'" >> "$_ZPM_CACHE"
+      echo "source '$file'" >> "$_ZPM_CACHE"
     fi
   done
   echo >> "$_ZPM_CACHE"
   
-  echo "  source '${_ZPM_DIR}/lib/functions.zsh'" >> "$_ZPM_CACHE"
-  echo "  source '${_ZPM_DIR}/lib/initialize.zsh'" >> "$_ZPM_CACHE"
-  echo "  source '${_ZPM_DIR}/lib/declarative.zsh'" >> "$_ZPM_CACHE"
-  echo "  source '${_ZPM_DIR}/lib/completion.zsh'" >> "$_ZPM_CACHE"
+  echo "source '${_ZPM_DIR}/lib/functions.zsh'" >> "$_ZPM_CACHE"
+  echo "source '${_ZPM_DIR}/lib/initialize.zsh'" >> "$_ZPM_CACHE"
+  echo "source '${_ZPM_DIR}/lib/declarative.zsh'" >> "$_ZPM_CACHE"
+  echo "source '${_ZPM_DIR}/lib/completion.zsh'" >> "$_ZPM_CACHE"
   
   echo >> "$_ZPM_CACHE"
   
-  echo '  TMOUT=5' >> "$_ZPM_CACHE"
+  echo 'TMOUT=5' >> "$_ZPM_CACHE"
   echo >> "$_ZPM_CACHE"
   
-  echo '  add-zsh-hook -d background _ZPM_post_fn' >> "$_ZPM_CACHE"
+  echo 'add-zsh-hook -d background _ZPM_post_fn' >> "$_ZPM_CACHE"
   echo '}' >> "$_ZPM_CACHE"
   echo >> "$_ZPM_CACHE"
-  
-  echo "_ZPM_Plugins=(${_ZPM_Plugins})" >> "$_ZPM_CACHE"
-  echo >> "$_ZPM_CACHE"
-  
+    
   echo 'typeset -aU path' >> "$_ZPM_CACHE"
   echo 'export PATH' >> "$_ZPM_CACHE"
   echo >> "$_ZPM_CACHE"
@@ -112,14 +118,17 @@ function _ZPM_Post_Initialization(){
   
   unset _ZPM_PATH
   unset _ZPM_fpath
-  unset _ZPM_files_for_source
-  unset _ZPM_files_for_async_source
 
+  unset _ZPM_plugins_for_source
+  unset _ZPM_plugins_for_async_source
+
+  unset _ZPM_file_for_source
+  unset _ZPM_file_for_async_source
+  
   zcompile "$_ZPM_CACHE" 2>/dev/null
   zcompile "${HOME}/.zshrc" 2>/dev/null
-  zcompile "${HOME}/.zshrc.local" 2>/dev/null
   zcompile "${_ZPM_DIR}/zpm.zsh" 2>/dev/null
-
+  
   compinit
   add-zsh-hook -d precmd _ZPM_Post_Initialization
 }

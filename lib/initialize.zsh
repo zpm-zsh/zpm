@@ -5,11 +5,9 @@
 # ----------
 
 function _ZPM-load-plugin() {
-  local Plugin_path
-  local Plugin_basename
-  
-  Plugin_path=$(_ZPM-get-plugin-path "$1")
-  Plugin_basename=$(_ZPM-get-plugin-basename "$1")
+  local Plugin_path=$(_ZPM-get-plugin-path "$1")
+  local Plugin_basename=$(_ZPM-get-plugin-basename "$1")
+  local Plugin_name=$(_ZPM-get-plugin-name "$1")
   
   local _ZPM_local_source=true
   local _ZPM_local_async=false
@@ -46,12 +44,12 @@ function _ZPM-load-plugin() {
     if [[ "$1"  == *",fpath:"* ]]; then
       local zpm_fpath=${${1##*,fpath:}%%,*}
       local _local_path="${Plugin_path}/${zpm_fpath}"
-      _ZPM-log zpm:init:fpath "Add to \$fpath ${Plugin_basename:A}/${zpm_fpath}"
-      _ZPM-addfpath "${_local_path:A}"
-    elif [[ -n "${Plugin_path:A}/_"*(#qN)  ]]; then
+      _ZPM-log zpm:init:fpath "Add to \$fpath ${Plugin_basename}/${zpm_fpath}"
+      _ZPM-addfpath "${_local_path}"
+    elif [[ -n "${Plugin_path}/_"*(#qN)  ]]; then
       local _local_path="${Plugin_path}"
-      _ZPM-log zpm:init:fpath "Add to \$fpath ${Plugin_basename:A}"
-      _ZPM-addfpath "${_local_path:A}"
+      _ZPM-log zpm:init:fpath "Add to \$fpath ${Plugin_basename}"
+      _ZPM-addfpath "${_local_path}"
     fi
   fi
   
@@ -60,11 +58,11 @@ function _ZPM-load-plugin() {
       local zpm_path=${${1##*,path:}%%,*}
       local _local_path="${Plugin_path}/${zpm_path}"
       _ZPM-log zpm:init:path "Add to PATH ${Plugin_basename}/${zpm_path}"
-      _ZPM-addpath "${_local_path:A}"
-    elif [[ -d ${Plugin_path:A}/bin ]]; then
+      _ZPM-addpath "${_local_path}"
+    elif [[ -d ${Plugin_path}/bin ]]; then
       local _local_path="${Plugin_path}/bin"
       _ZPM-log zpm:init:path "Add to PATH ${Plugin_basename}/bin"
-      _ZPM-addpath "${_local_path:A}"
+      _ZPM-addpath "${_local_path}"
     fi
   fi
   
@@ -83,18 +81,18 @@ function _ZPM-load-plugin() {
       if [[ "$_ZPM_local_inline" == "true" ]]; then
         if [[ "$_ZPM_local_async" == "true" ]]; then
           _ZPM-log zpm:init:source "Source ${Plugin_basename}"
-          _ZPM_inline_async_source "${_ZPM_plugin_file_path}"
+          _ZPM_inline_async_source "${Plugin_name}" "${_ZPM_plugin_file_path}"
         else
           _ZPM-log zpm:init:source "Source ${Plugin_basename}"
-          _ZPM_inline_source "${_ZPM_plugin_file_path}"
+          _ZPM_inline_source "${Plugin_name}" "${_ZPM_plugin_file_path}"
         fi
       else
         if [[ "$_ZPM_local_async" == "true" ]]; then
           _ZPM-log zpm:init:source "Source ${Plugin_basename}"
-          _ZPM_async_source "${_ZPM_plugin_file_path}"
+          _ZPM_async_source "${Plugin_name}" "${_ZPM_plugin_file_path}"
         else
           _ZPM-log zpm:init:source "Source ${Plugin_basename}"
-          _ZPM_source "${_ZPM_plugin_file_path}"
+          _ZPM_source "${Plugin_name}" "${_ZPM_plugin_file_path}"
         fi
       fi
     fi
@@ -126,9 +124,9 @@ function _ZPM-initialize-plugin() {
   done
   
   for plugin ($@); do
-    if [[ " ${_ZPM_Plugins[*]} " != *"$plugin"* ]]; then
+    if [[ " ${zsh_loaded_plugins[*]} " != *"$plugin"* ]]; then
       _ZPM-log zpm:init "Initialize $plugin"
-      _ZPM_Plugins+=("$plugin")
+      zsh_loaded_plugins+=( $(_ZPM-get-plugin-name "$plugin") )
       _ZPM-load-plugin "$plugin"
     else
       _ZPM-log zpm:init:skip "Skip initialization $1"

@@ -191,29 +191,33 @@ _ZPM-addfpath () {
 # Fake source
 source () {
   if [[ -f "$1" && ( ! -s "$1.zwc" || "$1" -nt "$1.zwc") ]]; then;
-    zcompile "$1" 2>/dev/null;
-  fi;
+    zcompile "$1" 2>/dev/null
+  fi
   
   builtin source "$1"
 }
 
 _ZPM_source () {
-  source "$1"
-  _ZPM_files_for_source+=("${1:A}")
+  source "$2"
+  _ZPM_plugins_for_source+=("$1") 
+  _ZPM_file_for_source["$1"]="${2:A}"
 }
 
 _ZPM_inline_source () {
-  source "$1"
-  _ZPM_files_for_source+=("${1:A}:_ZPM_inline")
+  source "$2"
+  _ZPM_plugins_for_source+=("$1") 
+  _ZPM_file_for_source["$1"]="${2:A}___ZPM_inline"
 }
 
 _ZPM_async_source () {
-  source "$1"
-  _ZPM_files_for_async_source+=("${1:A}" )
+  source "$2"
+  _ZPM_plugins_for_async_source+=("$1") 
+  _ZPM_file_for_async_source["$1"]="${2:A}"
 }
 
 _ZPM_inline_async_source () {
-  source "$1"
-  _ZPM_files_for_async_source+=("${1:A}:_ZPM_inline" )
+  source "$2"
+  _ZPM_plugins_for_async_source+=("$1") 
+  _ZPM_file_for_async_source["$1"]="${2:A}___ZPM_inline"
 }
 

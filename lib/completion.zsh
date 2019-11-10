@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 
 _zpm_completions_plugins_upgradable=(zpm)
-for plugin in $_ZPM_Plugins; do
+for plugin in $zsh_loaded_plugins; do
   local unused=${plugin//:/\\:}
   _zpm_completions_plugins_upgradable+=( $unused )
 done
@@ -13,7 +13,7 @@ for plugin in "$_ZPM_PLUGIN_DIR/"*; do
 done
 
 _zpm_completions_plugins_loaded=()
-for plugin ($_ZPM_Plugins); do
+for plugin ($zsh_loaded_plugins); do
   _zpm_completions_plugins_loaded+=( $(_ZPM-get-plugin-name "$plugin") )
 done
 
