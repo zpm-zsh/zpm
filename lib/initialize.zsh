@@ -132,7 +132,7 @@ function _ZPM-initialize-plugin() {
     if [[ " ${zsh_loaded_plugins[*]} " != *"$plugin_name"* ]]; then
       _ZPM-log zpm:init "Initialize $plugin_name"
       zsh_loaded_plugins+=( "$plugin_name" )
-      _ZPM-load-plugin "$plugin_name"
+      _ZPM-load-plugin "$plugin"
     else
       _ZPM-log zpm:init:skip "Skip initialization $1"
     fi

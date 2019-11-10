@@ -119,12 +119,12 @@ function _ZPM_Post_Initialization(){
   unset _ZPM_PATH
   unset _ZPM_fpath
   
-  unset _ZPM_plugins_for_source
-  unset _ZPM_plugins_for_async_source
-  unset _ZPM_plugins_no_source
+  # unset _ZPM_plugins_for_source
+  # unset _ZPM_plugins_for_async_source
+  # unset _ZPM_plugins_no_source
   
-  unset _ZPM_file_for_source
-  unset _ZPM_file_for_async_source
+  # unset _ZPM_file_for_source
+  # unset _ZPM_file_for_async_source
   
   zcompile "$_ZPM_CACHE" 2>/dev/null
   zcompile "${HOME}/.zshrc" 2>/dev/null
