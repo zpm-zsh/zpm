@@ -95,7 +95,11 @@ function _ZPM-load-plugin() {
           _ZPM_source "${Plugin_name}" "${_ZPM_plugin_file_path}"
         fi
       fi
+    else
+      _ZPM_no_source "${Plugin_name}"
     fi
+  else
+    _ZPM_no_source "${Plugin_name}"
   fi
   
 }
@@ -124,10 +128,11 @@ function _ZPM-initialize-plugin() {
   done
   
   for plugin ($@); do
-    if [[ " ${zsh_loaded_plugins[*]} " != *"$plugin"* ]]; then
-      _ZPM-log zpm:init "Initialize $plugin"
-      zsh_loaded_plugins+=( $(_ZPM-get-plugin-name "$plugin") )
-      _ZPM-load-plugin "$plugin"
+    local plugin_name=$(_ZPM-get-plugin-name "$plugin")
+    if [[ " ${zsh_loaded_plugins[*]} " != *"$plugin_name"* ]]; then
+      _ZPM-log zpm:init "Initialize $plugin_name"
+      zsh_loaded_plugins+=( "$plugin_name" )
+      _ZPM-load-plugin "$plugin_name"
     else
       _ZPM-log zpm:init:skip "Skip initialization $1"
     fi

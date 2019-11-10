@@ -83,7 +83,7 @@ else
     echo $status_string
   else
     local status_string="${c[red]}${c_bold}Can't install${c_reset} "
-
+    
     if [[ -z "$Plugin_link" ]]; then
       status_string+="${c[blue]}${c_bold}${Plugin_name//\//${c[red]}${c_bold}/${c[blue]}${c_bold}}"
       status_string+="${c_reset}"
@@ -92,7 +92,7 @@ else
       status_string+="${c[blue]}${c_bold}${Plugin_name//\//${c[red]}${c_bold}/${c[blue]}${c_bold}}"
       status_string+="\033]8;;\a${c_reset}"
     fi
-
+    
     status_string+=" ${c[red]}${c_bold}✖${c_reset}"
     
     echo $status_string

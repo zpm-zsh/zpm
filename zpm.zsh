@@ -7,6 +7,7 @@ typeset -a zsh_loaded_plugins
 
 typeset -a _ZPM_plugins_for_source
 typeset -a _ZPM_plugins_for_async_source
+typeset -a _ZPM_plugins_no_source
 
 typeset -A _ZPM_file_for_source
 typeset -A _ZPM_file_for_async_source

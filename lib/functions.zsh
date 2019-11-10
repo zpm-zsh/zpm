@@ -44,7 +44,7 @@ function _ZPM-get-plugin-file-path() {
     echo "${1}/${3}"
     return 0
   fi
-
+  
   if [[ -e "${1}/${2}.plugin.zsh" ]]; then
     echo "${1}/${2}.plugin.zsh"
     return 0
@@ -53,22 +53,22 @@ function _ZPM-get-plugin-file-path() {
     echo "${1}/zsh-${2}.plugin.zsh"
     return 0
   fi
-
+  
   if [[ -e "${1}/${2}.zsh" ]]; then
     echo "${1}/${2}.zsh"
     return 0
   fi
-
+  
   if [[ -e "${1}/${2}.zsh-theme" ]]; then
     echo "${1}/${2}.zsh-theme"
     return 0
   fi
-
+  
   if [[ -e "${1}/init.zsh" ]]; then
     echo "${1}/init.zsh"
     return 0
   fi
-
+  
   return -1
 }
 
@@ -77,7 +77,7 @@ function _ZPM-get-plugin-type() {
     echo 'zpm'
     return 0
   fi
-    
+  
   local _ZPM_tag_str=${1##*,type:}
   _ZPM_tag_str=${_ZPM_tag_str%%\,*}
   
@@ -95,7 +95,7 @@ function _ZPM-get-plugin-type() {
     echo 'omz'
     return 0
   fi
-
+  
   if [[ "$_ZPM_tag_str" == *'omz'* ]]; then
     echo 'omz'
     return 0
@@ -199,25 +199,28 @@ source () {
 
 _ZPM_source () {
   source "$2"
-  _ZPM_plugins_for_source+=("$1") 
+  _ZPM_plugins_for_source+=("$1")
   _ZPM_file_for_source["$1"]="${2:A}"
 }
 
 _ZPM_inline_source () {
   source "$2"
-  _ZPM_plugins_for_source+=("$1") 
+  _ZPM_plugins_for_source+=("$1")
   _ZPM_file_for_source["$1"]="${2:A}___ZPM_inline"
 }
 
 _ZPM_async_source () {
   source "$2"
-  _ZPM_plugins_for_async_source+=("$1") 
+  _ZPM_plugins_for_async_source+=("$1")
   _ZPM_file_for_async_source["$1"]="${2:A}"
 }
 
 _ZPM_inline_async_source () {
   source "$2"
-  _ZPM_plugins_for_async_source+=("$1") 
+  _ZPM_plugins_for_async_source+=("$1")
   _ZPM_file_for_async_source["$1"]="${2:A}___ZPM_inline"
 }
 
+_ZPM_no_source (){
+  _ZPM_plugins_no_source+=("$1")
+}
