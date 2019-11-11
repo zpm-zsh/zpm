@@ -64,18 +64,18 @@ _zpm(){
     PRE=$((CURRENT - 1))
     
     if [[                            \
-        "$words[$PRE]" == "u"      ||\
-        "$words[$PRE]" == "up"     ||\
-        "$words[$PRE]" == "upgrade"  \
-      ]]; then
-      _describe -t commands "zpm plugins" _zpm_completions_plugins_upgradable
-    elif [[                          \
         "$words[$PRE]" == "if"     ||\
         "$words[$PRE]" == "if-not"   \
       ]];then
       _describe -t commands "zpm condition" _zpm_completions_if_args
     elif ((${words[(I)load]})); then
       _describe -t commands "zpm load" _zpm_completions_plugins_loadable
+    elif                          \
+        ((${words[(I)u]}))      ||\
+        ((${words[(I)up]}))     ||\
+        ((${words[(I)upgrade]}))  \
+      ; then
+      _describe -t commands "zpm plugins" _zpm_completions_plugins_upgradable
     else
       _describe -t commands "zpm subcommand" _zpm_completions_1st_arguments
     fi
