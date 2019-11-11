@@ -106,20 +106,6 @@ function _ZPM-get-plugin-type() {
   echo "github"
 }
 
-function _ZPM-get-plugin-repo-type() {
-  if [[ "$1" == 'zpm' ]]; then
-    echo 'zpm'
-    return 0
-  fi
-  
-  if [[ "$1" == 'omz/'* ]]; then
-    echo 'omz'
-    return 0
-  fi
-    
-  echo "git"
-}
-
 function _ZPM-get-plugin-name() {
   echo "${1%%,*}"
 }
