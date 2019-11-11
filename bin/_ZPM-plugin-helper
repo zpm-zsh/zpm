@@ -98,3 +98,28 @@ else
     echo $status_string
   fi
 fi
+
+if [[ "$2" == *",hook:"* ]]; then
+  local hook=${2##*,hook:}
+  hook=${hook%%\,*}
+  
+  if [[ -e "$Plugin_path" ]]; then
+    local status_string="${c[green]}${c_bold}Run hook for${c_reset} "
+
+    if [[ -z "$Plugin_link" ]]; then
+      status_string+="${c[blue]}${c_bold}${Plugin_name//\//${c[red]}${c_bold}/${c[blue]}${c_bold}}"
+      status_string+="${c_reset}"
+    else
+      status_string+="\033]8;;${Plugin_link}\a"
+      status_string+="${c[blue]}${c_bold}${Plugin_name//\//${c[red]}${c_bold}/${c[blue]}${c_bold}}"
+      status_string+="\033]8;;\a${c_reset}"
+    fi
+
+    status_string+=" ${c[green]}●${c_reset}"
+
+    echo "$status_string"
+    cd "$Plugin_path"
+    
+    eval "$hook"
+  fi
+fi
