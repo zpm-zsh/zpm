@@ -22,21 +22,23 @@ function _ZPM_clean(){
 }
 
 function _ZPM-upgrade(){
-  declare -a _Plugins_Upgrade
+  typeset -a _Plugins_Upgrade
+  typeset -a _Plugins_Upgrade_full
+
   rm "$_ZPM_CACHE" 2>/dev/null
   
   if [[ -z $@ ]]; then
-    _Plugins_Upgrade+=( "zpm" $zsh_loaded_plugins )
+    _Plugins_Upgrade+=($zsh_loaded_plugins)
   else
     _Plugins_Upgrade+=($@)
   fi
-  
-  printf '%s\0' "${_Plugins_Upgrade[@]}" | \
-  xargs -0 -P32 -n1 "${_ZPM_DIR}/bin/_ZPM-plugin-helper" upgrade
-  
-  for plugin ($@); do
-    local plugin_basename=$(_ZPM-get-plugin-basename $plugin)
+
+  for plugin (${_Plugins_Upgrade}); do
+    _Plugins_Upgrade_full+=($_ZPM_plugins_full["$plugin"])
   done
+  
+  printf '%s\0' "${_Plugins_Upgrade_full[@]}" | \
+  xargs -0 -P32 -n1 "${_ZPM_DIR}/bin/_ZPM-plugin-helper" upgrade
 }
 
 function _ZPM-get-plugin-file-path() {
