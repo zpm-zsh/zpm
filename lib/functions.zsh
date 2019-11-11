@@ -22,8 +22,8 @@ function _ZPM_clean(){
 }
 
 function _ZPM-upgrade(){
-  typeset -a _Plugins_Upgrade
-  typeset -a _Plugins_Upgrade_full
+  typeset -a _Plugins_Upgrade=()
+  typeset -a _Plugins_Upgrade_full=()
 
   rm "$_ZPM_CACHE" 2>/dev/null
   
