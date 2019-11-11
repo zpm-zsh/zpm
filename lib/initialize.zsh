@@ -120,11 +120,12 @@ function _ZPM-initialize-plugin() {
     printf '%s\0' "${_Plugins_Install[@]}" | \
     xargs -0 -P0 -n1 "${_ZPM_DIR}/bin/_ZPM-plugin-helper" install
   fi
-    
+  
   for plugin ($@); do
     local plugin_name=$(_ZPM-get-plugin-name "$plugin")
     if [[ " ${zsh_loaded_plugins[*]} " != *"$plugin_name"* ]]; then
       _ZPM-log zpm:init "Initialize $plugin_name"
+      _ZPM_plugins_full["$plugin_name"]="$plugin"
       zsh_loaded_plugins+=( "$plugin_name" )
       _ZPM-load-plugin "$plugin"
     else
