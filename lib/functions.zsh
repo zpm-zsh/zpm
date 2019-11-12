@@ -42,7 +42,7 @@ function _ZPM-upgrade(){
 }
 
 function _ZPM-get-plugin-file-path() {
-  if [[ ! -z "${3}" ]]; then
+  if [[ -n "${3}" ]]; then
     echo "${1}/${3}"
     return 0
   fi

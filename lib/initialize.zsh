@@ -88,7 +88,7 @@ function _ZPM-load-plugin() {
       )
     fi
     
-    if [[ ! -z "$_ZPM_plugin_file_path" ]]; then
+    if [[ -n "$_ZPM_plugin_file_path" ]]; then
       if [[ "$_ZPM_local_inline" == "true" ]]; then
         if [[ "$_ZPM_local_async" == "true" ]]; then
           _ZPM-log zpm:init:source "Source '${_ZPM_plugin_file_path}', async, inline"

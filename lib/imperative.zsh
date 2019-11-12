@@ -43,12 +43,10 @@ function _ZPM_Post_Initialization(){
   echo 'export ZPFX="${HOME}/.local"' >> "$_ZPM_CACHE"
   echo "typeset -a zsh_loaded_plugins=('${(j:' ':)_ZPM_plugins_no_source}')" >> "$_ZPM_CACHE"
   echo -n "typeset -A _ZPM_plugins_full=('${(kvj:' ':)_ZPM_plugins_full}')" >> "$_ZPM_CACHE"
-  echo >> "$_ZPM_CACHE"
-  
   echo "export PATH=\"${_ZPM_PATH}\${PATH}\"" >> "$_ZPM_CACHE"
   echo >> "$_ZPM_CACHE"
   
-  echo "fpath=( \$fpath  '${(j:' ':)_ZPM_fpath}' )" >> "$_ZPM_CACHE"
+  echo "fpath=( \$fpath '${(j:' ':)_ZPM_fpath}' )" >> "$_ZPM_CACHE"
   echo >> "$_ZPM_CACHE"
   
   echo 'autoload -Uz compinit' >> "$_ZPM_CACHE"
@@ -62,7 +60,6 @@ function _ZPM_Post_Initialization(){
   echo >> "$_ZPM_CACHE"
   
   for plugin in ${_ZPM_plugins_for_source}; do
-    echo >> "$_ZPM_CACHE"
     local file="$_ZPM_file_for_source["$plugin"]"
     echo "zsh_loaded_plugins+=('$plugin')" >> "$_ZPM_CACHE"
     echo "ZERO='${file%%___ZPM_inline}'" >> "$_ZPM_CACHE"
@@ -72,13 +69,12 @@ function _ZPM_Post_Initialization(){
     else
       echo "source '${file}'" >> "$_ZPM_CACHE"
     fi
-  done
   echo >> "$_ZPM_CACHE"
+  done
   
   echo '_ZPM_post_fn () {' >> "$_ZPM_CACHE"
   
   for plugin in ${_ZPM_plugins_for_async_source}; do
-    echo >> "$_ZPM_CACHE"
     local file="$_ZPM_file_for_async_source["$plugin"]"
     echo "zsh_loaded_plugins+=('$plugin')" >> "$_ZPM_CACHE"
     echo "ZERO='${file%%___ZPM_inline}'" >> "$_ZPM_CACHE"
@@ -88,8 +84,8 @@ function _ZPM_Post_Initialization(){
     else
       echo "source '$file'" >> "$_ZPM_CACHE"
     fi
-  done
   echo >> "$_ZPM_CACHE"
+  done
   
   echo "source '${_ZPM_DIR}/lib/functions.zsh'" >> "$_ZPM_CACHE"
   echo "source '${_ZPM_DIR}/lib/initialize.zsh'" >> "$_ZPM_CACHE"
@@ -119,13 +115,6 @@ function _ZPM_Post_Initialization(){
   
   unset _ZPM_PATH
   unset _ZPM_fpath
-  
-  # unset _ZPM_plugins_for_source
-  # unset _ZPM_plugins_for_async_source
-  # unset _ZPM_plugins_no_source
-  
-  # unset _ZPM_file_for_source
-  # unset _ZPM_file_for_async_source
   
   zcompile "$_ZPM_CACHE" 2>/dev/null
   zcompile "${HOME}/.zshrc" 2>/dev/null
