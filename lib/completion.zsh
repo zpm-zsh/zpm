@@ -83,13 +83,3 @@ _zpm(){
 }
 
 compdef _zpm zpm
-
-unset                               \
-_zpm_completions_plugins_upgradable \
-_zpm_completions_plugins_local      \
-_zpm_completions_plugins_loaded     \
-_zpm_completions_plugins_loadable   \
-_zpm_completions_1st_arguments      \
-_zpm_completions_1st_arguments_full \
-_zpm_completions_if_args            \
-
