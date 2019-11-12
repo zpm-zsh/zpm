@@ -49,8 +49,8 @@ function _ZPM_Post_Initialization(){
   echo >> "$_ZPM_CACHE"
   done
   
-  echo "source '${_ZPM_DIR}/lib/functions.zsh'" >> "$_ZPM_CACHE"
-  echo "source '${_ZPM_DIR}/lib/completion.zsh'" >> "$_ZPM_CACHE"
+  cat "${_ZPM_DIR}/lib/functions.zsh" >> "$_ZPM_CACHE"
+  cat "${_ZPM_DIR}/lib/completion.zsh" >> "$_ZPM_CACHE"
   
   echo >> "$_ZPM_CACHE"
   
