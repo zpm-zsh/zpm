@@ -13,10 +13,10 @@ function _ZPM-load-plugin() {
     _ZPM-log zpm:init:skip "Skip initialization of '${1}', plugin directory not found '${Plugin_path}'"
     return -1
   fi
-
+  
   _ZPM-log zpm:init "Initialize '${Plugin_name}'"
-
-
+  
+  
   local _ZPM_local_source=true
   local _ZPM_local_async=false
   local _ZPM_local_inline=false
@@ -54,10 +54,13 @@ function _ZPM-load-plugin() {
       local _local_path="${Plugin_path}/${zpm_fpath}"
       _ZPM-log zpm:init:fpath "Add to \$fpath '${_local_path}'"
       _ZPM-addfpath "${_local_path}"
-    elif [[ -n "${Plugin_path}/_"*(#qN)  ]]; then
-      local _local_path="${Plugin_path}"
-      _ZPM-log zpm:init:fpath "Add to \$fpath '${_local_path}'"
-      _ZPM-addfpath "${_local_path}"
+    else
+      for file in  "${Plugin_path}/_"*(N); do
+        local _local_path="${Plugin_path}"
+        _ZPM-log zpm:init:fpath "Add to \$fpath '${_local_path}'"
+        _ZPM-addfpath "${_local_path}"
+        break;
+      done
     fi
   fi
   
