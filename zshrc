@@ -29,25 +29,25 @@ zpm                                                          \
   zsh-users/zsh-completions,apply:fpath,fpath:/src           \
 
 
-zpm if-not ssh                                               \
-  zpm-zsh/dropbox,async,inline                               \
-  lukechilds/zsh-better-npm-completion,async,inline          \
-  tj/git-extras,source:/etc/git-extras-completion.zsh,inline \
-  horosgrisa/utils,apply:path                                \
-                                                             \
-  zpm-zsh/readers,async,inline                               \
-  zpm-zsh/clipboard,async,inline                             \
-  zpm-zsh/mysql-colorize,async,inline                        \
-  zpm-zsh/zshmarks,async,inline                              \
-  voronkovich/gitignore.plugin.zsh,async,inline              \
-  zpm-zsh/autoenv,async,inline                               \
-                                                             \
-  mdumitru/fancy-ctrl-z,async,inline                         \
-  hlissner/zsh-autopair,async,inline                         \
-  psprint/history-search-multi-word,async                    \
-  zsh-users/zsh-history-substring-search                     \
-  zdharma/fast-syntax-highlighting,inline                    \
-  tarruda/zsh-autosuggestions,source:zsh-autosuggestions.zsh,inline \
+zpm if-not ssh                                                                          \
+  zpm-zsh/dropbox,async,inline                                                          \
+  lukechilds/zsh-better-npm-completion,async,inline                                     \
+  tj/git-extras,source:/etc/git-extras-completion.zsh,inline                            \
+  horosgrisa/utils,apply:path                                                           \
+                                                                                        \
+  zpm-zsh/readers,async,inline                                                          \
+  zpm-zsh/clipboard,async,inline                                                        \
+  zpm-zsh/mysql-colorize,async,inline                                                   \
+  zpm-zsh/zshmarks,async,inline                                                         \
+  voronkovich/gitignore.plugin.zsh,async,inline                                         \
+  zpm-zsh/autoenv,async,inline                                                          \
+                                                                                        \
+  mdumitru/fancy-ctrl-z,async,inline                                                    \
+  hlissner/zsh-autopair,async,inline                                                    \
+  psprint/history-search-multi-word,async                                               \
+  zsh-users/zsh-history-substring-search,source:zsh-history-substring-search.zsh,inline \
+  zdharma/fast-syntax-highlighting,inline                                               \
+  tarruda/zsh-autosuggestions,source:zsh-autosuggestions.zsh,inline                     \
 
 
 zpm                                  \
