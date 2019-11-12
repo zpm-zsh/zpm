@@ -72,11 +72,13 @@ function _ZPM_Post_Initialization(){
   echo >> "$_ZPM_CACHE"
   
   echo 'zpm () {}' >> "$_ZPM_CACHE"
-    
+
+
   zcompile "$_ZPM_CACHE" 2>/dev/null
   zcompile "${HOME}/.zshrc" 2>/dev/null
   zcompile "${_ZPM_DIR}/zpm.zsh" 2>/dev/null
-  
+  zcompile "${_ZPM_DIR}/lib/functions.zsh" 2>/dev/null
+
   source "${_ZPM_DIR}/lib/completion.zsh"
 
   compinit
@@ -95,6 +97,5 @@ else
 fi
 unset _comp_files
 
-zcompile ${_ZPM_DIR}/lib/functions.zsh
 
 zpm zpm-zsh/helpers,inline zpm-zsh/colors,inline zpm-zsh/background,inline
