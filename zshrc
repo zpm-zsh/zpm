@@ -44,7 +44,7 @@ zpm if-not ssh                                                                  
                                                                                         \
   mdumitru/fancy-ctrl-z,async,inline                                                    \
   hlissner/zsh-autopair,async,inline                                                    \
-  psprint/history-search-multi-word,async                                               \
+  psprint/history-search-multi-word,async,inline                                               \
   zsh-users/zsh-history-substring-search,source:zsh-history-substring-search.zsh,inline \
   zdharma/fast-syntax-highlighting,inline                                               \
   tarruda/zsh-autosuggestions,source:zsh-autosuggestions.zsh,inline                     \
