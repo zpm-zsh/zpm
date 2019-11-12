@@ -42,10 +42,8 @@ function _ZPM_Post_Initialization(){
   
   echo 'export ZPFX="${HOME}/.local"' >> "$_ZPM_CACHE"
   echo "typeset -a zsh_loaded_plugins=('${(j:' ':)_ZPM_plugins_no_source}')" >> "$_ZPM_CACHE"
-  echo -n "typeset -A _ZPM_plugins_full=('${(kvj:' ':)_ZPM_plugins_full}')" >> "$_ZPM_CACHE"
+  echo "typeset -A _ZPM_plugins_full=('${(kvj:' ':)_ZPM_plugins_full}')" >> "$_ZPM_CACHE"
   echo "export PATH=\"${_ZPM_PATH}\${PATH}\"" >> "$_ZPM_CACHE"
-  echo >> "$_ZPM_CACHE"
-  
   echo "fpath=( \$fpath '${(j:' ':)_ZPM_fpath}' )" >> "$_ZPM_CACHE"
   echo >> "$_ZPM_CACHE"
   
@@ -112,14 +110,13 @@ function _ZPM_Post_Initialization(){
   echo >> "$_ZPM_CACHE"
   
   echo 'zpm () {}' >> "$_ZPM_CACHE"
-  
-  unset _ZPM_PATH
-  unset _ZPM_fpath
-  
+    
   zcompile "$_ZPM_CACHE" 2>/dev/null
   zcompile "${HOME}/.zshrc" 2>/dev/null
   zcompile "${_ZPM_DIR}/zpm.zsh" 2>/dev/null
   
+  source "${_ZPM_DIR}/lib/completion.zsh"
+
   compinit
   add-zsh-hook -d precmd _ZPM_Post_Initialization
 }

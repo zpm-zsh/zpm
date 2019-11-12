@@ -37,12 +37,3 @@ else
   source "${_ZPM_DIR}/lib/initialize.zsh"
   source "${_ZPM_DIR}/lib/imperative.zsh"
 fi
-
-function _post_fn () {
-  TMOUT=5
-  source "${_ZPM_DIR}/lib/completion.zsh"
-}
-
-TMOUT=1
-
-add-zsh-hook background _post_fn
