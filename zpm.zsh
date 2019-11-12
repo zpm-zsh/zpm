@@ -34,6 +34,5 @@ if [[ -f "${_ZPM_CACHE}" ]]; then
   source "${_ZPM_CACHE}"
 else
   source "${_ZPM_DIR}/lib/functions.zsh"
-  source "${_ZPM_DIR}/lib/initialize.zsh"
   source "${_ZPM_DIR}/lib/imperative.zsh"
 fi
