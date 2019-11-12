@@ -34,7 +34,7 @@ function _ZPM-upgrade(){
   fi
 
   for plugin (${_Plugins_Upgrade}); do
-    _Plugins_Upgrade_full+=($_ZPM_plugins_full["$plugin"])
+    _Plugins_Upgrade_full+=($_ZPM_plugins_full[$plugin])
   done
   
   printf '%s\0' "${_Plugins_Upgrade_full[@]}" | \

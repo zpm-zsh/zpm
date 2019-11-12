@@ -132,7 +132,7 @@ function _ZPM-initialize-plugin() {
   for plugin ($@); do
     local plugin_name=$(_ZPM-get-plugin-name "$plugin")
     if [[ " ${zsh_loaded_plugins[*]} " != *"$plugin_name"* ]]; then
-      _ZPM_plugins_full["$plugin_name"]="$plugin"
+      _ZPM_plugins_full[$plugin_name]="$plugin"
       zsh_loaded_plugins+=( "$plugin_name" )
       _ZPM-load-plugin "$plugin"
     else

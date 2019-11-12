@@ -42,10 +42,11 @@ function _ZPM_Post_Initialization(){
   
   echo 'export ZPFX="${HOME}/.local"' >> "$_ZPM_CACHE"
   echo "typeset -a zsh_loaded_plugins=(${_ZPM_plugins_no_source})" >> "$_ZPM_CACHE"
-  echo "typeset -A _ZPM_plugins_full" >> "$_ZPM_CACHE"
+  echo -n "typeset -A _ZPM_plugins_full=(" >> "$_ZPM_CACHE"
   for key val in ${(kv)_ZPM_plugins_full}; do
-    echo "_ZPM_plugins_full[${key}]=\"${val}\" " >> "$_ZPM_CACHE"
+    echo -n "${key} \"${val}\" " >> "$_ZPM_CACHE"
   done  
+  echo ')' >> "$_ZPM_CACHE"
   echo >> "$_ZPM_CACHE"
   
   echo 'export PATH="'"${_ZPM_PATH}"'${PATH}"' >> "$_ZPM_CACHE"
