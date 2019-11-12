@@ -47,7 +47,7 @@ zpm if-not ssh                                               \
   psprint/history-search-multi-word,async                    \
   zsh-users/zsh-history-substring-search                     \
   zdharma/fast-syntax-highlighting,inline                    \
-  tarruda/zsh-autosuggestions                                \
+  tarruda/zsh-autosuggestions,source:zsh-autosuggestions.zsh,inline \
 
 
 zpm                                  \
