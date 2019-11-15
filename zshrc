@@ -18,6 +18,7 @@ zpm if termux                 \
 ### 3party plugins
 zpm                                                          \
   zpm-zsh/core-config,inline                                 \
+  zpm-zsh/ignored-users,inline,async                         \
   zpm-zsh/check-deps,inline                                  \
   zpm-zsh/minimal-theme,inline                               \
   zpm-zsh/ls,inline                                          \
