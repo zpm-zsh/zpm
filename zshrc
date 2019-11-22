@@ -18,6 +18,7 @@ zpm if termux                 \
 ### 3party plugins
 zpm                                                          \
   zpm-zsh/core-config,inline                                 \
+  zpm-zsh/ignored-users,inline,async                         \
   zpm-zsh/check-deps,inline                                  \
   zpm-zsh/minimal-theme,inline                               \
   zpm-zsh/ls,inline                                          \
@@ -44,7 +45,7 @@ zpm if-not ssh                                                                  
                                                                                         \
   mdumitru/fancy-ctrl-z,async,inline                                                    \
   hlissner/zsh-autopair,async,inline                                                    \
-  psprint/history-search-multi-word,async,inline                                               \
+  zthxxx/zsh-history-enquirer,async,inline                                              \
   zsh-users/zsh-history-substring-search,source:zsh-history-substring-search.zsh,inline \
   zdharma/fast-syntax-highlighting,inline                                               \
   tarruda/zsh-autosuggestions,source:zsh-autosuggestions.zsh,inline                     \
