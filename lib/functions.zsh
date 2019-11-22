@@ -203,7 +203,7 @@ function _ZPM-upgrade(){
   rm -f "$_ZPM_CACHE" "$_ZPM_CACHE_ASYNC" 2>/dev/null
   
   if [[ -z $@ ]]; then
-    _Plugins_Upgrade+=($zsh_loaded_plugins)
+    _Plugins_Upgrade+=("zpm" $zsh_loaded_plugins)
   else
     _Plugins_Upgrade+=($@)
   fi
