@@ -5,7 +5,7 @@ _ZPM_fpath=()
 
 typeset -a zsh_loaded_plugins
 typeset -A _ZPM_plugins_full
-_ZPM_plugins_full["zpm"]="zpm"
+_ZPM_plugins_full[zpm]="zpm"
 
 typeset -a _ZPM_plugins_for_source
 typeset -a _ZPM_plugins_for_async_source
