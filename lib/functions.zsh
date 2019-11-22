@@ -193,14 +193,14 @@ function _ZPM-initialize-plugin() {
 }
 
 function _ZPM_clean(){
-  rm -f "${_ZPM_CACHE}" "${_ZPM_CACHE}.zwc" "${HOME}/.zcompdump" "${HOME}/.zcompdump.zwc" 2>/dev/null
+  rm -f "${_ZPM_CACHE}" "${_ZPM_CACHE_ASYNC}" "${_ZPM_CACHE}.zwc" "${HOME}/.zcompdump" "${HOME}/.zcompdump.zwc" 2>/dev/null
 }
 
 function _ZPM-upgrade(){
   typeset -a _Plugins_Upgrade=()
   typeset -a _Plugins_Upgrade_full=()
 
-  rm "$_ZPM_CACHE" 2>/dev/null
+  rm -f "$_ZPM_CACHE" "$_ZPM_CACHE_ASYNC" 2>/dev/null
   
   if [[ -z $@ ]]; then
     _Plugins_Upgrade+=("zpm" $zsh_loaded_plugins)
