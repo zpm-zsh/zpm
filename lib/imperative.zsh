@@ -3,6 +3,7 @@
 function _ZPM_Post_Initialization(){
   
   echo > "$_ZPM_CACHE"
+  echo > "$_ZPM_CACHE_ASYNC"
   
   echo 'export ZPFX="${HOME}/.local"' >> "$_ZPM_CACHE"
   echo "typeset -a zsh_loaded_plugins=('${(j:' ':)_ZPM_plugins_no_source}')" >> "$_ZPM_CACHE"
@@ -38,21 +39,23 @@ function _ZPM_Post_Initialization(){
   
   for plugin in ${_ZPM_plugins_for_async_source}; do
     local file="$_ZPM_file_for_async_source["$plugin"]"
-    echo "zsh_loaded_plugins+=('$plugin')" >> "$_ZPM_CACHE"
-    echo "ZERO='${file%%___ZPM_inline}'" >> "$_ZPM_CACHE"
+    echo "zsh_loaded_plugins+=('$plugin')" >> "$_ZPM_CACHE_ASYNC"
+    echo "ZERO='${file%%___ZPM_inline}'" >> "$_ZPM_CACHE_ASYNC"
     if [[ "$file" == *"___ZPM_inline" ]]; then
-      echo "# Inlined from '${file%%___ZPM_inline}'" >> "$_ZPM_CACHE"
-      cat "${file%%___ZPM_inline}" >> "$_ZPM_CACHE"
+      echo "# Inlined from '${file%%___ZPM_inline}'" >> "$_ZPM_CACHE_ASYNC"
+      cat "${file%%___ZPM_inline}" >> "$_ZPM_CACHE_ASYNC"
     else
-      echo "source '$file'" >> "$_ZPM_CACHE"
+      echo "source '$file'" >> "$_ZPM_CACHE_ASYNC"
     fi
-  echo >> "$_ZPM_CACHE"
+  echo >> "$_ZPM_CACHE_ASYNC"
   done
   
-  cat "${_ZPM_DIR}/lib/functions.zsh" >> "$_ZPM_CACHE"
-  cat "${_ZPM_DIR}/lib/completion.zsh" >> "$_ZPM_CACHE"
+  cat "${_ZPM_DIR}/lib/functions.zsh" >> "$_ZPM_CACHE_ASYNC"
+  cat "${_ZPM_DIR}/lib/completion.zsh" >> "$_ZPM_CACHE_ASYNC"
   
   echo >> "$_ZPM_CACHE"
+
+  echo "source '$_ZPM_CACHE_ASYNC'" >> "$_ZPM_CACHE"
   
   echo 'TMOUT=5' >> "$_ZPM_CACHE"
   echo >> "$_ZPM_CACHE"

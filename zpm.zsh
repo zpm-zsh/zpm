@@ -30,6 +30,11 @@ _ZPM_CACHE="${_ZPM_CACHE:A}"
 export _ZPM_CACHE
 unset ZPM_CACHE
 
+_ZPM_CACHE_ASYNC=${ZPM_CACHE_ASYNC:-"${TMPDIR:-/tmp}/.zpm-cache-async-${USER}.zsh"}
+_ZPM_CACHE_ASYNC="${_ZPM_CACHE_ASYNC:A}"
+export _ZPM_CACHE_ASYNC
+unset ZPM_CACHE_ASYNC
+
 if [[ -f "${_ZPM_CACHE}" ]]; then
   source "${_ZPM_CACHE}"
 else
