@@ -79,7 +79,7 @@ function _ZPM_Post_Initialization(){
   echo 'zpm () {}' >> "$_ZPM_CACHE"
 
 
-  zcompile "$_ZPM_CACHE" 2>/dev/null
+  zcompile "$_ZPM_CACHE" "$_ZPM_CACHE_ASYNC" 2>/dev/null
   zcompile "${HOME}/.zshrc" 2>/dev/null
   zcompile "${_ZPM_DIR}/zpm.zsh" 2>/dev/null
   zcompile "${_ZPM_DIR}/lib/functions.zsh" 2>/dev/null
