@@ -87,6 +87,8 @@ function _ZPM_Post_Initialization(){
   zcompile "${_ZPM_DIR}/zpm.zsh" 2>/dev/null
   zcompile "${_ZPM_DIR}/lib/functions.zsh" 2>/dev/null
 
+  TRAPALRM
+
   compinit
   add-zsh-hook -d precmd _ZPM_Post_Initialization
 }
