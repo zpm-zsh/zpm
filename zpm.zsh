@@ -8,7 +8,7 @@ typeset -A _ZPM_file_for_async_source
 
 export ZPFX="${HOME}/.local"
 
-_ZPM_DIR=${ZPM_DIR:-"${${(%):-%x}:A:h}"}
+_ZPM_DIR=${ZPM_DIR:-"$HOME/.zpm"}
 export _ZPM_DIR
 unset ZPM_DIR
 
