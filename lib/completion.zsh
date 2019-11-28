@@ -43,7 +43,6 @@ _zpm_completions_if_args=(
   'android'
   'termux'
   'ssh'
-  'tmux'
 )
 
 _zpm(){

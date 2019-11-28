@@ -68,9 +68,8 @@ zpm load github-user/github-repo,async # Async load
 * `macos` - if current OS is macOS
 * `termux` - if current session run in [Termux](http://termux.com/)
 * `ssh` - if session run on remote host
-* `tmux` - if session run in Tmux
 
-The condition can be combined `zpm if ssh if tmux if-not macos load repo/plugin`
+The condition can be combined `zpm if ssh if ssh if-not macos load repo/plugin`
 
 ### Tags
 
