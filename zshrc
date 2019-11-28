@@ -9,8 +9,10 @@ source ~/.zpm/zpm.zsh
 zpm if ssh                \
   zpm-zsh/tmux,inline     \
 
+
 zpm if-not ssh            \
   zpm-zsh/tmux,apply:path \
+
 
 ### Compatibility
 zpm if termux                 \
