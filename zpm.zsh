@@ -40,4 +40,5 @@ if [[ -f "${_ZPM_CACHE}" ]]; then
 else
   source "${_ZPM_DIR}/lib/functions.zsh"
   source "${_ZPM_DIR}/lib/imperative.zsh"
+  source "${_ZPM_DIR}/lib/completion.zsh"
 fi

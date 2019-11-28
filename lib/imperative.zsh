@@ -68,16 +68,16 @@ function _ZPM_Post_Initialization(){
   echo >> "$_ZPM_CACHE_ASYNC"
   done
   
-  cat "${_ZPM_DIR}/lib/functions.zsh" >> "$_ZPM_CACHE_ASYNC"
-  cat "${_ZPM_DIR}/lib/completion.zsh" >> "$_ZPM_CACHE_ASYNC"
   echo 'unset ZERO' >> "$_ZPM_CACHE_ASYNC"
 
-  zcompile "$_ZPM_CACHE" "$_ZPM_CACHE_ASYNC" 2>/dev/null
+  cat "${_ZPM_DIR}/lib/functions.zsh" >> "$_ZPM_CACHE_ASYNC"
+  cat "${_ZPM_DIR}/lib/completion.zsh" >> "$_ZPM_CACHE_ASYNC"
+
+  zcompile "$_ZPM_CACHE" 2>/dev/null
+  zcompile "$_ZPM_CACHE_ASYNC" 2>/dev/null
   zcompile "${HOME}/.zshrc" 2>/dev/null
   zcompile "${_ZPM_DIR}/zpm.zsh" 2>/dev/null
   zcompile "${_ZPM_DIR}/lib/functions.zsh" 2>/dev/null
-
-  source "${_ZPM_DIR}/lib/completion.zsh"
 
   compinit
   add-zsh-hook -d precmd _ZPM_Post_Initialization
