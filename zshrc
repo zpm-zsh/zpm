@@ -25,11 +25,11 @@ zpm                                                          \
   zpm-zsh/ignored-users,inline,async                         \
   zpm-zsh/check-deps,inline                                  \
   zpm-zsh/minimal-theme,inline                               \
-  zpm-zsh/ls,inline                                          \
+  zpm-zsh/ls,inline,async                                    \
   zpm-zsh/colorize,async,inline                              \
   zpm-zsh/ssh,async,inline                                   \
   zpm-zsh/dot,async,inline                                   \
-  zpm-zsh/dircolors-material,inline                          \
+  zpm-zsh/dircolors-material,inline,async                    \
   zpm-zsh/undollar,async,inline                              \
   zsh-users/zsh-completions,apply:fpath,fpath:/src           \
 
