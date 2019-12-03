@@ -9,23 +9,13 @@ typeset -A _ZPM_file_for_async_source
 export ZPFX="${HOME}/.local"
 
 _ZPM_DIR=${ZPM_DIR:-"$HOME/.zpm"}
-export _ZPM_DIR
 unset ZPM_DIR
 
 _ZPM_PLUGIN_DIR=${ZPM_PLUGIN_DIR:-"$HOME/.local/lib/zpm"}
-_ZPM_PLUGIN_DIR="${_ZPM_PLUGIN_DIR:A}"
-export _ZPM_PLUGIN_DIR
 unset ZPM_PLUGIN_DIR
 
-_ZPM_CACHE=${ZPM_CACHE:-"${TMPDIR:-/tmp}/.zpm-cache-${USER}.zsh"}
-_ZPM_CACHE="${_ZPM_CACHE:A}"
-export _ZPM_CACHE
-unset ZPM_CACHE
-
-_ZPM_CACHE_ASYNC=${ZPM_CACHE_ASYNC:-"${TMPDIR:-/tmp}/.zpm-cache-async-${USER}.zsh"}
-_ZPM_CACHE_ASYNC="${_ZPM_CACHE_ASYNC:A}"
-export _ZPM_CACHE_ASYNC
-unset ZPM_CACHE_ASYNC
+_ZPM_CACHE="${TMPDIR:-/tmp}/.zpm-cache-${USER}.zsh"
+_ZPM_CACHE_ASYNC="${TMPDIR:-/tmp}/.zpm-cache-async-${USER}.zsh"
 
 if [[ -f "${_ZPM_CACHE}" ]]; then
   source "${_ZPM_CACHE}"
