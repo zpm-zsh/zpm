@@ -345,7 +345,7 @@ function _ZPM-get-plugin-link() {
 }
 
 _ZPM-addpath () {
-  _ZPM_PATH="${1:A}:$_ZPM_PATH"
+  _ZPM_PATH="${_ZPM_PATH}:${1:A}"
   case ":$PATH:" in
     *:"$1":*)
     ;;
@@ -355,7 +355,7 @@ _ZPM-addpath () {
 }
 
 _ZPM-addfpath () {
-  _ZPM_fpath=("${1:A}" $_ZPM_fpath )
+  _ZPM_fpath=("${1:A}" $_ZPM_fpath)
   case ":$FPATH:" in
     *:"$1":*)
     ;;
