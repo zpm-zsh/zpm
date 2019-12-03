@@ -9,10 +9,10 @@ typeset -A _ZPM_file_for_async_source
 export ZPFX="${HOME}/.local"
 
 _ZPM_DIR=${ZPM_DIR:-"$HOME/.zpm"}
-unset ZPM_DIR
+export _ZPM_DIR
 
 _ZPM_PLUGIN_DIR=${ZPM_PLUGIN_DIR:-"$HOME/.local/lib/zpm"}
-unset ZPM_PLUGIN_DIR
+export _ZPM_PLUGIN_DIR
 
 _ZPM_CACHE="${TMPDIR:-/tmp}/.zpm-cache-${USER}.zsh"
 _ZPM_CACHE_ASYNC="${TMPDIR:-/tmp}/.zpm-cache-async-${USER}.zsh"
