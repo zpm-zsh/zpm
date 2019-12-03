@@ -350,7 +350,7 @@ _ZPM-addpath () {
     *:"$1":*)
     ;;
     *)
-      PATH="${1:A}:$PATH"
+      PATH="$PATH:${1:A}"
   esac
 }
 
