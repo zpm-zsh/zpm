@@ -355,12 +355,12 @@ _ZPM-addpath () {
 }
 
 _ZPM-addfpath () {
-  _ZPM_fpath=("${1:A}" $_ZPM_fpath)
+  _ZPM_fpath=( $_ZPM_fpath "${1:A}" )
   case ":$FPATH:" in
     *:"$1":*)
     ;;
     *)
-      fpath=("${1:A}" $fpath )
+      fpath=( $fpath "${1:A}" )
   esac
 }
 
