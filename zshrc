@@ -52,7 +52,7 @@ zpm if-not ssh                                                                  
   zthxxx/zsh-history-enquirer,async,inline                                                    \
   zsh-users/zsh-history-substring-search,source:zsh-history-substring-search.zsh,inline,async \
   zdharma/fast-syntax-highlighting,inline,async                                               \
-  tarruda/zsh-autosuggestions,source:zsh-autosuggestions.zsh,inline,async                     \
+  horosgrisa/zsh-autosuggestions,source:zsh-autosuggestions.zsh,inline,async                     \
 
 
 zpm                                  \
