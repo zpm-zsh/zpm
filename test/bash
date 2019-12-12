@@ -1,4 +1,4 @@
 #!/usr/bin/env zsh
-for i in $(seq 1 10); do time bash --login -i -c exit; done
+for i in $(seq 1 10); do time bash -i -c exit; done
 
  
