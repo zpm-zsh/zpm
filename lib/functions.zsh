@@ -67,7 +67,6 @@ function _ZPM-load-plugin() {
   
   local _ZPM_local_source=true
   local _ZPM_local_async=false
-  local _ZPM_local_inline=false
   local _ZPM_local_path=true
   local _ZPM_local_fpath=true
   
@@ -91,11 +90,7 @@ function _ZPM-load-plugin() {
   if [[ "$1"  == *",async"* ]]; then
     _ZPM_local_async=true
   fi
-  
-  if [[ "$1"  == *",inline"* ]]; then
-    _ZPM_local_inline=true
-  fi
-  
+    
   if [[ "$_ZPM_local_fpath"  == "true" ]]; then
     if [[ "$1"  == *",fpath:"* ]]; then
       local zpm_fpath=${${1##*,fpath:}%%,*}
@@ -137,22 +132,12 @@ function _ZPM-load-plugin() {
     fi
     
     if [[ -n "$_ZPM_plugin_file_path" ]]; then
-      if [[ "$_ZPM_local_inline" == "true" ]]; then
-        if [[ "$_ZPM_local_async" == "true" ]]; then
-          _ZPM-log zpm:init:source "Source '${_ZPM_plugin_file_path}', async, inline"
-          _ZPM_inline_async_source "${Plugin_name}" "${_ZPM_plugin_file_path}"
-        else
-          _ZPM-log zpm:init:source "Source '${_ZPM_plugin_file_path}', sync, inline"
-          _ZPM_inline_source "${Plugin_name}" "${_ZPM_plugin_file_path}"
-        fi
+      if [[ "$_ZPM_local_async" == "true" ]]; then
+        _ZPM-log zpm:init:source "Source '${_ZPM_plugin_file_path}', async, inline"
+        _ZPM_async_source "${Plugin_name}" "${_ZPM_plugin_file_path}"
       else
-        if [[ "$_ZPM_local_async" == "true" ]]; then
-          _ZPM-log zpm:init:source "Source '${_ZPM_plugin_file_path}', async"
-          _ZPM_async_source "${Plugin_name}" "${_ZPM_plugin_file_path}"
-        else
-          _ZPM-log zpm:init:source "Source '${_ZPM_plugin_file_path}'"
-          _ZPM_source "${Plugin_name}" "${_ZPM_plugin_file_path}"
-        fi
+        _ZPM-log zpm:init:source "Source '${_ZPM_plugin_file_path}', sync, inline"
+        _ZPM_source "${Plugin_name}" "${_ZPM_plugin_file_path}"
       fi
     else
       _ZPM_no_source "${Plugin_name}"
@@ -192,13 +177,20 @@ function _ZPM-initialize-plugin() {
 }
 
 function _ZPM_clean(){
-  rm -f "${_ZPM_CACHE}" "${_ZPM_CACHE_ASYNC}" "${_ZPM_CACHE}.zwc" "${_ZPM_CACHE_ASYNC}.zwc" "${HOME}/.zcompdump" "${HOME}/.zcompdump.zwc" 2>/dev/null
+  rm                          \
+    -f "${_ZPM_CACHE}"        \
+    "${_ZPM_CACHE_ASYNC}"     \
+    "${_ZPM_CACHE}.zwc"       \
+    "${_ZPM_CACHE_ASYNC}.zwc" \
+    "${HOME}/.zcompdump"      \
+    "${HOME}/.zcompdump.zwc"  \
+    2>/dev/null
 }
 
 function _ZPM-upgrade(){
   typeset -a _Plugins_Upgrade=()
   typeset -a _Plugins_Upgrade_full=()
-
+  
   _ZPM_clean
   
   if [[ -z $@ ]]; then
@@ -206,7 +198,7 @@ function _ZPM-upgrade(){
   else
     _Plugins_Upgrade+=($@)
   fi
-
+  
   for plugin (${_Plugins_Upgrade}); do
     _Plugins_Upgrade_full+=($_ZPM_plugins_full[$plugin])
   done
@@ -313,8 +305,8 @@ function _ZPM-get-plugin-basename() {
 }
 
 function _ZPM-get-plugin-link() {
-  local plugin_name=$(_ZPM-get-plugin-name $1)
-  local plugin_type=$(_ZPM-get-plugin-type $1)
+  local plugin_name=$(_ZPM-get-plugin-name "$1")
+  local plugin_type=$(_ZPM-get-plugin-type "$1")
   
   if [[ "$plugin_type" == 'github' ]]; then
     echo "https://github.com/${plugin_name}"
@@ -346,22 +338,16 @@ function _ZPM-get-plugin-link() {
 
 _ZPM-addpath () {
   _ZPM_PATH="${_ZPM_PATH}:${1:A}"
-  case ":$PATH:" in
-    *:"$1":*)
-    ;;
-    *)
-      PATH="$PATH:${1:A}"
-  esac
+  if [[ ":$PATH:" == *:"$1":* ]]; then
+    PATH="$PATH:${1:A}"
+  fi
 }
 
 _ZPM-addfpath () {
   _ZPM_fpath=( $_ZPM_fpath "${1:A}" )
-  case ":$FPATH:" in
-    *:"$1":*)
-    ;;
-    *)
-      fpath=( $fpath "${1:A}" )
-  esac
+  if [[ ":$FPATH:" == *:"$1":* ]]; then
+    fpath=( $fpath "${1:A}" )
+  fi
 }
 
 # Fake source
@@ -376,53 +362,28 @@ source () {
 _ZPM_source () {
   zsh_loaded_plugins+=("$1")
   ZERO="$2"
-
+  
   source "$2"
-
-  _ZPM_plugins_for_source+=("$1")
-  _ZPM_file_for_source["$1"]="${2:A}"
-
-  unset ZERO
-}
-
-_ZPM_inline_source () {
-  zsh_loaded_plugins+=("$1")
-  ZERO="$2"
-
-  source "$2"
-
+  
   _ZPM_plugins_for_source+=("$1")
   _ZPM_file_for_source["$1"]="${2:A}___ZPM_inline"
-
+  
   unset ZERO
 }
 
 _ZPM_async_source () {
   zsh_loaded_plugins+=("$1")
   ZERO="$2"
-
+  
   source "$2"
-
-  _ZPM_plugins_for_async_source+=("$1")
-  _ZPM_file_for_async_source["$1"]="${2:A}"
-
-  unset ZERO
-}
-
-_ZPM_inline_async_source () {
-  zsh_loaded_plugins+=("$1")
-  ZERO="$2"
-
-  source "$2"
-
+  
   _ZPM_plugins_for_async_source+=("$1")
   _ZPM_file_for_async_source["$1"]="${2:A}___ZPM_inline"
-
+  
   unset ZERO
 }
 
 _ZPM_no_source (){
   zsh_loaded_plugins+=("$1")
-
   _ZPM_plugins_no_source+=("$1")
 }
