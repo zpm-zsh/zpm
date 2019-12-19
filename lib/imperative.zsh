@@ -17,7 +17,7 @@ function _ZPM_Post_Initialization(){
   echo "_ZPM_plugins_full+=('${(kvj:' ':)_ZPM_plugins_full}')" >> "$_ZPM_CACHE"
 
   echo "export PATH=\"\${PATH}${_ZPM_PATH}\"" >> "$_ZPM_CACHE"
-  echo "fpath=( \$fpath '${(j:' ':)_ZPM_fpath}' )" >> "$_ZPM_CACHE"
+  echo "fpath+=( '${(j:' ':)_ZPM_fpath}' )" >> "$_ZPM_CACHE"
   echo >> "$_ZPM_CACHE"
   
   echo 'autoload -Uz compinit' >> "$_ZPM_CACHE"
