@@ -64,7 +64,6 @@ function _ZPM-load-plugin() {
   
   _ZPM-log zpm:init "Initialize '${Plugin_name}'"
   
-  
   local _ZPM_local_source=true
   local _ZPM_local_async=false
   local _ZPM_local_path=true
@@ -96,12 +95,11 @@ function _ZPM-load-plugin() {
       local zpm_fpath=${${1##*,fpath:}%%,*}
       local _local_path="${Plugin_path}/${zpm_fpath}"
       _ZPM-log zpm:init:fpath "Add to \$fpath '${_local_path}'"
-      _ZPM-addfpath "${_local_path}"
+      _ZPM-addfpath "${_local_path:a}"
     else
       for file in  "${Plugin_path}/_"*(N); do
-        local _local_path="${Plugin_path}"
-        _ZPM-log zpm:init:fpath "Add to \$fpath '${_local_path}'"
-        _ZPM-addfpath "${_local_path}"
+        _ZPM-log zpm:init:fpath "Add to \$fpath '${Plugin_path:a}'"
+        _ZPM-addfpath "${Plugin_path:a}"
         break;
       done
     fi
@@ -112,11 +110,10 @@ function _ZPM-load-plugin() {
       local zpm_path=${${1##*,path:}%%,*}
       local _local_path="${Plugin_path}/${zpm_path}"
       _ZPM-log zpm:init:path "Add to \$PATH '${_local_path}'"
-      _ZPM-addpath "${_local_path}"
+      _ZPM-addpath "${_local_path:a}"
     elif [[ -d ${Plugin_path}/bin ]]; then
-      local _local_path="${Plugin_path}/bin"
-      _ZPM-log zpm:init:path "Add to \$PATH '${_local_path}'"
-      _ZPM-addpath "${_local_path}"
+      _ZPM-log zpm:init:path "Add to \$PATH '${_local_path:a}/bin'"
+      _ZPM-addpath "${Plugin_path:a}"
     fi
   fi
   
@@ -339,14 +336,14 @@ function _ZPM-get-plugin-link() {
 _ZPM-addpath () {
   _ZPM_PATH="${_ZPM_PATH}:${1:A}"
   if [[ ":$PATH:" != *:"$1":* ]]; then
-    PATH="$PATH:${1:A}"
+    PATH="$PATH:${1}"
   fi
 }
 
 _ZPM-addfpath () {
   _ZPM_fpath=( $_ZPM_fpath "${1:A}" )
   if [[ ":$FPATH:" != *:"$1":* ]]; then
-    fpath=( $fpath "${1:A}" )
+    fpath=( $fpath "${1}" )
   fi
 }
 
@@ -366,7 +363,7 @@ _ZPM_source () {
   source "$2"
   
   _ZPM_plugins_for_source+=("$1")
-  _ZPM_file_for_source["$1"]="${2:A}___ZPM_inline"
+  _ZPM_file_for_source["$1"]="${2}___ZPM_inline"
   
   unset ZERO
 }
@@ -378,7 +375,7 @@ _ZPM_async_source () {
   source "$2"
   
   _ZPM_plugins_for_async_source+=("$1")
-  _ZPM_file_for_async_source["$1"]="${2:A}___ZPM_inline"
+  _ZPM_file_for_async_source["$1"]="${2}___ZPM_inline"
   
   unset ZERO
 }
