@@ -338,14 +338,14 @@ function _ZPM-get-plugin-link() {
 
 _ZPM-addpath () {
   _ZPM_PATH="${_ZPM_PATH}:${1:A}"
-  if [[ ":$PATH:" == *:"$1":* ]]; then
+  if [[ ":$PATH:" != *:"$1":* ]]; then
     PATH="$PATH:${1:A}"
   fi
 }
 
 _ZPM-addfpath () {
   _ZPM_fpath=( $_ZPM_fpath "${1:A}" )
-  if [[ ":$FPATH:" == *:"$1":* ]]; then
+  if [[ ":$FPATH:" != *:"$1":* ]]; then
     fpath=( $fpath "${1:A}" )
   fi
 }
