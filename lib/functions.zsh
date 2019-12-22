@@ -174,8 +174,8 @@ function _ZPM-initialize-plugin() {
 }
 
 function _ZPM_clean(){
-  rm                          \
-    -f "${_ZPM_CACHE}"        \
+  rm -f                       \
+    "${_ZPM_CACHE}"           \
     "${_ZPM_CACHE_ASYNC}"     \
     "${_ZPM_CACHE}.zwc"       \
     "${_ZPM_CACHE_ASYNC}.zwc" \
@@ -363,7 +363,7 @@ _ZPM_source () {
   source "$2"
   
   _ZPM_plugins_for_source+=("$1")
-  _ZPM_file_for_source["$1"]="${2}___ZPM_inline"
+  _ZPM_file_for_source["$1"]="${2}"
   
   unset ZERO
 }
@@ -375,7 +375,7 @@ _ZPM_async_source () {
   source "$2"
   
   _ZPM_plugins_for_async_source+=("$1")
-  _ZPM_file_for_async_source["$1"]="${2}___ZPM_inline"
+  _ZPM_file_for_async_source["$1"]="${2}"
   
   unset ZERO
 }
