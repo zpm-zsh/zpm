@@ -19,10 +19,10 @@ if [[ "$CLICOLOR" != "0" ]]; then
 fi
 
 local Plugin_name=$(_ZPM-get-plugin-name "$2")
-local Plugin_basename=$(_ZPM-get-plugin-basename "$2")
-local Plugin_path=$(_ZPM-get-plugin-path "$2")
-local Plugin_link=$(_ZPM-get-plugin-link "$2")
 local Plugin_type=$(_ZPM-get-plugin-type "$2")
+local Plugin_basename=$(_ZPM-get-plugin-basename "$Plugin_name")
+local Plugin_path=$(_ZPM-get-plugin-path "$Plugin_name")
+local Plugin_link=$(_ZPM-get-plugin-link "$Plugin_name" "$Plugin_type")
 
 if [[ "$1" == "upgrade" ]]; then
   local status_string="${c[green]}${c_bold}Upgrade${c_reset} "

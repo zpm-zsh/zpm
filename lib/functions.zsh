@@ -53,9 +53,10 @@ function _ZPM-log() {
 }
 
 function _ZPM-load-plugin() {
-  local Plugin_path=$(_ZPM-get-plugin-path "$1")
-  local Plugin_basename=$(_ZPM-get-plugin-basename "$1")
   local Plugin_name=$(_ZPM-get-plugin-name "$1")
+  local Plugin_basename=$(_ZPM-get-plugin-basename "$Plugin_name")
+  local Plugin_path=$(_ZPM-get-plugin-path "$Plugin_name")
+
   
   if [[ ! -e "${Plugin_path}" ]]; then
     _ZPM-log zpm:init:skip "Skip initialization of '${1}', plugin directory not found '${Plugin_path}'"
@@ -150,7 +151,8 @@ function _ZPM-initialize-plugin() {
   declare -a _Plugins_Install
   
   for plugin ("$@"); do
-    local Plugin_path=$(_ZPM-get-plugin-path "$plugin")
+    local Plugin_name=$(_ZPM-get-plugin-name "$plugin")
+    local Plugin_path=$(_ZPM-get-plugin-path "$Plugin_name")
     
     if [[ ! -e $Plugin_path ]]; then
       _Plugins_Install+=("$plugin")
@@ -274,36 +276,26 @@ function _ZPM-get-plugin-name() {
 }
 
 function _ZPM-get-plugin-path() {
-  local plugin_name=$(_ZPM-get-plugin-name $1)
-  echo "${_ZPM_PLUGIN_DIR}/${plugin_name//\//---}"
+  echo "${_ZPM_PLUGIN_DIR}/${1//\//---}"
 }
 
 function _ZPM-get-plugin-basename() {
-  local plugin_name=$(_ZPM-get-plugin-name $1)
+  local plugin_name="$1"
   
   plugin_name=${plugin_name##*\/}
-  
-  if [[ "${plugin_name}" == 'oh-my-zsh-'* ]]; then
-    plugin_name=${plugin_name:10}
-  fi
-  if [[ "${plugin_name}" == 'zsh-'* ]]; then
-    plugin_name=${plugin_name:4}
-  fi
-  if [[ "${plugin_name}" == *'.zsh' ]]; then
-    plugin_name=${plugin_name:0:${#plugin_name}-4}
-  fi
-  if [[ "${plugin_name}" == *'-zsh' ]]; then
-    plugin_name=${plugin_name:0:${#plugin_name}-4}
-  fi
-  if [[ "${plugin_name}" == *'.plugin' ]]; then
-    plugin_name=${plugin_name:0:${#plugin_name}-7}
-  fi
+ 
+  plugin_name=${plugin_name##oh-my-zsh-}
+  plugin_name=${plugin_name##zsh-}
+  plugin_name=${plugin_name%%.zsh}
+  plugin_name=${plugin_name%%-zsh}
+  plugin_name=${plugin_name%%.plugin}
+
   echo "${plugin_name}"
 }
 
 function _ZPM-get-plugin-link() {
-  local plugin_name=$(_ZPM-get-plugin-name "$1")
-  local plugin_type=$(_ZPM-get-plugin-type "$1")
+  local plugin_name="$1"
+  local plugin_type="$2"
   
   if [[ "$plugin_type" == 'github' ]]; then
     echo "https://github.com/${plugin_name}"
