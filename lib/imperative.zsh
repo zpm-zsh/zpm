@@ -33,13 +33,9 @@ function _ZPM_Post_Initialization(){
   for plugin in ${_ZPM_plugins_for_source}; do
     local file="$_ZPM_file_for_source["$plugin"]"
     echo "zsh_loaded_plugins+=('$plugin')" >> "$_ZPM_CACHE"
-    echo "ZERO='${file%%___ZPM_inline}'" >> "$_ZPM_CACHE"
-    if [[ "$file" == *"___ZPM_inline" ]]; then
-      echo "# Inlined from '${file%%___ZPM_inline}'" >> "$_ZPM_CACHE"
-      cat "${file%%___ZPM_inline}" >> "$_ZPM_CACHE"
-    else
-      echo "source '${file}'" >> "$_ZPM_CACHE"
-    fi
+    echo "ZERO='${file}'" >> "$_ZPM_CACHE"
+    echo "# Inlined from '${file}'" >> "$_ZPM_CACHE"
+    cat "${file}" >> "$_ZPM_CACHE"
     echo >> "$_ZPM_CACHE"
   done
   
