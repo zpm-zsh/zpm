@@ -109,11 +109,11 @@ function _ZPM-load-plugin() {
     if [[ "$1"  == *",path:"* ]]; then
       local zpm_path=${${1##*,path:}%%,*}
       local _local_path="${Plugin_path}/${zpm_path}"
-      _ZPM-log zpm:init:path "Add to \$PATH '${_local_path}'"
+      _ZPM-log zpm:init:path "Add to \$PATH '${_local_path:a}'"
       _ZPM-addpath "${_local_path:a}"
-    elif [[ -d ${Plugin_path}/bin ]]; then
-      _ZPM-log zpm:init:path "Add to \$PATH '${_local_path:a}/bin'"
-      _ZPM-addpath "${Plugin_path:a}"
+    elif [[ -d "${Plugin_path}/bin" ]]; then
+      _ZPM-log zpm:init:path "Add to \$PATH '${Plugin_path:a}/bin'"
+      _ZPM-addpath "${Plugin_path:a}/bin"
     fi
   fi
   
