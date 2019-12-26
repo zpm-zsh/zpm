@@ -10,67 +10,70 @@ typeset -a _ZPM_plugins_for_async_source
 typeset -a _ZPM_plugins_no_source
 
 function _ZPM_Post_Initialization(){
-  echo -n >! "$_ZPM_CACHE"
-  echo -n >! "$_ZPM_CACHE_ASYNC"
+  _ZPM_TMP="$(mktemp)"
+  _ZPM_TMP_ASYNC="$(mktemp)"
   
-  echo "typeset -a zsh_loaded_plugins=('${(j:' ':)_ZPM_plugins_no_source}')" >> "$_ZPM_CACHE"
-  echo "_ZPM_plugins_full+=('${(kvj:' ':)_ZPM_plugins_full}')" >> "$_ZPM_CACHE"
+  echo "typeset -a zsh_loaded_plugins=('${(j:' ':)_ZPM_plugins_no_source}')" >> "$_ZPM_TMP"
+  echo "_ZPM_plugins_full+=('${(kvj:' ':)_ZPM_plugins_full}')" >> "$_ZPM_TMP"
   
-  echo "export PATH=\"\${PATH}${_ZPM_PATH}\"" >> "$_ZPM_CACHE"
-  echo "fpath+=( '${(j:' ':)_ZPM_fpath}' )" >> "$_ZPM_CACHE"
-  echo >> "$_ZPM_CACHE"
+  echo "export PATH=\"\${PATH}${_ZPM_PATH}\"" >> "$_ZPM_TMP"
+  echo "fpath+=( '${(j:' ':)_ZPM_fpath}' )" >> "$_ZPM_TMP"
+  echo >> "$_ZPM_TMP"
   
-  echo 'autoload -Uz compinit' >> "$_ZPM_CACHE"
-  echo '_comp_files=(${HOME}/.zcompdump(Nm-20))' >> "$_ZPM_CACHE"
-  echo 'if (( $#_comp_files )); then' >> "$_ZPM_CACHE"
-  echo '  compinit -i -C' >> "$_ZPM_CACHE"
-  echo 'else' >> "$_ZPM_CACHE"
-  echo '  compinit -i' >> "$_ZPM_CACHE"
-  echo 'fi' >> "$_ZPM_CACHE"
-  echo 'unset _comp_files' >> "$_ZPM_CACHE"
-  echo >> "$_ZPM_CACHE"
+  echo 'autoload -Uz compinit' >> "$_ZPM_TMP"
+  echo '_comp_files=(${HOME}/.zcompdump(Nm-20))' >> "$_ZPM_TMP"
+  echo 'if (( $#_comp_files )); then' >> "$_ZPM_TMP"
+  echo '  compinit -i -C' >> "$_ZPM_TMP"
+  echo 'else' >> "$_ZPM_TMP"
+  echo '  compinit -i' >> "$_ZPM_TMP"
+  echo 'fi' >> "$_ZPM_TMP"
+  echo 'unset _comp_files' >> "$_ZPM_TMP"
+  echo >> "$_ZPM_TMP"
   
   for plugin in ${_ZPM_plugins_for_source}; do
     local file="$_ZPM_file_for_source["$plugin"]"
-    echo "zsh_loaded_plugins+=('$plugin')" >> "$_ZPM_CACHE"
-    echo "ZERO='${file}'" >> "$_ZPM_CACHE"
-    echo "# Inlined from '${file}'" >> "$_ZPM_CACHE"
-    cat "${file}" >> "$_ZPM_CACHE"
-    echo >> "$_ZPM_CACHE"
+    echo "zsh_loaded_plugins+=('$plugin')" >> "$_ZPM_TMP"
+    echo "ZERO='${file}'" >> "$_ZPM_TMP"
+    echo "# Inlined from '${file}'" >> "$_ZPM_TMP"
+    cat "${file}" >> "$_ZPM_TMP"
+    echo >> "$_ZPM_TMP"
   done
+
+  echo '_ZPM_post_fn () {' >> "$_ZPM_TMP"
+  echo "  source '$_ZPM_TMP_ASYNC'" >> "$_ZPM_TMP"
+  echo '  TMOUT=5' >> "$_ZPM_TMP"
+  echo '  add-zsh-hook -d background _ZPM_post_fn' >> "$_ZPM_TMP"
+  echo '}' >> "$_ZPM_TMP"
+  echo >> "$_ZPM_TMP"
   
-  echo '_ZPM_post_fn () {' >> "$_ZPM_CACHE"
-  echo "  source '$_ZPM_CACHE_ASYNC'" >> "$_ZPM_CACHE"
-  echo '  TMOUT=5' >> "$_ZPM_CACHE"
-  echo '  add-zsh-hook -d background _ZPM_post_fn' >> "$_ZPM_CACHE"
-  echo '}' >> "$_ZPM_CACHE"
-  echo >> "$_ZPM_CACHE"
+  echo 'typeset -aU path' >> "$_ZPM_TMP"
+  echo 'export PATH' >> "$_ZPM_TMP"
+  echo >> "$_ZPM_TMP"
   
-  echo 'typeset -aU path' >> "$_ZPM_CACHE"
-  echo 'export PATH' >> "$_ZPM_CACHE"
-  echo >> "$_ZPM_CACHE"
+  echo 'TMOUT=1' >> "$_ZPM_TMP"
+  echo >> "$_ZPM_TMP"
+
+  echo 'add-zsh-hook background _ZPM_post_fn' >> "$_ZPM_TMP"
+  echo >> "$_ZPM_TMP"
   
-  echo 'TMOUT=1' >> "$_ZPM_CACHE"
-  echo >> "$_ZPM_CACHE"
-  
-  echo 'add-zsh-hook background _ZPM_post_fn' >> "$_ZPM_CACHE"
-  echo >> "$_ZPM_CACHE"
-  
-  echo 'zpm () {}' >> "$_ZPM_CACHE"
+  echo 'zpm () {}' >> "$_ZPM_TMP"
   
   for plugin in ${_ZPM_plugins_for_async_source}; do
     local file="$_ZPM_file_for_async_source["$plugin"]"
-    echo "zsh_loaded_plugins+=('$plugin')" >> "$_ZPM_CACHE_ASYNC"
-    echo "ZERO='${file}'" >> "$_ZPM_CACHE_ASYNC"
-    echo "# Inlined from '${file}'" >> "$_ZPM_CACHE_ASYNC"
-    cat "${file}" >> "$_ZPM_CACHE_ASYNC"
-    echo >> "$_ZPM_CACHE_ASYNC"
+    echo "zsh_loaded_plugins+=('$plugin')" >> "$_ZPM_TMP_ASYNC"
+    echo "ZERO='${file}'" >> "$_ZPM_TMP_ASYNC"
+    echo "# Inlined from '${file}'" >> "$_ZPM_TMP_ASYNC"
+    cat "${file}" >> "$_ZPM_TMP_ASYNC"
+    echo >> "$_ZPM_TMP_ASYNC"
   done
   
-  echo 'unset ZERO' >> "$_ZPM_CACHE_ASYNC"
+  echo 'unset ZERO' >> "$_ZPM_TMP_ASYNC"
   
-  cat "${_ZPM_DIR}/lib/functions.zsh" >> "$_ZPM_CACHE_ASYNC"
-  cat "${_ZPM_DIR}/lib/completion.zsh" >> "$_ZPM_CACHE_ASYNC"
+  cat "${_ZPM_DIR}/lib/functions.zsh" >> "$_ZPM_TMP_ASYNC"
+  cat "${_ZPM_DIR}/lib/completion.zsh" >> "$_ZPM_TMP_ASYNC"
+
+  cp "$_ZPM_TMP" "$_ZPM_CACHE"
+  cp "$_ZPM_TMP_ASYNC" "$_ZPM_CACHE_ASYNC"
   
   zcompile "$_ZPM_CACHE" 2>/dev/null
   zcompile "$_ZPM_CACHE_ASYNC" 2>/dev/null
