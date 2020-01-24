@@ -57,7 +57,6 @@ zpm if-not ssh                                                                  
 
 zpm                           \
   omz/pip,async               \
-  omz/cargo,async             \
   omz/extract,async           \
   omz/command-not-found,async \
   omz/wp-cli,async            \
