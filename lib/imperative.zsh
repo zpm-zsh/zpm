@@ -13,14 +13,14 @@ function _ZPM_Post_Initialization(){
   _ZPM_TMP="$(mktemp)"
   _ZPM_TMP_ASYNC="$(mktemp)"
   
-  echo "autoload -Uz add-zsh-hook" >> "$_ZPM_TMP"
   echo "typeset -a zsh_loaded_plugins=('${(j:' ':)_ZPM_plugins_no_source}')" >> "$_ZPM_TMP"
   echo "_ZPM_plugins_full+=('${(kvj:' ':)_ZPM_plugins_full}')" >> "$_ZPM_TMP"
   
   echo "export PATH=\"\${PATH}${_ZPM_PATH}\"" >> "$_ZPM_TMP"
   echo "fpath+=( '${(j:' ':)_ZPM_fpath}' )" >> "$_ZPM_TMP"
   echo >> "$_ZPM_TMP"
-  
+
+  echo "autoload -Uz add-zsh-hook" >> "$_ZPM_TMP"
   echo 'autoload -Uz compinit' >> "$_ZPM_TMP"
   echo '_comp_files=(${HOME}/.zcompdump(Nm-20))' >> "$_ZPM_TMP"
   echo 'if (( $#_comp_files )); then' >> "$_ZPM_TMP"
