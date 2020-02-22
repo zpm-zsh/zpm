@@ -20,6 +20,8 @@ function _ZPM_Post_Initialization(){
   echo "fpath+=( '${(j:' ':)_ZPM_fpath}' )" >> "$_ZPM_TMP"
   echo >> "$_ZPM_TMP"
 
+  echo "setopt extended_glob warn_create_global typeset_silent \\
+        no_short_loops rc_quotes no_auto_pushd" >> "$_ZPM_TMP"
   echo "autoload -Uz add-zsh-hook" >> "$_ZPM_TMP"
   echo 'autoload -Uz compinit' >> "$_ZPM_TMP"
   echo '_comp_files=(${HOME}/.zcompdump(Nm-20))' >> "$_ZPM_TMP"
@@ -85,9 +87,11 @@ function _ZPM_Post_Initialization(){
   add-zsh-hook -d precmd _ZPM_Post_Initialization
 }
 
+setopt extended_glob warn_create_global typeset_silent \
+        no_short_loops rc_quotes no_auto_pushd
+
 autoload -Uz add-zsh-hook
 add-zsh-hook precmd _ZPM_Post_Initialization
-
 autoload -Uz compinit
 _comp_files=(${HOME}/.zcompdump(Nm-20))
 if (( $#_comp_files )); then
