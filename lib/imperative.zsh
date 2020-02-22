@@ -35,7 +35,6 @@ function _ZPM_Post_Initialization(){
     local file="$_ZPM_file_for_source["$plugin"]"
     echo "zsh_loaded_plugins+=('$plugin')" >> "$_ZPM_TMP"
     echo "ZERO='${file}'" >> "$_ZPM_TMP"
-    echo "# Inlined from '${file}'" >> "$_ZPM_TMP"
     cat "${file}" >> "$_ZPM_TMP"
     echo >> "$_ZPM_TMP"
   done
@@ -63,7 +62,6 @@ function _ZPM_Post_Initialization(){
     local file="$_ZPM_file_for_async_source["$plugin"]"
     echo "zsh_loaded_plugins+=('$plugin')" >> "$_ZPM_TMP_ASYNC"
     echo "ZERO='${file}'" >> "$_ZPM_TMP_ASYNC"
-    echo "# Inlined from '${file}'" >> "$_ZPM_TMP_ASYNC"
     cat "${file}" >> "$_ZPM_TMP_ASYNC"
     echo >> "$_ZPM_TMP_ASYNC"
   done
