@@ -13,6 +13,7 @@ function _ZPM_Post_Initialization(){
   _ZPM_TMP="$(mktemp)"
   _ZPM_TMP_ASYNC="$(mktemp)"
   
+  echo "autoload -Uz add-zsh-hook" >> "$_ZPM_TMP"
   echo "typeset -a zsh_loaded_plugins=('${(j:' ':)_ZPM_plugins_no_source}')" >> "$_ZPM_TMP"
   echo "_ZPM_plugins_full+=('${(kvj:' ':)_ZPM_plugins_full}')" >> "$_ZPM_TMP"
   
