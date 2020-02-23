@@ -53,6 +53,7 @@ function _ZPM-log() {
 }
 
 function _ZPM-load-plugin() {
+  local file
   local Plugin_name=$(_ZPM-get-plugin-name "$1")
   local Plugin_basename=$(_ZPM-get-plugin-basename "$Plugin_name")
   local Plugin_path=$(_ZPM-get-plugin-path "$Plugin_name")
@@ -98,7 +99,7 @@ function _ZPM-load-plugin() {
       _ZPM-log zpm:init:fpath "Add to \$fpath '${_local_path}'"
       _ZPM-addfpath "${_local_path:a}"
     else
-      for file in  "${Plugin_path}/_"*(N); do
+      for file in "${Plugin_path}/_"*(N); do
         _ZPM-log zpm:init:fpath "Add to \$fpath '${Plugin_path:a}'"
         _ZPM-addfpath "${Plugin_path:a}"
         break;
@@ -350,6 +351,7 @@ source () {
 
 _ZPM_source () {
   zsh_loaded_plugins+=("$1")
+  typeset -g ZERO
   ZERO="$2"
   
   source "$2"
@@ -362,6 +364,7 @@ _ZPM_source () {
 
 _ZPM_async_source () {
   zsh_loaded_plugins+=("$1")
+  typeset -g ZERO
   ZERO="$2"
   
   source "$2"

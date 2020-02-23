@@ -37,7 +37,6 @@ zpm                                                \
 zpm if-not ssh                                                                         \
   zpm-zsh/dropbox,async                                                                \
   lukechilds/zsh-better-npm-completion,async                                           \
-  tj/git-extras,source:/etc/git-extras-completion.zsh,async                            \
   horosgrisa/utils,apply:path                                                          \
                                                                                        \
   zpm-zsh/readers,async                                                                \
@@ -48,7 +47,6 @@ zpm if-not ssh                                                                  
   zpm-zsh/autoenv,async                                                                \
                                                                                        \
   mdumitru/fancy-ctrl-z,async                                                          \
-  hlissner/zsh-autopair,async                                                          \
   zthxxx/zsh-history-enquirer,async                                                    \
   zsh-users/zsh-history-substring-search,source:zsh-history-substring-search.zsh,async \
   zdharma/fast-syntax-highlighting,async                                               \
@@ -56,7 +54,6 @@ zpm if-not ssh                                                                  
 
 
 zpm                           \
-  omz/pip,async               \
   omz/extract,async           \
   omz/command-not-found,async \
   omz/wp-cli,async            \
