@@ -22,6 +22,7 @@ function _ZPM_Post_Initialization(){
   echo >> "$_ZPM_TMP"
   
   echo 'autoload -Uz compinit' >> "$_ZPM_TMP"
+  echo 'local _comp_files' >> "$_ZPM_TMP"
   echo '_comp_files=(${HOME}/.zcompdump(Nm-20))' >> "$_ZPM_TMP"
   echo 'if (( $#_comp_files )); then' >> "$_ZPM_TMP"
   echo '  compinit -i -C' >> "$_ZPM_TMP"
@@ -35,7 +36,6 @@ function _ZPM_Post_Initialization(){
     local file="$_ZPM_file_for_source["$plugin"]"
     echo "zsh_loaded_plugins+=('$plugin')" >> "$_ZPM_TMP"
     echo "ZERO='${file}'" >> "$_ZPM_TMP"
-    echo "# Inlined from '${file}'" >> "$_ZPM_TMP"
     cat "${file}" >> "$_ZPM_TMP"
     echo >> "$_ZPM_TMP"
   done
@@ -63,7 +63,6 @@ function _ZPM_Post_Initialization(){
     local file="$_ZPM_file_for_async_source["$plugin"]"
     echo "zsh_loaded_plugins+=('$plugin')" >> "$_ZPM_TMP_ASYNC"
     echo "ZERO='${file}'" >> "$_ZPM_TMP_ASYNC"
-    echo "# Inlined from '${file}'" >> "$_ZPM_TMP_ASYNC"
     cat "${file}" >> "$_ZPM_TMP_ASYNC"
     echo >> "$_ZPM_TMP_ASYNC"
   done
@@ -91,7 +90,7 @@ autoload -Uz add-zsh-hook
 add-zsh-hook precmd _ZPM_Post_Initialization
 
 autoload -Uz compinit
-_comp_files=(${HOME}/.zcompdump(Nm-20))
+local _comp_files=(${HOME}/.zcompdump(Nm-20))
 if (( $#_comp_files )); then
   compinit -i -C
 else
@@ -99,4 +98,4 @@ else
 fi
 unset _comp_files
 
-zpm zpm-zsh/helpers,inline zpm-zsh/colors,inline zpm-zsh/background,inline
+zpm zpm-zsh/helpers zpm-zsh/colors zpm-zsh/background
