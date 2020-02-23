@@ -3,30 +3,25 @@
 _ZPM_PATH=""
 _ZPM_fpath=()
 
+typeset -a zsh_loaded_plugins
+
 typeset -a _ZPM_plugins_for_source
 typeset -a _ZPM_plugins_for_async_source
 typeset -a _ZPM_plugins_no_source
 
-typeset -g zsh_loaded_plugins
-
 function _ZPM_Post_Initialization(){
-  local _ZPM_TMP
-  local _ZPM_TMP_ASYNC
   _ZPM_TMP="$(mktemp)"
   _ZPM_TMP_ASYNC="$(mktemp)"
   
+  echo "autoload -Uz add-zsh-hook" >> "$_ZPM_TMP"
   echo "typeset -a zsh_loaded_plugins=('${(j:' ':)_ZPM_plugins_no_source}')" >> "$_ZPM_TMP"
   echo "_ZPM_plugins_full+=('${(kvj:' ':)_ZPM_plugins_full}')" >> "$_ZPM_TMP"
   
   echo "export PATH=\"\${PATH}${_ZPM_PATH}\"" >> "$_ZPM_TMP"
   echo "fpath+=( '${(j:' ':)_ZPM_fpath}' )" >> "$_ZPM_TMP"
   echo >> "$_ZPM_TMP"
-
-  echo "setopt extended_glob  typeset_silent \\
-        no_short_loops rc_quotes no_auto_pushd" >> "$_ZPM_TMP"
-  echo "autoload -Uz add-zsh-hook" >> "$_ZPM_TMP"
+  
   echo 'autoload -Uz compinit' >> "$_ZPM_TMP"
-  echo 'local _comp_files' >> "$_ZPM_TMP"
   echo '_comp_files=(${HOME}/.zcompdump(Nm-20))' >> "$_ZPM_TMP"
   echo 'if (( $#_comp_files )); then' >> "$_ZPM_TMP"
   echo '  compinit -i -C' >> "$_ZPM_TMP"
@@ -40,6 +35,7 @@ function _ZPM_Post_Initialization(){
     local file="$_ZPM_file_for_source["$plugin"]"
     echo "zsh_loaded_plugins+=('$plugin')" >> "$_ZPM_TMP"
     echo "ZERO='${file}'" >> "$_ZPM_TMP"
+    echo "# Inlined from '${file}'" >> "$_ZPM_TMP"
     cat "${file}" >> "$_ZPM_TMP"
     echo >> "$_ZPM_TMP"
   done
@@ -67,6 +63,7 @@ function _ZPM_Post_Initialization(){
     local file="$_ZPM_file_for_async_source["$plugin"]"
     echo "zsh_loaded_plugins+=('$plugin')" >> "$_ZPM_TMP_ASYNC"
     echo "ZERO='${file}'" >> "$_ZPM_TMP_ASYNC"
+    echo "# Inlined from '${file}'" >> "$_ZPM_TMP_ASYNC"
     cat "${file}" >> "$_ZPM_TMP_ASYNC"
     echo >> "$_ZPM_TMP_ASYNC"
   done
@@ -90,13 +87,10 @@ function _ZPM_Post_Initialization(){
   add-zsh-hook -d precmd _ZPM_Post_Initialization
 }
 
-setopt extended_glob  typeset_silent \
-        no_short_loops rc_quotes no_auto_pushd
-
 autoload -Uz add-zsh-hook
 add-zsh-hook precmd _ZPM_Post_Initialization
+
 autoload -Uz compinit
-local _comp_files
 _comp_files=(${HOME}/.zcompdump(Nm-20))
 if (( $#_comp_files )); then
   compinit -i -C
