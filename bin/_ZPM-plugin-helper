@@ -50,7 +50,7 @@ if [[ "$1" == "upgrade" ]]; then
     status_string+="\033]8;;\a${c_reset}"
   fi
   
-  status_string+=" ${c[green]}✔${c_reset}"
+  status_string+=" ${c[green]}✓${c_reset}"
   
   echo $status_string
 else
@@ -94,7 +94,7 @@ else
       status_string+="\033]8;;\a${c_reset}"
     fi
     
-    status_string+=" ${c[red]}${c_bold}✖${c_reset}"
+    status_string+=" ${c[red]}${c_bold}✕${c_reset}"
     
     echo $status_string
   fi
