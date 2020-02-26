@@ -3,11 +3,11 @@
 _ZPM_PATH=""
 _ZPM_fpath=()
 
-typeset -a zsh_loaded_plugins
+typeset -ag zsh_loaded_plugins
 
-typeset -a _ZPM_plugins_for_source
-typeset -a _ZPM_plugins_for_async_source
-typeset -a _ZPM_plugins_no_source
+typeset -ag _ZPM_plugins_for_source
+typeset -ag _ZPM_plugins_for_async_source
+typeset -ag _ZPM_plugins_no_source
 
 function _ZPM_Post_Initialization(){
   _ZPM_TMP="$(mktemp)"
@@ -32,6 +32,7 @@ function _ZPM_Post_Initialization(){
   echo 'unset _comp_files' >> "$_ZPM_TMP"
   echo >> "$_ZPM_TMP"
   
+  echo '----' $_ZPM_plugins_for_source
   for plugin in ${_ZPM_plugins_for_source}; do
     local file="$_ZPM_file_for_source["$plugin"]"
     echo "zsh_loaded_plugins+=('$plugin')" >> "$_ZPM_TMP"
