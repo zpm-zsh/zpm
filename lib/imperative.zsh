@@ -32,7 +32,6 @@ function _ZPM_Post_Initialization(){
   echo 'unset _comp_files' >> "$_ZPM_TMP"
   echo >> "$_ZPM_TMP"
   
-  echo '----' $_ZPM_plugins_for_source
   for plugin in ${_ZPM_plugins_for_source}; do
     local file="$_ZPM_file_for_source["$plugin"]"
     echo "zsh_loaded_plugins+=('$plugin')" >> "$_ZPM_TMP"
