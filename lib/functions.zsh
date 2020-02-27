@@ -203,7 +203,7 @@ function _ZPM-upgrade(){
   done
   
   printf '%s\0' "${_Plugins_Upgrade_full[@]}" | \
-  xargs -0 -P32 -n1 "${_ZPM_DIR}/bin/_ZPM-plugin-helper" upgrade
+  _ZPM_DIR="$_ZPM_DIR" xargs -0 -P32 -n1 "${_ZPM_DIR}/bin/_ZPM-plugin-helper" upgrade
 }
 
 function _ZPM-get-plugin-file-path() {
