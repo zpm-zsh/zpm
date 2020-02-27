@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 
-typeset _ZPM_DIR=${ZPM_DIR:-"$HOME/.zpm"}
-typeset _ZPM_PLUGIN_DIR=${ZPM_PLUGIN_DIR:-"$HOME/.local/lib/zpm"}
+export _ZPM_DIR=${ZPM_DIR:-"$HOME/.zpm"}
+export _ZPM_PLUGIN_DIR=${ZPM_PLUGIN_DIR:-"$HOME/.local/lib/zpm"}
 
 typeset -ag zsh_loaded_plugins
 
