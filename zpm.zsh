@@ -1,18 +1,11 @@
 #!/usr/bin/env zsh
 
-typeset -A _ZPM_plugins_full
-_ZPM_plugins_full[zpm]="zpm"
+typeset _ZPM_DIR=${ZPM_DIR:-"$HOME/.zpm"}
+typeset _ZPM_PLUGIN_DIR=${ZPM_PLUGIN_DIR:-"$HOME/.local/lib/zpm"}
 
-typeset -A _ZPM_file_for_source
-typeset -A _ZPM_file_for_async_source
+typeset -ag zsh_loaded_plugins
 
 export ZPFX="${HOME}/.local"
-
-_ZPM_DIR=${ZPM_DIR:-"$HOME/.zpm"}
-export _ZPM_DIR
-
-_ZPM_PLUGIN_DIR=${ZPM_PLUGIN_DIR:-"$HOME/.local/lib/zpm"}
-export _ZPM_PLUGIN_DIR
 
 _ZPM_CACHE="${TMPDIR:-/tmp}/.zpm-cache-${USER}.zsh"
 _ZPM_CACHE_ASYNC="${TMPDIR:-/tmp}/.zpm-cache-async-${USER}.zsh"
@@ -20,7 +13,7 @@ _ZPM_CACHE_ASYNC="${TMPDIR:-/tmp}/.zpm-cache-async-${USER}.zsh"
 if [[ -f "${_ZPM_CACHE}" ]]; then
   source "${_ZPM_CACHE}"
 else
-  source "${_ZPM_DIR}/lib/functions.zsh"
-  source "${_ZPM_DIR}/lib/imperative.zsh"
-  source "${_ZPM_DIR}/lib/completion.zsh"
+  eval "$(<${_ZPM_DIR}/lib/functions.zsh)"
+  eval "$(<${_ZPM_DIR}/lib/imperative.zsh)"
+  eval "$(<${_ZPM_DIR}/lib/completion.zsh)"
 fi

@@ -1,21 +1,24 @@
 #!/usr/bin/env zsh
 
-_ZPM_PATH=""
-_ZPM_fpath=()
+typeset _ZPM_PATH=""
+typeset _ZPM_fpath=()
 
-typeset -ag zsh_loaded_plugins
+typeset -A _ZPM_plugins_full
+_ZPM_plugins_full[zpm]="zpm"
 
-typeset -ag _ZPM_plugins_for_source
-typeset -ag _ZPM_plugins_for_async_source
-typeset -ag _ZPM_plugins_no_source
+typeset -a _ZPM_plugins_for_source
+typeset -a _ZPM_plugins_for_async_source
+typeset -a _ZPM_plugins_no_source
 
-function _ZPM_Post_Initialization(){
+typeset -A _ZPM_file_for_source
+typeset -A _ZPM_file_for_async_source
+
+function _ZPM_Background_Initialization(){
   _ZPM_TMP="$(mktemp)"
   _ZPM_TMP_ASYNC="$(mktemp)"
   
-  echo "autoload -Uz add-zsh-hook" >> "$_ZPM_TMP"
-  echo "typeset -a zsh_loaded_plugins=('${(j:' ':)_ZPM_plugins_no_source}')" >> "$_ZPM_TMP"
-  echo "_ZPM_plugins_full+=('${(kvj:' ':)_ZPM_plugins_full}')" >> "$_ZPM_TMP"
+  echo "$(typeset -p _ZPM_plugins_no_source)" >> "$_ZPM_TMP"
+  echo "$(typeset -p _ZPM_plugins_full)" >> "$_ZPM_TMP"
   
   echo "export PATH=\"\${PATH}${_ZPM_PATH}\"" >> "$_ZPM_TMP"
   echo "fpath+=( '${(j:' ':)_ZPM_fpath}' )" >> "$_ZPM_TMP"
@@ -81,7 +84,13 @@ function _ZPM_Post_Initialization(){
   zcompile "${HOME}/.zshrc.local" 2>/dev/null
   zcompile "${_ZPM_DIR}/zpm.zsh" 2>/dev/null
   zcompile "${_ZPM_DIR}/lib/functions.zsh" 2>/dev/null
-  
+
+  add-zsh-hook -d background _ZPM_Background_Initialization
+}
+
+function _ZPM_Post_Initialization(){
+  add-zsh-hook background _ZPM_Background_Initialization
+
   compinit
   add-zsh-hook -d precmd _ZPM_Post_Initialization
 }
