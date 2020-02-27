@@ -17,6 +17,8 @@ function _ZPM_Background_Initialization(){
   _ZPM_TMP="$(mktemp)"
   _ZPM_TMP_ASYNC="$(mktemp)"
   
+  echo "$(typeset -p _ZPM_plugins_for_source)" >> "$_ZPM_TMP"
+  echo "$(typeset -p _ZPM_plugins_for_async_source)" >> "$_ZPM_TMP"
   echo "$(typeset -p _ZPM_plugins_no_source)" >> "$_ZPM_TMP"
   echo "$(typeset -p _ZPM_plugins_full)" >> "$_ZPM_TMP"
   
