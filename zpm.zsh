@@ -10,10 +10,12 @@ export ZPFX="${HOME}/.local"
 _ZPM_CACHE="${TMPDIR:-/tmp}/zsh-${UID}/cache/zpm-cache.zsh"
 _ZPM_CACHE_ASYNC="${TMPDIR:-/tmp}/zsh-${UID}/cache/zpm-cache-async.zsh"
 
-if [[ -f "${_ZPM_CACHE}" ]]; then
+if [[ -f "${_ZPM_CACHE}" && "$DEBUG" != "zpm"* ]]; then
   source "${_ZPM_CACHE}"
-else
-  eval "$(<${_ZPM_DIR}/lib/functions.zsh)"
-  eval "$(<${_ZPM_DIR}/lib/imperative.zsh)"
-  eval "$(<${_ZPM_DIR}/lib/completion.zsh)"
+  return
 fi
+
+eval "$(<${_ZPM_DIR}/lib/functions.zsh)"
+eval "$(<${_ZPM_DIR}/lib/imperative.zsh)"
+eval "$(<${_ZPM_DIR}/lib/completion.zsh)"
+

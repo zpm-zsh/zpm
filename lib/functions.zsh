@@ -95,7 +95,7 @@ function _ZPM-load-plugin() {
     if [[ "$1"  == *",fpath:"* ]]; then
       local zpm_fpath=${${1##*,fpath:}%%,*}
       local _local_path="${Plugin_path}/${zpm_fpath}"
-      _ZPM-log zpm:init:fpath "Add to \$fpath '${_local_path}'"
+      _ZPM-log zpm:init:fpath "Add to \$fpath '${_local_path:a}'"
       _ZPM-addfpath "${_local_path:a}"
     else
       for file in  "${Plugin_path}/_"*(N); do
@@ -170,7 +170,7 @@ function _ZPM-initialize-plugin() {
       _ZPM_plugins_full[$plugin_name]="$plugin"
       _ZPM-load-plugin "$plugin"
     else
-      _ZPM-log zpm:init:skip "Skip initialization '$1', plugin already loaded"
+      _ZPM-log zpm:init:skip "Skip initialization '$plugin_name', plugin already loaded"
     fi
   done
 }
