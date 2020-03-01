@@ -14,6 +14,8 @@ typeset -A _ZPM_file_for_source
 typeset -A _ZPM_file_for_async_source
 
 function _ZPM_Background_Initialization(){
+  mkdir -p "${_ZPM_CACHE:h}"
+
   _ZPM_TMP="$(mktemp)"
   _ZPM_TMP_ASYNC="$(mktemp)"
   
@@ -43,7 +45,7 @@ function _ZPM_Background_Initialization(){
   done
 
   echo '_ZPM_post_fn () {' >> "$_ZPM_TMP"
-  echo "  source '$_ZPM_TMP_ASYNC'" >> "$_ZPM_TMP"
+  echo "  source '$_ZPM_CACHE_ASYNC'" >> "$_ZPM_TMP"
   echo '  TMOUT=5' >> "$_ZPM_TMP"
   echo '  add-zsh-hook -d background _ZPM_post_fn' >> "$_ZPM_TMP"
   echo '}' >> "$_ZPM_TMP"
@@ -74,8 +76,8 @@ function _ZPM_Background_Initialization(){
   cat "${_ZPM_DIR}/lib/functions.zsh" >> "$_ZPM_TMP_ASYNC"
   cat "${_ZPM_DIR}/lib/completion.zsh" >> "$_ZPM_TMP_ASYNC"
 
-  cp "$_ZPM_TMP" "$_ZPM_CACHE"
-  cp "$_ZPM_TMP_ASYNC" "$_ZPM_CACHE_ASYNC"
+  mv "$_ZPM_TMP" "$_ZPM_CACHE"
+  mv "$_ZPM_TMP_ASYNC" "$_ZPM_CACHE_ASYNC"
   
   zcompile "$_ZPM_CACHE" 2>/dev/null
   zcompile "$_ZPM_CACHE_ASYNC" 2>/dev/null
@@ -91,6 +93,7 @@ function _ZPM_Post_Initialization(){
   add-zsh-hook background _ZPM_Background_Initialization
 
   compinit
+
   add-zsh-hook -d precmd _ZPM_Post_Initialization
 }
 
