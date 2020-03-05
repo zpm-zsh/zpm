@@ -17,7 +17,7 @@ done
 typeset -g _zpm_completions_plugins_loaded
 _zpm_completions_plugins_loaded=()
 for plugin ($zsh_loaded_plugins); do
-  _zpm_completions_plugins_loaded+=( $(_ZPM-get-plugin-name "$plugin") )
+  _zpm_completions_plugins_loaded+=( $(_ZPM_get_plugin_name "$plugin") )
 done
 
 typeset -g _zpm_completions_plugins_loadable
