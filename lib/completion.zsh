@@ -23,7 +23,7 @@ done
 typeset -g _zpm_completions_plugins_loadable
 _zpm_completions_plugins_loadable=($(
     echo ${_zpm_completions_plugins_local[@]} ${_zpm_completions_plugins_loaded[@]} |\
-    tr ' ' '\n' | sort | uniq -u
+      tr ' ' '\n' | sort | uniq -u
 ))
 
 typeset -g _zpm_completions_1st_arguments
@@ -52,40 +52,40 @@ _zpm_completions_if_args=(
   'ssh'
 )
 
-_zpm(){
-  
+function _zpm() {
+
   _arguments \
-  '*:: :->subcmds' && return 0
-  
+    '*:: :->subcmds' && return 0
+
   if (( CURRENT == 1 )); then
     _describe -t commands "zpm subcommand" _zpm_completions_1st_arguments_full
     return
   fi
-  
+
   if [[ "$words[1]" == 'clean' ]]; then
     return
   fi
-  
+
   if (( CURRENT > 1 )); then
     PRE=$((CURRENT - 1))
-    
+
     if [[                            \
         "$words[$PRE]" == "if"     ||\
         "$words[$PRE]" == "if-not"   \
       ]];then
-      _describe -t commands "zpm condition" _zpm_completions_if_args
-    elif ((${words[(I)load]})); then
-      _describe -t commands "zpm load" _zpm_completions_plugins_loadable
+        _describe -t commands "zpm condition" _zpm_completions_if_args
+      elif ((${words[(I)load]})); then
+        _describe -t commands "zpm load" _zpm_completions_plugins_loadable
     elif                          \
         ((${words[(I)u]}))      ||\
         ((${words[(I)up]}))     ||\
         ((${words[(I)upgrade]}))  \
-      ; then
-      _describe -t commands "zpm plugins" _zpm_completions_plugins_upgradable
-    else
-      _describe -t commands "zpm subcommand" _zpm_completions_1st_arguments
+        ; then
+        _describe -t commands "zpm plugins" _zpm_completions_plugins_upgradable
+      else
+        _describe -t commands "zpm subcommand" _zpm_completions_1st_arguments
+      fi
     fi
-  fi
-}
+  }
 
-compdef _zpm zpm
+  compdef _zpm zpm
