@@ -28,15 +28,15 @@ if [[ "$1" == "upgrade" ]]; then
   local status_string="${c[green]}${c_bold}Upgrade${c_reset} "
   
   if [[ "$Plugin_type" == 'zpm' ]]; then
-    _ZPM-log zpm:upgrade "Upgrade 'zpm'"
+    _ZPM_log zpm:upgrade "Upgrade 'zpm'"
     git --git-dir="${_ZPM_DIR}/.git/" --work-tree="${_ZPM_DIR}/" checkout "${_ZPM_DIR}/" </dev/null >/dev/null 2>/dev/null
     git --git-dir="${_ZPM_DIR}/.git/" --work-tree="${_ZPM_DIR}/" pull </dev/null >/dev/null 2>/dev/null
   elif [[ "$Plugin_type" == 'omz' ]]; then
-    _ZPM-log zpm:upgrade "Upgrade '${2}'"
+    _ZPM_log zpm:upgrade "Upgrade '${2}'"
     git --git-dir="${HOME}/.oh-my-zsh/.git/" --work-tree="${HOME}/.oh-my-zsh/" checkout "${HOME}/.oh-my-zsh/" </dev/null >/dev/null 2>/dev/null
     git --git-dir="${HOME}/.oh-my-zsh/.git/" --work-tree="${HOME}/.oh-my-zsh/" pull </dev/null >/dev/null 2>/dev/null
   else
-    _ZPM-log zpm:upgrade "Upgrade '${2}'"
+    _ZPM_log zpm:upgrade "Upgrade '${2}'"
     git --git-dir="${Plugin_path}/.git/" --work-tree="${Plugin_path}/" checkout "${Plugin_path}/" </dev/null >/dev/null 2>/dev/null
     git --git-dir="${Plugin_path}/.git/" --work-tree="${Plugin_path}/" pull </dev/null >/dev/null 2>/dev/null
   fi

@@ -8,7 +8,7 @@ function zpm() {
 
   if [[ "$1" == 'u' || "$1" == 'up' || "$1" == 'upgrade' ]]; then
     shift
-    _ZPM-upgrade "$@"
+    _ZPM_upgrade "$@"
     return 0
   fi
 
