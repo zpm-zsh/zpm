@@ -7,8 +7,9 @@ typeset -ag zsh_loaded_plugins
 
 export ZPFX="${HOME}/.local"
 
-_ZPM_CACHE="${TMPDIR:-/tmp}/zsh-${UID}/cache/zpm-cache.zsh"
-_ZPM_CACHE_ASYNC="${TMPDIR:-/tmp}/zsh-${UID}/cache/zpm-cache-async.zsh"
+_ZPM_CACHE_DIR="${TMPDIR:-/tmp}/zsh-${UID}"
+_ZPM_CACHE="${_ZPM_CACHE_DIR}/zpm-cache.zsh"
+_ZPM_CACHE_ASYNC="${_ZPM_CACHE_DIR}/zpm-cache-async.zsh"
 
 if [[ -f "${_ZPM_CACHE}" && "$DEBUG" != "zpm"* ]]; then
   source "${_ZPM_CACHE}"

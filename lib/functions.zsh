@@ -176,11 +176,8 @@ function _ZPM-initialize-plugin() {
 }
 
 function _ZPM_clean(){
-  rm -f                       \
-    "${_ZPM_CACHE}"           \
-    "${_ZPM_CACHE_ASYNC}"     \
-    "${_ZPM_CACHE}.zwc"       \
-    "${_ZPM_CACHE_ASYNC}.zwc" \
+  rm -rf                      \
+    "${_ZPM_CACHE_DIR}"       \
     "${HOME}/.zcompdump"      \
     "${HOME}/.zcompdump.zwc"  \
     2>/dev/null
