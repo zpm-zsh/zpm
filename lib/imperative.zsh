@@ -15,7 +15,6 @@ typeset -A _ZPM_file_for_async_source
 
 zpm zpm-zsh/helpers zpm-zsh/colors zpm-zsh/background
 
-
 function _ZPM_Background_Initialization() {
   mkdir -p "${_ZPM_CACHE:h}"
 
@@ -96,11 +95,13 @@ function _ZPM_Background_Initialization() {
   zcompile "${_ZPM_DIR}/lib/functions.zsh" 2>/dev/null
 
   compinit
+  TMOUT=5
 
   add-zsh-hook -d background _ZPM_Background_Initialization
 }
 
 if [[ -z "$ZPM_NO_ASYNC_HOOK" ]]; then
+  TMOUT=1
   add-zsh-hook background _ZPM_Background_Initialization
 else
   _ZPM_Background_Initialization
