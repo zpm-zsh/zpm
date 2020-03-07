@@ -5,10 +5,24 @@
 0="${${(M)0:#/*}:-$PWD/$0}"
 _ZPM_DIR=${0:h}
 
-export _ZPM_PLUGIN_DIR=${ZPM_PLUGIN_DIR:-"$HOME/.local/lib/zpm"}
 export ZPFX="${HOME}/.local"
 
+export _ZPM_PLUGIN_DIR=${ZPM_PLUGIN_DIR:-"$HOME/.local/lib/zpm"}
+
 typeset -ag zsh_loaded_plugins
+
+typeset _ZPM_PATH=""
+typeset _ZPM_fpath=()
+
+typeset -A _ZPM_plugins_full
+_ZPM_plugins_full[zpm]="zpm"
+
+typeset -a _ZPM_plugins_for_source
+typeset -a _ZPM_plugins_for_async_source
+typeset -a _ZPM_plugins_no_source
+
+typeset -A _ZPM_file_for_source
+typeset -A _ZPM_file_for_async_source
 
 _ZPM_CACHE_DIR="${TMPDIR:-/tmp}/zsh-${UID}"
 _ZPM_CACHE="${_ZPM_CACHE_DIR}/zpm-cache.zsh"

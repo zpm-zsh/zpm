@@ -1,18 +1,5 @@
 #!/usr/bin/env zsh
 
-typeset _ZPM_PATH=""
-typeset _ZPM_fpath=()
-
-typeset -A _ZPM_plugins_full
-_ZPM_plugins_full[zpm]="zpm"
-
-typeset -a _ZPM_plugins_for_source
-typeset -a _ZPM_plugins_for_async_source
-typeset -a _ZPM_plugins_no_source
-
-typeset -A _ZPM_file_for_source
-typeset -A _ZPM_file_for_async_source
-
 zpm zpm-zsh/helpers zpm-zsh/colors zpm-zsh/background
 
 function _ZPM_Background_Initialization() {
@@ -78,11 +65,10 @@ function _ZPM_Background_Initialization() {
 
   echo 'unset ZERO' >> "$_ZPM_TMP_ASYNC"
 
-  echo "zpm() {" >> "$_ZPM_TMP_ASYNC"
-  echo "  source ${_ZPM_DIR}/lib/functions.zsh" >> "$_ZPM_TMP_ASYNC"
-  echo "  source ${_ZPM_DIR}/lib/completion.zsh" >> "$_ZPM_TMP_ASYNC"
-  echo '  zpm $@'>> "$_ZPM_TMP_ASYNC"
-  echo "}">> "$_ZPM_TMP_ASYNC"
+
+  cat "${_ZPM_DIR}/lib/functions.zsh" >> "$_ZPM_TMP_ASYNC"
+  cat "${_ZPM_DIR}/lib/completion.zsh" >> "$_ZPM_TMP_ASYNC"
+
 
   mv "$_ZPM_TMP" "$_ZPM_CACHE"
   mv "$_ZPM_TMP_ASYNC" "$_ZPM_CACHE_ASYNC"
