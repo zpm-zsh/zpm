@@ -13,6 +13,8 @@ typeset -a _ZPM_plugins_no_source
 typeset -A _ZPM_file_for_source
 typeset -A _ZPM_file_for_async_source
 
+zpm zpm-zsh/helpers zpm-zsh/colors zpm-zsh/background
+
 
 function _ZPM_Background_Initialization() {
   mkdir -p "${_ZPM_CACHE:h}"
@@ -77,8 +79,11 @@ function _ZPM_Background_Initialization() {
 
   echo 'unset ZERO' >> "$_ZPM_TMP_ASYNC"
 
-  cat "${_ZPM_DIR}/lib/functions.zsh" >> "$_ZPM_TMP_ASYNC"
-  cat "${_ZPM_DIR}/lib/completion.zsh" >> "$_ZPM_TMP_ASYNC"
+  echo "zpm() {" >> "$_ZPM_TMP_ASYNC"
+  echo "  source ${_ZPM_DIR}/lib/functions.zsh" >> "$_ZPM_TMP_ASYNC"
+  echo "  source ${_ZPM_DIR}/lib/completion.zsh" >> "$_ZPM_TMP_ASYNC"
+  echo '  zpm $@'>> "$_ZPM_TMP_ASYNC"
+  echo "}">> "$_ZPM_TMP_ASYNC"
 
   mv "$_ZPM_TMP" "$_ZPM_CACHE"
   mv "$_ZPM_TMP_ASYNC" "$_ZPM_CACHE_ASYNC"
@@ -90,23 +95,16 @@ function _ZPM_Background_Initialization() {
   zcompile "${_ZPM_DIR}/zpm.zsh" 2>/dev/null
   zcompile "${_ZPM_DIR}/lib/functions.zsh" 2>/dev/null
 
+  compinit
+
   add-zsh-hook -d background _ZPM_Background_Initialization
 }
 
-function _ZPM_Post_Initialization() {
-  if [[ -z "$ZPM_NO_ASYNC_HOOK" ]]; then
-    add-zsh-hook background _ZPM_Background_Initialization
-  else
-    _ZPM_Background_Initialization
-  fi
-
-  compinit
-
-  add-zsh-hook -d precmd _ZPM_Post_Initialization
-}
-
-autoload -Uz add-zsh-hook
-add-zsh-hook precmd _ZPM_Post_Initialization
+if [[ -z "$ZPM_NO_ASYNC_HOOK" ]]; then
+  add-zsh-hook background _ZPM_Background_Initialization
+else
+  _ZPM_Background_Initialization
+fi
 
 autoload -Uz compinit
 local _comp_files=(${HOME}/.zcompdump(Nm-20))
@@ -116,5 +114,3 @@ else
   compinit -i
 fi
 unset _comp_files
-
-zpm zpm-zsh/helpers zpm-zsh/colors zpm-zsh/background
