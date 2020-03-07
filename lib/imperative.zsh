@@ -13,6 +13,7 @@ typeset -a _ZPM_plugins_no_source
 typeset -A _ZPM_file_for_source
 typeset -A _ZPM_file_for_async_source
 
+
 function _ZPM_Background_Initialization() {
   mkdir -p "${_ZPM_CACHE:h}"
 
@@ -58,10 +59,13 @@ function _ZPM_Background_Initialization() {
   echo 'TMOUT=1' >> "$_ZPM_TMP"
   echo >> "$_ZPM_TMP"
 
-  echo 'add-zsh-hook background _ZPM_post_fn' >> "$_ZPM_TMP"
-  echo >> "$_ZPM_TMP"
-
-  echo 'zpm () {}' >> "$_ZPM_TMP"
+  if [[ -z "$ZPM_NO_ASYNC_HOOK" ]]; then
+    echo 'add-zsh-hook background _ZPM_post_fn' >> "$_ZPM_TMP"
+    echo >> "$_ZPM_TMP"
+    echo 'zpm () {}' >> "$_ZPM_TMP"
+  else
+    echo '_ZPM_post_fn' >> "$_ZPM_TMP"
+  fi
 
   for plugin in ${_ZPM_plugins_for_async_source}; do
     local file="$_ZPM_file_for_async_source["$plugin"]"
@@ -90,7 +94,11 @@ function _ZPM_Background_Initialization() {
 }
 
 function _ZPM_Post_Initialization() {
-  add-zsh-hook background _ZPM_Background_Initialization
+  if [[ -z "$ZPM_NO_ASYNC_HOOK" ]]; then
+    add-zsh-hook background _ZPM_Background_Initialization
+  else
+    _ZPM_Background_Initialization
+  fi
 
   compinit
 

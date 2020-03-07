@@ -1,0 +1,19 @@
+#!/usr/bin/env zunit
+@test 'Example' {
+  load ../zpm
+
+  zpm a/b
+
+  OOO=123
+
+  echo $OOO -----
+
+  assert "$zsh_loaded_plugins" same_as "BBB"
+}
+
+
+@test 'Example2' {
+  echo $OOO   _____
+
+  assert "$zsh_loaded_plugins" same_as "BBB"
+}

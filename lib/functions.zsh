@@ -183,7 +183,7 @@ function _ZPM_clean() {
     2>/dev/null
 }
 
-function _ZPM_upgrade(){
+function _ZPM_upgrade() {
   typeset -a _Plugins_Upgrade=()
   typeset -a _Plugins_Upgrade_full=()
 
