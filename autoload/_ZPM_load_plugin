@@ -20,18 +20,19 @@ function _ZPM_load_plugin() {
   local _ZPM_local_fpath=true
 
   if [[ "$1"  == *",apply:"* ]]; then
-    local _ZPM_tag_str=${1##*,apply:}
+    local _ZPM_tag_str=${1##*,apply}
+    echo $_ZPM_tag_str
     _ZPM_tag_str=${_ZPM_tag_str%%\,*}
 
-    if [[ "$_ZPM_tag_str" != *'source'* ]]; then
+    if [[ "$_ZPM_tag_str" != *':source'* ]]; then
       _ZPM_local_source=false
     fi
 
-    if [[ "$_ZPM_tag_str" != *'path'* ]]; then
+    if [[ "$_ZPM_tag_str" != *':path'* ]]; then
       _ZPM_local_path=false
     fi
 
-    if [[ "$_ZPM_tag_str" != *'fpath'* ]]; then
+    if [[ "$_ZPM_tag_str" != *':fpath'* ]]; then
       _ZPM_local_fpath=false
     fi
   fi
