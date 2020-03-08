@@ -3,3 +3,6 @@
 
 export ZPM_NO_CACHE=yes
 export ZPM_NO_ASYNC_HOOK=yes
+
+export ZPM_PLUGIN_DIR="$(mktemp -d)"
+

@@ -1,19 +1,19 @@
 #!/usr/bin/env zunit
-@test 'Example' {
+@test 'Check Base Plugins' {
   load ../zpm
 
-  # zpm a/b
-
-  # OOO=123
-
-  # echo $OOO -----
-
-  assert "$zsh_loaded_plugins" same_as "BBB"
+  assert "$zsh_loaded_plugins" contains "zpm-zsh/colors"
+  assert "$zsh_loaded_plugins" contains "zpm-zsh/helpers"
+  assert "$zsh_loaded_plugins" contains "zpm-zsh/colors"
 }
 
 
-@test 'Example2' {
-  echo $OOO   _____
+@test 'Check Install Plugin' {
+  load ../zpm
 
-  assert "$zsh_loaded_plugins" same_as "BBB"
+  assert "$zsh_loaded_plugins" contains "zpm-zsh/empty"
+}
+
+@teardown {
+  rm -rf "$ZPM_PLUGIN_DIR"
 }
