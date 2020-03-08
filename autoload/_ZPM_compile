@@ -1,0 +1,26 @@
+#!/usr/bin/env zsh
+
+function _ZPM_compile() {
+  zcompile "$_ZPM_CACHE" 2>/dev/null
+  zcompile "$_ZPM_CACHE_ASYNC" 2>/dev/null
+  zcompile "${HOME}/.zshrc" 2>/dev/null
+  zcompile "${HOME}/.zshrc.local" 2>/dev/null
+  zcompile "${_ZPM_DIR}/zpm.zsh" 2>/dev/null
+  zcompile "${_ZPM_DIR}/lib/functions.zsh" 2>/dev/null
+
+  zcompile "${_ZPM_DIR}autoload/_ZPM_addfpath" 2>/dev/null
+  zcompile "${_ZPM_DIR}autoload/_ZPM_addpath" 2>/dev/null
+  zcompile "${_ZPM_DIR}autoload/_ZPM_Background_Initialization" 2>/dev/null
+  zcompile "${_ZPM_DIR}autoload/_ZPM_clean" 2>/dev/null
+  zcompile "${_ZPM_DIR}autoload/_ZPM_get_plugin_basename" 2>/dev/null
+  zcompile "${_ZPM_DIR}autoload/_ZPM_get_plugin_file_path" 2>/dev/null
+  zcompile "${_ZPM_DIR}autoload/_ZPM_get_plugin_link" 2>/dev/null
+  zcompile "${_ZPM_DIR}autoload/_ZPM_get_plugin_name" 2>/dev/null
+  zcompile "${_ZPM_DIR}autoload/_ZPM_get_plugin_path" 2>/dev/null
+  zcompile "${_ZPM_DIR}autoload/_ZPM_get_plugin_type" 2>/dev/null
+  zcompile "${_ZPM_DIR}autoload/_ZPM_initialize_plugin" 2>/dev/null
+  zcompile "${_ZPM_DIR}autoload/_ZPM_load_plugin" 2>/dev/null
+  zcompile "${_ZPM_DIR}autoload/_ZPM_log" 2>/dev/null
+  zcompile "${_ZPM_DIR}autoload/_ZPM_upgrade" 2>/dev/null
+  zcompile "${_ZPM_DIR}autoload/_ZPM_compile" 2>/dev/null
+}

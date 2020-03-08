@@ -1,6 +1,7 @@
 #!/usr/bin/env zsh
 
 function _ZPM_Background_Initialization() {
+  autoload -Uz _ZPM_compile
   mkdir -p "${_ZPM_CACHE:h}"
 
   _ZPM_TMP="$(mktemp)"
@@ -69,12 +70,7 @@ function _ZPM_Background_Initialization() {
   mv "$_ZPM_TMP" "$_ZPM_CACHE"
   mv "$_ZPM_TMP_ASYNC" "$_ZPM_CACHE_ASYNC"
 
-  zcompile "$_ZPM_CACHE" 2>/dev/null
-  zcompile "$_ZPM_CACHE_ASYNC" 2>/dev/null
-  zcompile "${HOME}/.zshrc" 2>/dev/null
-  zcompile "${HOME}/.zshrc.local" 2>/dev/null
-  zcompile "${_ZPM_DIR}/zpm.zsh" 2>/dev/null
-  zcompile "${_ZPM_DIR}/lib/functions.zsh" 2>/dev/null
+  _ZPM_compile
 
   compinit
   TMOUT=5
