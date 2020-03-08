@@ -80,10 +80,10 @@ function _ZPM_load_plugin() {
 
     if [[ -n "$_ZPM_plugin_file_path" ]]; then
       if [[ "$_ZPM_local_async" == "true" ]]; then
-        _ZPM_log zpm:init:source "Source '${_ZPM_plugin_file_path}', async, inline"
+        _ZPM_log zpm:init:source "Source '${_ZPM_plugin_file_path}', async"
         _ZPM_async_source "${Plugin_name}" "${_ZPM_plugin_file_path}"
       else
-        _ZPM_log zpm:init:source "Source '${_ZPM_plugin_file_path}', sync, inline"
+        _ZPM_log zpm:init:source "Source '${_ZPM_plugin_file_path}', sync"
         _ZPM_source "${Plugin_name}" "${_ZPM_plugin_file_path}"
       fi
     else
