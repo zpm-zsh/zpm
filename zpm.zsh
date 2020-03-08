@@ -32,11 +32,7 @@ _ZPM_CACHE_ASYNC="${_ZPM_CACHE_DIR}/zpm-cache-async.zsh"
 if [[ -f "${_ZPM_CACHE}" && -z "$ZPM_NO_CACHE"  ]]; then
   source "${_ZPM_CACHE}"
 else
-
   eval "$(<${_ZPM_DIR}/lib/functions.zsh)"
-  
   eval "$(<${_ZPM_DIR}/lib/imperative.zsh)"
-  
   eval "$(<${_ZPM_DIR}/lib/completion.zsh)"
-  
 fi

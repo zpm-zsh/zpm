@@ -1,6 +1,5 @@
 #!/usr/bin/env zsh
 
-
 autoload -Uz compinit
 local _comp_files=(${HOME}/.zcompdump(Nm-20))
 if (( $#_comp_files )); then
@@ -19,4 +18,3 @@ if [[ -z "$ZPM_NO_ASYNC_HOOK" ]]; then
 else
   _ZPM_Background_Initialization
 fi
-
