@@ -4,16 +4,16 @@
 
   # zpm a/b
 
-  OOO=123
+  # OOO=123
 
-  echo $OOO -----
+  # echo $OOO -----
 
   assert "$zsh_loaded_plugins" same_as "BBB"
 }
 
 
-# @test 'Example2' {
-#   echo $OOO   _____
+@test 'Example2' {
+  echo $OOO   _____
 
-#   assert "$zsh_loaded_plugins" same_as "BBB"
-# }
+  assert "$zsh_loaded_plugins" same_as "BBB"
+}

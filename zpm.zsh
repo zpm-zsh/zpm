@@ -4,6 +4,7 @@
 0="${${ZERO:-${0:#$ZSH_ARGZERO}}:-${(%):-%N}}"
 0="${${(M)0:#/*}:-$PWD/$0}"
 _ZPM_DIR=${0:h}
+fpath+=("${0:h}/autoload")
 
 export ZPFX="${HOME}/.local"
 
@@ -30,9 +31,12 @@ _ZPM_CACHE_ASYNC="${_ZPM_CACHE_DIR}/zpm-cache-async.zsh"
 
 if [[ -f "${_ZPM_CACHE}" && -z "$ZPM_NO_CACHE"  ]]; then
   source "${_ZPM_CACHE}"
-  return
-fi
+else
 
-eval "$(<${_ZPM_DIR}/lib/functions.zsh)"
-eval "$(<${_ZPM_DIR}/lib/imperative.zsh)"
-eval "$(<${_ZPM_DIR}/lib/completion.zsh)"
+  eval "$(<${_ZPM_DIR}/lib/functions.zsh)"
+  
+  eval "$(<${_ZPM_DIR}/lib/imperative.zsh)"
+  
+  eval "$(<${_ZPM_DIR}/lib/completion.zsh)"
+  
+fi

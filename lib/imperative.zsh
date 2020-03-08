@@ -1,6 +1,5 @@
 #!/usr/bin/env zsh
 
-fpath+=("${0:h}/autoload")
 
 autoload -Uz compinit
 local _comp_files=(${HOME}/.zcompdump(Nm-20))
@@ -20,3 +19,4 @@ if [[ -z "$ZPM_NO_ASYNC_HOOK" ]]; then
 else
   _ZPM_Background_Initialization
 fi
+

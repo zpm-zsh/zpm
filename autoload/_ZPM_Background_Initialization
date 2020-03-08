@@ -10,7 +10,7 @@ function _ZPM_Background_Initialization() {
   echo "$(typeset -p _ZPM_plugins_full)" >> "$_ZPM_TMP"
 
   echo "export PATH=\"\${PATH}${_ZPM_PATH}\"" >> "$_ZPM_TMP"
-  echo "fpath+=( '${_ZPM_DIR}/autoload' '${(j:' ':)_ZPM_fpath}' )" >> "$_ZPM_TMP"
+  echo "fpath+=( '${(j:' ':)_ZPM_fpath}' )" >> "$_ZPM_TMP"
   echo >> "$_ZPM_TMP"
 
   echo 'autoload -Uz compinit' >> "$_ZPM_TMP"
