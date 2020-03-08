@@ -1,0 +1,31 @@
+#!/usr/bin/env zsh
+
+function _ZPM_initialize_plugin() {
+  autoload -Uz _ZPM_load_plugin _ZPM_get_plugin_path _ZPM_log _ZPM_get_plugin_name _ZPM_addpath _ZPM_addfpath
+  # Check if plugin isn't loaded
+  declare -a _Plugins_Install
+
+  for plugin ("$@"); do
+    local Plugin_name=$(_ZPM_get_plugin_name "$plugin")
+    local Plugin_path=$(_ZPM_get_plugin_path "$Plugin_name")
+
+    if [[ ! -e $Plugin_path ]]; then
+      _Plugins_Install+=("$plugin")
+    fi
+  done
+
+  if [[ -n "$_Plugins_Install[@]" ]]; then;
+    printf '%s\0' "${_Plugins_Install[@]}" | \
+      xargs -0 -P16 -n1 "${_ZPM_DIR}/bin/_ZPM-plugin-helper" install
+  fi
+
+  for plugin ($@); do
+    local plugin_name=$(_ZPM_get_plugin_name "$plugin")
+    if [[ " ${zsh_loaded_plugins[*]} " != *"$plugin_name"* ]]; then
+      _ZPM_plugins_full[$plugin_name]="$plugin"
+      _ZPM_load_plugin "$plugin"
+    else
+      _ZPM_log zpm:init:skip "Skip initialization '$plugin_name', plugin already loaded"
+    fi
+  done
+}

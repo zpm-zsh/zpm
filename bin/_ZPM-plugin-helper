@@ -4,6 +4,8 @@
 0="${${ZERO:-${0:#$ZSH_ARGZERO}}:-${(%):-%N}}"
 0="${${(M)0:#/*}:-$PWD/$0}"
 
+fpath+=("${0:h}/../autoload")
+
 source ${0:h}/../lib/functions.zsh
 
 if [[ "$CLICOLOR" != "0" ]]; then
@@ -21,6 +23,8 @@ if [[ "$CLICOLOR" != "0" ]]; then
   c[cyan]="[36m"
   c[grey]="[37m"
 fi
+
+autoload -Uz _ZPM_get_plugin_name _ZPM_get_plugin_type _ZPM_get_plugin_basename _ZPM_get_plugin_path _ZPM_get_plugin_link _ZPM_log
 
 local Plugin_name=$(_ZPM_get_plugin_name "$2")
 local Plugin_type=$(_ZPM_get_plugin_type "$2")

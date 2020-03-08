@@ -1,0 +1,5 @@
+#!/usr/bin/env zsh
+
+function _ZPM_get_plugin_name() {
+  echo "${1%%,*}"
+}

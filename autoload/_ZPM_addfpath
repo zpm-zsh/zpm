@@ -1,0 +1,8 @@
+#!/usr/bin/env zsh
+
+function _ZPM_addfpath() {
+  _ZPM_fpath=( $_ZPM_fpath "${1:A}" )
+  if [[ ":$FPATH:" != *:"$1":* ]]; then
+    fpath=( $fpath "${1}" )
+  fi
+}

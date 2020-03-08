@@ -1,0 +1,15 @@
+#!/usr/bin/env zsh
+
+function _ZPM_get_plugin_basename() {
+  local plugin_name="$1"
+
+  plugin_name=${plugin_name##*\/}
+
+  plugin_name=${plugin_name##oh-my-zsh-}
+  plugin_name=${plugin_name##zsh-}
+  plugin_name=${plugin_name%%.zsh}
+  plugin_name=${plugin_name%%-zsh}
+  plugin_name=${plugin_name%%.plugin}
+
+  echo "${plugin_name}"
+}

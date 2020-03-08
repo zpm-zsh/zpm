@@ -1,0 +1,96 @@
+#!/usr/bin/env zsh
+
+function _ZPM_load_plugin() {
+  autoload -Uz _ZPM_get_plugin_basename _ZPM_get_plugin_file_path
+  local Plugin_name=$(_ZPM_get_plugin_name "$1")
+  local Plugin_basename=$(_ZPM_get_plugin_basename "$Plugin_name")
+  local Plugin_path=$(_ZPM_get_plugin_path "$Plugin_name")
+
+
+  if [[ ! -e "${Plugin_path}" ]]; then
+    _ZPM_log zpm:init:skip "Skip initialization of '${1}', plugin directory not found '${Plugin_path}'"
+    return -1
+  fi
+
+  _ZPM_log zpm:init "Initialize '${Plugin_name}'"
+
+  local _ZPM_local_source=true
+  local _ZPM_local_async=false
+  local _ZPM_local_path=true
+  local _ZPM_local_fpath=true
+
+  if [[ "$1"  == *",apply:"* ]]; then
+    local _ZPM_tag_str=${1##*,apply:}
+    _ZPM_tag_str=${_ZPM_tag_str%%\,*}
+
+    if [[ "$_ZPM_tag_str" != *'source'* ]]; then
+      _ZPM_local_source=false
+    fi
+
+    if [[ "$_ZPM_tag_str" != *'path'* ]]; then
+      _ZPM_local_path=false
+    fi
+
+    if [[ "$_ZPM_tag_str" != *'fpath'* ]]; then
+      _ZPM_local_fpath=false
+    fi
+  fi
+
+  if [[ "$1"  == *",async"* ]]; then
+    _ZPM_local_async=true
+  fi
+
+  if [[ "$_ZPM_local_fpath"  == "true" ]]; then
+    if [[ "$1"  == *",fpath:"* ]]; then
+      local zpm_fpath=${${1##*,fpath:}%%,*}
+      local _local_path="${Plugin_path}/${zpm_fpath}"
+      _ZPM_log zpm:init:fpath "Add to \$fpath '${_local_path:a}'"
+      _ZPM_addfpath "${_local_path:a}"
+    else
+      for file in  "${Plugin_path}/_"*(N); do
+        _ZPM_log zpm:init:fpath "Add to \$fpath '${Plugin_path:a}'"
+        _ZPM_addfpath "${Plugin_path:a}"
+        break;
+      done
+    fi
+  fi
+
+  if [[ "$_ZPM_local_path"  == "true" ]]; then
+    if [[ "$1"  == *",path:"* ]]; then
+      local zpm_path=${${1##*,path:}%%,*}
+      local _local_path="${Plugin_path}/${zpm_path}"
+      _ZPM_log zpm:init:path "Add to \$PATH '${_local_path:a}'"
+      _ZPM_addpath "${_local_path:a}"
+    elif [[ -d "${Plugin_path}/bin" ]]; then
+      _ZPM_log zpm:init:path "Add to \$PATH '${Plugin_path:a}/bin'"
+      _ZPM_addpath "${Plugin_path:a}/bin"
+    fi
+  fi
+
+  if [[ "$_ZPM_local_source"  == "true" ]]; then
+    if [[ "$1"  == *",source:"* ]]; then
+      _ZPM_plugin_file_path=$(
+        _ZPM_get_plugin_file_path "${Plugin_path}" "${Plugin_basename}" "${${1##*,source:}%%,*}"
+      )
+    else
+      _ZPM_plugin_file_path=$(
+        _ZPM_get_plugin_file_path "${Plugin_path}" "${Plugin_basename}"
+      )
+    fi
+
+    if [[ -n "$_ZPM_plugin_file_path" ]]; then
+      if [[ "$_ZPM_local_async" == "true" ]]; then
+        _ZPM_log zpm:init:source "Source '${_ZPM_plugin_file_path}', async, inline"
+        _ZPM_async_source "${Plugin_name}" "${_ZPM_plugin_file_path}"
+      else
+        _ZPM_log zpm:init:source "Source '${_ZPM_plugin_file_path}', sync, inline"
+        _ZPM_source "${Plugin_name}" "${_ZPM_plugin_file_path}"
+      fi
+    else
+      _ZPM_no_source "${Plugin_name}"
+    fi
+  else
+    _ZPM_no_source "${Plugin_name}"
+  fi
+
+}

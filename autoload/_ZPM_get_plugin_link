@@ -1,0 +1,33 @@
+#!/usr/bin/env zsh
+
+function _ZPM_get_plugin_link() {
+  local plugin_name="$1"
+  local plugin_type="$2"
+
+  if [[ "$plugin_type" == 'github' ]]; then
+    echo "https://github.com/${plugin_name}"
+    return 0
+  fi
+
+  if [[ "$plugin_type" == 'gitlab' ]]; then
+    echo "https://gitlab.com/${plugin_name}"
+    return 0
+  fi
+
+  if [[ "$plugin_type" == 'bitbucket' ]]; then
+    echo "https://bitbucket.com/${plugin_name}"
+    return 0
+  fi
+
+  if [[ "$plugin_type" == 'zpm' ]]; then
+    echo "https://github.com/zpm-zsh/zpm"
+    return 0
+  fi
+
+  if [[ "$plugin_type" == 'omz' ]]; then
+    echo "https://github.com/robbyrussell/oh-my-zsh/tree/master/plugins/${plugin_name}"
+    return 0
+  fi
+
+  echo
+}

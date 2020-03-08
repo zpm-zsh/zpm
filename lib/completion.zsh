@@ -1,5 +1,7 @@
 #!/usr/bin/env zsh
 
+autoload -Uz _ZPM_get_plugin_name 
+
 typeset -g _zpm_completions_plugins_upgradable
 _zpm_completions_plugins_upgradable=(zpm)
 for plugin in $zsh_loaded_plugins; do

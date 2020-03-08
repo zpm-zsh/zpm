@@ -2,7 +2,7 @@
 @test 'Example' {
   load ../zpm
 
-  zpm a/b
+  # zpm a/b
 
   OOO=123
 
@@ -12,8 +12,8 @@
 }
 
 
-@test 'Example2' {
-  echo $OOO   _____
+# @test 'Example2' {
+#   echo $OOO   _____
 
-  assert "$zsh_loaded_plugins" same_as "BBB"
-}
+#   assert "$zsh_loaded_plugins" same_as "BBB"
+# }
