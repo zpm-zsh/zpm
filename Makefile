@@ -22,6 +22,7 @@ all:
 
 
 test:
+	zsh tests/base.test.zsh
 
 
-.PHONY: all 
+.PHONY: all test

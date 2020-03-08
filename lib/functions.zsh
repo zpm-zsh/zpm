@@ -76,4 +76,3 @@ function _ZPM_no_source() {
   zsh_loaded_plugins+=("$1")
   _ZPM_plugins_no_source+=("$1")
 }
-
