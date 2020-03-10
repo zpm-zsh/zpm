@@ -21,7 +21,6 @@ function _ZPM_load_plugin() {
 
   if [[ "$1"  == *",apply:"* ]]; then
     local _ZPM_tag_str=${1##*,apply}
-    echo $_ZPM_tag_str
     _ZPM_tag_str=${_ZPM_tag_str%%\,*}
 
     if [[ "$_ZPM_tag_str" != *':source'* ]]; then
