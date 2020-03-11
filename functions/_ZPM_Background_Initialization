@@ -39,10 +39,6 @@ function _ZPM_Background_Initialization() {
   echo '}' >> "$_ZPM_TMP"
   echo >> "$_ZPM_TMP"
 
-  echo 'typeset -aU path' >> "$_ZPM_TMP"
-  echo 'export PATH' >> "$_ZPM_TMP"
-  echo >> "$_ZPM_TMP"
-
   echo 'TMOUT=1' >> "$_ZPM_TMP"
   echo >> "$_ZPM_TMP"
 

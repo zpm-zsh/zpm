@@ -91,5 +91,4 @@ function _ZPM_load_plugin() {
   else
     _ZPM_no_source "${Plugin_name}"
   fi
-
 }
