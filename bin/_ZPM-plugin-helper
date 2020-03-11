@@ -6,8 +6,6 @@
 
 fpath+=("${0:h}/../functions")
 
-source ${0:h}/../lib/functions.zsh
-
 if [[ "$CLICOLOR" != "0" ]]; then
   typeset -gA c
   
