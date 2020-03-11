@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 
 function _ZPM_addpath() {
-  _ZPM_PATH="${_ZPM_PATH}:${1:A}"
+  _ZPM_PATH="${_ZPM_PATH}:${1}"
   if [[ ":$PATH:" != *:"$1":* ]]; then
     PATH="$PATH:${1}"
   fi
