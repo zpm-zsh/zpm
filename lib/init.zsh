@@ -13,8 +13,6 @@ export PMSPEC="0fiPs"
 
 export ZPFX="${HOME}/.local"
 
-export _ZPM_PLUGIN_DIR=${ZPM_PLUGIN_DIR:-"$HOME/.local/lib/zpm"}
-
 typeset -ag zsh_loaded_plugins
 
 typeset _ZPM_PATH=""
