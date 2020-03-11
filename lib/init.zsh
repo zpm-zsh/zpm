@@ -1,4 +1,16 @@
 #!/usr/bin/env zsh
+
+# Zsh Plugin Standard compatibility
+# 0 – the plugin manager provides the ZERO parameter,
+# f - … supports the functions subdirectory,
+# u - … the unload function,
+# U - … the @zsh-plugin-run-on-unload call,
+# p – … the @zsh-plugin-run-on-update call,
+# i – … the zsh_loaded_plugins activity indicator,
+# P – … the ZPFX global parameter,
+# s – … the PMSPEC global parameter itself (i.e.: should be always present).
+export PMSPEC="0fiPs"
+
 export ZPFX="${HOME}/.local"
 
 export _ZPM_PLUGIN_DIR=${ZPM_PLUGIN_DIR:-"$HOME/.local/lib/zpm"}
