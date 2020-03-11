@@ -29,6 +29,25 @@ _ZPM_CACHE_DIR="${TMPDIR:-/tmp}/zsh-${UID}"
 _ZPM_CACHE="${_ZPM_CACHE_DIR}/zpm-cache.zsh"
 _ZPM_CACHE_ASYNC="${_ZPM_CACHE_DIR}/zpm-cache-async.zsh"
 
+autoload -Uz                   \
+compinit                       \
+_ZPM_addfpath                  \
+_ZPM_addpath                   \
+_ZPM_Background_Initialization \
+_ZPM_clean                     \
+_ZPM_compile                   \
+_ZPM_get_plugin_basename       \
+_ZPM_get_plugin_file_path      \
+_ZPM_get_plugin_link           \
+_ZPM_get_plugin_name           \
+_ZPM_get_plugin_path           \
+_ZPM_get_plugin_type           \
+_ZPM_initialize_plugin         \
+_ZPM_load_plugin               \
+_ZPM_log                       \
+_ZPM_upgrade                   \
+
+
 if [[ -f "${_ZPM_CACHE}" && -z "$ZPM_NO_CACHE"  ]]; then
   source "${_ZPM_CACHE}"
 else

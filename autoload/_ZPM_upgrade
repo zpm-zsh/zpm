@@ -1,8 +1,6 @@
 #!/usr/bin/env zsh
 
 function _ZPM_upgrade() {
-  autoload -Uz _ZPM_clean
-
   typeset -a _Plugins_Upgrade=()
   typeset -a _Plugins_Upgrade_full=()
 

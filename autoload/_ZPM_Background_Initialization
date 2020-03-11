@@ -1,7 +1,6 @@
 #!/usr/bin/env zsh
 
 function _ZPM_Background_Initialization() {
-  autoload -Uz _ZPM_compile
   mkdir -p "${_ZPM_CACHE:h}"
 
   _ZPM_TMP="$(mktemp)"
@@ -13,7 +12,6 @@ function _ZPM_Background_Initialization() {
   echo "fpath+=( '${(j:' ':)_ZPM_fpath}' )" >> "$_ZPM_TMP"
   echo >> "$_ZPM_TMP"
 
-  echo 'autoload -Uz compinit' >> "$_ZPM_TMP"
   echo 'local _comp_files' >> "$_ZPM_TMP"
   echo '_comp_files=(${HOME}/.zcompdump(Nm-20))' >> "$_ZPM_TMP"
   echo 'if (( $#_comp_files )); then' >> "$_ZPM_TMP"

@@ -3,14 +3,12 @@
 function zpm() {
   if [[ "$1" == 'c' || "$1" == 'cl' || "$1" == 'clean' ]]; then
     shift
-    autoload -Uz _ZPM_clean
     _ZPM_clean
     return 0
   fi
 
   if [[ "$1" == 'u' || "$1" == 'up' || "$1" == 'upgrade' ]]; then
     shift
-    autoload -Uz _ZPM_upgrade
     _ZPM_upgrade "$@"
     return 0
   fi
@@ -35,7 +33,6 @@ function zpm() {
     return 0
   fi
 
-  autoload -Uz _ZPM_initialize_plugin
   _ZPM_initialize_plugin "$@"
 }
 
