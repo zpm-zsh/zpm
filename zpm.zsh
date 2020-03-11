@@ -4,53 +4,11 @@
 0="${${ZERO:-${0:#$ZSH_ARGZERO}}:-${(%):-%N}}"
 0="${${(M)0:#/*}:-$PWD/$0}"
 _ZPM_DIR=${0:h}
-fpath+=("${0:h}/autoload")
-
-export ZPFX="${HOME}/.local"
-
-export _ZPM_PLUGIN_DIR=${ZPM_PLUGIN_DIR:-"$HOME/.local/lib/zpm"}
-
-typeset -ag zsh_loaded_plugins
-
-typeset _ZPM_PATH=""
-typeset _ZPM_fpath=()
-
-typeset -A _ZPM_plugins_full
-_ZPM_plugins_full[zpm]="zpm"
-
-typeset -a _ZPM_plugins_for_source
-typeset -a _ZPM_plugins_for_async_source
-typeset -a _ZPM_plugins_no_source
-
-typeset -A _ZPM_file_for_source
-typeset -A _ZPM_file_for_async_source
-
-_ZPM_CACHE_DIR="${TMPDIR:-/tmp}/zsh-${UID}"
-_ZPM_CACHE="${_ZPM_CACHE_DIR}/zpm-cache.zsh"
-_ZPM_CACHE_ASYNC="${_ZPM_CACHE_DIR}/zpm-cache-async.zsh"
-
-autoload -Uz                   \
-compinit                       \
-_ZPM_addfpath                  \
-_ZPM_addpath                   \
-_ZPM_Background_Initialization \
-_ZPM_clean                     \
-_ZPM_compile                   \
-_ZPM_get_plugin_basename       \
-_ZPM_get_plugin_file_path      \
-_ZPM_get_plugin_link           \
-_ZPM_get_plugin_name           \
-_ZPM_get_plugin_path           \
-_ZPM_get_plugin_type           \
-_ZPM_initialize_plugin         \
-_ZPM_load_plugin               \
-_ZPM_log                       \
-_ZPM_upgrade                   \
-
 
 if [[ -f "${_ZPM_CACHE}" && -z "$ZPM_NO_CACHE"  ]]; then
   source "${_ZPM_CACHE}"
 else
+  eval "$(<${_ZPM_DIR}/lib/init.zsh)"
   eval "$(<${_ZPM_DIR}/lib/functions.zsh)"
   eval "$(<${_ZPM_DIR}/lib/imperative.zsh)"
   eval "$(<${_ZPM_DIR}/lib/completion.zsh)"
