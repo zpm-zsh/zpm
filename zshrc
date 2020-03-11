@@ -1,5 +1,4 @@
 #!/usr/bin/env zsh
-
 if [[ ! -f ~/.zpm/zpm.zsh ]]; then
   git clone --depth 1 https://github.com/zpm-zsh/zpm ~/.zpm
 fi

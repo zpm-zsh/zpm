@@ -5,6 +5,10 @@
 0="${${(M)0:#/*}:-$PWD/$0}"
 _ZPM_DIR=${0:h}
 
+_ZPM_CACHE_DIR="${TMPDIR:-/tmp}/zsh-${UID}"
+_ZPM_CACHE="${_ZPM_CACHE_DIR}/zpm-cache.zsh"
+_ZPM_CACHE_ASYNC="${_ZPM_CACHE_DIR}/zpm-cache-async.zsh"
+
 if [[ -f "${_ZPM_CACHE}" && -z "$ZPM_NO_CACHE"  ]]; then
   source "${_ZPM_CACHE}"
 else

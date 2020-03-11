@@ -30,11 +30,7 @@ typeset -a _ZPM_plugins_no_source
 typeset -A _ZPM_file_for_source
 typeset -A _ZPM_file_for_async_source
 
-_ZPM_CACHE_DIR="${TMPDIR:-/tmp}/zsh-${UID}"
-_ZPM_CACHE="${_ZPM_CACHE_DIR}/zpm-cache.zsh"
-_ZPM_CACHE_ASYNC="${_ZPM_CACHE_DIR}/zpm-cache-async.zsh"
-
-fpath+=("${0:h}/functions")
+fpath+=("${_ZPM_DIR}/functions")
 
 autoload -Uz                     \
   compinit                       \
@@ -53,3 +49,4 @@ autoload -Uz                     \
   _ZPM_load_plugin               \
   _ZPM_log                       \
   _ZPM_upgrade                   \
+
