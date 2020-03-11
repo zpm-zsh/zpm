@@ -1,7 +1,7 @@
 #compdef zpm
 #autoload
 
-autoload -Uz _ZPM_get_plugin_name 
+autoload -Uz _ZPM_get_plugin_name
 
 typeset -g _zpm_completions_plugins_local=()
 for plugin in "$_ZPM_PLUGIN_DIR/"*; do
@@ -36,36 +36,29 @@ _zpm_completions_if_args=(
   'ssh'
 )
 
-  _arguments \
-    '*:: :->subcmds' && return 0
+_arguments \
+  '*:: :->subcmds' && return 0
 
-  if (( CURRENT == 1 )); then
-    _describe -t commands "zpm subcommand" _zpm_completions_1st_arguments_full
-    return
+if (( CURRENT == 1 )); then
+  _describe -t commands "zpm subcommand" _zpm_completions_1st_arguments_full
+  return
+fi
+
+if [[ "$words[1]" == 'clean' ]]; then
+  return
+fi
+
+if (( CURRENT > 1 )); then
+  PRE=$((CURRENT - 1))
+  if [[ "$words[$PRE]" == "if" || "$words[$PRE]" == "if-not" ]]; then
+    _describe -t commands "zpm condition" _zpm_completions_if_args
+  elif ((${words[(I)load]})); then
+    _describe -t commands "zpm load" _zpm_completions_plugins_loadable
+  elif ((${words[(I)u]})) || ((${words[(I)up]})) || ((${words[(I)upgrade]})); then
+    _describe -t commands "zpm plugins" zsh_loaded_plugins
+  else
+    _describe -t commands "zpm subcommand" _zpm_completions_1st_arguments
   fi
+fi
 
-  if [[ "$words[1]" == 'clean' ]]; then
-    return
-  fi
-
-  if (( CURRENT > 1 )); then
-    PRE=$((CURRENT - 1))
-
-    if [[                            \
-        "$words[$PRE]" == "if"     ||\
-        "$words[$PRE]" == "if-not"   \
-      ]];then
-        _describe -t commands "zpm condition" _zpm_completions_if_args
-      elif ((${words[(I)load]})); then
-        _describe -t commands "zpm load" _zpm_completions_plugins_loadable
-    elif                          \
-        ((${words[(I)u]}))      ||\
-        ((${words[(I)up]}))     ||\
-        ((${words[(I)upgrade]}))  \
-        ; then
-        _describe -t commands "zpm plugins" zsh_loaded_plugins
-      else
-        _describe -t commands "zpm subcommand" _zpm_completions_1st_arguments
-      fi
-    fi
 return
