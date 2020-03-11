@@ -17,5 +17,4 @@ else
   eval "$(<${_ZPM_DIR}/lib/init.zsh)"
   eval "$(<${_ZPM_DIR}/lib/functions.zsh)"
   eval "$(<${_ZPM_DIR}/lib/imperative.zsh)"
-  eval "$(<${_ZPM_DIR}/lib/completion.zsh)"
 fi
