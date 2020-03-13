@@ -13,7 +13,7 @@ zpm ( ZSH Plugin Manager ) is a plugin manager for ZSH who combines the imperati
 
 | Plugin manager | zpm, first run | zpm with cache | zplug | zplugin | zplugin, with `light` |
 |----------------|----------------|----------------|-------|---------|-----------------------|
-| Start time     | 0.387          | 0.152          | 0.698 | 0.709   | 0.381                 |
+| Start time     | 0.416          | 0.056          | 0.698 | 0.709   | 0.381                 |
 
 ## Base dependences
 
@@ -55,6 +55,7 @@ zpm load gitlab-user/gitlab-repo,type:gitlab # Download and enable plugin from G
 zpm load bitbucket-user/bitbucket-repo,type:bitbucket # Download and enable the plugin from Bitbucket
 
 zpm load plugin-form-oh-my-zsh,type:omz # Load plugin form oh-my-zsh
+zpm load omz/plugin-name                # Load plugin form oh-my-zsh
 
 zpm load github-user/github-repo,async # Async load
 
@@ -68,8 +69,9 @@ zpm load github-user/github-repo,async # Async load
 * `macos` - if current OS is macOS
 * `termux` - if current session run in [Termux](http://termux.com/)
 * `ssh` - if session run on remote host
+* `vte` - if session run on VTE based terminal emulator
 
-The condition can be combined `zpm if ssh if ssh if-not macos load repo/plugin`
+The condition can be combined `zpm if macos if-not ssh load repo/plugin`
 
 ### Tags
 
