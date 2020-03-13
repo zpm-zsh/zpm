@@ -28,13 +28,13 @@ _zpm_completions_1st_arguments_full=(
 )
 
 _zpm_completions_if_args=(
-  'linux'
-  'bsd'
-  'macos'
-  'android'
-  'termux'
-  'ssh'
-  'vte'
+  'linux:Linux OS'
+  'bsd:BSD OS'
+  'macos:MacOS'
+  'android:Android OS'
+  'termux:Termux app'
+  'ssh:SSH session'
+  'vte:VTE based terminal emulator'
 )
 
 _arguments \
