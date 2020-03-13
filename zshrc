@@ -4,7 +4,7 @@ if [[ ! -f ~/.zpm/zpm.zsh ]]; then
 fi
 source ~/.zpm/zpm.zsh
 
-### Core
+### Tmux
 zpm if ssh     \
   zpm-zsh/tmux \
 
@@ -16,6 +16,10 @@ zpm if-not ssh            \
 ### Compatibility
 zpm if termux          \
   zpm-zsh/termux,async \
+
+
+zpm if vte    \
+  zpm-zsh/vte \
 
 
 ### 3party plugins

@@ -1,10 +1,10 @@
 all:
 	beautysh --indent-size 2 --force-function-style fnpar zpm.zsh
 	beautysh --indent-size 2 --force-function-style fnpar lib/init.zsh
-	# beautysh --indent-size 2 --force-function-style fnpar lib/completion.zsh
 	beautysh --indent-size 2 --force-function-style fnpar lib/functions.zsh
 	beautysh --indent-size 2 --force-function-style fnpar lib/imperative.zsh
 	
+	beautysh --indent-size 2 --force-function-style fnpar functions/_zpm
 	beautysh --indent-size 2 --force-function-style fnpar functions/_ZPM_addfpath
 	beautysh --indent-size 2 --force-function-style fnpar functions/_ZPM_addpath
 	beautysh --indent-size 2 --force-function-style fnpar functions/_ZPM_Background_Initialization

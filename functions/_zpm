@@ -34,6 +34,7 @@ _zpm_completions_if_args=(
   'android'
   'termux'
   'ssh'
+  'vte'
 )
 
 _arguments \
