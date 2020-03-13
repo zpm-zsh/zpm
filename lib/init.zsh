@@ -40,11 +40,12 @@ autoload -Uz                     \
   _ZPM_get_plugin_basename       \
   _ZPM_get_plugin_file_path      \
   _ZPM_get_plugin_link           \
+  _ZPM_get_plugin_hyperlink      \
   _ZPM_get_plugin_name           \
   _ZPM_get_plugin_path           \
   _ZPM_get_plugin_type           \
   _ZPM_initialize_plugin         \
   _ZPM_load_plugin               \
   _ZPM_log                       \
-  _ZPM_upgrade                   \
+  _ZPM_upgrade
 

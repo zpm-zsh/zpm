@@ -4,10 +4,10 @@ fpath+=("${_ZPM_DIR}/functions")
 
 if [[ "$CLICOLOR" != "0" ]]; then
   typeset -gA c
-  
+
   c_reset="[0m"
   c_bold="[1m"
-  
+
   c[black]="[30m"
   c[red]="[31m"
   c[green]="[32m"
@@ -18,42 +18,37 @@ if [[ "$CLICOLOR" != "0" ]]; then
   c[grey]="[37m"
 fi
 
-autoload -Uz _ZPM_get_plugin_name _ZPM_get_plugin_type _ZPM_get_plugin_basename _ZPM_get_plugin_path _ZPM_get_plugin_link _ZPM_log
+autoload -Uz                   \
+  _ZPM_get_plugin_name         \
+  _ZPM_get_plugin_type         \
+  _ZPM_get_plugin_basename     \
+  _ZPM_get_plugin_path         \
+  _ZPM_get_plugin_link         \
+  _ZPM_get_plugin_hyperlink    \
+  _ZPM_log                     \
+  _ZPM_get_plugin_root_git_dir
+
 
 local Plugin_name=$(_ZPM_get_plugin_name "$2")
 local Plugin_type=$(_ZPM_get_plugin_type "$2")
 local Plugin_basename=$(_ZPM_get_plugin_basename "$Plugin_name")
 local Plugin_path=$(_ZPM_get_plugin_path "$Plugin_name")
 local Plugin_link=$(_ZPM_get_plugin_link "$Plugin_name" "$Plugin_type")
+local Plugin_hyperlink=$(_ZPM_get_plugin_hyperlink "$Plugin_name" "$Plugin_link")
+local Plugin_git_dir=$(_ZPM_get_plugin_root_git_dir "$Plugin_type")
+
 
 if [[ "$1" == "upgrade" ]]; then
   local status_string="${c[green]}${c_bold}Upgrade${c_reset} "
-  
-  if [[ "$Plugin_type" == 'zpm' ]]; then
-    _ZPM_log zpm:upgrade "Upgrade 'zpm'"
-    git --git-dir="${_ZPM_DIR}/.git/" --work-tree="${_ZPM_DIR}/" checkout "${_ZPM_DIR}/" </dev/null >/dev/null 2>/dev/null
-    git --git-dir="${_ZPM_DIR}/.git/" --work-tree="${_ZPM_DIR}/" pull </dev/null >/dev/null 2>/dev/null
-  elif [[ "$Plugin_type" == 'omz' ]]; then
-    _ZPM_log zpm:upgrade "Upgrade '${2}'"
-    git --git-dir="${HOME}/.oh-my-zsh/.git/" --work-tree="${HOME}/.oh-my-zsh/" checkout "${HOME}/.oh-my-zsh/" </dev/null >/dev/null 2>/dev/null
-    git --git-dir="${HOME}/.oh-my-zsh/.git/" --work-tree="${HOME}/.oh-my-zsh/" pull </dev/null >/dev/null 2>/dev/null
-  else
-    _ZPM_log zpm:upgrade "Upgrade '${2}'"
-    git --git-dir="${Plugin_path}/.git/" --work-tree="${Plugin_path}/" checkout "${Plugin_path}/" </dev/null >/dev/null 2>/dev/null
-    git --git-dir="${Plugin_path}/.git/" --work-tree="${Plugin_path}/" pull </dev/null >/dev/null 2>/dev/null
-  fi
-  
-  if [[ -z "$Plugin_link" ]]; then
-    status_string+="${c[blue]}${c_bold}${Plugin_name//\//${c[red]}${c_bold}/${c[blue]}${c_bold}}"
-    status_string+="${c_reset}"
-  else
-    status_string+="\033]8;;${Plugin_link}\a"
-    status_string+="${c[blue]}${c_bold}${Plugin_name//\//${c[red]}${c_bold}/${c[blue]}${c_bold}}"
-    status_string+="\033]8;;\a${c_reset}"
-  fi
-  
+
+  _ZPM_log zpm:upgrade "Upgrade '${2}'"
+  git --git-dir="${Plugin_git_dir}/.git/" --work-tree="${Plugin_git_dir}/" checkout "${Plugin_git_dir}/" </dev/null >/dev/null 2>/dev/null
+  git --git-dir="${Plugin_git_dir}/.git/" --work-tree="${Plugin_git_dir}/" pull </dev/null >/dev/null 2>/dev/null
+
+  status_string+="$Plugin_hyperlink"
+
   status_string+=" ${c[green]}✓${c_reset}"
-  
+
   echo $status_string
 else
   if [[ "$Plugin_type" == "github" ]];then
@@ -67,62 +62,43 @@ else
       git clone --recursive "https://github.com/ohmyzsh/ohmyzsh.git" --depth 1 --single-branch "${HOME}/.oh-my-zsh"  </dev/null >/dev/null 2>/dev/null
     fi
     ln -s "${HOME}/.oh-my-zsh/plugins/${Plugin_basename}" "$Plugin_path" 2>/dev/null
+    :
   fi
-  
+
   if [[ "$?" == "0" ]]; then
     local status_string="${c[green]}${c_bold}Install${c_reset} "
-    
-    if [[ -z "$Plugin_link" ]]; then
-      status_string+="${c[blue]}${c_bold}${Plugin_name//\//${c[red]}${c_bold}/${c[blue]}${c_bold}}"
-      status_string+="${c_reset}"
-    else
-      status_string+="\033]8;;${Plugin_link}\a"
-      status_string+="${c[blue]}${c_bold}${Plugin_name//\//${c[red]}${c_bold}/${c[blue]}${c_bold}}"
-      status_string+="\033]8;;\a${c_reset}"
-    fi
-    
+
+    status_string+="$Plugin_hyperlink"
+
     status_string+=" ${c[green]}✓${c_reset}"
-    
+
     echo $status_string
   else
     local status_string="${c[red]}${c_bold}Can't install${c_reset} "
-    
-    if [[ -z "$Plugin_link" ]]; then
-      status_string+="${c[blue]}${c_bold}${Plugin_name//\//${c[red]}${c_bold}/${c[blue]}${c_bold}}"
-      status_string+="${c_reset}"
-    else
-      status_string+="\033]8;;${Plugin_link}\a"
-      status_string+="${c[blue]}${c_bold}${Plugin_name//\//${c[red]}${c_bold}/${c[blue]}${c_bold}}"
-      status_string+="\033]8;;\a${c_reset}"
-    fi
-    
+
+    status_string+="$Plugin_hyperlink"
+
     status_string+=" ${c[red]}${c_bold}✕${c_reset}"
-    
+
     echo $status_string
   fi
 fi
 
+
 if [[ "$2" == *",hook:"* ]]; then
   local hook=${2##*,hook:}
   hook=${hook%%\,*}
-  
+
   if [[ -e "$Plugin_path" ]]; then
     local status_string="${c[green]}${c_bold}Run hook for${c_reset} "
 
-    if [[ -z "$Plugin_link" ]]; then
-      status_string+="${c[blue]}${c_bold}${Plugin_name//\//${c[red]}${c_bold}/${c[blue]}${c_bold}}"
-      status_string+="${c_reset}"
-    else
-      status_string+="\033]8;;${Plugin_link}\a"
-      status_string+="${c[blue]}${c_bold}${Plugin_name//\//${c[red]}${c_bold}/${c[blue]}${c_bold}}"
-      status_string+="\033]8;;\a${c_reset}"
-    fi
+    status_string+="$Plugin_hyperlink"
 
     status_string+=" ${c[green]}●${c_reset}"
 
     echo "$status_string"
     cd "$Plugin_path"
-    
+
     eval "$hook" >/dev/null
   fi
 fi
