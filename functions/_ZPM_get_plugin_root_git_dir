@@ -1,9 +1,10 @@
 #!/usr/bin/env zsh
 
 function _ZPM_get_plugin_root_git_dir() {
-  if [[ "$1" == "omz" ]]; then
+  if [[ "$2" == "omz" ]]; then
     echo "$HOME/.oh-my-zsh"
     return
   fi
-  echo "${_ZPM_PLUGIN_DIR}/${1//\//---}"
+
+  echo "${1}"
 }

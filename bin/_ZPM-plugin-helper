@@ -35,8 +35,7 @@ local Plugin_basename=$(_ZPM_get_plugin_basename "$Plugin_name")
 local Plugin_path=$(_ZPM_get_plugin_path "$Plugin_name")
 local Plugin_link=$(_ZPM_get_plugin_link "$Plugin_name" "$Plugin_type")
 local Plugin_hyperlink=$(_ZPM_get_plugin_hyperlink "$Plugin_name" "$Plugin_link")
-local Plugin_git_dir=$(_ZPM_get_plugin_root_git_dir "$Plugin_type")
-
+local Plugin_git_dir=$(_ZPM_get_plugin_root_git_dir "$Plugin_path" "$Plugin_type")
 
 if [[ "$1" == "upgrade" ]]; then
   local status_string="${c[green]}${c_bold}Upgrade${c_reset} "
