@@ -52,14 +52,14 @@ if [[ "$1" == "upgrade" ]]; then
   echo $status_string
 else
   if [[ "$Plugin_type" == "github" ]];then
-    git clone --recursive "https://github.com/"${Plugin_name}".git" --depth 1 --single-branch "$Plugin_path"  </dev/null >/dev/null 2>/dev/null
+    git clone --recursive "https://github.com/"${Plugin_name}".git" --depth 1 --single-branch "${Plugin_git_dir}" </dev/null >/dev/null 2>/dev/null
   elif [[ "$Plugin_type" == "gitlab" ]];then
-    git clone --recursive "https://gitlab.com/"${Plugin_name}".git" --depth 1 --single-branch "$Plugin_path"  </dev/null >/dev/null 2>/dev/null
+    git clone --recursive "https://gitlab.com/"${Plugin_name}".git" --depth 1 --single-branch "${Plugin_git_dir}" </dev/null >/dev/null 2>/dev/null
   elif [[ "$Plugin_type" == "bitbucket" ]];then
-    git clone --recursive "https://bitbucket.com/"${Plugin_name}".git" --depth 1 --single-branch "$Plugin_path"  </dev/null >/dev/null 2>/dev/null
+    git clone --recursive "https://bitbucket.com/"${Plugin_name}".git" --depth 1 --single-branch "${Plugin_git_dir}" </dev/null >/dev/null 2>/dev/null
   elif [[ "$Plugin_type" == "omz" ]];then
     if [[ ! -e "${HOME}/.oh-my-zsh" ]]; then
-      git clone --recursive "https://github.com/ohmyzsh/ohmyzsh.git" --depth 1 --single-branch "${HOME}/.oh-my-zsh"  </dev/null >/dev/null 2>/dev/null
+      git clone --recursive "https://github.com/ohmyzsh/ohmyzsh.git" --depth 1 --single-branch "${Plugin_git_dir}" </dev/null >/dev/null 2>/dev/null
     fi
     ln -s "${HOME}/.oh-my-zsh/plugins/${Plugin_basename}" "$Plugin_path" 2>/dev/null
     :
