@@ -61,6 +61,9 @@ function _ZPM_Background_Initialization() {
   echo 'unset ZERO' >> "$_ZPM_TMP_ASYNC"
 
   cat "${_ZPM_DIR}/lib/functions.zsh" >> "$_ZPM_TMP_ASYNC"
+  echo >> "$_ZPM_TMP_ASYNC"
+
+  echo "zle && zle reset-prompt" >> "$_ZPM_TMP_ASYNC"
 
   mv "$_ZPM_TMP" "$_ZPM_CACHE"
   mv "$_ZPM_TMP_ASYNC" "$_ZPM_CACHE_ASYNC"
