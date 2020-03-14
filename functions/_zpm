@@ -3,23 +3,22 @@
 
 autoload -Uz _ZPM_get_plugin_name
 
-typeset -g _zpm_completions_plugins_local=()
+local _zpm_completions_plugins_local=()
 for plugin in "$_ZPM_PLUGIN_DIR/"*; do
-  local unused=${plugin:t}
-  _zpm_completions_plugins_local+=( ${unused//---/\/} )
+  _zpm_completions_plugins_local+=( ${${plugin:t}//---/\/} )
 done
 
-typeset -g _zpm_completions_plugins_loadable=($(
+local _zpm_completions_plugins_loadable=($(
     echo ${_zpm_completions_plugins_local[@]} ${zsh_loaded_plugins[@]} | tr ' ' '\n' | sort | uniq -u
 ))
 
-_zpm_completions_1st_arguments=(
+local _zpm_completions_1st_arguments=(
   'load:Load plugin'
   'if:Load plugin if condition true'
   'if-not:Load plugin if condition false'
 )
 
-_zpm_completions_1st_arguments_full=(
+local _zpm_completions_1st_arguments_full=(
   'clean:Remove zpm cache'
   'upgrade:Upgrade plugin'
   'load:Load plugin'
@@ -27,7 +26,7 @@ _zpm_completions_1st_arguments_full=(
   'if-not:Load plugin if condition false'
 )
 
-_zpm_completions_if_args=(
+local _zpm_completions_if_args=(
   'linux:Linux OS'
   'bsd:BSD OS'
   'macos:MacOS'
