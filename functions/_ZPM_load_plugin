@@ -89,6 +89,7 @@ function _ZPM_load_plugin() {
         _ZPM_source "${Plugin_name}" "${_ZPM_plugin_file_path}"
       fi
     else
+      _ZPM_log zpm:init:source "Plugin file for ${Plugin_name} is missing"
       _ZPM_no_source "${Plugin_name}"
     fi
   else

@@ -2,14 +2,19 @@
 
 function _ZPM_get_plugin_file_path() {
   if [[ -n "${3}" ]]; then
-    echo "${1}/${3}"
-    return 0
+    if [[ -e "${1}/${3}" ]]; then
+      echo "${1}/${3}"
+      return 0
+    else
+      return -1
+    fi
   fi
 
   if [[ -e "${1}/${2}.plugin.zsh" ]]; then
     echo "${1}/${2}.plugin.zsh"
     return 0
   fi
+
   if [[ -e "${1}/zsh-${2}.plugin.zsh" ]]; then
     echo "${1}/zsh-${2}.plugin.zsh"
     return 0
