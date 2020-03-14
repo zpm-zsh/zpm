@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 
-compinit -i -C
+compinit -i -C -d "${ZPM_COMPDUMP}"
 
 zpm zpm-zsh/helpers zpm-zsh/colors zpm-zsh/background
 

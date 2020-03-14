@@ -28,6 +28,8 @@ typeset -a _ZPM_plugins_no_source
 typeset -A _ZPM_file_for_source
 typeset -A _ZPM_file_for_async_source
 
+ZPM_COMPDUMP="${_ZPM_CACHE_DIR}/zcompdump"
+
 fpath+=("${_ZPM_DIR}/functions")
 
 autoload -Uz                     \
