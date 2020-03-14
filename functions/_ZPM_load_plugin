@@ -49,7 +49,7 @@ function _ZPM_load_plugin() {
       _ZPM_log zpm:init:fpath "Add to \$fpath '${Plugin_path}/functions'"
       _ZPM_addfpath "${Plugin_path}/functions"
     else
-      for file in  "${Plugin_path}/_"*(N); do
+      for file in "${Plugin_path}/_"*(N); do
         _ZPM_log zpm:init:fpath "Add to \$fpath '${Plugin_path}'"
         _ZPM_addfpath "${Plugin_path}"
         break;
@@ -61,11 +61,11 @@ function _ZPM_load_plugin() {
     if [[ "$1"  == *",path:"* ]]; then
       local zpm_path=${${1##*,path:}%%,*}
       local _local_path="${Plugin_path}/${zpm_path}"
-      _ZPM_log zpm:init:path "Add to \$PATH '${_local_path:a}'"
-      _ZPM_addpath "${_local_path:a}"
+      _ZPM_log zpm:init:path "Add to \$PATH '${_local_path}'"
+      _ZPM_addpath "${_local_path}"
     elif [[ -d "${Plugin_path}/bin" ]]; then
-      _ZPM_log zpm:init:path "Add to \$PATH '${Plugin_path:a}/bin'"
-      _ZPM_addpath "${Plugin_path:a}/bin"
+      _ZPM_log zpm:init:path "Add to \$PATH '${Plugin_path}/bin'"
+      _ZPM_addpath "${Plugin_path}/bin"
     fi
   fi
 
