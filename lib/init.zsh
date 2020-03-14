@@ -50,5 +50,7 @@ autoload -Uz                     \
   _ZPM_initialize_plugin         \
   _ZPM_load_plugin               \
   _ZPM_log                       \
-  _ZPM_upgrade
-
+  _ZPM_upgrade                   \
+  _ZPM_source                    \
+  _ZPM_async_source              \
+  _ZPM_no_source

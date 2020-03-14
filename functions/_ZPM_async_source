@@ -1,0 +1,17 @@
+#!/usr/bin/env zsh
+
+function _ZPM_async_source() {
+  zsh_loaded_plugins+=("$1")
+  ZERO="$2"
+
+  source "$2"
+
+  if [[ -f "$2" && ( ! -s "$2.zwc" || "$2" -nt "$2.zwc") ]]; then;
+    zcompile "$2" 2>/dev/null
+  fi
+
+  _ZPM_plugins_for_async_source+=("$1")
+  _ZPM_file_for_async_source["$1"]="${2}"
+
+  unset ZERO
+}
