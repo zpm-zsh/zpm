@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 
-compinit -C
+compinit -i -C
 
 zpm zpm-zsh/helpers zpm-zsh/colors zpm-zsh/background
 

@@ -14,7 +14,7 @@ function _ZPM_Background_Initialization() {
   echo "fpath+=( '${(j:' ':)_ZPM_fpath}' )" >> "$_ZPM_TMP"
   echo >> "$_ZPM_TMP"
 
-  echo 'compinit -C' >> "$_ZPM_TMP"
+  echo 'compinit -i -C' >> "$_ZPM_TMP"
   echo >> "$_ZPM_TMP"
 
   for plugin in ${_ZPM_plugins_for_source}; do
@@ -62,7 +62,7 @@ function _ZPM_Background_Initialization() {
   mv "$_ZPM_TMP_ASYNC" "$_ZPM_CACHE_ASYNC"
 
 
-  compinit -C
+  compinit -i -C
   TMOUT=5
 
   (_ZPM_compile 2>/dev/null &)
