@@ -1,12 +1,6 @@
 #!/usr/bin/env zsh
 
-local _comp_files=(${HOME}/.zcompdump(Nm-20))
-if (( $#_comp_files )); then
-  compinit -i -C
-else
-  compinit -i
-fi
-unset _comp_files
+compinit -C
 
 zpm zpm-zsh/helpers zpm-zsh/colors zpm-zsh/background
 
