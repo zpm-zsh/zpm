@@ -36,20 +36,15 @@ function zpm() {
   _ZPM_initialize_plugin "$@"
 }
 
-# Fake source
-function source() {
-  if [[ -f "$1" && ( ! -s "$1.zwc" || "$1" -nt "$1.zwc") ]]; then;
-    zcompile "$1" 2>/dev/null
-  fi
-
-  builtin source "$1"
-}
-
 function _ZPM_source() {
   zsh_loaded_plugins+=("$1")
   ZERO="$2"
 
   source "$2"
+
+  if [[ -f "$2" && ( ! -s "$2.zwc" || "$2" -nt "$2.zwc") ]]; then;
+    zcompile "$2" 2>/dev/null
+  fi
 
   _ZPM_plugins_for_source+=("$1")
   _ZPM_file_for_source["$1"]="${2}"
@@ -62,6 +57,10 @@ function _ZPM_async_source() {
   ZERO="$2"
 
   source "$2"
+
+  if [[ -f "$2" && ( ! -s "$2.zwc" || "$2" -nt "$2.zwc") ]]; then;
+    zcompile "$2" 2>/dev/null
+  fi
 
   _ZPM_plugins_for_async_source+=("$1")
   _ZPM_file_for_async_source["$1"]="${2}"
