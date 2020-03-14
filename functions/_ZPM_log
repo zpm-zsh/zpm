@@ -2,16 +2,17 @@
 
 function _ZPM_log() {
   if [[ -n "$DEBUG" &&  "${1}:" == "${DEBUG}:"*  ]]; then
-    num=0
+    local num=0
+    local i=0
 
-    for i in $(seq 1 ${#1}); do
+    while [[ $i -lt $(( ${#1} + 1 )) ]]; do
       num=$(( $num + $(LC_CTYPE=C printf '%d' "'${1[$i]})") ))
+      i=$(( $i + 1))
     done
-
+    
     color=$(( $num % 6 + 1 ))
-
+    
     echo -n "[1;3${color}m$1 [0m"
-
     shift
     echo "$@"
   fi
