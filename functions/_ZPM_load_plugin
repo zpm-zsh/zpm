@@ -43,8 +43,8 @@ function _ZPM_load_plugin() {
     if [[ "$1"  == *",fpath:"* ]]; then
       local zpm_fpath=${${1##*,fpath:}%%,*}
       local _local_path="${Plugin_path}/${zpm_fpath}"
-      _ZPM_log zpm:init:fpath "Add to \$fpath '${_local_path}'"
-      _ZPM_addfpath "${_local_path}"
+      _ZPM_log zpm:init:fpath "Add to \$fpath '${_local_path:a}'"
+      _ZPM_addfpath "${_local_path:a}"
     elif [[ -d "${Plugin_path}/functions" ]]; then
       _ZPM_log zpm:init:fpath "Add to \$fpath '${Plugin_path}/functions'"
       _ZPM_addfpath "${Plugin_path}/functions"
@@ -61,8 +61,8 @@ function _ZPM_load_plugin() {
     if [[ "$1"  == *",path:"* ]]; then
       local zpm_path=${${1##*,path:}%%,*}
       local _local_path="${Plugin_path}/${zpm_path}"
-      _ZPM_log zpm:init:path "Add to \$PATH '${_local_path}'"
-      _ZPM_addpath "${_local_path}"
+      _ZPM_log zpm:init:path "Add to \$PATH '${_local_path:a}'"
+      _ZPM_addpath "${_local_path:a}"
     elif [[ -d "${Plugin_path}/bin" ]]; then
       _ZPM_log zpm:init:path "Add to \$PATH '${Plugin_path}/bin'"
       _ZPM_addpath "${Plugin_path}/bin"
