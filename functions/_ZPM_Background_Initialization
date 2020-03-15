@@ -20,7 +20,7 @@ function _ZPM_Background_Initialization() {
     local file="$_ZPM_file_for_source["$plugin"]"
     echo "zsh_loaded_plugins+=('$plugin')" >> "$_ZPM_TMP"
     echo "ZERO='${file}'" >> "$_ZPM_TMP"
-    cat "${file}" >> "$_ZPM_TMP"
+    cat "${file}" | grep -v '#!/usr/bin/env zsh' | grep -v '#DO_NOT_INCLUDE_LINE_IN_ZPM_CACHE' >> "$_ZPM_TMP"
     echo >> "$_ZPM_TMP"
   done
 
@@ -42,7 +42,7 @@ function _ZPM_Background_Initialization() {
     local file="$_ZPM_file_for_async_source["$plugin"]"
     echo "zsh_loaded_plugins+=('$plugin')" >> "$_ZPM_TMP_ASYNC"
     echo "ZERO='${file}'" >> "$_ZPM_TMP_ASYNC"
-    cat "${file}" >> "$_ZPM_TMP_ASYNC"
+    cat "${file}" | grep -v '#!/usr/bin/env zsh' | grep -v '#DO_NOT_INCLUDE_LINE_IN_ZPM_CACHE' >> "$_ZPM_TMP_ASYNC"
     echo >> "$_ZPM_TMP_ASYNC"
   done
 
