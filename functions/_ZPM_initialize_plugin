@@ -2,8 +2,8 @@
 
 function _ZPM_initialize_plugin() {
   # Check if plugin isn't loaded
-  declare -a _Plugins_Install
-  declare -a _Plugins_Load_Names
+  local -a _Plugins_Install
+  local -a _Plugins_Load_Names
 
   for plugin in $@; do
     local Plugin_name=$(_ZPM_get_plugin_name "$plugin")
@@ -19,7 +19,7 @@ function _ZPM_initialize_plugin() {
       _Plugins_Install+=("$plugin")
     fi
 
-    _ZPM_plugins_full[$plugin_name]="$plugin"
+    _ZPM_plugins_full[$Plugin_name]="$plugin"
     _Plugins_Load_Names+=($plugin)
   done
 

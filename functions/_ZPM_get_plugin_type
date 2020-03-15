@@ -6,15 +6,21 @@ function _ZPM_get_plugin_type() {
     return 0
   fi
 
+  if [[ "$1" != *",type:"* ]]; then
+    echo "github"
+    return 0
+  fi
+
   local _ZPM_tag_str=${1##*,type:}
+  echo $_ZPM_tag_str
   _ZPM_tag_str=${_ZPM_tag_str%%\,*}
 
-  if [[ "$_ZPM_tag_str" == *'gitlab'* ]]; then
+  if [[ "$_ZPM_tag_str" == 'gitlab' ]]; then
     echo 'gitlab'
     return 0
   fi
 
-  if [[ "$_ZPM_tag_str" == *'bitbucket'* ]]; then
+  if [[ "$_ZPM_tag_str" == 'bitbucket' ]]; then
     echo 'bitbucket'
     return 0
   fi
@@ -24,7 +30,7 @@ function _ZPM_get_plugin_type() {
     return 0
   fi
 
-  if [[ "$_ZPM_tag_str" == *'omz'* ]]; then
+  if [[ "$_ZPM_tag_str" == 'omz' ]]; then
     echo 'omz'
     return 0
   fi

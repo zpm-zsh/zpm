@@ -5,17 +5,12 @@ function _ZPM_load_plugin() {
   local Plugin_basename=$(_ZPM_get_plugin_basename "$Plugin_name")
   local Plugin_path=$(_ZPM_get_plugin_path "$Plugin_name")
 
-  # if [[ ! -e "${Plugin_path}" ]]; then
-  #   _ZPM_log zpm:init:skip "Skip initialization of '${1}', plugin directory not found '${Plugin_path}'"
-  #   return -1
-  # fi
-
-  _ZPM_log zpm:init "Initialize '${Plugin_name}'"
-
   local _ZPM_local_source=true
   local _ZPM_local_async=false
   local _ZPM_local_path=true
   local _ZPM_local_fpath=true
+
+  _ZPM_log zpm:init "Initialize '${Plugin_name}'"
 
   if [[ "$1"  == *",apply:"* ]]; then
     local _ZPM_tag_str=${1##*,apply}
