@@ -3,7 +3,7 @@
 function _ZPM_get_plugin_root_git_dir() {
   if [[ "$2" == "omz" ]]; then
     echo "$HOME/.oh-my-zsh"
-    return
+    return 0
   fi
 
   echo "${1}"

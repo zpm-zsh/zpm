@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 
 function _ZPM_Background_Initialization() {
-  mkdir -p "${_ZPM_CACHE:h}"
+  mkdir -p "${_ZPM_CACHE_DIR}"
 
   _ZPM_TMP="$(mktemp)"
   _ZPM_TMP_ASYNC="$(mktemp)"
