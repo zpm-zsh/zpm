@@ -4,7 +4,9 @@ function _ZPM_upgrade() {
   typeset -a _Plugins_Upgrade=($@)
   typeset -a _Plugins_Upgrade_full=()
 
-  _Plugins_Upgrade+=("zpm" $zsh_loaded_plugins)
+  if [[ -z $_Plugins_Upgrade ]]; then
+    _Plugins_Upgrade+=("zpm" $zsh_loaded_plugins)
+  fi
 
   for plugin (${_Plugins_Upgrade}); do
     _Plugins_Upgrade_full+=($_ZPM_plugins_full[$plugin])
