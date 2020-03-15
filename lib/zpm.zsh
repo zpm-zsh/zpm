@@ -3,7 +3,7 @@
 typeset _ZPM_PATH=""
 typeset _ZPM_fpath=()
 
-typeset -A _ZPM_plugins_full
+
 _ZPM_plugins_full[zpm]="zpm"
 
 typeset -a _ZPM_plugins_for_source

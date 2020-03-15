@@ -14,9 +14,11 @@ export PMSPEC="0fbiPs"
 
 export ZPFX="${HOME}/.local"
 
-typeset -ag zsh_loaded_plugins
+declare -a zsh_loaded_plugins
+declare -A _ZPM_plugins_full
 
 ZPM_COMPDUMP="${_ZPM_CACHE_DIR}/zcompdump"
 
 autoload -Uz compinit
+
 
