@@ -19,5 +19,3 @@ declare -ag zsh_loaded_plugins
 ZPM_COMPDUMP="${_ZPM_CACHE_DIR}/zcompdump"
 
 autoload -Uz compinit
-
-
