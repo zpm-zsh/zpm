@@ -10,8 +10,8 @@ function _ZPM_async_source() {
 
   source "$2"
 
-  if [[ ! -s "$2.zwc" || "$2" -nt "$2.zwc" ]]; then;
-    zcompile "$2" 2>/dev/null
+  if [[ ! "${2}.zwc" -ot "${2}" ]]; then
+    zcompile "${2}" 2>/dev/null
   fi
 
   unset ZERO
