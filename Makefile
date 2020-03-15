@@ -1,7 +1,7 @@
 all:
 	beautysh --indent-size 2 --force-function-style fnpar zpm.zsh
 	beautysh --indent-size 2 --force-function-style fnpar lib/init.zsh
-	beautysh --indent-size 2 --force-function-style fnpar lib/functions.zsh
+	beautysh --indent-size 2 --force-function-style fnpar lib/zpm.zsh
 	beautysh --indent-size 2 --force-function-style fnpar lib/imperative.zsh
 
 	beautysh --indent-size 2 --force-function-style fnpar bin/_ZPM-plugin-helper

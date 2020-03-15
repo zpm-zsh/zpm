@@ -5,7 +5,6 @@
 _ZPM_DIR=${0:h}
 
 export ZPM_NO_CACHE=yes
-export ZPM_NO_ASYNC_HOOK=yes
 export ZPM_PLUGIN_DIR="$(mktemp -d)"
 
 source "${_ZPM_DIR}/../zpm.zsh"

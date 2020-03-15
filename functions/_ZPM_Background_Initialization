@@ -7,8 +7,7 @@ function _ZPM_Background_Initialization() {
   _ZPM_TMP_ASYNC="$(mktemp)"
 
   cat "${_ZPM_DIR}/lib/init.zsh" >> "$_ZPM_TMP"
-
-  echo "$(typeset -p _ZPM_plugins_full)" >> "$_ZPM_TMP"
+  echo >> "$_ZPM_TMP"
 
   echo "export PATH=\"\${PATH}${_ZPM_PATH}\"" >> "$_ZPM_TMP"
   echo "fpath+=( '${(j:' ':)_ZPM_fpath}' )" >> "$_ZPM_TMP"
@@ -35,13 +34,9 @@ function _ZPM_Background_Initialization() {
   echo 'TMOUT=1' >> "$_ZPM_TMP"
   echo >> "$_ZPM_TMP"
 
-  if [[ -z "$ZPM_NO_ASYNC_HOOK" ]]; then
-    echo 'add-zsh-hook background _ZPM_post_fn' >> "$_ZPM_TMP"
-    echo >> "$_ZPM_TMP"
-    echo 'zpm () {}' >> "$_ZPM_TMP"
-  else
-    echo '_ZPM_post_fn' >> "$_ZPM_TMP"
-  fi
+  echo 'add-zsh-hook background _ZPM_post_fn' >> "$_ZPM_TMP"
+  echo >> "$_ZPM_TMP"
+  echo 'zpm () {}' >> "$_ZPM_TMP"
 
   for plugin in ${_ZPM_plugins_for_async_source}; do
     local file="$_ZPM_file_for_async_source["$plugin"]"
@@ -53,7 +48,7 @@ function _ZPM_Background_Initialization() {
 
   echo 'unset ZERO' >> "$_ZPM_TMP_ASYNC"
 
-  cat "${_ZPM_DIR}/lib/functions.zsh" >> "$_ZPM_TMP_ASYNC"
+  cat "${_ZPM_DIR}/lib/zpm.zsh" >> "$_ZPM_TMP_ASYNC"
   echo >> "$_ZPM_TMP_ASYNC"
 
   echo "zle && zle reset-prompt" >> "$_ZPM_TMP_ASYNC"
