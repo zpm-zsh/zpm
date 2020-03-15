@@ -6,5 +6,4 @@ function _ZPM_addfpath() {
   if [[ ":$FPATH:" != *":${1}:"* ]]; then
     fpath=( $fpath "${1}" )
   fi
-
 }
