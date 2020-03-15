@@ -5,25 +5,25 @@ fi
 source ~/.zpm/zpm.zsh
 
 ### Tmux
-zpm if ssh     \
-  zpm-zsh/tmux \
+zpm if ssh load \
+  zpm-zsh/tmux  \
 
 
-zpm if-not ssh            \
+zpm if-not ssh load       \
   zpm-zsh/tmux,apply:path \
 
 
 ### Compatibility
-zpm if termux          \
+zpm if termux load     \
   zpm-zsh/termux,async \
 
 
-zpm if vte    \
-  zpm-zsh/vte \
+zpm if vte load \
+  zpm-zsh/vte   \
 
 
 ### 3party plugins
-zpm                                                \
+zpm load                                           \
   zpm-zsh/core-config                              \
   zpm-zsh/ignored-users,async                      \
   zpm-zsh/check-deps                               \
@@ -37,7 +37,7 @@ zpm                                                \
   zsh-users/zsh-completions,apply:fpath,fpath:/src \
 
 
-zpm if-not ssh                                                                         \
+zpm if-not ssh load                                                                    \
   zpm-zsh/dropbox,async                                                                \
   lukechilds/zsh-better-npm-completion,async                                           \
   horosgrisa/utils,apply:path                                                          \
@@ -56,7 +56,7 @@ zpm if-not ssh                                                                  
   zsh-users/zsh-autosuggestions,source:zsh-autosuggestions.zsh,async                   \
 
 
-zpm                           \
+zpm load                      \
   omz/extract,async           \
   omz/command-not-found,async \
   omz/wp-cli,async            \

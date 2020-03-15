@@ -8,7 +8,7 @@ TMOUT=1
 add-zsh-hook background _ZPM_Background_Initialization
 
 function source() {
-  if [[ -f "$1" && ( ! -s "$1.zwc" || "$1" -nt "$1.zwc") ]]; then;
+  if [[ ! -s "$1.zwc" || "$1" -nt "$1.zwc" ]]; then;
     zcompile "$1" 2>/dev/null
   fi
 

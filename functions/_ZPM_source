@@ -10,7 +10,7 @@ function _ZPM_source() {
 
   source "$2"
 
-  if [[ -f "$2" && ( ! -s "$2.zwc" || "$2" -nt "$2.zwc") ]]; then;
+  if [[ ! -s "$2.zwc" || "$2" -nt "$2.zwc" ]]; then;
     zcompile "$2" 2>/dev/null
   fi
 

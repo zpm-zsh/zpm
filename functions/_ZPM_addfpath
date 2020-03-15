@@ -8,7 +8,7 @@ function _ZPM_addfpath() {
   fi
 
   for i in "${1}/"*; do
-    if [[ -f "$i" && "$i" != *".zwc" && ( ! -s "$i.zwc" || "$i" -nt "$i.zwc") ]]; then;
+    if [[ "$i" != *".zwc" && ( ! -s "$i.zwc" || "$i" -nt "$i.zwc") ]]; then;
       zcompile "$i" 2>/dev/null
     fi
   done
