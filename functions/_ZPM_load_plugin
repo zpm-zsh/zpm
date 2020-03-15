@@ -5,11 +5,10 @@ function _ZPM_load_plugin() {
   local Plugin_basename=$(_ZPM_get_plugin_basename "$Plugin_name")
   local Plugin_path=$(_ZPM_get_plugin_path "$Plugin_name")
 
-
-  if [[ ! -e "${Plugin_path}" ]]; then
-    _ZPM_log zpm:init:skip "Skip initialization of '${1}', plugin directory not found '${Plugin_path}'"
-    return -1
-  fi
+  # if [[ ! -e "${Plugin_path}" ]]; then
+  #   _ZPM_log zpm:init:skip "Skip initialization of '${1}', plugin directory not found '${Plugin_path}'"
+  #   return -1
+  # fi
 
   _ZPM_log zpm:init "Initialize '${Plugin_name}'"
 
