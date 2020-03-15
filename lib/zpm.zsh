@@ -1,17 +1,17 @@
 #!/usr/bin/env zsh
 
-typeset _ZPM_PATH=""
-typeset _ZPM_fpath=()
+typeset -g _ZPM_PATH=""
+typeset -g _ZPM_fpath=()
 
+declare -Ag _ZPM_plugins_full
+typeset -ag _ZPM_plugins_for_source
+typeset -ag _ZPM_plugins_for_async_source
+typeset -ag _ZPM_plugins_no_source
+
+typeset -Ag _ZPM_file_for_source
+typeset -Ag _ZPM_file_for_async_source
 
 _ZPM_plugins_full[zpm]="zpm"
-
-typeset -a _ZPM_plugins_for_source
-typeset -a _ZPM_plugins_for_async_source
-typeset -a _ZPM_plugins_no_source
-
-typeset -A _ZPM_file_for_source
-typeset -A _ZPM_file_for_async_source
 
 fpath+=("${_ZPM_DIR}/functions")
 

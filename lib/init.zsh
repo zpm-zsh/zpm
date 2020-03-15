@@ -14,8 +14,7 @@ export PMSPEC="0fbiPs"
 
 export ZPFX="${HOME}/.local"
 
-declare -a zsh_loaded_plugins
-declare -A _ZPM_plugins_full
+declare -ag zsh_loaded_plugins
 
 ZPM_COMPDUMP="${_ZPM_CACHE_DIR}/zcompdump"
 
