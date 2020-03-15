@@ -37,6 +37,12 @@ autoload -Uz                     \
   _ZPM_no_source
 
 function zpm() {
+  if [[ "$1" == 'load' ]]; then
+    shift
+    _ZPM_initialize_plugin "$@"
+    return 0
+  fi
+
   if [[ "$1" == 'c' || "$1" == 'cl' || "$1" == 'clean' ]]; then
     shift
     _ZPM_clean
@@ -47,10 +53,6 @@ function zpm() {
     shift
     _ZPM_upgrade "$@"
     return 0
-  fi
-
-  if [[ "$1" == 'load' ]]; then
-    shift
   fi
 
   if [[ "$1" == 'if' ]]; then
