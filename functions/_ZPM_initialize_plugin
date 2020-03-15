@@ -3,11 +3,11 @@
 function _ZPM_initialize_plugin() {
   # Check if plugin isn't loaded
   declare -a _Plugins_Install
-  declare -a _Plugins_Load
+  declare -a _Plugins_Load_Names
 
   for plugin in $@; do
     local Plugin_name=$(_ZPM_get_plugin_name "$plugin")
-    
+
     if [[ " ${zsh_loaded_plugins} " == *" ${Plugin_name} "* ]]; then
       _ZPM_log zpm:init:skip "Skip initialization '$Plugin_name', plugin already loaded"
       break
@@ -19,7 +19,8 @@ function _ZPM_initialize_plugin() {
       _Plugins_Install+=("$plugin")
     fi
 
-    _Plugins_Load+=($plugin)
+    _ZPM_plugins_full[$plugin_name]="$plugin"
+    _Plugins_Load_Names+=($plugin)
   done
 
   if [[ -n "$_Plugins_Install[@]" ]]; then;
@@ -27,9 +28,7 @@ function _ZPM_initialize_plugin() {
       xargs -0 -P16 -n1 "${_ZPM_DIR}/bin/_ZPM-plugin-helper" install
   fi
 
-  for plugin in $_Plugins_Load; do
-    local plugin_name=$(_ZPM_get_plugin_name "$plugin")
-    _ZPM_plugins_full[$plugin_name]="$plugin"
+  for plugin in $_Plugins_Load_Names; do
     _ZPM_load_plugin "$plugin"
   done
 }
