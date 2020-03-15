@@ -10,9 +10,5 @@ function _ZPM_source() {
 
   source "$2"
 
-  if [[ ! "${2}.zwc" -ot "${2}" ]]; then
-    zcompile "${2}" 2>/dev/null
-  fi
-
   unset ZERO
 }
