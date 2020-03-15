@@ -7,6 +7,11 @@ function _ZPM_get_plugin_type() {
   fi
 
   if [[ "$1" != *",type:"* ]]; then
+    if [[ "$1" == 'omz/'* ]]; then
+      echo 'omz'
+      return 0
+    fi
+    
     echo "github"
     return 0
   fi
@@ -22,11 +27,6 @@ function _ZPM_get_plugin_type() {
 
   if [[ "$_ZPM_tag_str" == 'bitbucket' ]]; then
     echo 'bitbucket'
-    return 0
-  fi
-
-  if [[ "$1" == 'omz/'* ]]; then
-    echo 'omz'
     return 0
   fi
 
