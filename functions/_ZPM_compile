@@ -9,8 +9,20 @@ function _ZPM_compile() {
   zcompile "${_ZPM_DIR}/zpm.zsh" 2>/dev/null
 
   for i in "${_ZPM_DIR}/functions/"*; do
-    if [[ "${i}" != *".zwc" && ! "${i}.zwc" -ot "${i}" ]]; then
+    if [[ "${i}" != *".zwc" && ! "${i}.zwc" -nt "${i}" ]]; then
       zcompile "${i}" 2>/dev/null
+    fi
+  done
+
+  for dir in $fpath; do
+    if [[ -w "$dir" ]]; then
+
+      for i in "${dir}/"*; do
+        if [[ "${i}" != *".zwc" && ! "${i}.zwc" -nt "${i}" ]]; then
+          zcompile "${i}" 2>/dev/null
+        fi
+      done
+
     fi
   done
 

@@ -11,7 +11,7 @@ function _ZPM_get_plugin_type() {
       echo 'omz'
       return 0
     fi
-    
+
     echo "github"
     return 0
   fi

@@ -7,10 +7,4 @@ function _ZPM_addfpath() {
     fpath=( $fpath "${1}" )
   fi
 
-  for i in "${1}/"*; do
-    if [[ "${i}" != *".zwc" && "${i}.zwc" -ot "${i}" ]]; then
-      zcompile "${i}" 2>/dev/null
-    fi
-  done
-
 }
