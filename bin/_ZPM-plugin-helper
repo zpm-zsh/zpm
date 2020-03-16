@@ -80,7 +80,7 @@ fi
 if [[ "$2" == *",hook:"* && -e "$Plugin_path" ]]; then
   local status_string="${c[green]}${c[bold]}Run hook for${c[reset]} "
   status_string+="$Plugin_hyperlink"
-  status_string+=" ${c[green]}●${c[reset]}"
+  status_string+=" ${c[green]}✓${c[reset]}"
 
   cd "$Plugin_path"
   eval "${${2##*,hook:}%%\,*}" >/dev/null
