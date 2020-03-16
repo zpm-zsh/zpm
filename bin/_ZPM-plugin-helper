@@ -42,9 +42,7 @@ if [[ "$1" == "upgrade" ]]; then
   git --git-dir="${Plugin_git_dir}/.git/" --work-tree="${Plugin_git_dir}/" checkout "${Plugin_git_dir}/" </dev/null >/dev/null 2>/dev/null
   git --git-dir="${Plugin_git_dir}/.git/" --work-tree="${Plugin_git_dir}/" pull </dev/null >/dev/null 2>/dev/null
 
-  local status_string
-
-  status_string="${c[green]}${c[bold]}Upgrade${c[reset]} "
+  local status_string="${c[green]}${c[bold]}Upgrade${c[reset]} "
   status_string+="$Plugin_hyperlink"
   status_string+=" ${c[green]}✓${c[reset]}"
 
@@ -65,17 +63,13 @@ else
   fi
 
   if [[ "$?" == "0" ]]; then
-    local status_string
-
-    status_string="${c[green]}${c[bold]}Install${c[reset]} "
+    local status_string="${c[green]}${c[bold]}Install${c[reset]} "
     status_string+="$Plugin_hyperlink"
     status_string+=" ${c[green]}✓${c[reset]}"
 
     echo $status_string
   else
-    local status_string
-
-    status_string="${c[red]}${c[bold]}Can't install${c[reset]} "
+    local status_string="${c[red]}${c[bold]}Can't install${c[reset]} "
     status_string+="$Plugin_hyperlink"
     status_string+=" ${c[red]}${c[bold]}✕${c[reset]}"
     echo $status_string
@@ -84,9 +78,7 @@ fi
 
 
 if [[ "$2" == *",hook:"* && -e "$Plugin_path" ]]; then
-  local status_string
-
-  status_string="${c[green]}${c[bold]}Run hook for${c[reset]} "
+  local status_string="${c[green]}${c[bold]}Run hook for${c[reset]} "
   status_string+="$Plugin_hyperlink"
   status_string+=" ${c[green]}●${c[reset]}"
 
