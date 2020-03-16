@@ -1,8 +1,6 @@
 #!/usr/bin/env zsh
 
 function _ZPM_source() {
-  zsh_loaded_plugins+=("$1")
-
   _ZPM_plugins_for_source+=("$1")
   _ZPM_file_for_source["$1"]="${2}"
   

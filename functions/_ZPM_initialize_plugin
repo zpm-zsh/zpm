@@ -17,7 +17,6 @@ function _ZPM_initialize_plugin() {
         _Plugins_Install+=("$plugin")
       fi
 
-      _ZPM_plugins_full[$Plugin_name]="$plugin"
       _Plugins_Load_Names+=($plugin)
     fi
   done
