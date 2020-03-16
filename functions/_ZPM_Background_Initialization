@@ -8,7 +8,7 @@ function _ZPM_Background_Initialization() {
 
   cat "${_ZPM_DIR}/lib/init.zsh" >> "$_ZPM_TMP"
   echo >> "$_ZPM_TMP"
-  
+
   echo "$(typeset -p _ZPM_plugins_full)" >> "$_ZPM_TMP"
   echo "export PATH=\"\${PATH}${_ZPM_PATH}\"" >> "$_ZPM_TMP"
   echo "fpath+=( '${(j:' ':)_ZPM_fpath}' )" >> "$_ZPM_TMP"

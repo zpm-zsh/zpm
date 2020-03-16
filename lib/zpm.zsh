@@ -28,7 +28,7 @@ autoload -Uz                     \
   _ZPM_get_plugin_name           \
   _ZPM_get_plugin_path           \
   _ZPM_get_plugin_type           \
-  _ZPM_initialize_plugin         \
+  _ZPM_initialize_plugins        \
   _ZPM_load_plugin               \
   _ZPM_log                       \
   _ZPM_upgrade                   \
@@ -39,7 +39,7 @@ autoload -Uz                     \
 function zpm() {
   if [[ "$1" == 'load' ]]; then
     shift
-    _ZPM_initialize_plugin "$@"
+    _ZPM_initialize_plugins "$@"
     return 0
   fi
 
@@ -59,17 +59,17 @@ function zpm() {
     return 0
   fi
 
-  if [[ "$1" == 'c' || "$1" == 'cl' || "$1" == 'clean' ]]; then
-    shift
-    _ZPM_clean
-    return 0
-  fi
-
   if [[ "$1" == 'u' || "$1" == 'up' || "$1" == 'upgrade' ]]; then
     shift
     _ZPM_upgrade "$@"
     return 0
   fi
 
-  _ZPM_initialize_plugin "$@"
+  if [[ "$1" == 'c' || "$1" == 'cl' || "$1" == 'clean' ]]; then
+    shift
+    _ZPM_clean
+    return 0
+  fi
+
+  _ZPM_initialize_plugins "$@"
 }

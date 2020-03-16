@@ -19,7 +19,7 @@ all:
 	beautysh --indent-size 2 --force-function-style fnpar functions/_ZPM_get_plugin_path
 	beautysh --indent-size 2 --force-function-style fnpar functions/_ZPM_get_plugin_root_git_dir
 	beautysh --indent-size 2 --force-function-style fnpar functions/_ZPM_get_plugin_type
-	beautysh --indent-size 2 --force-function-style fnpar functions/_ZPM_initialize_plugin
+	beautysh --indent-size 2 --force-function-style fnpar functions/_ZPM_initialize_plugins
 	beautysh --indent-size 2 --force-function-style fnpar functions/_ZPM_load_plugin
 	beautysh --indent-size 2 --force-function-style fnpar functions/_ZPM_log
 	beautysh --indent-size 2 --force-function-style fnpar functions/_ZPM_upgrade

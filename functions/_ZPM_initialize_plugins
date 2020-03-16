@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 
-function _ZPM_initialize_plugin() {
+function _ZPM_initialize_plugins() {
   # Check if plugin isn't loaded
   local -a _Plugins_Install
   local -a _Plugins_Load_Names
