@@ -4,17 +4,17 @@ fpath+=("${_ZPM_DIR}/functions")
 
 if [[ "$CLICOLOR" != "0" ]]; then
   typeset -gA c=(
-    [reset]="[0m"
-    [bold]="[1m"
+    reset "[0m"
+    bold "[1m"
 
-    [black]="[30m"
-    [red]="[31m"
-    [green]="[32m"
-    [yellow]="[33m"
-    [blue]="[34m"
-    [magenta]="[35m"
-    [cyan]="[36m"
-    [grey]="[37m"
+    black "[30m"
+    red "[31m"
+    green "[32m"
+    yellow "[33m"
+    blue "[34m"
+    magenta "[35m"
+    cyan "[36m"
+    grey "[37m"
   )
 fi
 
@@ -27,7 +27,6 @@ autoload -Uz                   \
   _ZPM_get_plugin_hyperlink    \
   _ZPM_log                     \
   _ZPM_get_plugin_root_git_dir
-
 
 local Plugin_name=$(_ZPM_get_plugin_name "$2")
 local Plugin_type=$(_ZPM_get_plugin_type "$2")
@@ -75,7 +74,6 @@ else
     echo $status_string
   fi
 fi
-
 
 if [[ "$2" == *",hook:"* && -e "$Plugin_path" ]]; then
   local status_string="${c[green]}${c[bold]}Run hook for${c[reset]} "
