@@ -68,6 +68,7 @@ function _ZPM_load_plugin() {
   fi
 
   if [[ "$_ZPM_local_source"  == "true" ]]; then
+    local _ZPM_plugin_file_path
     if [[ "$1"  == *",source:"* ]]; then
       _ZPM_plugin_file_path=$(
         _ZPM_get_plugin_file_path "${Plugin_path}" "${Plugin_basename}" "${${1##*,source:}%%,*}"

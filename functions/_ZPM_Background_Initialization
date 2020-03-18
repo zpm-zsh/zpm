@@ -3,8 +3,8 @@
 function _ZPM_Background_Initialization() {
   mkdir -p "${_ZPM_CACHE_DIR}"
 
-  _ZPM_TMP="$(mktemp)"
-  _ZPM_TMP_ASYNC="$(mktemp)"
+  local _ZPM_TMP="$(mktemp)"
+  local _ZPM_TMP_ASYNC="$(mktemp)"
 
   cat "${_ZPM_DIR}/lib/init.zsh" >> "$_ZPM_TMP"
   echo >> "$_ZPM_TMP"
@@ -56,7 +56,6 @@ function _ZPM_Background_Initialization() {
 
   mv "$_ZPM_TMP" "$_ZPM_CACHE"
   mv "$_ZPM_TMP_ASYNC" "$_ZPM_CACHE_ASYNC"
-
 
   compinit -i -C -d "${ZPM_COMPDUMP}"
   TMOUT=5
