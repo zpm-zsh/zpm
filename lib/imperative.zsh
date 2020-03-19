@@ -1,6 +1,7 @@
 #!/usr/bin/env zsh
 
 declare -Ag _ZPM_plugins_full=( [zpm]=zpm )
+mkdir -p "${_ZPM_CACHE_DIR}"
 
 compinit -i -C -d "${ZPM_COMPDUMP}"
 

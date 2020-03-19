@@ -1,7 +1,6 @@
 #!/usr/bin/env zsh
 
 function _ZPM_Background_Initialization() {
-  mkdir -p "${_ZPM_CACHE_DIR}"
 
   local _ZPM_TMP="$(mktemp)"
   local _ZPM_TMP_ASYNC="$(mktemp)"
