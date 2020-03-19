@@ -1,11 +1,12 @@
 #!/usr/bin/env zsh
 
 function _ZPM_load_plugin() {
-  local Plugin_name=$(_ZPM_get_plugin_name "$1")
+  local Plugin="$1"
+  local Plugin_name=$(_ZPM_get_plugin_name "$Plugin")
   local Plugin_basename=$(_ZPM_get_plugin_basename "$Plugin_name")
   local Plugin_path=$(_ZPM_get_plugin_path "$Plugin_name")
 
-  _ZPM_plugins_full[$Plugin_name]="$1"
+  _ZPM_plugins_full[$Plugin_name]="$Plugin"
   zsh_loaded_plugins+=("$Plugin_name")
 
 
@@ -16,8 +17,8 @@ function _ZPM_load_plugin() {
 
   _ZPM_log zpm:init "Initialize '${Plugin_name}'"
 
-  if [[ "$1"  == *",apply:"* ]]; then
-    local _ZPM_tag_str=${1##*,apply}
+  if [[ "$Plugin"  == *",apply:"* ]]; then
+    local _ZPM_tag_str=${Plugin##*,apply}
     _ZPM_tag_str=${_ZPM_tag_str%%\,*}
 
     if [[ "$_ZPM_tag_str" != *':source'* ]]; then
@@ -33,12 +34,12 @@ function _ZPM_load_plugin() {
     fi
   fi
 
-  if [[ "$1"  == *",async"* ]]; then
+  if [[ "$Plugin"  == *",async"* ]]; then
     _ZPM_local_async=true
   fi
 
   if [[ "$_ZPM_local_fpath"  == "true" ]]; then
-    if [[ "$1"  == *",fpath:"* ]]; then
+    if [[ "$Plugin"  == *",fpath:"* ]]; then
       local zpm_fpath=${${1##*,fpath:}%%,*}
       local _local_path="${Plugin_path}/${zpm_fpath}"
       _ZPM_log zpm:init:fpath "Add to \$fpath '${_local_path:a}'"
@@ -56,7 +57,7 @@ function _ZPM_load_plugin() {
   fi
 
   if [[ "$_ZPM_local_path"  == "true" ]]; then
-    if [[ "$1"  == *",path:"* ]]; then
+    if [[ "$Plugin"  == *",path:"* ]]; then
       local zpm_path=${${1##*,path:}%%,*}
       local _local_path="${Plugin_path}/${zpm_path}"
       _ZPM_log zpm:init:path "Add to \$PATH '${_local_path:a}'"
@@ -69,7 +70,7 @@ function _ZPM_load_plugin() {
 
   if [[ "$_ZPM_local_source"  == "true" ]]; then
     local _ZPM_plugin_file_path
-    if [[ "$1"  == *",source:"* ]]; then
+    if [[ "$Plugin"  == *",source:"* ]]; then
       _ZPM_plugin_file_path=$(
         _ZPM_get_plugin_file_path "${Plugin_path}" "${Plugin_basename}" "${${1##*,source:}%%,*}"
       )
