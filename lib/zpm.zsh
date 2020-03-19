@@ -15,23 +15,21 @@ fpath+=("${_ZPM_DIR}/functions")
 autoload -Uz                     \
   _ZPM_addfpath                  \
   _ZPM_addpath                   \
+  _ZPM_async_source              \
   _ZPM_Background_Initialization \
   _ZPM_clean                     \
   _ZPM_compile                   \
   _ZPM_get_plugin_basename       \
   _ZPM_get_plugin_file_path      \
-  _ZPM_get_plugin_link           \
-  _ZPM_get_plugin_hyperlink      \
   _ZPM_get_plugin_name           \
   _ZPM_get_plugin_path           \
-  _ZPM_get_plugin_type           \
   _ZPM_initialize_plugins        \
   _ZPM_load_plugin               \
   _ZPM_log                       \
-  _ZPM_upgrade                   \
+  _ZPM_no_source                 \
   _ZPM_source                    \
-  _ZPM_async_source              \
-  _ZPM_no_source
+  _ZPM_upgrade
+
 
 function zpm() {
   if [[ "$1" == 'load' ]]; then
