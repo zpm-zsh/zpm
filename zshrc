@@ -5,13 +5,8 @@ fi
 source ~/.zpm/zpm.zsh
 
 ### Tmux
-zpm if ssh load \
-  zpm-zsh/tmux  \
-
-
-zpm if-not ssh load       \
-  zpm-zsh/tmux,apply:path \
-
+zpm if ssh load zpm-zsh/tmux
+zpm if-not ssh load zpm-zsh/tmux,apply:path
 
 ### Compatibility
 zpm if termux load     \
@@ -40,7 +35,6 @@ zpm load                                           \
 zpm if-not ssh load                                                                    \
   zpm-zsh/dropbox,async                                                                \
   lukechilds/zsh-better-npm-completion,async                                           \
-  horosgrisa/utils,apply:path                                                          \
                                                                                        \
   zpm-zsh/readers,async                                                                \
   zpm-zsh/clipboard,async                                                              \
