@@ -1,5 +1,7 @@
 #!/usr/bin/env zsh
 
+declare -Ag _ZPM_plugins_full=( [zpm]=zpm )
+
 compinit -i -C -d "${ZPM_COMPDUMP}"
 
 zpm load zpm-zsh/helpers zpm-zsh/colors zpm-zsh/background
@@ -14,3 +16,4 @@ function source() {
 
   builtin source "$1"
 }
+
