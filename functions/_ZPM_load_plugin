@@ -2,13 +2,11 @@
 
 function _ZPM_load_plugin() {
   local Plugin="$1"
-  local Plugin_name=$(_ZPM_get_plugin_name "$Plugin")
+  local Plugin_name="$2"
   local Plugin_basename=$(_ZPM_get_plugin_basename "$Plugin_name")
   local Plugin_path=$(_ZPM_get_plugin_path "$Plugin_name")
 
-  _ZPM_plugins_full[$Plugin_name]="$Plugin"
   zsh_loaded_plugins+=("$Plugin_name")
-
 
   local _ZPM_local_source=true
   local _ZPM_local_async=false
