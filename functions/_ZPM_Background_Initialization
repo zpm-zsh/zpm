@@ -56,7 +56,7 @@ function _ZPM_Background_Initialization() {
   mv "$_ZPM_TMP" "$_ZPM_CACHE"
   mv "$_ZPM_TMP_ASYNC" "$_ZPM_CACHE_ASYNC"
 
-  compinit -i -C -d "${ZPM_COMPDUMP}"
+  compinit -i -d "${ZPM_COMPDUMP}"
   TMOUT=5
 
   (_ZPM_compile  &)
