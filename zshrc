@@ -8,11 +8,6 @@ source ~/.zpm/zpm.zsh
 zpm if ssh load zpm-zsh/tmux
 zpm if-not ssh load zpm-zsh/tmux,apply:path
 
-### Compatibility
-zpm if termux load     \
-  zpm-zsh/termux,async \
-
-
 zpm if vte load \
   zpm-zsh/vte   \
 
