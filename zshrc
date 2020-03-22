@@ -29,7 +29,6 @@ zpm if-not ssh load                                                             
   zpm-zsh/dropbox,async                                                                \
   lukechilds/zsh-better-npm-completion,async                                           \
                                                                                        \
-  zpm-zsh/readers,async                                                                \
   zpm-zsh/clipboard,async                                                              \
   zpm-zsh/mysql-colorize,async                                                         \
   zpm-zsh/zshmarks,async                                                               \
