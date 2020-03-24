@@ -3,7 +3,7 @@
 # Zsh Plugin Standard compatibility
 # 0 – the plugin manager provides the ZERO parameter,
 # f - … supports the functions subdirectory,
-# f - … supports the bin subdirectory,
+# b - … supports the bin subdirectory,
 # u - … the unload function,
 # U - … the @zsh-plugin-run-on-unload call,
 # p – … the @zsh-plugin-run-on-update call,
