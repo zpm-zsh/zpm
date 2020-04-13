@@ -48,6 +48,4 @@ zpm load                      \
   omz/wp-cli,async            \
 
 
-if [[ -f ~/.zshrc.local ]]; then
-  source ~/.zshrc.local 
-fi
+source ~/.zshrc.local 2>/dev/null
