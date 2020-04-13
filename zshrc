@@ -12,7 +12,7 @@ zpm if vte load zpm-zsh/vte
 
 ### 3party plugins
 zpm load                                           \
-  zpm-zsh/core-config                              \
+  zpm-zsh/core-config,async                        \
   zpm-zsh/ignored-users,async                      \
   zpm-zsh/check-deps                               \
   zpm-zsh/minimal-theme                            \
