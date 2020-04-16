@@ -1,8 +1,5 @@
 #!/usr/bin/env zsh
-if [[ ! -f ~/.zpm/zpm.zsh ]]; then
-  git clone --depth 1 https://github.com/zpm-zsh/zpm ~/.zpm
-fi
-source ~/.zpm/zpm.zsh
+source ~/.local/lib/zpm/zpm.zsh
 
 ### Tmux
 zpm if ssh load zpm-zsh/tmux
