@@ -1,11 +1,8 @@
 #!/usr/bin/env zsh
-# Standarized $0 handling, following:
-# https://github.com/zdharma/Zsh-100-Commits-Club/blob/master/Zsh-Plugin-Standard.adoc
-0="${${ZERO:-${0:#$ZSH_ARGZERO}}:-${(%):-%N}}"
-0="${${(M)0:#/*}:-$PWD/$0}"
+0=${(%):-%x}
 
 export _ZPM_DIR=${0:h}
-export _ZPM_PLUGIN_DIR=${ZPM_PLUGIN_DIR:-"$HOME/.local/lib/zpm"}
+export _ZPM_PLUGIN_DIR="${0:h}/plugins"
 
 _ZPM_CACHE_DIR="${TMPDIR:-/tmp}/zsh-${UID}"
 _ZPM_CACHE="${_ZPM_CACHE_DIR}/zpm-cache.zsh"

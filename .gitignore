@@ -1,6 +1,9 @@
 tests/_output/*
 !tests/_output/.gitkeep
 
+plugins/*
+!plugins/.gitkeep
+
 .directory
 *.zwc
 *.old
