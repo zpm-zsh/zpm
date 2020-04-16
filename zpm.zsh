@@ -4,7 +4,7 @@
 export _ZPM_DIR=${0:h}
 export _ZPM_PLUGIN_DIR="${0:h}/plugins"
 
-_ZPM_CACHE_DIR="${TMPDIR:-/tmp}/zsh-${UID}"
+_ZPM_CACHE_DIR="${TMPDIR:-/tmp}/zsh-${UID:-user}"
 _ZPM_CACHE="${_ZPM_CACHE_DIR}/zpm-cache.zsh"
 _ZPM_CACHE_ASYNC="${_ZPM_CACHE_DIR}/zpm-cache-async.zsh"
 
