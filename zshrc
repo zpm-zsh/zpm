@@ -39,6 +39,7 @@ zpm if-not ssh load                                                             
   zsh-users/zsh-history-substring-search,source:zsh-history-substring-search.zsh,async \
   zdharma/fast-syntax-highlighting,async                                               \
   zsh-users/zsh-autosuggestions,source:zsh-autosuggestions.zsh,async                   \
+  psprint/history-search-multi-word,fpath:/,async                                      \
 
 
 zpm load                      \
