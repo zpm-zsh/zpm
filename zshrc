@@ -12,7 +12,7 @@ zpm if vte load zpm-zsh/vte
 
 ### 3party plugins
 zpm load                                           \
-  zpm-zsh/core-config,async                        \
+  zpm-zsh/core-config                              \
   zpm-zsh/ignored-users,async                      \
   zpm-zsh/check-deps                               \
   zpm-zsh/minimal-theme                            \
@@ -36,7 +36,6 @@ zpm if-not ssh load                                                             
   zpm-zsh/autoenv,async                                                                \
                                                                                        \
   mdumitru/fancy-ctrl-z,async                                                          \
-  zthxxx/zsh-history-enquirer,async                                                    \
   zsh-users/zsh-history-substring-search,source:zsh-history-substring-search.zsh,async \
   zdharma/fast-syntax-highlighting,async                                               \
   zsh-users/zsh-autosuggestions,source:zsh-autosuggestions.zsh,async                   \
