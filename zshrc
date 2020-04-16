@@ -1,5 +1,5 @@
 #!/usr/bin/env zsh
-source ~/.local/lib/zpm/zpm.zsh
+source ~/.zpm/zpm.zsh
 
 ### Tmux
 zpm if ssh load zpm-zsh/tmux
