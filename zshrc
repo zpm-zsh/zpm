@@ -11,18 +11,18 @@ zpm if-not ssh load zpm-zsh/tmux,apply:path
 zpm if vte load zpm-zsh/vte
 
 ### 3party plugins
-zpm load                                           \
-  zpm-zsh/core-config                              \
-  zpm-zsh/ignored-users,async                      \
-  zpm-zsh/check-deps                               \
-  zpm-zsh/minimal-theme                            \
-  zpm-zsh/ls,async                                 \
-  zpm-zsh/colorize,async                           \
-  zpm-zsh/ssh,async                                \
-  zpm-zsh/dot,async                                \
-  zpm-zsh/dircolors-material,async                 \
-  zpm-zsh/undollar,async                           \
-  zsh-users/zsh-completions,apply:fpath,fpath:/src \
+zpm load                              \
+  zpm-zsh/core-config                 \
+  zpm-zsh/ignored-users,async         \
+  zpm-zsh/check-deps                  \
+  zpm-zsh/minimal-theme               \
+  zpm-zsh/ls,async                    \
+  zpm-zsh/colorize,async              \
+  zpm-zsh/ssh,async                   \
+  zpm-zsh/dot,async                   \
+  zpm-zsh/dircolors-material,async    \
+  zpm-zsh/undollar,async              \
+  zpm-zsh/zsh-completions,apply:fpath \
 
 
 zpm if-not ssh load                                                                    \
