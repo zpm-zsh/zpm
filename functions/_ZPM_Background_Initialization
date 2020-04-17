@@ -63,7 +63,7 @@ function _ZPM_Background_Initialization() {
   compinit -i -d "${ZPM_COMPDUMP}"
   TMOUT=5
 
-  (_ZPM_compile  &)
+  (_ZPM_compile 2>/dev/null &)
 
   add-zsh-hook -d background _ZPM_Background_Initialization
 }
