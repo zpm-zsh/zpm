@@ -12,11 +12,6 @@ function _ZPM_get_plugin_type() {
       return 0
     fi
 
-    if [[ "$1" == 'mkdir/'* ]]; then
-      echo 'mkdir'
-      return 0
-    fi
-
     echo "github"
     return 0
   fi
