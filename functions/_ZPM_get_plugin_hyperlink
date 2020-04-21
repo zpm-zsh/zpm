@@ -6,7 +6,7 @@ function _ZPM_get_plugin_hyperlink() {
   local status_string=""
 
   if [[ -z "$plugin_link" ]]; then
-    status_string+="${c[blue]}${c[bold]}${plugin_link//\//${c[red]}${c[bold]}/${c[blue]}${c[bold]}}"
+    status_string+="${c[blue]}${c[bold]}${plugin_name//\//${c[red]}${c[bold]}/${c[blue]}${c[bold]}}"
     status_string+="${c[reset]}"
   else
     status_string+="\033]8;;${plugin_link}\a"

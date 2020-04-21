@@ -38,12 +38,17 @@ local Plugin_git_dir=$(_ZPM_get_plugin_root_git_dir "$Plugin_path" "$Plugin_type
 
 if [[ "$1" == "upgrade" ]]; then
   _ZPM_log zpm:upgrade "Upgrade '${2}'"
-  git --git-dir="${Plugin_git_dir}/.git/" --work-tree="${Plugin_git_dir}/" checkout "${Plugin_git_dir}/" </dev/null >/dev/null 2>/dev/null
-  git --git-dir="${Plugin_git_dir}/.git/" --work-tree="${Plugin_git_dir}/" pull </dev/null >/dev/null 2>/dev/null
-
+  if [[ "$Plugin_type" == "cmd" ]];then
+    if [[ "$2" == *",cmd:"*  ]]; then
+      eval "${${2##*,cmd:}%%\,*}" > "${Plugin_path}/${Plugin_basename}.plugin.zsh"
+    fi
+  else
+    git --git-dir="${Plugin_git_dir}/.git/" --work-tree="${Plugin_git_dir}/" checkout "${Plugin_git_dir}/" </dev/null >/dev/null 2>/dev/null
+    git --git-dir="${Plugin_git_dir}/.git/" --work-tree="${Plugin_git_dir}/" pull </dev/null >/dev/null 2>/dev/null
+  fi
   local status_string="${c[green]}${c[bold]}Upgrade${c[reset]} "
   status_string+="$Plugin_hyperlink"
-  status_string+=" ${c[green]}✓${c[reset]}"
+  status_string+=" ${c[green]}${c[reset]}"
 
   echo $status_string
 else
@@ -53,6 +58,11 @@ else
     git clone --recursive "https://gitlab.com/"${Plugin_name}".git" --depth 1 --single-branch "${Plugin_git_dir}" </dev/null >/dev/null 2>/dev/null
   elif [[ "$Plugin_type" == "bitbucket" ]];then
     git clone --recursive "https://bitbucket.com/"${Plugin_name}".git" --depth 1 --single-branch "${Plugin_git_dir}" </dev/null >/dev/null 2>/dev/null
+  elif [[ "$Plugin_type" == "cmd" ]];then
+    if [[ "$2" == *",cmd:"*  ]]; then
+      mkdir -p "${Plugin_path}"
+      eval "${${2##*,cmd:}%%\,*}" >! "${Plugin_path}/${Plugin_basename}.plugin.zsh"
+    fi
   elif [[ "$Plugin_type" == "omz" ]];then
     if [[ ! -e "${HOME}/.oh-my-zsh" ]]; then
       git clone --recursive "https://github.com/ohmyzsh/ohmyzsh.git" --depth 1 --single-branch "${Plugin_git_dir}" </dev/null >/dev/null 2>/dev/null
