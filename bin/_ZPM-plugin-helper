@@ -97,7 +97,7 @@ if [[ "$2" == *",gen-comp:"* && -e "$Plugin_path" ]]; then
   status_string+=" ${c[green]}${c[reset]}"
 
   cd "$Plugin_path"
-  mkdir "${Plugin_path}/functions"
+  mkdir -p "${Plugin_path}/functions"
   eval "${${2##*,gen-comp:}%%\,*}" >"${Plugin_path}/functions/_${Plugin_basename}"
 
   echo "$status_string"
