@@ -12,8 +12,8 @@ function _ZPM_get_plugin_type() {
       return 0
     fi
 
-    if [[ "$1" == 'cmd/'* ]]; then
-      echo 'cmd'
+    if [[ "$1" == 'mkdir/'* ]]; then
+      echo 'mkdir'
       return 0
     fi
 
@@ -22,7 +22,6 @@ function _ZPM_get_plugin_type() {
   fi
 
   local _ZPM_tag_str=${1##*,type:}
-  echo $_ZPM_tag_str
   _ZPM_tag_str=${_ZPM_tag_str%%\,*}
 
   if [[ "$_ZPM_tag_str" == 'gitlab' ]]; then
@@ -40,8 +39,8 @@ function _ZPM_get_plugin_type() {
     return 0
   fi
 
-  if [[ "$_ZPM_tag_str" == 'cmd' ]]; then
-    echo 'cmd'
+  if [[ "$_ZPM_tag_str" == 'mkdir' ]]; then
+    echo 'mkdir'
     return 0
   fi
 

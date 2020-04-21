@@ -10,6 +10,11 @@ function _ZPM_get_plugin_file_path() {
     fi
   fi
 
+  if [[ -e "${1}/zpm-generated.zsh" ]]; then
+    echo "${1}/zpm-generated.zsh"
+    return 0
+  fi
+
   if [[ -e "${1}/${2}.plugin.zsh" ]]; then
     echo "${1}/${2}.plugin.zsh"
     return 0
