@@ -64,13 +64,13 @@ else
   if [[ "$?" == "0" ]]; then
     local status_string="${c[green]}${c[bold]}Install${c[reset]} "
     status_string+="$Plugin_hyperlink"
-    status_string+=" ${c[green]}✓${c[reset]}"
+    status_string+=" ${c[green]}${c[reset]}"
 
     echo $status_string
   else
     local status_string="${c[red]}${c[bold]}Can't install${c[reset]} "
     status_string+="$Plugin_hyperlink"
-    status_string+=" ${c[red]}${c[bold]}✕${c[reset]}"
+    status_string+=" ${c[red]}${c[bold]}${c[reset]}"
     echo $status_string
   fi
 fi
@@ -78,7 +78,7 @@ fi
 if [[ "$2" == *",hook:"* && -e "$Plugin_path" ]]; then
   local status_string="${c[magenta]}${c[bold]}Run hook for${c[reset]} "
   status_string+="$Plugin_hyperlink"
-  status_string+=" ${c[green]}✓${c[reset]}"
+  status_string+=" ${c[green]}${c[reset]}"
 
   cd "$Plugin_path"
   eval "${${2##*,hook:}%%\,*}" >/dev/null
