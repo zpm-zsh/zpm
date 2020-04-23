@@ -5,7 +5,7 @@ mkdir -p "${_ZPM_CACHE_DIR}"
 
 compinit -i -C -d "${ZPM_COMPDUMP}"
 
-zpm load zpm-zsh/helpers zpm-zsh/colors zpm-zsh/background
+_ZPM_initialize_plugins zpm-zsh/helpers zpm-zsh/colors zpm-zsh/background
 
 TMOUT=1
 add-zsh-hook background _ZPM_Background_Initialization
@@ -17,4 +17,3 @@ function source() {
 
   builtin source "$1"
 }
-

@@ -24,6 +24,7 @@ all:
 	beautysh --indent-size 2 --force-function-style fnpar functions/_ZPM_log
 	beautysh --indent-size 2 --force-function-style fnpar functions/_ZPM_upgrade
 	beautysh --indent-size 2 --force-function-style fnpar functions/_ZPM_compile
+	beautysh --indent-size 2 --force-function-style fnpar functions/_ZPM_readme
 
 
 test:
