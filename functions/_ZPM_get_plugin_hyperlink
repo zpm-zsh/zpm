@@ -1,18 +1,16 @@
 #!/usr/bin/env zsh
 
-function _ZPM_get_plugin_hyperlink() {
-  local plugin_name="$1"
-  local plugin_link="$2"
-  local status_string=""
+local plugin_name="$1"
+local plugin_link="$2"
+local status_string=""
 
-  if [[ -z "$plugin_link" ]]; then
-    status_string+="${c[blue]}${c[bold]}${plugin_name//\//${c[red]}${c[bold]}/${c[blue]}${c[bold]}}"
-    status_string+="${c[reset]}"
-  else
-    status_string+="\033]8;;${plugin_link}\a"
-    status_string+="${c[blue]}${c[bold]}${plugin_name//\//${c[red]}${c[bold]}/${c[blue]}${c[bold]}}"
-    status_string+="\033]8;;\a${c[reset]}"
-  fi
+if [[ -z "$plugin_link" ]]; then
+  status_string+="${c[blue]}${c[bold]}${plugin_name//\//${c[red]}${c[bold]}/${c[blue]}${c[bold]}}"
+  status_string+="${c[reset]}"
+else
+  status_string+="\033]8;;${plugin_link}\a"
+  status_string+="${c[blue]}${c[bold]}${plugin_name//\//${c[red]}${c[bold]}/${c[blue]}${c[bold]}}"
+  status_string+="\033]8;;\a${c[reset]}"
+fi
 
-  echo "$status_string"
-}
+echo "$status_string"

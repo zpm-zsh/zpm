@@ -1,44 +1,43 @@
 #!/usr/bin/env zsh
 
-function _ZPM_get_plugin_file_path() {
-  if [[ -n "${3}" ]]; then
-    if [[ -e "${1}/${3}" ]]; then
-      echo "${1}/${3}"
-      return 0
-    else
-      return -1
-    fi
-  fi
-
-  if [[ -e "${1}/zpm-generated.zsh" ]]; then
-    echo "${1}/zpm-generated.zsh"
+if [[ -n "${3}" ]]; then
+  if [[ -e "${1}/${3}" ]]; then
+    echo "${1}/${3}"
     return 0
+  else
+    return -1
   fi
+fi
 
-  if [[ -e "${1}/${2}.plugin.zsh" ]]; then
-    echo "${1}/${2}.plugin.zsh"
-    return 0
-  fi
+if [[ -e "${1}/zpm-generated.zsh" ]]; then
+  echo "${1}/zpm-generated.zsh"
+  return 0
+fi
 
-  if [[ -e "${1}/zsh-${2}.plugin.zsh" ]]; then
-    echo "${1}/zsh-${2}.plugin.zsh"
-    return 0
-  fi
+if [[ -e "${1}/${2}.plugin.zsh" ]]; then
+  echo "${1}/${2}.plugin.zsh"
+  return 0
+fi
 
-  if [[ -e "${1}/${2}.zsh" ]]; then
-    echo "${1}/${2}.zsh"
-    return 0
-  fi
+if [[ -e "${1}/zsh-${2}.plugin.zsh" ]]; then
+  echo "${1}/zsh-${2}.plugin.zsh"
+  return 0
+fi
 
-  if [[ -e "${1}/${2}.zsh-theme" ]]; then
-    echo "${1}/${2}.zsh-theme"
-    return 0
-  fi
+if [[ -e "${1}/${2}.zsh" ]]; then
+  echo "${1}/${2}.zsh"
+  return 0
+fi
 
-  if [[ -e "${1}/init.zsh" ]]; then
-    echo "${1}/init.zsh"
-    return 0
-  fi
+if [[ -e "${1}/${2}.zsh-theme" ]]; then
+  echo "${1}/${2}.zsh-theme"
+  return 0
+fi
 
-  return -1
-}
+if [[ -e "${1}/init.zsh" ]]; then
+  echo "${1}/init.zsh"
+  return 0
+fi
+
+return -1
+

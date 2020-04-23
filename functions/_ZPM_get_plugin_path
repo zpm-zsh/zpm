@@ -1,5 +1,4 @@
 #!/usr/bin/env zsh
 
-function _ZPM_get_plugin_path() {
-  echo "${_ZPM_PLUGIN_DIR}/${1//\//---}"
-}
+echo "${_ZPM_PLUGIN_DIR}/${1//\//---}"
+

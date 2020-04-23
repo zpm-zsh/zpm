@@ -1,5 +1,4 @@
 #!/usr/bin/env zsh
 
-function _ZPM_clean() {
-  rm -rf "${_ZPM_CACHE_DIR}" 2>/dev/null
-}
+rm -rf "${_ZPM_CACHE_DIR}" 2>/dev/null
+

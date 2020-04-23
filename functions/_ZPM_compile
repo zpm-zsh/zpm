@@ -1,30 +1,29 @@
 #!/usr/bin/env zsh
 
-function _ZPM_compile() {
-  zcompile "$_ZPM_CACHE" 2>/dev/null
-  zcompile "$_ZPM_CACHE_ASYNC" 2>/dev/null
-  zcompile "${ZPM_COMPDUMP}" 2>/dev/null
-  zcompile "${HOME}/.zshrc" 2>/dev/null
-  zcompile "${HOME}/.zshrc.local" 2>/dev/null
-  zcompile "${_ZPM_DIR}/zpm.zsh" 2>/dev/null
+zcompile "$_ZPM_CACHE" 2>/dev/null
+zcompile "$_ZPM_CACHE_ASYNC" 2>/dev/null
+zcompile "${ZPM_COMPDUMP}" 2>/dev/null
+zcompile "${HOME}/.zshrc" 2>/dev/null
+zcompile "${HOME}/.zshrc.local" 2>/dev/null
+zcompile "${_ZPM_DIR}/zpm.zsh" 2>/dev/null
 
-  for i in "${_ZPM_DIR}/functions/"*; do
-    if [[ "${i}" != *".zwc" && ! "${i}.zwc" -nt "${i}" ]]; then
-      zcompile "${i}" 2>/dev/null
-    fi
-  done
+for i in "${_ZPM_DIR}/functions/"*; do
+  if [[ "${i}" != *".zwc" && ! "${i}.zwc" -nt "${i}" ]]; then
+    zcompile "${i}" 2>/dev/null
+  fi
+done
 
-  for dir in $fpath; do
-    if [[ -w "$dir" ]]; then
+for dir in $fpath; do
+  if [[ -w "$dir" ]]; then
 
-      for i in "${dir}/"*; do
-        if [[ "${i}" != *".zwc" && ! "${i}.zwc" -nt "${i}" ]]; then
-          zcompile "${i}" 2>/dev/null
-        fi
-      done
+    for i in "${dir}/"*; do
+      if [[ "${i}" != *".zwc" && ! "${i}.zwc" -nt "${i}" ]]; then
+        zcompile "${i}" 2>/dev/null
+      fi
+    done
 
-    fi
-  done
+  fi
+done
 
-  return 0
-}
+return 0
+

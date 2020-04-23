@@ -1,69 +1,67 @@
 #!/usr/bin/env zsh
 
-function _ZPM_Background_Initialization() {
 
-  local _ZPM_TMP="$(mktemp)"
-  local _ZPM_TMP_ASYNC="$(mktemp)"
+local _ZPM_TMP="$(mktemp)"
+local _ZPM_TMP_ASYNC="$(mktemp)"
 
-  cat "${_ZPM_DIR}/lib/init.zsh" >> "$_ZPM_TMP"
+cat "${_ZPM_DIR}/lib/init.zsh" >> "$_ZPM_TMP"
+echo >> "$_ZPM_TMP"
+
+echo "$(typeset -p _ZPM_plugins_full)" >> "$_ZPM_TMP"
+echo "export PATH=\"\${PATH}${_ZPM_PATH}\"" >> "$_ZPM_TMP"
+echo "fpath+=( '${(j:' ':)_ZPM_fpath}' )" >> "$_ZPM_TMP"
+echo >> "$_ZPM_TMP"
+
+echo 'compinit -i -C -d "${ZPM_COMPDUMP}"' >> "$_ZPM_TMP"
+echo >> "$_ZPM_TMP"
+
+for plugin in ${_ZPM_plugins_for_source}; do
+  local file="$_ZPM_file_for_source["$plugin"]"
+  echo "zsh_loaded_plugins+=('$plugin')" >> "$_ZPM_TMP"
+  echo "(){" >> "$_ZPM_TMP"
+  echo "ZERO='${file}'" >> "$_ZPM_TMP"
+  cat "${file}" | grep -v '#!/usr/bin/env zsh' | grep -v '#DO_NOT_INCLUDE_LINE_IN_ZPM_CACHE' >> "$_ZPM_TMP"
+  echo "}" >> "$_ZPM_TMP"
   echo >> "$_ZPM_TMP"
+done
 
-  echo "$(typeset -p _ZPM_plugins_full)" >> "$_ZPM_TMP"
-  echo "export PATH=\"\${PATH}${_ZPM_PATH}\"" >> "$_ZPM_TMP"
-  echo "fpath+=( '${(j:' ':)_ZPM_fpath}' )" >> "$_ZPM_TMP"
-  echo >> "$_ZPM_TMP"
+echo '_ZPM_post_fn () {' >> "$_ZPM_TMP"
+echo "  source '$_ZPM_CACHE_ASYNC'" >> "$_ZPM_TMP"
+echo '  TMOUT=5' >> "$_ZPM_TMP"
+echo '  add-zsh-hook -d background _ZPM_post_fn' >> "$_ZPM_TMP"
+echo '}' >> "$_ZPM_TMP"
+echo >> "$_ZPM_TMP"
 
-  echo 'compinit -i -C -d "${ZPM_COMPDUMP}"' >> "$_ZPM_TMP"
-  echo >> "$_ZPM_TMP"
+echo 'TMOUT=1' >> "$_ZPM_TMP"
+echo >> "$_ZPM_TMP"
 
-  for plugin in ${_ZPM_plugins_for_source}; do
-    local file="$_ZPM_file_for_source["$plugin"]"
-    echo "zsh_loaded_plugins+=('$plugin')" >> "$_ZPM_TMP"
-    echo "(){" >> "$_ZPM_TMP"
-    echo "ZERO='${file}'" >> "$_ZPM_TMP"
-    cat "${file}" | grep -v '#!/usr/bin/env zsh' | grep -v '#DO_NOT_INCLUDE_LINE_IN_ZPM_CACHE' >> "$_ZPM_TMP"
-    echo "}" >> "$_ZPM_TMP"
-    echo >> "$_ZPM_TMP"
-  done
+echo 'add-zsh-hook background _ZPM_post_fn' >> "$_ZPM_TMP"
+echo >> "$_ZPM_TMP"
+echo 'zpm () {}' >> "$_ZPM_TMP"
 
-  echo '_ZPM_post_fn () {' >> "$_ZPM_TMP"
-  echo "  source '$_ZPM_CACHE_ASYNC'" >> "$_ZPM_TMP"
-  echo '  TMOUT=5' >> "$_ZPM_TMP"
-  echo '  add-zsh-hook -d background _ZPM_post_fn' >> "$_ZPM_TMP"
-  echo '}' >> "$_ZPM_TMP"
-  echo >> "$_ZPM_TMP"
-
-  echo 'TMOUT=1' >> "$_ZPM_TMP"
-  echo >> "$_ZPM_TMP"
-
-  echo 'add-zsh-hook background _ZPM_post_fn' >> "$_ZPM_TMP"
-  echo >> "$_ZPM_TMP"
-  echo 'zpm () {}' >> "$_ZPM_TMP"
-
-  for plugin in ${_ZPM_plugins_for_async_source}; do
-    local file="$_ZPM_file_for_async_source["$plugin"]"
-    echo "zsh_loaded_plugins+=('$plugin')" >> "$_ZPM_TMP_ASYNC"
-    echo "(){" >> "$_ZPM_TMP_ASYNC"
-    echo "ZERO='${file}'" >> "$_ZPM_TMP_ASYNC"
-    cat "${file}" | grep -v '#!/usr/bin/env zsh' | grep -v '#DO_NOT_INCLUDE_LINE_IN_ZPM_CACHE' >> "$_ZPM_TMP_ASYNC"
-    echo "}" >> "$_ZPM_TMP_ASYNC"
-    echo >> "$_ZPM_TMP_ASYNC"
-  done
-
-  echo 'unset ZERO' >> "$_ZPM_TMP_ASYNC"
-
-  cat "${_ZPM_DIR}/lib/zpm.zsh" >> "$_ZPM_TMP_ASYNC"
+for plugin in ${_ZPM_plugins_for_async_source}; do
+  local file="$_ZPM_file_for_async_source["$plugin"]"
+  echo "zsh_loaded_plugins+=('$plugin')" >> "$_ZPM_TMP_ASYNC"
+  echo "(){" >> "$_ZPM_TMP_ASYNC"
+  echo "ZERO='${file}'" >> "$_ZPM_TMP_ASYNC"
+  cat "${file}" | grep -v '#!/usr/bin/env zsh' | grep -v '#DO_NOT_INCLUDE_LINE_IN_ZPM_CACHE' >> "$_ZPM_TMP_ASYNC"
+  echo "}" >> "$_ZPM_TMP_ASYNC"
   echo >> "$_ZPM_TMP_ASYNC"
+done
 
-  echo "zle && zle reset-prompt" >> "$_ZPM_TMP_ASYNC"
+echo 'unset ZERO' >> "$_ZPM_TMP_ASYNC"
 
-  mv "$_ZPM_TMP" "$_ZPM_CACHE"
-  mv "$_ZPM_TMP_ASYNC" "$_ZPM_CACHE_ASYNC"
+cat "${_ZPM_DIR}/lib/zpm.zsh" >> "$_ZPM_TMP_ASYNC"
+echo >> "$_ZPM_TMP_ASYNC"
 
-  compinit -i -d "${ZPM_COMPDUMP}"
-  TMOUT=5
+echo "zle && zle reset-prompt" >> "$_ZPM_TMP_ASYNC"
 
-  (_ZPM_compile 2>/dev/null &)
+mv "$_ZPM_TMP" "$_ZPM_CACHE"
+mv "$_ZPM_TMP_ASYNC" "$_ZPM_CACHE_ASYNC"
 
-  add-zsh-hook -d background _ZPM_Background_Initialization
-}
+compinit -i -d "${ZPM_COMPDUMP}"
+TMOUT=5
+
+(_ZPM_compile 2>/dev/null &)
+
+add-zsh-hook -d background _ZPM_Background_Initialization

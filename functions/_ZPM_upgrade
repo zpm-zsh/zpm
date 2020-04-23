@@ -1,19 +1,17 @@
 #!/usr/bin/env zsh
 
-function _ZPM_upgrade() {
-  typeset -a _Plugins_Upgrade=($@)
-  typeset -a _Plugins_Upgrade_full=()
+typeset -a _Plugins_Upgrade=($@)
+typeset -a _Plugins_Upgrade_full=()
 
-  if [[ -z $@ ]]; then
-    _Plugins_Upgrade=("zpm" $zsh_loaded_plugins)
-  fi
+if [[ -z $@ ]]; then
+  _Plugins_Upgrade=("zpm" $zsh_loaded_plugins)
+fi
 
-  for plugin (${_Plugins_Upgrade}); do
-    _Plugins_Upgrade_full+=($_ZPM_plugins_full[$plugin])
-  done
+for plugin (${_Plugins_Upgrade}); do
+  _Plugins_Upgrade_full+=($_ZPM_plugins_full[$plugin])
+done
 
-  printf '%s\0' "${_Plugins_Upgrade_full[@]}" | \
-    _ZPM_DIR="$_ZPM_DIR" xargs -0 -P32 -n1 "${_ZPM_DIR}/bin/_ZPM-plugin-helper" upgrade
+printf '%s\0' "${_Plugins_Upgrade_full[@]}" | \
+  _ZPM_DIR="$_ZPM_DIR" xargs -0 -P32 -n1 "${_ZPM_DIR}/bin/_ZPM-plugin-helper" upgrade
 
-  _ZPM_clean
-}
+_ZPM_clean
