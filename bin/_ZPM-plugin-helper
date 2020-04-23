@@ -46,7 +46,7 @@ if [[ "$1" == "upgrade" ]]; then
   fi
   local status_string="${c[green]}${c[bold]}Upgrade${c[reset]} "
   status_string+="$Plugin_hyperlink"
-  status_string+=" ${c[green]}${c[reset]}"
+  status_string+=" ${c[green]}✔${c[reset]}"
 
   echo $status_string
 else
