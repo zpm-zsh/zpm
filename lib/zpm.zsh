@@ -29,7 +29,7 @@ autoload -Uz                     \
   _ZPM_no_source                 \
   _ZPM_source                    \
   _ZPM_upgrade                   \
-  _ZPM_readme
+  zpm-readme
 
 function zpm() {
   if [[ "$1" == 'load' ]]; then
@@ -66,10 +66,10 @@ function zpm() {
     return 0
   fi
 
-  if [[ "$1" == 'readme' ]]; then
+  if is-callable "zpm-$1"; then
+    local call_fn=$1
     shift
-    _ZPM_readme "$@"
-    return 0
+    "zpm-${call_fn}" $@
   fi
 
   echo 'Unknown command, treat as `zpm load`'

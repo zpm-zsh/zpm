@@ -4,8 +4,7 @@
 0="${${(M)0:#/*}:-$PWD/$0}"
 _ZPM_DIR=${0:h}
 
-export ZPM_NO_CACHE=yes
-export ZPM_PLUGIN_DIR="$(mktemp -d)"
+export ZPM_USE_CACHE=false
 
 source "${_ZPM_DIR}/../zpm.zsh"
 source "${0:h}/lib.zsh"

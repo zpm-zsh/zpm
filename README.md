@@ -11,9 +11,25 @@ zpm ( ZSH Plugin Manager ) is a plugin manager for ZSH who combines the imperati
 
 #### Stats
 
-| Plugin manager | zpm, first run | zpm with cache | zplug | zplugin | zplugin, with `light` |
-|----------------|----------------|----------------|-------|---------|-----------------------|
-| Start time     | 0.416          | 0.056          | 0.698 | 0.709   | 0.381                 |
+<details>
+  <summary>Test on Intel I7-8750H, SanDisk SD7SN6S, 16GB RAM</summary>
+<p>
+
+```sh
+zsh -i -c exit  0.01s user 0.00s system 100% cpu 0.010 total
+zsh -i -c exit  0.01s user 0.00s system 101% cpu 0.010 total
+zsh -i -c exit  0.01s user 0.00s system 100% cpu 0.012 total
+zsh -i -c exit  0.00s user 0.01s system 100% cpu 0.010 total
+zsh -i -c exit  0.00s user 0.00s system 101% cpu 0.008 total
+zsh -i -c exit  0.01s user 0.00s system 100% cpu 0.010 total
+zsh -i -c exit  0.01s user 0.00s system 99% cpu 0.010 total
+zsh -i -c exit  0.01s user 0.00s system 100% cpu 0.009 total
+zsh -i -c exit  0.01s user 0.00s system 99% cpu 0.010 total
+zsh -i -c exit  0.01s user 0.00s system 103% cpu 0.010 total
+```
+
+</p>
+</details>
 
 ## Base dependences
 

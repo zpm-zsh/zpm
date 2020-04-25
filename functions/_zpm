@@ -12,19 +12,19 @@ local _zpm_completions_plugins_loadable=($(
     echo ${_zpm_completions_plugins_local[@]} ${zsh_loaded_plugins[@]} | tr ' ' '\n' | sort | uniq -u
 ))
 
-local _zpm_completions_1st_arguments=(
+local _load_args=(
   'load:Load plugin'
   'if:Load plugin if condition true'
   'if-not:Load plugin if condition false'
 )
 
-local _zpm_completions_1st_arguments_full=(
-  'clean:Remove zpm cache'
-  'upgrade:Upgrade plugin'
-  'readme:Show README for plugin'
+local _zpm_all_args=(
   'load:Load plugin'
   'if:Load plugin if condition true'
   'if-not:Load plugin if condition false'
+  'clean:Remove zpm cache'
+  'upgrade:Upgrade plugin'
+  $_zpm_extend_commands
 )
 
 local _zpm_completions_if_args=(
@@ -37,11 +37,10 @@ local _zpm_completions_if_args=(
   'vte:VTE based terminal emulator'
 )
 
-_arguments \
-  '*:: :->subcmds' && return 0
+_arguments '*:: :->subcmds' && return 0
 
 if (( CURRENT == 1 )); then
-  _describe -t commands "zpm subcommand" _zpm_completions_1st_arguments_full
+  _describe -t commands "zpm subcommand" _zpm_all_args
   return
 fi
 
@@ -51,14 +50,20 @@ fi
 
 if (( CURRENT > 1 )); then
   PRE=$((CURRENT - 1))
-  if [[ "$words[$PRE]" == "if" || "$words[$PRE]" == "if-not" ]]; then
+  PRE2=$((CURRENT - 2))
+  if [[ "$words[$PRE]" == 'if' || "$words[$PRE]" == 'if-not' ]]; then
     _describe -t commands "zpm condition" _zpm_completions_if_args
-  elif ((${words[(I)load]})); then
+  elif [[ "$words[$PRE2]" == 'if' || "$words[$PRE2]" == 'if-not'  ]]; then
+    _describe -t commands "zpm next condition" _load_args
+  elif [[ "$words[$PRE]" == 'load' ]]; then
     _describe -t commands "zpm load" _zpm_completions_plugins_loadable
-  elif ((${words[(I)u]})) || ((${words[(I)up]})) || ((${words[(I)upgrade]})) || ((${words[(I)readme]})); then
-    _describe -t commands "zpm plugins" zsh_loaded_plugins
+  elif [[ "$words[$PRE]" == 'u' || "$words[$PRE]" == 'up' || "$words[$CURRENT]" == 'upgrade' ]]; then
+    _describe -t commands "zpm upgrade plugins" zsh_loaded_plugins
+  elif is-callable "_zpm_${words[$PRE]}_completion"; then
+    "_zpm_${words[$PRE]}_completion"
   else
-    _describe -t commands "zpm subcommand" _zpm_completions_1st_arguments
+    _describe -t commands "zpm subcommand" zsh_loaded_plugins
+    return
   fi
 fi
 
