@@ -72,5 +72,6 @@ function zpm() {
     return 0
   fi
 
+  echo 'Unknown command, treat as `zpm load`'
   _ZPM_initialize_plugins "$@"
 }
