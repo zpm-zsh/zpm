@@ -2,8 +2,8 @@
 source ~/.zpm/zpm.zsh
 
 ### Plugin for zpm
-zpm load zpm-zsh/zpm-readme
-
+zpm load zpm-zsh/zpm-readme,async
+zpm load zpm-zsh/zpm-info,async
 ### Tmux
 zpm if ssh load zpm-zsh/tmux
 zpm if-not ssh load zpm-zsh/tmux,apply:path

@@ -70,6 +70,7 @@ function zpm() {
     local call_fn=$1
     shift
     "zpm-${call_fn}" $@
+    return 0
   fi
 
   echo 'Unknown command, treat as `zpm load`'
