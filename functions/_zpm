@@ -19,9 +19,7 @@ local _load_args=(
 )
 
 local _zpm_all_args=(
-  'load:Load plugin'
-  'if:Load plugin if condition true'
-  'if-not:Load plugin if condition false'
+  $_load_args
   'clean:Remove zpm cache'
   'upgrade:Upgrade plugin'
   $_zpm_extend_commands
@@ -44,23 +42,27 @@ if (( CURRENT == 1 )); then
   return
 fi
 
-if [[ "$words[1]" == 'clean' ]]; then
-  return
-fi
-
 if (( CURRENT > 1 )); then
   PRE=$((CURRENT - 1))
   PRE2=$((CURRENT - 2))
-  if [[ "$words[$PRE]" == 'if' || "$words[$PRE]" == 'if-not' ]]; then
+
+  if [[ "$words[$PRE]" == 'load' ]]; then
+    _describe -t commands "zpm load" _zpm_completions_plugins_loadable
+    return
+  elif [[ "$words[$PRE]" == 'if' || "$words[$PRE]" == 'if-not' ]]; then
     _describe -t commands "zpm condition" _zpm_completions_if_args
+    return
   elif [[ "$words[$PRE2]" == 'if' || "$words[$PRE2]" == 'if-not'  ]]; then
     _describe -t commands "zpm next condition" _load_args
-  elif [[ "$words[$PRE]" == 'load' ]]; then
-    _describe -t commands "zpm load" _zpm_completions_plugins_loadable
-  elif [[ "$words[$PRE]" == 'u' || "$words[$PRE]" == 'up' || "$words[$CURRENT]" == 'upgrade' ]]; then
+    return
+  elif [[ "$words[$PRE]" == 'clean' ]]; then
+    return
+  elif [[ "$words[$PRE]" == 'u' || "$words[$PRE]" == 'up' || "$words[$PRE]" == 'upgrade' ]]; then
     _describe -t commands "zpm upgrade plugins" zsh_loaded_plugins
+    return
   elif is-callable "_zpm_${words[$PRE]}_completion"; then
     "_zpm_${words[$PRE]}_completion"
+    return
   else
     _describe -t commands "zpm subcommand" zsh_loaded_plugins
     return
