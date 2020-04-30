@@ -28,8 +28,7 @@ autoload -Uz                     \
   _ZPM_log                       \
   _ZPM_no_source                 \
   _ZPM_source                    \
-  _ZPM_upgrade                   \
-  zpm-readme
+  _ZPM_upgrade
 
 function zpm() {
   if [[ "$1" == 'load' ]]; then
