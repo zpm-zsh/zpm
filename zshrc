@@ -21,7 +21,6 @@ zpm load                              \
   zpm-zsh/colorize,async              \
   zpm-zsh/ssh,async                   \
   zpm-zsh/dot,async                   \
-  zpm-zsh/dircolors-material,async    \
   zpm-zsh/undollar,async              \
   zpm-zsh/zsh-completions,apply:fpath
 
