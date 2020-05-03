@@ -47,5 +47,6 @@ zpm load                      \
   omz/command-not-found,async \
   omz/wp-cli,async
 
+zpm load zpm-zsh/zpm-telemetry
 
 source ~/.zshrc.local 2>/dev/null
