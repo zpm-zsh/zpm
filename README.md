@@ -8,6 +8,20 @@ zpm ( ZSH Plugin Manager ) is a plugin manager for ZSH who combines the imperati
 * Dependencies between packages
 * ZPM plugins are compatible with [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh)
 * ZPM runs on Linux, Android, FreeBSD and macOS
+* Extensible 
+
+<details>
+  <summary>Extensions for zpm itself</summary>
+<p>
+
+* [zpm-readme](https://github.com/zpm-zsh/zpm-readme) - Show plugin readme in terminal
+* [zpm-info](https://github.com/zpm-zsh/zpm-info) - Show plugin info in terminal
+* [zpm-bugreport](https://github.com/zpm-zsh/zpm-bugreport) - Quickly create bugreport for zsh plugin
+* [zpm-telemetry](https://github.com/zpm-zsh/zpm-telemetry) - Send telemetry data. Keep calm. Data is sent using GitHub and you can see it before sending.
+
+</p>
+</details>
+
 
 #### Stats
 
@@ -37,6 +51,7 @@ zsh -i -c exit  0.01s user 0.00s system 103% cpu 0.010 total
 * git
 * xargs
 * [Termux](http://termux.com/) for Android
+* [Rush](https://github.com/shenwei356/rush) - optional
 
 ## Instalation
 
