@@ -11,7 +11,10 @@ for plugin (${_Plugins_Upgrade}); do
   _Plugins_Upgrade_full+=($_ZPM_plugins_full[$plugin])
 done
 
-printf '%s\0' "${_Plugins_Upgrade_full[@]}" | \
-  _ZPM_DIR="$_ZPM_DIR" xargs -0 -P32 -n1 "${_ZPM_DIR}/bin/_ZPM-plugin-helper" upgrade
+if (( $+commands[rush] )); then
+  printf '%s\n' "${_Plugins_Upgrade_full[@]}" | _ZPM_DIR="$_ZPM_DIR" rush "${_ZPM_DIR}/bin/_ZPM-plugin-helper" upgrade {}
+else
+  printf '%s\0' "${_Plugins_Upgrade_full[@]}" | _ZPM_DIR="$_ZPM_DIR" xargs -0 -P32 -n1 "${_ZPM_DIR}/bin/_ZPM-plugin-helper" upgrade
+fi
 
 _ZPM_clean
