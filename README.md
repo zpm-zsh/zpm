@@ -45,6 +45,64 @@ zsh -i -c exit  0.01s user 0.00s system 103% cpu 0.010 total
 </p>
 </details>
 
+<details>
+  <summary>With this set of plugins. 48 total</summary>
+<p>
+
+```sh
+zpm-zsh/helpers
+zpm-zsh/colors
+zpm-zsh/background
+zpm-zsh/vte
+zpm-zsh/core-config
+zpm-zsh/check-deps
+zpm-zsh/minimal-theme
+zpm-zsh/pr-user
+zpm-zsh/zpm-telemetry
+zpm-zsh/btrfs
+zpm-zsh/zpm-readme
+zpm-zsh/zpm-info
+zpm-zsh/ignored-users
+zpm-zsh/material-colors
+zpm-zsh/pr-is-root
+zpm-zsh/pr-return
+zpm-zsh/pr-exec-time
+sindresorhus/pretty-time-zsh
+zpm-zsh/pr-git
+zpm-zsh/pr-cwd
+zpm-zsh/pr-php
+zpm-zsh/pr-rust
+zpm-zsh/pr-node
+zpm-zsh/pr-2
+zpm-zsh/pr-eol
+zpm-zsh/pr-zcalc
+zpm-zsh/pr-correct
+zpm-zsh/ls
+zpm-zsh/colorize
+zpm-zsh/ssh
+zpm-zsh/dot
+zpm-zsh/undollar
+zpm-zsh/dropbox
+lukechilds/zsh-better-npm-completion
+zpm-zsh/clipboard
+zpm-zsh/mysql-colorize
+zpm-zsh/zshmarks
+voronkovich/gitignore.plugin.zsh
+zpm-zsh/autoenv
+mdumitru/fancy-ctrl-z
+zsh-users/zsh-history-substring-search
+zdharma/fast-syntax-highlighting
+zsh-users/zsh-autosuggestions
+psprint/history-search-multi-word
+omz/extract
+omz/command-not-found
+omz/wp-cli
+zpm-zsh/template
+```
+
+</p>
+</details>
+
 ## Base dependences
 
 * zsh
