@@ -1,11 +1,13 @@
 #!/usr/bin/env zsh
 
 declare -Ag _ZPM_plugins_full=( zpm zpm )
-mkdir -p "${_ZPM_CACHE_DIR}"
+mkdir -p "${_ZPM_CACHE_DIR}" "${_ZPM_CACHE_DIR}/functions"
 
 compinit -i -C -d "${ZPM_COMPDUMP}"
 
 _ZPM_initialize_plugins zpm-zsh/helpers zpm-zsh/colors zpm-zsh/background
+
+FPATH="${FPATH}:${_ZPM_CACHE_DIR}/functions"
 
 TMOUT=1
 add-zsh-hook background _ZPM_Background_Initialization
