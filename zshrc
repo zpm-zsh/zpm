@@ -1,5 +1,8 @@
 #!/usr/bin/env zsh
-source ~/.zpm/zpm.zsh
+source ~/.zpm/zpm.zsh 2>/dev/null || {
+  git clone https://github.com/zpm-zsh/zpm ~/.zpm
+  source ~/.zpm/zpm.zsh
+}
 
 ### Plugin for zpm
 zpm load zpm-zsh/zpm-readme,async
@@ -15,7 +18,7 @@ zpm if vte load zpm-zsh/vte
 zpm load                              \
   zpm-zsh/core-config                 \
   zpm-zsh/ignored-users,async         \
-  zpm-zsh/check-deps                  \
+  zpm-zsh/check-deps,async                  \
   zpm-zsh/minimal-theme               \
   zpm-zsh/ls,async                    \
   zpm-zsh/colorize,async              \
