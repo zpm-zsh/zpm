@@ -7,23 +7,23 @@ all:
 	beautysh --indent-size 2 --force-function-style fnpar bin/_ZPM-plugin-helper
 	
 	beautysh --indent-size 2 --force-function-style fnpar functions/_zpm
-	beautysh --indent-size 2 --force-function-style fnpar functions/_ZPM_addfpath
-	beautysh --indent-size 2 --force-function-style fnpar functions/_ZPM_addpath
-	beautysh --indent-size 2 --force-function-style fnpar functions/_ZPM_Background_Initialization
-	beautysh --indent-size 2 --force-function-style fnpar functions/_ZPM_clean
-	beautysh --indent-size 2 --force-function-style fnpar functions/_ZPM_get_plugin_basename
-	beautysh --indent-size 2 --force-function-style fnpar functions/_ZPM_get_plugin_file_path
-	beautysh --indent-size 2 --force-function-style fnpar functions/_ZPM_get_plugin_link
-	beautysh --indent-size 2 --force-function-style fnpar functions/_ZPM_get_plugin_hyperlink
-	beautysh --indent-size 2 --force-function-style fnpar functions/_ZPM_get_plugin_name
-	beautysh --indent-size 2 --force-function-style fnpar functions/_ZPM_get_plugin_path
-	beautysh --indent-size 2 --force-function-style fnpar functions/_ZPM_get_plugin_root_git_dir
-	beautysh --indent-size 2 --force-function-style fnpar functions/_ZPM_get_plugin_type
-	beautysh --indent-size 2 --force-function-style fnpar functions/_ZPM_initialize_plugins
-	beautysh --indent-size 2 --force-function-style fnpar functions/_ZPM_load_plugin
-	beautysh --indent-size 2 --force-function-style fnpar functions/_ZPM_log
-	beautysh --indent-size 2 --force-function-style fnpar functions/_ZPM_upgrade
-	beautysh --indent-size 2 --force-function-style fnpar functions/_ZPM_compile
+	beautysh --indent-size 2 --force-function-style fnpar functions/.zpm-addpath
+	beautysh --indent-size 2 --force-function-style fnpar functions/.zpm-addpath
+	beautysh --indent-size 2 --force-function-style fnpar functions/.zpm-background-initialization
+	beautysh --indent-size 2 --force-function-style fnpar functions/.zpm-clean
+	beautysh --indent-size 2 --force-function-style fnpar functions/@zpm-get-plugin-basename
+	beautysh --indent-size 2 --force-function-style fnpar functions/@zpm-get-plugin-file-path
+	beautysh --indent-size 2 --force-function-style fnpar functions/@zpm-get-plugin-link
+	beautysh --indent-size 2 --force-function-style fnpar functions/@zpm-get-plugin-hyperlink
+	beautysh --indent-size 2 --force-function-style fnpar functions/@zpm-get-plugin-name
+	beautysh --indent-size 2 --force-function-style fnpar functions/@zpm-get-plugin-path
+	beautysh --indent-size 2 --force-function-style fnpar functions/@zpm-get-plugin-root-git-dir
+	beautysh --indent-size 2 --force-function-style fnpar functions/@zpm-get-plugin-type
+	beautysh --indent-size 2 --force-function-style fnpar functions/.zpm-initialize-plugins
+	beautysh --indent-size 2 --force-function-style fnpar functions/.zpm-load-plugin
+	beautysh --indent-size 2 --force-function-style fnpar functions/.zpm-log
+	beautysh --indent-size 2 --force-function-style fnpar functions/.zpm-upgrade
+	beautysh --indent-size 2 --force-function-style fnpar functions/.zpm-compile
 
 test:
 	zsh tests/base.test.zsh
