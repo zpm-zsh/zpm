@@ -19,25 +19,25 @@ if [[ "$CLICOLOR" != "0" ]]; then
 fi
 
 autoload -Uz                   \
-  _ZPM_get_plugin_name         \
-  _ZPM_get_plugin_type         \
-  _ZPM_get_plugin_basename     \
-  _ZPM_get_plugin_path         \
-  _ZPM_get_plugin_link         \
-  _ZPM_get_plugin_hyperlink    \
-  _ZPM_log                     \
-  _ZPM_get_plugin_root_git_dir
+  @zpm-get-plugin-name         \
+  @zpm-get-plugin-type         \
+  @zpm-get-plugin-basename     \
+  @zpm-get-plugin-path         \
+  @zpm-get-plugin-link         \
+  @zpm-get-plugin-hyperlink    \
+  .zpm-log                     \
+  @zpm-get-plugin-root-git-dir
 
-local Plugin_name=$(_ZPM_get_plugin_name "$2")
-local Plugin_type=$(_ZPM_get_plugin_type "$2")
-local Plugin_basename=$(_ZPM_get_plugin_basename "$Plugin_name")
-local Plugin_path=$(_ZPM_get_plugin_path "$Plugin_name")
-local Plugin_link=$(_ZPM_get_plugin_link "$Plugin_name" "$Plugin_type")
-local Plugin_hyperlink=$(_ZPM_get_plugin_hyperlink "$Plugin_name" "$Plugin_link")
-local Plugin_git_dir=$(_ZPM_get_plugin_root_git_dir "$Plugin_path" "$Plugin_type")
+local Plugin_name=$(@zpm-get-plugin-name "$2")
+local Plugin_type=$(@zpm-get-plugin-type "$2")
+local Plugin_basename=$(@zpm-get-plugin-basename "$Plugin_name")
+local Plugin_path=$(@zpm-get-plugin-path "$Plugin_name")
+local Plugin_link=$(@zpm-get-plugin-link "$Plugin_name" "$Plugin_type")
+local Plugin_hyperlink=$(@zpm-get-plugin-hyperlink "$Plugin_name" "$Plugin_link")
+local Plugin_git_dir=$(@zpm-get-plugin-root-git-dir "$Plugin_path" "$Plugin_type")
 
 if [[ "$1" == "upgrade" ]]; then
-  _ZPM_log zpm:upgrade "Upgrade '${2}'"
+  .zpm-log zpm:upgrade "Upgrade '${2}'"
   if [[ "$Plugin_type" == "mkdir" ]]; then
     true
   else

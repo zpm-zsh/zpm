@@ -5,12 +5,12 @@ mkdir -p "${_ZPM_CACHE_DIR}" "${_ZPM_CACHE_DIR}/functions"
 
 compinit -i -C -d "${ZPM_COMPDUMP}"
 
-_ZPM_initialize_plugins zpm-zsh/helpers zpm-zsh/colors zpm-zsh/background
+.zpm-initialize-plugins zpm-zsh/helpers zpm-zsh/colors zpm-zsh/background
 
 FPATH="${FPATH}:${_ZPM_CACHE_DIR}/functions"
 
 TMOUT=1
-add-zsh-hook background _ZPM_Background_Initialization
+add-zsh-hook background .zpm-background-initialization
 
 function source() {
   if [[ ! "${1}.zwc" -nt "${1}" ]]; then

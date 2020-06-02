@@ -13,27 +13,27 @@ typeset -Ag _ZPM_file_for_async_source
 fpath+=("${_ZPM_DIR}/functions")
 
 autoload -Uz                     \
-  _ZPM_addfpath                  \
-  _ZPM_addpath                   \
-  _ZPM_async_source              \
-  _ZPM_Background_Initialization \
-  _ZPM_clean                     \
-  _ZPM_compile                   \
-  _ZPM_get_plugin_basename       \
-  _ZPM_get_plugin_file_path      \
-  _ZPM_get_plugin_name           \
-  _ZPM_get_plugin_path           \
-  _ZPM_initialize_plugins        \
-  _ZPM_load_plugin               \
-  _ZPM_log                       \
-  _ZPM_no_source                 \
-  _ZPM_source                    \
-  _ZPM_upgrade
+  .zpm-addfpath                  \
+  .zpm-addpath                   \
+  .zpm-async-source              \
+  .zpm-background-initialization \
+  .zpm-clean                     \
+  .zpm-compile                   \
+  @zpm-get-plugin-basename       \
+  @zpm-get-plugin-file-path      \
+  @zpm-get-plugin-name           \
+  @zpm-get-plugin-path           \
+  .zpm-initialize-plugins        \
+  .zpm-load-plugin               \
+  .zpm-log                       \
+  .zpm-no-source                 \
+  .zpm-source                    \
+  .zpm-upgrade
 
 function zpm() {
   if [[ "$1" == 'load' ]]; then
     shift
-    _ZPM_initialize_plugins "$@"
+    .zpm-initialize-plugins "$@"
     return 0
   fi
 
@@ -55,13 +55,13 @@ function zpm() {
 
   if [[ "$1" == 'u' || "$1" == 'up' || "$1" == 'upgrade' ]]; then
     shift
-    _ZPM_upgrade "$@"
+    .zpm-upgrade "$@"
     return 0
   fi
 
   if [[ "$1" == 'c' || "$1" == 'cl' || "$1" == 'clean' ]]; then
     shift
-    _ZPM_clean
+    .zpm-clean
     return 0
   fi
 
@@ -73,5 +73,5 @@ function zpm() {
   fi
 
   echo 'Unknown command `zpm '"$@"'`, treat as `zpm load '"$@"'`'
-  _ZPM_initialize_plugins "$@"
+  .zpm-initialize-plugins "$@"
 }
