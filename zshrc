@@ -2,8 +2,8 @@
 source ~/.zpm/zpm.zsh
 
 ### Plugin for zpm
-zpm load zpm-zsh/zpm-readme,async
-zpm load zpm-zsh/zpm-info,async
+zpm load zpm-zsh/zpm-readme,async zpm-zsh/zpm-info,async zpm-zsh/zpm-telemetry,async
+
 ### Tmux
 zpm if ssh load zpm-zsh/tmux
 zpm if-not ssh load zpm-zsh/tmux,apply:path
@@ -15,7 +15,7 @@ zpm if vte load zpm-zsh/vte
 zpm load                              \
   zpm-zsh/core-config                 \
   zpm-zsh/ignored-users,async         \
-  zpm-zsh/check-deps                  \
+  zpm-zsh/check-deps,async            \
   zpm-zsh/minimal-theme               \
   zpm-zsh/ls,async                    \
   zpm-zsh/colorize,async              \
@@ -47,6 +47,5 @@ zpm load                      \
   omz/command-not-found,async \
   omz/wp-cli,async
 
-zpm load zpm-zsh/zpm-telemetry
 
 source ~/.zshrc.local 2>/dev/null
