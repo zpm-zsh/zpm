@@ -25,7 +25,7 @@ autoload -Uz                   \
   @zpm-get-plugin-path         \
   @zpm-get-plugin-link         \
   @zpm-get-plugin-hyperlink    \
-  .zpm-log                     \
+  @zpm-log                     \
   @zpm-get-git-work-tree
 
 local Plugin_name=$(@zpm-get-plugin-name "$2")
@@ -37,28 +37,30 @@ local Plugin_hyperlink=$(@zpm-get-plugin-hyperlink "$Plugin_name" "$Plugin_link"
 local Plugin_git_work_tree=$(@zpm-get-git-work-tree "$Plugin_path" "$Plugin_type")
 
 if [[ "$1" == "upgrade" ]]; then
-  .zpm-log zpm:upgrade "Upgrade '${2}'"
-  if [[ "$Plugin_type" == "mkdir" ]]; then
-    true
-  else
+  @zpm-log zpm:upgrade "Upgrade '${2}'"
+
+  if [[ "$Plugin_type" == (github|gitlab|bitbucket|omz) ]]; then
     git --git-dir="${Plugin_git_work_tree}/.git/" --work-tree="${Plugin_git_work_tree}/" checkout "${Plugin_git_work_tree}/" </dev/null >/dev/null 2>/dev/null
     git --git-dir="${Plugin_git_work_tree}/.git/" --work-tree="${Plugin_git_work_tree}/" pull </dev/null >/dev/null 2>/dev/null
+  else
+    true
   fi
+
   local status_string="${c[green]}${c[bold]}Upgrade${c[reset]} "
   status_string+="$Plugin_hyperlink"
   status_string+=" ${c[green]}✔${c[reset]}"
 
   echo $status_string
 else
-  if [[ "$Plugin_type" == "github" ]];then
+  if [[ "$Plugin_type" == "github" ]]; then
     git clone --recursive "https://github.com/${Plugin_name}" --depth 1 --single-branch "${Plugin_git_work_tree}" </dev/null >/dev/null 2>/dev/null
-  elif [[ "$Plugin_type" == "gitlab" ]];then
+  elif [[ "$Plugin_type" == "gitlab" ]]; then
     git clone --recursive "https://gitlab.com/${Plugin_name}" --depth 1 --single-branch "${Plugin_git_work_tree}" </dev/null >/dev/null 2>/dev/null
-  elif [[ "$Plugin_type" == "bitbucket" ]];then
+  elif [[ "$Plugin_type" == "bitbucket" ]]; then
     git clone --recursive "https://bitbucket.com/${Plugin_name}" --depth 1 --single-branch "${Plugin_git_work_tree}" </dev/null >/dev/null 2>/dev/null
-  elif [[ "$Plugin_type" == "mkdir" ]];then
+  elif [[ "$Plugin_type" == "mkdir" ]]; then
     mkdir -p "${Plugin_path}"
-  elif [[ "$Plugin_type" == "omz" ]];then
+  elif [[ "$Plugin_type" == "omz" ]]; then
     if [[ ! -e "${HOME}/.oh-my-zsh" ]]; then
       git clone --recursive "https://github.com/ohmyzsh/ohmyzsh" --depth 1 --single-branch "${Plugin_git_work_tree}" </dev/null >/dev/null 2>/dev/null
     fi

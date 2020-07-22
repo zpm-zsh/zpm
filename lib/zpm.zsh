@@ -13,27 +13,27 @@ typeset -Ag _ZPM_file_for_async_source
 fpath+=("${_ZPM_DIR}/functions")
 
 autoload -Uz                     \
-  .zpm-addfpath                  \
-  .zpm-addpath                   \
-  .zpm-async-source              \
-  .zpm-background-initialization \
-  .zpm-clean                     \
-  .zpm-compile                   \
+  @zpm-addfpath                  \
+  @zpm-addpath                   \
+  @zpm-async-source              \
+  @zpm-background-initialization \
+  @zpm-clean                     \
+  @zpm-compile                   \
   @zpm-get-plugin-basename       \
   @zpm-get-plugin-file-path      \
   @zpm-get-plugin-name           \
   @zpm-get-plugin-path           \
-  .zpm-initialize-plugins        \
-  .zpm-load-plugin               \
-  .zpm-log                       \
-  .zpm-no-source                 \
-  .zpm-source                    \
-  .zpm-upgrade
+  @zpm-initialize-plugins        \
+  @zpm-load-plugin               \
+  @zpm-log                       \
+  @zpm-no-source                 \
+  @zpm-source                    \
+  @zpm-upgrade
 
 function zpm() {
   if [[ "$1" == 'load' ]]; then
     shift
-    .zpm-initialize-plugins "$@"
+    @zpm-initialize-plugins "$@"
     return 0
   fi
 
@@ -55,13 +55,13 @@ function zpm() {
 
   if [[ "$1" == 'u' || "$1" == 'up' || "$1" == 'upgrade' ]]; then
     shift
-    .zpm-upgrade "$@"
+    @zpm-upgrade "$@"
     return 0
   fi
 
   if [[ "$1" == 'c' || "$1" == 'cl' || "$1" == 'clean' ]]; then
     shift
-    .zpm-clean
+    @zpm-clean
     return 0
   fi
 
@@ -73,5 +73,5 @@ function zpm() {
   fi
 
   echo 'Unknown command `zpm '"$@"'`, treat as `zpm load '"$@"'`'
-  .zpm-initialize-plugins "$@"
+  @zpm-initialize-plugins "$@"
 }

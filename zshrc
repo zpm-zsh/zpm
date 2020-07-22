@@ -42,10 +42,10 @@ zpm if-not ssh load                                                             
   psprint/history-search-multi-word,fpath:/,async
 
 
-zpm load                      \
-  omz/extract,async           \
-  omz/command-not-found,async \
-  omz/wp-cli,async
+zpm load                          \
+  extract,type:omz,async           \
+  command-not-found,type:omz,async \
+  wp-cli,type:omz,async
 
 
 source ~/.zshrc.local 2>/dev/null

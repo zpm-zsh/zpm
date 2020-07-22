@@ -9,7 +9,7 @@ for plugin in $@; do
   local Plugin_name=$(@zpm-get-plugin-name "$plugin")
 
   if [[ ! -z $_ZPM_plugins_full[$Plugin_name] ]]; then
-    .zpm-log zpm:init:skip "Skip initialization '$Plugin_name', plugin already loaded"
+    @zpm-log zpm:init:skip "Skip initialization '$Plugin_name', plugin already loaded"
   else
     _ZPM_plugins_full[$Plugin_name]="$plugin"
 
@@ -30,5 +30,5 @@ if [[ -n "$_Plugins_Install[@]" ]]; then;
 fi
 
 for plugin_name in $_Plugins_Load_Order; do
-  .zpm-load-plugin "${_Plugins_Load[$plugin_name]}" "$plugin_name"
+  @zpm-load-plugin "${_Plugins_Load[$plugin_name]}" "$plugin_name"
 done
