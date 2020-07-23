@@ -60,9 +60,7 @@ function zpm() {
   fi
 
   if [[ "$1" == 'c' || "$1" == 'cl' || "$1" == 'clean' ]]; then
-    shift
     @zpm-clean
-    return 0
   fi
 
   if is-callable "zpm-$1"; then
