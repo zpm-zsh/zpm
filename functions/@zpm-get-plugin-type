@@ -5,6 +5,16 @@ if [[ "$1" == 'zpm' ]]; then
   return 0
 fi
 
+if [[ "$1" != *",type:"* ]]; then
+  if [[ "$1" == 'omz/'* ]]; then
+    echo 'omz'
+    return 0
+  fi
+
+  echo "github"
+  return 0
+fi
+
 local _ZPM_tag_str=${1##*,type:}
 _ZPM_tag_str=${_ZPM_tag_str%%\,*}
 
