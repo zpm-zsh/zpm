@@ -11,6 +11,11 @@ if [[ "$1" != *",type:"* ]]; then
     return 0
   fi
 
+    if [[ "$1" == 'empty/'* ]]; then
+    echo 'empty'
+    return 0
+  fi
+
   echo "github"
   return 0
 fi
@@ -33,8 +38,8 @@ if [[ "$_ZPM_tag_str" == 'omz' ]]; then
   return 0
 fi
 
-if [[ "$_ZPM_tag_str" == 'mkdir' ]]; then
-  echo 'mkdir'
+if [[ "$_ZPM_tag_str" == 'empty' ]]; then
+  echo 'empty'
   return 0
 fi
 

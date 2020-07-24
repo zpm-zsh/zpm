@@ -58,7 +58,7 @@ else
     git clone --recursive "https://gitlab.com/${Plugin_name}" --depth 1 --single-branch "${Plugin_git_work_tree}" </dev/null >/dev/null 2>/dev/null
   elif [[ "$Plugin_type" == "bitbucket" ]]; then
     git clone --recursive "https://bitbucket.com/${Plugin_name}" --depth 1 --single-branch "${Plugin_git_work_tree}" </dev/null >/dev/null 2>/dev/null
-  elif [[ "$Plugin_type" == "mkdir" ]]; then
+  elif [[ "$Plugin_type" == "empty" ]]; then
     mkdir -p "${Plugin_path}"
   elif [[ "$Plugin_type" == "omz" ]]; then
     if [[ ! -e "${HOME}/.oh-my-zsh" ]]; then

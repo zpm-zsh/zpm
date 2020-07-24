@@ -1,6 +1,5 @@
 #!/usr/bin/env zsh
 
-
 local _ZPM_TMP="$(mktemp)"
 local _ZPM_TMP_ASYNC="$(mktemp)"
 
@@ -65,6 +64,6 @@ mv "$_ZPM_TMP_ASYNC" "$_ZPM_CACHE_ASYNC"
 compinit -i -d "${ZPM_COMPDUMP}"
 TMOUT=5
 
-(.zpm-compile 2>/dev/null &)
+(@zpm-compile 2>/dev/null &)
 
-add-zsh-hook -d background .zpm-background-initialization
+add-zsh-hook -d background @zpm-background-initialization
