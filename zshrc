@@ -5,8 +5,8 @@ source ~/.zpm/zpm.zsh 2>/dev/null || {
 }
 
 ### Plugin for zpm
-zpm load zpm-zsh/zpm-readme,async
-zpm load zpm-zsh/zpm-info,async
+zpm load zpm-zsh/zpm-readme,async zpm-zsh/zpm-info,async zpm-zsh/zpm-telemetry,async
+
 ### Tmux
 zpm if ssh load zpm-zsh/tmux
 zpm if-not ssh load zpm-zsh/tmux,apply:path
@@ -18,7 +18,11 @@ zpm if vte load zpm-zsh/vte
 zpm load                              \
   zpm-zsh/core-config                 \
   zpm-zsh/ignored-users,async         \
+<<<<<<< HEAD
   zpm-zsh/check-deps,async                  \
+=======
+  zpm-zsh/check-deps,async            \
+>>>>>>> next
   zpm-zsh/minimal-theme               \
   zpm-zsh/ls,async                    \
   zpm-zsh/colorize,async              \
@@ -32,7 +36,7 @@ zpm if-not ssh load                                                             
   zpm-zsh/dropbox,async                                                                \
   lukechilds/zsh-better-npm-completion,async                                           \
   \
-  zpm-zsh/clipboard,async                                                              \
+  zpm-zsh/clipboard                                                                    \
   zpm-zsh/mysql-colorize,async                                                         \
   zpm-zsh/zshmarks,async                                                               \
   voronkovich/gitignore.plugin.zsh,async                                               \
@@ -50,6 +54,5 @@ zpm load                      \
   omz/command-not-found,async \
   omz/wp-cli,async
 
-zpm load zpm-zsh/zpm-telemetry
 
 source ~/.zshrc.local 2>/dev/null

@@ -1,29 +1,19 @@
 # ZPM - Zsh Plugin Manager
 
-ZPM ( Zsh plugin manager ) is **NOT** a yet another plugin manager for [zsh](http://www.zsh.org/).
-zpm ( ZSH Plugin Manager ) is a plugin manager for ZSH who combines the imperative and declarative approach. At first run, zpm will do complex logic and generate cache, after that will be used cache only, so it makes this framework to be very fast.
+> Zpm is **NOT** a yet another plugin manager for [zsh](http://www.zsh.org/).
+
+---
+
+Zpm is a plugin manager for ZSH who combines the imperative and declarative approach. At first run, zpm will do complex logic and generate cache, after that will be used cache only, so it makes this framework to be very fast.
 
 * Fastest plugin manager (Really, after the first run, zpm will not be used at all)
 * Support for async loading
 * Dependencies between packages
 * ZPM plugins are compatible with [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh)
 * ZPM runs on Linux, Android, FreeBSD and macOS
-* Extensible 
+* Extensible
 
-<details>
-  <summary>Extensions for zpm itself</summary>
-<p>
-
-* [zpm-readme](https://github.com/zpm-zsh/zpm-readme) - Show plugin readme in terminal
-* [zpm-info](https://github.com/zpm-zsh/zpm-info) - Show plugin info in terminal
-* [zpm-bugreport](https://github.com/zpm-zsh/zpm-bugreport) - Quickly create bugreport for zsh plugin
-* [zpm-telemetry](https://github.com/zpm-zsh/zpm-telemetry) - Send telemetry data. Keep calm. Data is sent using GitHub and you can see it before sending.
-
-</p>
-</details>
-
-
-#### Stats
+## Stats
 
 <details>
   <summary>Test on Intel I7-8750H, SanDisk SD7SN6S, 16GB RAM</summary>
@@ -130,28 +120,59 @@ cp ~/.zpm/zshrc ~/.zshrc
 
 ## How to use
 
-Add your zpm commands to `~/.zshrc` after zpm initialization:
+Currently zpm has following commands
+
+* load - will download and load plugin [See](#load-plugin)
+* if/if-not - conditions for following command [See](#if-conditions)
+* upgrade - will upgrade plugin, without parameters will upgrade all plugins [See](#upgrade)
+* clean - will clean zpm cache [See](#clean)
+
+The set of commands can be expanded extended using plugins
+
+<details>
+  <summary>Plugins for zpm itself</summary>
+  <p>
+
+* [zpm-readme](https://github.com/zpm-zsh/zpm-readme) - Show plugin readme in terminal
+* [zpm-info](https://github.com/zpm-zsh/zpm-info) - Show plugin info in terminal
+* [zpm-telemetry](https://github.com/zpm-zsh/zpm-telemetry) - Send telemetry data. Keep calm. Data is sent using GitHub and you can see it before sending.
+
+  </p>
+
+</details>
+
+### Load plugin
+
+Plugin name must have next form: `user/plugin-name`. This plugin can be enabled using
 
 ```sh
-zpm load github-user/github-repo # Download and enable the plugin from GitHub
-
-zpm if linux load github-user/github-repo # Load plugin only on Linux
-
-zpm if-not linux load github-user/github-repo # Don't load the plugin on Linux
-
-zpm load gitlab-user/gitlab-repo,type:gitlab # Download and enable plugin from GitLab
-
-zpm load bitbucket-user/bitbucket-repo,type:bitbucket # Download and enable the plugin from Bitbucket
-
-zpm load plugin-form-oh-my-zsh,type:omz # Load plugin form oh-my-zsh
-zpm load omz/plugin-name                # Load plugin form oh-my-zsh
-
-zpm load github-user/github-repo,async # Async load
-
+# Add to `~/.zshrc` after zpm initialization:
+zpm load user/plugin-name
 ```
-> Notice: if you change `~/.zshrc`, you need to remove zpm cache: `zpm clean`
 
-### `if` conditions:
+> Notice: if you change `~/.zshrc`, you need to remove zpm cache using: `zpm clean`
+
+Additionaly they can have some tags. Tags must be separated by commas `,` without spaces, tag parameters must be separated from tag names or another tag parameters by `:`
+
+```sh
+#     plugin name
+#   ⬀          tag
+#   |         ⬀      tag parameters, divided by :
+#   |         |    ⬀                   boolean tag
+#   |         |    |                 ⬀
+#   ↓         ↓    ↓                 ↓
+some/plugin,apply:source:path:fpath,async
+```
+
+### `if` and `if-not` conditions
+
+If condition allows you to run the following commands only if the condition is true
+
+```sh
+zpm if some-condition (another commands)
+```
+
+Conditions:
 
 * `linux` - if current OS is Linux
 * `bsd` - if current OS is *BSD
@@ -160,35 +181,62 @@ zpm load github-user/github-repo,async # Async load
 * `ssh` - if session run on remote host
 * `vte` - if session run on VTE based terminal emulator
 
+Result of condition can be negated using `if-not` tag
+
 The condition can be combined `zpm if macos if-not ssh load repo/plugin`
+
+> Notice: conditions will be verified only at first run, after that will be used generated cache
 
 ### Tags
 
 Zpm supports tags for plugins:
 
-##### `apply` tag
+#### `type` tag
 
-This tag has 3 possible arguments: 
+This tag has the following parameters:
 
-* `source` - for source this plugin, enabled by default
-* `path` - add `/bin` folder to your `$PATH`, only if it exists, enabled by default
-* `fpath` - add plugin folder to your `$fpath`, only if exist at least one `_*` file, enabled by default
+* `type:github` - plugin will be downloaded from GitHub, this is default value, so you don't need to set it
+* `type:gitlab` - plugin will be downloaded from GitLab
+* `type:bitbucket` - plugin will be downloaded from Bitbucket
+* `type:omz` - zpm will use a plugin from oh-my-zsh, oh-my-zsh will be download if not installed. Can be ommited if your plugin name starts with `@omz/`
+* `type:empty` - special type, zpm will create empty dir without files. Useful with `hook`, `gen-completion` and `gen-plugin` tags. Can be ommited if your plugin name starts with `@empty/`
 
-`some/plugin,apply:source:path:fpath`
+```sh
+plugin-from/github  # type:gitlab doesn't necessary
+plugin-from/gitlab,type:gitlab
+plugin-from/bitbucket,type:bitbucket
+oh-my-zsh/some-plugin,type:omz
+@omz/another-plugin
+custom/empty-plugin,type:empty
+@empty/another-empty-plugin
+```
 
-##### `async` tag
+#### `apply` tag
+
+This tag has 3 possible arguments divided by `:`
+
+* `source` - load zsh plugin file, enabled by default. File name can be changed using `source` tag
+* `path` - add directory to your `$PATH`, by default - `/bin` dir, enabled by default. Directory name can be changed using `path` tag
+* `fpath` - add directory to your `$fpath`, by default or `/functions` dir if it exists, or plugin root dir if exist at least one `_*` file, enabled by default. Directory name can be changed using `fpath` tag
+
+```sh
+zpm load some/plugin,apply:source:path:fpath
+zpm load another/plugin,apply:path # zpm will only add /bin dir to $PATH, plugin will not be sourced, nor be added to $fpath
+```
+
+#### `async` tag
 
 If this tag is present, zsh plugin will be loaded async
 
-##### `source` tag
+#### `source` tag
 
-Define own file woh will be load
+Define own file that will be loaded
 
 ```sh
 zpm some/plugin,source:/other.file.zsh
 ```
 
-##### `path` and `fpath` tags
+#### `path` and `fpath` tags
 
 Using these tags you can change the destination of folders which will be added to `$PATH` or `$fpath`
 
@@ -197,28 +245,56 @@ zpm some/plugin,path:/executables
 zpm another/plugin,fpath:/completions
 ```
 
-##### `type` tag
+#### `autoload` tag
 
-This tag has the following parameters:
-
-* `type:gitlab` - plugin will be downloaded from GitLab
-* `type:bitbucket` - plugin will be downloaded from Bitbucket
-* `type:omz` - zpm  will use a plugin from oh-my-zsh, oh-my-zsh will be download if not installed
+This tag defines functions that will be autoloaded by zpm (using `autoload -Uz`) divided by `:`
 
 ```sh
-plugin-from/gitlab,type:gitlab
-plugin-from/bitbucket,type:bitbucket
-plugin-form-oh-my-zsh,type:omz
+zpm load some/plugin,autoload:one:two:three
 ```
 
-##### `hook` tag
+#### `autoload-all` tag
 
-This tag param contains command who will be run in the plugin directory
+If this tag present all files from [functions directory](#path-and-fpath-tags) of this plugin will be autoloaded. Exception for files who starts with `_` or ends with `.zwc`
+
+#### `hook` tag
+
+This tag parameter contains command who will be run in the plugin directory after instalation or upgrade
 
 ```sh
 zpm plugin/name,hook:"make; make install"
 ```
 
-## Upgrade
+#### `gen-plugin` tag
+
+This tag parameter contains command who can generate zsh plugin file
+
+```sh
+zpm @empty/npm,gen-plugin:"npm completion"
+```
+
+#### `gen-completion` tag
+
+This tag parameter contains command who can generate zsh completions file
+
+```sh
+zpm @empty/rustup,gen-completion:"rustup completions zsh"
+```
+
+### Upgrade
 
 Run `zpm upgrade` for upgrading, or run `zpm upgrade some-plugin another-plugin` if you want to upgrade only these plugins
+
+### Clean
+
+By default zpm will generate cache file at first run, but if you will change `~/.zshrc` this cache should be removed using `zpm clean` command
+
+## Changelog
+
+* 2.0
+  * `omz/` prefix replaced by `@omz/`
+  * Added plugin type `empty`
+  * Added `autoload` and `autoload-all` tags
+  * Added `gen-plugin` and `gen-completion` tags
+  * Notes:
+    * Replace `omz/` to `@omz/` in your `.zshrc`

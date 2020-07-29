@@ -1,0 +1,34 @@
+#!/usr/bin/env zsh
+
+# Check if plugin isn't loaded
+local -a Plugins_Install
+local -a Plugins_Load_Order
+local -A Plugins_Load
+
+for plugin in $@; do
+  local Plugin_name=$(@zpm-get-plugin-name "$plugin")
+
+  if [[ ! -z $_ZPM_plugins_full[$Plugin_name] ]]; then
+    @zpm-log zpm:init:skip "Skip initialization '$Plugin_name', plugin already loaded"
+  else
+    _ZPM_plugins_full[$Plugin_name]="$plugin"
+
+    local Plugin_path=$(@zpm-get-plugin-path "$Plugin_name")
+
+    if [[ ! -e $Plugin_path ]]; then
+      Plugins_Install+=("$plugin")
+    fi
+
+    Plugins_Load_Order+=($Plugin_name)
+    Plugins_Load[$Plugin_name]="$plugin"
+  fi
+done
+
+if [[ -n "$Plugins_Install[@]" ]]; then;
+  printf '%s\0' "${Plugins_Install[@]}" | \
+    xargs -0 -P16 -n1 "${_ZPM_DIR}/bin/_ZPM-plugin-helper" install
+fi
+
+for plugin_name in $Plugins_Load_Order; do
+  @zpm-initialize-plugin "${Plugins_Load[$plugin_name]}" "$plugin_name"
+done

@@ -1,0 +1,16 @@
+#!/usr/bin/env zsh
+
+local Plugin_path="$1"
+local Plugin_type="$2"
+
+if [[ "$Plugin_type" == "omz" ]]; then
+  echo "${HOME}/.oh-my-zsh"
+  return 0
+fi
+
+if [[ "$Plugin_type" == "zpm" ]]; then
+  echo "${_ZPM_DIR}"
+  return 0
+fi
+
+echo "${Plugin_path}"
