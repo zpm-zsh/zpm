@@ -18,11 +18,7 @@ zpm if vte load zpm-zsh/vte
 zpm load                              \
   zpm-zsh/core-config                 \
   zpm-zsh/ignored-users,async         \
-<<<<<<< HEAD
-  zpm-zsh/check-deps,async                  \
-=======
   zpm-zsh/check-deps,async            \
->>>>>>> next
   zpm-zsh/minimal-theme               \
   zpm-zsh/ls,async                    \
   zpm-zsh/colorize,async              \
