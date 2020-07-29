@@ -3,7 +3,7 @@
 declare -Ag _ZPM_plugins_full=( zpm zpm )
 mkdir -p "${_ZPM_CACHE_DIR}"
 
-compinit -i -C -d "${ZPM_COMPDUMP}"
+compinit -i -C -d "${_ZPM_COMPDUMP}"
 
 @zpm-load-plugins zpm-zsh/helpers zpm-zsh/colors zpm-zsh/background
 

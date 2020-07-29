@@ -3,16 +3,13 @@
 local _ZPM_TMP="$(mktemp)"
 local _ZPM_TMP_ASYNC="$(mktemp)"
 
-cat "${_ZPM_DIR}/lib/init.zsh" >> "$_ZPM_TMP"
-echo >> "$_ZPM_TMP"
-
 echo "$(typeset -p _ZPM_plugins_full)" >> "$_ZPM_TMP"
 echo "export PATH=\"\${PATH}${_ZPM_path}\"" >> "$_ZPM_TMP"
 echo "fpath+=( '${(j:' ':)_ZPM_fpath}' )" >> "$_ZPM_TMP"
 echo "autoload -Uz $_ZPM_autoload" >> "$_ZPM_TMP"
 echo >> "$_ZPM_TMP"
 
-echo 'compinit -i -C -d "${ZPM_COMPDUMP}"' >> "$_ZPM_TMP"
+echo 'compinit -i -C -d "${_ZPM_COMPDUMP}"' >> "$_ZPM_TMP"
 echo >> "$_ZPM_TMP"
 
 echo 'zsh_loaded_plugins=('$_ZPM_plugins_no_source')' >> "$_ZPM_TMP"
@@ -62,7 +59,7 @@ echo "zle && zle reset-prompt" >> "$_ZPM_TMP_ASYNC"
 mv "$_ZPM_TMP" "$_ZPM_CACHE"
 mv "$_ZPM_TMP_ASYNC" "$_ZPM_CACHE_ASYNC"
 
-compinit -i -d "${ZPM_COMPDUMP}"
+compinit -i -d "${_ZPM_COMPDUMP}"
 TMOUT=5
 
 (@zpm-compile 2>/dev/null &)

@@ -2,7 +2,7 @@
 
 zcompile "$_ZPM_CACHE" 2>/dev/null
 zcompile "$_ZPM_CACHE_ASYNC" 2>/dev/null
-zcompile "${ZPM_COMPDUMP}" 2>/dev/null
+zcompile "${_ZPM_COMPDUMP}" 2>/dev/null
 zcompile "${HOME}/.zshrc" 2>/dev/null
 zcompile "${HOME}/.zshrc.local" 2>/dev/null
 zcompile "${_ZPM_DIR}/zpm.zsh" 2>/dev/null
