@@ -29,7 +29,7 @@ zpm if-not ssh load                                                             
   zpm-zsh/dropbox,async                                                                \
   lukechilds/zsh-better-npm-completion,async                                           \
   \
-  zpm-zsh/clipboard,async                                                              \
+  zpm-zsh/clipboard                                                                    \
   zpm-zsh/mysql-colorize,async                                                         \
   zpm-zsh/zshmarks,async                                                               \
   voronkovich/gitignore.plugin.zsh,async                                               \
