@@ -81,8 +81,8 @@ if [[ "$zpm_plugin_source" == "true" ]]; then
       @zpm-source "${Plugin_name}" "${_ZPM_plugin_file_path}"
     fi
   else
-    @zpm-no-source "${Plugin_name}"
+    @zpm-no-source "${Plugin_name}" 'missing'
   fi
 else
-  @zpm-no-source "${Plugin_name}"
+  @zpm-no-source "${Plugin_name}" 'disabled'
 fi

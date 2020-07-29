@@ -1,4 +1,10 @@
 #!/usr/bin/env zsh
 
-@zpm-log zpm:init:source "Plugin file for ${Plugin_name} is missing"
+local Plugin_cause="$2"
+if [[ "$Plugin_cause" == 'missing' ]]; then
+  @zpm-log zpm:init:source "Plugin file for ${Plugin_name} is missing"
+else
+  @zpm-log zpm:init:source "Sourcing for ${Plugin_name} is disabled"
+fi
+
 _ZPM_plugins_no_source+=("$1")
