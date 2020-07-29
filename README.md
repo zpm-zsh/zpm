@@ -118,7 +118,7 @@ If you don't have `.zshrc` copy example of `.zshrc` from zpm
 cp ~/.zpm/zshrc ~/.zshrc
 ```
 
-# Zpm commands
+## How to use
 
 Currently zpm has following commands
 
@@ -141,7 +141,7 @@ The set of commands can be expanded extended using plugins
 
 </details>
 
-## How to use
+### Load plugin 
 
 Plugin name must have next form: `user/plugin-name`. This plugin can be enabled using
 
@@ -152,8 +152,7 @@ zpm load user/plugin-name
 
 > Notice: if you change `~/.zshrc`, you need to remove zpm cache using: `zpm clean`
 
-Additionaly they can have some tags and conditions.
-Tags must be separated by commas `,` without spaces, tag parameters must be separated from tag names or another tag parameters by `:`
+Additionaly they can have some tags. Tags must be separated by commas `,` without spaces, tag parameters must be separated from tag names or another tag parameters by `:`
 
 ```sh
 #  zpm command itself
