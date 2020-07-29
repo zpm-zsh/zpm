@@ -1,7 +1,8 @@
 #!/usr/bin/env zsh
 
-typeset -g _ZPM_PATH=""
+typeset -g _ZPM_path=()
 typeset -g _ZPM_fpath=()
+typeset -g _ZPM_autoload=()
 
 typeset -ag _ZPM_plugins_for_source
 typeset -ag _ZPM_plugins_for_async_source
@@ -13,6 +14,7 @@ typeset -Ag _ZPM_file_for_async_source
 fpath+=("${_ZPM_DIR}/functions")
 
 autoload -Uz                     \
+  @zpm-add-autoload              \
   @zpm-addfpath                  \
   @zpm-addpath                   \
   @zpm-async-source              \
@@ -23,9 +25,9 @@ autoload -Uz                     \
   @zpm-get-plugin-file-path      \
   @zpm-get-plugin-name           \
   @zpm-get-plugin-path           \
-  @zpm-initialize-plugins        \
-  @zpm-load-plugin               \
   @zpm-get-plugin-type           \
+  @zpm-initialize-plugin         \
+  @zpm-load-plugins              \
   @zpm-log                       \
   @zpm-no-source                 \
   @zpm-source                    \
@@ -34,7 +36,7 @@ autoload -Uz                     \
 function zpm() {
   if [[ "$1" == 'load' ]]; then
     shift
-    @zpm-initialize-plugins "$@"
+    @zpm-load-plugins "$@"
     return 0
   fi
 
@@ -72,5 +74,5 @@ function zpm() {
   fi
 
   echo 'Unknown command `zpm '"$@"'`, treat as `zpm load '"$@"'`'
-  @zpm-initialize-plugins "$@"
+  @zpm-load-plugins "$@"
 }

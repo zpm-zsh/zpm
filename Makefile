@@ -5,7 +5,7 @@ all:
 	beautysh --indent-size 2 --force-function-style fnpar lib/imperative.zsh
 
 	beautysh --indent-size 2 --force-function-style fnpar bin/_ZPM-plugin-helper
-	
+
 	beautysh --indent-size 2 --force-function-style fnpar functions/_zpm
 	beautysh --indent-size 2 --force-function-style fnpar functions/@zpm-addpath
 	beautysh --indent-size 2 --force-function-style fnpar functions/@zpm-addpath
@@ -19,8 +19,8 @@ all:
 	beautysh --indent-size 2 --force-function-style fnpar functions/@zpm-get-plugin-path
 	beautysh --indent-size 2 --force-function-style fnpar functions/@zpm-get-git-work-tree
 	beautysh --indent-size 2 --force-function-style fnpar functions/@zpm-get-plugin-type
-	beautysh --indent-size 2 --force-function-style fnpar functions/@zpm-initialize-plugins
-	beautysh --indent-size 2 --force-function-style fnpar functions/@zpm-load-plugin
+	beautysh --indent-size 2 --force-function-style fnpar functions/@zpm-load-plugins
+	beautysh --indent-size 2 --force-function-style fnpar functions/@zpm-initialize-plugin
 	beautysh --indent-size 2 --force-function-style fnpar functions/@zpm-log
 	beautysh --indent-size 2 --force-function-style fnpar functions/@zpm-upgrade
 	beautysh --indent-size 2 --force-function-style fnpar functions/@zpm-compile

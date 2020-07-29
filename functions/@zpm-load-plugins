@@ -1,9 +1,9 @@
 #!/usr/bin/env zsh
 
 # Check if plugin isn't loaded
-local -a _Plugins_Install
-local -a _Plugins_Load_Order
-local -A _Plugins_Load
+local -a Plugins_Install
+local -a Plugins_Load_Order
+local -A Plugins_Load
 
 for plugin in $@; do
   local Plugin_name=$(@zpm-get-plugin-name "$plugin")
@@ -16,19 +16,19 @@ for plugin in $@; do
     local Plugin_path=$(@zpm-get-plugin-path "$Plugin_name")
 
     if [[ ! -e $Plugin_path ]]; then
-      _Plugins_Install+=("$plugin")
+      Plugins_Install+=("$plugin")
     fi
 
-    _Plugins_Load_Order+=$Plugin_name
-    _Plugins_Load[$Plugin_name]="$plugin"
+    Plugins_Load_Order+=($Plugin_name)
+    Plugins_Load[$Plugin_name]="$plugin"
   fi
 done
 
-if [[ -n "$_Plugins_Install[@]" ]]; then;
-  printf '%s\0' "${_Plugins_Install[@]}" | \
+if [[ -n "$Plugins_Install[@]" ]]; then;
+  printf '%s\0' "${Plugins_Install[@]}" | \
     xargs -0 -P16 -n1 "${_ZPM_DIR}/bin/_ZPM-plugin-helper" install
 fi
 
-for plugin_name in $_Plugins_Load_Order; do
-  @zpm-load-plugin "${_Plugins_Load[$plugin_name]}" "$plugin_name"
+for plugin_name in $Plugins_Load_Order; do
+  @zpm-initialize-plugin "${Plugins_Load[$plugin_name]}" "$plugin_name"
 done

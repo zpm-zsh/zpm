@@ -7,8 +7,9 @@ cat "${_ZPM_DIR}/lib/init.zsh" >> "$_ZPM_TMP"
 echo >> "$_ZPM_TMP"
 
 echo "$(typeset -p _ZPM_plugins_full)" >> "$_ZPM_TMP"
-echo "export PATH=\"\${PATH}${_ZPM_PATH}\"" >> "$_ZPM_TMP"
-echo "fpath+=( ${_ZPM_CACHE_DIR}/functions '${(j:' ':)_ZPM_fpath}' )" >> "$_ZPM_TMP"
+echo "export PATH=\"\${PATH}${_ZPM_path}\"" >> "$_ZPM_TMP"
+echo "fpath+=( '${(j:' ':)_ZPM_fpath}' )" >> "$_ZPM_TMP"
+echo "autoload -Uz $_ZPM_autoload" >> "$_ZPM_TMP"
 echo >> "$_ZPM_TMP"
 
 echo 'compinit -i -C -d "${ZPM_COMPDUMP}"' >> "$_ZPM_TMP"
