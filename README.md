@@ -152,7 +152,20 @@ zpm load user/plugin-name
 
 > Notice: if you change `~/.zshrc`, you need to remove zpm cache using: `zpm clean`
 
-Additionaly they can have some tags and conditions
+Additionaly they can have some tags and conditions.
+Tags must be separated by commas `,` without spaces, tag parameters must be separated from tag names or another tag parameters by `:`
+
+```sh
+#  zpm command itself
+# ⬀    zpm command
+# |   ⬀     plugin name
+# |   |    ⬀             tag
+# |   |    |            ⬀     tag parameters, divided by :
+# |   |    |            |    ⬀                  boolean tag
+# |   |    |            |    |                 ⬀
+# ↓   ↓    ↓            ↓    ↓                 ↓
+zpm load some/plugin,apply:source:path:fpath,async
+```
 
 ### `if` and `if-not` conditions
 
@@ -278,3 +291,13 @@ Run `zpm upgrade` for upgrading, or run `zpm upgrade some-plugin another-plugin`
 ### Clean
 
 By default zpm will generate cache file at first run, but if you will change `~/.zshrc` this cache should be removed using `zpm clean` command
+
+## Changelog
+
+* 2.0
+  * `omz/` prefix replaced by `@omz/`
+  * Added plugin type `empty`
+  * Added `autoload` and `autoload-all` tags
+  * Added `gen-plugin` and `gen-completion` tags
+  * Notes:
+    * Replace `omz/` to `@omz/` in your `.zshrc`
