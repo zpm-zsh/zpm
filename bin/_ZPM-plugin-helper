@@ -31,7 +31,7 @@ autoload -Uz                   \
 local Plugin_name=$(@zpm-get-plugin-name "$2")
 
 if [[ "$2" == 'omz/'* ]]; then
-  echo 'omz/ prefix is depricated, change it to @omz/'
+  echo "${c[red]}omz/ prefix is depricated, change it to @omz/${c[reset]}"
 fi
 
 local Plugin_type=$(@zpm-get-plugin-type "$2")
