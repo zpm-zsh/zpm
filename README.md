@@ -13,6 +13,30 @@ Zpm is a plugin manager for ZSH who combines the imperative and declarative appr
 * ZPM runs on Linux, Android, FreeBSD and macOS
 * Extensible
 
+---
+
+* [Stats](#stats)
+* [Base dependences](#base-dependences)
+* [Instalation](#instalation)
+* [How to use](#how-to-use)
+  * [Load plugin](#load-plugin)
+  * [`if` and `if-not` conditions](#if-and-if-not-conditions)
+  * [Tags](#tags)
+    * [`type` tag](#type-tag)
+    * [`apply` tag](#apply-tag)
+    * [`async` tag](#async-tag)
+    * [`source` tag](#source-tag)
+    * [`path` and `fpath` tags](#path-and-fpath-tags)
+    * [`autoload` tag](#autoload-tag)
+    * [`autoload-all` tag](#autoload-all-tag)
+    * [`hook` tag](#hook-tag)
+    * [`gen-plugin` tag](#gen-plugin-tag)
+    * [`gen-completion` tag](#gen-completion-tag)
+  * [Upgrade](#upgrade)
+  * [Clean](#clean)
+* [Troubleshooting](#troubleshooting)
+* [Changelog](#changelog)
+
 ## Stats
 
 <details>
@@ -125,7 +149,7 @@ cp ~/.zpm/zshrc ~/.zshrc
 Currently zpm has following commands
 
 * load - will download and load plugin [See](#load-plugin)
-* if/if-not - conditions for following command [See](#if-conditions)
+* if/if-not - conditions for following command [See](#if-and-if-not-conditions)
 * upgrade - will upgrade plugin, without parameters will upgrade all plugins [See](#upgrade)
 * clean - will clean zpm cache [See](#clean)
 
@@ -290,6 +314,16 @@ Run `zpm upgrade` for upgrading, or run `zpm upgrade some-plugin another-plugin`
 ### Clean
 
 By default zpm will generate cache file at first run, but if you will change `~/.zshrc` this cache should be removed using `zpm clean` command
+
+## Troubleshooting
+
+If you have problems with zpm try:
+
+```sh
+rm -rf "${TMPDIR:-/tmp}/zsh-${UID:-user}"
+cd ~/.zpm
+git pull
+```
 
 ## Changelog
 
