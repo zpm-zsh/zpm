@@ -1,4 +1,5 @@
 #!/usr/bin/env zsh
+TMOUT=5
 
 local _ZPM_TMP="$(mktemp)"
 local _ZPM_TMP_ASYNC="$(mktemp)"
@@ -60,7 +61,6 @@ mv "$_ZPM_TMP" "$_ZPM_CACHE"
 mv "$_ZPM_TMP_ASYNC" "$_ZPM_CACHE_ASYNC"
 
 compinit -i -d "${_ZPM_COMPDUMP}"
-TMOUT=5
 
 (@zpm-compile 2>/dev/null &)
 
