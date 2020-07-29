@@ -34,16 +34,17 @@ Zpm is a plugin manager for ZSH who combines the imperative and declarative appr
 <p>
 
 ```sh
-zsh -i -c exit  0.01s user 0.00s system 100% cpu 0.010 total
-zsh -i -c exit  0.01s user 0.00s system 101% cpu 0.010 total
-zsh -i -c exit  0.01s user 0.00s system 100% cpu 0.012 total
-zsh -i -c exit  0.00s user 0.01s system 100% cpu 0.010 total
+zsh -i -c exit  0.00s user 0.00s system 100% cpu 0.008 total
+zsh -i -c exit  0.01s user 0.00s system 100% cpu 0.008 total
+zsh -i -c exit  0.01s user 0.00s system 101% cpu 0.008 total
+zsh -i -c exit  0.01s user 0.00s system 102% cpu 0.008 total
+zsh -i -c exit  0.01s user 0.00s system 101% cpu 0.008 total
 zsh -i -c exit  0.00s user 0.00s system 101% cpu 0.008 total
-zsh -i -c exit  0.01s user 0.00s system 100% cpu 0.010 total
-zsh -i -c exit  0.01s user 0.00s system 99% cpu 0.010 total
-zsh -i -c exit  0.01s user 0.00s system 100% cpu 0.009 total
-zsh -i -c exit  0.01s user 0.00s system 99% cpu 0.010 total
-zsh -i -c exit  0.01s user 0.00s system 103% cpu 0.010 total
+zsh -i -c exit  0.01s user 0.00s system 102% cpu 0.008 total
+zsh -i -c exit  0.01s user 0.00s system 101% cpu 0.009 total
+zsh -i -c exit  0.01s user 0.00s system 101% cpu 0.008 total
+zsh -i -c exit  0.01s user 0.00s system 102% cpu 0.008 total
+
 ```
 
 </p>
