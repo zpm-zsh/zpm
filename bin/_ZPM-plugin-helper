@@ -87,25 +87,25 @@ else
   fi
 fi
 
-if [[ "$2" == *",gen-pl:"* && -e "$Plugin_path" ]]; then
+if [[ "$2" == *",gen-plugin:"* && -e "$Plugin_path" ]]; then
   local status_string="${c[cyan]}${c[bold]}Generate plugin for:${c[reset]} "
   status_string+="$Plugin_hyperlink"
   status_string+=" ${c[green]}✔${c[reset]}"
 
   cd "$Plugin_path"
-  eval "${${2##*,gen-pl:}%%\,*}" > "${Plugin_path}/zpm-generated.zsh"
+  eval "${${2##*,gen-plugin:}%%\,*}" >! "${Plugin_path}/zpm-generated.zsh"
 
   echo "$status_string"
 fi
 
-if [[ "$2" == *",gen-comp:"* && -e "$Plugin_path" ]]; then
+if [[ "$2" == *",gen-completion:"* && -e "$Plugin_path" ]]; then
   local status_string="${c[cyan]}${c[bold]}Generate completion for:${c[reset]} "
   status_string+="$Plugin_hyperlink"
   status_string+=" ${c[green]}✔${c[reset]}"
 
   cd "$Plugin_path"
   mkdir -p "${Plugin_path}/functions"
-  eval "${${2##*,gen-comp:}%%\,*}" >"${Plugin_path}/functions/_${Plugin_basename}"
+  eval "${${2##*,gen-completion:}%%\,*}" >! "${Plugin_path}/functions/_${Plugin_basename}"
 
   echo "$status_string"
 fi
