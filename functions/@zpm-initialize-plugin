@@ -60,7 +60,7 @@ if [[ "$zpm_plugin_functions_path"  == "true" ]]; then
     done
   fi
 
-  if [[ -n "${zpm_functions_path}" ]]; then
+  if [[ -n "${zpm_functions_path}" && -d "${zpm_functions_path}" ]]; then
     @zpm-log zpm:init:fpath "Add to \$fpath '${zpm_functions_path}'"
     @zpm-addfpath "${zpm_functions_path}"
   fi
@@ -97,8 +97,10 @@ if [[ "$zpm_plugin_bin_path" == "true" ]]; then
     zpm_bin_path="${Plugin_path}/bin"
   fi
 
-  @zpm-log zpm:init:path "Add to \$PATH '${zpm_bin_path:a}'"
-  @zpm-addpath "${zpm_bin_path:a}"
+  if [[ -n "${zpm_bin_path}" && -d "${zpm_bin_path}" ]]; then
+    @zpm-log zpm:init:path "Add to \$PATH '${zpm_bin_path}'"
+    @zpm-addpath "${zpm_bin_path}"
+  fi
 fi
 
 # Source plugin

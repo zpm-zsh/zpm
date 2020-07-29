@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 
-_ZPM_path+=("${1}")
+_ZPM_path="${_ZPM_path}:${1}"
 
 if [[ ":$PATH:" != *":${1}:"* ]]; then
-  path+=("${1}")
+  PATH="$PATH:${1}"
 fi
