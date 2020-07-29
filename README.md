@@ -122,10 +122,10 @@ cp ~/.zpm/zshrc ~/.zshrc
 
 Currently zpm has following commands
 
-* load - will download and load plugin [See](#how-to-use)
+* load - will download and load plugin [See](#load-plugin)
 * if/if-not - conditions for following command [See](#if-conditions)
 * upgrade - will upgrade plugin, without parameters will upgrade all plugins [See](#upgrade)
-* clean - will clean zpm cache [See](#cache)
+* clean - will clean zpm cache [See](#clean)
 
 The set of commands can be expanded extended using plugins
 
@@ -141,7 +141,7 @@ The set of commands can be expanded extended using plugins
 
 </details>
 
-### Load plugin 
+### Load plugin
 
 Plugin name must have next form: `user/plugin-name`. This plugin can be enabled using
 
@@ -155,15 +155,13 @@ zpm load user/plugin-name
 Additionaly they can have some tags. Tags must be separated by commas `,` without spaces, tag parameters must be separated from tag names or another tag parameters by `:`
 
 ```sh
-#  zpm command itself
-# ⬀    zpm command
-# |   ⬀     plugin name
-# |   |    ⬀             tag
-# |   |    |            ⬀     tag parameters, divided by :
-# |   |    |            |    ⬀                  boolean tag
-# |   |    |            |    |                 ⬀
-# ↓   ↓    ↓            ↓    ↓                 ↓
-zpm load some/plugin,apply:source:path:fpath,async
+#     plugin name
+#   ⬀          tag
+#   |         ⬀      tag parameters, divided by :
+#   |         |    ⬀                   boolean tag
+#   |         |    |                 ⬀
+#   ↓         ↓    ↓                 ↓
+some/plugin,apply:source:path:fpath,async
 ```
 
 ### `if` and `if-not` conditions
