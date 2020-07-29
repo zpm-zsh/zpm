@@ -26,7 +26,7 @@ done
 
 if [[ -n "$Plugins_Install[@]" ]]; then;
   printf '%s\0' "${Plugins_Install[@]}" | \
-    xargs -0 -P16 -n1 "${_ZPM_DIR}/bin/_ZPM-plugin-helper" install
+    xargs -0 -P16 -n1 -I{} "${_ZPM_DIR}/bin/_ZPM-plugin-helper" install '{}'
 fi
 
 for plugin_name in $Plugins_Load_Order; do
