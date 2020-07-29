@@ -99,7 +99,9 @@ zpm-zsh/template
 * git
 * xargs
 * [Termux](http://termux.com/) for Android
-* [Rush](https://github.com/shenwei356/rush) - optional
+* [Rush](https://github.com/shenwei356/rush) for fastest parallel execution, optional
+* [cli-html](https://www.npmjs.com/package/cli-markdown) view html in terminal, optional
+* [cli-markdown](https://www.npmjs.com/package/cli-markdown) view markdown in terminal, optional
 
 ## Instalation
 
