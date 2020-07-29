@@ -29,6 +29,11 @@ autoload -Uz                   \
   @zpm-get-git-work-tree
 
 local Plugin_name=$(@zpm-get-plugin-name "$2")
+
+if [[ "$2" == 'omz/'* ]]; then
+  echo 'omz/ prefix is depricated, change it to @omz/'
+fi
+
 local Plugin_type=$(@zpm-get-plugin-type "$2")
 local Plugin_basename=$(@zpm-get-plugin-basename "$Plugin_name")
 local Plugin_path=$(@zpm-get-plugin-path "$Plugin_name")

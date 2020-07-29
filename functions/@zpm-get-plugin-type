@@ -6,13 +6,18 @@ if [[ "$1" == 'zpm' ]]; then
 fi
 
 if [[ "$1" != *",type:"* ]]; then
-  if [[ "$1" == 'omz/'* ]]; then
+  if [[ "$1" == '@omz/'* ]]; then
     echo 'omz'
     return 0
   fi
 
-  if [[ "$1" == 'empty/'* ]]; then
+  if [[ "$1" == '@empty/'* ]]; then
     echo 'empty'
+    return 0
+  fi
+
+  if [[ "$1" == 'omz/'* ]]; then
+    echo 'omz'
     return 0
   fi
 
