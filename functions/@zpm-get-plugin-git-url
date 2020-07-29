@@ -1,0 +1,12 @@
+#!/usr/bin/env zsh
+
+local Plugin_name="$1"
+local Plugin_type="$2"
+
+if [[ "$Plugin_type" == "github" ]]; then
+  echo "https://github.com/${Plugin_name}"
+elif [[ "$Plugin_type" == "gitlab" ]]; then
+  echo "https://gitlab.com/${Plugin_name}"
+elif [[ "$Plugin_type" == "bitbucket" ]]; then
+  echo "https://bitbucket.com/${Plugin_name}"
+fi

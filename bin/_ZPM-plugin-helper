@@ -17,15 +17,16 @@ if [[ "$CLICOLOR" != "0" ]]; then
   )
 fi
 
-autoload -Uz                   \
-  @zpm-get-plugin-name         \
-  @zpm-get-plugin-type         \
-  @zpm-get-plugin-basename     \
-  @zpm-get-plugin-path         \
-  @zpm-get-plugin-link         \
-  @zpm-get-plugin-hyperlink    \
-  @zpm-log                     \
-  @zpm-get-git-work-tree
+autoload -Uz                    \
+  @zpm-get-plugin-basename      \
+  @zpm-get-plugin-git-root-path \
+  @zpm-get-plugin-git-url       \
+  @zpm-get-plugin-hyperlink     \
+  @zpm-get-plugin-link          \
+  @zpm-get-plugin-name          \
+  @zpm-get-plugin-path          \
+  @zpm-get-plugin-type          \
+  @zpm-log
 
 local Plugin_name=$(@zpm-get-plugin-name "$2")
 
@@ -38,14 +39,14 @@ local Plugin_basename=$(@zpm-get-plugin-basename "$Plugin_name")
 local Plugin_path=$(@zpm-get-plugin-path "$Plugin_name")
 local Plugin_link=$(@zpm-get-plugin-link "$Plugin_name" "$Plugin_type")
 local Plugin_hyperlink=$(@zpm-get-plugin-hyperlink "$Plugin_name" "$Plugin_link")
-local Plugin_git_work_tree=$(@zpm-get-git-work-tree "$Plugin_path" "$Plugin_type")
+local Plugin_git_root_path=$(@zpm-get-plugin-git-root-path "$Plugin_path" "$Plugin_type")
 
 if [[ "$1" == "upgrade" ]]; then
   @zpm-log zpm:upgrade "Upgrade '${2}'"
 
-  if [[ "$Plugin_type" == (github|gitlab|bitbucket|omz|zpm) ]]; then
-    git --git-dir="${Plugin_git_work_tree}/.git/" --work-tree="${Plugin_git_work_tree}/" checkout "${Plugin_git_work_tree}/" </dev/null >/dev/null 2>/dev/null
-    git --git-dir="${Plugin_git_work_tree}/.git/" --work-tree="${Plugin_git_work_tree}/" pull </dev/null >/dev/null 2>/dev/null
+  if [[ -n "$Plugin_git_root_path" ]]; then
+    git --git-dir="${Plugin_git_root_path}/.git/" --work-tree="${Plugin_git_root_path}/" checkout "${Plugin_git_root_path}/" </dev/null >/dev/null 2>/dev/null
+    git --git-dir="${Plugin_git_root_path}/.git/" --work-tree="${Plugin_git_root_path}/" pull </dev/null >/dev/null 2>/dev/null
   else
     true
   fi
@@ -56,20 +57,19 @@ if [[ "$1" == "upgrade" ]]; then
 
   echo $status_string
 else
-  if [[ "$Plugin_type" == "github" ]]; then
-    git clone --recursive "https://github.com/${Plugin_name}" --depth 1 --single-branch "${Plugin_git_work_tree}" </dev/null >/dev/null 2>/dev/null
-  elif [[ "$Plugin_type" == "gitlab" ]]; then
-    git clone --recursive "https://gitlab.com/${Plugin_name}" --depth 1 --single-branch "${Plugin_git_work_tree}" </dev/null >/dev/null 2>/dev/null
-  elif [[ "$Plugin_type" == "bitbucket" ]]; then
-    git clone --recursive "https://bitbucket.com/${Plugin_name}" --depth 1 --single-branch "${Plugin_git_work_tree}" </dev/null >/dev/null 2>/dev/null
-  elif [[ "$Plugin_type" == "empty" ]]; then
-    mkdir -p "${Plugin_path}"
-  elif [[ "$Plugin_type" == "omz" ]]; then
+  local Plugin_git_url=$(@zpm-get-plugin-git-url "$Plugin_name" "$Plugin_type")
+  if [[ "$Plugin_type" == "omz" ]]; then
     if [[ ! -e "${HOME}/.oh-my-zsh" ]]; then
-      git clone --recursive "https://github.com/ohmyzsh/ohmyzsh" --depth 1 --single-branch "${Plugin_git_work_tree}" </dev/null >/dev/null 2>/dev/null
+      git clone --recursive "${Plugin_git_url}" --depth 1 --single-branch "${Plugin_git_root_path}" </dev/null >/dev/null 2>/dev/null
     fi
     ln -s "${HOME}/.oh-my-zsh/plugins/${Plugin_basename}" "$Plugin_path" 2>/dev/null
     true
+  elif [[ "$Plugin_type" == "empty" ]]; then
+    mkdir -p "${Plugin_path}"
+  elif [[ -n "$Plugin_git_url" ]]; then
+    git clone --recursive "${Plugin_git_url}" --depth 1 --single-branch "${Plugin_git_root_path}" </dev/null >/dev/null 2>/dev/null
+  else
+    false
   fi
 
   if [[ "$?" == "0" ]]; then

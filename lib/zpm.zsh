@@ -14,30 +14,31 @@ typeset -Ag _ZPM_file_for_async_source
 fpath+=("${_ZPM_DIR}/functions")
 
 autoload -Uz                     \
-  @zpm-add-autoload      \
-  @zpm-addfpath      \
-  @zpm-addpath      \
-  @zpm-async-source      \
-  @zpm-background-initialization      \
-  @zpm-clean      \
-  @zpm-compile      \
-  @zpm-get-git-work-tree      \
-  @zpm-get-plugin-autoload      \
-  @zpm-get-plugin-basename      \
-  @zpm-get-plugin-bin-path      \
-  @zpm-get-plugin-file-path      \
-  @zpm-get-plugin-functions-path      \
-  @zpm-get-plugin-hyperlink      \
-  @zpm-get-plugin-link      \
-  @zpm-get-plugin-name      \
-  @zpm-get-plugin-path      \
-  @zpm-get-plugin-type      \
-  @zpm-initialize-plugin      \
-  @zpm-load-plugins      \
-  @zpm-log      \
-  @zpm-no-source      \
-  @zpm-source      \
-  @zpm-upgrade      \
+  @zpm-add-autoload \
+  @zpm-addfpath \
+  @zpm-addpath \
+  @zpm-async-source \
+  @zpm-background-initialization \
+  @zpm-clean \
+  @zpm-compile \
+  @zpm-get-plugin-autoload \
+  @zpm-get-plugin-basename \
+  @zpm-get-plugin-bin-path \
+  @zpm-get-plugin-file-path \
+  @zpm-get-plugin-functions-path \
+  @zpm-get-plugin-git-root-path \
+  @zpm-get-plugin-git-url \
+  @zpm-get-plugin-hyperlink \
+  @zpm-get-plugin-link \
+  @zpm-get-plugin-name \
+  @zpm-get-plugin-path \
+  @zpm-get-plugin-type \
+  @zpm-initialize-plugin \
+  @zpm-load-plugins \
+  @zpm-log \
+  @zpm-no-source \
+  @zpm-source \
+  @zpm-upgrade \
 
 
   function zpm() {

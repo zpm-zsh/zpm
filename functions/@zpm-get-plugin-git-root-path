@@ -13,4 +13,9 @@ if [[ "$Plugin_type" == "zpm" ]]; then
   return 0
 fi
 
-echo "${Plugin_path}"
+if [[ "$Plugin_type" == (github|gitlab|bitbucket) ]]; then
+  echo "${Plugin_path}"
+  return 0
+fi
+
+return -1
