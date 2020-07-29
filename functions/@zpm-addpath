@@ -3,5 +3,5 @@
 _ZPM_path="${_ZPM_path}:${1}"
 
 if [[ ":$PATH:" != *":${1}:"* ]]; then
-  PATH="$PATH:${1}"
+  path=( $path "${1}" )
 fi

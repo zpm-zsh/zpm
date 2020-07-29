@@ -1,5 +1,6 @@
 #!/usr/bin/env zsh
 0=${(%):-%x}
+typeset -aU path cdpath fpath manpath
 
 export _ZPM_DIR=${0:h}
 export _ZPM_PLUGIN_DIR="${0:h}/plugins"
