@@ -1,5 +1,4 @@
 #!/usr/bin/env zsh
-
 fpath+=("${_ZPM_DIR}/functions")
 
 if [[ "$CLICOLOR" != "0" ]]; then
@@ -44,7 +43,7 @@ local Plugin_git_work_tree=$(@zpm-get-git-work-tree "$Plugin_path" "$Plugin_type
 if [[ "$1" == "upgrade" ]]; then
   @zpm-log zpm:upgrade "Upgrade '${2}'"
 
-  if [[ "$Plugin_type" == (github|gitlab|bitbucket|omz) ]]; then
+  if [[ "$Plugin_type" == (github|gitlab|bitbucket|omz|zpm) ]]; then
     git --git-dir="${Plugin_git_work_tree}/.git/" --work-tree="${Plugin_git_work_tree}/" checkout "${Plugin_git_work_tree}/" </dev/null >/dev/null 2>/dev/null
     git --git-dir="${Plugin_git_work_tree}/.git/" --work-tree="${Plugin_git_work_tree}/" pull </dev/null >/dev/null 2>/dev/null
   else
