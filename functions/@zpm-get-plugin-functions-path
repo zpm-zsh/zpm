@@ -1,0 +1,17 @@
+#!/usr/bin/env zsh
+
+local Plugin="$1"
+local Plugin_path="$2"
+
+if [[ "$Plugin" == *",fpath:"* ]]; then
+  local zpm_fpath="${Plugin_path}/${${1##*,fpath:}%%,*}"
+  echo "${zpm_fpath:a}"
+elif [[ -d "${Plugin_path}/functions" ]]; then
+  zpm_fpath="${Plugin_path}/functions"
+  echo "${zpm_fpath:a}"
+else
+  for file in "${Plugin_path}/_"*(N); do
+    echo "${Plugin_path:a}"
+    return
+  done
+fi

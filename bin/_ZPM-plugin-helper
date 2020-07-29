@@ -92,7 +92,7 @@ if [[ "$2" == *",gen-plugin:"* && -e "$Plugin_path" ]]; then
   status_string+=" ${c[green]}✔${c[reset]}"
 
   cd "$Plugin_path"
-  eval "${${2##*,gen-plugin:}%%\,*}" >! "${Plugin_path}/zpm-generated.zsh"
+  eval "${${2##*,gen-plugin:}%%\,*}" 1>! "${Plugin_path}/zpm-generated.zsh" 2>/dev/null
 
   echo "$status_string"
 fi
@@ -104,7 +104,7 @@ if [[ "$2" == *",gen-completion:"* && -e "$Plugin_path" ]]; then
 
   cd "$Plugin_path"
   mkdir -p "${Plugin_path}/functions"
-  eval "${${2##*,gen-completion:}%%\,*}" >! "${Plugin_path}/functions/_${Plugin_basename}"
+  eval "${${2##*,gen-completion:}%%\,*}" 1>! "${Plugin_path}/functions/_${Plugin_basename}" 2>/dev/null
 
   echo "$status_string"
 fi

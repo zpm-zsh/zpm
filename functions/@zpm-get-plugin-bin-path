@@ -1,0 +1,12 @@
+#!/usr/bin/env zsh
+
+local Plugin="$1"
+local Plugin_path="$2"
+
+if [[ "$Plugin" == *",path:"* ]]; then
+  local zpm_path="${Plugin_path}/${${1##*,path:}%%,*}"
+  echo "${zpm_path:a}"
+elif [[ -d "${Plugin_path}/bin" ]]; then
+  zpm_path="${Plugin_path}/bin"
+  echo "${zpm_path:a}"
+fi

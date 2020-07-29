@@ -2,10 +2,11 @@
 
 local Plugin_path="${1}"
 local Plugin_basename="${2}"
-local Plugin_sourcefile="${3}"
+local Plugin="${3}"
 
-if [[ -n "${Plugin_sourcefile}" ]]; then
-  if [[ -e "${Plugin_path}/${Plugin_sourcefile}" ]]; then
+if [[ "$Plugin"  == *",source:"* ]]; then
+  local Plugin_sourcefile="${${Plugin##*,source:}%%,*}"
+  if [[ -n "${Plugin_sourcefile}" && -e "${Plugin_path}/${Plugin_sourcefile}" ]]; then
     echo "${Plugin_path}/${Plugin_sourcefile}"
     return 0
   else

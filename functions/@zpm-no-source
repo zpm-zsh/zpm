@@ -1,3 +1,4 @@
 #!/usr/bin/env zsh
 
-  _ZPM_plugins_no_source+=("$1")
+@zpm-log zpm:init:source "Plugin file for ${Plugin_name} is missing"
+_ZPM_plugins_no_source+=("$1")
