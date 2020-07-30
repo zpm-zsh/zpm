@@ -5,8 +5,6 @@ local Plugin_name="$2"
 local Plugin_basename=$(@zpm-get-plugin-basename "$Plugin_name")
 local Plugin_path=$(@zpm-get-plugin-path "$Plugin_name")
 
-zsh_loaded_plugins+=("$Plugin_name")
-
 local zpm_plugin_source=true
 local zpm_plugin_async=false
 local zpm_plugin_bin_path=true
@@ -19,6 +17,7 @@ if [[ -f "${Plugin_path}/plugin-options.zsh" ]]; then
 fi
 
 @zpm-log zpm:init "Initialize '${Plugin_name}'"
+zsh_loaded_plugins+=("$Plugin_name")
 
 # Config
 if [[ "$Plugin" == *",apply:"* ]]; then
