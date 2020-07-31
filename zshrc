@@ -4,9 +4,6 @@ source ~/.zpm/zpm.zsh 2>/dev/null || {
   source ~/.zpm/zpm.zsh
 }
 
-### Plugin for zpm
-zpm load zpm-zsh/zpm-readme,async zpm-zsh/zpm-info,async zpm-zsh/zpm-telemetry,async
-
 ### Tmux
 zpm if ssh load zpm-zsh/tmux
 zpm if-not ssh load zpm-zsh/tmux,apply:path
@@ -27,7 +24,7 @@ zpm load                              \
   zpm-zsh/undollar,async              \
   zpm-zsh/zsh-completions,apply:fpath
 
-
+### Plugins for local host
 zpm if-not ssh load                                                                    \
   zpm-zsh/dropbox,async                                                                \
   lukechilds/zsh-better-npm-completion,async                                           \
@@ -43,12 +40,5 @@ zpm if-not ssh load                                                             
   zdharma/fast-syntax-highlighting,async                                               \
   zsh-users/zsh-autosuggestions,source:zsh-autosuggestions.zsh,async                   \
   psprint/history-search-multi-word,fpath:/,async
-
-
-zpm load                      \
-  omz/extract,async           \
-  omz/command-not-found,async \
-  omz/wp-cli,async
-
 
 source ~/.zshrc.local 2>/dev/null
