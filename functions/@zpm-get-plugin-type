@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 
-if [[ "$1" == 'zpm' ]]; then
-  echo 'zpm'
+if [[ "$1" == 'zpm' || "$1" == '@zpm' ]]; then
+  echo '@zpm'
   return 0
 fi
 

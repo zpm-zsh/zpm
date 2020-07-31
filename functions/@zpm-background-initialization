@@ -3,10 +3,11 @@ TMOUT=5
 
 local _ZPM_TMP="$(mktemp)"
 local _ZPM_TMP_ASYNC="$(mktemp)"
-
-echo "$(typeset -p _ZPM_plugins_full)" >> "$_ZPM_TMP"
-echo "export PATH=\"\${PATH}${_ZPM_path}\"" >> "$_ZPM_TMP"
-echo "fpath+=( '${(j:' ':)_ZPM_fpath}' )" >> "$_ZPM_TMP"
+# echo "$(typeset -p _ZPM_plugins_full)" >> "$_ZPM_TMP_ASYNC"
+echo "$(typeset -p PATH)" >> "$_ZPM_TMP"
+echo "$(typeset -p fpath)" >> "$_ZPM_TMP"
+# echo "export PATH=\"\${PATH}${_ZPM_path}\"" >> "$_ZPM_TMP"
+# echo "fpath+=( '${(j:' ':)_ZPM_fpath}' )" >> "$_ZPM_TMP"
 echo "autoload -Uz $_ZPM_autoload" >> "$_ZPM_TMP"
 echo >> "$_ZPM_TMP"
 
@@ -39,6 +40,9 @@ echo >> "$_ZPM_TMP"
 echo 'add-zsh-hook background _ZPM_post_fn' >> "$_ZPM_TMP"
 echo >> "$_ZPM_TMP"
 echo 'zpm () {}' >> "$_ZPM_TMP"
+
+echo "$(typeset -p _ZPM_plugins_full)" >> "$_ZPM_TMP_ASYNC"
+echo >> "$_ZPM_TMP_ASYNC"
 
 for plugin in ${_ZPM_plugins_for_async_source}; do
   local file="$_ZPM_file_for_async_source["$plugin"]"
