@@ -31,13 +31,13 @@ zpm load                              \
 zpm if-not ssh load                                                                    \
   zpm-zsh/dropbox,async                                                                \
   lukechilds/zsh-better-npm-completion,async                                           \
-  \
+                                                                                       \
   zpm-zsh/clipboard                                                                    \
   zpm-zsh/mysql-colorize,async                                                         \
   zpm-zsh/zshmarks,async                                                               \
   voronkovich/gitignore.plugin.zsh,async                                               \
   zpm-zsh/autoenv,async                                                                \
-  \
+                                                                                       \
   mdumitru/fancy-ctrl-z,async                                                          \
   zsh-users/zsh-history-substring-search,source:zsh-history-substring-search.zsh,async \
   zdharma/fast-syntax-highlighting,async                                               \
