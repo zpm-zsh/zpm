@@ -1,7 +1,5 @@
 #!/usr/bin/env zsh
 
-typeset -g _ZPM_path=()
-typeset -g _ZPM_fpath=()
 typeset -g _ZPM_autoload=()
 
 typeset -ag _ZPM_plugins_for_source
