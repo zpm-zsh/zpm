@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 mkdir -p "${_ZPM_CACHE_DIR}"
 
-declare -Ag _ZPM_plugins_full=( @zpm @zpm )
+declare -Ag _ZPM_plugins_full=( '@zpm' '@zpm' )
 fpath+=("${_ZPM_DIR}/functions")
 
 compinit -i -C -d "${_ZPM_COMPDUMP}"
