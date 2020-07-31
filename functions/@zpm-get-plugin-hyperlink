@@ -2,14 +2,34 @@
 
 local plugin_name="$1"
 local plugin_link="$2"
-local status_string=""
+local status_string
+
+if [[ "$plugin_name" == "@zpm" ]]; then
+  status_string+="\033]8;;${plugin_link}\a"
+  status_string+="${c[magenta]}${c[bold]}@zpm"
+  status_string+="\033]8;;\a${c[reset]}"
+  echo "$status_string"
+  return 0
+fi
+
+local Plugin_pre="${c[bold]}"
+local Plugin_first
+if [[ "$plugin_name" == '@'* ]]; then
+  Plugin_first="${c[cyan]}${plugin_name%/*}"
+else
+  Plugin_first="${c[blue]}${plugin_name%/*}"
+fi
+local Plugin_divider="${c[red]}/"
+local Plugin_second="${c[blue]}${plugin_name#*/}"
+local Plugin_post="${c[reset]}"
+
+local Plugin_colorized_name="${Plugin_pre}${Plugin_first}${Plugin_divider}${Plugin_second}${Plugin_post}"
 
 if [[ -z "$plugin_link" ]]; then
-  status_string+="${c[blue]}${c[bold]}${plugin_name//\//${c[red]}${c[bold]}/${c[blue]}${c[bold]}}"
-  status_string+="${c[reset]}"
+  status_string="$Plugin_colorized_name"
 else
-  status_string+="\033]8;;${plugin_link}\a"
-  status_string+="${c[blue]}${c[bold]}${plugin_name//\//${c[red]}${c[bold]}/${c[blue]}${c[bold]}}"
+  status_string="\033]8;;${plugin_link}\a"
+  status_string+="$Plugin_colorized_name"
   status_string+="\033]8;;\a${c[reset]}"
 fi
 

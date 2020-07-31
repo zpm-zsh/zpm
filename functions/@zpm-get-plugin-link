@@ -18,12 +18,12 @@ if [[ "$plugin_type" == 'bitbucket' ]]; then
   return 0
 fi
 
-if [[ "$plugin_type" == '@zpm' ]]; then
+if [[ "$plugin_type" == 'zpm' ]]; then
   echo "https://github.com/zpm-zsh/zpm"
   return 0
 fi
 
 if [[ "$plugin_type" == 'omz' ]]; then
-  echo "https://github.com/robbyrussell/oh-my-zsh/tree/master/plugins/${${plugin_name#@omz/}#omz/}"
+  echo "https://github.com/robbyrussell/oh-my-zsh/tree/master/plugins/${plugin_name#*/}"
   return 0
 fi
