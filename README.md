@@ -20,8 +20,8 @@ Zpm is a plugin manager for ZSH who combines the imperative and declarative appr
 * [Instalation](#instalation)
 * [How to use](#how-to-use)
   * [Load plugin](#load-plugin)
-  * [`if` and `if-not` conditions](#if-and-if-not-conditions)
   * [Tags](#tags)
+  * [`if` and `if-not` conditions](#if-and-if-not-conditions)
   * [Upgrade](#upgrade)
   * [Clean](#clean)
 * [Troubleshooting](#troubleshooting)
@@ -182,29 +182,6 @@ Additionaly they can have some tags. Tags must be separated by commas `,` withou
 some/plugin,apply:source:path:fpath,async
 ```
 
-### `if` and `if-not` conditions
-
-If condition allows you to run the following commands only if the condition is true
-
-```sh
-zpm if some-condition (another commands)
-```
-
-Conditions:
-
-* `linux` - if current OS is Linux
-* `bsd` - if current OS is *BSD
-* `macos` - if current OS is macOS
-* `termux` - if current session run in [Termux](http://termux.com/)
-* `ssh` - if session run on remote host
-* `vte` - if session run on VTE based terminal emulator
-
-Result of condition can be negated using `if-not` tag
-
-The condition can be combined `zpm if macos if-not ssh load repo/plugin`
-
-> Notice: conditions will be verified only at first run, after that will be used generated cache
-
 ### Tags
 
 Zpm supports tags for plugins:
@@ -298,6 +275,29 @@ This tag parameter contains command who can generate zsh completions file
 ```sh
 zpm @empty/rustup,gen-completion:"rustup completions zsh"
 ```
+
+### `if` and `if-not` conditions
+
+If condition allows you to run the following commands only if the condition is true
+
+```sh
+zpm if some-condition (another commands)
+```
+
+Conditions:
+
+* `linux` - if current OS is Linux
+* `bsd` - if current OS is *BSD
+* `macos` - if current OS is macOS
+* `termux` - if current session run in [Termux](http://termux.com/)
+* `ssh` - if session run on remote host
+* `vte` - if session run on VTE based terminal emulator
+
+Result of condition can be negated using `if-not` tag
+
+The condition can be combined `zpm if macos if-not ssh load repo/plugin`
+
+> Notice: conditions will be verified only at first run, after that will be used generated cache
 
 ### Upgrade
 
