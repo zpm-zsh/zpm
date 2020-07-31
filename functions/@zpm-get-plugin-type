@@ -16,6 +16,11 @@ if [[ "$1" != *",type:"* ]]; then
     return 0
   fi
 
+  if [[ "$1" == '@link/'* ]]; then
+    echo 'link'
+    return 0
+  fi
+
   if [[ "$1" == 'omz/'* ]]; then
     echo 'omz'
     return 0
@@ -45,6 +50,11 @@ fi
 
 if [[ "$_ZPM_tag_str" == 'empty' ]]; then
   echo 'empty'
+  return 0
+fi
+
+if [[ "$_ZPM_tag_str" == 'link' ]]; then
+  echo 'link'
   return 0
 fi
 

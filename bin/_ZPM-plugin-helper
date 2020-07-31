@@ -54,12 +54,11 @@ if [[ "$1" == "upgrade" ]]; then
   local status_string="${c[green]}${c[bold]}Upgrade${c[reset]} "
   status_string+="$Plugin_hyperlink"
   status_string+=" ${c[green]}✔${c[reset]}"
-
   echo $status_string
 else
   local Plugin_git_url=$(@zpm-get-plugin-git-url "$Plugin_name" "$Plugin_type")
   if [[ "$Plugin_type" == "omz" ]]; then
-    if [[ ! -e "${HOME}/.oh-my-zsh" ]]; then
+    if [[ ! -e "${Plugin_git_url}" ]]; then
       git clone --recursive "${Plugin_git_url}" --depth 1 --single-branch "${Plugin_git_root_path}" </dev/null >/dev/null 2>/dev/null
     fi
     ln -s "${HOME}/.oh-my-zsh/plugins/${Plugin_basename}" "$Plugin_path" 2>/dev/null
@@ -76,7 +75,6 @@ else
     local status_string="${c[green]}${c[bold]}Install${c[reset]} "
     status_string+="$Plugin_hyperlink"
     status_string+=" ${c[green]}✔${c[reset]}"
-
     echo $status_string
   else
     local status_string="${c[red]}${c[bold]}Can't install${c[reset]} "
