@@ -54,7 +54,7 @@ done
 
 echo 'unset ZERO' >> "$_ZPM_TMP_ASYNC"
 
-cat "${_ZPM_DIR}/lib/zpm.zsh" >> "$_ZPM_TMP_ASYNC"
+cat "${_ZPM_DIR}/lib/init.zsh" >> "$_ZPM_TMP_ASYNC"
 echo >> "$_ZPM_TMP_ASYNC"
 
 echo "zle && zle reset-prompt" >> "$_ZPM_TMP_ASYNC"
