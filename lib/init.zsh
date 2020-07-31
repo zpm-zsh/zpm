@@ -34,7 +34,5 @@ autoload -Uz \
   @zpm-log \
   @zpm-no-source \
   @zpm-source \
-  @zpm-upgrade
-
-unfunction zpm
-autoload -Uz zpm
+  @zpm-upgrade \
+  zpm
