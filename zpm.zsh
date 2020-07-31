@@ -30,6 +30,6 @@ zstyle ':completion:*:zpm:*' sort false
 if [[ -f "${_ZPM_CACHE}" && "${ZPM_USE_CACHE}" != 'false' ]]; then
   source "${_ZPM_CACHE}"
 else
-  eval "$(<${_ZPM_DIR}/lib/zpm.zsh)"
+  eval "$(<${_ZPM_DIR}/lib/init.zsh)"
   eval "$(<${_ZPM_DIR}/lib/imperative.zsh)"
 fi
