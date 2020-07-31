@@ -323,6 +323,7 @@ git pull
   * Change `zpm` type to `@zpm`
   * Remove unused vars
   * Some vars will be loaded async
+  * Fixed colors
 * 2.0
   * `omz/` prefix replaced by `@omz/`
   * Added plugin type `empty`
