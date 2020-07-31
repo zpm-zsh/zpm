@@ -320,6 +320,10 @@ git pull
 
 ## Changelog
 
+* 2.1
+  * Change `zpm` type to `@zpm`
+  * Remove unused vars
+  * Some vars will be loaded async
 * 2.0
   * `omz/` prefix replaced by `@omz/`
   * Added plugin type `empty`
