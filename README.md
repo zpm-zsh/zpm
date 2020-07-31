@@ -149,15 +149,14 @@ Currently zpm has following commands
 The set of commands can be expanded extended using plugins
 
 <details>
-  <summary>Plugins for zpm itself</summary>
-  <p>
+<summary>Plugins for zpm itself</summary>
+<p>
 
 * [zpm-readme](https://github.com/zpm-zsh/zpm-readme) - Show plugin readme in terminal
 * [zpm-info](https://github.com/zpm-zsh/zpm-info) - Show plugin info in terminal
 * [zpm-telemetry](https://github.com/zpm-zsh/zpm-telemetry) - Send telemetry data. Keep calm. Data is sent using GitHub and you can see it before sending.
 
-  </p>
-
+</p>
 </details>
 
 ### Load plugin
