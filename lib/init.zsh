@@ -9,6 +9,7 @@ typeset -ag _ZPM_plugins_no_source
 typeset -Ag _ZPM_file_for_source
 typeset -Ag _ZPM_file_for_async_source
 
+unfunction zpm
 autoload -Uz \
   @zpm-add-autoload \
   @zpm-addfpath \
