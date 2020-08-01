@@ -21,6 +21,10 @@ _ZPM_CACHE="${_ZPM_CACHE_DIR}/zpm-cache.zsh"
 _ZPM_CACHE_ASYNC="${_ZPM_CACHE_DIR}/zpm-cache-async.zsh"
 _ZPM_COMPDUMP="${_ZPM_CACHE_DIR}/zcompdump"
 
+fpath+=("${_ZPM_DIR}/functions" "${_ZPM_CACHE_DIR}/functions")
+export PATH="$PATH:${_ZPM_CACHE_DIR}/bin"
+typeset -aU path cdpath fpath manpath
+
 autoload -Uz compinit
 zstyle ':completion:*:zpm:*' sort false
 
