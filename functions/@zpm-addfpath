@@ -1,5 +1,3 @@
 #!/usr/bin/env zsh
 
-if [[ ":$FPATH:" != *":${1}:"* ]]; then
-  fpath=( $fpath "${1}" )
-fi
+cp -RpLf "${1}/"* "${_ZPM_CACHE_DIR}/functions"

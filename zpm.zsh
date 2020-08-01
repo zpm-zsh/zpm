@@ -11,9 +11,7 @@
 # s – … the PMSPEC global parameter itself (i.e.: should be always present).
 export PMSPEC="0fbiPs"
 export ZPFX="${HOME}/.local"
-declare -ag zsh_loaded_plugins
 
-typeset -aU path cdpath fpath manpath
 autoload -Uz compinit
 
 0=${(%):-%x}
@@ -24,6 +22,7 @@ _ZPM_CACHE_DIR="${TMPDIR:-/tmp}/zsh-${UID:-user}"
 _ZPM_CACHE="${_ZPM_CACHE_DIR}/zpm-cache.zsh"
 _ZPM_CACHE_ASYNC="${_ZPM_CACHE_DIR}/zpm-cache-async.zsh"
 _ZPM_COMPDUMP="${_ZPM_CACHE_DIR}/zcompdump"
+
 
 zstyle ':completion:*:zpm:*' sort false
 

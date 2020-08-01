@@ -1,8 +1,11 @@
 #!/usr/bin/env zsh
-mkdir -p "${_ZPM_CACHE_DIR}"
+mkdir -p "${_ZPM_CACHE_DIR}" "${_ZPM_CACHE_DIR}/functions" "${_ZPM_CACHE_DIR}/bin"
+typeset -aU path cdpath fpath manpath
+declare -ag zsh_loaded_plugins
 
 declare -Ag _ZPM_plugins_full=( '@zpm' '@zpm' )
-fpath+=("${_ZPM_DIR}/functions")
+fpath+=("${_ZPM_DIR}/functions" "${_ZPM_CACHE_DIR}/functions")
+path+=("${_ZPM_CACHE_DIR}/bin")
 
 compinit -i -C -d "${_ZPM_COMPDUMP}"
 
@@ -10,6 +13,7 @@ compinit -i -C -d "${_ZPM_COMPDUMP}"
 
 TMOUT=1
 add-zsh-hook background @zpm-background-initialization
+
 
 function source() {
   if [[ ! "${1}.zwc" -nt "${1}" ]]; then

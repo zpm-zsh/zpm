@@ -1,5 +1,4 @@
 #!/usr/bin/env zsh
-
 typeset -g _ZPM_autoload=()
 
 typeset -ag _ZPM_plugins_for_source

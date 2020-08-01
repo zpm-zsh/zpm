@@ -1,12 +1,13 @@
 #!/usr/bin/env zsh
 TMOUT=5
 add-zsh-hook -d background @zpm-background-initialization
+rehash
 
 local _ZPM_TMP="$(mktemp)"
 local _ZPM_TMP_ASYNC="$(mktemp)"
 
-echo "$(typeset -p PATH)" >> "$_ZPM_TMP"
-echo "$(typeset -p fpath)" >> "$_ZPM_TMP"
+echo "export PATH=\"\$PATH:"${_ZPM_CACHE_DIR}/bin"\"" >> "$_ZPM_TMP"
+echo "fpath+=(\"${_ZPM_DIR}/functions\" \"${_ZPM_CACHE_DIR}/functions\")" >> "$_ZPM_TMP"
 echo "autoload -Uz $_ZPM_autoload" >> "$_ZPM_TMP"
 echo 'zsh_loaded_plugins=('$_ZPM_plugins_no_source')' >> "$_ZPM_TMP"
 echo >> "$_ZPM_TMP"

@@ -1,5 +1,3 @@
 #!/usr/bin/env zsh
 
-if [[ ":$PATH:" != *":${1}:"* ]]; then
-  path=( $path "${1}" )
-fi
+cp -RpLf "${1}/"* "${_ZPM_CACHE_DIR}/bin"
