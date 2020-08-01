@@ -41,6 +41,7 @@ echo >> "$_ZPM_TMP"
 echo 'zpm () {}' >> "$_ZPM_TMP"
 
 echo "$(typeset -p _ZPM_plugins_full)" >> "$_ZPM_TMP_ASYNC"
+echo 'unfunction zpm' >> "$_ZPM_TMP_ASYNC"
 echo >> "$_ZPM_TMP_ASYNC"
 
 for plugin in ${_ZPM_plugins_for_async_source}; do
@@ -54,7 +55,6 @@ for plugin in ${_ZPM_plugins_for_async_source}; do
 done
 
 echo 'unset ZERO' >> "$_ZPM_TMP_ASYNC"
-echo 'unfunction zpm' >> "$_ZPM_TMP_ASYNC"
 
 cat "${_ZPM_DIR}/lib/init.zsh" >> "$_ZPM_TMP_ASYNC"
 echo >> "$_ZPM_TMP_ASYNC"
