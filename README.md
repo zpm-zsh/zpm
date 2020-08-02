@@ -197,7 +197,7 @@ This tag has the following parameters:
 * `type:empty` - special type, zpm will create empty dir without files. Useful with `hook`, `gen-completion` and `gen-plugin` tags. Can be ommited if your plugin name starts with `@empty/`
 
 ```sh
-plugin-from/github  # type:gitlab doesn't necessary
+plugin-from/github  # type:github doesn't necessary
 plugin-from/gitlab,type:gitlab
 plugin-from/bitbucket,type:bitbucket
 oh-my-zsh/some-plugin,type:omz

@@ -5,7 +5,7 @@ if [[ "$1" == '@zpm' ]]; then
   return 0
 fi
 
-if [[ "$1" != *",type:"* ]]; then
+if [[ "$1" == "@"* ]]; then
   if [[ "$1" == '@omz/'* ]]; then
     echo 'omz'
     return 0
@@ -21,17 +21,15 @@ if [[ "$1" != *",type:"* ]]; then
     return 0
   fi
 
-  if [[ "$1" == 'omz/'* ]]; then
-    echo 'omz'
-    return 0
-  fi
+  return -1
+fi
 
-  echo "github"
+if [[ "$1" == 'omz/'* ]]; then
+  echo 'omz'
   return 0
 fi
 
-local _ZPM_tag_str=${1##*,type:}
-_ZPM_tag_str=${_ZPM_tag_str%%\,*}
+local _ZPM_tag_str=${${1##*,type:}%%\,*}
 
 if [[ "$_ZPM_tag_str" == 'gitlab' ]]; then
   echo 'gitlab'
