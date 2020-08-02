@@ -320,10 +320,14 @@ git pull
 ## Changelog
 
 * 2.1
-  * Change `zpm` type to `@zpm`
+  * Optimizations
+  * Now all content of `/functions` and `/bin` will be copied into single dir, in zpm cache dir
+  * Change `zpm` to `@zpm`
   * Remove unused vars
   * Some vars will be loaded async
   * Fixed colors
+  * Notes
+    * Now for update zpm need to run `zpm u @zpm`
 * 2.0
   * `omz/` prefix replaced by `@omz/`
   * Added plugin type `empty`
