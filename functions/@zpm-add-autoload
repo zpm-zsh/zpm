@@ -2,5 +2,5 @@
 
 for autoload_file in $(echo $1|tr ':' '\n'); do
   _ZPM_autoload+=("${autoload_file}")
-  autoload -Uz "${autoload_file}"
+  autoload -Uz -- "${autoload_file}"
 done
