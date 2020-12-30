@@ -29,6 +29,7 @@ autoload -Uz \
   @zpm-get-plugin-path \
   @zpm-get-plugin-type \
   @zpm-initialize-plugin \
+  @zpm-launch-plugin-helper \
   @zpm-load-plugins \
   @zpm-log \
   @zpm-no-source \
