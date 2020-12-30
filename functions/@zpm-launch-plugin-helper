@@ -1,0 +1,24 @@
+#!/usr/bin/env zsh
+
+local Command="$1"
+
+local Format
+local Launcher
+local Item
+
+if is-callable "rush"; then
+  Format='%s\n'
+  Launcher="rush"
+  Item='"{}"'
+else
+  Format='%s\0'
+  Launcher="xargs -0 -P32 -n1 -I{}"
+  Item='{}'
+fi
+
+shift
+
+printf $Format "$@" | \
+  _ZPM_CACHE_DIR="$_ZPM_CACHE_DIR" \
+  _ZPM_autoload="$_ZPM_autoload" \
+  ${(z)Launcher} "${_ZPM_DIR}/bin/_ZPM-plugin-helper" $Command $Item

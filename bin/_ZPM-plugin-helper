@@ -1,5 +1,5 @@
 #!/usr/bin/env zsh
-fpath+=("${_ZPM_DIR}/functions")
+fpath+=("${_ZPM_DIR}/functions" "${_ZPM_CACHE_DIR}/functions")
 
 if [[ "$CLICOLOR" != "0" ]]; then
   typeset -gA c=(
@@ -27,6 +27,9 @@ autoload -Uz                    \
   @zpm-get-plugin-path          \
   @zpm-get-plugin-type          \
   @zpm-log
+
+(( $#_ZPM_autoload )) && \
+  autoload -Uz -- ${(z)_ZPM_autoload}
 
 local Plugin_name=$(@zpm-get-plugin-name "$2")
 
