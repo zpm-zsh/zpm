@@ -6,7 +6,7 @@ local Format
 local Launcher
 local Item
 
-if is-callable "rush"; then
+if (( $+commands[rush] )); then
   Format='%s\n'
   Launcher="rush"
   Item='"{}"'
