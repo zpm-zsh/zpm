@@ -9,4 +9,6 @@ elif [[ "$Plugin_type" == "gitlab" ]]; then
   echo "https://gitlab.com/${Plugin_name}"
 elif [[ "$Plugin_type" == "bitbucket" ]]; then
   echo "https://bitbucket.com/${Plugin_name}"
+elif [[ "$Plugin_type" == "omz" ]]; then
+  echo "https://github.com/ohmyzsh/ohmyzsh"
 fi

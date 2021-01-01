@@ -9,7 +9,7 @@ Zpm is a plugin manager for ZSH who combines the imperative and declarative appr
 * Dependencies between packages
 * Many hooks
 * Function autoloading
-* ZPM plugins are compatible with [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh)
+* ZPM plugins are compatible with [oh-my-zsh](https://github.com/ohmyzsh/ohmyzsh)
 * ZPM runs on Linux, Android, FreeBSD and macOS
 * Extensible
 
