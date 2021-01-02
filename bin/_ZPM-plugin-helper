@@ -61,10 +61,12 @@ if [[ "$1" == "upgrade" ]]; then
 else
   local Plugin_git_url=$(@zpm-get-plugin-git-url "$Plugin_name" "$Plugin_type")
   if [[ "$Plugin_type" == "omz" ]]; then
-    if [[ ! -e "${Plugin_git_url}" ]]; then
+    if [[ ! -e "${Plugin_git_root_path}" ]]; then
       git clone --recursive "${Plugin_git_url}" --depth 1 --single-branch "${Plugin_git_root_path}" </dev/null >/dev/null 2>/dev/null
     fi
-    ln -s "${HOME}/.oh-my-zsh/plugins/${Plugin_basename}" "$Plugin_path" 2>/dev/null
+    if [[ "$Plugin_path" != "$Plugin_git_root_path" ]]; then
+      ln -s "${Plugin_git_root_path}/plugins/${Plugin_basename}" "$Plugin_path" 2>/dev/null
+    fi
     true
   elif [[ "$Plugin_type" == "empty" ]]; then
     mkdir -p "${Plugin_path}"
