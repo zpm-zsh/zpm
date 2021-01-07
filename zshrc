@@ -4,6 +4,9 @@ source ~/.zpm/zpm.zsh 2>/dev/null || {
   source ~/.zpm/zpm.zsh
 }
 
+### OpenWrt
+zpm if openwrt load zpm-zsh/openwrt
+
 ### Tmux
 zpm if ssh load zpm-zsh/tmux
 zpm if-not ssh load zpm-zsh/tmux,apply:path
