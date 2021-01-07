@@ -7,8 +7,8 @@ compinit -i -d "${_ZPM_COMPDUMP}"
 local _ZPM_TMP="$(mktemp)"
 local _ZPM_TMP_ASYNC="$(mktemp)"
 
+echo "_zpm_declarative=true" >> "$_ZPM_TMP"
 echo "autoload -Uz -- $_ZPM_autoload" >> "$_ZPM_TMP"
-echo "_zpm_loaded_plugins=($_zpm_loaded_plugins)" >> "$_ZPM_TMP"
 echo >> "$_ZPM_TMP"
 
 echo 'compinit -i -C -d "${_ZPM_COMPDUMP}"' >> "$_ZPM_TMP"
@@ -37,6 +37,7 @@ echo 'add-zsh-hook background _ZPM_post_fn' >> "$_ZPM_TMP"
 echo >> "$_ZPM_TMP"
 echo 'zpm () {}' >> "$_ZPM_TMP"
 
+echo "$(typeset -p _zpm_loaded_plugins)" >> "$_ZPM_TMP_ASYNC"
 echo "$(typeset -p _ZPM_plugins_full)" >> "$_ZPM_TMP_ASYNC"
 echo 'unfunction zpm' >> "$_ZPM_TMP_ASYNC"
 echo >> "$_ZPM_TMP_ASYNC"
