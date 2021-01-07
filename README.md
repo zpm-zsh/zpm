@@ -319,6 +319,8 @@ git pull
 
 ## Changelog
 
+* next
+
 * 2.2
   * Add support for OpenWrt
   * Improve oh-my-zsh-support [@igetgames](https://github.com/igetgames)
