@@ -24,8 +24,7 @@ zpm load                              \
   zpm-zsh/colorize,async              \
   zpm-zsh/ssh,async                   \
   zpm-zsh/dot,async                   \
-  zpm-zsh/undollar,async              \
-  zpm-zsh/zsh-completions,apply:fpath
+  zpm-zsh/undollar,async
 
 ### Plugins for local host
 zpm if-not ssh load                                                                    \
