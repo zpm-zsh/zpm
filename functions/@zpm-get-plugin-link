@@ -24,6 +24,6 @@ if [[ "$plugin_type" == 'zpm' ]]; then
 fi
 
 if [[ "$plugin_type" == 'omz' ]]; then
-  echo "https://github.com/robbyrussell/oh-my-zsh/tree/master/plugins/${plugin_name#*/}"
+  echo "https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/${plugin_name#*/}"
   return 0
 fi
