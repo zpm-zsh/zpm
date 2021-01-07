@@ -7,7 +7,7 @@ compinit -i -d "${_ZPM_COMPDUMP}"
 local _ZPM_TMP="$(mktemp)"
 local _ZPM_TMP_ASYNC="$(mktemp)"
 
-echo "_zpm_declarative=true" >> "$_ZPM_TMP"
+echo "_zpm_cache=true" >> "$_ZPM_TMP"
 echo "autoload -Uz -- $_ZPM_autoload" >> "$_ZPM_TMP"
 echo >> "$_ZPM_TMP"
 
