@@ -10,8 +10,8 @@ source "${_ZPM_DIR}/../zpm.zsh"
 source "${0:h}/lib.zsh"
 
 # --------------------
-assert "$zsh_loaded_plugins" contains "zpm-zsh/colors"
+assert "$_zpm_loaded_plugins" contains "zpm-zsh/colors"
 
 # --------------------
-zpm load zpm-zsh/empty 
-assert "$zsh_loaded_plugins" contains "zpm-zsh/empty"
+zpm load zpm-zsh/empty
+assert "$_zpm_loaded_plugins" contains "zpm-zsh/empty"

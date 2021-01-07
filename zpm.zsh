@@ -9,7 +9,7 @@
 # i – … the zsh_loaded_plugins activity indicator,
 # P – … the ZPFX global parameter,
 # s – … the PMSPEC global parameter itself (i.e.: should be always present).
-export PMSPEC="0fbiPs"
+export PMSPEC="0fbPs"
 export ZPFX="${HOME}/.local"
 
 0=${(%):-%x}

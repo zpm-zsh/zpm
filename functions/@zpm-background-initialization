@@ -8,7 +8,7 @@ local _ZPM_TMP="$(mktemp)"
 local _ZPM_TMP_ASYNC="$(mktemp)"
 
 echo "autoload -Uz -- $_ZPM_autoload" >> "$_ZPM_TMP"
-echo 'zsh_loaded_plugins=('$_ZPM_plugins_no_source')' >> "$_ZPM_TMP"
+echo "_zpm_loaded_plugins=($_zpm_loaded_plugins)" >> "$_ZPM_TMP"
 echo >> "$_ZPM_TMP"
 
 echo 'compinit -i -C -d "${_ZPM_COMPDUMP}"' >> "$_ZPM_TMP"
@@ -16,10 +16,9 @@ echo >> "$_ZPM_TMP"
 
 for plugin in ${_ZPM_plugins_for_source}; do
   local file="$_ZPM_file_for_source["$plugin"]"
-  echo "zsh_loaded_plugins+=('$plugin')" >> "$_ZPM_TMP"
   echo "(){" >> "$_ZPM_TMP"
   echo "ZERO='${file}'" >> "$_ZPM_TMP"
-  cat "${file}" | grep -v '#!/usr/bin/env zsh' | grep -v '#DO_NOT_INCLUDE_LINE_IN_ZPM_CACHE' >> "$_ZPM_TMP"
+  cat "${file}" >> "$_ZPM_TMP"
   echo "}" >> "$_ZPM_TMP"
   echo >> "$_ZPM_TMP"
 done
@@ -44,22 +43,21 @@ echo >> "$_ZPM_TMP_ASYNC"
 
 for plugin in ${_ZPM_plugins_for_async_source}; do
   local file="$_ZPM_file_for_async_source["$plugin"]"
-  echo "zsh_loaded_plugins+=('$plugin')" >> "$_ZPM_TMP_ASYNC"
   echo "(){" >> "$_ZPM_TMP_ASYNC"
   echo "ZERO='${file}'" >> "$_ZPM_TMP_ASYNC"
-  cat "${file}" | grep -v '#!/usr/bin/env zsh' | grep -v '#DO_NOT_INCLUDE_LINE_IN_ZPM_CACHE' >> "$_ZPM_TMP_ASYNC"
+  cat "${file}" >> "$_ZPM_TMP_ASYNC"
   echo "}" >> "$_ZPM_TMP_ASYNC"
   echo >> "$_ZPM_TMP_ASYNC"
 done
-
-echo 'unset ZERO' >> "$_ZPM_TMP_ASYNC"
 
 cat "${_ZPM_DIR}/lib/init.zsh" >> "$_ZPM_TMP_ASYNC"
 echo >> "$_ZPM_TMP_ASYNC"
 
 echo "zle && zle reset-prompt" >> "$_ZPM_TMP_ASYNC"
 
-mv "$_ZPM_TMP" "$_ZPM_CACHE"
-mv "$_ZPM_TMP_ASYNC" "$_ZPM_CACHE_ASYNC"
+cat "$_ZPM_TMP" | egrep -v '\#\!/usr/bin/env\ zsh|\#DO_NOT_INCLUDE_LINE_IN_ZPM_CACHE' > "$_ZPM_CACHE"
+cat "$_ZPM_TMP_ASYNC" | egrep -v '\#\!/usr/bin/env\ zsh|\#DO_NOT_INCLUDE_LINE_IN_ZPM_CACHE' > "$_ZPM_CACHE_ASYNC"
+
+rm "$_ZPM_TMP"  "$_ZPM_TMP_ASYNC"
 
 (@zpm-compile 2>/dev/null &)

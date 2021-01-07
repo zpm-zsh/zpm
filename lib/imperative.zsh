@@ -1,5 +1,5 @@
 #!/usr/bin/env zsh
-declare -ag zsh_loaded_plugins
+declare -ag _zpm_loaded_plugins
 compinit -i -C -d "${_ZPM_COMPDUMP}"
 
 mkdir -p "${_ZPM_CACHE_DIR}" "${_ZPM_CACHE_DIR}/functions" "${_ZPM_CACHE_DIR}/bin"

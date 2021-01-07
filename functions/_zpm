@@ -9,10 +9,10 @@ for plugin in "$_ZPM_PLUGIN_DIR/"*; do
 done
 
 local _zpm_completions_plugins_loadable=($(
-    echo ${_zpm_completions_plugins_local[@]} ${zsh_loaded_plugins[@]} | tr ' ' '\n' | sort | uniq -u
+    echo ${_zpm_completions_plugins_local[@]} ${_zpm_loaded_plugins[@]} | tr ' ' '\n' | sort | uniq -u
 ))
 
-local _zpm_upgrade_plugins=(@zpm $zsh_loaded_plugins)
+local _zpm_upgrade_plugins=(@zpm $_zpm_loaded_plugins)
 
 local _load_args=(
   'load:Load plugin'
@@ -66,7 +66,7 @@ if (( CURRENT > 1 )); then
     "_zpm_${words[$PRE]}_completion"
     return
   else
-    _describe -t commands "zpm subcommand" zsh_loaded_plugins
+    _describe -t commands "zpm subcommand" _zpm_loaded_plugins
     return
   fi
 fi

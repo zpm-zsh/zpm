@@ -25,6 +25,7 @@ Zpm is a plugin manager for ZSH who combines the imperative and declarative appr
   * [Upgrade](#upgrade)
   * [Clean](#clean)
 * [Troubleshooting](#troubleshooting)
+* [Developing process](#developing-process)
 * [Changelog](#changelog)
 
 ---
@@ -116,9 +117,9 @@ zpm-zsh/template
 * git
 * xargs
 * [Termux](http://termux.com/) for Android
-* [Rush](https://github.com/shenwei356/rush) for fastest parallel execution, optional
-* [cli-html](https://www.npmjs.com/package/cli-markdown) view html in terminal, optional
-* [cli-markdown](https://www.npmjs.com/package/cli-markdown) view markdown in terminal, optional
+* [Rush](https://github.com/shenwei356/rush) for fastest parallel execution. *Optional*
+* [cli-html](https://www.npmjs.com/package/cli-markdown) view html in terminal. *Optional*
+* [cli-markdown](https://www.npmjs.com/package/cli-markdown) view markdown in terminal. *Optional*
 
 ## Instalation
 
@@ -134,7 +135,7 @@ source ~/.zpm/zpm.zsh
 If you don't have `.zshrc` copy example of `.zshrc` from zpm
 
 ```sh
-cp ~/.zpm/zshrc ~/.zshrc
+ln -sf ~/.zpm/zshrc ~/.zshrc
 ```
 
 ## How to use
@@ -317,9 +318,20 @@ cd ~/.zpm
 git pull
 ```
 
+## Developing process
+
+> You can see debug information by setting the system variable `DEBUG=zpm`
+
+When you make changes, add information about them to the change log in **next** section. Also add link to pr and link to your GitHub profile.
+
 ## Changelog
 
 * next
+
+* 2.3
+  * Improve README
+  * Remove suppot for `zsh_loaded_plugins`
+  * Add config for Markdownlint
 
 * 2.2
   * Add support for OpenWrt
