@@ -319,6 +319,11 @@ git pull
 
 ## Changelog
 
+* 2.2
+  * Add support for OpenWrt
+  * Improve oh-my-zsh-support [@igetgames](https://github.com/igetgames)
+  * Support for calling plugin functions from command tags [@igetgames](https://github.com/igetgames)
+  * Fix autoload option processing [@igetgames](https://github.com/igetgames)
 * 2.1
   * Optimizations
   * Now all content of `/functions` and `/bin` will be copied into single dir, in zpm cache dir
