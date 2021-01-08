@@ -9,7 +9,7 @@ for plugin in "$_ZPM_PLUGIN_DIR/"*; do
 done
 
 local _zpm_completions_plugins_loadable=($(
-    echo ${_zpm_completions_plugins_local[@]} ${_zpm_loaded_plugins[@]} | tr ' ' '\n' | sort | uniq -u
+    printf '%s\n%s\n' "${_zpm_completions_plugins_local[@]}" "${_zpm_loaded_plugins[@]}" | sort | uniq -u
 ))
 
 local _zpm_upgrade_plugins=(@zpm $_zpm_loaded_plugins)
