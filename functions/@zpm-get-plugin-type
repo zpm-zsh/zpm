@@ -16,11 +16,6 @@ if [[ "$1" == "@"* ]]; then
     return 0
   fi
 
-  if [[ "$1" == '@link/'* ]]; then
-    echo 'link'
-    return 0
-  fi
-
   return -1
 fi
 
@@ -48,11 +43,6 @@ fi
 
 if [[ "$_ZPM_tag_str" == 'empty' ]]; then
   echo 'empty'
-  return 0
-fi
-
-if [[ "$_ZPM_tag_str" == 'link' ]]; then
-  echo 'link'
   return 0
 fi
 
