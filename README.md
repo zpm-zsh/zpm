@@ -37,16 +37,16 @@ Zpm is a plugin manager for ZSH who combines the imperative and declarative appr
 <p>
 
 ```sh
-zsh -i -c exit  0.00s user 0.00s system 100% cpu 0.008 total
-zsh -i -c exit  0.01s user 0.00s system 100% cpu 0.008 total
+zsh -i -c exit  0.00s user 0.00s system 102% cpu 0.007 total
+zsh -i -c exit  0.01s user 0.00s system 102% cpu 0.007 total
+zsh -i -c exit  0.00s user 0.01s system 101% cpu 0.007 total
+zsh -i -c exit  0.00s user 0.00s system 102% cpu 0.008 total
+zsh -i -c exit  0.01s user 0.00s system 101% cpu 0.007 total
 zsh -i -c exit  0.01s user 0.00s system 101% cpu 0.008 total
-zsh -i -c exit  0.01s user 0.00s system 102% cpu 0.008 total
-zsh -i -c exit  0.01s user 0.00s system 101% cpu 0.008 total
+zsh -i -c exit  0.01s user 0.00s system 100% cpu 0.007 total
 zsh -i -c exit  0.00s user 0.00s system 101% cpu 0.008 total
-zsh -i -c exit  0.01s user 0.00s system 102% cpu 0.008 total
 zsh -i -c exit  0.01s user 0.00s system 101% cpu 0.009 total
-zsh -i -c exit  0.01s user 0.00s system 101% cpu 0.008 total
-zsh -i -c exit  0.01s user 0.00s system 102% cpu 0.008 total
+zsh -i -c exit  0.00s user 0.00s system 101% cpu 0.008 total
 
 ```
 
@@ -54,28 +54,25 @@ zsh -i -c exit  0.01s user 0.00s system 102% cpu 0.008 total
 </details>
 
 <details>
-  <summary>With this set of plugins. 48 total</summary>
+  <summary>With this set of plugins. 51 total</summary>
 <p>
 
 ```sh
 zpm-zsh/helpers
 zpm-zsh/colors
 zpm-zsh/background
+zpm-zsh/tmux
 zpm-zsh/vte
 zpm-zsh/core-config
+zpm-zsh/ignored-users
 zpm-zsh/check-deps
 zpm-zsh/minimal-theme
-zpm-zsh/pr-user
-zpm-zsh/zpm-telemetry
-zpm-zsh/btrfs
-zpm-zsh/zpm-readme
-zpm-zsh/zpm-info
-zpm-zsh/ignored-users
 zpm-zsh/material-colors
 zpm-zsh/pr-is-root
+zpm-zsh/pr-user
 zpm-zsh/pr-return
 zpm-zsh/pr-exec-time
-sindresorhus/pretty-time-zsh
+zpm-zsh/pretty-time-zsh
 zpm-zsh/pr-git
 zpm-zsh/pr-cwd
 zpm-zsh/pr-php
@@ -102,10 +99,16 @@ zsh-users/zsh-history-substring-search
 zdharma/fast-syntax-highlighting
 zsh-users/zsh-autosuggestions
 psprint/history-search-multi-word
-omz/extract
-omz/command-not-found
-omz/wp-cli
-zpm-zsh/template
+zpm-zsh/zpm-readme
+zpm-zsh/zpm-info
+zpm-zsh/zpm-telemetry
+zpm-zsh/zpm-link
+@omz/extract
+@omz/command-not-found
+@omz/pip
+@empty/npm
+@empty/rustup
+zpm-zsh/create-zsh-plugin
 ```
 
 </p>
