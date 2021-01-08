@@ -328,6 +328,7 @@ When you make changes, add information about them to the change log in **next** 
 
 * next
   * Remove unused `@link`
+  * Remove `tr` calls
 
 * 2.3
   * Improve README
