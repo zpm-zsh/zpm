@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 
-for autoload_file in $(echo $1|tr ':' '\n'); do
+for autoload_file in ${(s.:.)1}; do
   _ZPM_autoload+=("${autoload_file}")
   autoload -Uz -- "${autoload_file}"
 done
