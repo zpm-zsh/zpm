@@ -50,14 +50,17 @@ if [[ "$1" == "upgrade" ]]; then
   if [[ -n "$Plugin_git_root_path" ]]; then
     git --git-dir="${Plugin_git_root_path}/.git/" --work-tree="${Plugin_git_root_path}/" checkout "${Plugin_git_root_path}/" </dev/null >/dev/null 2>/dev/null
     git --git-dir="${Plugin_git_root_path}/.git/" --work-tree="${Plugin_git_root_path}/" pull </dev/null >/dev/null 2>/dev/null
-  else
-    true
-  fi
 
-  local status_string="${c[green]}${c[bold]}Upgrade${c[reset]} "
-  status_string+="$Plugin_hyperlink"
-  status_string+=" ${c[green]}✔${c[reset]}"
-  echo $status_string
+    local status_string="${c[green]}${c[bold]}Upgrade${c[reset]} "
+    status_string+="$Plugin_hyperlink"
+    status_string+=" ${c[green]}✔${c[reset]}"
+    echo $status_string
+  else
+    local status_string="${c[yellow]}${c[bold]}Skip upgrade${c[reset]} "
+    status_string+="$Plugin_hyperlink"
+    status_string+=" ${c[yellow]}‣${c[reset]}"
+    echo $status_string
+  fi
 else
   local Plugin_git_url=$(@zpm-get-plugin-git-url "$Plugin_name" "$Plugin_type")
   if [[ "$Plugin_type" == "omz" ]]; then
@@ -65,9 +68,8 @@ else
       git clone --recursive "${Plugin_git_url}" --depth 1 --single-branch "${Plugin_git_root_path}" </dev/null >/dev/null 2>/dev/null
     fi
     if [[ "$Plugin_path" != "$Plugin_git_root_path" ]]; then
-      ln -s "${Plugin_git_root_path}/plugins/${Plugin_basename}" "$Plugin_path" 2>/dev/null
+      ln -s "${Plugin_git_root_path}/plugins/${Plugin_basename}" "$Plugin_path"
     fi
-    true
   elif [[ "$Plugin_type" == "empty" ]]; then
     mkdir -p "${Plugin_path}"
   elif [[ -n "$Plugin_git_url" ]]; then

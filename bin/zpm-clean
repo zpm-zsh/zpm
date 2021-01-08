@@ -1,4 +1,0 @@
-#!/usr/bin/env zsh
-
-rm -rf "${TMPDIR:-/tmp}/zsh-${UID:-user}" 2>/dev/null
-exec zsh
