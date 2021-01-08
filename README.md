@@ -327,6 +327,7 @@ When you make changes, add information about them to the change log in **next** 
 ## Changelog
 
 * next
+  * Remove unused `@link`
 
 * 2.3
   * Improve README
