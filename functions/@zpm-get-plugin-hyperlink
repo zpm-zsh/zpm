@@ -1,36 +1,37 @@
 #!/usr/bin/env zsh
 
-local plugin_name="$1"
-local plugin_link="$2"
+local Plugin_name="$1"
+local Plugin_link="$2"
 local status_string
 
-if [[ "$plugin_name" == "@zpm" ]]; then
-  status_string+="\033]8;;${plugin_link}\a"
-  status_string+="${c[magenta]}${c[bold]}@zpm"
-  status_string+="\033]8;;\a${c[reset]}"
-  echo "$status_string"
-  return 0
-fi
+function join() {  # usage: join ', ' "${array[@]}"
+  local sep=$1 arg
+  printf %s "$2"
+  shift 2
+  for arg do
+    printf %s%s "$sep" "$arg"
+  done
+  printf '\n'
+}
 
-local Plugin_pre="${c[bold]}"
-local Plugin_first
-if [[ "$plugin_name" == '@'* ]]; then
-  Plugin_first="${c[cyan]}${plugin_name%/*}"
+plugin_name_arr=
+local -a plugin_name_arr_color
+
+for plugin in ${(s./.)Plugin_name}; do
+  if [[ "$plugin" == "@"* ]]; then
+    plugin_name_arr_color=($plugin_name_arr_color "${c[cyan]}${c[bold]}${plugin}" )
+  else
+    plugin_name_arr_color=($plugin_name_arr_color "${c[blue]}${c[bold]}${plugin}" )
+  fi
+done
+
+
+if [[ -z "$Plugin_link" ]]; then
+  status_string="$(join "$c[blue]$c[bold]/" $plugin_name_arr_color)"
 else
-  Plugin_first="${c[blue]}${plugin_name%/*}"
-fi
-local Plugin_divider="${c[red]}/"
-local Plugin_second="${c[blue]}${plugin_name#*/}"
-local Plugin_post="${c[reset]}"
-
-local Plugin_colorized_name="${Plugin_pre}${Plugin_first}${Plugin_divider}${Plugin_second}${Plugin_post}"
-
-if [[ -z "$plugin_link" ]]; then
-  status_string="$Plugin_colorized_name"
-else
-  status_string="\033]8;;${plugin_link}\a"
-  status_string+="$Plugin_colorized_name"
+  status_string="\033]8;;${Plugin_link}\a"
+  status_string+="$(join "$c[blue]$c[bold]/" $plugin_name_arr_color)"
   status_string+="\033]8;;\a${c[reset]}"
 fi
 
-echo "$status_string"
+echo $status_string

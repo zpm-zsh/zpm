@@ -1,49 +1,46 @@
 #!/usr/bin/env zsh
 
-if [[ "$1" == '@zpm' ]]; then
-  echo 'zpm'
-  return 0
-fi
+declare -Ag namespaces=(
+  empty empty
+  omz omz
+  gh github
+  github github
+  gl gitlab
+  gitlab gitlab
+  bb bitbucket
+  bitbucket bitbucket
+)
 
-if [[ "$1" == "@"* ]]; then
-  if [[ "$1" == '@omz/'* ]]; then
-    echo 'omz'
+local Plugin_name="$1"
+
+if [[ "$Plugin_name" == "@"* ]]; then
+
+  if [[ "$Plugin_name" == '@zpm' ]]; then
+    echo 'zpm'
     return 0
   fi
 
-  if [[ "$1" == '@empty/'* ]]; then
-    echo 'empty'
-    return 0
-  fi
+  for namespace_key namespace in ${(@kv)namespaces}; do
+    if [[ "$Plugin_name" == "@${namespace_key}/"* || "$Plugin_name" == "@${namespace_key}" ]];then
+      echo "$namespace"
+      return 0
+    fi
+  done
 
   return -1
 fi
 
-if [[ "$1" == 'omz/'* ]]; then
-  echo 'omz'
-  return 0
-fi
-
 local _ZPM_tag_str=${${1##*,type:}%%\,*}
-
-if [[ "$_ZPM_tag_str" == 'gitlab' ]]; then
-  echo 'gitlab'
+if [[ "$_ZPM_tag_str" == "$Plugin_name" ]]; then
+  echo 'github'
   return 0
 fi
 
-if [[ "$_ZPM_tag_str" == 'bitbucket' ]]; then
-  echo 'bitbucket'
-  return 0
-fi
+for namespace_key namespace in ${(@kv)namespaces}; do
+  if [[ "$_ZPM_tag_str" == "${namespace_key}" ]];then
+    echo "$namespace"
+    return 0
+  fi
+done
 
-if [[ "$_ZPM_tag_str" == 'omz' ]]; then
-  echo 'omz'
-  return 0
-fi
-
-if [[ "$_ZPM_tag_str" == 'empty' ]]; then
-  echo 'empty'
-  return 0
-fi
-
-echo "github"
+return -1
