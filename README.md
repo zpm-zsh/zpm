@@ -342,7 +342,6 @@ When you make changes, add information about them to the change log in **next** 
   * Remove `tr` calls
   * Deprecate `type:` tag
   * Internal changes for basename/name,hyperlink
-
   * Upgrade from 2.x:
     * Add `zpm load @omz` if you are yousing at least one oh-my-zsh plugin.
     * Replace `type:plugin-type` with `@plugin-type/plugin/name`
