@@ -9,10 +9,10 @@ for plugin in "$_ZPM_PLUGIN_DIR/"*; do
 done
 
 local _zpm_completions_plugins_loadable=($(
-    printf '%s\n%s\n' "${_zpm_completions_plugins_local[@]}" "${_zpm_loaded_plugins[@]}" | sort | uniq -u
+    printf '%s\n%s\n' "${_zpm_completions_plugins_local[@]}" "${(k)_ZPM_plugins_full[@]}" | sort | uniq -u
 ))
 
-local _zpm_upgrade_plugins=(@zpm $_zpm_loaded_plugins)
+local _zpm_upgrade_plugins=(@zpm ${(k)_ZPM_plugins_full})
 
 local _load_args=(
   'load:Load plugin'
@@ -36,6 +36,7 @@ local _zpm_completions_if_args=(
   'ssh:SSH session'
   'vte:VTE based terminal emulator'
 )
+local _zpm_loaded_plugins=(${(k)_ZPM_plugins_full})
 
 _arguments '*:: :->subcmds' && return 0
 

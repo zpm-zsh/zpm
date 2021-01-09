@@ -17,7 +17,6 @@ if [[ -f "${Plugin_path}/plugin-options.zsh" ]]; then
 fi
 
 @zpm-log zpm:init "Initialize '${Plugin_name}'"
-_zpm_loaded_plugins+=("$Plugin_name")
 
 # Config
 if [[ "$Plugin" == *",apply:"* ]]; then
