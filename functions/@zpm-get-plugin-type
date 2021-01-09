@@ -1,5 +1,7 @@
 #!/usr/bin/env zsh
 
+local Plugin_name="$1"
+
 declare -Ag namespaces=(
   empty empty
   omz omz
@@ -11,10 +13,7 @@ declare -Ag namespaces=(
   bitbucket bitbucket
 )
 
-local Plugin_name="$1"
-
 if [[ "$Plugin_name" == "@"* ]]; then
-
   if [[ "$Plugin_name" == '@zpm' ]]; then
     echo 'zpm'
     return 0
@@ -34,5 +33,4 @@ if [[ "$Plugin_name" == "@"* ]]; then
 
   return -1
 fi
-
-return -1
+echo 'github'
