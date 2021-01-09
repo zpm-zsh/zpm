@@ -20,7 +20,8 @@ Zpm is a plugin manager for ZSH who combines the imperative and declarative appr
 * [Instalation](#instalation)
 * [How to use](#how-to-use)
   * [Load plugin](#load-plugin)
-  * [Tags](#tags)
+  * [Plugin name](#plugin-name)
+  * [Plugin tags](#plugin-tags)
   * [`if` and `if-not` conditions](#if-and-if-not-conditions)
   * [Upgrade](#upgrade)
   * [Clean](#clean)
@@ -177,38 +178,36 @@ zpm load user/plugin-name
 Additionaly they can have some tags. Tags must be separated by commas `,` without spaces, tag parameters must be separated from tag names or another tag parameters by `:`
 
 ```sh
-#     plugin name
-#   ⬀          tag
-#   |         ⬀      tag parameters, divided by :
-#   |         |    ⬀                   boolean tag
-#   |         |    |                 ⬀
-#   ↓         ↓    ↓                 ↓
-some/plugin,apply:source:path:fpath,async
+# plugin type
+#    |   plugin name
+#    |      |        tag
+#    |      |         |  tag parameters, divided by :
+#    |      |         |            |       boolean tag
+#    |      |         |            |             |
+#    ↓      ↓         ↓            ↓             ↓
+@type/some/plugin,apply:source:path:fpath,async
 ```
 
-### Tags
+### Plugin name
 
-Zpm supports tags for plugins:
+If plugin name starts with `@word`, this word will be used as plugin type. Plugin name will be used to detect plugin repository url.
 
-#### `type` tag
-
-This tag has the following parameters:
-
-* `type:github` - plugin will be downloaded from GitHub, this is default value, so you don't need to set it
-* `type:gitlab` - plugin will be downloaded from GitLab
-* `type:bitbucket` - plugin will be downloaded from Bitbucket
-* `type:omz` - zpm will use a plugin from oh-my-zsh, oh-my-zsh will be download if not installed. Can be ommited if your plugin name starts with `@omz/`
-* `type:empty` - special type, zpm will create empty dir without files. Useful with `hook`, `gen-completion` and `gen-plugin` tags. Can be ommited if your plugin name starts with `@empty/`
+* `@github/` or `@gl/` - plugin will be downloaded from GitHub, this is default value, so you don't need to set it
+* `@gitlab/` or `@gl/` - plugin will be downloaded from GitLab
+* `@bitbucket/` or `@bb/` - plugin will be downloaded from Bitbucket
+* `@omz/` - zpm will use a plugin from oh-my-zsh, oh-my-zsh will be download if not installed. **Important**: you shoud load `@omz` before any other plugin from on-my-zsh. `zpm load @omz`
+* `@empty/` - special type, zpm will create empty dir without files. Useful with `hook`, `gen-completion` and `gen-plugin` tags. Can be ommited if your plugin name starts with `@empty/`
 
 ```sh
-plugin-from/github  # type:github doesn't necessary
-plugin-from/gitlab,type:gitlab
-plugin-from/bitbucket,type:bitbucket
-oh-my-zsh/some-plugin,type:omz
-@omz/another-plugin
-custom/empty-plugin,type:empty
+plugin-from/github  # @github doesn't necessary
+@gitlab/plugin-from/gitlab
+@bitbucket/plugin-from/bitbucket
+@omz/some-plugin
+@empty/custom/empty-plugin
 @empty/another-empty-plugin
 ```
+
+### Plugin tags
 
 #### `apply` tag
 
@@ -292,6 +291,7 @@ Conditions:
 
 * `linux` - if current OS is Linux
 * `bsd` - if current OS is *BSD
+* `openwrt` - if current OS is OpenWrt
 * `macos` - if current OS is macOS
 * `termux` - if current session run in [Termux](http://termux.com/)
 * `ssh` - if session run on remote host
@@ -329,9 +329,13 @@ When you make changes, add information about them to the change log in **next** 
 
 ## Changelog
 
-* next
+* Next
+
+* 3.0
   * Remove unused `@link`
   * Remove `tr` calls
+  * Deprecate `type:` tag
+  * Internal changes for basename/name,hyperlink
 
 * 2.3
   * Improve README
