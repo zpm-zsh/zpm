@@ -10,5 +10,3 @@ if [[ "$Plugin_type" == "zpm" ]]; then
 fi
 
 echo "${_ZPM_PLUGIN_DIR}/${Plugin_name//\//---}"
-
-return -1

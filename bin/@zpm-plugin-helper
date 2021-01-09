@@ -48,7 +48,7 @@ local Plugin_git_url=$(@zpm-get-plugin-vcs-url "$Plugin_name" "$Plugin_type")
 if [[ "$Command" == "upgrade" ]]; then
   @zpm-log zpm:upgrade "Upgrade '${Plugin}'"
 
-  if [[ "|github|gitlab|bitbucket|omz-core|" == *"|${Plugin_type}|"* ]]; then
+  if [[ "|github|gitlab|bitbucket|omz-core|zpm|" == *"|${Plugin_type}|"* ]]; then
     git --git-dir="${Plugin_path}/.git/" --work-tree="${Plugin_path}/" pull </dev/null >/dev/null 2>/dev/null
 
     if [[ "$?" == "0" ]]; then

@@ -4,10 +4,10 @@ typeset -a _Plugins_Upgrade=($@)
 typeset -a _Plugins_Upgrade_full=()
 
 if [[ -z $@ ]]; then
-  _Plugins_Upgrade=("@zpm" ${(k)_ZPM_plugins_full})
+  _Plugins_Upgrade=("${(k)_ZPM_plugins_full[@]}")
 fi
 
-for plugin (${_Plugins_Upgrade}); do
+for plugin in $_Plugins_Upgrade; do
   _Plugins_Upgrade_full+=($_ZPM_plugins_full[$plugin])
 done
 
