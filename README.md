@@ -1,19 +1,22 @@
+
 # ZPM - Zsh Plugin Manager
 
-> Zpm is **NOT** a yet another plugin manager for [zsh](http://www.zsh.org/).
+> Fastest, configurable and extensible zsh plugin manager
 
 Zpm is a plugin manager for ZSH who combines the imperative and declarative approach. At first run, zpm will do complex logic and generate cache, after that will be used cache only, so it makes this framework to be very fast.
 
-* Fastest plugin manager (Really, after the first run, zpm will not be used at all)
+## Features
+
+* **Speed**. Fastest plugin manager (Really, after the first run, zpm will not be used at all)
+* **Compatibility**. Zpm plugins are compatible with [oh-my-zsh](https://github.com/ohmyzsh/ohmyzsh)
+* **Portability**. Zpm runs on Linux, Android, OpenWrt, FreeBSD and macOS
 * Support for async loading
 * Dependencies between packages
-* Many hooks
+* Hooks
 * Function autoloading
-* ZPM plugins are compatible with [oh-my-zsh](https://github.com/ohmyzsh/ohmyzsh)
-* ZPM runs on Linux, Android, OpenWrt, FreeBSD and macOS
 * Extensible
 
----
+## Table of Contents
 
 * [Stats](#stats)
 * [Base dependences](#base-dependences)
@@ -29,8 +32,6 @@ Zpm is a plugin manager for ZSH who combines the imperative and declarative appr
 * [Developing process](#developing-process)
 * [TODO](#todo)
 * [Changelog](#changelog)
-
----
 
 ## Stats
 
