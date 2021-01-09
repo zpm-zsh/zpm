@@ -27,6 +27,7 @@ Zpm is a plugin manager for ZSH who combines the imperative and declarative appr
   * [Clean](#clean)
 * [Troubleshooting](#troubleshooting)
 * [Developing process](#developing-process)
+* [TODO](#todo)
 * [Changelog](#changelog)
 
 ---
@@ -327,6 +328,11 @@ git pull
 
 When you make changes, add information about them to the change log in **next** section. Also add link to pr and link to your GitHub profile.
 
+## TODO
+
+* [ ] Improve readme
+  * [ ] Describe installation process
+
 ## Changelog
 
 * Next
@@ -336,6 +342,10 @@ When you make changes, add information about them to the change log in **next** 
   * Remove `tr` calls
   * Deprecate `type:` tag
   * Internal changes for basename/name,hyperlink
+
+  * Upgrade from 2.x:
+    * Add `zpm load @omz` if you are yousing at least one oh-my-zsh plugin.
+    * Replace `type:plugin-type` with `@plugin-type/plugin/name`
 
 * 2.3
   * Improve README
