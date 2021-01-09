@@ -20,6 +20,11 @@ if [[ "$Plugin_name" == "@"* ]]; then
     return 0
   fi
 
+  if [[ "$Plugin_name" == '@omz' ]]; then
+    echo 'omz-core'
+    return 0
+  fi
+
   for namespace_key namespace in ${(@kv)namespaces}; do
     if [[ "$Plugin_name" == "@${namespace_key}/"* || "$Plugin_name" == "@${namespace_key}" ]];then
       echo "$namespace"

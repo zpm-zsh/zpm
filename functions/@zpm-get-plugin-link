@@ -23,6 +23,11 @@ if [[ "$plugin_type" == 'zpm' ]]; then
   return 0
 fi
 
+if [[ "$plugin_type" == 'omz-core' ]]; then
+  echo "https://github.com/ohmyzsh/ohmyzsh"
+  return 0
+fi
+
 if [[ "$plugin_type" == 'omz' ]]; then
   echo "https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/${plugin_name#*/}"
   return 0

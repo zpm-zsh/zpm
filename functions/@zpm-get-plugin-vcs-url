@@ -5,12 +5,14 @@ local Plugin_type="$2"
 
 local Plugin_striped_name="${Plugin_name#@*/}"
 
-if [[ "$Plugin_type" == "github" ]]; then
+if [[ "$Plugin_type" == 'github' ]]; then
   echo "https://github.com/${Plugin_striped_name}"
-elif [[ "$Plugin_type" == "gitlab" ]]; then
+elif [[ "$Plugin_type" == 'gitlab' ]]; then
   echo "https://gitlab.com/${Plugin_striped_name}"
-elif [[ "$Plugin_type" == "bitbucket" ]]; then
+elif [[ "$Plugin_type" == 'bitbucket' ]]; then
   echo "https://bitbucket.com/${Plugin_striped_name}"
-elif [[ "$Plugin_type" == "omz" ]]; then
+elif [[ "$Plugin_type" == 'omz-core' ]]; then
   echo "https://github.com/ohmyzsh/ohmyzsh"
+else
+  return -1
 fi
