@@ -1,8 +1,15 @@
 #!/usr/bin/env zsh
 
-local Plugin_path="${1}"
-local Plugin_basename="${2}"
-local Plugin="${3}"
+local Plugin="${1}"
+local Plugin_path="${2}"
+local Plugin_basename="${3}"
+
+local Plugin_basename_clean=$Plugin_basename
+Plugin_basename_clean=${Plugin_basename_clean##oh-my-zsh-}
+Plugin_basename_clean=${Plugin_basename_clean##zsh-}
+Plugin_basename_clean=${Plugin_basename_clean%%.zsh}
+Plugin_basename_clean=${Plugin_basename_clean%%-zsh}
+Plugin_basename_clean=${Plugin_basename_clean%%.plugin}
 
 if [[ "$Plugin"  == *",source:"* ]]; then
   local Plugin_sourcefile="${${Plugin##*,source:}%%,*}"
@@ -12,36 +19,18 @@ if [[ "$Plugin"  == *",source:"* ]]; then
   else
     return -1
   fi
-fi
-
-if [[ -e "${Plugin_path}/zpm-generated.zsh" ]]; then
+elif [[ -e "${Plugin_path}/zpm-generated.zsh" ]]; then
   echo "${Plugin_path}/zpm-generated.zsh"
-  return 0
-fi
-
-if [[ -e "${Plugin_path}/${Plugin_basename}.plugin.zsh" ]]; then
-  echo "${Plugin_path}/${Plugin_basename}.plugin.zsh"
-  return 0
-fi
-
-if [[ -e "${Plugin_path}/zsh-${Plugin_basename}.plugin.zsh" ]]; then
-  echo "${Plugin_path}/zsh-${Plugin_basename}.plugin.zsh"
-  return 0
-fi
-
-if [[ -e "${Plugin_path}/${Plugin_basename}.zsh" ]]; then
-  echo "${Plugin_path}/${Plugin_basename}.zsh"
-  return 0
-fi
-
-if [[ -e "${Plugin_path}/${Plugin_basename}.zsh-theme" ]]; then
-  echo "${Plugin_path}/${Plugin_basename}.zsh-theme"
-  return 0
-fi
-
-if [[ -e "${Plugin_path}/init.zsh" ]]; then
+elif [[ -e "${Plugin_path}/${Plugin_basename_clean}.plugin.zsh" ]]; then
+  echo "${Plugin_path}/${Plugin_basename_clean}.plugin.zsh"
+elif [[ -e "${Plugin_path}/zsh-${Plugin_basename_clean}.plugin.zsh" ]]; then
+  echo "${Plugin_path}/zsh-${Plugin_basename_clean}.plugin.zsh"
+elif [[ -e "${Plugin_path}/${Plugin_basename_clean}.zsh" ]]; then
+  echo "${Plugin_path}/${Plugin_basename_clean}.zsh"
+elif [[ -e "${Plugin_path}/${Plugin_basename_clean}.zsh-theme" ]]; then
+  echo "${Plugin_path}/${Plugin_basename_clean}.zsh-theme"
+elif [[ -e "${Plugin_path}/init.zsh" ]]; then
   echo "${Plugin_path}/init.zsh"
-  return 0
+else
+  return -1
 fi
-
-return -1

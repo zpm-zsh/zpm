@@ -71,7 +71,7 @@ fi
 
 # Source plugin
 if [[ "$zpm_plugin_source" == "true" ]]; then
-  local _ZPM_plugin_file_path=$( @zpm-get-plugin-file-path "${Plugin_path}" "${Plugin_basename}" "${Plugin}" )
+  local _ZPM_plugin_file_path=$( @zpm-get-plugin-file-path "${Plugin}" "${Plugin_path}" "${Plugin_basename}" )
   if [[ -n "$_ZPM_plugin_file_path" ]]; then
     if [[ "$zpm_plugin_async" == "true" ]]; then
       @zpm-async-source "${Plugin_name}" "${_ZPM_plugin_file_path}"
