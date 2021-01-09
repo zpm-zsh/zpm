@@ -11,8 +11,7 @@ declare -Ag namespaces=(
   bitbucket bitbucket
 )
 
-local Plugin="$1"
-local Plugin_name="$2"
+local Plugin_name="$1"
 
 if [[ "$Plugin_name" == "@"* ]]; then
 
@@ -35,19 +34,5 @@ if [[ "$Plugin_name" == "@"* ]]; then
 
   return -1
 fi
-
-local _ZPM_tag_str=${${Plugin##*,type:}%%\,*}
-
-if [[ "$_ZPM_tag_str" == "$Plugin_name" ]]; then
-  echo 'github'
-  return 0
-fi
-
-for namespace_key namespace in ${(@kv)namespaces}; do
-  if [[ "$_ZPM_tag_str" == "${namespace_key}" ]];then
-    echo "$namespace"
-    return 0
-  fi
-done
 
 return -1

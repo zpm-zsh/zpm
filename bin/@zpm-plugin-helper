@@ -38,7 +38,7 @@ fi
 local Command="$1"
 local Plugin="$2"
 local Plugin_name=$(@zpm-get-plugin-name "$Plugin")
-local Plugin_type=$(@zpm-get-plugin-type "$Plugin" "$Plugin_name")
+local Plugin_type=$(@zpm-get-plugin-type "$Plugin_name")
 local Plugin_basename=$(@zpm-get-plugin-basename "$Plugin_name")
 local Plugin_path=$(@zpm-get-plugin-path "$Plugin_name" "$Plugin_type")
 local Plugin_link=$(@zpm-get-plugin-link "$Plugin_name" "$Plugin_type")
@@ -62,11 +62,6 @@ if [[ "$Command" == "upgrade" ]]; then
       status_string+=" ${c[green]}✔${c[reset]}"
       echo $status_string
     fi
-  elif [[ "$Plugin_type" == "omz" ]]; then
-    local status_string="${c[yellow]}${c[bold]}Skip upgrade${c[reset]} "
-    status_string+="$Plugin_hyperlink"
-    status_string+=" ${c[yellow]}‣${c[reset]}"
-    echo $status_string
   else
     local status_string="${c[yellow]}${c[bold]}Skip upgrade${c[reset]} "
     status_string+="$Plugin_hyperlink"
@@ -75,11 +70,7 @@ if [[ "$Command" == "upgrade" ]]; then
   fi
 elif [[ "$Command" == "install" ]]; then
   if [[ "$Plugin_type" == "omz" ]]; then
-    if [[ "$Plugin_name" == "@omz" ]]; then
-      git clone --recursive "${Plugin_git_url}" --depth 1 --single-branch "${Plugin_path}" </dev/null >/dev/null 2>/dev/null
-    else
-      ln -s "${_ZPM_PLUGIN_DIR}/@omz/plugins/${Plugin_basename}" "$Plugin_path" 2>/dev/null
-    fi
+    ln -s "$(@zpm-get-plugin-path @omz)/plugins/${Plugin_basename}" "$Plugin_path" 2>/dev/null
   elif [[ "$Plugin_type" == "empty" ]]; then
     mkdir -p "${Plugin_path}"
   elif [[ -n "$Plugin_git_url" ]]; then
