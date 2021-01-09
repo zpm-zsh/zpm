@@ -21,10 +21,6 @@ autoload -Uz \
   @zpm-get-plugin-bin-path \
   @zpm-get-plugin-file-path \
   @zpm-get-plugin-functions-path \
-  @zpm-get-plugin-git-root-path \
-  @zpm-get-plugin-git-url \
-  @zpm-get-plugin-hyperlink \
-  @zpm-get-plugin-link \
   @zpm-get-plugin-name \
   @zpm-get-plugin-path \
   @zpm-get-plugin-type \
