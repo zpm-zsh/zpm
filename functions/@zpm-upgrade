@@ -4,7 +4,7 @@ typeset -a _Plugins_Upgrade=($@)
 typeset -a _Plugins_Upgrade_full=()
 
 if [[ -z $@ ]]; then
-  _Plugins_Upgrade=("@zpm" $_zpm_loaded_plugins)
+  _Plugins_Upgrade=("@zpm" ${(k)_ZPM_plugins_full})
 fi
 
 for plugin (${_Plugins_Upgrade}); do

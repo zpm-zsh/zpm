@@ -38,7 +38,7 @@ fi
 local Command="$1"
 local Plugin="$2"
 local Plugin_name=$(@zpm-get-plugin-name "$Plugin")
-local Plugin_type=$(@zpm-get-plugin-type "$Plugin")
+local Plugin_type=$(@zpm-get-plugin-type "$Plugin" "$Plugin_name")
 local Plugin_basename=$(@zpm-get-plugin-basename "$Plugin_name")
 local Plugin_path=$(@zpm-get-plugin-path "$Plugin_name" "$Plugin_type")
 local Plugin_link=$(@zpm-get-plugin-link "$Plugin_name" "$Plugin_type")
