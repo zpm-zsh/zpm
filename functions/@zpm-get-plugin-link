@@ -1,34 +1,20 @@
 #!/usr/bin/env zsh
 
-local plugin_name="$1"
-local plugin_type="$2"
+local Plugin_name="$1"
+local Plugin_type="$2"
 
-if [[ "$plugin_type" == 'github' ]]; then
-  echo "https://github.com/${plugin_name}"
-  return 0
-fi
-
-if [[ "$plugin_type" == 'gitlab' ]]; then
-  echo "https://gitlab.com/${plugin_name}"
-  return 0
-fi
-
-if [[ "$plugin_type" == 'bitbucket' ]]; then
-  echo "https://bitbucket.com/${plugin_name}"
-  return 0
-fi
-
-if [[ "$plugin_type" == 'zpm' ]]; then
+if [[ "$Plugin_type" == 'omz' ]]; then
+  echo "https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/${Plugin_name#*/}"
+elif [[ "$Plugin_type" == 'github' ]]; then
+  echo "https://github.com/${Plugin_name}"
+elif [[ "$Plugin_type" == 'gitlab' ]]; then
+  echo "https://gitlab.com/${Plugin_name}"
+elif [[ "$Plugin_type" == 'bitbucket' ]]; then
+  echo "https://bitbucket.com/${Plugin_name}"
+elif [[ "$Plugin_type" == 'zpm' ]]; then
   echo "https://github.com/zpm-zsh/zpm"
-  return 0
-fi
-
-if [[ "$plugin_type" == 'omz-core' ]]; then
+elif [[ "$Plugin_type" == 'omz-core' ]]; then
   echo "https://github.com/ohmyzsh/ohmyzsh"
-  return 0
-fi
-
-if [[ "$plugin_type" == 'omz' ]]; then
-  echo "https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/${plugin_name#*/}"
-  return 0
+else
+  return -1
 fi

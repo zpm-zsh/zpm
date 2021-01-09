@@ -25,7 +25,6 @@ for plugin in ${(s./.)Plugin_name}; do
   fi
 done
 
-
 if [[ -z "$Plugin_link" ]]; then
   status_string="$(join "${c[magenta]}${c[bold]}/" $plugin_name_arr_color)"
 else
