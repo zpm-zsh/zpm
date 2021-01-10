@@ -8,6 +8,18 @@ for plugin in "$_ZPM_PLUGIN_DIR/"*; do
   _zpm_completions_plugins_local+=( ${${plugin:t}//---/\/} )
 done
 
+if [[ -e "$_ZPM_PLUGIN_DIR/@omz" ]]; then
+for omz_plugin in "$_ZPM_PLUGIN_DIR/@omz/plugins/"*; do
+  _zpm_completions_plugins_local+=( "@omz/${omz_plugin:t}" )
+done
+for omz_theme in "$_ZPM_PLUGIN_DIR/@omz/themes/"*; do
+  _zpm_completions_plugins_local+=( "@omz-theme/${${omz_theme:t}%.zsh-theme}" )
+done
+for omz_lib in "$_ZPM_PLUGIN_DIR/@omz/lib/"*; do
+  _zpm_completions_plugins_local+=( "@omz-lib/${${omz_lib:t}%.zsh}" )
+done
+fi
+
 local _zpm_completions_plugins_loadable=($(
     printf '%s\n%s\n' "${_zpm_completions_plugins_local[@]}" "${(k)_ZPM_plugins_full[@]}" | sort | uniq -u
 ))
@@ -67,7 +79,6 @@ if (( CURRENT > 1 )); then
     "_zpm_${words[$PRE]}_completion"
     return
   else
-    _describe -t commands "zpm subcommand" _zpm_loaded_plugins
     return
   fi
 fi

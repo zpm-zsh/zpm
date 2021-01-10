@@ -31,10 +31,6 @@ autoload -Uz                    \
 (( $#_ZPM_autoload )) && \
   autoload -Uz -- ${(z)_ZPM_autoload}
 
-if [[ "$Plugin" == 'omz/'* ]]; then
-  echo "${c[red]}omz/ prefix is depricated, change it to @omz/${c[reset]}"
-fi
-
 local Command="$1"
 local Plugin="$2"
 local Plugin_name=$(@zpm-get-plugin-name "$Plugin")
@@ -68,10 +64,16 @@ if [[ "$Command" == "upgrade" ]]; then
     status_string+=" ${c[yellow]}‣${c[reset]}"
     echo $status_string
   fi
-elif [[ "$Command" == "install" ]]; then
-  if [[ "$Plugin_type" == "omz" ]]; then
+elif [[ "$Command" == 'install' ]]; then
+  if [[ "$Plugin_type" == 'omz' ]]; then
     ln -s "$(@zpm-get-plugin-path @omz)/plugins/${Plugin_basename}" "$Plugin_path" 2>/dev/null
-  elif [[ "$Plugin_type" == "empty" ]]; then
+  elif [[ "$Plugin_type" == 'omz-theme' ]]; then
+    mkdir -p "${Plugin_path}"
+    ln -s "$(@zpm-get-plugin-path @omz)/themes/${Plugin_basename}.zsh-theme" "$Plugin_path" 2>/dev/null
+  elif [[ "$Plugin_type" == 'omz-lib' ]]; then
+    mkdir -p "${Plugin_path}"
+    ln -s "$(@zpm-get-plugin-path @omz)/lib/${Plugin_basename}.zsh" "$Plugin_path" 2>/dev/null
+  elif [[ "$Plugin_type" == 'empty' ]]; then
     mkdir -p "${Plugin_path}"
   elif [[ -n "$Plugin_git_url" ]]; then
     git clone --recursive "${Plugin_git_url}" --depth 1 --single-branch "${Plugin_path}" </dev/null >/dev/null 2>/dev/null
@@ -94,7 +96,7 @@ else
   echo Unknown command
 fi
 
-if [[ "$Plugin" == *",gen-plugin:"* && -e "$Plugin_path" ]]; then
+if [[ "$Plugin" == *',gen-plugin:'* && -e "$Plugin_path" ]]; then
   local status_string="${c[green]}${c[bold]}Generate plugin for${c[reset]} "
   status_string+="$Plugin_hyperlink"
   status_string+=" ${c[green]}✔${c[reset]}"
@@ -105,7 +107,7 @@ if [[ "$Plugin" == *",gen-plugin:"* && -e "$Plugin_path" ]]; then
   echo "$status_string"
 fi
 
-if [[ "$Plugin" == *",gen-completion:"* && -e "$Plugin_path" ]]; then
+if [[ "$Plugin" == *',gen-completion:'* && -e "$Plugin_path" ]]; then
   local status_string="${c[green]}${c[bold]}Generate completion for${c[reset]} "
   status_string+="$Plugin_hyperlink"
   status_string+=" ${c[green]}✔${c[reset]}"
@@ -117,7 +119,7 @@ if [[ "$Plugin" == *",gen-completion:"* && -e "$Plugin_path" ]]; then
   echo "$status_string"
 fi
 
-if [[ "$Plugin" == *",hook:"* && -e "$Plugin_path" ]]; then
+if [[ "$Plugin" == *',hook:'* && -e "$Plugin_path" ]]; then
   local status_string="${c[green]}${c[bold]}Run hook for${c[reset]} "
   status_string+="$Plugin_hyperlink"
   status_string+=" ${c[green]}✔${c[reset]}"

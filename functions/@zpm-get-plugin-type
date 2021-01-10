@@ -2,9 +2,11 @@
 
 local Plugin_name="$1"
 
-declare -Ag namespaces=(
+declare -Ag plugin_types=(
   empty empty
   omz omz
+  omz-theme omz-theme
+  omz-lib omz-lib
   gh github
   github github
   gl gitlab
@@ -24,9 +26,9 @@ if [[ "$Plugin_name" == "@"* ]]; then
     return 0
   fi
 
-  for namespace_key namespace in ${(@kv)namespaces}; do
-    if [[ "$Plugin_name" == "@${namespace_key}/"* || "$Plugin_name" == "@${namespace_key}" ]];then
-      echo "$namespace"
+  for plugin_type_key plugin_type in ${(@kv)plugin_types}; do
+    if [[ "$Plugin_name" == "@${plugin_type_key}/"* || "$Plugin_name" == "@${plugin_type_key}" ]];then
+      echo "$plugin_type"
       return 0
     fi
   done

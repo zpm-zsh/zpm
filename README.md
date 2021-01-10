@@ -18,20 +18,21 @@ Zpm is a plugin manager for ZSH who combines the imperative and declarative appr
 
 ## Table of Contents
 
-* [Stats](#stats)
-* [Base dependences](#base-dependences)
-* [Instalation](#instalation)
-* [How to use](#how-to-use)
-  * [Load plugin](#load-plugin)
-  * [Plugin name](#plugin-name)
-  * [Plugin tags](#plugin-tags)
-  * [`if` and `if-not` conditions](#if-and-if-not-conditions)
-  * [Upgrade](#upgrade)
-  * [Clean](#clean)
-* [Troubleshooting](#troubleshooting)
-* [Developing process](#developing-process)
-* [TODO](#todo)
-* [Changelog](#changelog)
+1. [Features](#features)
+2. [Stats](#stats)
+3. [Base dependences](#base-dependences)
+4. [Instalation](#instalation)
+5. [How to use](#how-to-use)
+   1. [Load plugin](#load-plugin)
+   2. [Plugin name](#plugin-name)
+   3. [Plugin tags](#plugin-tags)
+   4. [`if` and `if-not` conditions](#if-and-if-not-conditions)
+   5. [Upgrade](#upgrade)
+   6. [Clean](#clean)
+6. [Troubleshooting](#troubleshooting)
+7. [Developing process](#developing-process)
+8. [TODO](#todo)
+9. [Changelog](#changelog)
 
 ## Stats
 
@@ -198,6 +199,8 @@ If plugin name starts with `@word`, this word will be used as plugin type. Plugi
 * `@gitlab/` or `@gl/` - plugin will be downloaded from GitLab
 * `@bitbucket/` or `@bb/` - plugin will be downloaded from Bitbucket
 * `@omz/` - zpm will use a plugin from oh-my-zsh, oh-my-zsh will be download if not installed. **Important**: you shoud load `@omz` before any other plugin from on-my-zsh. `zpm load @omz`
+  * `@omz-theme/` - will load a theme from omz. From `<omz-dir>/themes/*.zsh-theme`
+  * `@omz-lib/` - will load a lib from omz. From `<omz-dir>/lib/*.zsh`
 * `@empty/` - special type, zpm will create empty dir without files. Useful with `hook`, `gen-completion` and `gen-plugin` tags. Can be ommited if your plugin name starts with `@empty/`
 
 ```sh
@@ -333,6 +336,8 @@ When you make changes, add information about them to the change log in **next** 
 
 * [ ] Improve readme
   * [ ] Describe installation process
+* [ ] Improve completions
+  * [ ] Now `zpm load`, `zpm upgrade` or `zpm subcommand` will complete only one argument
 
 ## Changelog
 
@@ -343,6 +348,9 @@ When you make changes, add information about them to the change log in **next** 
   * Remove `tr` calls
   * Deprecate `type:` tag
   * Internal changes for basename/name,hyperlink
+  * Add support for oh-my-zsh themes and libs
+    * `zpm load @omz-theme/theme-name`
+    * `zpm load @omz-lib/lib`
   * Upgrade from 2.x:
     * Add `zpm load @omz` if you are yousing at least one oh-my-zsh plugin.
     * Replace `type:plugin-type` with `@plugin-type/plugin/name`
