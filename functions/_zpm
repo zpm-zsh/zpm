@@ -9,19 +9,27 @@ for plugin in "$_ZPM_PLUGIN_DIR/"*; do
 done
 
 if [[ -e "$_ZPM_PLUGIN_DIR/@omz" ]]; then
-for omz_plugin in "$_ZPM_PLUGIN_DIR/@omz/plugins/"*; do
-  _zpm_completions_plugins_local+=( "@omz/${omz_plugin:t}" )
-done
-for omz_theme in "$_ZPM_PLUGIN_DIR/@omz/themes/"*; do
-  _zpm_completions_plugins_local+=( "@omz-theme/${${omz_theme:t}%.zsh-theme}" )
-done
-for omz_lib in "$_ZPM_PLUGIN_DIR/@omz/lib/"*; do
-  _zpm_completions_plugins_local+=( "@omz-lib/${${omz_lib:t}%.zsh}" )
-done
+  for omz_plugin in "$_ZPM_PLUGIN_DIR/@omz/plugins/"*; do
+    _zpm_completions_plugins_local+=( "@omz/${omz_plugin:t}" )
+  done
+
+  for omz_lib in "$_ZPM_PLUGIN_DIR/@omz/lib/"*; do
+    _zpm_completions_plugins_local+=( "@omz-lib/${${omz_lib:t}%.zsh}" )
+  done
+
+  for omz_theme in "$_ZPM_PLUGIN_DIR/@omz/themes/"*; do
+    _zpm_completions_plugins_local+=( "@omz-theme/${${omz_theme:t}%.zsh-theme}" )
+  done
+
+
 fi
 
+local _zpm_completions_plugins_installed=($(
+    printf '%s\n%s\n' "${_zpm_completions_plugins_local[@]}" | sort | uniq
+))
+
 local _zpm_completions_plugins_loadable=($(
-    printf '%s\n%s\n' "${_zpm_completions_plugins_local[@]}" "${(k)_ZPM_plugins_full[@]}" | sort | uniq -u
+    printf '%s\n%s\n' "${_zpm_completions_plugins_installed[@]}" "${(k)_ZPM_plugins_full[@]}" | sort | uniq -u
 ))
 
 local _zpm_upgrade_plugins=(@zpm ${(k)_ZPM_plugins_full})

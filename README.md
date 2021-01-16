@@ -18,21 +18,22 @@ Zpm is a plugin manager for ZSH who combines the imperative and declarative appr
 
 ## Table of Contents
 
-1. [Features](#features)
-2. [Stats](#stats)
-3. [Base dependences](#base-dependences)
-4. [Instalation](#instalation)
-5. [How to use](#how-to-use)
-   1. [Load plugin](#load-plugin)
-   2. [Plugin name](#plugin-name)
-   3. [Plugin tags](#plugin-tags)
-   4. [`if` and `if-not` conditions](#if-and-if-not-conditions)
-   5. [Upgrade](#upgrade)
-   6. [Clean](#clean)
-6. [Troubleshooting](#troubleshooting)
-7. [Developing process](#developing-process)
-8. [TODO](#todo)
-9. [Changelog](#changelog)
+* [Features](#features)
+* [Table of Contents](#table-of-contents)
+* [Stats](#stats)
+* [Base dependences](#base-dependences)
+* [Instalation](#instalation)
+* [How to use](#how-to-use)
+  * [Load plugin](#load-plugin)
+  * [Plugin name](#plugin-name)
+  * [Plugin tags](#plugin-tags)
+  * [`if` and `if-not` conditions](#if-and-if-not-conditions)
+  * [Upgrade](#upgrade)
+  * [Clean](#clean)
+* [Troubleshooting](#troubleshooting)
+* [Developing process](#developing-process)
+* [TODO](#todo)
+* [Changelog](#changelog)
 
 ## Stats
 
@@ -342,6 +343,7 @@ When you make changes, add information about them to the change log in **next** 
 ## Changelog
 
 * Next
+  * Fix completions
 
 * 3.0
   * Remove unused `@link`

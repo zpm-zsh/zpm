@@ -2,9 +2,8 @@
 
 
 local Plugin_name="$1"
-local Plugin_type="$2"
 
-if [[ "$Plugin_type" == "zpm" ]]; then
+if [[ "$Plugin_name" == "@zpm" ]]; then
   echo "${_ZPM_DIR}"
   return 0
 fi
