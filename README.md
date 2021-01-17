@@ -202,6 +202,39 @@ If plugin name starts with `@word`, this word will be used as plugin type. Plugi
 * `@omz/` - zpm will use a plugin from oh-my-zsh, oh-my-zsh will be download if not installed. **Important**: you shoud load `@omz` before any other plugin from on-my-zsh. `zpm load @omz`
   * `@omz-theme/` - will load a theme from omz. From `<omz-dir>/themes/*.zsh-theme`
   * `@omz-lib/` - will load a lib from omz. From `<omz-dir>/lib/*.zsh`
+  * <details>
+    <p>
+
+    See: <https://github.com/zpm-zsh/zpm/issues/24>
+
+    ```sh
+    # Pull in OMZ (doesn't actually source anything)
+    zpm load @omz
+
+    # Load any OMZ libraries we want or our OMZ plugins require
+    zpm load                \
+      @omz-lib/compfix      \
+      @omz-lib/completion   \
+      @omz-lib/directories  \
+      @omz-lib/functions    \
+      @omz-lib/git          \
+      @omz-lib/grep         \
+      @omz-lib/history      \
+      @omz-lib/key-bindings \
+      @omz-lib/misc         \
+      @omz-lib/spectrum     \
+      @omz-lib/theme-and-appearance
+
+      # Load some OMZ plugins and theme
+      zpm load          \
+        @omz/virtualenv \
+        @omz/git
+
+      zpm load @omz-theme/robbyrussell
+    ```
+
+    </p>
+    </details>
 * `@empty/` - special type, zpm will create empty dir without files. Useful with `hook`, `gen-completion` and `gen-plugin` tags. Can be ommited if your plugin name starts with `@empty/`
 
 ```sh
@@ -344,6 +377,7 @@ When you make changes, add information about them to the change log in **next** 
 
 * Next
   * Fix completions
+  * Add example for @omz
 
 * 3.0
   * Remove unused `@link`
