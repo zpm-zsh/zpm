@@ -7,6 +7,11 @@ source ~/.zpm/zpm.zsh 2>/dev/null || {
 ### OpenWrt
 zpm if openwrt load zpm-zsh/openwrt
 
+
+### Termux
+
+zpm if termux load zpm-zsh/termux
+
 ### Tmux
 zpm if ssh load zpm-zsh/tmux
 zpm if-not ssh load zpm-zsh/tmux,apply:path
