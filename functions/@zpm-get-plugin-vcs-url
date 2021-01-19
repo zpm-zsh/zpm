@@ -1,7 +1,15 @@
 #!/usr/bin/env zsh
 
-local Plugin_name="$1"
-local Plugin_type="$2"
+local Plugin="$1"
+local Plugin_name="$2"
+local Plugin_type="$3"
+
+local Plugin_origin="$(@zpm-get-origin $Plugin)"
+
+if [[ -n "$Plugin_origin" ]]; then
+  echo "$Plugin_origin"
+  return 0
+fi
 
 local Plugin_striped_name="${Plugin_name#@*/}"
 

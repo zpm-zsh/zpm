@@ -1,0 +1,8 @@
+#!/usr/bin/env zsh
+
+local Plugin="$1"
+
+if [[ "$Plugin" == *',origin:'* ]]; then
+  origin="${${Plugin##*,origin:}%%\,*}"
+  echo "$origin"
+fi

@@ -13,6 +13,8 @@ declare -Ag plugin_types=(
   gitlab gitlab
   bb bitbucket
   bitbucket bitbucket
+  git git
+  link link
 )
 
 if [[ "$Plugin_name" == "@"* ]]; then
@@ -33,8 +35,7 @@ if [[ "$Plugin_name" == "@"* ]]; then
     fi
   done
 
-  echo 'empty'
-  return 0
+  return -1
 fi
 
 if [[ "$Plugin_name" = *'/'* && "$Plugin_name" != *'/'*'/'* ]]; then
@@ -42,5 +43,4 @@ if [[ "$Plugin_name" = *'/'* && "$Plugin_name" != *'/'*'/'* ]]; then
   return 0
 fi
 
-echo 'empty'
-
+return -1

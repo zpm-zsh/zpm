@@ -1,6 +1,57 @@
 #!/usr/bin/env zsh
 fpath+=("${_ZPM_DIR}/functions" "${_ZPM_CACHE_DIR}/functions")
 
+function _upgrade_success_msg(){
+  local status_string="${c[green]}${c[bold]}Upgrade${c[reset]} "
+  status_string+="$Plugin_hyperlink"
+  status_string+=" ${c[green]}✔${c[reset]}"
+  echo $status_string
+}
+
+function _upgrade_error_msg(){
+  local status_string="${c[red]}${c[bold]}Can't upgrade${c[reset]} "
+  status_string+="$Plugin_hyperlink"
+  status_string+=" ${c[green]}✔${c[reset]}"
+  echo $status_string
+}
+
+function _upgrade_skip_msg(){
+  local status_string="${c[yellow]}${c[bold]}Skip upgrade${c[reset]} "
+  status_string+="$Plugin_hyperlink"
+  status_string+=" ${c[yellow]}‣${c[reset]}"
+  echo $status_string
+}
+
+function _install_success_msg(){
+  local status_string="${c[green]}${c[bold]}Install${c[reset]} "
+  status_string+="$Plugin_hyperlink"
+  status_string+=" ${c[green]}✔${c[reset]}"
+  echo $status_string
+}
+
+function _install_error_msg(){
+  local status_string="${c[red]}${c[bold]}Can't install${c[reset]} "
+  status_string+="$Plugin_hyperlink"
+  status_string+=" ${c[red]}${c[bold]}✖${c[reset]}"
+  echo $status_string
+}
+
+function _default_install_msg(){
+    if [[ "$?" == "0" ]]; then
+      _install_success_msg
+  else
+    _upgrade_error_msg
+  fi
+}
+
+function _default_upgrade_msg(){
+  if [[ "$?" == "0" ]]; then
+    _upgrade_success_msg
+  else
+    _install_error_msg
+  fi
+}
+
 if [[ "$CLICOLOR" != "0" ]]; then
   typeset -gA c=(
     reset "[0m"
@@ -26,6 +77,7 @@ autoload -Uz                    \
   @zpm-get-plugin-name          \
   @zpm-get-plugin-path          \
   @zpm-get-plugin-type          \
+  @zpm-get-origin               \
   @zpm-log
 
 (( $#_ZPM_autoload )) && \
@@ -39,58 +91,41 @@ local Plugin_basename=$(@zpm-get-plugin-basename "$Plugin_name")
 local Plugin_path=$(@zpm-get-plugin-path "$Plugin_name" "$Plugin_type")
 local Plugin_link=$(@zpm-get-plugin-link "$Plugin_name" "$Plugin_type")
 local Plugin_hyperlink=$(@zpm-get-plugin-hyperlink "$Plugin_name" "$Plugin_link")
-local Plugin_git_url=$(@zpm-get-plugin-vcs-url "$Plugin_name" "$Plugin_type")
+local Plugin_git_url=$(@zpm-get-plugin-vcs-url "$Plugin" "$Plugin_name" "$Plugin_type")
 
 if [[ "$Command" == "upgrade" ]]; then
   @zpm-log zpm:upgrade "Upgrade '${Plugin}'"
 
-  if [[ "|github|gitlab|bitbucket|omz-core|zpm|" == *"|${Plugin_type}|"* ]]; then
+  if [[ '|github|gitlab|bitbucket|omz-core|zpm|git|' == *"|${Plugin_type}|"* ]]; then
     git --git-dir="${Plugin_path}/.git/" --work-tree="${Plugin_path}/" pull </dev/null >/dev/null 2>/dev/null
-
-    if [[ "$?" == "0" ]]; then
-      local status_string="${c[green]}${c[bold]}Upgrade${c[reset]} "
-      status_string+="$Plugin_hyperlink"
-      status_string+=" ${c[green]}✔${c[reset]}"
-      echo $status_string
-    else
-      local status_string="${c[red]}${c[bold]}Can't upgrade${c[reset]} "
-      status_string+="$Plugin_hyperlink"
-      status_string+=" ${c[green]}✔${c[reset]}"
-      echo $status_string
-    fi
+    _default_upgrade_msg
   else
-    local status_string="${c[yellow]}${c[bold]}Skip upgrade${c[reset]} "
-    status_string+="$Plugin_hyperlink"
-    status_string+=" ${c[yellow]}‣${c[reset]}"
-    echo $status_string
+    _upgrade_skip_msg
   fi
 elif [[ "$Command" == 'install' ]]; then
   if [[ "$Plugin_type" == 'omz' ]]; then
-    ln -s "$(@zpm-get-plugin-path @omz)/plugins/${Plugin_basename}" "$Plugin_path" 2>/dev/null
+    ln -sf "$(@zpm-get-plugin-path @omz)/plugins/${Plugin_basename}" "$Plugin_path" 2>/dev/null
+    _default_install_msg
   elif [[ "$Plugin_type" == 'omz-theme' ]]; then
     mkdir -p "${Plugin_path}"
-    ln -s "$(@zpm-get-plugin-path @omz)/themes/${Plugin_basename}.zsh-theme" "$Plugin_path" 2>/dev/null
+    ln -sf "$(@zpm-get-plugin-path @omz)/themes/${Plugin_basename}.zsh-theme" "$Plugin_path" 2>/dev/null
+    _default_install_msg
   elif [[ "$Plugin_type" == 'omz-lib' ]]; then
     mkdir -p "${Plugin_path}"
     ln -s "$(@zpm-get-plugin-path @omz)/lib/${Plugin_basename}.zsh" "$Plugin_path" 2>/dev/null
+    _default_install_msg
   elif [[ "$Plugin_type" == 'empty' ]]; then
     mkdir -p "${Plugin_path}"
-  elif [[ -n "$Plugin_git_url" ]]; then
+    _default_install_msg
+  elif [[ "$Plugin_type" == 'link' ]]; then
+    ln -sf "$(@zpm-get-origin $Plugin)" "$Plugin_path" 2>/dev/null
+    _default_install_msg
+  elif [[ '|github|gitlab|bitbucket|omz-core|zpm|git|' == *"|${Plugin_type}|"*  ]]; then
     git clone --recursive "${Plugin_git_url}" --depth 1 --single-branch "${Plugin_path}" </dev/null >/dev/null 2>/dev/null
+    _default_install_msg
   else
     false
-  fi
-
-  if [[ "$?" == "0" ]]; then
-    local status_string="${c[green]}${c[bold]}Install${c[reset]} "
-    status_string+="$Plugin_hyperlink"
-    status_string+=" ${c[green]}✔${c[reset]}"
-    echo $status_string
-  else
-    local status_string="${c[red]}${c[bold]}Can't install${c[reset]} "
-    status_string+="$Plugin_hyperlink"
-    status_string+=" ${c[red]}${c[bold]}✖${c[reset]}"
-    echo $status_string
+    _install_error_msg
   fi
 else
   echo Unknown command
