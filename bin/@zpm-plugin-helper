@@ -1,50 +1,50 @@
 #!/usr/bin/env zsh
 fpath+=("${_ZPM_DIR}/functions" "${_ZPM_CACHE_DIR}/functions")
 
-function _upgrade_success_msg(){
+function _upgrade_success_msg() {
   local status_string="${c[green]}${c[bold]}Upgrade${c[reset]} "
   status_string+="$Plugin_hyperlink"
   status_string+=" ${c[green]}✔${c[reset]}"
   echo $status_string
 }
 
-function _upgrade_error_msg(){
+function _upgrade_error_msg() {
   local status_string="${c[red]}${c[bold]}Can't upgrade${c[reset]} "
   status_string+="$Plugin_hyperlink"
   status_string+=" ${c[green]}✔${c[reset]}"
   echo $status_string
 }
 
-function _upgrade_skip_msg(){
+function _upgrade_skip_msg() {
   local status_string="${c[yellow]}${c[bold]}Skip upgrade${c[reset]} "
   status_string+="$Plugin_hyperlink"
   status_string+=" ${c[yellow]}‣${c[reset]}"
   echo $status_string
 }
 
-function _install_success_msg(){
+function _install_success_msg() {
   local status_string="${c[green]}${c[bold]}Install${c[reset]} "
   status_string+="$Plugin_hyperlink"
   status_string+=" ${c[green]}✔${c[reset]}"
   echo $status_string
 }
 
-function _install_error_msg(){
+function _install_error_msg() {
   local status_string="${c[red]}${c[bold]}Can't install${c[reset]} "
   status_string+="$Plugin_hyperlink"
   status_string+=" ${c[red]}${c[bold]}✖${c[reset]}"
   echo $status_string
 }
 
-function _default_install_msg(){
-    if [[ "$?" == "0" ]]; then
-      _install_success_msg
+function _default_install_msg() {
+  if [[ "$?" == "0" ]]; then
+    _install_success_msg
   else
     _install_error_msg
   fi
 }
 
-function _default_upgrade_msg(){
+function _default_upgrade_msg() {
   if [[ "$?" == "0" ]]; then
     _upgrade_success_msg
   else
