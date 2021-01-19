@@ -37,7 +37,7 @@ if [[ "$Plugin_name" == "@"* ]]; then
   return 0
 fi
 
-if [[ 'a/b' = *'/'* && 'a/b' != *'/'*'/'* ]]; then
+if [[ "$Plugin_name" = *'/'* && "$Plugin_name" != *'/'*'/'* ]]; then
   echo 'github'
   return 0
 fi
