@@ -26,10 +26,10 @@ for plugin in ${(s./.)Plugin_name}; do
 done
 
 if [[ -z "$Plugin_link" ]]; then
-  status_string="$(join "${c[magenta]}${c[bold]}/" $plugin_name_arr_color)"
+  status_string="$(join "${c[red]}${c[bold]}/" $plugin_name_arr_color)"
 else
   status_string="\033]8;;${Plugin_link}\a"
-  status_string+="$(join "${c[magenta]}${c[bold]}/" $plugin_name_arr_color)"
+  status_string+="$(join "${c[red]}${c[bold]}/" $plugin_name_arr_color)"
   status_string+="\033]8;;\a${c[reset]}"
 fi
 
