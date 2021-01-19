@@ -40,7 +40,7 @@ function _default_install_msg(){
     if [[ "$?" == "0" ]]; then
       _install_success_msg
   else
-    _upgrade_error_msg
+    _install_error_msg
   fi
 }
 
@@ -48,7 +48,7 @@ function _default_upgrade_msg(){
   if [[ "$?" == "0" ]]; then
     _upgrade_success_msg
   else
-    _install_error_msg
+    _upgrade_error_msg
   fi
 }
 
