@@ -1,5 +1,7 @@
 #!/usr/bin/env zsh
 
+autoload -Uz @zpm-log @zpm-launch-plugin-helper @zpm-initialize-plugin @zpm-get-plugin-name @zpm-get-plugin-path
+
 # Check if plugin isn't loaded
 local -a Plugins_Install
 local -a Plugins_Load_Order

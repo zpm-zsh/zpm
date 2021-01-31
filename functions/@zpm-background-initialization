@@ -58,6 +58,8 @@ echo "zle && zle reset-prompt" >> "$_ZPM_TMP_ASYNC"
 cat "$_ZPM_TMP" | command egrep -v '\#\!/usr/bin/env\ zsh|\#DO_NOT_INCLUDE_LINE_IN_ZPM_CACHE' >! "$_ZPM_CACHE"
 cat "$_ZPM_TMP_ASYNC" | command egrep -v '\#\!/usr/bin/env\ zsh|\#DO_NOT_INCLUDE_LINE_IN_ZPM_CACHE' >! "$_ZPM_CACHE_ASYNC"
 
-rm "$_ZPM_TMP"  "$_ZPM_TMP_ASYNC"
+rm "$_ZPM_TMP" "$_ZPM_TMP_ASYNC"
+
+unfunction source
 
 (@zpm-compile 2>/dev/null &)

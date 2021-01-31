@@ -1,4 +1,4 @@
 #!/usr/bin/env zsh
 
-rm -rf "${_ZPM_CACHE_DIR}" 2>/dev/null
+rm -rf "${ZSH_CACHE_DIR}" 2>/dev/null
 exec zsh

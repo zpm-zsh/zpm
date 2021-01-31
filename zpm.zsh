@@ -12,17 +12,16 @@
 export PMSPEC="0fbPs"
 export ZPFX="${HOME}/.local"
 
-0=${(%):-%x}
-export _ZPM_DIR=${0:h}
-export _ZPM_PLUGIN_DIR="${0:h}/plugins"
+export _ZPM_DIR="${${(%):-%x}:h}"
+export _ZPM_PLUGIN_DIR="${_ZPM_DIR}/plugins"
 
-_ZPM_CACHE_DIR="${TMPDIR:-/tmp}/zsh-${UID:-user}"
-_ZPM_CACHE="${_ZPM_CACHE_DIR}/zpm-cache.zsh"
-_ZPM_CACHE_ASYNC="${_ZPM_CACHE_DIR}/zpm-cache-async.zsh"
-_ZPM_COMPDUMP="${_ZPM_CACHE_DIR}/zcompdump"
+export ZSH_CACHE_DIR="${TMPDIR:-/tmp}/zsh-${UID:-user}"
+_ZPM_CACHE="${ZSH_CACHE_DIR}/zpm-cache.zsh"
+_ZPM_CACHE_ASYNC="${ZSH_CACHE_DIR}/zpm-cache-async.zsh"
+_ZPM_COMPDUMP="${ZSH_CACHE_DIR}/zcompdump"
 
-fpath+=("${_ZPM_DIR}/functions" "${_ZPM_CACHE_DIR}/functions")
-export PATH="$PATH:${_ZPM_CACHE_DIR}/bin"
+fpath+=("${_ZPM_DIR}/functions" "${ZSH_CACHE_DIR}/functions")
+export PATH="$PATH:${ZSH_CACHE_DIR}/bin"
 typeset -aU path cdpath fpath manpath
 
 autoload -Uz compinit
