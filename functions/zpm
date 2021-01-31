@@ -1,8 +1,5 @@
 #!/usr/bin/env zsh
 
-autoload -Uz @zpm-load-plugins @zpm-upgrade @zpm-clean
-
-
 if [[ "$1" == 'load' ]]; then
   shift
   @zpm-load-plugins "$@"

@@ -1,8 +1,6 @@
 #compdef zpm
 #autoload
 
-autoload -Uz @zpm-get-plugin-name
-
 local _zpm_completions_plugins_local=( @zpm )
 for plugin in "$_ZPM_PLUGIN_DIR/"*; do
   _zpm_completions_plugins_local+=( ${${plugin:t}//---/\/} )
