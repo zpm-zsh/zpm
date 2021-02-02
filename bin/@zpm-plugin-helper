@@ -138,14 +138,6 @@ local Plugin_link=$(@zpm-get-plugin-link "$Plugin_name" "$Plugin_type")
 local Plugin_hyperlink=$(@zpm-get-plugin-hyperlink "$Plugin_name" "$Plugin_link")
 local Plugin_git_url=$(@zpm-get-plugin-vcs-url "$Plugin" "$Plugin_name" "$Plugin_type")
 
-echo Plugin_name $Plugin_name
-echo Plugin_type $Plugin_type
-echo Plugin_basename $Plugin_basename
-echo Plugin_path $Plugin_path
-echo Plugin_link $Plugin_link
-echo Plugin_hyperlink $Plugin_hyperlink
-echo Plugin_git_url $Plugin_git_url
-
 if [[ "$Command" == "upgrade" ]]; then
   @zpm-log zpm:upgrade "Upgrade '${Plugin}'"
 
