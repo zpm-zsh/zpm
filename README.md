@@ -375,7 +375,7 @@ When you make changes, add information about them to the change log in **next** 
 
 ## Changelog
 
-* Next
+* 3.1
   * Fix completions
   * Add example for @omz
 
