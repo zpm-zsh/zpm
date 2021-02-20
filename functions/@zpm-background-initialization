@@ -1,6 +1,5 @@
 #!/usr/bin/env zsh
-TMOUT=5
-add-zsh-hook -d background @zpm-background-initialization
+
 rehash
 compinit -i -d "${_ZPM_COMPDUMP}"
 
@@ -25,15 +24,12 @@ done
 
 echo '_ZPM_post_fn () {' >> "$_ZPM_TMP"
 echo "  source '$_ZPM_CACHE_ASYNC'" >> "$_ZPM_TMP"
-echo '  TMOUT=5' >> "$_ZPM_TMP"
-echo '  add-zsh-hook -d background _ZPM_post_fn' >> "$_ZPM_TMP"
 echo '}' >> "$_ZPM_TMP"
 echo >> "$_ZPM_TMP"
 
-echo 'TMOUT=1' >> "$_ZPM_TMP"
 echo >> "$_ZPM_TMP"
 
-echo 'add-zsh-hook background _ZPM_post_fn' >> "$_ZPM_TMP"
+echo 'sched +1 _ZPM_post_fn' >> "$_ZPM_TMP"
 echo >> "$_ZPM_TMP"
 echo 'zpm () {}' >> "$_ZPM_TMP"
 

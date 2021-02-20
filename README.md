@@ -65,7 +65,6 @@ zsh -i -c exit  0.00s user 0.00s system 101% cpu 0.008 total
 ```sh
 zpm-zsh/helpers
 zpm-zsh/colors
-zpm-zsh/background
 zpm-zsh/tmux
 zpm-zsh/vte
 zpm-zsh/core-config
