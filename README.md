@@ -22,7 +22,7 @@ Zpm is a plugin manager for ZSH who combines the imperative and declarative appr
 * [Table of Contents](#table-of-contents)
 * [Stats](#stats)
 * [Base dependences](#base-dependences)
-* [Instalation](#instalation)
+* [Installation](#installation)
 * [How to use](#how-to-use)
   * [Load plugin](#load-plugin)
   * [Plugin name](#plugin-name)
@@ -129,7 +129,7 @@ zpm-zsh/create-zsh-plugin
 * [cli-html](https://www.npmjs.com/package/cli-markdown) view html in terminal. *Optional*
 * [cli-markdown](https://www.npmjs.com/package/cli-markdown) view markdown in terminal. *Optional*
 
-## Instalation
+## Installation
 
 Add the following text into `.zshrc`
 
