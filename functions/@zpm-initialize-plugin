@@ -48,13 +48,6 @@ if [[ "$zpm_plugin_functions_path" == "true" ]]; then
   fi
 fi
 
-# Autoload
-local Plugin_autoload_files=$(@zpm-get-plugin-autoload "$Plugin" "$Plugin_path" "$Plugin_functions_path" "$zpm_plugin_autoload")
-if [[ -n "$Plugin_autoload_files" ]]; then
-  @zpm-log zpm:init:autoload "Autoload ${Plugin_autoload_files}"
-  @zpm-add-autoload "$Plugin_autoload_files"
-fi
-
 # Bin path
 if [[ "$zpm_plugin_bin_path" == "true" ]]; then
   local Plugin_bin_path=$(@zpm-get-plugin-bin-path "$Plugin" "$Plugin_path")
@@ -78,4 +71,11 @@ if [[ "$zpm_plugin_source" == "true" ]]; then
   fi
 else
   @zpm-no-source "${Plugin_name}" 'disabled'
+fi
+
+# Autoload
+local Plugin_autoload_files=$(@zpm-get-plugin-autoload "$Plugin" "$Plugin_path" "$Plugin_functions_path" "$zpm_plugin_autoload")
+if [[ -n "$Plugin_autoload_files" ]]; then
+  @zpm-log zpm:init:autoload "Autoload ${Plugin_autoload_files}"
+  @zpm-add-autoload "$Plugin_autoload_files"
 fi
