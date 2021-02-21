@@ -74,7 +74,7 @@ else
 fi
 
 # Autoload
-local Plugin_autoload_files=$(@zpm-get-plugin-autoload "$Plugin" "$Plugin_path" "$Plugin_functions_path" "$zpm_plugin_autoload")
+local Plugin_autoload_files=$(@zpm-get-plugin-autoload "$Plugin" "$zpm_plugin_autoload")
 if [[ -n "$Plugin_autoload_files" ]]; then
   @zpm-log zpm:init:autoload "Autoload ${Plugin_autoload_files}"
   @zpm-add-autoload "$Plugin_autoload_files"

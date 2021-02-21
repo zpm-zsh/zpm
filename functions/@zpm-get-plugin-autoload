@@ -1,9 +1,7 @@
 #!/usr/bin/env zsh
 
 local Plugin="$1"
-local Plugin_path="$2"
-local Plugin_functions_path="$3"
-local autoload_files="$4"
+local autoload_files="$2"
 
 if [[ "$Plugin"  == *",autoload:"* ]]; then
   local _ZPM_autoload_str=${Plugin##*,autoload}
