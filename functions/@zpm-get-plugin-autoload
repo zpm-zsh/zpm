@@ -3,17 +3,7 @@
 local Plugin="$1"
 local Plugin_path="$2"
 local Plugin_functions_path="$3"
-local zpm_plugin_autoload_all="$4"
-
-local autoload_files=''
-
-if [[ "$zpm_plugin_autoload_all" == "true" && -d "${Plugin_functions_path}" ]]; then
-  for autoload_file in "${Plugin_functions_path}/"*; do
-    if [[ "${autoload_file:t}" != "_"* && "${autoload_file:t}" != *".zwc" ]];then
-      autoload_files="${autoload_files}:${autoload_file:t}"
-    fi
-  done
-fi
+local autoload_files="$4"
 
 if [[ "$Plugin"  == *",autoload:"* ]]; then
   local _ZPM_autoload_str=${Plugin##*,autoload}

@@ -289,10 +289,6 @@ This tag defines functions that will be autoloaded by zpm (using `autoload -Uz`)
 zpm load some/plugin,autoload:one:two:three
 ```
 
-#### `autoload-all` tag
-
-If this tag present all files from [functions directory](#path-and-fpath-tags) of this plugin will be autoloaded. Exception for files who starts with `_` or ends with `.zwc`
-
 #### `hook` tag
 
 This tag parameter contains command who will be run in the plugin directory after instalation or upgrade
@@ -373,6 +369,9 @@ When you make changes, add information about them to the change log in **next** 
   * [ ] Now `zpm load`, `zpm upgrade` or `zpm subcommand` will complete only one argument
 
 ## Changelog
+
+* Next
+  * Removed `autoload-all` tag
 
 * 3.2
   * Fix plugin load order

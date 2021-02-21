@@ -10,7 +10,6 @@ local zpm_plugin_async=false
 local zpm_plugin_bin_path=true
 local zpm_plugin_functions_path=true
 local zpm_plugin_autoload=''
-local zpm_plugin_autoload_all=false
 
 if [[ -f "${Plugin_path}/plugin-options.zsh" ]]; then
   source "${Plugin_path}/plugin-options.zsh"
@@ -40,10 +39,6 @@ if [[ "$Plugin"  == *",async"* ]]; then
   zpm_plugin_async=true
 fi
 
-if [[ "$Plugin" == *",autoload-all"* ]]; then
-  zpm_plugin_autoload_all=true
-fi
-
 # Fpath
 if [[ "$zpm_plugin_functions_path" == "true" ]]; then
   local Plugin_functions_path=$(@zpm-get-plugin-functions-path "$Plugin" "$Plugin_path")
@@ -54,7 +49,7 @@ if [[ "$zpm_plugin_functions_path" == "true" ]]; then
 fi
 
 # Autoload
-local Plugin_autoload_files=$(@zpm-get-plugin-autoload "$Plugin" "$Plugin_path" "$Plugin_functions_path" "$zpm_plugin_autoload_all")
+local Plugin_autoload_files=$(@zpm-get-plugin-autoload "$Plugin" "$Plugin_path" "$Plugin_functions_path" "$zpm_plugin_autoload")
 if [[ -n "$Plugin_autoload_files" ]]; then
   @zpm-log zpm:init:autoload "Autoload ${Plugin_autoload_files}"
   @zpm-add-autoload "$Plugin_autoload_files"
