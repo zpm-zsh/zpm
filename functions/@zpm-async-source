@@ -1,11 +1,11 @@
 #!/usr/bin/env zsh
 @zpm-log zpm:init:source "Source '${_ZPM_plugin_file_path}', async"
 
-_ZPM_plugins_for_async_source+=("$1")
-_ZPM_file_for_async_source["$1"]="${2}"
-
 ZERO="$2"
 
 source "$2"
 
 unset ZERO
+
+_ZPM_plugins_for_async_source+=("$1")
+_ZPM_file_for_async_source["$1"]="${2}"

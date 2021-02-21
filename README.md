@@ -65,7 +65,6 @@ zsh -i -c exit  0.00s user 0.00s system 101% cpu 0.008 total
 ```sh
 zpm-zsh/helpers
 zpm-zsh/colors
-zpm-zsh/background
 zpm-zsh/tmux
 zpm-zsh/vte
 zpm-zsh/core-config
@@ -374,6 +373,10 @@ When you make changes, add information about them to the change log in **next** 
   * [ ] Now `zpm load`, `zpm upgrade` or `zpm subcommand` will complete only one argument
 
 ## Changelog
+
+* 3.2
+  * Fix plugin load order
+  * Use sched for background run
 
 * 3.1
   * Fix completions

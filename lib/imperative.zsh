@@ -5,10 +5,9 @@ mkdir -p "${ZSH_CACHE_DIR}" "${ZSH_CACHE_DIR}/functions" "${ZSH_CACHE_DIR}/bin"
 compinit -i -C -d "${_ZPM_COMPDUMP}"
 
 declare -Ag _ZPM_plugins_full=( '@zpm' '@zpm' )
-@zpm-load-plugins zpm-zsh/helpers zpm-zsh/background
+@zpm-load-plugins zpm-zsh/helpers
 
-TMOUT=1
-add-zsh-hook background @zpm-background-initialization
+sched +1 @zpm-background-initialization
 
 function source() {
   if [[ ! "${1}.zwc" -nt "${1}" ]]; then
