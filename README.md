@@ -374,6 +374,10 @@ When you make changes, add information about them to the change log in **next** 
 
 ## Changelog
 
+* 3.2
+  * Fix plugin load order
+  * Use sched for background run
+
 * 3.1
   * Fix completions
   * Add example for @omz
