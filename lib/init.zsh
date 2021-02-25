@@ -30,3 +30,5 @@ autoload -Uz \
   @zpm-no-source                 \
   @zpm-source                    \
   @zpm-upgrade                   \
+  @zpm-compile                   \
+  
