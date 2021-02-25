@@ -59,6 +59,27 @@ zsh -i -c exit  0.00s user 0.00s system 102% cpu 0.007 total
 </details>
 
 <details>
+  <summary>Test on MikroTik RouterBOARD 951Ui-2HnD, Atheros AR9344 rev 3, MIPS 74Kc V4.12, 128MB RAM</summary>
+<p>
+
+```sh
+zsh -i -c exit  0.09s user 0.03s system 83% cpu 0.144 total
+zsh -i -c exit  0.10s user 0.02s system 29% cpu 0.412 total
+zsh -i -c exit  0.10s user 0.02s system 69% cpu 0.173 total
+zsh -i -c exit  0.10s user 0.03s system 73% cpu 0.165 total
+zsh -i -c exit  0.10s user 0.02s system 81% cpu 0.150 total
+zsh -i -c exit  0.10s user 0.02s system 71% cpu 0.170 total
+zsh -i -c exit  0.10s user 0.02s system 85% cpu 0.141 total
+zsh -i -c exit  0.10s user 0.02s system 42% cpu 0.283 total
+zsh -i -c exit  0.11s user 0.02s system 68% cpu 0.176 total
+zsh -i -c exit  0.10s user 0.02s system 75% cpu 0.161 total
+
+```
+
+</p>
+</details>
+
+<details>
   <summary>With this set of plugins. 51 total</summary>
 <p>
 
