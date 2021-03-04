@@ -20,8 +20,8 @@ _ZPM_CACHE="${ZSH_CACHE_DIR}/zpm-cache.zsh"
 _ZPM_CACHE_ASYNC="${ZSH_CACHE_DIR}/zpm-cache-async.zsh"
 _ZPM_COMPDUMP="${ZSH_CACHE_DIR}/zcompdump"
 
-fpath+=("${_ZPM_DIR}/functions" "${ZSH_CACHE_DIR}/functions")
-export PATH="$PATH:${ZSH_CACHE_DIR}/bin"
+fpath=("${_ZPM_DIR}/functions" "${ZSH_CACHE_DIR}/functions" $fpath)
+export PATH="${ZSH_CACHE_DIR}/bin:$PATH"
 typeset -aU path cdpath fpath manpath
 
 autoload -Uz compinit
