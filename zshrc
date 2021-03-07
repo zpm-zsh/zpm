@@ -39,7 +39,6 @@ zpm if-not ssh load                                                             
   zpm-zsh/clipboard                                                                    \
   zpm-zsh/mysql-colorize,async                                                         \
   zpm-zsh/bookmarks,async                                                               \
-  voronkovich/gitignore.plugin.zsh,async                                               \
   zpm-zsh/autoenv,async                                                                \
                                                                                        \
   mdumitru/fancy-ctrl-z,async                                                          \
