@@ -38,7 +38,7 @@ zpm if-not ssh load                                                             
                                                                                        \
   zpm-zsh/clipboard                                                                    \
   zpm-zsh/mysql-colorize,async                                                         \
-  zpm-zsh/zshmarks,async                                                               \
+  zpm-zsh/bookmarks,async                                                               \
   voronkovich/gitignore.plugin.zsh,async                                               \
   zpm-zsh/autoenv,async                                                                \
                                                                                        \
@@ -47,5 +47,7 @@ zpm if-not ssh load                                                             
   zdharma/fast-syntax-highlighting,async                                               \
   zsh-users/zsh-autosuggestions,source:zsh-autosuggestions.zsh,async                   \
   psprint/history-search-multi-word,fpath:/,async
+
+zpm load hlissner/zsh-autopair
 
 source ~/.zshrc.local 2>/dev/null
