@@ -43,10 +43,8 @@ zpm if-not ssh load                                                             
                                                                                        \
   mdumitru/fancy-ctrl-z,async                                                          \
   zsh-users/zsh-history-substring-search,source:zsh-history-substring-search.zsh,async \
-  zdharma/fast-syntax-highlighting,async                                               \
   zsh-users/zsh-autosuggestions,source:zsh-autosuggestions.zsh,async                   \
+  zdharma/fast-syntax-highlighting,async                                               \
   psprint/history-search-multi-word,fpath:/,async
-
-zpm load hlissner/zsh-autopair
 
 source ~/.zshrc.local 2>/dev/null
