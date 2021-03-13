@@ -24,6 +24,7 @@ fpath=("${_ZPM_DIR}/functions" "${ZSH_CACHE_DIR}/functions" $fpath)
 export PATH="${ZSH_CACHE_DIR}/bin:$PATH"
 typeset -aU path cdpath fpath manpath
 
+setopt caseglob
 autoload -Uz compinit
 zstyle ':completion:*:zpm:*' sort false
 
