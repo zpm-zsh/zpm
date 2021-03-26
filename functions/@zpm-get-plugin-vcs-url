@@ -13,6 +13,11 @@ fi
 
 local Plugin_striped_name="${Plugin_name#@*/}"
 
+if [[ "$Plugin"  == *",origin:"* ]]; then
+  local Plugin_origin="${${Plugin##*,origin:}%%,*}"
+  return "$Plugin_origin"
+fi
+
 if [[ "$Plugin_type" == 'github' ]]; then
   echo "https://github.com/${Plugin_striped_name}"
 elif [[ "$Plugin_type" == 'gitlab' ]]; then
