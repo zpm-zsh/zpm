@@ -190,6 +190,11 @@ The set of commands can be expanded extended using plugins
 
 ### Load plugin
 
+**Important**
+
+> Be carefully, zpm doesnt guarantue loading order in call. So if you need to load plugin **before** antoher, you should do 2 separate `zpm load`.
+> This is very important for oh-my-zsh plugins, because @omz-core should be loaded before
+
 Plugin name must have next form: `user/plugin-name`. This plugin can be enabled using
 
 ```sh
@@ -219,10 +224,13 @@ If plugin name starts with `@word`, this word will be used as plugin type. Plugi
 * `@github/` or `@gl/` - plugin will be downloaded from GitHub, this is default value, so you don't need to set it
 * `@gitlab/` or `@gl/` - plugin will be downloaded from GitLab
 * `@bitbucket/` or `@bb/` - plugin will be downloaded from Bitbucket
-* `@omz/` - zpm will use a plugin from oh-my-zsh, oh-my-zsh will be download if not installed. **Important**: you shoud load `@omz` before any other plugin from on-my-zsh. `zpm load @omz`
+* `@omz/` - zpm will use a plugin from oh-my-zsh, oh-my-zsh will be download if not installed. **Important**: you shoud load `@omz` before any other plugin from on-my-zsh. `zpm load @omz`.
   * `@omz-theme/` - will load a theme from omz. From `<omz-dir>/themes/*.zsh-theme`
   * `@omz-lib/` - will load a lib from omz. From `<omz-dir>/lib/*.zsh`
   * <details>
+    <summary>
+    Example:
+    </summary>
     <p>
 
     See: <https://github.com/zpm-zsh/zpm/issues/24>
@@ -391,7 +399,8 @@ When you make changes, add information about them to the change log in **next** 
 
 ## Changelog
 
-* Next
+* 3.3
+  * Added `origin` tag
   * Removed `autoload-all` tag
 
 * 3.2
@@ -415,7 +424,7 @@ When you make changes, add information about them to the change log in **next** 
     * Replace `type:plugin-type` with `@plugin-type/plugin/name`
 
 * 2.3
-  * Improve README
+  * Improve **README**
   * Remove suppot for `zsh_loaded_plugins`
   * Add config for Markdownlint
 

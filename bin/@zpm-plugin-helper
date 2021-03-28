@@ -117,13 +117,12 @@ fi
 autoload -Uz                    \
   @zpm-get-plugin-basename      \
   @zpm-get-plugin-vcs-root-path \
-  @zpm-get-plugin-vcs-url       \
+  @zpm-get-plugin-origin        \
   @zpm-get-plugin-hyperlink     \
   @zpm-get-plugin-link          \
   @zpm-get-plugin-name          \
   @zpm-get-plugin-path          \
   @zpm-get-plugin-type          \
-  @zpm-get-origin               \
   @zpm-log
 
 (( $#_ZPM_autoload )) && \
@@ -137,7 +136,7 @@ local Plugin_basename=$(@zpm-get-plugin-basename "$Plugin_name")
 local Plugin_path=$(@zpm-get-plugin-path "$Plugin_name" "$Plugin_type")
 local Plugin_link=$(@zpm-get-plugin-link "$Plugin_name" "$Plugin_type")
 local Plugin_hyperlink=$(@zpm-get-plugin-hyperlink "$Plugin_name" "$Plugin_link")
-local Plugin_vcs_url=$(@zpm-get-plugin-vcs-url "$Plugin" "$Plugin_name" "$Plugin_type")
+local Plugin_origin=$(@zpm-get-plugin-origin "$Plugin" "$Plugin_name" "$Plugin_type")
 
 if [[ "$Command" == "upgrade" ]]; then
   @zpm-log zpm:upgrade "Upgrade '${Plugin}'"
@@ -162,10 +161,11 @@ elif [[ "$Command" == 'install' ]]; then
     mkdir -p "${Plugin_path}"
     _default_install_mkdir_msg
   elif [[ "$Plugin_type" == 'link' ]]; then
-    ln -sf "$(@zpm-get-origin $Plugin)" "$Plugin_path" 2>/dev/null
+  echo ""${Plugin_origin}" "$Plugin_path" "
+    ln -sf "${Plugin_origin}" "$Plugin_path" 2>/dev/null
     _default_install_link_msg
   elif [[ '|github|gitlab|bitbucket|omz-core|git|' == *"|${Plugin_type}|"*  ]]; then
-    git clone --recursive "${Plugin_vcs_url}" --depth 1 --single-branch "${Plugin_path}" </dev/null >/dev/null 2>/dev/null
+    git clone --recursive "${Plugin_origin}" --depth 1 --single-branch "${Plugin_path}" </dev/null >/dev/null 2>/dev/null
     _default_install_msg
   else
     false

@@ -4,18 +4,13 @@ local Plugin="$1"
 local Plugin_name="$2"
 local Plugin_type="$3"
 
-local Plugin_origin="$(@zpm-get-origin $Plugin)"
-
-if [[ -n "$Plugin_origin" ]]; then
-  echo "$Plugin_origin"
-  return 0
-fi
-
 local Plugin_striped_name="${Plugin_name#@*/}"
 
-if [[ "$Plugin"  == *",origin:"* ]]; then
+if [[ "$Plugin" == *",origin:"* ]]; then
   local Plugin_origin="${${Plugin##*,origin:}%%,*}"
-  return "$Plugin_origin"
+
+  echo "$Plugin_origin"
+  return 0
 fi
 
 if [[ "$Plugin_type" == 'github' ]]; then
