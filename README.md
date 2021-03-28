@@ -192,7 +192,7 @@ The set of commands can be expanded extended using plugins
 
 **Important**
 
-> Be carefully, zpm doesnt guarantue loading order in call. So if you need to load plugin **before** antoher, you should do 2 separate `zpm load`.
+> Be carefully, zpm doesnt guarantue loading order in call. So if you need to load a plugin **before** antoher, you should do 2 separate `zpm load` calls.
 > This is very important for oh-my-zsh plugins, because @omz-core should be loaded before
 
 Plugin name must have next form: `user/plugin-name`. This plugin can be enabled using
@@ -292,6 +292,20 @@ zpm load another/plugin,apply:path # zpm will only add /bin dir to $PATH, plugin
 #### `async` tag
 
 If this tag is present, zsh plugin will be loaded async
+
+#### `origin` tag
+
+This tag can be used for define or redefine repo origin of plugin. Example:
+
+```sh
+zpm load some/plugin,origin:https://github.com/another/origin # This plugin will be loaded from https://github.com/another/origin, but will have internal name some/plugin
+
+zpm load git/my-plugin,git://my.site/plugin.git # This plugin will be loaded from 3-party origin
+
+zpm load @link/plugin,origin:/home/user/Projects/plugin # This plugin directory will be linked to your local directory
+```
+
+This tag have no sense with another plugin types like `@omz`, `@omz-core`, `@omz-theme`
 
 #### `source` tag
 
