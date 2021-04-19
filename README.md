@@ -1,4 +1,3 @@
-
 # ZPM - Zsh Plugin Manager
 
 > Fastest, configurable and extensible zsh plugin manager
@@ -145,6 +144,7 @@ zpm-zsh/create-zsh-plugin
 * git
 * xargs
 * [Termux](http://termux.com/) for Android
+* [GNU Parallel](https://www.gnu.org/software/parallel/) for fastest parallel execution. *Optional*
 * [Rush](https://github.com/shenwei356/rush) for fastest parallel execution. *Optional*
 * [cli-html](https://www.npmjs.com/package/cli-markdown) view html in terminal. *Optional*
 * [cli-markdown](https://www.npmjs.com/package/cli-markdown) view markdown in terminal. *Optional*
@@ -412,6 +412,9 @@ When you make changes, add information about them to the change log in **next** 
   * [ ] Now `zpm load`, `zpm upgrade` or `zpm subcommand` will complete only one argument
 
 ## Changelog
+
+* 3.4
+  * Added GNU Parallel
 
 * 3.3
   * Added `origin` tag

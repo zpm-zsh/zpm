@@ -89,7 +89,6 @@ function _default_install_mkdir_msg() {
   fi
 }
 
-
 function _default_upgrade_msg() {
   if [[ "$?" == "0" ]]; then
     _upgrade_success_msg
@@ -125,8 +124,7 @@ autoload -Uz                    \
   @zpm-get-plugin-type          \
   @zpm-log
 
-(( $#_ZPM_autoload )) && \
-  autoload -Uz -- ${(z)_ZPM_autoload}
+(( $#_ZPM_autoload )) && autoload -Uz -- ${(z)_ZPM_autoload}
 
 local Command="$1"
 local Plugin="$2"

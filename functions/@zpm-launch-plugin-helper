@@ -6,7 +6,11 @@ local Format
 local Launcher
 local Item
 
-if (( $+commands[rush] )); then
+if (( $+commands[parallel] )); then
+  Format='%s\n'
+  Launcher="parallel"
+  Item='{1}'
+elif (( $+commands[rush] )); then
   Format='%s\n'
   Launcher="rush"
   Item='"{}"'

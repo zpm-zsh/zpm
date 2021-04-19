@@ -34,11 +34,11 @@ zpm load                              \
 ### Plugins for local host
 zpm if-not ssh load                                                                    \
   zpm-zsh/dropbox,async                                                                \
-  zpm-zsh/zsh-better-npm-completion,async                                           \
+  zpm-zsh/zsh-better-npm-completion,async                                              \
                                                                                        \
   zpm-zsh/clipboard                                                                    \
   zpm-zsh/mysql-colorize,async                                                         \
-  zpm-zsh/bookmarks,async                                                               \
+  zpm-zsh/bookmarks,async                                                              \
   zpm-zsh/autoenv,async                                                                \
                                                                                        \
   mdumitru/fancy-ctrl-z,async                                                          \
