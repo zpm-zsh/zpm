@@ -46,7 +46,7 @@ for plugin in ${_ZPM_plugins_for_async_source}; do
   echo >> "$_ZPM_TMP_ASYNC"
 done
 
-cat "${_ZPM_DIR}/lib/init.zsh" >> "$_ZPM_TMP_ASYNC"
+cat "${ZSH_CUSTOM}/lib/init.zsh" >> "$_ZPM_TMP_ASYNC"
 echo >> "$_ZPM_TMP_ASYNC"
 
 echo "zle && zle reset-prompt" >> "$_ZPM_TMP_ASYNC"
