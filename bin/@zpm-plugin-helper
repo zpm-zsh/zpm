@@ -1,5 +1,5 @@
 #!/usr/bin/env zsh
-fpath+=("${ZSH_CUSTOM}/functions" "${ZSH_CACHE_DIR}/functions")
+fpath+=("${_ZPM_DIR}/functions" "${ZSH_CACHE_DIR}/functions")
 
 function _upgrade_success_msg() {
   local status_string="${c[green]}${c[bold]}Upgrade${c[reset]} "

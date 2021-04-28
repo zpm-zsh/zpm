@@ -4,8 +4,8 @@
 local Plugin_name="$1"
 
 if [[ "$Plugin_name" == "@zpm" ]]; then
-  echo "${ZSH_CUSTOM}"
+  echo "${_ZPM_DIR}"
   return 0
 fi
 
-echo "${ZSH_CUSTOM}/plugins/${Plugin_name//\//---}"
+echo "${_ZPM_DIR}/plugins/${Plugin_name//\//---}"
