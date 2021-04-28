@@ -140,12 +140,13 @@ zpm-zsh/create-zsh-plugin
 
 ## Base dependences
 
-* zsh
-* git
-* xargs
+* [zsh](https://www.zsh.org/)
+* [git](https://git-scm.com/)
+* One of these:
+  * [GNU Parallel](https://www.gnu.org/software/parallel/) for fastest parallel execution.
+  * [Rush](https://github.com/shenwei356/rush) for fastest parallel execution.
+  * [xargs](https://www.gnu.org/software/findutils/) as fallback
 * [Termux](http://termux.com/) for Android
-* [GNU Parallel](https://www.gnu.org/software/parallel/) for fastest parallel execution. *Optional*
-* [Rush](https://github.com/shenwei356/rush) for fastest parallel execution. *Optional*
 * [cli-html](https://www.npmjs.com/package/cli-markdown) view html in terminal. *Optional*
 * [cli-markdown](https://www.npmjs.com/package/cli-markdown) view markdown in terminal. *Optional*
 
