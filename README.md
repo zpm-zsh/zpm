@@ -222,7 +222,7 @@ Additionaly they can have some tags. Tags must be separated by commas `,` withou
 
 If plugin name starts with `@word`, this word will be used as plugin type. Plugin name will be used to detect plugin repository url.
 
-* `@github/` or `@gl/` - plugin will be downloaded from GitHub, this is default value, so you don't need to set it
+* `@github/` or `@gh/` - plugin will be downloaded from GitHub, this is default value, so you don't need to set it
 * `@gitlab/` or `@gl/` - plugin will be downloaded from GitLab
 * `@bitbucket/` or `@bb/` - plugin will be downloaded from Bitbucket
 * `@omz/` - zpm will use a plugin from oh-my-zsh, oh-my-zsh will be download if not installed. **Important**: you shoud load `@omz` before any other plugin from on-my-zsh. `zpm load @omz`.
