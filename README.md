@@ -140,12 +140,13 @@ zpm-zsh/create-zsh-plugin
 
 ## Base dependences
 
-* zsh
-* git
-* xargs
+* [zsh](https://www.zsh.org/)
+* [git](https://git-scm.com/)
+* One of these:
+  * [GNU Parallel](https://www.gnu.org/software/parallel/) for fastest parallel execution.
+  * [Rush](https://github.com/shenwei356/rush) for fastest parallel execution.
+  * [xargs](https://www.gnu.org/software/findutils/) as fallback
 * [Termux](http://termux.com/) for Android
-* [GNU Parallel](https://www.gnu.org/software/parallel/) for fastest parallel execution. *Optional*
-* [Rush](https://github.com/shenwei356/rush) for fastest parallel execution. *Optional*
 * [cli-html](https://www.npmjs.com/package/cli-markdown) view html in terminal. *Optional*
 * [cli-markdown](https://www.npmjs.com/package/cli-markdown) view markdown in terminal. *Optional*
 
@@ -221,7 +222,7 @@ Additionaly they can have some tags. Tags must be separated by commas `,` withou
 
 If plugin name starts with `@word`, this word will be used as plugin type. Plugin name will be used to detect plugin repository url.
 
-* `@github/` or `@gl/` - plugin will be downloaded from GitHub, this is default value, so you don't need to set it
+* `@github/` or `@gh/` - plugin will be downloaded from GitHub, this is default value, so you don't need to set it
 * `@gitlab/` or `@gl/` - plugin will be downloaded from GitLab
 * `@bitbucket/` or `@bb/` - plugin will be downloaded from Bitbucket
 * `@omz/` - zpm will use a plugin from oh-my-zsh, oh-my-zsh will be download if not installed. **Important**: you shoud load `@omz` before any other plugin from on-my-zsh. `zpm load @omz`.
