@@ -438,6 +438,7 @@ When you make changes, add information about them to the change log in **next** 
 
 ## TODO
 
+* [ ] Create logo
 * [ ] Improve readme
   * [ ] Describe installation process
 * [ ] Improve completions
