@@ -53,14 +53,33 @@ zsh -i -c exit  0.00s user 0.00s system 101% cpu 0.007 total
 zsh -i -c exit  0.00s user 0.01s system 101% cpu 0.007 total
 zsh -i -c exit  0.01s user 0.00s system 101% cpu 0.007 total
 zsh -i -c exit  0.00s user 0.00s system 102% cpu 0.007 total
-
 ```
 
 </p>
 </details>
 
 <details>
-  <summary>Test on MikroTik RouterBOARD 951Ui-2HnD, Atheros AR9344 rev 3, MIPS 74Kc V4.12, 128MB RAM</summary>
+  <summary>Test on Raspberry Pi Zero W, Raspbian 10, 1GHz Broadcom BCM2835 ARMv6, 512MB RAM</summary>
+<p>
+
+```sh
+zsh -i -c exit  0.14s user 0.05s system 85% cpu 0.219 total
+zsh -i -c exit  0.14s user 0.05s system 43% cpu 0.436 total
+zsh -i -c exit  0.14s user 0.05s system 58% cpu 0.325 total
+zsh -i -c exit  0.12s user 0.07s system 90% cpu 0.206 total
+zsh -i -c exit  0.15s user 0.05s system 84% cpu 0.231 total
+zsh -i -c exit  0.15s user 0.04s system 46% cpu 0.407 total
+zsh -i -c exit  0.13s user 0.06s system 62% cpu 0.306 total
+zsh -i -c exit  0.11s user 0.08s system 83% cpu 0.227 total
+zsh -i -c exit  0.14s user 0.05s system 47% cpu 0.403 total
+zsh -i -c exit  0.11s user 0.08s system 62% cpu 0.307 total
+```
+
+</p>
+</details>
+
+<details>
+  <summary>Test on MikroTik RouterBOARD 951Ui-2HnD, OpenWrt 19.07.7, 600MHz Atheros AR9344 MIPS, 128MB RAM</summary>
 <p>
 
 ```sh
@@ -74,7 +93,6 @@ zsh -i -c exit  0.10s user 0.02s system 85% cpu 0.141 total
 zsh -i -c exit  0.10s user 0.02s system 42% cpu 0.283 total
 zsh -i -c exit  0.11s user 0.02s system 68% cpu 0.176 total
 zsh -i -c exit  0.10s user 0.02s system 75% cpu 0.161 total
-
 ```
 
 </p>
@@ -227,9 +245,9 @@ If plugin name starts with `@word`, this word will be used as plugin type. Plugi
 * `@github/` or `@gh/` - plugin will be downloaded from GitHub, this is default value, so you don't need to set it
 * `@gitlab/` or `@gl/` - plugin will be downloaded from GitLab
 * `@bitbucket/` or `@bb/` - plugin will be downloaded from Bitbucket
-* `@omz/` - zpm will use a plugin from oh-my-zsh, oh-my-zsh will be download if not installed. **Important**: you shoud load `@omz` before any other plugin from on-my-zsh. `zpm load @omz`.
-  * `@omz-theme/` - will load a theme from omz. From `<omz-dir>/themes/*.zsh-theme`
-  * `@omz-lib/` - will load a lib from omz. From `<omz-dir>/lib/*.zsh`
+* `@omz/` - zpm will use a plugin from oh-my-zsh, oh-my-zsh will be download if not installed. **Important**: you shoud load `@omz` before any other plugin from on-my-zsh: `zpm load @omz`.
+  * `@omz-theme/` - will load a theme from omz dir: `<omz-dir>/themes/*.zsh-theme`
+  * `@omz-lib/` - will load a lib from omz dir: `<omz-dir>/lib/*.zsh`
   * <details>
     <summary>
     Example:
@@ -454,7 +472,7 @@ When you make changes, add information about them to the change log in **next** 
     * `zpm load @omz-theme/theme-name`
     * `zpm load @omz-lib/lib`
   * Upgrade from 2.x:
-    * Add `zpm load @omz` if you are yousing at least one oh-my-zsh plugin.
+    * Add `zpm load @omz` if you use at least one oh-my-zsh plugin.
     * Replace `type:plugin-type` with `@plugin-type/plugin/name`
 
 * 2.3
