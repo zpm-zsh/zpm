@@ -14,6 +14,7 @@ Zpm is a plugin manager for ZSH who combines the imperative and declarative appr
 * Hooks
 * Function autoloading
 * Extensible
+* Possibility to use github/gitlab/bitbucket mirrors (useful for China)
 
 ## Table of Contents
 
@@ -29,6 +30,7 @@ Zpm is a plugin manager for ZSH who combines the imperative and declarative appr
   * [`if` and `if-not` conditions](#if-and-if-not-conditions)
   * [Upgrade](#upgrade)
   * [Clean](#clean)
+* [Configuration](#configuration)
 * [Troubleshooting](#troubleshooting)
 * [Developing process](#developing-process)
 * [TODO](#todo)
@@ -389,9 +391,20 @@ Run `zpm upgrade` for upgrading, or run `zpm upgrade some-plugin another-plugin`
 
 By default zpm will generate cache file at first run, but if you will change `~/.zshrc` this cache should be removed using `zpm clean` command
 
+## Configuration
+
+You can use another mirror for GitHub/Gitlab/Bitbucket:
+
+```sh
+# Declare this before zpm load
+GITHUB_MIRROR="https://hub.fastgit.org"
+GITLAB_MIRROR="Some url"
+BITBUCKET_MIRROR="Some url"
+```
+
 ## Troubleshooting
 
-If you have problems with zpm try:
+If you have problems with `zpm` try:
 
 ```sh
 rm -rf "${TMPDIR:-/tmp}/zsh-${UID:-user}"
@@ -413,6 +426,9 @@ When you make changes, add information about them to the change log in **next** 
   * [ ] Now `zpm load`, `zpm upgrade` or `zpm subcommand` will complete only one argument
 
 ## Changelog
+
+* next
+  * Added posibility to use mirrors for GitHub/Gitlab/Bitbucket
 
 * 3.4
   * Added GNU Parallel

@@ -13,14 +13,18 @@ if [[ "$Plugin" == *",origin:"* ]]; then
   return 0
 fi
 
+GITHUB_URL=${GITHUB_MIRROR:-'https://github.com'}
+GITLAB_URL=${GITLAB_MIRROR:-'https://gitlab.com'}
+BITBUCKET_URL=${BITBUCKET_MIRROR:-'https://bitbucket.com'}
+
 if [[ "$Plugin_type" == 'github' ]]; then
-  echo "https://github.com/${Plugin_striped_name}"
+  echo "${GITHUB_URL}/${Plugin_striped_name}"
 elif [[ "$Plugin_type" == 'gitlab' ]]; then
-  echo "https://gitlab.com/${Plugin_striped_name}"
+  echo "${GITLAB_URL}/${Plugin_striped_name}"
 elif [[ "$Plugin_type" == 'bitbucket' ]]; then
-  echo "https://bitbucket.com/${Plugin_striped_name}"
+  echo "${BITBUCKET_URL}/${Plugin_striped_name}"
 elif [[ "$Plugin_type" == 'omz-core' ]]; then
-  echo "https://github.com/ohmyzsh/ohmyzsh"
+  echo "${GITHUB_URL}/ohmyzsh/ohmyzsh"
 else
   return -1
 fi
