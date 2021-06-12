@@ -428,7 +428,7 @@ When you make changes, add information about them to the change log in **next** 
 ## Changelog
 
 * next
-  * Added posibility to use mirrors for GitHub/Gitlab/Bitbucket
+  * Added posibility to use mirrors for GitHub/Gitlab/Bitbucket. See [issue](https://github.com/zpm-zsh/zpm/issues/31)
 
 * 3.4
   * Added GNU Parallel
