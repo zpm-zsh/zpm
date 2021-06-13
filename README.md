@@ -27,14 +27,12 @@ Zpm is a plugin manager for ZSH who combines the imperative and declarative appr
 - Extensible
 - Possibility to use github/gitlab/bitbucket mirrors (useful for China)
 
-## Demo
-
 ## Table of Contents
 
 * [Features](#features)
-* [Demo](#demo)
 * [Table of Contents](#table-of-contents)
 * [Stats](#stats)
+* [Demo](#demo)
 * [Base dependences](#base-dependences)
 * [Installation](#installation)
 * [How to use](#how-to-use)
@@ -168,6 +166,17 @@ zpm-zsh/zpm-link
 @empty/rustup
 zpm-zsh/create-zsh-plugin
 ```
+
+</p>
+</details>
+
+## Demo
+
+<details>
+  <summary>Gif animation</summary>
+<p>
+
+![Demo](demo.gif)
 
 </p>
 </details>
