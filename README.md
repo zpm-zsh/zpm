@@ -1,24 +1,38 @@
-# ZPM - Zsh Plugin Manager
-
-> Fastest, configurable and extensible zsh plugin manager
+<p align="center">
+  <img alt="Logo" src="logo.svg" height="180" />
+  <h1 align="center">ZPM - Zsh Plugin Manager</h1>
+  <p align="center">
+    Fastest, configurable and extensible zsh plugin manager
+  </p>
+  <p align="center">
+    <a href="/LICENSE.md">
+      <img alt="Software License" src="https://img.shields.io/github/license/zpm-zsh/zpm?style=flat-square">
+    </a>
+    <img alt="Travis" src="https://img.shields.io/github/languages/code-size/zpm-zsh/zpm?style=flat-square">
+    <img alt="Go Report Card" src="https://img.shields.io/github/last-commit/zpm-zsh/zpm/next?style=flat-square">
+  </p>
+</p>
 
 Zpm is a plugin manager for ZSH who combines the imperative and declarative approach. At first run, zpm will do complex logic and generate cache, after that will be used cache only, so it makes this framework to be very fast.
 
 ## Features
 
-* **Speed**. Fastest plugin manager (Really, after the first run, zpm will not be used at all)
-* **Compatibility**. Zpm plugins are compatible with [oh-my-zsh](https://github.com/ohmyzsh/ohmyzsh)
-* **Portability**. Zpm runs on Linux, Android, OpenWrt, FreeBSD and macOS
-* Support for async loading
-* Dependencies between packages
-* Hooks
-* Function autoloading
-* Extensible
-* Possibility to use github/gitlab/bitbucket mirrors (useful for China)
+- **Speed**. Fastest plugin manager (Really, after the first run, zpm will not be used at all)
+- **Compatibility**. Zpm plugins are compatible with [oh-my-zsh](https://github.com/ohmyzsh/ohmyzsh)
+- **Portability**. Zpm runs on Linux, Android, OpenWrt, FreeBSD and macOS
+- Support for async loading
+- Dependencies between packages
+- Hooks
+- Function autoloading
+- Extensible
+- Possibility to use github/gitlab/bitbucket mirrors (useful for China)
+
+## Demo
 
 ## Table of Contents
 
 * [Features](#features)
+* [Demo](#demo)
 * [Table of Contents](#table-of-contents)
 * [Stats](#stats)
 * [Base dependences](#base-dependences)
@@ -160,15 +174,15 @@ zpm-zsh/create-zsh-plugin
 
 ## Base dependences
 
-* [zsh](https://www.zsh.org/)
-* [git](https://git-scm.com/)
-* One of these:
-  * [GNU Parallel](https://www.gnu.org/software/parallel/) for fastest parallel execution.
-  * [Rush](https://github.com/shenwei356/rush) for fastest parallel execution.
-  * [xargs](https://www.gnu.org/software/findutils/) as fallback
-* [Termux](http://termux.com/) for Android
-* [cli-html](https://www.npmjs.com/package/cli-markdown) view html in terminal. *Optional*
-* [cli-markdown](https://www.npmjs.com/package/cli-markdown) view markdown in terminal. *Optional*
+- [zsh](https://www.zsh.org/)
+- [git](https://git-scm.com/)
+- One of these:
+  - [GNU Parallel](https://www.gnu.org/software/parallel/) for fastest parallel execution.
+  - [Rush](https://github.com/shenwei356/rush) for fastest parallel execution.
+  - [xargs](https://www.gnu.org/software/findutils/) as fallback
+- [Termux](http://termux.com/) for Android
+- [cli-html](https://www.npmjs.com/package/cli-markdown) view html in terminal. _Optional_
+- [cli-markdown](https://www.npmjs.com/package/cli-markdown) view markdown in terminal. _Optional_
 
 ## Installation
 
@@ -191,10 +205,10 @@ ln -sf ~/.zpm/zshrc ~/.zshrc
 
 Currently zpm has following commands
 
-* load - will download and load plugin [See](#load-plugin)
-* if/if-not - conditions for following command [See](#if-and-if-not-conditions)
-* upgrade - will upgrade plugin, without parameters will upgrade all plugins [See](#upgrade)
-* clean - will clean zpm cache [See](#clean)
+- load - will download and load plugin [See](#load-plugin)
+- if/if-not - conditions for following command [See](#if-and-if-not-conditions)
+- upgrade - will upgrade plugin, without parameters will upgrade all plugins [See](#upgrade)
+- clean - will clean zpm cache [See](#clean)
 
 The set of commands can be expanded extended using plugins
 
@@ -202,9 +216,9 @@ The set of commands can be expanded extended using plugins
 <summary>Plugins for zpm itself</summary>
 <p>
 
-* [zpm-readme](https://github.com/zpm-zsh/zpm-readme) - Show plugin readme in terminal
-* [zpm-info](https://github.com/zpm-zsh/zpm-info) - Show plugin info in terminal
-* [zpm-telemetry](https://github.com/zpm-zsh/zpm-telemetry) - Send telemetry data. Keep calm. Data is sent using GitHub and you can see it before sending.
+- [zpm-readme](https://github.com/zpm-zsh/zpm-readme) - Show plugin readme in terminal
+- [zpm-info](https://github.com/zpm-zsh/zpm-info) - Show plugin info in terminal
+- [zpm-telemetry](https://github.com/zpm-zsh/zpm-telemetry) - Send telemetry data. Keep calm. Data is sent using GitHub and you can see it before sending.
 
 </p>
 </details>
@@ -242,13 +256,14 @@ Additionaly they can have some tags. Tags must be separated by commas `,` withou
 
 If plugin name starts with `@word`, this word will be used as plugin type. Plugin name will be used to detect plugin repository url.
 
-* `@github/` or `@gh/` - plugin will be downloaded from GitHub, this is default value, so you don't need to set it
-* `@gitlab/` or `@gl/` - plugin will be downloaded from GitLab
-* `@bitbucket/` or `@bb/` - plugin will be downloaded from Bitbucket
-* `@omz/` - zpm will use a plugin from oh-my-zsh, oh-my-zsh will be download if not installed. **Important**: you shoud load `@omz` before any other plugin from on-my-zsh: `zpm load @omz`.
-  * `@omz-theme/` - will load a theme from omz dir: `<omz-dir>/themes/*.zsh-theme`
-  * `@omz-lib/` - will load a lib from omz dir: `<omz-dir>/lib/*.zsh`
-  * <details>
+- `@github/` or `@gh/` - plugin will be downloaded from GitHub, this is default value, so you don't need to set it
+- `@gitlab/` or `@gl/` - plugin will be downloaded from GitLab
+- `@bitbucket/` or `@bb/` - plugin will be downloaded from Bitbucket
+- `@omz/` - zpm will use a plugin from oh-my-zsh, oh-my-zsh will be download if not installed. **Important**: you shoud load `@omz` before any other plugin from on-my-zsh: `zpm load @omz`.
+
+  - `@omz-theme/` - will load a theme from omz dir: `<omz-dir>/themes/*.zsh-theme`
+  - `@omz-lib/` - will load a lib from omz dir: `<omz-dir>/lib/*.zsh`
+  - <details>
     <summary>
     Example:
     </summary>
@@ -284,7 +299,8 @@ If plugin name starts with `@word`, this word will be used as plugin type. Plugi
 
     </p>
     </details>
-* `@empty/` - special type, zpm will create empty dir without files. Useful with `hook`, `gen-completion` and `gen-plugin` tags. Can be ommited if your plugin name starts with `@empty/`
+
+- `@empty/` - special type, zpm will create empty dir without files. Useful with `hook`, `gen-completion` and `gen-plugin` tags. Can be ommited if your plugin name starts with `@empty/`
 
 ```sh
 plugin-from/github  # @github doesn't necessary
@@ -301,9 +317,9 @@ plugin-from/github  # @github doesn't necessary
 
 This tag has 3 possible arguments divided by `:`
 
-* `source` - load zsh plugin file, enabled by default. File name can be changed using `source` tag
-* `path` - add directory to your `$PATH`, by default - `/bin` dir, enabled by default. Directory name can be changed using `path` tag
-* `fpath` - add directory to your `$fpath`, by default or `/functions` dir if it exists, or plugin root dir if exist at least one `_*` file, enabled by default. Directory name can be changed using `fpath` tag
+- `source` - load zsh plugin file, enabled by default. File name can be changed using `source` tag
+- `path` - add directory to your `$PATH`, by default - `/bin` dir, enabled by default. Directory name can be changed using `path` tag
+- `fpath` - add directory to your `$fpath`, by default or `/functions` dir if it exists, or plugin root dir if exist at least one `_*` file, enabled by default. Directory name can be changed using `fpath` tag
 
 ```sh
 zpm load some/plugin,apply:source:path:fpath
@@ -387,13 +403,13 @@ zpm if some-condition (another commands)
 
 Conditions:
 
-* `linux` - if current OS is Linux
-* `bsd` - if current OS is *BSD
-* `openwrt` - if current OS is OpenWrt
-* `macos` - if current OS is macOS
-* `termux` - if current session run in [Termux](http://termux.com/)
-* `ssh` - if session run on remote host
-* `vte` - if session run on VTE based terminal emulator
+- `linux` - if current OS is Linux
+- `bsd` - if current OS is \*BSD
+- `openwrt` - if current OS is OpenWrt
+- `macos` - if current OS is macOS
+- `termux` - if current session run in [Termux](http://termux.com/)
+- `ssh` - if session run on remote host
+- `vte` - if session run on VTE based terminal emulator
 
 Result of condition can be negated using `if-not` tag
 
@@ -438,67 +454,79 @@ When you make changes, add information about them to the change log in **next** 
 
 ## TODO
 
-* [ ] Create logo
-* [ ] Improve readme
-  * [ ] Describe installation process
-* [ ] Improve completions
-  * [ ] Now `zpm load`, `zpm upgrade` or `zpm subcommand` will complete only one argument
+- [ ] Create logo
+- [ ] Improve readme
+  - [ ] Describe installation process
+- [ ] Improve completions
+  - [ ] Now `zpm load`, `zpm upgrade` or `zpm subcommand` will complete only one argument
 
 ## Changelog
 
-* next
-  * Added posibility to use mirrors for GitHub/Gitlab/Bitbucket. See [issue](https://github.com/zpm-zsh/zpm/issues/31)
+- next
+  - Added new logo
+  - Added posibility to use mirrors for GitHub/Gitlab/Bitbucket. See [issue](https://github.com/zpm-zsh/zpm/issues/31)
 
-* 3.4
-  * Added GNU Parallel
+- 3.4
 
-* 3.3
-  * Added `origin` tag
-  * Removed `autoload-all` tag
+  - Added GNU Parallel
 
-* 3.2
-  * Fix plugin load order
-  * Use sched for background run
+- 3.3
 
-* 3.1
-  * Fix completions
-  * Add example for @omz
+  - Added `origin` tag
+  - Removed `autoload-all` tag
 
-* 3.0
-  * Remove unused `@link`
-  * Remove `tr` calls
-  * Deprecate `type:` tag
-  * Internal changes for basename/name,hyperlink
-  * Add support for oh-my-zsh themes and libs
-    * `zpm load @omz-theme/theme-name`
-    * `zpm load @omz-lib/lib`
-  * Upgrade from 2.x:
-    * Add `zpm load @omz` if you use at least one oh-my-zsh plugin.
-    * Replace `type:plugin-type` with `@plugin-type/plugin/name`
+- 3.2
 
-* 2.3
-  * Improve **README**
-  * Remove suppot for `zsh_loaded_plugins`
-  * Add config for Markdownlint
+  - Fix plugin load order
+  - Use sched for background run
 
-* 2.2
-  * Add support for OpenWrt
-  * Improve oh-my-zsh-support [@igetgames](https://github.com/igetgames)
-  * Support for calling plugin functions from command tags [@igetgames](https://github.com/igetgames)
-  * Fix autoload option processing [@igetgames](https://github.com/igetgames)
-* 2.1
-  * Optimizations
-  * Now all content of `/functions` and `/bin` will be copied into single dir, in zpm cache dir
-  * Change `zpm` to `@zpm`
-  * Remove unused vars
-  * Some vars will be loaded async
-  * Fixed colors
-  * Notes
-    * Now for update zpm need to run `zpm u @zpm`
-* 2.0
-  * `omz/` prefix replaced by `@omz/`
-  * Added plugin type `empty`
-  * Added `autoload` and `autoload-all` tags
-  * Added `gen-plugin` and `gen-completion` tags
-  * Notes:
-    * Replace `omz/` to `@omz/` in your `.zshrc`
+- 3.1
+
+  - Fix completions
+  - Add example for @omz
+
+- 3.0
+
+  - Remove unused `@link`
+  - Remove `tr` calls
+  - Deprecate `type:` tag
+  - Internal changes for basename/name,hyperlink
+  - Add support for oh-my-zsh themes and libs
+    - `zpm load @omz-theme/theme-name`
+    - `zpm load @omz-lib/lib`
+  - Upgrade from 2.x:
+    - Add `zpm load @omz` if you use at least one oh-my-zsh plugin.
+    - Replace `type:plugin-type` with `@plugin-type/plugin/name`
+
+- 2.3
+
+  - Improve **README**
+  - Remove suppot for `zsh_loaded_plugins`
+  - Add config for Markdownlint
+
+- 2.2
+
+  - Add support for OpenWrt
+  - Improve oh-my-zsh-support [@igetgames](https://github.com/igetgames)
+  - Support for calling plugin functions from command tags [@igetgames](https://github.com/igetgames)
+  - Fix autoload option processing [@igetgames](https://github.com/igetgames)
+
+- 2.1
+
+  - Optimizations
+  - Now all content of `/functions` and `/bin` will be copied into single dir, in zpm cache dir
+  - Change `zpm` to `@zpm`
+  - Remove unused vars
+  - Some vars will be loaded async
+  - Fixed colors
+  - Notes
+    - Now for update zpm need to run `zpm u @zpm`
+
+- 2.0
+
+  - `omz/` prefix replaced by `@omz/`
+  - Added plugin type `empty`
+  - Added `autoload` and `autoload-all` tags
+  - Added `gen-plugin` and `gen-completion` tags
+  - Notes:
+    - Replace `omz/` to `@omz/` in your `.zshrc`
