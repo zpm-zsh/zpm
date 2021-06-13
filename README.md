@@ -462,7 +462,8 @@ When you make changes, add information about them to the change log in **next** 
 
 ## Changelog
 
-- next
+- 3.5
+
   - Added new logo
   - Added posibility to use mirrors for GitHub/Gitlab/Bitbucket. See [issue](https://github.com/zpm-zsh/zpm/issues/31)
 
