@@ -16,7 +16,7 @@ elif (( $+commands[rush] )); then
   Item='"{}"'
 else
   Format='%s\0'
-  Launcher="xargs -0 -P32 -n1 -I{}"
+  Launcher="xargs -0 -P12 -I{}"
   Item='{}'
 fi
 
