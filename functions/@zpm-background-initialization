@@ -51,6 +51,7 @@ echo >> "$_ZPM_TMP_ASYNC"
 
 echo "zle && zle reset-prompt" >> "$_ZPM_TMP_ASYNC"
 
-rm "$_ZPM_TMP" "$_ZPM_TMP_ASYNC"
+mv "$_ZPM_TMP" "$_ZPM_CACHE"
+mv "$_ZPM_TMP_ASYNC" "$_ZPM_CACHE_ASYNC"
 
 (@zpm-compile 2>/dev/null &)
