@@ -1,5 +1,5 @@
 <p align="center">
-  <img alt="Logo" src="logo.svg" height="180" />
+  <img alt="Logo" src="images/logo.svg" height="180" />
   <h1 align="center">ZPM - Zsh Plugin Manager</h1>
   <p align="center">
     Fastest, configurable and extensible zsh plugin manager
@@ -14,6 +14,8 @@
 </p>
 
 Zpm is a plugin manager for ZSH who combines the imperative and declarative approach. At first run, zpm will do complex logic and generate cache, after that will be used cache only, so it makes this framework to be very fast.
+
+![Demo](images/demo.gif)
 
 ## Features
 
@@ -32,7 +34,6 @@ Zpm is a plugin manager for ZSH who combines the imperative and declarative appr
 * [Features](#features)
 * [Table of Contents](#table-of-contents)
 * [Stats](#stats)
-* [Demo](#demo)
 * [Base dependences](#base-dependences)
 * [Installation](#installation)
 * [How to use](#how-to-use)
@@ -166,17 +167,6 @@ zpm-zsh/zpm-link
 @empty/rustup
 zpm-zsh/create-zsh-plugin
 ```
-
-</p>
-</details>
-
-## Demo
-
-<details>
-  <summary>Gif animation</summary>
-<p>
-
-![Demo](demo.gif)
 
 </p>
 </details>
