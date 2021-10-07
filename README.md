@@ -468,6 +468,7 @@ When you make changes, add information about them to the change log in **next** 
 
   - Added new plugin types `@dir` and `@file`
   - `@link` now is an alias for `@dir` 
+  - Fixed [#35](https://github.com/zpm-zsh/zpm/issues/35)
 
 - 3.5
 

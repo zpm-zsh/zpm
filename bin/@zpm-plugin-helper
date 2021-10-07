@@ -157,10 +157,12 @@ elif [[ "$Command" == 'install' ]]; then
     ln -sf "$(@zpm-get-plugin-path @omz)/plugins/${Plugin_basename}" "$Plugin_path" 2>/dev/null
     _default_install_link_msg
   elif [[ "$Plugin_type" == 'omz-theme' ]]; then
-    ln -sf "$(@zpm-get-plugin-path @omz)/themes/${Plugin_basename}.zsh-theme" "$Plugin_path" 2>/dev/null
+    mkdir -p "${Plugin_path}"
+    ln -sf "$(@zpm-get-plugin-path @omz)/themes/${Plugin_basename}.zsh-theme" "${Plugin_path}/zpm-generated.zsh" 2>/dev/null
     _default_install_link_msg
   elif [[ "$Plugin_type" == 'omz-lib' ]]; then
-    ln -s "$(@zpm-get-plugin-path @omz)/lib/${Plugin_basename}.zsh" "$Plugin_path" 2>/dev/null
+    mkdir -p "${Plugin_path}"
+    ln -s "$(@zpm-get-plugin-path @omz)/lib/${Plugin_basename}.zsh" "${Plugin_path}/zpm-generated.zsh" 2>/dev/null
     _default_install_link_msg
   elif [[ "$Plugin_type" == 'empty' ]]; then
     mkdir -p "${Plugin_path}"
