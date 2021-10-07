@@ -464,6 +464,11 @@ When you make changes, add information about them to the change log in **next** 
 
 ## Changelog
 
+- 3.6
+
+  - Added new plugin types `@dir` and `@file`
+  - `@link` now is an alias for `@dir` 
+
 - 3.5
 
   - Added new logo
