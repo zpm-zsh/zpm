@@ -72,7 +72,7 @@ function _default_install_msg() {
   fi
 }
 
-function _default_install_dir_msg() {
+function _default_install_link_msg() {
   if [[ "$?" == "0" ]]; then
     _install_link_success_msg
   else
@@ -167,7 +167,7 @@ elif [[ "$Command" == 'install' ]]; then
     _default_install_mkdir_msg
   elif [[ '|link|dir|' == *"|${Plugin_type}|"*  ]]; then
     ln -sf "${Plugin_origin}" "${Plugin_path}" 2>/dev/null
-    _default_install_dir_msg
+    _default_install_link_msg
   elif [[ "$Plugin_type" == 'file' ]]; then
     mkdir -p "${Plugin_path}"
     ln -sf "${Plugin_origin}" "${Plugin_path}/zpm-generated.zsh" 2>/dev/null
