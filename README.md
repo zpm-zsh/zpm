@@ -299,6 +299,8 @@ If plugin name starts with `@word`, this word will be used as plugin type. Plugi
     </p>
     </details>
 
+- `@dir` - special type, zpm will create a symlink to local directory from `origin` tag
+- `@file` - special type, zpm will create a symlink to file from `origin` tag. Should be used for plugins that are written in single file, without additional dependencies
 - `@empty/` - special type, zpm will create empty dir without files. Useful with `hook`, `gen-completion` and `gen-plugin` tags. Can be ommited if your plugin name starts with `@empty/`
 
 ```sh
@@ -338,7 +340,8 @@ zpm load some/plugin,origin:https://github.com/another/origin # This plugin will
 
 zpm load git/my-plugin,git://my.site/plugin.git # This plugin will be loaded from 3-party origin
 
-zpm load @link/plugin,origin:/home/user/Projects/plugin # This plugin directory will be linked to your local directory
+zpm load @dir/plugin,origin:/home/user/Projects/plugin # This plugin directory will be linked to your local directory
+zpm load @file/plugin-file,origin:/home/user/Projects/plugin.zsh # This plugin file will be linked to your local directory
 ```
 
 This tag have no sense with another plugin types like `@omz`, `@omz-core`, `@omz-theme`

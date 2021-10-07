@@ -14,6 +14,9 @@ declare -Ag plugin_types=(
   bb bitbucket
   bitbucket bitbucket
   git git
+  file file
+  dir dir
+
   link link
 )
 
