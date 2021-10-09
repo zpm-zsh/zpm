@@ -4,20 +4,31 @@ local Plugin_name="$1"
 
 declare -Ag plugin_types=(
   empty empty
-  omz omz
-  omz-theme omz-theme
-  omz-lib omz-lib
+
   gh github
   github github
+
   gl gitlab
   gitlab gitlab
+
   bb bitbucket
   bitbucket bitbucket
-  git git
-  file file
-  dir dir
 
-  link link
+  git git
+
+  file file
+
+  dir dir
+  link dir
+
+  omz omz
+
+  omz-theme omz-theme
+
+  omz-lib omz-lib
+
+  remote remote
+  gist gist
 )
 
 if [[ "$Plugin_name" == "@"* ]]; then

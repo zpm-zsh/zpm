@@ -179,6 +179,7 @@ zpm-zsh/create-zsh-plugin
   - [GNU Parallel](https://www.gnu.org/software/parallel/) for fastest parallel execution.
   - [Rush](https://github.com/shenwei356/rush) for fastest parallel execution.
   - [xargs](https://www.gnu.org/software/findutils/) as fallback
+- [curl](https://curl.se/) for GitHub Gists
 - [Termux](http://termux.com/) for Android
 - [cli-html](https://www.npmjs.com/package/cli-markdown) view html in terminal. _Optional_
 - [cli-markdown](https://www.npmjs.com/package/cli-markdown) view markdown in terminal. _Optional_
@@ -229,11 +230,11 @@ The set of commands can be expanded extended using plugins
 > Be carefully, zpm doesnt guarantue loading order in call. So if you need to load a plugin **before** antoher, you should do 2 separate `zpm load` calls.
 > This is very important for oh-my-zsh plugins, because @omz-core should be loaded before
 
-Plugin name must have next form: `user/plugin-name`. This plugin can be enabled using
+Plugin name must have next form: `@plugin-type/user/plugin-name`. This plugin can be enabled using
 
 ```sh
 # Add to `~/.zshrc` after zpm initialization:
-zpm load user/plugin-name
+zpm load @plugin-type/user/plugin-name
 ```
 
 > Notice: if you change `~/.zshrc`, you need to remove zpm cache using: `zpm clean`
@@ -253,11 +254,13 @@ Additionaly they can have some tags. Tags must be separated by commas `,` withou
 
 ### Plugin name
 
-If plugin name starts with `@word`, this word will be used as plugin type. Plugin name will be used to detect plugin repository url.
+If plugin name starts with `@word`, this word will be used as plugin type. Plugin name will be used to detect plugin origin url.
 
-- `@github/` or `@gh/` - plugin will be downloaded from GitHub, this is default value, so you don't need to set it
-- `@gitlab/` or `@gl/` - plugin will be downloaded from GitLab
-- `@bitbucket/` or `@bb/` - plugin will be downloaded from Bitbucket
+- `@github/` or `@gh/` - plugin will be cloned from GitHub, this is default value, so you don't need to set it
+- `@gitlab/` or `@gl/` - plugin will be cloned from GitLab
+- `@bitbucket/` or `@bb/` - plugin will be cloned from Bitbucket
+- `@git/` - plugin will be cloned via git. Be careful, zpm can't detect origin for this plugin type, you must specify origin using tag `origin:`
+- `@gist/` - plugin will be downloaded from GitHub Gist
 - `@omz/` - zpm will use a plugin from oh-my-zsh, oh-my-zsh will be download if not installed. **Important**: you shoud load `@omz` before any other plugin from on-my-zsh: `zpm load @omz`.
 
   - `@omz-theme/` - will load a theme from omz dir: `<omz-dir>/themes/*.zsh-theme`
@@ -301,6 +304,7 @@ If plugin name starts with `@word`, this word will be used as plugin type. Plugi
 
 - `@dir` - special type, zpm will create a symlink to local directory from `origin` tag
 - `@file` - special type, zpm will create a symlink to file from `origin` tag. Should be used for plugins that are written in single file, without additional dependencies
+- `@remote/` - plugin will be downloaded using curl, for example from an HTTP site. Be careful, zpm can't detect origin for this plugin type, you must specify origin using tag `origin:`
 - `@empty/` - special type, zpm will create empty dir without files. Useful with `hook`, `gen-completion` and `gen-plugin` tags. Can be ommited if your plugin name starts with `@empty/`
 
 ```sh
@@ -331,21 +335,6 @@ zpm load another/plugin,apply:path # zpm will only add /bin dir to $PATH, plugin
 
 If this tag is present, zsh plugin will be loaded async
 
-#### `origin` tag
-
-This tag can be used for define or redefine repo origin of plugin. Example:
-
-```sh
-zpm load some/plugin,origin:https://github.com/another/origin # This plugin will be loaded from https://github.com/another/origin, but will have internal name some/plugin
-
-zpm load git/my-plugin,git://my.site/plugin.git # This plugin will be loaded from 3-party origin
-
-zpm load @dir/plugin,origin:/home/user/Projects/plugin # This plugin directory will be linked to your local directory
-zpm load @file/plugin-file,origin:/home/user/Projects/plugin.zsh # This plugin file will be linked to your local directory
-```
-
-This tag have no sense with another plugin types like `@omz`, `@omz-core`, `@omz-theme`
-
 #### `source` tag
 
 Define own file that will be loaded
@@ -370,6 +359,43 @@ This tag defines functions that will be autoloaded by zpm (using `autoload -Uz`)
 ```sh
 zpm load some/plugin,autoload:one:two:three
 ```
+
+#### `origin` tag
+
+All plugins have internal origin type property, like: git, dir, file, remote.
+You can define own origin, but you can't mix different types of origin types.
+So, you can define Gitlab origin for GitHub plugin, or different origin for GitHub Gist plugin.
+
+* Git plugins: `@github`, `@gitlab`, `@bitbucket`, `@git`
+
+```sh
+zpm load some/plugin,origin:https://github.com/another/origin # This plugin will be loaded from https://github.com/another/origin, but will have internal name some/plugin
+
+zpm load @git/my-plugin,git://my.site/plugin.git # This plugin will be loaded from 3-party origin
+```
+
+* Remote: `@gist`, `@remote`
+
+```sh
+zpm load @gist/user/hash,origin:https://another-site/file.zsh # This file will be downloaded instead of gist
+zpm load @remote/plugin,origin:https://mysite.com/plugin.zsh # In this case origin should be declared, because zpm can't detect origin
+```
+
+* Dir: `@dir`
+
+```sh
+zpm load @dir/plugin,origin:/home/user/Projects/plugin # Internal plugin directory will be linked to your local directory
+```
+
+* File: `@file`
+
+```sh
+zpm load @file/plugin-file,origin:/home/user/Projects/plugin.zsh # Internal plugin file will be linked to your local file
+```
+
+* Some special types, like: `@empty`, `@omz`, `@omz-theme`, `@omz-lib`
+
+Do not declare own `origin:`, because this can produce side effects
 
 #### `hook` tag
 
@@ -464,10 +490,15 @@ When you make changes, add information about them to the change log in **next** 
 
 ## Changelog
 
+- 4.0
+
+  - Refactoring of internal logic
+  - Added new plugin types: `@gist`, `@remote`
+
 - 3.6
 
   - Added new plugin types `@dir` and `@file`
-  - `@link` now is an alias for `@dir` 
+  - `@link` now is an alias for `@dir`
   - Fixed [#35](https://github.com/zpm-zsh/zpm/issues/35)
 
 - 3.5

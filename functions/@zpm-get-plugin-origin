@@ -2,7 +2,8 @@
 
 local Plugin="$1"
 local Plugin_name="$2"
-local Plugin_type="$3"
+local Plugin_basename="$3"
+local Plugin_type="$4"
 
 local Plugin_striped_name="${Plugin_name#@*/}"
 
@@ -25,6 +26,14 @@ elif [[ "$Plugin_type" == 'bitbucket' ]]; then
   echo "${BITBUCKET_URL}/${Plugin_striped_name}"
 elif [[ "$Plugin_type" == 'omz-core' ]]; then
   echo "${GITHUB_URL}/ohmyzsh/ohmyzsh"
+elif [[ "$Plugin_type" == 'omz' ]]; then
+  echo "$(@zpm-get-plugin-path @omz)/plugins/${Plugin_basename}"
+elif [[ "$Plugin_type" == 'omz-theme' ]]; then
+  echo "$(@zpm-get-plugin-path @omz)/themes/${Plugin_basename}.zsh-theme"
+elif [[ "$Plugin_type" == 'omz-lib' ]]; then
+  echo "$(@zpm-get-plugin-path @omz)/lib/${Plugin_basename}.zsh"
+elif [[ "$Plugin_type" == 'gist' ]]; then
+  echo "https://gist.githubusercontent.com/${Plugin_striped_name}/raw"
 else
   return -1
 fi

@@ -2,10 +2,9 @@
 
 local Plugin_name="$1"
 local Plugin_type="$2"
+local Plugin_origin="$3"
 
-if [[ "$Plugin_type" == 'omz' ]]; then
-  echo "https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/${Plugin_name#*/}"
-elif [[ "$Plugin_type" == 'github' ]]; then
+if [[ "$Plugin_type" == 'github' ]]; then
   echo "https://github.com/${Plugin_name}"
 elif [[ "$Plugin_type" == 'gitlab' ]]; then
   echo "https://gitlab.com/${Plugin_name}"
@@ -15,6 +14,16 @@ elif [[ "$Plugin_type" == 'zpm' ]]; then
   echo "https://github.com/zpm-zsh/zpm"
 elif [[ "$Plugin_type" == 'omz-core' ]]; then
   echo "https://github.com/ohmyzsh/ohmyzsh"
+elif [[ "$Plugin_type" == 'omz' ]]; then
+  echo "https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/${Plugin_name#*/}"
+elif [[ "$Plugin_type" == 'omz-lib' ]]; then
+  echo "https://github.com/ohmyzsh/ohmyzsh/tree/master/lib/${Plugin_name#*/}.zsh"
+elif [[ "$Plugin_type" == 'omz-theme' ]]; then
+  echo "https://github.com/ohmyzsh/ohmyzsh/tree/master/themes/${Plugin_name#*/}.zsh-theme"
+elif [[ "$Plugin_type" == 'dir' ]]; then
+  echo "file://${Plugin_origin}"
+elif [[ "$Plugin_type" == 'file' ]]; then
+  echo "file://${Plugin_origin}"
 else
   return -1
 fi

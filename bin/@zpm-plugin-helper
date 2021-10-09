@@ -22,14 +22,29 @@ function _upgrade_skip_msg() {
   echo $status_string
 }
 
-function _install_success_msg() {
+function _default_upgrade_msg() {
+  if [[ "$?" == "0" ]]; then
+    _upgrade_success_msg
+  else
+    _upgrade_error_msg
+  fi
+}
+
+function _install_error_msg() {
+  local status_string="${c[red]}${c[bold]}Can't install${c[reset]} "
+  status_string+="$Plugin_hyperlink"
+  status_string+=" ${c[red]}${c[bold]}✖${c[reset]}"
+  echo $status_string
+}
+
+function _install_git_success_msg() {
   local status_string="${c[green]}${c[bold]}Install${c[reset]} "
   status_string+="$Plugin_hyperlink"
   status_string+=" ${c[green]}✔${c[reset]}"
   echo $status_string
 }
 
-function _install_error_msg() {
+function _install_git_error_msg() {
   local status_string="${c[red]}${c[bold]}Can't install${c[reset]} "
   status_string+="$Plugin_hyperlink"
   status_string+=" ${c[red]}${c[bold]}✖${c[reset]}"
@@ -64,23 +79,30 @@ function _install_mkdir_error_msg() {
   echo $status_string
 }
 
-function _default_install_msg() {
+function _install_remote_success_msg() {
+  local status_string="${c[green]}${c[bold]}Download file for${c[reset]} "
+  status_string+="$Plugin_hyperlink"
+  status_string+=" ${c[green]}✔${c[reset]}"
+  echo $status_string
+}
+
+function _install_remote_error_msg() {
+  local status_string="${c[red]}${c[bold]}Can't download file for${c[reset]} "
+  status_string+="$Plugin_hyperlink"
+  status_string+=" ${c[red]}${c[bold]}✖${c[reset]}"
+  echo $status_string
+}
+
+
+function _default_install_git_msg() {
   if [[ "$?" == "0" ]]; then
-    _install_success_msg
+    _install_git_success_msg
   else
-    _install_error_msg
+    _install_git_error_msg
   fi
 }
 
 function _default_install_link_msg() {
-  if [[ "$?" == "0" ]]; then
-    _install_link_success_msg
-  else
-    _install_link_error_msg
-  fi
-}
-
-function _default_install_file_msg() {
   if [[ "$?" == "0" ]]; then
     _install_link_success_msg
   else
@@ -96,11 +118,11 @@ function _default_install_mkdir_msg() {
   fi
 }
 
-function _default_upgrade_msg() {
+function _default_install_remote_msg() {
   if [[ "$?" == "0" ]]; then
-    _upgrade_success_msg
+    _install_remote_success_msg
   else
-    _upgrade_error_msg
+    _install_remote_error_msg
   fi
 }
 
@@ -122,14 +144,17 @@ fi
 
 autoload -Uz                    \
   @zpm-get-plugin-basename      \
-  @zpm-get-plugin-vcs-root-path \
-  @zpm-get-plugin-origin        \
   @zpm-get-plugin-hyperlink     \
   @zpm-get-plugin-link          \
   @zpm-get-plugin-name          \
+  @zpm-get-plugin-origin        \
+  @zpm-get-plugin-origin-type   \
   @zpm-get-plugin-path          \
   @zpm-get-plugin-type          \
-  @zpm-log
+  @zpm-get-plugin-vcs-root-path \
+  @zpm-log                      \
+
+
 
 (( $#_ZPM_autoload )) && autoload -Uz -- ${(z)_ZPM_autoload}
 
@@ -139,46 +164,42 @@ local Plugin_name=$(@zpm-get-plugin-name "$Plugin")
 local Plugin_type=$(@zpm-get-plugin-type "$Plugin_name")
 local Plugin_basename=$(@zpm-get-plugin-basename "$Plugin_name")
 local Plugin_path=$(@zpm-get-plugin-path "$Plugin_name" "$Plugin_type")
-local Plugin_link=$(@zpm-get-plugin-link "$Plugin_name" "$Plugin_type")
-local Plugin_hyperlink=$(@zpm-get-plugin-hyperlink "$Plugin_name" "$Plugin_link")
-local Plugin_origin=$(@zpm-get-plugin-origin "$Plugin" "$Plugin_name" "$Plugin_type")
+local Plugin_origin_type=$(@zpm-get-plugin-origin-type "$Plugin_name")
+local Plugin_origin=$(@zpm-get-plugin-origin "$Plugin" "$Plugin_name" "$Plugin_basename" "$Plugin_type")
+local Plugin_link=$(@zpm-get-plugin-link "$Plugin_name" "$Plugin_type" "$Plugin_origin")
+local Plugin_hyperlink=$(@zpm-get-plugin-hyperlink "$Plugin_name" "$Plugin_link" "$Plugin_origin")
 
 if [[ "$Command" == "upgrade" ]]; then
   @zpm-log zpm:upgrade "Upgrade '${Plugin}'"
 
-  if [[ '|github|gitlab|bitbucket|omz-core|zpm|git|' == *"|${Plugin_type}|"* ]]; then
+  if [[ "$Plugin_origin_type" == 'git' ]]; then
     git --git-dir="${Plugin_path}/.git/" --work-tree="${Plugin_path}/" pull </dev/null >/dev/null 2>/dev/null
     _default_upgrade_msg
+  elif [[ "$Plugin_origin_type" == 'remote' ]]; then
+    curl --silent "${Plugin_origin}" --output "${Plugin_path}/${Plugin_basename}.zsh" 2>/dev/null
+    _default_install_remote_msg
   else
     _upgrade_skip_msg
   fi
 elif [[ "$Command" == 'install' ]]; then
-  if [[ "$Plugin_type" == 'omz' ]]; then
-    ln -sf "$(@zpm-get-plugin-path @omz)/plugins/${Plugin_basename}" "$Plugin_path" 2>/dev/null
-    _default_install_link_msg
-  elif [[ "$Plugin_type" == 'omz-theme' ]]; then
-    mkdir -p "${Plugin_path}"
-    ln -sf "$(@zpm-get-plugin-path @omz)/themes/${Plugin_basename}.zsh-theme" "${Plugin_path}/zpm-generated.zsh" 2>/dev/null
-    _default_install_link_msg
-  elif [[ "$Plugin_type" == 'omz-lib' ]]; then
-    mkdir -p "${Plugin_path}"
-    ln -s "$(@zpm-get-plugin-path @omz)/lib/${Plugin_basename}.zsh" "${Plugin_path}/zpm-generated.zsh" 2>/dev/null
-    _default_install_link_msg
-  elif [[ "$Plugin_type" == 'empty' ]]; then
-    mkdir -p "${Plugin_path}"
-    _default_install_mkdir_msg
-  elif [[ '|link|dir|' == *"|${Plugin_type}|"*  ]]; then
+  if [[ "$Plugin_origin_type" == 'git' ]]; then
+    git clone --recursive "${Plugin_origin}" --depth 1 --single-branch "${Plugin_path}" </dev/null >/dev/null 2>/dev/null
+    _default_install_git_msg
+  elif [[ "$Plugin_origin_type" == 'dir' ]]; then
     ln -sf "${Plugin_origin}" "${Plugin_path}" 2>/dev/null
     _default_install_link_msg
-  elif [[ "$Plugin_type" == 'file' ]]; then
+  elif [[ "$Plugin_origin_type" == 'file' ]]; then
     mkdir -p "${Plugin_path}"
-    ln -sf "${Plugin_origin}" "${Plugin_path}/zpm-generated.zsh" 2>/dev/null
-    _default_install_file_msg
-  elif [[ '|github|gitlab|bitbucket|omz-core|git|' == *"|${Plugin_type}|"*  ]]; then
-    git clone --recursive "${Plugin_origin}" --depth 1 --single-branch "${Plugin_path}" </dev/null >/dev/null 2>/dev/null
-    _default_install_msg
+    ln -sf "${Plugin_origin}" "${Plugin_path}/${Plugin_basename}.zsh" 2>/dev/null
+    _default_install_link_msg
+  elif [[ "$Plugin_origin_type" == 'remote' ]]; then
+    mkdir -p "${Plugin_path}"
+    curl --silent "${Plugin_origin}" --output "${Plugin_path}/${Plugin_basename}.zsh" 2>/dev/null
+    _default_install_remote_msg
+  elif [[ "$Plugin_origin_type" == 'empty' ]]; then
+    mkdir -p "${Plugin_path}"
+    _default_install_mkdir_msg
   else
-    false
     _install_error_msg
   fi
 else
