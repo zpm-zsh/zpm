@@ -22,12 +22,19 @@ function _upgrade_skip_msg() {
   echo $status_string
 }
 
-function _default_upgrade_msg() {
+function _upgrade_msg() {
   if [[ "$?" == "0" ]]; then
     _upgrade_success_msg
   else
     _upgrade_error_msg
   fi
+}
+
+function _install_success_msg() {
+  local status_string="${c[green]}${c[bold]}Install${c[reset]} "
+  status_string+="$Plugin_hyperlink"
+  status_string+=" ${c[green]}✔${c[reset]}"
+  echo $status_string
 }
 
 function _install_error_msg() {
@@ -37,92 +44,18 @@ function _install_error_msg() {
   echo $status_string
 }
 
-function _install_git_success_msg() {
-  local status_string="${c[green]}${c[bold]}Install${c[reset]} "
+function _install_skip_msg() {
+  local status_string="${c[yellow]}${c[bold]}Skip install${c[reset]} "
   status_string+="$Plugin_hyperlink"
-  status_string+=" ${c[green]}✔${c[reset]}"
+  status_string+=" ${c[yellow]}✖${c[reset]}"
   echo $status_string
 }
 
-function _install_git_error_msg() {
-  local status_string="${c[red]}${c[bold]}Can't install${c[reset]} "
-  status_string+="$Plugin_hyperlink"
-  status_string+=" ${c[red]}${c[bold]}✖${c[reset]}"
-  echo $status_string
-}
-
-function _install_link_success_msg() {
-  local status_string="${c[green]}${c[bold]}Create link for${c[reset]} "
-  status_string+="$Plugin_hyperlink"
-  status_string+=" ${c[green]}✔${c[reset]}"
-  echo $status_string
-}
-
-function _install_link_error_msg() {
-  local status_string="${c[red]}${c[bold]}Can't create link for${c[reset]} "
-  status_string+="$Plugin_hyperlink"
-  status_string+=" ${c[red]}${c[bold]}✖${c[reset]}"
-  echo $status_string
-}
-
-function _install_mkdir_success_msg() {
-  local status_string="${c[green]}${c[bold]}Create empty directory for${c[reset]} "
-  status_string+="$Plugin_hyperlink"
-  status_string+=" ${c[green]}✔${c[reset]}"
-  echo $status_string
-}
-
-function _install_mkdir_error_msg() {
-  local status_string="${c[red]}${c[bold]}Can't create directory for${c[reset]} "
-  status_string+="$Plugin_hyperlink"
-  status_string+=" ${c[red]}${c[bold]}✖${c[reset]}"
-  echo $status_string
-}
-
-function _install_remote_success_msg() {
-  local status_string="${c[green]}${c[bold]}Download file for${c[reset]} "
-  status_string+="$Plugin_hyperlink"
-  status_string+=" ${c[green]}✔${c[reset]}"
-  echo $status_string
-}
-
-function _install_remote_error_msg() {
-  local status_string="${c[red]}${c[bold]}Can't download file for${c[reset]} "
-  status_string+="$Plugin_hyperlink"
-  status_string+=" ${c[red]}${c[bold]}✖${c[reset]}"
-  echo $status_string
-}
-
-
-function _default_install_git_msg() {
+function _install_msg() {
   if [[ "$?" == "0" ]]; then
-    _install_git_success_msg
+    _install_success_msg
   else
-    _install_git_error_msg
-  fi
-}
-
-function _default_install_link_msg() {
-  if [[ "$?" == "0" ]]; then
-    _install_link_success_msg
-  else
-    _install_link_error_msg
-  fi
-}
-
-function _default_install_mkdir_msg() {
-  if [[ "$?" == "0" ]]; then
-    _install_mkdir_success_msg
-  else
-    _install_mkdir_error_msg
-  fi
-}
-
-function _default_install_remote_msg() {
-  if [[ "$?" == "0" ]]; then
-    _install_remote_success_msg
-  else
-    _install_remote_error_msg
+    _install_error_msg
   fi
 }
 
@@ -155,7 +88,6 @@ autoload -Uz                    \
   @zpm-log                      \
 
 
-
 (( $#_ZPM_autoload )) && autoload -Uz -- ${(z)_ZPM_autoload}
 
 local Command="$1"
@@ -174,33 +106,33 @@ if [[ "$Command" == "upgrade" ]]; then
 
   if [[ "$Plugin_origin_type" == 'git' ]]; then
     git --git-dir="${Plugin_path}/.git/" --work-tree="${Plugin_path}/" pull </dev/null >/dev/null 2>/dev/null
-    _default_upgrade_msg
+    _upgrade_msg
   elif [[ "$Plugin_origin_type" == 'remote' ]]; then
     curl --silent "${Plugin_origin}" --output "${Plugin_path}/${Plugin_basename}.zsh" 2>/dev/null
-    _default_install_remote_msg
+    _upgrade_msg
   else
     _upgrade_skip_msg
   fi
 elif [[ "$Command" == 'install' ]]; then
   if [[ "$Plugin_origin_type" == 'git' ]]; then
     git clone --recursive "${Plugin_origin}" --depth 1 --single-branch "${Plugin_path}" </dev/null >/dev/null 2>/dev/null
-    _default_install_git_msg
+    _install_msg
   elif [[ "$Plugin_origin_type" == 'dir' ]]; then
     ln -sf "${Plugin_origin}" "${Plugin_path}" 2>/dev/null
-    _default_install_link_msg
+    _install_msg
   elif [[ "$Plugin_origin_type" == 'file' ]]; then
     mkdir -p "${Plugin_path}"
     ln -sf "${Plugin_origin}" "${Plugin_path}/${Plugin_basename}.zsh" 2>/dev/null
-    _default_install_link_msg
+    _install_msg
   elif [[ "$Plugin_origin_type" == 'remote' ]]; then
     mkdir -p "${Plugin_path}"
     curl --silent "${Plugin_origin}" --output "${Plugin_path}/${Plugin_basename}.zsh" 2>/dev/null
-    _default_install_remote_msg
+    _install_msg
   elif [[ "$Plugin_origin_type" == 'empty' ]]; then
     mkdir -p "${Plugin_path}"
-    _default_install_mkdir_msg
+    _install_msg
   else
-    _install_error_msg
+    _install_skip_msg
   fi
 else
   echo Unknown command
