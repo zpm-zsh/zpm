@@ -15,7 +15,9 @@
 
 Zpm is a plugin manager for ZSH who combines the imperative and declarative approach. At first run, zpm will do complex logic and generate cache, after that will be used cache only, so it makes this framework to be very fast.
 
-![Demo](images/demo.gif)
+<p align="center">
+  <img src="images/demo.gif">
+</p>
 
 ## Features
 
