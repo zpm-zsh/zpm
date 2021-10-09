@@ -11,7 +11,7 @@ function _upgrade_success_msg() {
 function _upgrade_error_msg() {
   local status_string="${c[red]}${c[bold]}Can't upgrade${c[reset]} "
   status_string+="$Plugin_hyperlink"
-  status_string+=" ${c[green]}✔${c[reset]}"
+  status_string+=" ${c[red]}${c[bold]}✖${c[reset]}"
   echo $status_string
 }
 
