@@ -36,7 +36,7 @@ if [[ "$Plugin_name" == "@"* ]]; then
   fi
 
   for plugin_origin_type_key plugin_origin_type in ${(@kv)plugin_origin_types}; do
-    if [[ "$Plugin_name" == "@${plugin_origin_type_key}/"* || "$Plugin_name" == "@${plugin_origin_type_key}" ]];then
+    if [[ "$Plugin_name" == "@${plugin_origin_type_key}/"* ]];then
       echo "$plugin_origin_type"
       return 0
     fi

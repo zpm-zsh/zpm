@@ -20,6 +20,8 @@ elif [[ "$Plugin_type" == 'omz-lib' ]]; then
   echo "https://github.com/ohmyzsh/ohmyzsh/tree/master/lib/${Plugin_name#*/}.zsh"
 elif [[ "$Plugin_type" == 'omz-theme' ]]; then
   echo "https://github.com/ohmyzsh/ohmyzsh/tree/master/themes/${Plugin_name#*/}.zsh-theme"
+elif [[ "$Plugin_type" == 'gist' ]]; then
+  echo "https://gist.githubusercontent.com/${Plugin_striped_name}"
 elif [[ "$Plugin_type" == 'dir' ]]; then
   echo "file://${Plugin_origin}"
 elif [[ "$Plugin_type" == 'file' ]]; then
