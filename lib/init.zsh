@@ -30,12 +30,12 @@ function _zpm_use_xargs_runner() {
   _zpm_parallel_item='{}'
 }
 
-if [[ -n "$ZPM_PARALLEL_RUNNER" ]]; then
-  if [[ "$ZPM_PARALLEL_RUNNER" = 'parallel' ]]; then
+if [[ -n "$_ZPM_PARALLEL_RUNNER" ]]; then
+  if [[ "$_ZPM_PARALLEL_RUNNER" = 'parallel' ]]; then
     _zpm_use_parallel_runner
-  elif [[ "$ZPM_PARALLEL_RUNNER" = 'rush' ]]; then
+  elif [[ "$_ZPM_PARALLEL_RUNNER" = 'rush' ]]; then
     _zpm_use_rush_runner
-  elif [[ "$ZPM_PARALLEL_RUNNER" = 'xargs' ]]; then
+  elif [[ "$_ZPM_PARALLEL_RUNNER" = 'xargs' ]]; then
     _zpm_use_xargs_runner
   else
     echo "Can't detect parallel runner"
