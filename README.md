@@ -492,6 +492,11 @@ When you make changes, add information about them to the change log in **next** 
 
 ## Changelog
 
+- 4.1
+
+  - Added possibility to change parallel runner, e.g. GNU Parallel, Rush, Xargs
+  - Change source order
+
 - 4.0
 
   - Refactoring of internal logic
