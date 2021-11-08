@@ -1,4 +1,7 @@
 #!/usr/bin/env zsh
+
+ZPM_PARALLEL_RUNNER=xargs
+
 source ~/.zpm/zpm.zsh 2>/dev/null || {
   git clone https://github.com/zpm-zsh/zpm ~/.zpm
   source ~/.zpm/zpm.zsh
@@ -20,31 +23,31 @@ zpm if-not ssh load zpm-zsh/tmux,apply:path
 zpm if vte load zpm-zsh/vte
 
 ### 3party plugins
-zpm load                              \
-  zpm-zsh/core-config                 \
-  zpm-zsh/ignored-users,async         \
-  zpm-zsh/check-deps,async            \
-  zpm-zsh/minimal-theme               \
-  zpm-zsh/ls,async                    \
-  zpm-zsh/colorize,async              \
-  zpm-zsh/ssh,async                   \
-  zpm-zsh/dot,async                   \
+zpm load                      \
+  zpm-zsh/core-config         \
+  zpm-zsh/ignored-users,async \
+  zpm-zsh/check-deps,async    \
+  zpm-zsh/minimal-theme       \
+  zpm-zsh/ls,async            \
+  zpm-zsh/colorize,async      \
+  zpm-zsh/ssh,async           \
+  zpm-zsh/dot,async           \
   zpm-zsh/undollar,async
 
 ### Plugins for local host
-zpm if-not ssh load                                                                    \
-  zpm-zsh/dropbox,async                                                                \
-  zpm-zsh/zsh-better-npm-completion,async                                              \
-                                                                                       \
-  zpm-zsh/clipboard                                                                    \
-  zpm-zsh/mysql-colorize,async                                                         \
-  zpm-zsh/bookmarks,async                                                              \
-  zpm-zsh/autoenv,async                                                                \
-                                                                                       \
-  mdumitru/fancy-ctrl-z,async                                                          \
-  zsh-users/zsh-history-substring-search,source:zsh-history-substring-search.zsh,async \
-  zsh-users/zsh-autosuggestions,source:zsh-autosuggestions.zsh,async                   \
-  zdharma/fast-syntax-highlighting,async                                               \
-  psprint/history-search-multi-word,fpath:/,async
+zpm if-not ssh load                                   \
+  zpm-zsh/dropbox,async                               \
+  zpm-zsh/zsh-better-npm-completion,async             \
+  \
+  zpm-zsh/clipboard                                   \
+  zpm-zsh/mysql-colorize,async                        \
+  zpm-zsh/bookmarks,async                             \
+  zpm-zsh/autoenv,async                               \
+  \
+  mdumitru/fancy-ctrl-z,async                         \
+  zsh-users/zsh-history-substring-search,async        \
+  zsh-users/zsh-autosuggestions,async                 \
+  zdharma-continuum/fast-syntax-highlighting,async              \
+  zdharma-continuum/history-search-multi-word,fpath:/,async
 
 source ~/.zshrc.local 2>/dev/null
