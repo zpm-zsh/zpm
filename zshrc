@@ -45,8 +45,8 @@ zpm if-not ssh load                                   \
   zpm-zsh/autoenv,async                               \
   \
   mdumitru/fancy-ctrl-z,async                         \
-  zsh-users/zsh-history-substring-search,async        \
-  zsh-users/zsh-autosuggestions,async                 \
+  zsh-users/zsh-history-substring-search,source:zsh-history-substring-search.zsh,async        \
+  zsh-users/zsh-autosuggestions,source:zsh-autosuggestions.zsh,async                 \
   zdharma-continuum/fast-syntax-highlighting,async              \
   zdharma-continuum/history-search-multi-word,fpath:/,async
 

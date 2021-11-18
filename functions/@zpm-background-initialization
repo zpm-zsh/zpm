@@ -22,14 +22,10 @@ for plugin in ${_ZPM_plugins_for_source}; do
   echo >> "$_ZPM_TMP"
 done
 
-echo '_ZPM_post_fn () {' >> "$_ZPM_TMP"
-echo "  source '$_ZPM_CACHE_ASYNC'" >> "$_ZPM_TMP"
-echo '}' >> "$_ZPM_TMP"
+echo "sched +1 source '$_ZPM_CACHE_ASYNC'" >> "$_ZPM_TMP"
 echo >> "$_ZPM_TMP"
 
-echo >> "$_ZPM_TMP"
 
-echo 'sched +1 _ZPM_post_fn' >> "$_ZPM_TMP"
 echo >> "$_ZPM_TMP"
 echo 'zpm () {}' >> "$_ZPM_TMP"
 
