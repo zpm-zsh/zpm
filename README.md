@@ -495,7 +495,8 @@ When you make changes, add information about them to the change log in **next** 
 - 4.1
 
   - Added possibility to change parallel runner, e.g. GNU Parallel, Rush, Xargs
-  - Change source order
+  - Optimize plugin load
+  - Change some plugin urls
 
 - 4.0
 
