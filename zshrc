@@ -1,7 +1,5 @@
 #!/usr/bin/env zsh
 
-ZPM_PARALLEL_RUNNER=xargs
-
 source ~/.zpm/zpm.zsh 2>/dev/null || {
   git clone https://github.com/zpm-zsh/zpm ~/.zpm
   source ~/.zpm/zpm.zsh
@@ -10,9 +8,7 @@ source ~/.zpm/zpm.zsh 2>/dev/null || {
 ### OpenWrt
 zpm if openwrt load zpm-zsh/openwrt
 
-
 ### Termux
-
 zpm if termux load zpm-zsh/termux
 
 ### Tmux
@@ -36,18 +32,19 @@ zpm load                      \
 
 ### Plugins for local host
 zpm if-not ssh load                                   \
-  zpm-zsh/dropbox,async                               \
+  zpm-zsh/dropbox,apply:path:fpath                    \
   zpm-zsh/zsh-better-npm-completion,async             \
   \
   zpm-zsh/clipboard                                   \
   zpm-zsh/mysql-colorize,async                        \
   zpm-zsh/bookmarks,async                             \
+  voronkovich/gitignore.plugin.zsh,async              \
   zpm-zsh/autoenv,async                               \
   \
   mdumitru/fancy-ctrl-z,async                         \
-  zsh-users/zsh-history-substring-search,source:zsh-history-substring-search.zsh,async        \
-  zsh-users/zsh-autosuggestions,source:zsh-autosuggestions.zsh,async                 \
-  zdharma-continuum/fast-syntax-highlighting,async              \
+  zpm-zsh/zsh-history-substring-search,async          \
+  zpm-zsh/zsh-autosuggestions,async                   \
+  zdharma-continuum/fast-syntax-highlighting,async    \
   zdharma-continuum/history-search-multi-word,fpath:/,async
 
 source ~/.zshrc.local 2>/dev/null
