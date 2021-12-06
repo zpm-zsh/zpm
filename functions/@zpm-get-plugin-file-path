@@ -27,6 +27,8 @@ elif [[ -e "${Plugin_path}/${Plugin_basename_clean}.zsh" ]]; then
   echo "${Plugin_path}/${Plugin_basename_clean}.zsh"
 elif [[ -e "${Plugin_path}/zsh-${Plugin_basename_clean}.plugin.zsh" ]]; then
   echo "${Plugin_path}/zsh-${Plugin_basename_clean}.plugin.zsh"
+elif [[ -e "${Plugin_path}/zsh-${Plugin_basename_clean}.zsh" ]]; then
+  echo "${Plugin_path}/zsh-${Plugin_basename_clean}.zsh"
 elif [[ -e "${Plugin_path}/${Plugin_basename_clean}.zsh-theme" ]]; then
   echo "${Plugin_path}/${Plugin_basename_clean}.zsh-theme"
 elif [[ -e "${Plugin_path}/init.zsh" ]]; then
