@@ -183,7 +183,7 @@ zpm-zsh/create-zsh-plugin
   - [xargs](https://www.gnu.org/software/findutils/) as fallback
 - [curl](https://curl.se/) for GitHub Gists
 - [Termux](http://termux.com/) for Android
-- [cli-html](https://www.npmjs.com/package/cli-markdown) view html in terminal. _Optional_
+- [cli-html](https://www.npmjs.com/package/cli-html) view html in terminal. _Optional_
 - [cli-markdown](https://www.npmjs.com/package/cli-markdown) view markdown in terminal. _Optional_
 
 ## Installation
