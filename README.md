@@ -492,6 +492,11 @@ When you make changes, add information about them to the change log in **next** 
 
 ## Changelog
 
+- 4.2
+
+  - Replace `$ZERO` with `$0`. Fixed [#43](https://github.com/zpm-zsh/zpm/issues/43)
+  - Update README. [#44](https://github.com/zpm-zsh/zpm/pull/44)
+
 - 4.1
 
   - Added possibility to change parallel runner, e.g. GNU Parallel, Rush, Xargs
