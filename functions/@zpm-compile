@@ -11,7 +11,7 @@ zcompile "${_ZPM_DIR}/lib/imperative.zsh" 2>/dev/null
 
 for dir in $fpath; do
   if [[ -w "$dir" ]]; then
-    for i in "${dir}/"*; do
+    for i in "${dir}"/**/*; do
       if [[ "${i}" != *".zwc" && ! "${i}.zwc" -nt "${i}" ]]; then
         zcompile "${i}" 2>/dev/null
       fi
