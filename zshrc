@@ -45,6 +45,6 @@ zpm if-not ssh load                                   \
   zpm-zsh/zsh-history-substring-search,async          \
   zpm-zsh/zsh-autosuggestions,async                   \
   zpm-zsh/fast-syntax-highlighting,async    \
-  zpm-zsh/history-search-multi-word,fpath:/,async
+  zpm-zsh/history-search-multi-word,async
 
 source ~/.zshrc.local 2>/dev/null
