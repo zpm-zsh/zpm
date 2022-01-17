@@ -18,11 +18,11 @@ for plugin in ${_ZPM_plugins_for_source}; do
   echo "(){" >> "$_ZPM_TMP"
   echo "0='${file}'" >> "$_ZPM_TMP"
   cat "${file}" |\
-  grep -F -v '#!/usr/bin/env zsh' |\
-  grep -F -v '${ZERO:-${${0:#$ZSH_ARGZERO}:-${(%):-%N}}}' |\
-  grep -F -v '${${ZERO:-${0:#$ZSH_ARGZERO}}:-${(%):-%N}}' |\
-  grep -F -v '${${(M)0:#/*}:-$PWD/$0}' |\
-  >> "$_ZPM_TMP"
+    grep -F -v '#!/usr/bin/env zsh' |\
+    grep -F -v '${ZERO:-${${0:#$ZSH_ARGZERO}:-${(%):-%N}}}' |\
+    grep -F -v '${${ZERO:-${0:#$ZSH_ARGZERO}}:-${(%):-%N}}' |\
+    grep -F -v '${${(M)0:#/*}:-$PWD/$0}' |\
+    >> "$_ZPM_TMP"
   echo "}" >> "$_ZPM_TMP"
   echo >> "$_ZPM_TMP"
 done
@@ -43,11 +43,11 @@ for plugin in ${_ZPM_plugins_for_async_source}; do
   echo "(){" >> "$_ZPM_TMP_ASYNC"
   echo "0='${file}'" >> "$_ZPM_TMP_ASYNC"
   cat "${file}" |\
-  grep -F -v '#!/usr/bin/env zsh' |\
-  grep -F -v '${ZERO:-${${0:#$ZSH_ARGZERO}:-${(%):-%N}}}' |\
-  grep -F -v '${${ZERO:-${0:#$ZSH_ARGZERO}}:-${(%):-%N}}' |\
-  grep -F -v '${${(M)0:#/*}:-$PWD/$0}' |\
-  >> "$_ZPM_TMP_ASYNC"
+    grep -F -v '#!/usr/bin/env zsh' |\
+    grep -F -v '${ZERO:-${${0:#$ZSH_ARGZERO}:-${(%):-%N}}}' |\
+    grep -F -v '${${ZERO:-${0:#$ZSH_ARGZERO}}:-${(%):-%N}}' |\
+    grep -F -v '${${(M)0:#/*}:-$PWD/$0}' |\
+    >> "$_ZPM_TMP_ASYNC"
   echo "}" >> "$_ZPM_TMP_ASYNC"
   echo >> "$_ZPM_TMP_ASYNC"
 done

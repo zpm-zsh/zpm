@@ -88,7 +88,7 @@ autoload -Uz                    \
   @zpm-log                      \
 
 
-(( $#_ZPM_autoload )) && autoload -Uz -- ${(z)_ZPM_autoload}
+  (( $#_ZPM_autoload )) && autoload -Uz -- ${(z)_ZPM_autoload}
 
 local Command="$1"
 local Plugin="$2"
