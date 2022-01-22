@@ -1,0 +1,25 @@
+#!/usr/bin/env zsh
+
+local Plugin="$1"
+local Plugin_path="$2"
+local Plugin_basename="$3"
+local Plugin_origin_type="$4"
+
+local destination='plugin'
+if [[ "$Plugin" == *",destination:"* ]]; then
+  destination="${${Plugin##*,destination:}%%,*}"
+fi
+
+if [[ "$Plugin_origin_type" == 'git' || "$Plugin_origin_type" == 'dir' ]]; then
+  echo "${Plugin_path}/"
+elif [[ "$Plugin_type" == 'remote' || "$Plugin_type" == 'file' || "$Plugin_type" == 'exec'  ]]; then
+  if [[ "$destination" == 'completion' ]]; then
+    echo "${Plugin_path}/functions/_${Plugin_basename}"
+  elif [[ "$destination" == 'bin' ]]; then
+    echo "${Plugin_path}/bin/${Plugin_basename}"
+  else
+    echo "${Plugin_path}/${Plugin_basename}.zsh"
+  fi
+else
+  echo "${Plugin_path}/"
+fi

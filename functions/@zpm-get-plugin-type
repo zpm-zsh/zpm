@@ -2,33 +2,33 @@
 
 local Plugin_name="$1"
 
-declare -Ag plugin_types=(
-  empty empty
+declare -ag plugin_types=(
+  empty,empty
 
-  gh github
-  github github
+  gh,github
+  github,github
 
-  gl gitlab
-  gitlab gitlab
+  gl,gitlab
+  gitlab,gitlab
 
-  bb bitbucket
-  bitbucket bitbucket
+  bb,bitbucket
+  bitbucket,bitbucket
 
-  git git
+  git,git
 
-  file file
+  file,file
 
-  dir dir
-  link dir
+  dir,dir
+  link,dir
 
-  omz omz
+  omz/theme,omz-theme
+  omz/lib,omz-lib
+  omz,omz
 
-  omz-theme omz-theme
+  remote,remote
+  gist,gist
 
-  omz-lib omz-lib
-
-  remote remote
-  gist gist
+  exec,exec
 )
 
 if [[ "$Plugin_name" == "@"* ]]; then
@@ -42,7 +42,9 @@ if [[ "$Plugin_name" == "@"* ]]; then
     return 0
   fi
 
-  for plugin_type_key plugin_type in ${(@kv)plugin_types}; do
+  for plugin_type in ${plugin_types}; do
+    local plugin_type_key="${plugin_type%%\,*}"
+    local plugin_type="${plugin_type#*,}"
     if [[ "$Plugin_name" == "@${plugin_type_key}/"* ]];then
       echo "$plugin_type"
       return 0

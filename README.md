@@ -281,24 +281,24 @@ If plugin name starts with `@word`, this word will be used as plugin type. Plugi
 
     # Load any OMZ libraries we want or our OMZ plugins require
     zpm load                \
-      @omz-lib/compfix      \
-      @omz-lib/completion   \
-      @omz-lib/directories  \
-      @omz-lib/functions    \
-      @omz-lib/git          \
-      @omz-lib/grep         \
-      @omz-lib/history      \
-      @omz-lib/key-bindings \
-      @omz-lib/misc         \
-      @omz-lib/spectrum     \
-      @omz-lib/theme-and-appearance
+      @omz/lib/compfix      \
+      @omz/lib/completion   \
+      @omz/lib/directories  \
+      @omz/lib/functions    \
+      @omz/lib/git          \
+      @omz/lib/grep         \
+      @omz/lib/history      \
+      @omz/lib/key-bindings \
+      @omz/lib/misc         \
+      @omz/lib/spectrum     \
+      @omz/lib/theme-and-appearance
 
       # Load some OMZ plugins and theme
       zpm load          \
         @omz/virtualenv \
         @omz/git
 
-      zpm load @omz-theme/robbyrussell
+      zpm load @omz/theme/robbyrussell
     ```
 
     </p>
@@ -307,7 +307,8 @@ If plugin name starts with `@word`, this word will be used as plugin type. Plugi
 - `@dir` - special type, zpm will create a symlink to local directory from `origin` tag
 - `@file` - special type, zpm will create a symlink to file from `origin` tag. Should be used for plugins that are written in single file, without additional dependencies
 - `@remote/` - plugin will be downloaded using curl, for example from an HTTP site. Be careful, zpm can't detect origin for this plugin type, you must specify origin using tag `origin:`
-- `@empty/` - special type, zpm will create empty dir without files. Useful with `hook`, `gen-completion` and `gen-plugin` tags. Can be ommited if your plugin name starts with `@empty/`
+- `@exec/` - special type, zpm will create plugin, completion or binary via executing of `origin` tag content. See `destination` tag
+- `@empty/` - special type, zpm will create empty dir without files. Useful with `hook` tag.
 
 ```sh
 plugin-from/github  # @github doesn't necessary
@@ -407,22 +408,6 @@ This tag parameter contains command who will be run in the plugin directory afte
 zpm plugin/name,hook:"make; make install"
 ```
 
-#### `gen-plugin` tag
-
-This tag parameter contains command who can generate zsh plugin file
-
-```sh
-zpm @empty/npm,gen-plugin:"npm completion"
-```
-
-#### `gen-completion` tag
-
-This tag parameter contains command who can generate zsh completions file
-
-```sh
-zpm @empty/rustup,gen-completion:"rustup completions zsh"
-```
-
 ### `if` and `if-not` conditions
 
 If condition allows you to run the following commands only if the condition is true
@@ -491,6 +476,10 @@ When you make changes, add information about them to the change log in **next** 
   - [ ] Now `zpm load`, `zpm upgrade` or `zpm subcommand` will complete only one argument
 
 ## Changelog
+
+- 5.0
+  - Removed `gen-plugin` and `gen-completion` tags
+  - `@omz-theme/` and `@omz-lib/` changed to `@omz/theme/` and `@omz/lib/`
 
 - 4.2
 

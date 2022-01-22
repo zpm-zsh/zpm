@@ -8,9 +8,7 @@ local Plugin_type="$4"
 local Plugin_striped_name="${Plugin_name#@*/}"
 
 if [[ "$Plugin" == *",origin:"* ]]; then
-  local Plugin_origin="${${Plugin##*,origin:}%%,*}"
-
-  echo "$Plugin_origin"
+  echo -n "${${Plugin##*,origin:}%%,*}"
   return 0
 fi
 

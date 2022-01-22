@@ -1,27 +1,29 @@
 #!/usr/bin/env zsh
 
 local Plugin_name="$1"
-declare -Ag plugin_origin_types=(
-  empty empty
+declare -ag plugin_origin_types=(
+  empty,empty
 
-  gh git
-  github git
-  gl git
-  gitlab git
-  bb git
-  bitbucket git
-  git git
+  gh,git
+  github,git
+  gl,git
+  gitlab,git
+  bb,git
+  bitbucket,git
+  git,git
 
-  file file
-  omz-theme file
-  omz-lib file
+  file,file-link
+  omz/theme,file-link
+  omz/lib,file-link
 
-  dir dir
-  link dir
-  omz dir
+  dir,dir-link
+  link,dir-link
+  omz,dir-link
 
-  remote remote
-  gist remote
+  remote,remote
+  gist,remote
+
+  exec,exec
 )
 
 if [[ "$Plugin_name" == "@"* ]]; then
@@ -35,7 +37,9 @@ if [[ "$Plugin_name" == "@"* ]]; then
     return 0
   fi
 
-  for plugin_origin_type_key plugin_origin_type in ${(@kv)plugin_origin_types}; do
+  for plugin_origin_type in ${plugin_origin_types}; do
+    local plugin_origin_type_key="${plugin_origin_type%%\,*}"
+    local plugin_origin_type="${plugin_origin_type#*,}"
     if [[ "$Plugin_name" == "@${plugin_origin_type_key}/"* ]];then
       echo "$plugin_origin_type"
       return 0
