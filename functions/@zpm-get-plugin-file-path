@@ -19,8 +19,6 @@ if [[ "$Plugin"  == *",source:"* ]]; then
   else
     return -1
   fi
-elif [[ -e "${Plugin_path}/zpm-generated.zsh" ]]; then
-  echo "${Plugin_path}/zpm-generated.zsh"
 elif [[ -e "${Plugin_path}/${Plugin_basename_clean}.zsh" ]]; then
   echo "${Plugin_path}/${Plugin_basename_clean}.zsh"
 elif [[ -e "${Plugin_path}/zsh-${Plugin_basename_clean}.zsh" ]]; then

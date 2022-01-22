@@ -74,4 +74,4 @@ autoload -Uz \
   @zpm-log                       \
   @zpm-no-source                 \
   @zpm-source                    \
-  @zpm-upgrade                   \
+  @zpm-upgrade
