@@ -114,9 +114,9 @@ fi
 if [[ "$Plugin_origin_type" == 'git' ]]; then
   if [[ "$Command" == 'install' ]]; then
     mkdir -p "${Plugin_destination}"
-    git clone --recursive "${Plugin_origin}" --depth 1 --single-branch "${Plugin_destination}" # </dev/null >/dev/null 2>/dev/null
+    git clone --recursive "${Plugin_origin}" --depth 1 --single-branch "${Plugin_destination}" </dev/null >/dev/null 2>/dev/null
   else
-    git --git-dir="${Plugin_destination}/.git/" --work-tree="${Plugin_destination}" pull # </dev/null >/dev/null 2>/dev/null
+    git --git-dir="${Plugin_destination}/.git/" --work-tree="${Plugin_destination}" pull </dev/null >/dev/null 2>/dev/null
   fi
   _msg $?
 elif [[ "$Plugin_origin_type" == 'remote' ]]; then
