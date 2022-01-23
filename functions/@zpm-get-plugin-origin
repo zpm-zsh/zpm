@@ -4,11 +4,12 @@ local Plugin="$1"
 local Plugin_name="$2"
 local Plugin_basename="$3"
 local Plugin_type="$4"
+local Plugin_origin_type="$5"
 
 local Plugin_striped_name="${Plugin_name#@*/}"
 
 if [[ "$Plugin" == *",origin:"* ]]; then
-  echo -n "${${Plugin##*,origin:}%%,*}"
+  echo "${${Plugin##*,origin:}%%,*}"
   return 0
 fi
 
