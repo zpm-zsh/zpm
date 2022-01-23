@@ -4,7 +4,7 @@ fpath+=("${_ZPM_DIR}/functions" "${ZSH_CACHE_DIR}/functions")
 
 function _success_msg() {
   local msg
-  if [[ "$1" == 'install' ]]; then
+  if [[ "$Command" == 'install' ]]; then
     msg="Install"
   else
     msg='Upgrade'
@@ -15,39 +15,47 @@ function _success_msg() {
 
 function _error_msg() {
   local msg
-  if [[ "$1" == 'install' ]]; then
+  if [[ "$Command" == 'install' ]]; then
     msg="Can't install"
   else
     msg="Can't upgrade"
   fi
 
-  local status_string="${c[red]}${c[bold]}${msg}${c[reset]} ${Plugin_hyperlink} ${c[red]}${c[bold]}✖${c[reset]}"
+  echo "${c[red]}${c[bold]}${msg}${c[reset]} ${Plugin_hyperlink} ${c[red]}${c[bold]}✖${c[reset]}"
 }
 
 function _skip_msg() {
   local msg
-  if [[ "$1" == 'install' ]]; then
+  if [[ "$Command" == 'install' ]]; then
     msg="Skip install"
   else
     msg="Skip upgrade"
   fi
 
-  local status_string="${c[yellow]}${c[bold]}${msg}${c[reset]} ${Plugin_hyperlink} ${c[yellow]}✖${c[reset]}"
+  echo "${c[yellow]}${c[bold]}${msg}${c[reset]} ${Plugin_hyperlink} ${c[yellow]}✖${c[reset]}"
 }
 
 function _upgrade_msg() {
-  if [[ "$?" == "0" ]]; then
-    _success_msg upgrade
+  if [[ "$1" == "0" ]]; then
+    _success_msg
   else
-    _error_msg upgrade
+    _error_msg
   fi
 }
 
 function _install_msg() {
-  if [[ "$?" == "0" ]]; then
-    _success_msg install
+  if [[ "$1" == "0" ]]; then
+    _success_msg
   else
-    _error_msg install
+    _error_msg
+  fi
+}
+
+function _msg() {
+  if [[ "$Command" == "install" ]]; then
+    _install_msg "$1"
+  else
+    _upgrade_msg "$1"
   fi
 }
 
@@ -97,64 +105,49 @@ local Plugin_destination=$(@zpm-get-plugin-destination "$Plugin" "$Plugin_path" 
 
 if [[ "$Command" == "upgrade" ]]; then
   @zpm-log zpm:upgrade "Upgrade '${Plugin}'"
-
-  if [[ "$Plugin_origin_type" == 'git' ]]; then
-    git --git-dir="${Plugin_destination}/.git/" --work-tree="${Plugin_destination}" pull </dev/null >/dev/null 2>/dev/null
-    _upgrade_msg
-  elif [[ "$Plugin_origin_type" == 'remote' ]]; then
-    curl --silent "${Plugin_origin}" --output "${Plugin_destination}" 2>/dev/null
-    _upgrade_msg
-  elif [[ "$Plugin_origin_type" == 'dir-link' ]]; then
-    ln -sf "${Plugin_origin}" "${Plugin_destination}" 2>/dev/null
-    _install_msg
-  elif [[ "$Plugin_origin_type" == 'file-link' ]]; then
-    ln -sf "${Plugin_origin}" "${Plugin_destination}" 2>/dev/null
-    _install_msg
-  elif [[ "$Plugin_origin_type" == 'remote' ]]; then
-    curl --silent "${Plugin_origin}" --output "${Plugin_destination}" 2>/dev/null
-    _install_msg
-  elif [[ "$Plugin_origin_type" == 'exec' ]]; then
-    cd "$Plugin_path"
-    eval "$Plugin_origin" 1>! "${Plugin_destination}" 2>/dev/null
-    _install_msg
-  else
-    _skip_msg upgrade
-  fi
-elif [[ "$Command" == 'install' ]]; then
+elif [[ "$Command" == "install" ]]; then
   @zpm-log zpm:install "Install '${Plugin}'"
-
-  if [[ "$Plugin_origin_type" == 'git' ]]; then
-    git clone --recursive "${Plugin_origin}" --depth 1 --single-branch "${Plugin_destination}" </dev/null >/dev/null 2>/dev/null
-    _install_msg
-  elif [[ "$Plugin_origin_type" == 'dir-link' ]]; then
-    ln -sf "${Plugin_origin}" "${Plugin_destination}" 2>/dev/null
-    _install_msg
-  elif [[ "$Plugin_origin_type" == 'file-link' ]]; then
-    mkdir -p "${Plugin_destination:h}"
-    ln -sf "${Plugin_origin}" "${Plugin_destination}" 2>/dev/null
-    _install_msg
-  elif [[ "$Plugin_origin_type" == 'remote' ]]; then
-    mkdir -p "${Plugin_destination:h}"
-    curl --silent "${Plugin_origin}" --output "${Plugin_destination}" 2>/dev/null
-    _install_msg
-  elif [[ "$Plugin_origin_type" == 'exec' ]]; then
-    mkdir -p "${Plugin_destination:h}"
-    cd "$Plugin_path"
-    eval "$Plugin_origin" 1>! "${Plugin_destination}" 2>/dev/null
-    _install_msg
-  elif [[ "$Plugin_origin_type" == 'empty' ]]; then
-    mkdir -p "${Plugin_destination}"
-    _install_msg
-  else
-    _skip_msg install
-  fi
-
-  if [[ "$Plugin" == *',destination:bin'* ]]; then
-    chmod +x "${Plugin_destination}" >/dev/null 2>/dev/null
-  fi
 else
   echo Unknown command
 fi
+
+if [[ "$Plugin_origin_type" == 'git' ]]; then
+  if [[ "$Command" == 'install' ]]; then
+    mkdir -p "${Plugin_destination}"
+    git clone --recursive "${Plugin_origin}" --depth 1 --single-branch "${Plugin_destination}" # </dev/null >/dev/null 2>/dev/null
+  else
+    git --git-dir="${Plugin_destination}/.git/" --work-tree="${Plugin_destination}" pull # </dev/null >/dev/null 2>/dev/null
+  fi
+  _msg $?
+elif [[ "$Plugin_origin_type" == 'remote' ]]; then
+  mkdir -p "${Plugin_destination:h}"
+  curl --silent "${Plugin_origin}" --output "${Plugin_destination}" 2>/dev/null
+  _msg $?
+elif [[ "$Plugin_origin_type" == 'dir-link' ]]; then
+  mkdir -p "${Plugin_destination}"
+  ln -sf "${Plugin_origin}" "${Plugin_destination}" 2>/dev/null
+  _msg $?
+elif [[ "$Plugin_origin_type" == 'file-link' ]]; then
+  mkdir -p "${Plugin_destination:h}"
+  ln -sf "${Plugin_origin}" "${Plugin_destination}" 2>/dev/null
+  _msg $?
+elif [[ "$Plugin_origin_type" == 'remote' ]]; then
+  mkdir -p "${Plugin_destination:h}"
+  curl --silent "${Plugin_origin}" --output "${Plugin_destination}" 2>/dev/null
+  _msg $?
+elif [[ "$Plugin_origin_type" == 'exec' ]]; then
+  mkdir -p "${Plugin_destination:h}"
+  cd "${Plugin_destination:h}"
+  eval "$Plugin_origin" 1>! "${Plugin_destination}" 2>/dev/null
+  _msg $?
+else
+  _skip_msg
+fi
+
+if [[ "$Plugin" == *',destination:bin'* ]]; then
+  chmod +x "${Plugin_destination}" >/dev/null 2>/dev/null
+fi
+
 
 if [[ "$Plugin" == *',hook:'* && -e "$Plugin_path" ]]; then
   cd "$Plugin_path"
