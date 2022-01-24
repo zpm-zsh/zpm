@@ -35,27 +35,20 @@ function _skip_msg() {
   echo "${c[yellow]}${c[bold]}${msg}${c[reset]} ${Plugin_hyperlink} ${c[yellow]}✖${c[reset]}"
 }
 
-function _upgrade_msg() {
-  if [[ "$1" == "0" ]]; then
-    _success_msg
-  else
-    _error_msg
-  fi
-}
-
-function _install_msg() {
-  if [[ "$1" == "0" ]]; then
-    _success_msg
-  else
-    _error_msg
-  fi
-}
 
 function _msg() {
   if [[ "$Command" == "install" ]]; then
-    _install_msg "$1"
+    if [[ "$1" == "0" ]]; then
+      _success_msg
+    else
+      _error_msg
+    fi
   else
-    _upgrade_msg "$1"
+    if [[ "$1" == "0" ]]; then
+      _success_msg
+    else
+      _error_msg
+    fi
   fi
 }
 
@@ -124,16 +117,11 @@ elif [[ "$Plugin_origin_type" == 'remote' ]]; then
   curl --silent "${Plugin_origin}" --output "${Plugin_destination}" 2>/dev/null
   _msg $?
 elif [[ "$Plugin_origin_type" == 'dir-link' ]]; then
-  mkdir -p "${Plugin_destination}"
   ln -sf "${Plugin_origin}" "${Plugin_destination}" 2>/dev/null
   _msg $?
 elif [[ "$Plugin_origin_type" == 'file-link' ]]; then
   mkdir -p "${Plugin_destination:h}"
   ln -sf "${Plugin_origin}" "${Plugin_destination}" 2>/dev/null
-  _msg $?
-elif [[ "$Plugin_origin_type" == 'remote' ]]; then
-  mkdir -p "${Plugin_destination:h}"
-  curl --silent "${Plugin_origin}" --output "${Plugin_destination}" 2>/dev/null
   _msg $?
 elif [[ "$Plugin_origin_type" == 'exec' ]]; then
   mkdir -p "${Plugin_destination:h}"
@@ -147,7 +135,6 @@ fi
 if [[ "$Plugin" == *',destination:bin'* ]]; then
   chmod +x "${Plugin_destination}" >/dev/null 2>/dev/null
 fi
-
 
 if [[ "$Plugin" == *',hook:'* && -e "$Plugin_path" ]]; then
   cd "$Plugin_path"
