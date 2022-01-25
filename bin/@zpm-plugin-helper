@@ -37,7 +37,7 @@ function _msg() {
     fi
   fi
 
-  echo "${color}${c[bold]}${msg}${c[reset]} ${Plugin_hyperlink} ${color}${symbol}${c[reset]}"
+  echo "${color}${c[bold]}${msg}${c[reset]} ${Plugin_documentation_hyperlink} ${color}${symbol}${c[reset]}"
 }
 
 if [[ "$CLICOLOR" != "0" ]]; then
@@ -56,17 +56,17 @@ if [[ "$CLICOLOR" != "0" ]]; then
   )
 fi
 
-autoload -Uz                       \
-  @zpm-get-plugin-basename         \
-  @zpm-get-plugin-hyperlink        \
-  @zpm-get-plugin-link             \
-  @zpm-get-plugin-name             \
-  @zpm-get-plugin-origin           \
-  @zpm-get-plugin-origin-type      \
-  @zpm-get-plugin-path             \
-  @zpm-get-plugin-type             \
-  @zpm-get-plugin-vcs-root-path    \
-  @zpm-get-plugin-destination-path \
+autoload -Uz                              \
+  @zpm-get-plugin-basename                \
+  @zpm-get-plugin-documentation-hyperlink \
+  @zpm-get-plugin-documentation-link      \
+  @zpm-get-plugin-name                    \
+  @zpm-get-plugin-origin                  \
+  @zpm-get-plugin-origin-type             \
+  @zpm-get-plugin-path                    \
+  @zpm-get-plugin-type                    \
+  @zpm-get-plugin-vcs-root-path           \
+  @zpm-get-plugin-destination-path        \
   @zpm-log
 
 
@@ -80,8 +80,8 @@ local Plugin_basename=$(@zpm-get-plugin-basename "$Plugin_name")
 local Plugin_path=$(@zpm-get-plugin-path "$Plugin_name" "$Plugin_type")
 local Plugin_origin_type=$(@zpm-get-plugin-origin-type "$Plugin_name")
 local Plugin_origin=$(@zpm-get-plugin-origin "$Plugin" "$Plugin_name" "$Plugin_basename" "$Plugin_type" "$Plugin_origin_type")
-local Plugin_link=$(@zpm-get-plugin-link "$Plugin_name" "$Plugin_type" "$Plugin_origin")
-local Plugin_hyperlink=$(@zpm-get-plugin-hyperlink "$Plugin_name" "$Plugin_link" "$Plugin_origin")
+local Plugin_documentation_link=$(@zpm-get-plugin-documentation-link "$Plugin_name" "$Plugin_type" "$Plugin_origin")
+local Plugin_documentation_hyperlink=$(@zpm-get-plugin-documentation-hyperlink "$Plugin_name" "$Plugin_documentation_link" "$Plugin_origin")
 local Plugin_destination_path=$(@zpm-get-plugin-destination-path "$Plugin" "$Plugin_path" "$Plugin_basename" "$Plugin_origin_type")
 
 if [[ "$Command" == "upgrade" ]]; then
@@ -116,6 +116,12 @@ elif [[ "$Plugin_origin_type" == 'exec' ]]; then
   cd "${Plugin_destination_path:h}"
   eval "$Plugin_origin" 1>! "${Plugin_destination_path}" 2>/dev/null
   _msg $?
+elif [[ "$Plugin_origin_type" == 'omz-old' ]]; then
+  echo "Deprecated, use ${Plugin_name/@omz-/@omz/}"
+  mkdir -p "${Plugin_destination_path:h}"
+  ln -sf "${Plugin_origin}" "${Plugin_destination_path}" 2>/dev/null
+  _msg $?
+
 else
   _msg skip
 fi
@@ -128,5 +134,5 @@ if [[ "$Plugin" == *',hook:'* && -e "$Plugin_path" ]]; then
   cd "$Plugin_path"
   eval "${${Plugin##*,hook:}%%\,*}" >/dev/null
 
-  echo "${c[green]}${c[bold]}Run hook for${c[reset]} ${Plugin_hyperlink} ${c[green]}✔${c[reset]}"
+  echo "${c[green]}${c[bold]}Run hook for${c[reset]} ${Plugin_documentation_hyperlink} ${c[green]}✔${c[reset]}"
 fi

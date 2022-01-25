@@ -24,6 +24,9 @@ declare -ag plugin_origin_types=(
   gist,remote
 
   exec,exec
+
+  omz-theme,omz-old
+  omz-lib,omz-old
 )
 
 if [[ "$Plugin_name" == "@"* ]]; then

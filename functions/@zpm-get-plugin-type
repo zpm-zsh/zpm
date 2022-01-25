@@ -29,6 +29,8 @@ declare -ag plugin_types=(
   gist,gist
 
   exec,exec
+  omz-theme,omz-theme-old
+  omz-lib,omz-lib-old
 )
 
 if [[ "$Plugin_name" == "@"* ]]; then

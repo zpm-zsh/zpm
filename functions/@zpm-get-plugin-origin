@@ -31,6 +31,10 @@ elif [[ "$Plugin_type" == 'omz-theme' ]]; then
   echo "$(@zpm-get-plugin-path @omz)/themes/${Plugin_basename}.zsh-theme"
 elif [[ "$Plugin_type" == 'omz-lib' ]]; then
   echo "$(@zpm-get-plugin-path @omz)/lib/${Plugin_basename}.zsh"
+elif [[ "$Plugin_type" == 'omz-theme-old' ]]; then
+  echo "$(@zpm-get-plugin-path @omz)/themes/${Plugin_basename}.zsh-theme"
+elif [[ "$Plugin_type" == 'omz-lib-old' ]]; then
+  echo "$(@zpm-get-plugin-path @omz)/lib/${Plugin_basename}.zsh"
 elif [[ "$Plugin_type" == 'gist' ]]; then
   echo "https://gist.githubusercontent.com/${Plugin_striped_name}/raw"
 else
