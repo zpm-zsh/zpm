@@ -121,7 +121,6 @@ elif [[ "$Plugin_origin_type" == 'omz-old' ]]; then
   mkdir -p "${Plugin_destination_path:h}"
   ln -sf "${Plugin_origin}" "${Plugin_destination_path}" 2>/dev/null
   _msg $?
-
 else
   _msg skip
 fi
