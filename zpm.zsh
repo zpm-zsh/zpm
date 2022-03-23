@@ -19,7 +19,7 @@ _ZPM_COMPDUMP="${ZSH_CACHE_DIR}/zcompdump"
 
 fpath=("${_ZPM_DIR}/functions" "${ZSH_CACHE_DIR}/functions" $fpath)
 export PATH="${ZSH_CACHE_DIR}/bin:$PATH"
-typeset -aU path fpath
+typeset -gaU path fpath
 
 autoload -Uz compinit
 
