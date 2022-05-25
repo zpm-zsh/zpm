@@ -1,11 +1,1 @@
-<svg viewBox="0 0 1200 1200" xmlns="http://www.w3.org/2000/svg">
-
-    <polygon points="100,300 100,900 300,1020 800,180 400,180 300,270 300,180" stroke="#a04747" fill="#a04747" />
-
-    <polygon points="1100,300 1100,900 900,1020 900,930 800,1020 400,1020 900,180" stroke="#a04747" fill="#a04747" />
-
-    <polygon points="600,0 800,120 400,120" stroke="#a04747" fill="#a04747" />
-
-    <polygon points="600,1200 800,1080 400,1080" stroke="#a04747" fill="#a04747" />
-
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1200"><polygon fill="#a04747" stroke="#a04747" points="100 300 100 900 300 1020 800 180 400 180 300 270 300 180"/><polygon fill="#a04747" stroke="#a04747" points="1100 300 1100 900 900 1020 900 930 800 1020 400 1020 900 180"/><polygon fill="#a04747" stroke="#a04747" points="600 0 800 120 400 120"/><polygon fill="#a04747" stroke="#a04747" points="600 1200 800 1080 400 1080"/></svg>
