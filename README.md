@@ -477,6 +477,9 @@ When you make changes, add information about them to the change log in **next** 
 
 ## Changelog
 
+- 5.1
+  - Change internal functions
+
 - 5.0
   - Removed `gen-plugin` and `gen-completion` tags
   - `@omz-theme/` and `@omz-lib/` changed to `@omz/theme/` and `@omz/lib/`
