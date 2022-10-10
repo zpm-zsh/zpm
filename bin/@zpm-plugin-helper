@@ -116,6 +116,9 @@ elif [[ "$Plugin_origin_type" == 'exec' ]]; then
   cd "${Plugin_destination_path:h}"
   eval "$Plugin_origin" 1>! "${Plugin_destination_path}" 2>/dev/null
   _msg $?
+elif [[ "$Plugin_origin_type" == 'empty' ]]; then
+  mkdir -p "${Plugin_path}"
+  _msg $?
 elif [[ "$Plugin_origin_type" == 'omz-old' ]]; then
   echo "Deprecated, use ${Plugin_name/@omz-/@omz/}"
   mkdir -p "${Plugin_destination_path:h}"
