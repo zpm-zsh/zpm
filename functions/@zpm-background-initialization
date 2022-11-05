@@ -27,7 +27,7 @@ for plugin in ${_ZPM_plugins_for_source}; do
   echo >> "$_ZPM_TMP"
 done
 
-echo "sched +1 source '$_ZPM_CACHE_ASYNC'" >> "$_ZPM_TMP"
+echo "sched +0 source '$_ZPM_CACHE_ASYNC'" >> "$_ZPM_TMP"
 echo >> "$_ZPM_TMP"
 
 
@@ -53,7 +53,7 @@ for plugin in ${_ZPM_plugins_for_async_source}; do
 done
 
 echo "zle && zle reset-prompt" >> "$_ZPM_TMP_ASYNC"
-echo "sched +1 source ${_ZPM_DIR}/lib/init.zsh" >> "$_ZPM_TMP_ASYNC"
+echo "sched +0 source ${_ZPM_DIR}/lib/init.zsh" >> "$_ZPM_TMP_ASYNC"
 
 mv "$_ZPM_TMP" "$_ZPM_CACHE"
 mv "$_ZPM_TMP_ASYNC" "$_ZPM_CACHE_ASYNC"

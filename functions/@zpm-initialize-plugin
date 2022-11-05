@@ -35,7 +35,7 @@ if [[ "$Plugin" == *",apply:"* ]]; then
   fi
 fi
 
-if [[ "$Plugin"  == *",async"* ]]; then
+if [[ "$Plugin" == *",async"* ]]; then
   zpm_plugin_async=true
 fi
 

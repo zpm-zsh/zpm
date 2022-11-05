@@ -71,7 +71,7 @@ if (( CURRENT > 1 )); then
   elif [[ "$words[$PRE]" == 'if' || "$words[$PRE]" == 'if-not' ]]; then
     _describe -t commands "zpm condition" _zpm_completions_if_args
     return
-  elif [[ "$words[$PRE2]" == 'if' || "$words[$PRE2]" == 'if-not'  ]]; then
+  elif [[ "$words[$PRE2]" == 'if' || "$words[$PRE2]" == 'if-not' ]]; then
     _describe -t commands "zpm next condition" _load_args
     return
   elif [[ "$words[$PRE]" == 'clean' ]]; then

@@ -246,11 +246,11 @@ Additionaly they can have some tags. Tags must be separated by commas `,` withou
 ```sh
 # plugin type
 #    |   plugin name
-#    |      |        tag
-#    |      |         |  tag parameters, divided by :
-#    |      |         |            |       boolean tag
-#    |      |         |            |             |
-#    ↓      ↓         ↓            ↓             ↓
+#    |      |     tag
+#    |      |      |  tag parameters,
+#    |      |      |  divided by `:`    boolean tag
+#    |      |      |         |              |
+#    ↓      ↓      ↓         ↓              ↓
 @type/some/plugin,apply:source:path:fpath,async
 ```
 
@@ -265,8 +265,8 @@ If plugin name starts with `@word`, this word will be used as plugin type. Plugi
 - `@gist/` - plugin will be downloaded from GitHub Gist
 - `@omz/` - zpm will use a plugin from oh-my-zsh, oh-my-zsh will be download if not installed. **Important**: you shoud load `@omz` before any other plugin from on-my-zsh: `zpm load @omz`.
 
-  - `@omz-theme/` - will load a theme from omz dir: `<omz-dir>/themes/*.zsh-theme`
-  - `@omz-lib/` - will load a lib from omz dir: `<omz-dir>/lib/*.zsh`
+  - `@omz/theme/` - will load a theme from omz dir: `<omz-dir>/themes/*.zsh-theme`
+  - `@omz/lib/` - will load a lib from omz dir: `<omz-dir>/lib/*.zsh`
   - <details>
     <summary>
     Example:
@@ -396,7 +396,7 @@ zpm load @dir/plugin,origin:/home/user/Projects/plugin # Internal plugin directo
 zpm load @file/plugin-file,origin:/home/user/Projects/plugin.zsh # Internal plugin file will be linked to your local file
 ```
 
-* Some special types, like: `@empty`, `@omz`, `@omz-theme`, `@omz-lib`
+* Some special types, like: `@empty`, `@omz`, `@omz/theme`, `@omz/lib`
 
 Do not declare own `origin:`, because this can produce side effects
 
@@ -485,53 +485,43 @@ When you make changes, add information about them to the change log in **next** 
   - `@omz-theme/` and `@omz-lib/` changed to `@omz/theme/` and `@omz/lib/`
 
 - 4.2
-
   - Replace `$ZERO` with `$0`. Fixed [#43](https://github.com/zpm-zsh/zpm/issues/43)
   - Update README. [#44](https://github.com/zpm-zsh/zpm/pull/44)
 
 - 4.1
-
   - Added possibility to change parallel runner, e.g. GNU Parallel, Rush, Xargs
   - Optimize plugin load
   - Change some plugin urls
 
 - 4.0
-
   - Refactoring of internal logic
   - Added new plugin types: `@gist`, `@remote`
 
 - 3.6
-
   - Added new plugin types `@dir` and `@file`
   - `@link` now is an alias for `@dir`
   - Fixed [#35](https://github.com/zpm-zsh/zpm/issues/35)
 
 - 3.5
-
   - Added new logo
   - Added posibility to use mirrors for GitHub/Gitlab/Bitbucket. See [issue](https://github.com/zpm-zsh/zpm/issues/31)
 
 - 3.4
-
   - Added GNU Parallel
 
 - 3.3
-
   - Added `origin` tag
   - Removed `autoload-all` tag
 
 - 3.2
-
   - Fix plugin load order
   - Use sched for background run
 
 - 3.1
-
   - Fix completions
   - Add example for @omz
 
 - 3.0
-
   - Remove unused `@link`
   - Remove `tr` calls
   - Deprecate `type:` tag
@@ -544,20 +534,17 @@ When you make changes, add information about them to the change log in **next** 
     - Replace `type:plugin-type` with `@plugin-type/plugin/name`
 
 - 2.3
-
   - Improve **README**
   - Remove suppot for `zsh_loaded_plugins`
   - Add config for Markdownlint
 
 - 2.2
-
   - Add support for OpenWrt
   - Improve oh-my-zsh-support [@igetgames](https://github.com/igetgames)
   - Support for calling plugin functions from command tags [@igetgames](https://github.com/igetgames)
   - Fix autoload option processing [@igetgames](https://github.com/igetgames)
 
 - 2.1
-
   - Optimizations
   - Now all content of `/functions` and `/bin` will be copied into single dir, in zpm cache dir
   - Change `zpm` to `@zpm`
@@ -568,7 +555,6 @@ When you make changes, add information about them to the change log in **next** 
     - Now for update zpm need to run `zpm u @zpm`
 
 - 2.0
-
   - `omz/` prefix replaced by `@omz/`
   - Added plugin type `empty`
   - Added `autoload` and `autoload-all` tags
