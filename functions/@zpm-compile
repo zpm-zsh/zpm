@@ -13,7 +13,7 @@ for dir in $fpath; do
   if [[ -w "$dir" ]]; then
     for i in "${dir}"/**/*; do
       if [[ "${i}" != *".zwc" && ! "${i}.zwc" -nt "${i}" ]]; then
-        zcompile "${i}" 2>/dev/null
+        zcompile -- "${i}" 2>/dev/null
       fi
     done
   fi

@@ -3,41 +3,34 @@
 fpath+=("${_ZPM_DIR}/functions" "${ZSH_CACHE_DIR}/functions")
 
 function _msg() {
-  local color
-  local symbol
   local msg
+  local color
 
   if [[ "$Command" == "install" ]]; then
     if [[ "$1" == "skip" ]]; then
       msg="Skip install"
       color="${c[yellow]}"
-      symbol='✖'
     elif [[ "$1" == "0" ]]; then
       msg="Install"
       color="${c[green]}"
-      symbol='✔'
     else
       msg="Can't install"
       color="${c[red]}"
-      symbol='✖'
     fi
   elif [[ "$Command" == "upgrade" ]]; then
     if [[ "$1" == "skip" ]]; then
       msg='Skip upgrade'
       color="${c[yellow]}"
-      symbol='✖'
     elif [[ "$1" == "0" ]]; then
       msg='Upgrade'
       color="${c[green]}"
-      symbol='✔'
     else
       msg="Can't upgrade"
       color="${c[red]}"
-      symbol='✖'
     fi
   fi
 
-  echo "${color}${c[bold]}${msg}${c[reset]} ${Plugin_documentation_hyperlink} ${color}${symbol}${c[reset]}"
+  echo "${color}${c[bold]}${msg}${c[reset]} ${Plugin_documentation_hyperlink} ${c[reset]}"
 }
 
 if [[ "$CLICOLOR" != "0" ]]; then
