@@ -1,5 +1,4 @@
 <p align="center">
-  <img alt="Logo" src="images/logo.svg" height="180" />
   <h1 align="center">ZPM - Zsh Plugin Manager</h1>
   <p align="center">
     Fastest, configurable and extensible zsh plugin manager
