@@ -8,7 +8,7 @@
       <img alt="Software License" src="https://img.shields.io/github/license/zpm-zsh/zpm?style=flat-square">
     </a>
     <img alt="Travis" src="https://img.shields.io/github/languages/code-size/zpm-zsh/zpm?style=flat-square">
-    <img alt="Go Report Card" src="https://img.shields.io/github/last-commit/zpm-zsh/zpm/next?style=flat-square">
+    <img alt="Go Report Card" src="https://img.shields.io/github/last-commit/zpm-zsh/zpm?logo=github&style=flat-square">
   </p>
 </p>
 
