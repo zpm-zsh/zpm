@@ -10,30 +10,30 @@ function _msg() {
   if [[ "$Command" == "install" ]]; then
     if [[ "$1" == "skip" ]]; then
       msg="Skip install"
-      color="${c[yellow]}"
-      symbol='✖'
+      color="${c[yellow]}${c[bold]}"
+      symbol='✗'
     elif [[ "$1" == "0" ]]; then
       msg="Install"
-      color="${c[green]}"
-      symbol='✔'
+      color="${c[green]}${c[bold]}"
+      symbol='✓'
     else
       msg="Can't install"
-      color="${c[red]}"
-      symbol='✖'
+      color="${c[red]}${c[bold]}"
+      symbol='✗'
     fi
   elif [[ "$Command" == "upgrade" ]]; then
     if [[ "$1" == "skip" ]]; then
       msg='Skip upgrade'
-      color="${c[yellow]}"
-      symbol='✖'
+      color="${c[yellow]}${c[bold]}"
+      symbol='✗'
     elif [[ "$1" == "0" ]]; then
       msg='Upgrade'
-      color="${c[green]}"
-      symbol='✔'
+      color="${c[green]}${c[bold]}"
+      symbol='✓'
     else
       msg="Can't upgrade"
-      color="${c[red]}"
-      symbol='✖'
+      color="${c[red]}${c[bold]}"
+      symbol='✗'
     fi
   fi
 
