@@ -12,7 +12,7 @@
 export PMSPEC="0fbs"
 export _ZPM_DIR="${${(%):-%x}:h}"
 
-export ZSH_CACHE_DIR="${TMPDIR:-/tmp}/zsh-${UID:-user}"
+export ZSH_CACHE_DIR="${ZSH_CACHE_DIR:-${TMPDIR:-/tmp}/zsh-${UID:-user}}"
 _ZPM_CACHE="${ZSH_CACHE_DIR}/zpm-cache.zsh"
 _ZPM_CACHE_ASYNC="${ZSH_CACHE_DIR}/zpm-cache-async.zsh"
 _ZPM_COMPDUMP="${ZSH_CACHE_DIR}/zcompdump"

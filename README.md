@@ -1,5 +1,4 @@
 <p align="center">
-  <img alt="Logo" src="images/logo.svg" height="180" />
   <h1 align="center">ZPM - Zsh Plugin Manager</h1>
   <p align="center">
     Fastest, configurable and extensible zsh plugin manager
@@ -9,7 +8,7 @@
       <img alt="Software License" src="https://img.shields.io/github/license/zpm-zsh/zpm?style=flat-square">
     </a>
     <img alt="Travis" src="https://img.shields.io/github/languages/code-size/zpm-zsh/zpm?style=flat-square">
-    <img alt="Go Report Card" src="https://img.shields.io/github/last-commit/zpm-zsh/zpm/next?style=flat-square">
+    <img alt="Go Report Card" src="https://img.shields.io/github/last-commit/zpm-zsh/zpm?logo=github&style=flat-square">
   </p>
 </p>
 

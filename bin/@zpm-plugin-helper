@@ -9,24 +9,30 @@ function _msg() {
   if [[ "$Command" == "install" ]]; then
     if [[ "$1" == "skip" ]]; then
       msg="Skip install"
-      color="${c[yellow]}"
+      color="${c[yellow]}${c[bold]}"
+      symbol='✗'
     elif [[ "$1" == "0" ]]; then
       msg="Install"
-      color="${c[green]}"
+      color="${c[green]}${c[bold]}"
+      symbol='✓'
     else
       msg="Can't install"
-      color="${c[red]}"
+      color="${c[red]}${c[bold]}"
+      symbol='✗'
     fi
   elif [[ "$Command" == "upgrade" ]]; then
     if [[ "$1" == "skip" ]]; then
       msg='Skip upgrade'
-      color="${c[yellow]}"
+      color="${c[yellow]}${c[bold]}"
+      symbol='✗'
     elif [[ "$1" == "0" ]]; then
       msg='Upgrade'
-      color="${c[green]}"
+      color="${c[green]}${c[bold]}"
+      symbol='✓'
     else
       msg="Can't upgrade"
-      color="${c[red]}"
+      color="${c[red]}${c[bold]}"
+      symbol='✗'
     fi
   fi
 
@@ -108,6 +114,9 @@ elif [[ "$Plugin_origin_type" == 'exec' ]]; then
   mkdir -p "${Plugin_destination_path:h}"
   cd "${Plugin_destination_path:h}"
   eval "$Plugin_origin" 1>! "${Plugin_destination_path}" 2>/dev/null
+  _msg $?
+elif [[ "$Plugin_origin_type" == 'empty' ]]; then
+  mkdir -p "${Plugin_path}"
   _msg $?
 elif [[ "$Plugin_origin_type" == 'omz-old' ]]; then
   echo "Deprecated, use ${Plugin_name/@omz-/@omz/}"
