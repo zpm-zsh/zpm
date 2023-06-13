@@ -36,7 +36,7 @@ function _msg() {
     fi
   fi
 
-  echo "${color}${c[bold]}${msg}${c[reset]} ${Plugin_documentation_hyperlink} ${c[reset]}"
+  echo "${color}${c[bold]}${msg}${c[reset]} ${Plugin_documentation_hyperlink} ${color}${symbol}${c[reset]}"
 }
 
 if [[ "$CLICOLOR" != "0" ]]; then
