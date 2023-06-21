@@ -2,12 +2,14 @@
 
 rehash
 compinit -i -d "${_ZPM_COMPDUMP}"
-unfunction source
+unfunction source 2>/dev/null
+
+echo "$is" >! $ZSH_CACHE_DIR/is
 
 local _ZPM_TMP="$(mktemp)"
 local _ZPM_TMP_ASYNC="$(mktemp)"
 
-echo "autoload -Uz -- $_ZPM_autoload" >> "$_ZPM_TMP"
+echo "autoload -Uz -- @zpm-clean $_ZPM_autoload" >> "$_ZPM_TMP"
 echo >> "$_ZPM_TMP"
 
 echo 'compinit -i -C -d "${_ZPM_COMPDUMP}"' >> "$_ZPM_TMP"
@@ -30,6 +32,14 @@ done
 echo "sched +0 source '$_ZPM_CACHE_ASYNC'" >> "$_ZPM_TMP"
 echo >> "$_ZPM_TMP"
 
+echo 'if [[ -s $ZSH_CACHE_DIR/is ]]; then' >> "$_ZPM_TMP"
+echo '  old_is="$(cat $ZSH_CACHE_DIR/is)"' >> "$_ZPM_TMP"
+echo '  if [[ "$is" != "$old_is" ]]; then' >> "$_ZPM_TMP"
+echo '    @zpm-clean' >> "$_ZPM_TMP"
+echo '  fi' >> "$_ZPM_TMP"
+echo 'fi' >> "$_ZPM_TMP"
+
+echo >> "$_ZPM_TMP"
 
 echo >> "$_ZPM_TMP"
 echo 'zpm () {}' >> "$_ZPM_TMP"
