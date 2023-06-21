@@ -27,7 +27,7 @@ zpm load                          \
   zpm-zsh/ignored-users,async     \
   zpm-zsh/check-deps,async        \
   zpm-zsh/minimal-theme           \
-  zpm-zsh/material-colors,async   \
+  zpm-zsh/dircolors-neutral,async \
   zpm-zsh/fsh-theme-neutral,async \
   zpm-zsh/ls,async                \
   zpm-zsh/colorize,async          \
