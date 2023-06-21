@@ -18,16 +18,21 @@ zpm if-not ssh load zpm-zsh/tmux,apply:path
 ### VTE
 zpm if vte load zpm-zsh/vte
 
+### MSYS
+zpm if msys load zpm-zsh/msys
+
 ### 3party plugins
-zpm load                      \
-  zpm-zsh/core-config         \
-  zpm-zsh/ignored-users,async \
-  zpm-zsh/check-deps,async    \
-  zpm-zsh/minimal-theme       \
-  zpm-zsh/ls,async            \
-  zpm-zsh/colorize,async      \
-  zpm-zsh/ssh,async           \
-  zpm-zsh/dot,async           \
+zpm load                          \
+  zpm-zsh/core-config             \
+  zpm-zsh/ignored-users,async     \
+  zpm-zsh/check-deps,async        \
+  zpm-zsh/minimal-theme           \
+  zpm-zsh/material-colors,async   \
+  zpm-zsh/fsh-theme-neutral,async \
+  zpm-zsh/ls,async                \
+  zpm-zsh/colorize,async          \
+  zpm-zsh/ssh,async               \
+  zpm-zsh/dot,async               \
   zpm-zsh/undollar,async
 
 ### Plugins for local host
