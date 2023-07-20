@@ -118,11 +118,6 @@ elif [[ "$Plugin_origin_type" == 'exec' ]]; then
 elif [[ "$Plugin_origin_type" == 'empty' ]]; then
   mkdir -p "${Plugin_path}"
   _msg $?
-elif [[ "$Plugin_origin_type" == 'omz-old' ]]; then
-  echo "Deprecated, use ${Plugin_name/@omz-/@omz/}"
-  mkdir -p "${Plugin_destination_path:h}"
-  ln -sf "${Plugin_origin}" "${Plugin_destination_path}" 2>/dev/null
-  _msg $?
 else
   _msg skip
 fi
@@ -135,5 +130,5 @@ if [[ "$Plugin" == *',hook:'* && -e "$Plugin_path" ]]; then
   cd "$Plugin_path"
   eval "${${Plugin##*,hook:}%%\,*}" >/dev/null
 
-  echo "${c[green]}${c[bold]}Run hook for${c[reset]} ${Plugin_documentation_hyperlink} ${c[green]}✔${c[reset]}"
+  echo "${c[green]}${c[bold]}Run hook for${c[reset]} ${Plugin_documentation_hyperlink} ${c[green]}✓${c[reset]}"
 fi

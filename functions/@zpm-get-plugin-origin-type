@@ -24,9 +24,6 @@ declare -ag plugin_origin_types=(
   gist,remote
 
   exec,exec
-
-  omz-theme,omz-old
-  omz-lib,omz-old
 )
 
 if [[ "$Plugin_name" == "@"* ]]; then
@@ -43,7 +40,7 @@ if [[ "$Plugin_name" == "@"* ]]; then
   for plugin_origin_type in ${plugin_origin_types}; do
     local plugin_origin_type_key="${plugin_origin_type%%\,*}"
     local plugin_origin_type="${plugin_origin_type#*,}"
-    if [[ "$Plugin_name" == "@${plugin_origin_type_key}/"* ]];then
+    if [[ "$Plugin_name" == "@${plugin_origin_type_key}/"* ]]; then
       echo "$plugin_origin_type"
       return 0
     fi
