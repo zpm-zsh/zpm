@@ -476,6 +476,9 @@ When you make changes, add information about them to the change log in **next** 
 
 ## Changelog
 
+- 5.2
+  - Remove old omz tag
+
 - 5.1
   - Change internal functions
 
