@@ -228,7 +228,7 @@ The set of commands can be expanded extended using plugins
 
 **Important**
 
-> Be carefully, zpm doesnt guarantue loading order in call. So if you need to load a plugin **before** antoher, you should do 2 separate `zpm load` calls.
+> Be carefully, zpm doesn't guarantee loading order in call. So if you need to load a plugin **before** antoher, you should do 2 separate `zpm load` calls.
 > This is very important for oh-my-zsh plugins, because @omz-core should be loaded before
 
 Plugin name must have next form: `@plugin-type/user/plugin-name`. This plugin can be enabled using
@@ -506,7 +506,7 @@ When you make changes, add information about them to the change log in **next** 
 
 - 3.5
   - Added new logo
-  - Added posibility to use mirrors for GitHub/Gitlab/Bitbucket. See [issue](https://github.com/zpm-zsh/zpm/issues/31)
+  - Added possibility to use mirrors for GitHub/Gitlab/Bitbucket. See [issue](https://github.com/zpm-zsh/zpm/issues/31)
 
 - 3.4
   - Added GNU Parallel
