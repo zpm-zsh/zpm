@@ -31,6 +31,9 @@ elif [[ -e "${Plugin_path}/${Plugin_basename_clean}.zsh-theme" ]]; then
   echo "${Plugin_path}/${Plugin_basename_clean}.zsh-theme"
 elif [[ -e "${Plugin_path}/init.zsh" ]]; then
   echo "${Plugin_path}/init.zsh"
+elif [[ -L "${Plugin_path}" ]]; then
+  zmodload -F zsh/stat b:zstat
+  zstat +link "${Plugin_path}" 2>/dev/null
 else
   return -1
 fi
