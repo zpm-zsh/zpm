@@ -104,11 +104,15 @@ elif [[ "$Plugin_origin_type" == 'remote' ]]; then
   curl --silent "${Plugin_origin}" --output "${Plugin_destination_path}" 2>/dev/null
   _msg $?
 elif [[ "$Plugin_origin_type" == 'dir-link' ]]; then
-  ln -sf "${Plugin_origin}" "${Plugin_destination_path}" 2>/dev/null
+  if [[ "$Command" == 'install' ]]; then
+    ln -sf "${Plugin_origin}" "${Plugin_destination_path}" 2>/dev/null
+  fi
   _msg $?
 elif [[ "$Plugin_origin_type" == 'file-link' ]]; then
-  mkdir -p "${Plugin_destination_path:h}"
-  ln -sf "${Plugin_origin}" "${Plugin_destination_path}" 2>/dev/null
+  if [[ "$Command" == 'install' ]]; then
+    mkdir -p "${Plugin_destination_path:h}"
+    ln -sf "${Plugin_origin}" "${Plugin_destination_path}" 2>/dev/null
+  fi
   _msg $?
 elif [[ "$Plugin_origin_type" == 'exec' ]]; then
   mkdir -p "${Plugin_destination_path:h}"
