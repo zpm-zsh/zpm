@@ -1,5 +1,7 @@
 #!/usr/bin/env zsh
 
+source ~/.zpm/zpm.zsh
+
 ### OpenWrt
 zpm if openwrt load zpm-zsh/openwrt
 
