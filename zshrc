@@ -55,4 +55,3 @@ zpm if-not ssh load                          \
   zdharma-continuum/fast-syntax-highlighting,async     \
   zpm-zsh/history-search-multi-word,async
 
-source ~/.zshrc.local 2>/dev/null
