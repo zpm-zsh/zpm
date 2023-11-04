@@ -1,10 +1,5 @@
 #!/usr/bin/env zsh
 
-source ~/.zpm/zpm.zsh 2>/dev/null || {
-  git clone https://github.com/zpm-zsh/zpm ~/.zpm
-  source ~/.zpm/zpm.zsh
-}
-
 ### OpenWrt
 zpm if openwrt load zpm-zsh/openwrt
 
@@ -20,6 +15,9 @@ zpm if vte load zpm-zsh/vte
 
 ### MSYS
 zpm if msys load zpm-zsh/msys
+
+### macOS
+zpm if macos load zpm-zsh/macos
 
 ### VSCode
 zpm if vscode load zpm-zsh/vscode
@@ -51,8 +49,8 @@ zpm if-not ssh load                          \
   \
   mdumitru/fancy-ctrl-z,async                \
   zpm-zsh/zsh-history-substring-search,async \
-  zsh-users/zsh-autosuggestions,async        \
-  zpm-zsh/fast-syntax-highlighting,async     \
+  zsh-users/zsh-autosuggestions        \
+  zdharma-continuum/fast-syntax-highlighting,async     \
   zpm-zsh/history-search-multi-word,async
 
 source ~/.zshrc.local 2>/dev/null
