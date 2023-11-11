@@ -21,6 +21,9 @@ zpm if msys load zpm-zsh/msys
 ### VSCode
 zpm if vscode load zpm-zsh/vscode
 
+### iterm
+zpm if iterm load zpm-zsh/iterm
+
 ### 3party plugins
 zpm load                          \
   zpm-zsh/core-config             \
