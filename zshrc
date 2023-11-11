@@ -18,9 +18,6 @@ zpm if vte load zpm-zsh/vte
 ### MSYS
 zpm if msys load zpm-zsh/msys
 
-### macOS
-zpm if macos load zpm-zsh/macos
-
 ### VSCode
 zpm if vscode load zpm-zsh/vscode
 
@@ -39,19 +36,17 @@ zpm load                          \
   zpm-zsh/undollar,async
 
 ### Plugins for local host
-zpm if-not ssh load                          \
-  zpm-zsh/dropbox,apply:path:fpath           \
-  zpm-zsh/zsh-better-npm-completion,async    \
-  \
-  zpm-zsh/clipboard                          \
-  zpm-zsh/mysql-colorize,async               \
-  zpm-zsh/bookmarks,async                    \
-  voronkovich/gitignore.plugin.zsh,async     \
-  zpm-zsh/autoenv,async                      \
-  \
-  mdumitru/fancy-ctrl-z,async                \
-  zpm-zsh/zsh-history-substring-search,async \
-  zsh-users/zsh-autosuggestions        \
-  zdharma-continuum/fast-syntax-highlighting,async     \
+zpm if-not ssh load                                \
+  zpm-zsh/dropbox,apply:path:fpath                 \
+  zpm-zsh/zsh-better-npm-completion,async          \
+  zpm-zsh/clipboard                                \
+  zpm-zsh/mysql-colorize,async                     \
+  zpm-zsh/bookmarks,async                          \
+  voronkovich/gitignore.plugin.zsh,async           \
+  zpm-zsh/autoenv,async                            \
+  mdumitru/fancy-ctrl-z,async                      \
+  zpm-zsh/zsh-history-substring-search,async       \
+  zsh-users/zsh-autosuggestions,async              \
+  zdharma-continuum/fast-syntax-highlighting,async \
   zpm-zsh/history-search-multi-word,async
 
