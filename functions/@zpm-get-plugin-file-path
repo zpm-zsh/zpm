@@ -7,9 +7,12 @@ local Plugin_basename="${3}"
 local Plugin_basename_clean=$Plugin_basename
 Plugin_basename_clean=${Plugin_basename_clean##oh-my-zsh-}
 Plugin_basename_clean=${Plugin_basename_clean##zsh-}
+Plugin_basename_clean=${Plugin_basename_clean%%.plugin}
+Plugin_basename_clean=${Plugin_basename_clean%%-plugin}
 Plugin_basename_clean=${Plugin_basename_clean%%.zsh}
 Plugin_basename_clean=${Plugin_basename_clean%%-zsh}
 Plugin_basename_clean=${Plugin_basename_clean%%.plugin}
+Plugin_basename_clean=${Plugin_basename_clean%%-plugin}
 
 if [[ "$Plugin"  == *",source:"* ]]; then
   local Plugin_sourcefile="${${Plugin##*,source:}%%,*}"

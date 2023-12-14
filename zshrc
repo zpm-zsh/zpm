@@ -21,7 +21,7 @@ zpm if msys load zpm-zsh/msys
 ### VSCode
 zpm if vscode load zpm-zsh/vscode
 
-### iterm
+### iTerm2
 zpm if iterm load zpm-zsh/iterm
 
 ### 3party plugins
@@ -40,16 +40,21 @@ zpm load                          \
 
 ### Plugins for local host
 zpm if-not ssh load                                \
-  zpm-zsh/dropbox,apply:path:fpath                 \
-  zpm-zsh/zsh-better-npm-completion,async          \
-  zpm-zsh/clipboard                                \
-  zpm-zsh/mysql-colorize,async                     \
-  zpm-zsh/bookmarks,async                          \
+  mdumitru/fancy-ctrl-z,async                      \
   voronkovich/gitignore.plugin.zsh,async           \
   zpm-zsh/autoenv,async                            \
-  mdumitru/fancy-ctrl-z,async                      \
+  zpm-zsh/bookmarks,async                          \
+  zpm-zsh/clipboard                                \
+  zpm-zsh/command-not-found,async                  \
+  zpm-zsh/dropbox,apply:path:fpath                 \
+  zpm-zsh/extract,async                            \
+  zpm-zsh/history-search-multi-word,async          \
+  zpm-zsh/mysql-colorize,async                     \
+  zpm-zsh/rehash-on-usr1,async                     \
+  zpm-zsh/tmux-keys                                \
+  zpm-zsh/zsh-better-npm-completion,async          \
+  zpm-zsh/zsh-completions                          \
   zpm-zsh/zsh-history-substring-search,async       \
   zsh-users/zsh-autosuggestions,async              \
-  zdharma-continuum/fast-syntax-highlighting,async \
-  zpm-zsh/history-search-multi-word,async
+  zpm-zsh/fast-syntax-highlighting,async
 
