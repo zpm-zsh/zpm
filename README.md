@@ -452,10 +452,29 @@ BITBUCKET_MIRROR="Some url"
 
 ## Troubleshooting
 
-If you have problems with `zpm` try:
+### Powerlevel10k
+
+Powerlevel10k loads extra modules in its installation directory, which it [automatically detects by taking the file containing its init code, making it absolute, and taking its directory](https://github.com/romkatv/powerlevel10k/blob/0cc19ac2ede35fd8accff590fa71df580dc7e109/powerlevel10k.zsh-theme#L20). However, as zpm combines plugins into one fast-loading cache file, this automatic detection would break.
+
+As a workaround, you have to explicitly tell Powerlevel10k where it is installed. This needs to be done before the cache file is loaded, which means before zpm itself is loaded, like this:
 
 ```sh
-rm -rf "${TMPDIR:-/tmp}/zsh-${UID:-user}"
+# Adjust the path accordingly if your zpm is not installed at `~/.zpm` or you're
+# using a powerlevel10k fork
+export POWERLEVEL9K_INSTALLATION_DIR=~/.zpm/plugins/romkatv---powerlevel10k
+source ~/.zpm/zpm.zsh
+
+# ...
+
+zpm load romkatv/powerlevel10k
+```
+
+### Update to latest zpm
+
+If you have problems with `zpm` try updating:
+
+```sh
+rm -rf "${TMPDIR:-/tmp}/zsh-${UID:-user}" # clear the cache
 cd ~/.zpm
 git pull
 ```
