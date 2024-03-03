@@ -476,6 +476,9 @@ When you make changes, add information about them to the change log in **next** 
 
 ## Changelog
 
+- 6.0
+  - Add workarouds for powerlevel10k, zsh-syntax-highlighting, zsh-history-substring-search
+
 - 5.3
   - Change plugin file path detector
 

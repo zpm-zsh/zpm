@@ -4,6 +4,18 @@ local Plugin="${1}"
 local Plugin_path="${2}"
 local Plugin_basename="${3}"
 
+# Workaround for zsh-syntax-highlighting
+if [[ "$Plugin" == 'zsh-users/zsh-syntax-highlighting' ]]; then
+  echo "${Plugin_path}/zsh-syntax-highlighting.zsh"
+  return 0
+fi
+
+# Workaround for zsh-history-substring-search
+if [[ "$Plugin" == 'zsh-users/zsh-history-substring-search' ]]; then
+  echo "${Plugin_path}/zsh-history-substring-search.zsh"
+  return 0
+fi
+
 local Plugin_basename_clean=$Plugin_basename
 Plugin_basename_clean=${Plugin_basename_clean##oh-my-zsh-}
 Plugin_basename_clean=${Plugin_basename_clean##zsh-}
