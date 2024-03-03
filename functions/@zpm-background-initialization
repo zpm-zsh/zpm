@@ -19,11 +19,18 @@ for plugin in ${_ZPM_plugins_for_source}; do
   local file="$_ZPM_file_for_source["$plugin"]"
   echo "(){" >> "$_ZPM_TMP"
   echo "0='${file}'" >> "$_ZPM_TMP"
+
+  # Workaround for powerlevel10k
+  if [[ "$plugin" == "romkatv/powerlevel10k" ]]; then
+    echo "export POWERLEVEL9K_INSTALLATION_DIR='$(@zpm-get-plugin-path $plugin)'" >> "$_ZPM_TMP"
+  fi
+
   cat "${file}" |\
     grep -F -v '#!/usr/bin/env zsh' |\
     grep -F -v '${ZERO:-${${0:#$ZSH_ARGZERO}:-${(%):-%N}}}' |\
     grep -F -v '${${ZERO:-${0:#$ZSH_ARGZERO}}:-${(%):-%N}}' |\
     grep -F -v '${${(M)0:#/*}:-$PWD/$0}' |\
+    grep -F -v '0=${(%):-%N}' |\
     >> "$_ZPM_TMP"
   echo "}" >> "$_ZPM_TMP"
   echo >> "$_ZPM_TMP"
@@ -55,11 +62,19 @@ for plugin in ${_ZPM_plugins_for_async_source}; do
   local file="$_ZPM_file_for_async_source["$plugin"]"
   echo "(){" >> "$_ZPM_TMP_ASYNC"
   echo "0='${file}'" >> "$_ZPM_TMP_ASYNC"
+
+  # Workaround for powerlevel10k
+  if [[ "$plugin" == "romkatv/powerlevel10k" ]]; then
+    echo "export POWERLEVEL9K_INSTALLATION_DIR='$(@zpm-get-plugin-path $plugin)'" >> "$_ZPM_TMP_ASYNC"
+  fi
+
   cat "${file}" |\
     grep -F -v '#!/usr/bin/env zsh' |\
     grep -F -v '${ZERO:-${${0:#$ZSH_ARGZERO}:-${(%):-%N}}}' |\
     grep -F -v '${${ZERO:-${0:#$ZSH_ARGZERO}}:-${(%):-%N}}' |\
     grep -F -v '${${(M)0:#/*}:-$PWD/$0}' |\
+    grep -F -v '${${(M)0:#/*}:-$PWD/$0}' |\
+    grep -F -v '0=${(%):-%N}' |\
     >> "$_ZPM_TMP_ASYNC"
   echo "}" >> "$_ZPM_TMP_ASYNC"
   echo >> "$_ZPM_TMP_ASYNC"
