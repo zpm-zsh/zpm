@@ -6,7 +6,7 @@
   <p align="center">
     <a href="/LICENSE">
       <img alt="Software License" src="https://img.shields.io/github/license/zpm-zsh/zpm?style=flat-square">
-    </a>  
+    </a>
     <img alt="Travis" src="https://img.shields.io/github/languages/code-size/zpm-zsh/zpm?style=flat-square">
     <img alt="Go Report Card" src="https://img.shields.io/github/last-commit/zpm-zsh/zpm?logo=github&style=flat-square">
   </p>
@@ -496,7 +496,7 @@ When you make changes, add information about them to the change log in **next** 
 ## Changelog
 
 - 6.0
-  - Add workarouds for powerlevel10k, zsh-syntax-highlighting, zsh-history-substring-search
+  - Add workarouds for powerlevel10k, zsh-syntax-highlighting, zsh-history-substring-search, sindresorhus/pure
 
 - 5.3
   - Change plugin file path detector

@@ -3,6 +3,12 @@
 local Plugin="$1"
 local Plugin_path="$2"
 
+# Workaround for sindresorhus/pure
+if [[ "$Plugin" == 'sindresorhus/pure' ]]; then
+  echo "${Plugin_path:a}"
+  return
+fi
+
 if [[ "$Plugin" == *",fpath:"* ]]; then
   local zpm_fpath="${Plugin_path}/${${1##*,fpath:}%%,*}"
   echo "${zpm_fpath:a}"
