@@ -1,4 +1,5 @@
 <p align="center">
+  <img alt="Logo" src="images/logo.svg" height="180" />
   <h1 align="center">ZPM - Zsh Plugin Manager</h1>
   <p align="center">
     Fastest, configurable and extensible zsh plugin manager
@@ -32,23 +33,23 @@ Zpm is a plugin manager for ZSH who combines the imperative and declarative appr
 
 ## Table of Contents
 
-* [Features](#features)
-* [Table of Contents](#table-of-contents)
-* [Stats](#stats)
-* [Base dependences](#base-dependences)
-* [Installation](#installation)
-* [How to use](#how-to-use)
-  * [Load plugin](#load-plugin)
-  * [Plugin name](#plugin-name)
-  * [Plugin tags](#plugin-tags)
-  * [`if` and `if-not` conditions](#if-and-if-not-conditions)
-  * [Upgrade](#upgrade)
-  * [Clean](#clean)
-* [Configuration](#configuration)
-* [Troubleshooting](#troubleshooting)
-* [Developing process](#developing-process)
-* [TODO](#todo)
-* [Changelog](#changelog)
+- [Features](#features)
+- [Table of Contents](#table-of-contents)
+- [Stats](#stats)
+- [Base dependences](#base-dependences)
+- [Installation](#installation)
+- [How to use](#how-to-use)
+  - [Load plugin](#load-plugin)
+  - [Plugin name](#plugin-name)
+  - [Plugin tags](#plugin-tags)
+  - [`if` and `if-not` conditions](#if-and-if-not-conditions)
+  - [Upgrade](#upgrade)
+  - [Clean](#clean)
+- [Configuration](#configuration)
+- [Troubleshooting](#troubleshooting)
+- [Developing process](#developing-process)
+- [TODO](#todo)
+- [Changelog](#changelog)
 
 ## Stats
 
@@ -368,7 +369,7 @@ All plugins have internal origin type property, like: git, dir, file, remote.
 You can define own origin, but you can't mix different types of origin types.
 So, you can define Gitlab origin for GitHub plugin, or different origin for GitHub Gist plugin.
 
-* Git plugins: `@github`, `@gitlab`, `@bitbucket`, `@git`
+- Git plugins: `@github`, `@gitlab`, `@bitbucket`, `@git`
 
 ```sh
 zpm load some/plugin,origin:https://github.com/another/origin # This plugin will be loaded from https://github.com/another/origin, but will have internal name some/plugin
@@ -376,26 +377,26 @@ zpm load some/plugin,origin:https://github.com/another/origin # This plugin will
 zpm load @git/my-plugin,git://my.site/plugin.git # This plugin will be loaded from 3-party origin
 ```
 
-* Remote: `@gist`, `@remote`
+- Remote: `@gist`, `@remote`
 
 ```sh
 zpm load @gist/user/hash,origin:https://another-site/file.zsh # This file will be downloaded instead of gist
 zpm load @remote/plugin,origin:https://mysite.com/plugin.zsh # In this case origin should be declared, because zpm can't detect origin
 ```
 
-* Dir: `@dir`
+- Dir: `@dir`
 
 ```sh
 zpm load @dir/plugin,origin:/home/user/Projects/plugin # Internal plugin directory will be linked to your local directory
 ```
 
-* File: `@file`
+- File: `@file`
 
 ```sh
 zpm load @file/plugin-file,origin:/home/user/Projects/plugin.zsh # Internal plugin file will be linked to your local file
 ```
 
-* Some special types, like: `@empty`, `@omz`, `@omz/theme`, `@omz/lib`
+- Some special types, like: `@empty`, `@omz`, `@omz/theme`, `@omz/lib`
 
 Do not declare own `origin:`, because this can produce side effects
 
@@ -496,59 +497,74 @@ When you make changes, add information about them to the change log in **next** 
 ## Changelog
 
 - 6.0
+
   - Add workarouds for powerlevel10k, zsh-syntax-highlighting, zsh-history-substring-search, sindresorhus/pure
 
 - 5.3
+
   - Change plugin file path detector
 
 - 5.2
+
   - Remove old omz tag
 
 - 5.1
+
   - Change internal functions
 
 - 5.0
+
   - Removed `gen-plugin` and `gen-completion` tags
   - `@omz-theme/` and `@omz-lib/` changed to `@omz/theme/` and `@omz/lib/`
 
 - 4.2
+
   - Replace `$ZERO` with `$0`. Fixed [#43](https://github.com/zpm-zsh/zpm/issues/43)
   - Update README. [#44](https://github.com/zpm-zsh/zpm/pull/44)
 
 - 4.1
+
   - Added possibility to change parallel runner, e.g. GNU Parallel, Rush, Xargs
   - Optimize plugin load
   - Change some plugin urls
 
 - 4.0
+
   - Refactoring of internal logic
   - Added new plugin types: `@gist`, `@remote`
 
 - 3.6
+
   - Added new plugin types `@dir` and `@file`
   - `@link` now is an alias for `@dir`
   - Fixed [#35](https://github.com/zpm-zsh/zpm/issues/35)
 
 - 3.5
+
   - Added new logo
   - Added possibility to use mirrors for GitHub/Gitlab/Bitbucket. See [issue](https://github.com/zpm-zsh/zpm/issues/31)
 
 - 3.4
+
   - Added GNU Parallel
 
 - 3.3
+
   - Added `origin` tag
   - Removed `autoload-all` tag
 
 - 3.2
+
   - Fix plugin load order
   - Use sched for background run
 
 - 3.1
+
   - Fix completions
   - Add example for @omz
 
 - 3.0
+
   - Remove unused `@link`
   - Remove `tr` calls
   - Deprecate `type:` tag
@@ -561,17 +577,20 @@ When you make changes, add information about them to the change log in **next** 
     - Replace `type:plugin-type` with `@plugin-type/plugin/name`
 
 - 2.3
+
   - Improve **README**
   - Remove suppot for `zsh_loaded_plugins`
   - Add config for Markdownlint
 
 - 2.2
+
   - Add support for OpenWrt
   - Improve oh-my-zsh-support [@igetgames](https://github.com/igetgames)
   - Support for calling plugin functions from command tags [@igetgames](https://github.com/igetgames)
   - Fix autoload option processing [@igetgames](https://github.com/igetgames)
 
 - 2.1
+
   - Optimizations
   - Now all content of `/functions` and `/bin` will be copied into single dir, in zpm cache dir
   - Change `zpm` to `@zpm`
