@@ -496,6 +496,10 @@ When you make changes, add information about them to the change log in **next** 
 
 ## Changelog
 
+- 7.0
+
+  - Move zpm to `$XDG_DATA_HOME/zsh/plugins/zpm`
+
 - 6.0
 
   - Add workarouds for powerlevel10k, zsh-syntax-highlighting, zsh-history-substring-search, sindresorhus/pure

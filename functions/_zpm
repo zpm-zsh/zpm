@@ -2,20 +2,20 @@
 #autoload
 
 local _zpm_completions_plugins_local=( @zpm )
-for plugin in "${_ZPM_DIR}/plugins/"*; do
+for plugin in "${_ZPM_PLUGINS_DIR}/"*; do
   _zpm_completions_plugins_local+=( ${${plugin:t}//---/\/} )
 done
 
-if [[ -e "${_ZPM_DIR}/plugins/@omz" ]]; then
-  for omz_plugin in "${_ZPM_DIR}/plugins/@omz/plugins/"*; do
+if [[ -e "${_ZPM_PLUGINS_DIR}/@omz" ]]; then
+  for omz_plugin in "${_ZPM_PLUGINS_DIR}/@omz/plugins/"*; do
     _zpm_completions_plugins_local+=( "@omz/${omz_plugin:t}" )
   done
 
-  for omz_lib in "${_ZPM_DIR}/plugins/@omz/lib/"*; do
+  for omz_lib in "${_ZPM_PLUGINS_DIR}/@omz/lib/"*; do
     _zpm_completions_plugins_local+=( "@omz/lib/${${omz_lib:t}%.zsh}" )
   done
 
-  for omz_theme in "${_ZPM_DIR}/plugins/@omz/themes/"*; do
+  for omz_theme in "${_ZPM_PLUGINS_DIR}/@omz/themes/"*; do
     _zpm_completions_plugins_local+=( "@omz/theme/${${omz_theme:t}%.zsh-theme}" )
   done
 fi

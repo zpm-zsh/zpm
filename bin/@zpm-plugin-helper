@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 
-fpath+=("${_ZPM_DIR}/functions" "${ZSH_CACHE_DIR}/functions")
+fpath+=("${_ZPM_DIR}/functions" "${ZSH_TMP_DIR}/functions")
 
 function _msg() {
   local msg
@@ -93,7 +93,7 @@ fi
 
 if [[ "$Plugin_origin_type" == 'git' ]]; then
   if [[ "$Command" == 'install' ]]; then
-    mkdir -p "${Plugin_destination_path}"
+    mkdir -p "${Plugin_destination_path}/.."
     git clone --recursive "${Plugin_origin}" --depth 1 --single-branch "${Plugin_destination_path}" </dev/null >/dev/null 2>/dev/null
   else
     git --git-dir="${Plugin_destination_path}/.git/" --work-tree="${Plugin_destination_path}" pull </dev/null >/dev/null 2>/dev/null

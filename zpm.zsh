@@ -12,13 +12,19 @@
 export PMSPEC="0fbs"
 export _ZPM_DIR="${${(%):-%x}:h}"
 
-export ZSH_CACHE_DIR="${ZSH_CACHE_DIR:-${TMPDIR:-/tmp}/zsh-${UID:-user}}"
-_ZPM_CACHE="${ZSH_CACHE_DIR}/zpm-cache.zsh"
-_ZPM_CACHE_ASYNC="${ZSH_CACHE_DIR}/zpm-cache-async.zsh"
-_ZPM_COMPDUMP="${ZSH_CACHE_DIR}/zcompdump"
+export ZSH_TMP_DIR="${ZSH_TMP_DIR:-${TMPDIR:-/tmp}/zsh-${UID:-user}}"
+_ZPM_CACHE="${ZSH_TMP_DIR}/zpm-cache.zsh"
+_ZPM_CACHE_ASYNC="${ZSH_TMP_DIR}/zpm-cache-async.zsh"
 
-fpath=("${_ZPM_DIR}/functions" "${ZSH_CACHE_DIR}/functions" $fpath)
-export PATH="${ZSH_CACHE_DIR}/bin:$PATH"
+export ZSH_DATA_HOME="${ZSH_DATA_HOME:-${XDG_DATA_HOME:-$HOME/.local/share}/zsh}"
+_ZPM_PLUGINS_DIR="${ZSH_DATA_HOME}/plugins"
+_ZPM_PLUGIN_DIR="${ZSH_DATA_HOME}/plugins/zpm"
+
+export ZSH_CACHE_HOME="${ZSH_CACHE_HOME:-${XDG_CACHE_HOME:-$HOME/.cache}/zsh}"
+_ZPM_COMPDUMP="${ZSH_CACHE_HOME}/zcompdump-${ZSH_VERSION}"
+
+fpath=("${_ZPM_DIR}/functions" "${ZSH_TMP_DIR}/functions" $fpath)
+export PATH="${ZSH_TMP_DIR}/bin:$PATH"
 typeset -gaU path fpath
 
 autoload -Uz compinit

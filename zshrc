@@ -1,6 +1,7 @@
 #!/usr/bin/env zsh
 
-source ~/.zpm/zpm.zsh
+_ZPM_PLUGIN_FILE="${${(%):-%x}:h}/zpm.zsh"
+source "$_ZPM_PLUGIN_FILE"
 
 ### OpenWrt
 zpm if openwrt load zpm-zsh/openwrt
@@ -57,4 +58,3 @@ zpm if-not ssh load                                \
   zpm-zsh/zsh-history-substring-search,async       \
   zsh-users/zsh-autosuggestions,async              \
   zpm-zsh/fast-syntax-highlighting,async
-
