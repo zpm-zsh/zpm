@@ -1,6 +1,7 @@
 #!/usr/bin/env zsh
 
-_ZPM_PLUGIN_FILE="${${(%):-%x}:h}/zpm.zsh"
+0="${${(M)0:#/*}:-$PWD/$0}"
+_ZPM_PLUGIN_FILE="${0:h}/zpm.zsh"
 source "$_ZPM_PLUGIN_FILE"
 
 ### OpenWrt

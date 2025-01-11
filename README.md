@@ -192,9 +192,11 @@ Add the following text into `.zshrc`
 
 ```sh
 if [[ ! -f ~/.zpm/zpm.zsh ]]; then
-  git clone --recursive https://github.com/zpm-zsh/zpm ~/.zpm
+  git clone --recursive https://github.com/zpm-zsh/zpm "${XDG_DATA_HOME:-$HOME/.local/share}/zsh/plugins/@zpm"
 fi
-source ~/.zpm/zpm.zsh
+source "${XDG_DATA_HOME:-$HOME/.local/share}/zsh/plugins/@zpm/zpm.zsh"
+# Or source our zshrc
+# source "${XDG_DATA_HOME:-$HOME/.local/share}/zsh/plugins/@zpm/zshrc"
 ```
 
 If you don't have `.zshrc` copy example of `.zshrc` from zpm

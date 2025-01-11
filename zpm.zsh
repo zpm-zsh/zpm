@@ -10,7 +10,9 @@
 # P – … the ZPFX global parameter,
 # s – … the PMSPEC global parameter itself (i.e.: should be always present).
 export PMSPEC="0fbs"
-export _ZPM_DIR="${${(%):-%x}:h}"
+
+0="${${(M)0:#/*}:-$PWD/$0}"
+export _ZPM_DIR="${0:h}"
 
 export ZSH_TMP_DIR="${ZSH_TMP_DIR:-${TMPDIR:-/tmp}/zsh-${UID:-user}}"
 _ZPM_CACHE="${ZSH_TMP_DIR}/zpm-cache.zsh"
