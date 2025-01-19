@@ -1,7 +1,8 @@
 #!/usr/bin/env zsh
 
-0="${${(M)0:#/*}:-$PWD/$0}"
-_ZPM_PLUGIN_FILE="${0:h}/zpm.zsh"
+# Set xdg param XDG_DATA_HOME
+
+_ZPM_PLUGIN_FILE="${XDG_DATA_HOME:-$HOME/.local/share}/zsh/plugins/@zpm/zpm.zsh"
 source "$_ZPM_PLUGIN_FILE"
 
 ### OpenWrt
