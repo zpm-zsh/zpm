@@ -101,7 +101,7 @@ if [[ "$Plugin_origin_type" == 'git' ]]; then
   _msg $?
 elif [[ "$Plugin_origin_type" == 'remote' ]]; then
   mkdir -p "${Plugin_destination_path:h}"
-  curl --silent "${Plugin_origin}" --output "${Plugin_destination_path}" 2>/dev/null
+  curl -fSL --silent "${Plugin_origin}" --output "${Plugin_destination_path}" 2>/dev/null
   _msg $?
 elif [[ "$Plugin_origin_type" == 'dir-link' ]]; then
   if [[ "$Command" == 'install' ]]; then
