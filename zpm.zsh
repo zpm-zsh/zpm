@@ -14,7 +14,7 @@ export PMSPEC="0fbs"
 0="${${(M)0:#/*}:-$PWD/$0}"
 export _ZPM_DIR="${0:h}"
 
-export ZSH_TMP_DIR="${ZSH_TMP_DIR:-${TMPDIR:-/tmp}/zsh-${UID:-user}}"
+export ZSH_TMP_DIR="${ZSH_TMP_DIR:-${XDG_STATE_HOME:-$HOME/.local/state}/zsh}"
 _ZPM_CACHE="${ZSH_TMP_DIR}/zpm-cache.zsh"
 _ZPM_CACHE_ASYNC="${ZSH_TMP_DIR}/zpm-cache-async.zsh"
 
