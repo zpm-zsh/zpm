@@ -1,31 +1,41 @@
 #!/usr/bin/env zsh
 
-local Plugin_name="$1"
-local Plugin_type="$2"
-local Plugin_origin="$3"
+local plugin_name="$1"
+local plugin_type="$2"
+local plugin_origin="$3"
 
-if [[ "$Plugin_type" == 'github' ]]; then
-  echo "https://github.com/${Plugin_name}"
-elif [[ "$Plugin_type" == 'gitlab' ]]; then
-  echo "https://gitlab.com/${Plugin_name}"
-elif [[ "$Plugin_type" == 'bitbucket' ]]; then
-  echo "https://bitbucket.com/${Plugin_name}"
-elif [[ "$Plugin_type" == 'zpm' ]]; then
-  echo "https://github.com/zpm-zsh/zpm"
-elif [[ "$Plugin_type" == 'omz-core' ]]; then
-  echo "https://github.com/ohmyzsh/ohmyzsh"
-elif [[ "$Plugin_type" == 'omz' ]]; then
-  echo "https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/${Plugin_name#*/}"
-elif [[ "$Plugin_type" == 'omz-lib' ]]; then
-  echo "https://github.com/ohmyzsh/ohmyzsh/tree/master/lib/${Plugin_name#*/}.zsh"
-elif [[ "$Plugin_type" == 'omz-theme' ]]; then
-  echo "https://github.com/ohmyzsh/ohmyzsh/tree/master/themes/${Plugin_name#*/}.zsh-theme"
-elif [[ "$Plugin_type" == 'gist' ]]; then
-  echo "https://gist.githubusercontent.com/${Plugin_striped_name}"
-elif [[ "$Plugin_type" == 'dir' ]]; then
-  echo "file://${Plugin_origin}"
-elif [[ "$Plugin_type" == 'file' ]]; then
-  echo "file://${Plugin_origin}"
-else
-  return -1
-fi
+case "$plugin_type" in
+  github)
+    print -r -- "https://github.com/${plugin_name}"
+    ;;
+  gitlab)
+    print -r -- "https://gitlab.com/${plugin_name}"
+    ;;
+  bitbucket)
+    print -r -- "https://bitbucket.com/${plugin_name}"
+    ;;
+  zpm)
+    print -r -- 'https://github.com/zpm-zsh/zpm'
+    ;;
+  omz-core)
+    print -r -- 'https://github.com/ohmyzsh/ohmyzsh'
+    ;;
+  omz)
+    print -r -- "https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/${plugin_name#*/}"
+    ;;
+  omz-lib)
+    print -r -- "https://github.com/ohmyzsh/ohmyzsh/tree/master/lib/${plugin_name#*/}.zsh"
+    ;;
+  omz-theme)
+    print -r -- "https://github.com/ohmyzsh/ohmyzsh/tree/master/themes/${plugin_name#*/}.zsh-theme"
+    ;;
+  gist)
+    print -r -- "https://gist.githubusercontent.com/${plugin_name#@*/}"
+    ;;
+  dir|file)
+    print -r -- "file://${plugin_origin}"
+    ;;
+  *)
+    return -1
+    ;;
+esac

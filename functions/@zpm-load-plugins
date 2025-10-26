@@ -1,33 +1,33 @@
 #!/usr/bin/env zsh
 
 # Check if plugin isn't loaded
-local -a Plugins_Install
-local -a Plugins_Load_Order
-local -A Plugins_Load
+local -a plugins_install=()
+local -a plugins_load_order=()
+local -A plugins_load=()
 
-for plugin in $@; do
-  local Plugin_name=$(@zpm-get-plugin-name "$plugin")
+for plugin in "$@"; do
+  local plugin_name=$(@zpm-get-plugin-name "$plugin")
 
-  if [[ ! -z $_ZPM_plugins_full[$Plugin_name] ]]; then
-    @zpm-log zpm:init:skip "Skip initialization '$Plugin_name', plugin already loaded"
-  else
-    _ZPM_plugins_full[$Plugin_name]="$plugin"
-
-    local Plugin_path=$(@zpm-get-plugin-path "$Plugin_name")
-
-    if [[ ! -e $Plugin_path ]]; then
-      Plugins_Install+=("$plugin")
-    fi
-
-    Plugins_Load_Order+=($Plugin_name)
-    Plugins_Load[$Plugin_name]="$plugin"
+  if [[ -n ${_ZPM_plugins_full[$plugin_name]-} ]]; then
+    @zpm-log zpm:init:skip "Skip initialization '${plugin_name}', plugin already loaded"
+    continue
   fi
+
+  _ZPM_plugins_full[$plugin_name]="$plugin"
+
+  local plugin_path=$(@zpm-get-plugin-path "$plugin_name")
+  if [[ ! -e "$plugin_path" ]]; then
+    plugins_install+=("$plugin")
+  fi
+
+  plugins_load_order+=("$plugin_name")
+  plugins_load[$plugin_name]="$plugin"
 done
 
-if [[ -n "$Plugins_Install[@]" ]]; then;
-  @zpm-launch-plugin-helper install "${Plugins_Install[@]}"
+if (( ${#plugins_install} )); then
+  @zpm-launch-plugin-helper install "${plugins_install[@]}"
 fi
 
-for plugin_name in $Plugins_Load_Order; do
-  @zpm-initialize-plugin "${Plugins_Load[$plugin_name]}" "$plugin_name"
+for plugin_name in "${plugins_load_order[@]}"; do
+  @zpm-initialize-plugin "${plugins_load[$plugin_name]}" "$plugin_name"
 done

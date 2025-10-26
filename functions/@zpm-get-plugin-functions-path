@@ -1,23 +1,36 @@
 #!/usr/bin/env zsh
 
-local Plugin="$1"
-local Plugin_path="$2"
+local plugin_spec="$1"
+local plugin_path="$2"
 
-# Workaround for sindresorhus/pure
-if [[ "$Plugin" == 'sindresorhus/pure' ]]; then
-  echo "${Plugin_path:a}"
-  return
+if [[ -z "$plugin_path" ]]; then
+  return -1
 fi
 
-if [[ "$Plugin" == *",fpath:"* ]]; then
-  local zpm_fpath="${Plugin_path}/${${1##*,fpath:}%%,*}"
-  echo "${zpm_fpath:a}"
-elif [[ -d "${Plugin_path}/functions" ]]; then
-  zpm_fpath="${Plugin_path}/functions"
-  echo "${zpm_fpath:a}"
-else
-  for file in "${Plugin_path}/_"*(N); do
-    echo "${Plugin_path:a}"
-    return
-  done
+if [[ "$plugin_spec" == 'sindresorhus/pure' ]]; then
+  print -r -- "${plugin_path:a}"
+  return 0
 fi
+
+local candidate
+if [[ "$plugin_spec" == *",fpath:"* ]]; then
+  candidate="${plugin_path}/${${plugin_spec##*,fpath:}%%,*}"
+  [[ -d "$candidate" ]] || return -1
+  print -r -- "${candidate:a}"
+  return 0
+fi
+
+candidate="${plugin_path}/functions"
+if [[ -d "$candidate" ]]; then
+  print -r -- "${candidate:a}"
+  return 0
+fi
+
+local file
+for file in "$plugin_path"/_*; do
+  [[ -e "$file" ]] || continue
+  print -r -- "${plugin_path:a}"
+  return 0
+done
+
+return -1

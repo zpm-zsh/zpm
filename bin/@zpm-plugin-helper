@@ -3,38 +3,36 @@
 fpath+=("${_ZPM_DIR}/functions" "${ZSH_TMP_DIR}/functions")
 
 function _msg() {
-  local msg
-  local color
+  local status="$1"
+  local action_label skip_label fail_label msg color symbol
 
   if [[ "$Command" == "install" ]]; then
-    if [[ "$1" == "skip" ]]; then
-      msg="Skip install"
-      color="${c[yellow]}${c[bold]}"
-      symbol='✗'
-    elif [[ "$1" == "0" ]]; then
-      msg="Install"
-      color="${c[green]}${c[bold]}"
-      symbol='✓'
-    else
-      msg="Can't install"
-      color="${c[red]}${c[bold]}"
-      symbol='✗'
-    fi
-  elif [[ "$Command" == "upgrade" ]]; then
-    if [[ "$1" == "skip" ]]; then
-      msg='Skip upgrade'
-      color="${c[yellow]}${c[bold]}"
-      symbol='✗'
-    elif [[ "$1" == "0" ]]; then
-      msg='Upgrade'
-      color="${c[green]}${c[bold]}"
-      symbol='✓'
-    else
-      msg="Can't upgrade"
-      color="${c[red]}${c[bold]}"
-      symbol='✗'
-    fi
+    action_label='Install'
+    skip_label='Skip install'
+    fail_label="Can't install"
+  else
+    action_label='Upgrade'
+    skip_label='Skip upgrade'
+    fail_label="Can't upgrade"
   fi
+
+  case "$status" in
+    skip)
+      msg="$skip_label"
+      color="${c[yellow]}${c[bold]}"
+      symbol='✗'
+      ;;
+    0)
+      msg="$action_label"
+      color="${c[green]}${c[bold]}"
+      symbol='✓'
+      ;;
+    *)
+      msg="$fail_label"
+      color="${c[red]}${c[bold]}"
+      symbol='✗'
+      ;;
+  esac
 
   echo "${color}${c[bold]}${msg}${c[reset]} ${Plugin_documentation_hyperlink} ${color}${symbol}${c[reset]}"
 }
@@ -91,48 +89,74 @@ else
   echo Unknown command
 fi
 
-if [[ "$Plugin_origin_type" == 'git' ]]; then
-  if [[ "$Command" == 'install' ]]; then
-    mkdir -p "${Plugin_destination_path}/.."
-    git clone --recursive "${Plugin_origin}" --depth 1 --single-branch "${Plugin_destination_path}" </dev/null >/dev/null 2>/dev/null
-  else
-    git --git-dir="${Plugin_destination_path}/.git/" --work-tree="${Plugin_destination_path}" pull </dev/null >/dev/null 2>/dev/null
-  fi
-  _msg $?
-elif [[ "$Plugin_origin_type" == 'remote' ]]; then
-  mkdir -p "${Plugin_destination_path:h}"
-  curl -fSL --silent "${Plugin_origin}" --output "${Plugin_destination_path}" 2>/dev/null
-  _msg $?
-elif [[ "$Plugin_origin_type" == 'dir-link' ]]; then
-  if [[ "$Command" == 'install' ]]; then
-    ln -sf "${Plugin_origin}" "${Plugin_destination_path}" 2>/dev/null
-  fi
-  _msg $?
-elif [[ "$Plugin_origin_type" == 'file-link' ]]; then
-  if [[ "$Command" == 'install' ]]; then
-    mkdir -p "${Plugin_destination_path:h}"
-    ln -sf "${Plugin_origin}" "${Plugin_destination_path}" 2>/dev/null
-  fi
-  _msg $?
-elif [[ "$Plugin_origin_type" == 'exec' ]]; then
-  mkdir -p "${Plugin_destination_path:h}"
-  cd "${Plugin_destination_path:h}"
-  eval "$Plugin_origin" 1>! "${Plugin_destination_path}" 2>/dev/null
-  _msg $?
-elif [[ "$Plugin_origin_type" == 'empty' ]]; then
-  mkdir -p "${Plugin_path}"
-  _msg $?
-else
-  _msg skip
-fi
+local destination_parent="${Plugin_destination_path:h}"
+local status=0
+
+case "$Plugin_origin_type" in
+  git)
+    if [[ "$Command" == 'install' ]]; then
+      mkdir -p "${destination_parent}" || status=$?
+      if [[ $status -eq 0 ]]; then
+        git clone --recursive "${Plugin_origin}" --depth 1 --single-branch "${Plugin_destination_path}" </dev/null >/dev/null 2>/dev/null || status=$?
+      fi
+    else
+      git --git-dir="${Plugin_destination_path}/.git/" --work-tree="${Plugin_destination_path}" pull </dev/null >/dev/null 2>/dev/null || status=$?
+    fi
+    ;;
+  remote)
+    mkdir -p "${destination_parent}" || status=$?
+    if [[ $status -eq 0 ]]; then
+      curl -fSL --silent "${Plugin_origin}" --output "${Plugin_destination_path}" 2>/dev/null || status=$?
+    fi
+    ;;
+  dir-link)
+    if [[ "$Command" == 'install' ]]; then
+      ln -sf "${Plugin_origin}" "${Plugin_destination_path}" 2>/dev/null
+      status=$?
+    else
+      status='skip'
+    fi
+    ;;
+  file-link)
+    if [[ "$Command" == 'install' ]]; then
+      mkdir -p "${destination_parent}" || status=$?
+      if [[ $status -eq 0 ]]; then
+        ln -sf "${Plugin_origin}" "${Plugin_destination_path}" 2>/dev/null || status=$?
+      fi
+    else
+      status='skip'
+    fi
+    ;;
+  exec)
+    mkdir -p "${destination_parent}" || status=$?
+    if [[ $status -eq 0 ]]; then
+      (
+        cd "${destination_parent}" || exit 1
+        eval "$Plugin_origin" 1>! "${Plugin_destination_path}" 2>/dev/null
+      ) || status=$?
+    fi
+    ;;
+  empty)
+    mkdir -p "${Plugin_path}" || status=$?
+    ;;
+  *)
+    status='skip'
+    ;;
+esac
+
+_msg "$status"
 
 if [[ "$Plugin" == *',destination:bin'* ]]; then
   chmod +x "${Plugin_destination_path}" >/dev/null 2>/dev/null
 fi
 
 if [[ "$Plugin" == *',hook:'* && -e "$Plugin_path" ]]; then
-  cd "$Plugin_path"
-  eval "${${Plugin##*,hook:}%%\,*}" >/dev/null
-
-  echo "${c[green]}${c[bold]}Run hook for${c[reset]} ${Plugin_documentation_hyperlink} ${c[green]}✓${c[reset]}"
+  local hook_command="${${Plugin##*,hook:}%%\,*}"
+  if [[ -n "$hook_command" ]]; then
+    (
+      cd "$Plugin_path" || exit 1
+      eval "$hook_command" >/dev/null
+    )
+    echo "${c[green]}${c[bold]}Run hook for${c[reset]} ${Plugin_documentation_hyperlink} ${c[green]}✓${c[reset]}"
+  fi
 fi

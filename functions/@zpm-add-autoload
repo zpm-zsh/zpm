@@ -1,6 +1,11 @@
 #!/usr/bin/env zsh
 
-for autoload_file in ${(s.:.)1}; do
-  _ZPM_autoload+=("${autoload_file}")
-  autoload -Uz -- "${autoload_file}"
+local raw="${1:-}"
+[[ -n "$raw" ]] || return 0
+
+local autoload_file
+for autoload_file in ${(s.:.)raw}; do
+  [[ -n "$autoload_file" ]] || continue
+  _ZPM_autoload+=("$autoload_file")
+  autoload -Uz -- "$autoload_file"
 done

@@ -1,17 +1,30 @@
 #!/usr/bin/env zsh
 
-if [[ -n "$DEBUG" &&  "${1}:" == "${DEBUG}:"*  ]]; then
-  local num=0
-  local i=0
+local namespace="$1"
+[[ -n "$namespace" ]] || return 0
 
-  while [[ $i -lt $(( ${#1} + 1 )) ]]; do
-    num=$(( $num + $(LC_CTYPE=C printf '%d' "'${1[$i]})") ))
-    i=$(( $i + 1))
-  done
-
-  color=$(( $num % 6 + 1 ))
-
-  echo -n "[1;3${color}m$1 [0m"
-  shift
-  echo "$@"
+if [[ -z "$DEBUG" || "${namespace}:" != ${DEBUG}:* ]]; then
+  return 0
 fi
+
+shift
+
+local hash=0
+local idx=1
+local char
+while [[ $idx -le ${#namespace} ]]; do
+  char=${namespace[$idx]}
+  hash=$(( hash + $(LC_CTYPE=C printf '%d' "'${char}") ))
+  idx=$(( idx + 1 ))
+done
+
+local color=$(( hash % 6 + 1 ))
+
+printf '\033[1;3%sm%s \033[0m' "$color" "$namespace"
+
+local arg
+for arg in "$@"; do
+  printf ' %s' "$arg"
+done
+
+printf '\n'

@@ -1,7 +1,8 @@
 #!/usr/bin/env zsh
 
-local Plugin_name="$1"
-declare -ag plugin_origin_types=(
+local plugin_name="$1"
+
+local -a plugin_origin_types=(
   empty,empty
 
   gh,git
@@ -26,22 +27,20 @@ declare -ag plugin_origin_types=(
   exec,exec
 )
 
-if [[ "$Plugin_name" == "@"* ]]; then
-  if [[ "$Plugin_name" == '@zpm' ]]; then
-    echo 'git'
-    return 0
-  fi
+if [[ "$plugin_name" == "@"* ]]; then
+  case "$plugin_name" in
+    @zpm|@omz)
+      print -r -- 'git'
+      return 0
+      ;;
+  esac
 
-  if [[ "$Plugin_name" == '@omz' ]]; then
-    echo 'git'
-    return 0
-  fi
-
-  for plugin_origin_type in ${plugin_origin_types}; do
-    local plugin_origin_type_key="${plugin_origin_type%%\,*}"
-    local plugin_origin_type="${plugin_origin_type#*,}"
-    if [[ "$Plugin_name" == "@${plugin_origin_type_key}/"* ]]; then
-      echo "$plugin_origin_type"
+  local entry entry_key entry_value
+  for entry in "${plugin_origin_types[@]}"; do
+    entry_key="${entry%%,*}"
+    entry_value="${entry#*,}"
+    if [[ "$plugin_name" == "@${entry_key}/"* ]]; then
+      print -r -- "$entry_value"
       return 0
     fi
   done
@@ -49,8 +48,8 @@ if [[ "$Plugin_name" == "@"* ]]; then
   return -1
 fi
 
-if [[ "$Plugin_name" = *'/'* && "$Plugin_name" != *'/'*'/'* ]]; then
-  echo 'git'
+if [[ "$plugin_name" == */* && "$plugin_name" != *'/'*'/'* ]]; then
+  print -r -- 'git'
   return 0
 fi
 

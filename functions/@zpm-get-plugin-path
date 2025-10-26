@@ -1,10 +1,10 @@
 #!/usr/bin/env zsh
 
-local Plugin_name="$1"
+local plugin_name="$1"
 
-if [[ "$Plugin_name" == "@zpm" ]]; then
-  echo "${_ZPM_DIR}"
+if [[ "$plugin_name" == "@zpm" ]]; then
+  print -r -- "${_ZPM_DIR}"
   return 0
 fi
 
-echo "${_ZPM_PLUGINS_DIR}/${Plugin_name//\//---}"
+print -r -- "${_ZPM_PLUGINS_DIR}/${plugin_name//\//---}"

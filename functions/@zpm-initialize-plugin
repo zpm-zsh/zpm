@@ -5,39 +5,40 @@ local Plugin_name="$2"
 local Plugin_basename=$(@zpm-get-plugin-basename "$Plugin_name")
 local Plugin_path=$(@zpm-get-plugin-path "$Plugin_name")
 
-local zpm_plugin_source=true
-local zpm_plugin_async=false
-local zpm_plugin_bin_path=true
-local zpm_plugin_functions_path=true
 local zpm_plugin_autoload=''
+
+local zpm_plugin_source=false
+local zpm_plugin_async=false
+local zpm_plugin_bin_path=false
+local zpm_plugin_functions_path=false
+
+local apply_spec="source:path:fpath"
+if [[ "$Plugin" == *",apply:"* ]]; then
+  apply_spec="${${Plugin##*,apply:}%%\,*}"
+fi
+local apply_flags=":${apply_spec}:"
+
+if [[ "$apply_flags" == *":source:"* ]]; then
+  zpm_plugin_source=true
+fi
+
+if [[ "$apply_flags" == *":path:"* ]]; then
+  zpm_plugin_bin_path=true
+fi
+
+if [[ "$apply_flags" == *":fpath:"* ]]; then
+  zpm_plugin_functions_path=true
+fi
+
+if [[ ",$Plugin," == *",async,"* ]]; then
+  zpm_plugin_async=true
+fi
 
 if [[ -f "${Plugin_path}/plugin-options.zsh" ]]; then
   source "${Plugin_path}/plugin-options.zsh"
 fi
 
 @zpm-log zpm:init "Initialize '${Plugin_name}'"
-
-# Config
-if [[ "$Plugin" == *",apply:"* ]]; then
-  local _ZPM_tag_str=${Plugin##*,apply}
-  _ZPM_tag_str=${_ZPM_tag_str%%\,*}
-
-  if [[ "$_ZPM_tag_str" != *':source'* ]]; then
-    zpm_plugin_source=false
-  fi
-
-  if [[ "$_ZPM_tag_str" != *':path'* ]]; then
-    zpm_plugin_bin_path=false
-  fi
-
-  if [[ "$_ZPM_tag_str" != *':fpath'* ]]; then
-    zpm_plugin_functions_path=false
-  fi
-fi
-
-if [[ "$Plugin" == *",async"* ]]; then
-  zpm_plugin_async=true
-fi
 
 # Fpath
 if [[ "$zpm_plugin_functions_path" == "true" ]]; then

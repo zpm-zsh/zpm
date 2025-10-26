@@ -1,36 +1,33 @@
 #!/usr/bin/env zsh
 
-local Plugin_name="$1"
-local Plugin_link="$2"
-local status_string
+local plugin_name="$1"
+local plugin_link="$2"
 
-function join() { # usage: join ', ' "${array[@]}"
-  local sep=$1 arg
-  printf %s "$2"
-  shift 2
-  for arg do
-    printf %s%s "$sep" "$arg"
-  done
-  printf '\n'
-}
-
-plugin_name_arr=
-local -a plugin_name_arr_color
-
-for plugin in ${(s./.)Plugin_name}; do
-  if [[ "$plugin" == "@"* ]]; then
-    plugin_name_arr_color=($plugin_name_arr_color "${c[cyan]}${c[bold]}${plugin}" )
+local -a colored_parts=()
+local part
+for part in ${(s./.)plugin_name}; do
+  if [[ "$part" == @* ]]; then
+    colored_parts+=("${c[cyan]}${c[bold]}${part}")
   else
-    plugin_name_arr_color=($plugin_name_arr_color "${c[blue]}${c[bold]}${plugin}" )
+    colored_parts+=("${c[blue]}${c[bold]}${part}")
   fi
 done
 
-if [[ -z "$Plugin_link" ]]; then
-  status_string="$(join "${c[red]}${c[bold]}/" $plugin_name_arr_color)"
-else
-  status_string="\033]8;;${Plugin_link}\a"
-  status_string+="$(join "${c[red]}${c[bold]}/" $plugin_name_arr_color)"
-  status_string+="\033]8;;\a${c[reset]}"
+if (( ${#colored_parts} == 0 )); then
+  colored_parts=("${plugin_name}")
 fi
 
-echo $status_string
+local separator="${c[red]}${c[bold]}/"
+local joined="${colored_parts[1]}"
+local idx
+for idx in {2..${#colored_parts}}; do
+  joined+="${separator}${colored_parts[idx]}"
+done
+
+local status_string="$joined${c[reset]}"
+
+if [[ -n "$plugin_link" ]]; then
+  status_string="\033]8;;${plugin_link}\a${joined}\033]8;;\a${c[reset]}"
+fi
+
+print -r -- "$status_string"

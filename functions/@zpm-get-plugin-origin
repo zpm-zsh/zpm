@@ -1,42 +1,52 @@
 #!/usr/bin/env zsh
 
-local Plugin="$1"
-local Plugin_name="$2"
-local Plugin_basename="$3"
-local Plugin_type="$4"
-local Plugin_origin_type="$5"
+local plugin_spec="$1"
+local plugin_name="$2"
+local plugin_basename="$3"
+local plugin_type="$4"
 
-local Plugin_striped_name="${Plugin_name#@*/}"
 
-if [[ "$Plugin" == *",origin:"* ]]; then
-  echo "${${Plugin##*,origin:}%%,*}"
+local plugin_stripped_name="${plugin_name#@*/}"
+
+if [[ "$plugin_spec" == *",origin:"* ]]; then
+  print -r -- "${${plugin_spec##*,origin:}%%,*}"
   return 0
 fi
 
-GITHUB_URL=${GITHUB_MIRROR:-'https://github.com'}
-GITLAB_URL=${GITLAB_MIRROR:-'https://gitlab.com'}
-BITBUCKET_URL=${BITBUCKET_MIRROR:-'https://bitbucket.com'}
+local github_url="${GITHUB_MIRROR:-https://github.com}"
+local gitlab_url="${GITLAB_MIRROR:-https://gitlab.com}"
+local bitbucket_url="${BITBUCKET_MIRROR:-https://bitbucket.com}"
+local omz_path
 
-if [[ "$Plugin_type" == 'github' ]]; then
-  echo "${GITHUB_URL}/${Plugin_striped_name}"
-elif [[ "$Plugin_type" == 'gitlab' ]]; then
-  echo "${GITLAB_URL}/${Plugin_striped_name}"
-elif [[ "$Plugin_type" == 'bitbucket' ]]; then
-  echo "${BITBUCKET_URL}/${Plugin_striped_name}"
-elif [[ "$Plugin_type" == 'omz-core' ]]; then
-  echo "${GITHUB_URL}/ohmyzsh/ohmyzsh"
-elif [[ "$Plugin_type" == 'omz' ]]; then
-  echo "$(@zpm-get-plugin-path @omz)/plugins/${Plugin_basename}"
-elif [[ "$Plugin_type" == 'omz-theme' ]]; then
-  echo "$(@zpm-get-plugin-path @omz)/themes/${Plugin_basename}.zsh-theme"
-elif [[ "$Plugin_type" == 'omz-lib' ]]; then
-  echo "$(@zpm-get-plugin-path @omz)/lib/${Plugin_basename}.zsh"
-elif [[ "$Plugin_type" == 'omz-theme-old' ]]; then
-  echo "$(@zpm-get-plugin-path @omz)/themes/${Plugin_basename}.zsh-theme"
-elif [[ "$Plugin_type" == 'omz-lib-old' ]]; then
-  echo "$(@zpm-get-plugin-path @omz)/lib/${Plugin_basename}.zsh"
-elif [[ "$Plugin_type" == 'gist' ]]; then
-  echo "https://gist.githubusercontent.com/${Plugin_striped_name}/raw"
-else
-  return -1
-fi
+case "$plugin_type" in
+  github)
+    print -r -- "${github_url}/${plugin_stripped_name}"
+    ;;
+  gitlab)
+    print -r -- "${gitlab_url}/${plugin_stripped_name}"
+    ;;
+  bitbucket)
+    print -r -- "${bitbucket_url}/${plugin_stripped_name}"
+    ;;
+  omz-core)
+    print -r -- "${github_url}/ohmyzsh/ohmyzsh"
+    ;;
+  omz)
+    omz_path=$(@zpm-get-plugin-path @omz)
+    print -r -- "${omz_path}/plugins/${plugin_basename}"
+    ;;
+  omz-theme|omz-theme-old)
+    omz_path=$(@zpm-get-plugin-path @omz)
+    print -r -- "${omz_path}/themes/${plugin_basename}.zsh-theme"
+    ;;
+  omz-lib|omz-lib-old)
+    omz_path=$(@zpm-get-plugin-path @omz)
+    print -r -- "${omz_path}/lib/${plugin_basename}.zsh"
+    ;;
+  gist)
+    print -r -- "https://gist.githubusercontent.com/${plugin_stripped_name}/raw"
+    ;;
+  *)
+    return -1
+    ;;
+esac

@@ -1,3 +1,6 @@
 #!/usr/bin/env zsh
 
-cp -RpLf "${1}/." "${ZSH_TMP_DIR}/bin"
+local source_dir="${1:-}"
+[[ -n "$source_dir" && -d "$source_dir" ]] || return 0
+
+cp -RpLf "${source_dir}/." "${ZSH_TMP_DIR}/bin"

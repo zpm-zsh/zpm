@@ -1,3 +1,5 @@
 #!/usr/bin/env zsh
 
-echo "${1%%,*}"
+local plugin_spec="$1"
+
+print -r -- "${plugin_spec%%,*}"

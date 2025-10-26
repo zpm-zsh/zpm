@@ -1,11 +1,12 @@
 #!/usr/bin/env zsh
 
-local Command="$1"
+local command="$1"
+shift || true
 
-shift
+(( $# )) || return 0
 
-printf $_zpm_parallel_format "$@" | \
+printf -- "${_zpm_parallel_format}" "$@" | \
   ZSH_TMP_DIR="$ZSH_TMP_DIR" \
   _ZPM_PLUGINS_DIR="$_ZPM_PLUGINS_DIR" \
   _ZPM_autoload="$_ZPM_autoload" \
-  ${(z)_zpm_parallel_launcher} "${_ZPM_DIR}/bin/@zpm-plugin-helper" $Command $_zpm_parallel_item
+  ${(z)_zpm_parallel_launcher} "${_ZPM_DIR}/bin/@zpm-plugin-helper" "$command" $_zpm_parallel_item

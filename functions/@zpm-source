@@ -1,11 +1,14 @@
 #!/usr/bin/env zsh
 @zpm-log zpm:init:source "Source '${_ZPM_plugin_file_path}', sync"
 
-ZERO="$2"
+local plugin_name="$1"
+local plugin_file="$2"
 
-source "$2"
+[[ -n "$plugin_name" && -n "$plugin_file" ]] || return 1
 
+ZERO="$plugin_file"
+source "$plugin_file"
 unset ZERO
 
-_ZPM_plugins_for_source+=("$1")
-_ZPM_file_for_source["$1"]="${2}"
+_ZPM_plugins_for_source+=("$plugin_name")
+_ZPM_file_for_source["$plugin_name"]="$plugin_file"

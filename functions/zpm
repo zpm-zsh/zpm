@@ -1,43 +1,49 @@
 #!/usr/bin/env zsh
 
-if [[ "$1" == 'load' ]]; then
-  shift
-  @zpm-load-plugins "$@"
+local command="${1:-load}"
+shift || true
+local -a original_args=("$command" "$@")
+
+case "$command" in
+  load)
+    @zpm-load-plugins "$@"
+    return 0
+    ;;
+
+  if)
+    local condition="${1:-}"
+    shift || true
+    if [[ "${is[$condition]}" == '1' ]]; then
+      zpm "$@"
+    fi
+    return 0
+    ;;
+
+  if-not)
+    local condition="${1:-}"
+    shift || true
+    if [[ "${is[$condition]}" == '0' ]]; then
+      zpm "$@"
+    fi
+    return 0
+    ;;
+
+  u|up|upgrade)
+    @zpm-upgrade "$@"
+    return 0
+    ;;
+
+  c|cl|clean)
+    @zpm-clean
+    return 0
+    ;;
+esac
+
+if is-callable "zpm-${command}"; then
+  "zpm-${command}" "$@"
   return 0
 fi
 
-if [[ "$1" == 'if' ]]; then
-  if [[ "${is[$2]}" == '1' ]] ; then
-	  shift 2
-    zpm "$@"
-  fi
-  return 0
-fi
-
-if [[ "$1" == 'if-not' ]]; then
-  if [[ "${is[$2]}" == '0' ]]; then
-    shift 2
-    zpm "$@"
-  fi
-  return 0
-fi
-
-if [[ "$1" == 'u' || "$1" == 'up' || "$1" == 'upgrade' ]]; then
-  shift
-  @zpm-upgrade "$@"
-  return 0
-fi
-
-if [[ "$1" == 'c' || "$1" == 'cl' || "$1" == 'clean' ]]; then
-  @zpm-clean
-fi
-
-if is-callable "zpm-$1"; then
-  local call_fn=$1
-  shift
-  "zpm-${call_fn}" $@
-  return 0
-fi
-
-echo 'Unknown command `zpm '"$@"'`, treat as `zpm load '"$@"'`'
-@zpm-load-plugins "$@"
+local joined="${original_args[*]}"
+echo "Unknown command \`zpm ${joined}\`, treat as \`zpm load ${joined}\`"
+@zpm-load-plugins "${original_args[@]}"

@@ -1,12 +1,12 @@
 #!/usr/bin/env zsh
 
-local Plugin="$1"
-local Autoload_files="$2"
+local plugin_spec="$1"
+local autoload_files="$2"
 
-if [[ "$Plugin"  == *",autoload:"* ]]; then
-  local _ZPM_autoload_str=${Plugin##*,autoload}
-  _ZPM_autoload_str=${_ZPM_autoload_str%%\,*}
-  Autoload_files="${Autoload_files}${_ZPM_autoload_str}"
+if [[ "$plugin_spec" == *",autoload:"* ]]; then
+  local autoload_suffix="${plugin_spec##*,autoload}"
+  autoload_suffix="${autoload_suffix%%,*}"
+  autoload_files+="$autoload_suffix"
 fi
 
-echo "$Autoload_files"
+print -r -- "$autoload_files"

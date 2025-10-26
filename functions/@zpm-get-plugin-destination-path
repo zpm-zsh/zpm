@@ -1,25 +1,36 @@
 #!/usr/bin/env zsh
 
-local Plugin="$1"
-local Plugin_path="$2"
-local Plugin_basename="$3"
-local Plugin_origin_type="$4"
+local plugin_spec="$1"
+local plugin_path="$2"
+local plugin_basename="$3"
+local plugin_origin_type="$4"
 
 local destination='plugin'
-if [[ "$Plugin" == *",destination:"* ]]; then
-  destination="${${Plugin##*,destination:}%%,*}"
+if [[ "$plugin_spec" == *",destination:"* ]]; then
+  destination="${${plugin_spec##*,destination:}%%,*}"
 fi
 
-if [[ "$Plugin_origin_type" == 'git' || "$Plugin_origin_type" == 'dir-link' ]]; then
-  echo "${Plugin_path}"
-elif [[ "$Plugin_origin_type" == 'remote' || "$Plugin_origin_type" == 'file-link' || "$Plugin_origin_type" == 'exec'  ]]; then
-  if [[ "$destination" == 'completion' ]]; then
-    echo "${Plugin_path}/functions/_${Plugin_basename}"
-  elif [[ "$destination" == 'bin' ]]; then
-    echo "${Plugin_path}/bin/${Plugin_basename}"
-  else
-    echo "${Plugin_path}/${Plugin_basename}.zsh"
-  fi
-else
-  echo "${Plugin_path}"
-fi
+case "$plugin_origin_type" in
+  git|dir-link)
+    print -r -- "$plugin_path"
+    return 0
+    ;;
+  remote|file-link|exec)
+    case "$destination" in
+      completion)
+        print -r -- "${plugin_path}/functions/_${plugin_basename}"
+        ;; 
+      bin)
+        print -r -- "${plugin_path}/bin/${plugin_basename}"
+        ;; 
+      *)
+        print -r -- "${plugin_path}/${plugin_basename}.zsh"
+        ;;
+    esac
+    return 0
+    ;;
+  *)
+    print -r -- "$plugin_path"
+    return 0
+    ;;
+esac

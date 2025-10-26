@@ -1,16 +1,21 @@
 #!/usr/bin/env zsh
 
-typeset -a _Plugins_Upgrade=($@)
-typeset -a _Plugins_Upgrade_full=()
+local -a plugins_to_upgrade=($@)
+local -a plugin_specs=()
 
-if [[ -z $@ ]]; then
-  _Plugins_Upgrade=("${(k)_ZPM_plugins_full[@]}")
+if (( ${#plugins_to_upgrade} == 0 )); then
+  plugins_to_upgrade=(${(k)_ZPM_plugins_full})
 fi
 
-for plugin in $_Plugins_Upgrade; do
-  _Plugins_Upgrade_full+=($_ZPM_plugins_full[$plugin])
+local plugin
+for plugin in "${plugins_to_upgrade[@]}"; do
+  if [[ -n ${_ZPM_plugins_full[$plugin]-} ]]; then
+    plugin_specs+=("${_ZPM_plugins_full[$plugin]}")
+  fi
 done
 
-@zpm-launch-plugin-helper upgrade "${_Plugins_Upgrade_full[@]}"
+(( ${#plugin_specs} )) || return 0
+
+@zpm-launch-plugin-helper upgrade "${plugin_specs[@]}"
 
 @zpm-clean

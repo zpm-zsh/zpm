@@ -1,5 +1,5 @@
 #!/usr/bin/env zsh
 
-local Plugin_name="$1"
+local plugin_name="$1"
 
-echo "${Plugin_name##*\/}"
+print -r -- "${plugin_name##*/}"

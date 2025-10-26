@@ -1,10 +1,16 @@
 #!/usr/bin/env zsh
 
-local Plugin_cause="$2"
-if [[ "$Plugin_cause" == 'missing' ]]; then
-  @zpm-log zpm:init:source "Plugin file for ${Plugin_name} is missing"
-else
-  @zpm-log zpm:init:source "Sourcing for ${Plugin_name} is disabled"
+local plugin_name="$1"
+local plugin_cause="$2"
+
+if [[ -z "$plugin_name" ]]; then
+  return 1
 fi
 
-_ZPM_plugins_no_source+=("$1")
+if [[ "$plugin_cause" == 'missing' ]]; then
+  @zpm-log zpm:init:source "Plugin file for ${plugin_name} is missing"
+else
+  @zpm-log zpm:init:source "Sourcing for ${plugin_name} is disabled"
+fi
+
+_ZPM_plugins_no_source+=("$plugin_name")

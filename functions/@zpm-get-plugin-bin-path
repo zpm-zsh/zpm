@@ -1,12 +1,24 @@
 #!/usr/bin/env zsh
 
-local Plugin="$1"
-local Plugin_path="$2"
+local plugin_spec="$1"
+local plugin_path="$2"
 
-if [[ "$Plugin" == *",path:"* ]]; then
-  local zpm_path="${Plugin_path}/${${1##*,path:}%%,*}"
-  echo "${zpm_path:a}"
-elif [[ -d "${Plugin_path}/bin" ]]; then
-  zpm_path="${Plugin_path}/bin"
-  echo "${zpm_path:a}"
+if [[ -z "$plugin_path" ]]; then
+  return -1
 fi
+
+local candidate
+if [[ "$plugin_spec" == *",path:"* ]]; then
+  candidate="${plugin_path}/${${plugin_spec##*,path:}%%,*}"
+  [[ -d "$candidate" ]] || return -1
+  print -r -- "${candidate:a}"
+  return 0
+fi
+
+candidate="${plugin_path}/bin"
+if [[ -d "$candidate" ]]; then
+  print -r -- "${candidate:a}"
+  return 0
+fi
+
+return -1

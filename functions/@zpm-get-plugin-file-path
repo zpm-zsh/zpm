@@ -26,26 +26,31 @@ Plugin_basename_clean=${Plugin_basename_clean%%-zsh}
 Plugin_basename_clean=${Plugin_basename_clean%%.plugin}
 Plugin_basename_clean=${Plugin_basename_clean%%-plugin}
 
-if [[ "$Plugin"  == *",source:"* ]]; then
-  local Plugin_sourcefile="${${Plugin##*,source:}%%,*}"
-  if [[ -n "${Plugin_sourcefile}" && -e "${Plugin_path}/${Plugin_sourcefile}" ]]; then
-    echo "${Plugin_path}/${Plugin_sourcefile}"
+if [[ "$Plugin" == *",source:"* ]]; then
+  local plugin_sourcefile="${${Plugin##*,source:}%%,*}"
+  if [[ -n "$plugin_sourcefile" && -e "${Plugin_path}/${plugin_sourcefile}" ]]; then
+    echo "${Plugin_path}/${plugin_sourcefile}"
     return 0
-  else
-    return -1
   fi
-elif [[ -e "${Plugin_path}/${Plugin_basename_clean}.zsh" ]]; then
-  echo "${Plugin_path}/${Plugin_basename_clean}.zsh"
-elif [[ -e "${Plugin_path}/zsh-${Plugin_basename_clean}.zsh" ]]; then
-  echo "${Plugin_path}/zsh-${Plugin_basename_clean}.zsh"
-elif [[ -e "${Plugin_path}/${Plugin_basename_clean}.plugin.zsh" ]]; then
-  echo "${Plugin_path}/${Plugin_basename_clean}.plugin.zsh"
-elif [[ -e "${Plugin_path}/zsh-${Plugin_basename_clean}.plugin.zsh" ]]; then
-  echo "${Plugin_path}/zsh-${Plugin_basename_clean}.plugin.zsh"
-elif [[ -e "${Plugin_path}/${Plugin_basename_clean}.zsh-theme" ]]; then
-  echo "${Plugin_path}/${Plugin_basename_clean}.zsh-theme"
-elif [[ -e "${Plugin_path}/init.zsh" ]]; then
-  echo "${Plugin_path}/init.zsh"
-else
   return -1
 fi
+
+local -a candidate_files=(
+  "${Plugin_basename_clean}.zsh"
+  "zsh-${Plugin_basename_clean}.zsh"
+  "${Plugin_basename_clean}.plugin.zsh"
+  "zsh-${Plugin_basename_clean}.plugin.zsh"
+  "${Plugin_basename_clean}.zsh-theme"
+  "init.zsh"
+)
+
+local candidate
+for candidate in "${candidate_files[@]}"; do
+  local candidate_path="${Plugin_path}/${candidate}"
+  if [[ -e "$candidate_path" ]]; then
+    echo "$candidate_path"
+    return 0
+  fi
+done
+
+return -1
