@@ -13,6 +13,7 @@ export PMSPEC="0fbs"
 
 0="${${(M)0:#/*}:-$PWD/$0}"
 typeset -gr _ZPM_DIR="${0:h}"
+export _ZPM_DIR
 
 export ZSH_TMP_DIR="${ZSH_TMP_DIR:-${TMPDIR:-/tmp}/zsh-${UID:-user}}"
 typeset -g _ZPM_CACHE="${ZSH_TMP_DIR}/zpm-cache.zsh"

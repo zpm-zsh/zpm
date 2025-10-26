@@ -1,9 +1,11 @@
 #!/usr/bin/env zsh
 
+: "${_ZPM_DIR:=${0:A:h:h}}"
+
 fpath+=("${_ZPM_DIR}/functions" "${ZSH_TMP_DIR}/functions")
 
 function _msg() {
-  local status="$1"
+  local msg_status="$1"
   local action_label skip_label fail_label msg color symbol
 
   if [[ "$Command" == "install" ]]; then
@@ -16,7 +18,7 @@ function _msg() {
     fail_label="Can't upgrade"
   fi
 
-  case "$status" in
+  case "$msg_status" in
     skip)
       msg="$skip_label"
       color="${c[yellow]}${c[bold]}"
@@ -90,61 +92,61 @@ else
 fi
 
 local destination_parent="${Plugin_destination_path:h}"
-local status=0
+local op_status=0
 
 case "$Plugin_origin_type" in
   git)
     if [[ "$Command" == 'install' ]]; then
-      mkdir -p "${destination_parent}" || status=$?
-      if [[ $status -eq 0 ]]; then
-        git clone --recursive "${Plugin_origin}" --depth 1 --single-branch "${Plugin_destination_path}" </dev/null >/dev/null 2>/dev/null || status=$?
+      mkdir -p "${destination_parent}" || op_status=$?
+      if [[ $op_status -eq 0 ]]; then
+        git clone --recursive "${Plugin_origin}" --depth 1 --single-branch "${Plugin_destination_path}" </dev/null >/dev/null 2>/dev/null || op_status=$?
       fi
     else
-      git --git-dir="${Plugin_destination_path}/.git/" --work-tree="${Plugin_destination_path}" pull </dev/null >/dev/null 2>/dev/null || status=$?
+      git --git-dir="${Plugin_destination_path}/.git/" --work-tree="${Plugin_destination_path}" pull </dev/null >/dev/null 2>/dev/null || op_status=$?
     fi
     ;;
   remote)
-    mkdir -p "${destination_parent}" || status=$?
-    if [[ $status -eq 0 ]]; then
-      curl -fSL --silent "${Plugin_origin}" --output "${Plugin_destination_path}" 2>/dev/null || status=$?
+    mkdir -p "${destination_parent}" || op_status=$?
+    if [[ $op_status -eq 0 ]]; then
+      curl -fSL --silent "${Plugin_origin}" --output "${Plugin_destination_path}" 2>/dev/null || op_status=$?
     fi
     ;;
   dir-link)
     if [[ "$Command" == 'install' ]]; then
       ln -sf "${Plugin_origin}" "${Plugin_destination_path}" 2>/dev/null
-      status=$?
+      op_status=$?
     else
-      status='skip'
+      op_status='skip'
     fi
     ;;
   file-link)
     if [[ "$Command" == 'install' ]]; then
-      mkdir -p "${destination_parent}" || status=$?
-      if [[ $status -eq 0 ]]; then
-        ln -sf "${Plugin_origin}" "${Plugin_destination_path}" 2>/dev/null || status=$?
+      mkdir -p "${destination_parent}" || op_status=$?
+      if [[ $op_status -eq 0 ]]; then
+        ln -sf "${Plugin_origin}" "${Plugin_destination_path}" 2>/dev/null || op_status=$?
       fi
     else
-      status='skip'
+      op_status='skip'
     fi
     ;;
   exec)
-    mkdir -p "${destination_parent}" || status=$?
-    if [[ $status -eq 0 ]]; then
+    mkdir -p "${destination_parent}" || op_status=$?
+    if [[ $op_status -eq 0 ]]; then
       (
         cd "${destination_parent}" || exit 1
         eval "$Plugin_origin" 1>! "${Plugin_destination_path}" 2>/dev/null
-      ) || status=$?
+      ) || op_status=$?
     fi
     ;;
   empty)
-    mkdir -p "${Plugin_path}" || status=$?
+    mkdir -p "${Plugin_path}" || op_status=$?
     ;;
   *)
-    status='skip'
+    op_status='skip'
     ;;
 esac
 
-_msg "$status"
+_msg "$op_status"
 
 if [[ "$Plugin" == *',destination:bin'* ]]; then
   chmod +x "${Plugin_destination_path}" >/dev/null 2>/dev/null

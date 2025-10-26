@@ -27,7 +27,7 @@ if [[ -d "$candidate" ]]; then
 fi
 
 local file
-for file in "$plugin_path"/_*; do
+for file in "$plugin_path"/_*(N); do
   [[ -e "$file" ]] || continue
   print -r -- "${plugin_path:a}"
   return 0
