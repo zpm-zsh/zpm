@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 
-mkdir -p "${ZSH_CACHE_DIR}" "${ZSH_CACHE_DIR}/functions" "${ZSH_CACHE_DIR}/bin"
+mkdir -p "${ZSH_TMP_DIR}" "${ZSH_TMP_DIR}/functions" "${ZSH_TMP_DIR}/bin" "${ZSH_DATA_HOME}" "${ZSH_DATA_HOME}/plugins" "${ZSH_DATA_HOME}/plugins/" "${ZSH_DATA_HOME}/functions" "${ZSH_DATA_HOME}/scripts" "${ZSH_DATA_HOME}/site-functions" "${ZSH_CACHE_HOME}"
 
 compinit -i -C -d "${_ZPM_COMPDUMP}"
 

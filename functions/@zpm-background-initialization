@@ -4,7 +4,7 @@ rehash
 compinit -i -d "${_ZPM_COMPDUMP}"
 unfunction source 2>/dev/null
 
-echo "$is" >! $ZSH_CACHE_DIR/is
+echo "$is" >! $ZSH_TMP_DIR/is
 
 local _ZPM_TMP="$(mktemp)"
 local _ZPM_TMP_ASYNC="$(mktemp)"
@@ -25,13 +25,7 @@ for plugin in ${_ZPM_plugins_for_source}; do
     echo "export POWERLEVEL9K_INSTALLATION_DIR='$(@zpm-get-plugin-path $plugin)'" >> "$_ZPM_TMP"
   fi
 
-  cat "${file}" |\
-    grep -F -v '#!/usr/bin/env zsh' |\
-    grep -F -v '${ZERO:-${${0:#$ZSH_ARGZERO}:-${(%):-%N}}}' |\
-    grep -F -v '${${ZERO:-${0:#$ZSH_ARGZERO}}:-${(%):-%N}}' |\
-    grep -F -v '${${(M)0:#/*}:-$PWD/$0}' |\
-    grep -F -v '0=${(%):-%N}' |\
-    >> "$_ZPM_TMP"
+  cat "${file}" >> "$_ZPM_TMP"
   echo "}" >> "$_ZPM_TMP"
   echo >> "$_ZPM_TMP"
 done
@@ -39,8 +33,8 @@ done
 echo "sched +0 source '$_ZPM_CACHE_ASYNC'" >> "$_ZPM_TMP"
 echo >> "$_ZPM_TMP"
 
-echo 'if [[ -s $ZSH_CACHE_DIR/is ]]; then' >> "$_ZPM_TMP"
-echo '  if [[ "$is" != "$(<$ZSH_CACHE_DIR/is)" ]]; then' >> "$_ZPM_TMP"
+echo 'if [[ -s $ZSH_TMP_DIR/is ]]; then' >> "$_ZPM_TMP"
+echo '  if [[ "$is" != "$(<$ZSH_TMP_DIR/is)" ]]; then' >> "$_ZPM_TMP"
 echo '    @zpm-clean' >> "$_ZPM_TMP"
 echo '  fi' >> "$_ZPM_TMP"
 echo 'fi' >> "$_ZPM_TMP"
@@ -68,14 +62,7 @@ for plugin in ${_ZPM_plugins_for_async_source}; do
     echo "export POWERLEVEL9K_INSTALLATION_DIR='$(@zpm-get-plugin-path $plugin)'" >> "$_ZPM_TMP_ASYNC"
   fi
 
-  cat "${file}" |\
-    grep -F -v '#!/usr/bin/env zsh' |\
-    grep -F -v '${ZERO:-${${0:#$ZSH_ARGZERO}:-${(%):-%N}}}' |\
-    grep -F -v '${${ZERO:-${0:#$ZSH_ARGZERO}}:-${(%):-%N}}' |\
-    grep -F -v '${${(M)0:#/*}:-$PWD/$0}' |\
-    grep -F -v '${${(M)0:#/*}:-$PWD/$0}' |\
-    grep -F -v '0=${(%):-%N}' |\
-    >> "$_ZPM_TMP_ASYNC"
+  cat "${file}" >> "$_ZPM_TMP_ASYNC"
   echo "}" >> "$_ZPM_TMP_ASYNC"
   echo >> "$_ZPM_TMP_ASYNC"
 done

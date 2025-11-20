@@ -7,4 +7,4 @@ if [[ "$Plugin_name" == "@zpm" ]]; then
   return 0
 fi
 
-echo "${_ZPM_DIR}/plugins/${Plugin_name//\//---}"
+echo "${_ZPM_PLUGINS_DIR}/${Plugin_name//\//---}"
