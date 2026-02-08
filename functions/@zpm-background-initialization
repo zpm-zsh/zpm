@@ -9,66 +9,67 @@ echo "$is" >! $ZSH_TMP_DIR/is
 local _ZPM_TMP="$(mktemp)"
 local _ZPM_TMP_ASYNC="$(mktemp)"
 
-echo "autoload -Uz -- @zpm-clean $_ZPM_autoload" >> "$_ZPM_TMP"
-echo >> "$_ZPM_TMP"
+{
+  echo "autoload -Uz -- @zpm-clean $_ZPM_autoload"
+  echo
+  echo 'compinit -i -C -d "${_ZPM_COMPDUMP}"'
+  echo
 
-echo 'compinit -i -C -d "${_ZPM_COMPDUMP}"' >> "$_ZPM_TMP"
-echo >> "$_ZPM_TMP"
+  for plugin in ${_ZPM_plugins_for_source}; do
+    local file="$_ZPM_file_for_source["$plugin"]"
+    echo "(){"
+    echo "0='${file}'"
 
-for plugin in ${_ZPM_plugins_for_source}; do
-  local file="$_ZPM_file_for_source["$plugin"]"
-  echo "(){" >> "$_ZPM_TMP"
-  echo "0='${file}'" >> "$_ZPM_TMP"
+    # Workaround for powerlevel10k
+    if [[ "$plugin" == "romkatv/powerlevel10k" ]]; then
+      echo "export POWERLEVEL9K_INSTALLATION_DIR='$(@zpm-get-plugin-path $plugin)'"
+    fi
 
-  # Workaround for powerlevel10k
-  if [[ "$plugin" == "romkatv/powerlevel10k" ]]; then
-    echo "export POWERLEVEL9K_INSTALLATION_DIR='$(@zpm-get-plugin-path $plugin)'" >> "$_ZPM_TMP"
-  fi
+    cat "${file}"
+    echo "}"
+    echo
+  done
 
-  cat "${file}" >> "$_ZPM_TMP"
-  echo "}" >> "$_ZPM_TMP"
-  echo >> "$_ZPM_TMP"
-done
+  echo "sched +0 source '$_ZPM_CACHE_ASYNC'"
+  echo
 
-echo "sched +0 source '$_ZPM_CACHE_ASYNC'" >> "$_ZPM_TMP"
-echo >> "$_ZPM_TMP"
+  echo 'if [[ -s $ZSH_TMP_DIR/is ]]; then'
+  echo '  if [[ "$is" != "$(<$ZSH_TMP_DIR/is)" ]]; then'
+  echo '    @zpm-clean'
+  echo '  fi'
+  echo 'fi'
 
-echo 'if [[ -s $ZSH_TMP_DIR/is ]]; then' >> "$_ZPM_TMP"
-echo '  if [[ "$is" != "$(<$ZSH_TMP_DIR/is)" ]]; then' >> "$_ZPM_TMP"
-echo '    @zpm-clean' >> "$_ZPM_TMP"
-echo '  fi' >> "$_ZPM_TMP"
-echo 'fi' >> "$_ZPM_TMP"
+  echo
+  echo
+  echo 'zpm () {}'
+} >! "$_ZPM_TMP"
 
-echo >> "$_ZPM_TMP"
+{
+  typeset -p _ZPM_plugins_full
+  echo 'unfunction zpm'
+  typeset -p _zpm_parallel_format
+  typeset -p _zpm_parallel_launcher
+  typeset -p _zpm_parallel_item
+  echo
 
-echo >> "$_ZPM_TMP"
-echo 'zpm () {}' >> "$_ZPM_TMP"
+  for plugin in ${_ZPM_plugins_for_async_source}; do
+    local file="$_ZPM_file_for_async_source["$plugin"]"
+    echo "(){"
+    echo "0='${file}'"
 
-echo "$(typeset -p _ZPM_plugins_full)" >> "$_ZPM_TMP_ASYNC"
-echo 'unfunction zpm' >> "$_ZPM_TMP_ASYNC"
-echo "$(typeset -p _zpm_parallel_format)" >> "$_ZPM_TMP_ASYNC"
-echo "$(typeset -p _zpm_parallel_launcher)" >> "$_ZPM_TMP_ASYNC"
-echo "$(typeset -p _zpm_parallel_item)" >> "$_ZPM_TMP_ASYNC"
+    # Workaround for powerlevel10k
+    if [[ "$plugin" == "romkatv/powerlevel10k" ]]; then
+      echo "export POWERLEVEL9K_INSTALLATION_DIR='$(@zpm-get-plugin-path $plugin)'"
+    fi
 
-echo >> "$_ZPM_TMP_ASYNC"
+    cat "${file}"
+    echo "}"
+    echo
+  done
 
-for plugin in ${_ZPM_plugins_for_async_source}; do
-  local file="$_ZPM_file_for_async_source["$plugin"]"
-  echo "(){" >> "$_ZPM_TMP_ASYNC"
-  echo "0='${file}'" >> "$_ZPM_TMP_ASYNC"
-
-  # Workaround for powerlevel10k
-  if [[ "$plugin" == "romkatv/powerlevel10k" ]]; then
-    echo "export POWERLEVEL9K_INSTALLATION_DIR='$(@zpm-get-plugin-path $plugin)'" >> "$_ZPM_TMP_ASYNC"
-  fi
-
-  cat "${file}" >> "$_ZPM_TMP_ASYNC"
-  echo "}" >> "$_ZPM_TMP_ASYNC"
-  echo >> "$_ZPM_TMP_ASYNC"
-done
-
-echo "zle && zle reset-prompt" >> "$_ZPM_TMP_ASYNC"
-echo "sched +0 source ${_ZPM_DIR}/lib/init.zsh" >> "$_ZPM_TMP_ASYNC"
+  echo "zle && zle reset-prompt"
+  echo "sched +0 source ${_ZPM_DIR}/lib/init.zsh"
+} >! "$_ZPM_TMP_ASYNC"
 
 mv "$_ZPM_TMP" "$_ZPM_CACHE"
 mv "$_ZPM_TMP_ASYNC" "$_ZPM_CACHE_ASYNC"

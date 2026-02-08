@@ -1,4 +1,5 @@
 #!/usr/bin/env zsh
 
+[[ -n "${ZSH_TMP_DIR}" ]] || return 1
 rm -rf "${ZSH_TMP_DIR}" 2>/dev/null
 exec zsh

@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 
-mkdir -p "${ZSH_TMP_DIR}" "${ZSH_TMP_DIR}/functions" "${ZSH_TMP_DIR}/bin" "${ZSH_DATA_HOME}" "${ZSH_DATA_HOME}/plugins" "${ZSH_DATA_HOME}/plugins/" "${ZSH_DATA_HOME}/functions" "${ZSH_DATA_HOME}/scripts" "${ZSH_DATA_HOME}/site-functions" "${ZSH_CACHE_HOME}"
+mkdir -p "${ZSH_TMP_DIR}" "${ZSH_TMP_DIR}/functions" "${ZSH_TMP_DIR}/bin" "${ZSH_DATA_HOME}" "${ZSH_DATA_HOME}/plugins" "${ZSH_DATA_HOME}/functions" "${ZSH_DATA_HOME}/scripts" "${ZSH_DATA_HOME}/site-functions" "${ZSH_CACHE_HOME}"
 
 chmod 700 "${ZSH_TMP_DIR}" "${ZSH_DATA_HOME}"
 
@@ -59,5 +59,5 @@ function source() {
     zcompile "${1}" 2>/dev/null
   fi
 
-  builtin source "$1"
+  builtin source "$@"
 }

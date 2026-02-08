@@ -24,7 +24,7 @@ for plugin in $@; do
   fi
 done
 
-if [[ -n "$Plugins_Install[@]" ]]; then;
+if (( $#Plugins_Install )); then
   @zpm-launch-plugin-helper install "${Plugins_Install[@]}"
 fi
 

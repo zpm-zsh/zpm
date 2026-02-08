@@ -32,7 +32,7 @@ if [[ "$Plugin"  == *",source:"* ]]; then
     echo "${Plugin_path}/${Plugin_sourcefile}"
     return 0
   else
-    return -1
+    return 1
   fi
 elif [[ -e "${Plugin_path}/${Plugin_basename_clean}.zsh" ]]; then
   echo "${Plugin_path}/${Plugin_basename_clean}.zsh"
@@ -47,5 +47,5 @@ elif [[ -e "${Plugin_path}/${Plugin_basename_clean}.zsh-theme" ]]; then
 elif [[ -e "${Plugin_path}/init.zsh" ]]; then
   echo "${Plugin_path}/init.zsh"
 else
-  return -1
+  return 1
 fi

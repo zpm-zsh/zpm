@@ -9,8 +9,9 @@ if [[ "$Plugin" == 'sindresorhus/pure' ]]; then
   return
 fi
 
+local zpm_fpath
 if [[ "$Plugin" == *",fpath:"* ]]; then
-  local zpm_fpath="${Plugin_path}/${${1##*,fpath:}%%,*}"
+  zpm_fpath="${Plugin_path}/${${1##*,fpath:}%%,*}"
   echo "${zpm_fpath:a}"
 elif [[ -d "${Plugin_path}/functions" ]]; then
   zpm_fpath="${Plugin_path}/functions"

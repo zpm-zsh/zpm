@@ -13,9 +13,9 @@ if [[ "$Plugin" == *",origin:"* ]]; then
   return 0
 fi
 
-GITHUB_URL=${GITHUB_MIRROR:-'https://github.com'}
-GITLAB_URL=${GITLAB_MIRROR:-'https://gitlab.com'}
-BITBUCKET_URL=${BITBUCKET_MIRROR:-'https://bitbucket.com'}
+local GITHUB_URL=${GITHUB_MIRROR:-'https://github.com'}
+local GITLAB_URL=${GITLAB_MIRROR:-'https://gitlab.com'}
+local BITBUCKET_URL=${BITBUCKET_MIRROR:-'https://bitbucket.org'}
 
 if [[ "$Plugin_type" == 'github' ]]; then
   echo "${GITHUB_URL}/${Plugin_striped_name}"
@@ -38,5 +38,5 @@ elif [[ "$Plugin_type" == 'omz-lib-old' ]]; then
 elif [[ "$Plugin_type" == 'gist' ]]; then
   echo "https://gist.githubusercontent.com/${Plugin_striped_name}/raw"
 else
-  return -1
+  return 1
 fi

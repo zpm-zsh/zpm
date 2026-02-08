@@ -106,17 +106,21 @@ elif [[ "$Plugin_origin_type" == 'remote' ]]; then
 elif [[ "$Plugin_origin_type" == 'dir-link' ]]; then
   if [[ "$Command" == 'install' ]]; then
     ln -sf "${Plugin_origin}" "${Plugin_destination_path}" 2>/dev/null
+    _msg $?
+  else
+    _msg 0
   fi
-  _msg $?
 elif [[ "$Plugin_origin_type" == 'file-link' ]]; then
   if [[ "$Command" == 'install' ]]; then
     mkdir -p "${Plugin_destination_path:h}"
     ln -sf "${Plugin_origin}" "${Plugin_destination_path}" 2>/dev/null
+    _msg $?
+  else
+    _msg 0
   fi
-  _msg $?
 elif [[ "$Plugin_origin_type" == 'exec' ]]; then
   mkdir -p "${Plugin_destination_path:h}"
-  cd "${Plugin_destination_path:h}"
+  cd "${Plugin_destination_path:h}" || { _msg 1; return; }
   eval "$Plugin_origin" 1>! "${Plugin_destination_path}" 2>/dev/null
   _msg $?
 elif [[ "$Plugin_origin_type" == 'empty' ]]; then
@@ -131,7 +135,7 @@ if [[ "$Plugin" == *',destination:bin'* ]]; then
 fi
 
 if [[ "$Plugin" == *',hook:'* && -e "$Plugin_path" ]]; then
-  cd "$Plugin_path"
+  cd "$Plugin_path" || return
   eval "${${Plugin##*,hook:}%%\,*}" >/dev/null
 
   echo "${c[green]}${c[bold]}Run hook for${c[reset]} ${Plugin_documentation_hyperlink} ${c[green]}✓${c[reset]}"

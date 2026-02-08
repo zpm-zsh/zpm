@@ -1,5 +1,5 @@
 #!/usr/bin/env zsh
-@zpm-log zpm:init:source "Source '${_ZPM_plugin_file_path}', async"
+@zpm-log zpm:init:source "Source '${2}', async"
 
 ZERO="$2"
 

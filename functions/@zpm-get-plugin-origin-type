@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 
 local Plugin_name="$1"
-declare -ag plugin_origin_types=(
+local -a plugin_origin_types=(
   empty,empty
 
   gh,git
@@ -46,7 +46,7 @@ if [[ "$Plugin_name" == "@"* ]]; then
     fi
   done
 
-  return -1
+  return 1
 fi
 
 if [[ "$Plugin_name" = *'/'* && "$Plugin_name" != *'/'*'/'* ]]; then
@@ -54,4 +54,4 @@ if [[ "$Plugin_name" = *'/'* && "$Plugin_name" != *'/'*'/'* ]]; then
   return 0
 fi
 
-return -1
+return 1

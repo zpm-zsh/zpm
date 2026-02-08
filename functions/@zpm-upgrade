@@ -3,7 +3,7 @@
 typeset -a _Plugins_Upgrade=($@)
 typeset -a _Plugins_Upgrade_full=()
 
-if [[ -z $@ ]]; then
+if (( ! $# )); then
   _Plugins_Upgrade=("${(k)_ZPM_plugins_full[@]}")
 fi
 
