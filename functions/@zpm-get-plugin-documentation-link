@@ -9,7 +9,7 @@ if [[ "$Plugin_type" == 'github' ]]; then
 elif [[ "$Plugin_type" == 'gitlab' ]]; then
   echo "https://gitlab.com/${Plugin_name}"
 elif [[ "$Plugin_type" == 'bitbucket' ]]; then
-  echo "https://bitbucket.com/${Plugin_name}"
+  echo "https://bitbucket.org/${Plugin_name}"
 elif [[ "$Plugin_type" == 'zpm' ]]; then
   echo "https://github.com/zpm-zsh/zpm"
 elif [[ "$Plugin_type" == 'omz-core' ]]; then

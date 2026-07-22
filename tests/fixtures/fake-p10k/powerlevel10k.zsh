@@ -1,0 +1,1 @@
+export ZPM_FAKE_P10K_LOADED=1

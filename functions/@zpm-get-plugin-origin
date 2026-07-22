@@ -15,7 +15,7 @@ fi
 
 GITHUB_URL=${GITHUB_MIRROR:-'https://github.com'}
 GITLAB_URL=${GITLAB_MIRROR:-'https://gitlab.com'}
-BITBUCKET_URL=${BITBUCKET_MIRROR:-'https://bitbucket.com'}
+BITBUCKET_URL=${BITBUCKET_MIRROR:-'https://bitbucket.org'}
 
 if [[ "$Plugin_type" == 'github' ]]; then
   echo "${GITHUB_URL}/${Plugin_striped_name}"
