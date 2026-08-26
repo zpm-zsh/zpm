@@ -39,6 +39,14 @@ Zpm is a plugin manager for ZSH who combines the imperative and declarative appr
 - [Base dependences](#base-dependences)
 - [Installation](#installation)
 - [CLI Commands & Aliases](#cli-commands--aliases)
+  - [`zpm load`](#zpm-load)
+  - [`zpm upgrade`](#zpm-upgrade-zpm-u-zpm-up)
+  - [`zpm clean`](#zpm-clean-zpm-c-zpm-cl)
+  - [`zpm info`](#zpm-info)
+  - [`zpm list`](#zpm-list-zpm-ls)
+  - [`zpm readme`](#zpm-readme)
+  - [`zpm link`](#zpm-link)
+  - [Custom Commands Extension](#custom-commands-extension)
 - [How to use](#how-to-use)
   - [Plugin Name & Types](#plugin-name--types)
   - [Plugin Tags](#plugin-tags)
@@ -226,6 +234,80 @@ ln -sf "${XDG_DATA_HOME:-$HOME/.local/share}/zsh/plugins/@zpm/zshrc" ~/.zshrc
 | `zpm if <condition> <command>` | | Execute command only if condition is true on first run |
 | `zpm if-not <condition> <command>` | | Execute command only if condition is false on first run |
 | `zpm <custom-command>` | | Execute custom subcommand function `zpm-<custom-command>` |
+
+### `zpm load`
+Downloads, resolves, and loads one or more plugins into the current shell and registers them for inclusion in the pre-compiled startup cache.
+
+```sh
+zpm load zsh-users/zsh-autosuggestions
+zpm load @omz/git @omz/extract
+```
+
+### `zpm upgrade` (`zpm u`, `zpm up`)
+Updates git repositories and remote plugins to their latest versions. Running without arguments updates all installed plugins (including `@zpm` itself). You can also pass specific plugin names to update only them:
+
+```sh
+zpm u                                  # update all plugins
+zpm u zsh-users/zsh-autosuggestions    # update only a specific plugin
+```
+
+### `zpm clean` (`zpm c`, `zpm cl`)
+Purges the generated runtime cache in `$ZSH_TMP_DIR` (including byte-compiled cache and aggregated binary/completion files) and restarts the shell with `exec zsh`. Use this whenever you edit your `~/.zshrc`.
+
+```sh
+zpm clean
+# or simply
+zpm c
+```
+
+### `zpm info`
+Displays detailed metadata for one or more plugins, including origin repository URL, plugin type, sync/async mode, local installation path, and current installation status:
+
+```sh
+zpm info zsh-users/zsh-autosuggestions
+zpm info @zpm
+```
+
+### `zpm list` (`zpm ls`)
+Lists all plugins currently loaded or installed in your ZPM environment with their metadata:
+
+```sh
+zpm list
+# or
+zpm ls
+```
+
+### `zpm readme`
+Displays the `README.md` documentation for any installed plugin directly in your terminal. Automatically detects available terminal markdown renderers (`cli-markdown`, `md`, `cli-html`, `glow`, `bat`, or system `$PAGER`):
+
+```sh
+zpm readme zsh-users/zsh-autosuggestions
+zpm readme @zpm
+```
+
+### `zpm link`
+Quickly symlinks and loads a local directory or standalone `.zsh` script into your current session (analogous to `npm link`). It automatically detects whether the target is a directory or single file, generates the appropriate `@dir` / `@file` spec, loads it immediately, and prints the exact snippet to add to your `~/.zshrc`:
+
+```sh
+# In plugin's repository directory:
+zpm link
+
+# Or by providing a path:
+zpm link ~/Projects/my-awesome-plugin
+zpm link ~/.dotfiles/zsh/custom-aliases.zsh
+```
+
+### Custom Commands Extension
+You can easily extend ZPM with custom commands! Any shell function named `zpm-<subcommand>` will be automatically called when executing `zpm <subcommand>`:
+
+```sh
+function zpm-hello() {
+  echo "Hello from custom ZPM command! Arguments: $@"
+}
+
+zpm hello world
+# Output: Hello from custom ZPM command! Arguments: world
+```
 
 ## How to use
 
