@@ -9,3 +9,4 @@ plugins/*
 *.old
 *.bak
 *~
+docs/superpowers/

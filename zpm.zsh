@@ -9,18 +9,18 @@
 # i – … the zsh_loaded_plugins activity indicator,
 # P – … the ZPFX global parameter,
 # s – … the PMSPEC global parameter itself (i.e.: should be always present).
-export PMSPEC="0fbs"
+typeset -g PMSPEC="0fbs"
 
 0="${${(M)0:#/*}:-$PWD/$0}"
-export _ZPM_DIR="${0:h}"
+typeset -g _ZPM_DIR="${0:h}"
 
-export ZSH_TMP_DIR="${ZSH_TMP_DIR:-${TMPDIR:-/tmp}/zsh-${UID:-user}}"
+typeset -g ZSH_TMP_DIR="${ZSH_TMP_DIR:-${TMPDIR:-/tmp}/zsh-${UID:-user}}"
 _ZPM_CACHE="${ZSH_TMP_DIR}/zpm-cache.zsh"
 _ZPM_CACHE_ASYNC="${ZSH_TMP_DIR}/zpm-cache-async.zsh"
 
 export ZSH_DATA_HOME="${ZSH_DATA_HOME:-${XDG_DATA_HOME:-$HOME/.local/share}/zsh}"
 _ZPM_PLUGINS_DIR="${ZSH_DATA_HOME}/plugins"
-_ZPM_PLUGIN_DIR="${ZSH_DATA_HOME}/plugins/zpm"
+_ZPM_PLUGIN_DIR="${ZSH_DATA_HOME}/plugins/@zpm"
 
 export ZSH_CACHE_HOME="${ZSH_CACHE_HOME:-${XDG_CACHE_HOME:-$HOME/.cache}/zsh}"
 _ZPM_COMPDUMP="${ZSH_CACHE_HOME}/zcompdump-${ZSH_VERSION}"

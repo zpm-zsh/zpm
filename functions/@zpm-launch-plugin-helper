@@ -5,6 +5,7 @@ local Command="$1"
 shift
 
 printf $_zpm_parallel_format "$@" | \
+  _ZPM_DIR="$_ZPM_DIR" \
   ZSH_TMP_DIR="$ZSH_TMP_DIR" \
   _ZPM_PLUGINS_DIR="$_ZPM_PLUGINS_DIR" \
   _ZPM_autoload="$_ZPM_autoload" \

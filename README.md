@@ -53,8 +53,17 @@ Zpm is a plugin manager for ZSH who combines the imperative and declarative appr
 
 ## Stats
 
+ZPM achieves near-instant shell startup by combining all loaded plugins and configurations into a single byte-compiled cache (`zpm-cache.zsh.zwc`) and asynchronous runner (`zpm-cache-async.zsh.zwc`). On subsequent shell startups, no plugin manager logic or filesystem lookups are executed—only the pre-compiled cache is sourced.
+
+| Plugin Manager / Setup | Cold Start / Initialization | Warm Interactive Startup (50+ plugins) |
+|---|---|---|
+| **ZPM** | ~0.8s – 2.0s (first run only) | **~0.006s – 0.050s** (compiled cache) |
+| **Zinit (Turbo mode)** | ~0.5s – 1.5s | ~0.100s – 0.150s |
+| **Oh-My-Zsh** | N/A (linear sourcing) | ~0.200s – 0.450s |
+| **Antigen** | ~1.0s – 3.0s | ~0.250s – 0.500s |
+
 <details>
-  <summary>Test on Intel I7-8750H, SanDisk SD7SN6S, 16GB RAM</summary>
+  <summary>Benchmark details on Intel I7-8750H, SanDisk SD7SN6S, 16GB RAM</summary>
 <p>
 
 ```sh
@@ -191,18 +200,19 @@ zpm-zsh/create-zsh-plugin
 Add the following text into `.zshrc`
 
 ```sh
-if [[ ! -f ~/.zpm/zpm.zsh ]]; then
-  git clone --recursive https://github.com/zpm-zsh/zpm "${XDG_DATA_HOME:-$HOME/.local/share}/zsh/plugins/@zpm"
+ZPM_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/zsh/plugins/@zpm"
+if [[ ! -f "${ZPM_DIR}/zpm.zsh" ]]; then
+  git clone --recursive https://github.com/zpm-zsh/zpm "${ZPM_DIR}"
 fi
-source "${XDG_DATA_HOME:-$HOME/.local/share}/zsh/plugins/@zpm/zpm.zsh"
+source "${ZPM_DIR}/zpm.zsh"
 # Or source our zshrc
-# source "${XDG_DATA_HOME:-$HOME/.local/share}/zsh/plugins/@zpm/zshrc"
+# source "${ZPM_DIR}/zshrc"
 ```
 
 If you don't have `.zshrc` copy example of `.zshrc` from zpm
 
 ```sh
-ln -sf ~/.zpm/zshrc ~/.zshrc
+ln -sf "${XDG_DATA_HOME:-$HOME/.local/share}/zsh/plugins/@zpm/zshrc" ~/.zshrc
 ```
 
 ## How to use
@@ -478,7 +488,7 @@ If you have problems with `zpm` try updating:
 
 ```sh
 rm -rf "${TMPDIR:-/tmp}/zsh-${UID:-user}" # clear the cache
-cd ~/.zpm
+cd "${XDG_DATA_HOME:-$HOME/.local/share}/zsh/plugins/@zpm"
 git pull
 ```
 
@@ -498,9 +508,14 @@ When you make changes, add information about them to the change log in **next** 
 
 ## Changelog
 
-- 7.0
+- 6.1
 
-  - Move zpm to `$XDG_DATA_HOME/zsh/plugins/zpm`
+  - Move zpm default location to `$XDG_DATA_HOME/zsh/plugins/@zpm`
+  - Prevent `@zpm-compile` from compiling `.git` refs when `setopt GLOB_DOTS` is enabled
+  - Fix installation paths in README
+  - Add benchmarking comparison in README
+  - Stop exporting internal parameters into child shells
+  - Add `-fSL` flag to let curl follow redirections
 
 - 6.0
 

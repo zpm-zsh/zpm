@@ -1,5 +1,7 @@
 #!/usr/bin/env zsh
 
+setopt localoptions noglobdots
+
 zcompile "$_ZPM_CACHE" 2>/dev/null
 zcompile "$_ZPM_CACHE_ASYNC" 2>/dev/null
 zcompile "${_ZPM_COMPDUMP}" 2>/dev/null
@@ -10,9 +12,9 @@ zcompile "${_ZPM_DIR}/lib/init.zsh" 2>/dev/null
 zcompile "${_ZPM_DIR}/lib/imperative.zsh" 2>/dev/null
 
 for dir in $fpath; do
-  if [[ -w "$dir" ]]; then
-    for i in "${dir}"/**/*; do
-      if [[ "${i}" != *".zwc" && ! "${i}.zwc" -nt "${i}" ]]; then
+  if [[ -d "$dir" && -w "$dir" ]]; then
+    for i in "${dir}"/**/*(N-.); do
+      if [[ "${i}" != *".zwc" && "${i}" != */.git/* && ! "${i}.zwc" -nt "${i}" ]]; then
         zcompile -- "${i}" 2>/dev/null
       fi
     done
@@ -20,3 +22,4 @@ for dir in $fpath; do
 done
 
 return 0
+

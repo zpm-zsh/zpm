@@ -1,0 +1,1 @@
+export ZPM_FAKE_PLUGIN_LOADED=1

@@ -15,6 +15,6 @@ all: clean
 	@beautysh --indent-size 2 --force-function-style fnpar bin/@zpm-plugin-helper
 
 test:
-	zsh tests/base.test.zsh
+	zsh tests/run.zsh
 
 .PHONY: all clean test
