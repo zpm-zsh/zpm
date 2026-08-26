@@ -38,14 +38,14 @@ Zpm is a plugin manager for ZSH who combines the imperative and declarative appr
 - [Stats](#stats)
 - [Base dependences](#base-dependences)
 - [Installation](#installation)
+- [CLI Commands & Aliases](#cli-commands--aliases)
 - [How to use](#how-to-use)
-  - [Load plugin](#load-plugin)
-  - [Plugin name](#plugin-name)
-  - [Plugin tags](#plugin-tags)
-  - [`if` and `if-not` conditions](#if-and-if-not-conditions)
-  - [Upgrade](#upgrade)
-  - [Clean](#clean)
-- [Configuration](#configuration)
+  - [Plugin Name & Types](#plugin-name--types)
+  - [Plugin Tags](#plugin-tags)
+  - [Conditional Loading (`if` and `if-not`)](#conditional-loading-if-and-if-not)
+- [Cookbook & Common Examples](#cookbook--common-examples)
+- [Configuration & Environment Variables](#configuration--environment-variables)
+- [Guide for Plugin Authors](#guide-for-plugin-authors)
 - [Troubleshooting](#troubleshooting)
 - [Developing process](#developing-process)
 - [TODO](#todo)
@@ -123,7 +123,7 @@ zsh -i -c exit  0.10s user 0.02s system 75% cpu 0.161 total
 </details>
 
 <details>
-  <summary>With this set of plugins. 51 total</summary>
+  <summary>With this set of plugins (51 total)</summary>
 <p>
 
 ```sh
@@ -184,20 +184,18 @@ zpm-zsh/create-zsh-plugin
 
 ## Base dependences
 
-- [zsh](https://www.zsh.org/)
+- [zsh](https://www.zsh.org/) (>= 5.1)
 - [git](https://git-scm.com/)
-- One of these:
-  - [GNU Parallel](https://www.gnu.org/software/parallel/) for fastest parallel execution.
-  - [Rush](https://github.com/shenwei356/rush) for fastest parallel execution.
-  - [xargs](https://www.gnu.org/software/findutils/) as fallback
-- [curl](https://curl.se/) for GitHub Gists
+- One of these for parallel downloading:
+  - [GNU Parallel](https://www.gnu.org/software/parallel/)
+  - [Rush](https://github.com/shenwei356/rush)
+  - [xargs](https://www.gnu.org/software/findutils/) (standard fallback)
+- [curl](https://curl.se/) for remote downloads and GitHub Gists
 - [Termux](http://termux.com/) for Android
-- [cli-html](https://www.npmjs.com/package/cli-html) view html in terminal. _Optional_
-- [cli-markdown](https://www.npmjs.com/package/cli-markdown) view markdown in terminal. _Optional_
 
 ## Installation
 
-Add the following text into `.zshrc`
+Add the following to your `~/.zshrc`:
 
 ```sh
 ZPM_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/zsh/plugins/@zpm"
@@ -205,304 +203,294 @@ if [[ ! -f "${ZPM_DIR}/zpm.zsh" ]]; then
   git clone --recursive https://github.com/zpm-zsh/zpm "${ZPM_DIR}"
 fi
 source "${ZPM_DIR}/zpm.zsh"
-# Or source our zshrc
-# source "${ZPM_DIR}/zshrc"
 ```
 
-If you don't have `.zshrc` copy example of `.zshrc` from zpm
+If you don't have a `.zshrc`, you can copy the provided example:
 
 ```sh
 ln -sf "${XDG_DATA_HOME:-$HOME/.local/share}/zsh/plugins/@zpm/zshrc" ~/.zshrc
 ```
 
-## How to use
+## CLI Commands & Aliases
 
-Currently zpm has following commands
-
-- load - will download and load plugin [See](#load-plugin)
-- if/if-not - conditions for following command [See](#if-and-if-not-conditions)
-- upgrade - will upgrade plugin, without parameters will upgrade all plugins [See](#upgrade)
-- clean - will clean zpm cache [See](#clean)
-
-The set of commands can be expanded extended using plugins
+| Command | Aliases | Description |
+|---|---|---|
+| `zpm load <plugins...>` | *(default)* | Download and initialize specified plugins |
+| `zpm upgrade [plugins...]` | `zpm u`, `zpm up` | Upgrade all plugins (or specific plugins), then clear cache and reload |
+| `zpm clean` | `zpm c`, `zpm cl` | Remove generated ZPM cache (`$ZSH_TMP_DIR`) and restart shell |
+| `zpm if <condition> <command>` | | Execute command only if condition is true on first run |
+| `zpm if-not <condition> <command>` | | Execute command only if condition is false on first run |
+| `zpm <custom-command>` | | Execute custom subcommand function `zpm-<custom-command>` |
 
 <details>
-<summary>Plugins for zpm itself</summary>
+<summary>Extensions for ZPM itself</summary>
 <p>
 
-- [zpm-readme](https://github.com/zpm-zsh/zpm-readme) - Show plugin readme in terminal
-- [zpm-info](https://github.com/zpm-zsh/zpm-info) - Show plugin info in terminal
-- [zpm-telemetry](https://github.com/zpm-zsh/zpm-telemetry) - Send telemetry data. Keep calm. Data is sent using GitHub and you can see it before sending.
+- [zpm-readme](https://github.com/zpm-zsh/zpm-readme) - Show plugin readme in terminal (`zpm readme <plugin>`)
+- [zpm-info](https://github.com/zpm-zsh/zpm-info) - Show plugin info in terminal (`zpm info <plugin>`)
+- [zpm-telemetry](https://github.com/zpm-zsh/zpm-telemetry) - Send anonymous usage stats via GitHub
 
 </p>
 </details>
 
-### Load plugin
+## How to use
 
-**Important**
-
-> Be carefully, zpm doesn't guarantee loading order in call. So if you need to load a plugin **before** antoher, you should do 2 separate `zpm load` calls.
-> This is very important for oh-my-zsh plugins, because @omz-core should be loaded before
-
-Plugin name must have next form: `@plugin-type/user/plugin-name`. This plugin can be enabled using
+### Basic Syntax
 
 ```sh
-# Add to `~/.zshrc` after zpm initialization:
-zpm load @plugin-type/user/plugin-name
+zpm load [@type/]plugin-name[,tag1:val1,tag2,...]
 ```
 
-> Notice: if you change `~/.zshrc`, you need to remove zpm cache using: `zpm clean`
-
-Additionaly they can have some tags. Tags must be separated by commas `,` without spaces, tag parameters must be separated from tag names or another tag parameters by `:`
+> **Note**: If you modify `~/.zshrc`, apply your changes by running `zpm clean` (or `zpm c`).
 
 ```sh
-# plugin type
+# plugin type (optional, defaults to @github)
 #    |   plugin name
 #    |      |     tag
-#    |      |      |  tag parameters,
-#    |      |      |  divided by `:`    boolean tag
+#    |      |      |  tag parameter(s)
+#    |      |      |  separated by `:`    boolean tag
 #    |      |      |         |              |
 #    ↓      ↓      ↓         ↓              ↓
-@type/some/plugin,apply:source:path:fpath,async
+zpm load @type/some/plugin,apply:source:path:fpath,async
 ```
 
-### Plugin name
+### Plugin Name & Types
 
-If plugin name starts with `@word`, this word will be used as plugin type. Plugin name will be used to detect plugin origin url.
+| Type Prefix | Origin / Behavior | Example |
+|---|---|---|
+| *(none)* or `@github/` / `@gh/` | Cloned from GitHub *(default)* | `zpm load zsh-users/zsh-autosuggestions` |
+| `@gitlab/` or `@gl/` | Cloned from GitLab | `zpm load @gitlab/user/repo` |
+| `@bitbucket/` or `@bb/` | Cloned from Bitbucket | `zpm load @bitbucket/user/repo` |
+| `@git/` | Cloned from any Git URL via `origin:` tag | `zpm load @git/custom,origin:https://git.example.com/repo.git` |
+| `@gist/` | Downloaded from GitHub Gist | `zpm load @gist/username/gist_id` |
+| `@remote/` | Single file downloaded via `curl` | `zpm load @remote/prompt,origin:https://example.com/prompt.zsh` |
+| `@dir/` / `@link/` | Symlinked from a local directory | `zpm load @dir/my-plugin,origin:$HOME/Projects/my-plugin` |
+| `@file/` | Symlinked from a single local file | `zpm load @file/my-script,origin:$HOME/dotfiles/script.zsh` |
+| `@exec/` | Output generated by executing shell command | `zpm load @exec/kubectl-completion,origin:"kubectl completion zsh",destination:completion` |
+| `@empty/` | Creates an empty directory (useful with `hook:`) | `zpm load @empty/custom-tool,hook:"cargo install ..."` |
+| `@omz` | Clones oh-my-zsh core repository | `zpm load @omz` |
+| `@omz/plugin-name` | Loads plugin from `<omz-dir>/plugins/` | `zpm load @omz/git` |
+| `@omz/theme/theme-name` | Loads theme from `<omz-dir>/themes/` | `zpm load @omz/theme/robbyrussell` |
+| `@omz/lib/lib-name` | Loads library from `<omz-dir>/lib/` | `zpm load @omz/lib/completion` |
 
-- `@github/` or `@gh/` - plugin will be cloned from GitHub, this is default value, so you don't need to set it
-- `@gitlab/` or `@gl/` - plugin will be cloned from GitLab
-- `@bitbucket/` or `@bb/` - plugin will be cloned from Bitbucket
-- `@git/` - plugin will be cloned via git. Be careful, zpm can't detect origin for this plugin type, you must specify origin using tag `origin:`
-- `@gist/` - plugin will be downloaded from GitHub Gist
-- `@omz/` - zpm will use a plugin from oh-my-zsh, oh-my-zsh will be download if not installed. **Important**: you shoud load `@omz` before any other plugin from on-my-zsh: `zpm load @omz`.
+> **Important for Oh-My-Zsh**: Load `@omz` before loading individual OMZ plugins, themes, or libraries.
 
-  - `@omz/theme/` - will load a theme from omz dir: `<omz-dir>/themes/*.zsh-theme`
-  - `@omz/lib/` - will load a lib from omz dir: `<omz-dir>/lib/*.zsh`
-  - <details>
-    <summary>
-    Example:
-    </summary>
-    <p>
+### Plugin Tags
 
-    See: <https://github.com/zpm-zsh/zpm/issues/24>
-
-    ```sh
-    # Pull in OMZ (doesn't actually source anything)
-    zpm load @omz
-
-    # Load any OMZ libraries we want or our OMZ plugins require
-    zpm load                \
-      @omz/lib/compfix      \
-      @omz/lib/completion   \
-      @omz/lib/directories  \
-      @omz/lib/functions    \
-      @omz/lib/git          \
-      @omz/lib/grep         \
-      @omz/lib/history      \
-      @omz/lib/key-bindings \
-      @omz/lib/misc         \
-      @omz/lib/spectrum     \
-      @omz/lib/theme-and-appearance
-
-      # Load some OMZ plugins and theme
-      zpm load          \
-        @omz/virtualenv \
-        @omz/git
-
-      zpm load @omz/theme/robbyrussell
-    ```
-
-    </p>
-    </details>
-
-- `@dir` - special type, zpm will create a symlink to local directory from `origin` tag
-- `@file` - special type, zpm will create a symlink to file from `origin` tag. Should be used for plugins that are written in single file, without additional dependencies
-- `@remote/` - plugin will be downloaded using curl, for example from an HTTP site. Be careful, zpm can't detect origin for this plugin type, you must specify origin using tag `origin:`
-- `@exec/` - special type, zpm will create plugin, completion or binary via executing of `origin` tag content. See `destination` tag
-- `@empty/` - special type, zpm will create empty dir without files. Useful with `hook` tag.
+#### `apply`
+Controls what components of the plugin are activated. Takes colon-separated values:
+- `source` — source the main plugin script file *(enabled by default)*.
+- `path` — add plugin's `bin/` directory to `$PATH` *(enabled by default if `bin/` exists)*.
+- `fpath` — add plugin's `functions/` (or completions) directory to `$fpath` *(enabled by default)*.
 
 ```sh
-plugin-from/github  # @github doesn't necessary
-@gitlab/plugin-from/gitlab
-@bitbucket/plugin-from/bitbucket
-@omz/some-plugin
-@empty/custom/empty-plugin
-@empty/another-empty-plugin
+# Only add completions to $fpath without sourcing any script
+zpm load zsh-users/zsh-completions,apply:fpath
+
+# Only add bin/ executables to $PATH
+zpm load some/cli-tool,apply:path
 ```
 
-### Plugin tags
-
-#### `apply` tag
-
-This tag has 3 possible arguments divided by `:`
-
-- `source` - load zsh plugin file, enabled by default. File name can be changed using `source` tag
-- `path` - add directory to your `$PATH`, by default - `/bin` dir, enabled by default. Directory name can be changed using `path` tag
-- `fpath` - add directory to your `$fpath`, by default or `/functions` dir if it exists, or plugin root dir if exist at least one `_*` file, enabled by default. Directory name can be changed using `fpath` tag
+#### `async`
+Defers plugin sourcing until after the primary prompt is rendered, significantly speeding up initial shell display.
 
 ```sh
-zpm load some/plugin,apply:source:path:fpath
-zpm load another/plugin,apply:path # zpm will only add /bin dir to $PATH, plugin will not be sourced, nor be added to $fpath
+zpm load zsh-users/zsh-autosuggestions,async
+zpm load zdharma-continuum/fast-syntax-highlighting,async
 ```
 
-#### `async` tag
-
-If this tag is present, zsh plugin will be loaded async
-
-#### `source` tag
-
-Define own file that will be loaded
+#### `destination`
+Specifies how downloaded files or generated outputs should be placed within the plugin directory:
+- `plugin` *(default)* — saved as `<name>.zsh` and sourced.
+- `completion` — saved into `functions/_<basename>` as an autoloadable completion file.
+- `bin` — saved into `bin/<basename>` and **automatically marked executable** (`chmod +x`).
 
 ```sh
-zpm some/plugin,source:/other.file.zsh
+# Download a standalone CLI tool and make it executable in $PATH
+zpm load @remote/git-standup,origin:https://raw.githubusercontent.com/kamranahmedse/git-standup/master/git-standup,destination:bin
+
+# Generate completion dynamically on install
+zpm load @exec/rustup-completion,origin:"rustup completions zsh",destination:completion
 ```
 
-#### `path` and `fpath` tags
-
-Using these tags you can change the destination of folders which will be added to `$PATH` or `$fpath`
+#### `source`
+Specifies a custom script file to source if the main entry file cannot be detected automatically.
 
 ```sh
-zpm some/plugin,path:/executables
-zpm another/plugin,fpath:/completions
+zpm load some/plugin,source:custom-init.zsh
 ```
 
-#### `autoload` tag
-
-This tag defines functions that will be autoloaded by zpm (using `autoload -Uz`) divided by `:`
+#### `path` and `fpath`
+Specifies custom directory locations within the plugin to add to `$PATH` or `$fpath`.
 
 ```sh
-zpm load some/plugin,autoload:one:two:three
+zpm load some/plugin,path:executables
+zpm load some/plugin,fpath:completions
 ```
 
-#### `origin` tag
-
-All plugins have internal origin type property, like: git, dir, file, remote.
-You can define own origin, but you can't mix different types of origin types.
-So, you can define Gitlab origin for GitHub plugin, or different origin for GitHub Gist plugin.
-
-- Git plugins: `@github`, `@gitlab`, `@bitbucket`, `@git`
+#### `autoload`
+Declares functions to be autoloaded on demand (`autoload -Uz`).
 
 ```sh
-zpm load some/plugin,origin:https://github.com/another/origin # This plugin will be loaded from https://github.com/another/origin, but will have internal name some/plugin
-
-zpm load @git/my-plugin,git://my.site/plugin.git # This plugin will be loaded from 3-party origin
+zpm load some/plugin,autoload:func1:func2:func3
 ```
 
-- Remote: `@gist`, `@remote`
+#### `origin`
+Overrides the download or clone source URL / path / command.
 
 ```sh
-zpm load @gist/user/hash,origin:https://another-site/file.zsh # This file will be downloaded instead of gist
-zpm load @remote/plugin,origin:https://mysite.com/plugin.zsh # In this case origin should be declared, because zpm can't detect origin
+zpm load @git/private-plugin,origin:git@github.com:company/private-plugin.git
+zpm load @dir/local-theme,origin:$HOME/.dotfiles/themes/my-theme
 ```
 
-- Dir: `@dir`
+#### `hook`
+Runs a shell command in the plugin directory immediately after installation or upgrade.
 
 ```sh
-zpm load @dir/plugin,origin:/home/user/Projects/plugin # Internal plugin directory will be linked to your local directory
+zpm load junegunn/fzf,hook:"./install --bin"
+zpm load romkatv/powerlevel10k,hook:"git submodule update --init --recursive"
 ```
 
-- File: `@file`
+### Conditional Loading (`if` and `if-not`)
+
+Load plugins conditionally based on the operating system or environment. Conditions are evaluated during cache generation on first run.
 
 ```sh
-zpm load @file/plugin-file,origin:/home/user/Projects/plugin.zsh # Internal plugin file will be linked to your local file
+zpm if <condition> load <plugin>
+zpm if-not <condition> load <plugin>
 ```
 
-- Some special types, like: `@empty`, `@omz`, `@omz/theme`, `@omz/lib`
+#### Available Conditions:
+- `linux` — Linux operating system
+- `macos` — macOS (Darwin)
+- `bsd` — BSD variants (FreeBSD, OpenBSD, NetBSD)
+- `openwrt` — OpenWrt router environment
+- `termux` — Android Termux
+- `ssh` — Remote SSH session (`$SSH_CONNECTION` / `$SSH_TTY`)
+- `vte` — Terminal emulator with VTE support
+- `msys` — MSYS / Cygwin environment on Windows
+- `vscode` — Integrated terminal in VS Code
+- `iterm` — iTerm2 terminal emulator
 
-Do not declare own `origin:`, because this can produce side effects
-
-#### `hook` tag
-
-This tag parameter contains command who will be run in the plugin directory after instalation or upgrade
+Conditions can be chained:
 
 ```sh
-zpm plugin/name,hook:"make; make install"
+# Only load on macOS and when not connected over SSH
+zpm if macos if-not ssh load zpm-zsh/iterm
 ```
 
-### `if` and `if-not` conditions
+## Cookbook & Common Examples
 
-If condition allows you to run the following commands only if the condition is true
-
+### 1. Oh-My-Zsh Plugins & Themes
 ```sh
-zpm if some-condition (another commands)
+# Step 1: Clone OMZ core
+zpm load @omz
+
+# Step 2: Load required libraries
+zpm load              \
+  @omz/lib/completion \
+  @omz/lib/history    \
+  @omz/lib/key-bindings
+
+# Step 3: Load OMZ plugins and theme
+zpm load @omz/git @omz/extract
+zpm load @omz/theme/robbyrussell
 ```
 
-Conditions:
+### 2. High-Performance Modern Setup (Async Plugins)
+```sh
+# Immediate sync loading
+zpm load zpm-zsh/helpers
+zpm load romkatv/powerlevel10k
 
-- `linux` - if current OS is Linux
-- `bsd` - if current OS is \*BSD
-- `openwrt` - if current OS is OpenWrt
-- `macos` - if current OS is macOS
-- `termux` - if current session run in [Termux](http://termux.com/)
-- `ssh` - if session run on remote host
-- `vte` - if session run on VTE based terminal emulator
+# Async deferred loading
+zpm load zsh-users/zsh-autosuggestions,async
+zpm load zdharma-continuum/fast-syntax-highlighting,async
+zpm load zsh-users/zsh-history-substring-search,async
+```
 
-Result of condition can be negated using `if-not` tag
+### 3. Local Plugin & Single-File Development
+```sh
+# Symlink entire local repository
+zpm load @dir/my-plugin,origin:$HOME/Projects/zsh-my-plugin
 
-The condition can be combined `zpm if macos if-not ssh load repo/plugin`
+# Symlink a standalone snippet/script
+zpm load @file/aliases,origin:$HOME/.dotfiles/zsh/aliases.zsh
+```
 
-> Notice: conditions will be verified only at first run, after that will be used generated cache
+### 4. Completions and Standalone Binaries
+```sh
+# Add completions from repo without sourcing anything
+zpm load zsh-users/zsh-completions,apply:fpath
 
-### Upgrade
+# Download single-file binary and expose to $PATH
+zpm load @remote/git-quick-stats,origin:https://raw.githubusercontent.com/arzzen/git-quick-stats/master/git-quick-stats,destination:bin
+```
 
-Run `zpm upgrade` for upgrading, or run `zpm upgrade some-plugin another-plugin` if you want to upgrade only these plugins
+## Configuration & Environment Variables
 
-### Clean
-
-By default zpm will generate cache file at first run, but if you will change `~/.zshrc` this cache should be removed using `zpm clean` command
-
-## Configuration
-
-You can use another mirror for GitHub/Gitlab/Bitbucket:
+| Variable | Default | Description |
+|---|---|---|
+| `_ZPM_PARALLEL_RUNNER` | `auto` (`parallel` -> `rush` -> `xargs`) | Force runner for concurrent downloads (`parallel`, `rush`, `xargs`) |
+| `CLICOLOR` | `1` | Set `CLICOLOR=0` to disable ANSI colors in terminal output |
+| `DEBUG` | *(none)* | Enable debug logging. Supports prefixes: `DEBUG=zpm`, `DEBUG=zpm:init`, `DEBUG=zpm:install`, `DEBUG=zpm:upgrade` |
+| `GITHUB_MIRROR` | `https://github.com` | Custom mirror URL for GitHub |
+| `GITLAB_MIRROR` | `https://gitlab.com` | Custom mirror URL for GitLab |
+| `BITBUCKET_MIRROR` | `https://bitbucket.org` | Custom mirror URL for Bitbucket |
+| `ZSH_DATA_HOME` | `${XDG_DATA_HOME:-$HOME/.local/share}/zsh` | Root directory for installed plugins |
+| `ZSH_CACHE_HOME` | `${XDG_CACHE_HOME:-$HOME/.cache}/zsh` | Root directory for `zcompdump` |
+| `ZSH_TMP_DIR` | `/tmp/zsh-${UID:-user}` | Directory for compiled cache, aggregated functions and bin files |
 
 ```sh
-# Declare this before zpm load
-GITHUB_MIRROR="https://hub.fastgit.org"
-GITLAB_MIRROR="Some url"
-BITBUCKET_MIRROR="Some url"
+# Example: configuration before sourcing zpm.zsh
+export _ZPM_PARALLEL_RUNNER="xargs"
+export GITHUB_MIRROR="https://hub.fastgit.org"
+```
+
+## Guide for Plugin Authors
+
+If you are authoring a plugin, you can include a `plugin-options.zsh` file in the root of your repository. ZPM will automatically read this file before initializing the plugin:
+
+```zsh
+# plugin-options.zsh
+zpm_plugin_source=true          # set to false if the plugin should not be sourced
+zpm_plugin_async=false          # set to true if the plugin should always load asynchronously
+zpm_plugin_bin_path=true        # add plugin's bin/ to $PATH
+zpm_plugin_functions_path=true  # add plugin's functions/ to $fpath
+zpm_plugin_autoload="foo:bar"   # functions to autoload automatically
 ```
 
 ## Troubleshooting
 
-### Powerlevel10k
+### Built-in Compatibility Workarounds
+ZPM automatically detects and applies optimizations for popular plugins:
+- **`romkatv/powerlevel10k`**: `POWERLEVEL9K_INSTALLATION_DIR` is automatically configured in cache.
+- **`zsh-syntax-highlighting`** & **`zsh-history-substring-search`**: Main entry files are resolved automatically.
+- **`sindresorhus/pure`**: Prompt function paths are resolved automatically.
 
-Powerlevel10k loads extra modules in its installation directory, which it [automatically detects by taking the file containing its init code, making it absolute, and taking its directory](https://github.com/romkatv/powerlevel10k/blob/0cc19ac2ede35fd8accff590fa71df580dc7e109/powerlevel10k.zsh-theme#L20). However, as zpm combines plugins into one fast-loading cache file, this automatic detection would break.
-
-As a workaround, you have to explicitly tell Powerlevel10k where it is installed. This needs to be done before the cache file is loaded, which means before zpm itself is loaded, like this:
-
-```sh
-# Adjust the path accordingly if your zpm is not installed at `~/.zpm` or you're
-# using a powerlevel10k fork
-export POWERLEVEL9K_INSTALLATION_DIR=~/.zpm/plugins/romkatv---powerlevel10k
-source ~/.zpm/zpm.zsh
-
-# ...
-
-zpm load romkatv/powerlevel10k
-```
-
-### Update to latest zpm
-
-If you have problems with `zpm` try updating:
+### Clearing Cache and Updating ZPM
+If you modify your `.zshrc` or encounter corrupted cache files:
 
 ```sh
-rm -rf "${TMPDIR:-/tmp}/zsh-${UID:-user}" # clear the cache
-cd "${XDG_DATA_HOME:-$HOME/.local/share}/zsh/plugins/@zpm"
-git pull
+# Quick cache refresh
+zpm clean
+
+# Updating ZPM itself
+zpm upgrade @zpm
 ```
 
 ## Developing process
 
-> You can see debug information by setting the system variable `DEBUG=zpm`
+> Set `DEBUG=zpm` to view verbose debug logs during plugin resolution and caching.
 
-When you make changes, add information about them to the change log in **next** section. Also add link to pr and link to your GitHub profile.
+When contributing changes, add information about them to the changelog in the **next** section, including pull request and profile links.
 
 ## TODO
 
 - [x] Create logo
-- [ ] Improve readme
-  - [ ] Describe installation process
+- [x] Improve readme
+  - [x] Describe installation process
+  - [x] Describe all tags, plugin types, and configuration options
 - [ ] Improve completions
   - [ ] Now `zpm load`, `zpm upgrade` or `zpm subcommand` will complete only one argument
 
