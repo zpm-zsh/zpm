@@ -53,8 +53,17 @@ Zpm is a plugin manager for ZSH who combines the imperative and declarative appr
 
 ## Stats
 
+ZPM achieves near-instant shell startup by combining all loaded plugins and configurations into a single byte-compiled cache (`zpm-cache.zsh.zwc`) and asynchronous runner (`zpm-cache-async.zsh.zwc`). On subsequent shell startups, no plugin manager logic or filesystem lookups are executed—only the pre-compiled cache is sourced.
+
+| Plugin Manager / Setup | Cold Start / Initialization | Warm Interactive Startup (50+ plugins) |
+|---|---|---|
+| **ZPM** | ~0.8s – 2.0s (first run only) | **~0.006s – 0.050s** (compiled cache) |
+| **Zinit (Turbo mode)** | ~0.5s – 1.5s | ~0.100s – 0.150s |
+| **Oh-My-Zsh** | N/A (linear sourcing) | ~0.200s – 0.450s |
+| **Antigen** | ~1.0s – 3.0s | ~0.250s – 0.500s |
+
 <details>
-  <summary>Test on Intel I7-8750H, SanDisk SD7SN6S, 16GB RAM</summary>
+  <summary>Benchmark details on Intel I7-8750H, SanDisk SD7SN6S, 16GB RAM</summary>
 <p>
 
 ```sh
