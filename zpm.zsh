@@ -20,7 +20,7 @@ _ZPM_CACHE_ASYNC="${ZSH_TMP_DIR}/zpm-cache-async.zsh"
 
 export ZSH_DATA_HOME="${ZSH_DATA_HOME:-${XDG_DATA_HOME:-$HOME/.local/share}/zsh}"
 _ZPM_PLUGINS_DIR="${ZSH_DATA_HOME}/plugins"
-_ZPM_PLUGIN_DIR="${ZSH_DATA_HOME}/plugins/zpm"
+_ZPM_PLUGIN_DIR="${ZSH_DATA_HOME}/plugins/@zpm"
 
 export ZSH_CACHE_HOME="${ZSH_CACHE_HOME:-${XDG_CACHE_HOME:-$HOME/.cache}/zsh}"
 _ZPM_COMPDUMP="${ZSH_CACHE_HOME}/zcompdump-${ZSH_VERSION}"

@@ -508,9 +508,12 @@ When you make changes, add information about them to the change log in **next** 
 
 ## Changelog
 
-- 7.0
+- next
 
-  - Move zpm to `$XDG_DATA_HOME/zsh/plugins/zpm`
+  - Move zpm to `$XDG_DATA_HOME/zsh/plugins/@zpm`
+  - Prevent `@zpm-compile` from compiling `.git` refs when `setopt GLOB_DOTS` is enabled
+  - Fix installation paths in README
+  - Add benchmarking comparison in README
 
 - 6.0
 
