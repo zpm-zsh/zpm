@@ -192,6 +192,7 @@ zpm-zsh/create-zsh-plugin
   - [xargs](https://www.gnu.org/software/findutils/) (standard fallback)
 - [curl](https://curl.se/) for remote downloads and GitHub Gists
 - [Termux](http://termux.com/) for Android
+- [cli-markdown](https://www.npmjs.com/package/cli-markdown) / [cli-html](https://www.npmjs.com/package/cli-html) / [glow](https://github.com/charmbracelet/glow) / [bat](https://github.com/sharkdp/bat) — *optional, for `zpm readme` terminal viewer*
 
 ## Installation
 
@@ -218,20 +219,13 @@ ln -sf "${XDG_DATA_HOME:-$HOME/.local/share}/zsh/plugins/@zpm/zshrc" ~/.zshrc
 | `zpm load <plugins...>` | *(default)* | Download and initialize specified plugins |
 | `zpm upgrade [plugins...]` | `zpm u`, `zpm up` | Upgrade all plugins (or specific plugins), then clear cache and reload |
 | `zpm clean` | `zpm c`, `zpm cl` | Remove generated ZPM cache (`$ZSH_TMP_DIR`) and restart shell |
+| `zpm info [plugins...]` | | Display detailed metadata card for specified plugin(s) |
+| `zpm list` | `zpm ls` | List all loaded/installed plugins |
+| `zpm readme <plugin>` | | Display plugin's README in the terminal |
+| `zpm link [path]` | | Link and load a local directory or single script as a plugin |
 | `zpm if <condition> <command>` | | Execute command only if condition is true on first run |
 | `zpm if-not <condition> <command>` | | Execute command only if condition is false on first run |
 | `zpm <custom-command>` | | Execute custom subcommand function `zpm-<custom-command>` |
-
-<details>
-<summary>Extensions for ZPM itself</summary>
-<p>
-
-- [zpm-readme](https://github.com/zpm-zsh/zpm-readme) - Show plugin readme in terminal (`zpm readme <plugin>`)
-- [zpm-info](https://github.com/zpm-zsh/zpm-info) - Show plugin info in terminal (`zpm info <plugin>`)
-- [zpm-telemetry](https://github.com/zpm-zsh/zpm-telemetry) - Send anonymous usage stats via GitHub
-
-</p>
-</details>
 
 ## How to use
 

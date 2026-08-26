@@ -1,0 +1,37 @@
+#!/usr/bin/env zsh
+
+local target="${1:-$PWD}"
+local Plugin_basename
+local Plugin_dir
+local Plugin_type
+
+if [[ -d "$target" ]]; then
+  Plugin_type='dir'
+  Plugin_basename="${target:A:t}"
+  Plugin_dir="${target:A}"
+elif [[ -f "$target" ]]; then
+  local clean="${target:A:t}"
+  clean=${clean##oh-my-zsh-}
+  clean=${clean##zsh-}
+  clean=${clean%%.plugin.zsh}
+  clean=${clean%%-plugin.zsh}
+  clean=${clean%%.zsh}
+  clean=${clean%%-zsh}
+  clean=${clean%%.plugin}
+  clean=${clean%%-plugin}
+
+  Plugin_type='file'
+  Plugin_basename="${clean}"
+  Plugin_dir="${target:A}"
+else
+  print -u2 "Error: path '${target}' does not exist."
+  return 1
+fi
+
+local Plugin_dir_str="${Plugin_dir/"$HOME"/\$HOME}"
+local spec="@${Plugin_type}/${Plugin_basename},origin:${Plugin_dir_str}"
+
+zpm load "$spec"
+print "Linked and loaded plugin: ${spec}"
+print "To load automatically on startup, add to your ~/.zshrc:"
+print "  zpm load \"${spec}\""

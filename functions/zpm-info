@@ -1,0 +1,55 @@
+#!/usr/bin/env zsh
+
+autoload -Uz \
+  @zpm-get-plugin-basename \
+  @zpm-get-plugin-documentation-hyperlink \
+  @zpm-get-plugin-documentation-link \
+  @zpm-get-plugin-name \
+  @zpm-get-plugin-origin \
+  @zpm-get-plugin-origin-type \
+  @zpm-get-plugin-path \
+  @zpm-get-plugin-type
+
+local -a plugins=("$@")
+if (( ! $#plugins )); then
+  plugins=("${(k)_ZPM_plugins_full[@]}")
+  if (( ! $#plugins )); then
+    plugins=('@zpm')
+  fi
+fi
+
+typeset -gA c=(
+  reset   $'\e[0m'
+  bold    $'\e[1m'
+  dim     $'\e[2m'
+  green   $'\e[32m'
+  yellow  $'\e[33m'
+  blue    $'\e[34m'
+  cyan    $'\e[36m'
+)
+[[ "$CLICOLOR" == "0" ]] && c=()
+
+for plugin in "${plugins[@]}"; do
+  local Plugin_name="$(@zpm-get-plugin-name "$plugin")"
+  local Plugin_type="$(@zpm-get-plugin-type "$Plugin_name")"
+  local Plugin_basename="$(@zpm-get-plugin-basename "$Plugin_name")"
+  local Plugin_origin_type="$(@zpm-get-plugin-origin-type "$Plugin_name")"
+  local Plugin_path="$(@zpm-get-plugin-path "$Plugin_name")"
+  local Plugin_full="${_ZPM_plugins_full[$Plugin_name]:-$plugin}"
+  local Plugin_origin="$(@zpm-get-plugin-origin "$Plugin_full" "$Plugin_name" "$Plugin_basename" "$Plugin_type" "$Plugin_origin_type")"
+  local Plugin_link="$(@zpm-get-plugin-documentation-link "$Plugin_name" "$Plugin_type" "$Plugin_origin")"
+  local Plugin_hyperlink="$(@zpm-get-plugin-documentation-hyperlink "$Plugin_name" "$Plugin_link" "$Plugin_origin")"
+
+  local is_async="false"
+  [[ "$Plugin_full" == *",async"* ]] && is_async="true"
+
+  local is_installed="no"
+  [[ -e "$Plugin_path" ]] && is_installed="yes"
+
+  print "${c[bold]}${c[cyan]}Plugin:${c[reset]}     ${Plugin_hyperlink}"
+  [[ -n "$Plugin_link" ]] && print "${c[bold]}URL:${c[reset]}        ${Plugin_link}"
+  print "${c[bold]}Type:${c[reset]}       ${Plugin_type}"
+  print "${c[bold]}Async:${c[reset]}      ${is_async}"
+  print "${c[bold]}Installed:${c[reset]}  ${is_installed} (${Plugin_path})"
+  print ""
+done

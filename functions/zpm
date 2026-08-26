@@ -33,6 +33,30 @@ if [[ "$1" == 'c' || "$1" == 'cl' || "$1" == 'clean' ]]; then
   return 0
 fi
 
+if [[ "$1" == 'info' ]]; then
+  shift
+  zpm-info "$@"
+  return 0
+fi
+
+if [[ "$1" == 'list' || "$1" == 'ls' ]]; then
+  shift
+  zpm-info "$@"
+  return 0
+fi
+
+if [[ "$1" == 'readme' ]]; then
+  shift
+  zpm-readme "$@"
+  return 0
+fi
+
+if [[ "$1" == 'link' ]]; then
+  shift
+  zpm-link "$@"
+  return 0
+fi
+
 if is-callable "zpm-$1"; then
   local call_fn=$1
   shift

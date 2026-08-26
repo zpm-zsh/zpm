@@ -1,0 +1,44 @@
+#!/usr/bin/env zsh
+
+autoload -Uz @zpm-get-plugin-name @zpm-get-plugin-path
+
+local -a plugins=("$@")
+if (( ! $#plugins )); then
+  plugins=('@zpm')
+fi
+
+local viewer
+if (( $+commands[cli-markdown] )); then
+  viewer='cli-markdown'
+elif (( $+commands[md] )); then
+  viewer='md'
+elif (( $+commands[cli-html] )); then
+  viewer='cli-html'
+elif (( $+commands[glow] )); then
+  viewer='glow'
+elif (( $+commands[bat] )); then
+  viewer='bat'
+elif [[ -n "$PAGER" ]]; then
+  viewer="$PAGER"
+else
+  viewer='cat'
+fi
+
+for plugin in "${plugins[@]}"; do
+  local Plugin_name="$(@zpm-get-plugin-name "$plugin")"
+  local Plugin_path="$(@zpm-get-plugin-path "$Plugin_name")"
+  local readme=""
+
+  for candidate in "${Plugin_path}/README.md" "${Plugin_path}/readme.md" "${Plugin_path}/README.markdown" "${Plugin_path}/README"; do
+    if [[ -f "$candidate" ]]; then
+      readme="$candidate"
+      break
+    fi
+  done
+
+  if [[ -n "$readme" ]]; then
+    ${(z)viewer} "$readme"
+  else
+    print -u2 "README not found for plugin '${plugin}' in '${Plugin_path}'"
+  fi
+done
