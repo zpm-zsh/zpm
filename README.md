@@ -191,18 +191,19 @@ zpm-zsh/create-zsh-plugin
 Add the following text into `.zshrc`
 
 ```sh
-if [[ ! -f ~/.zpm/zpm.zsh ]]; then
-  git clone --recursive https://github.com/zpm-zsh/zpm "${XDG_DATA_HOME:-$HOME/.local/share}/zsh/plugins/@zpm"
+ZPM_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/zsh/plugins/@zpm"
+if [[ ! -f "${ZPM_DIR}/zpm.zsh" ]]; then
+  git clone --recursive https://github.com/zpm-zsh/zpm "${ZPM_DIR}"
 fi
-source "${XDG_DATA_HOME:-$HOME/.local/share}/zsh/plugins/@zpm/zpm.zsh"
+source "${ZPM_DIR}/zpm.zsh"
 # Or source our zshrc
-# source "${XDG_DATA_HOME:-$HOME/.local/share}/zsh/plugins/@zpm/zshrc"
+# source "${ZPM_DIR}/zshrc"
 ```
 
 If you don't have `.zshrc` copy example of `.zshrc` from zpm
 
 ```sh
-ln -sf ~/.zpm/zshrc ~/.zshrc
+ln -sf "${XDG_DATA_HOME:-$HOME/.local/share}/zsh/plugins/@zpm/zshrc" ~/.zshrc
 ```
 
 ## How to use
@@ -478,7 +479,7 @@ If you have problems with `zpm` try updating:
 
 ```sh
 rm -rf "${TMPDIR:-/tmp}/zsh-${UID:-user}" # clear the cache
-cd ~/.zpm
+cd "${XDG_DATA_HOME:-$HOME/.local/share}/zsh/plugins/@zpm"
 git pull
 ```
 
