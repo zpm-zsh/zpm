@@ -4,9 +4,13 @@ local Plugin="$1"
 local Autoload_files="$2"
 
 if [[ "$Plugin"  == *",autoload:"* ]]; then
-  local _ZPM_autoload_str=${Plugin##*,autoload}
-  _ZPM_autoload_str=${_ZPM_autoload_str%%\,*}
-  Autoload_files="${Autoload_files}${_ZPM_autoload_str}"
+  local _ZPM_autoload_str="${Plugin##*,autoload:}"
+  _ZPM_autoload_str="${_ZPM_autoload_str%%\,*}"
+  if [[ -n "$Autoload_files" ]]; then
+    Autoload_files="${Autoload_files%:}:${_ZPM_autoload_str}"
+  else
+    Autoload_files="${_ZPM_autoload_str}"
+  fi
 fi
 
 echo "$Autoload_files"
