@@ -508,12 +508,14 @@ When you make changes, add information about them to the change log in **next** 
 
 ## Changelog
 
-- next
+- 6.1
 
-  - Move zpm to `$XDG_DATA_HOME/zsh/plugins/@zpm`
+  - Move zpm default location to `$XDG_DATA_HOME/zsh/plugins/@zpm`
   - Prevent `@zpm-compile` from compiling `.git` refs when `setopt GLOB_DOTS` is enabled
   - Fix installation paths in README
   - Add benchmarking comparison in README
+  - Stop exporting internal parameters into child shells
+  - Add `-fSL` flag to let curl follow redirections
 
 - 6.0
 
