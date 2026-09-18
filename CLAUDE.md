@@ -50,6 +50,14 @@ After all plugins load, `@zpm-background-initialization` generates two cache fil
 
 Both are zcompiled by `@zpm-compile`.
 
+Each plugin is emitted into the cache as `(){ local ZERO=<file>; source <file>; }`.
+Plugin bodies are **not** inlined: a plugin that resolves its own location (`$0`, `%N`,
+`%x`) must see its own file path, not the cache's — inlining made `%N` expand to
+`(anon)` and broke zsh-syntax-highlighting on every start after the first (issue #46).
+The anonymous function is still required: it is the scope `@zpm-source` gives the plugin
+on the cold path, without which `emulate -L zsh` and top-level `local` leak into the
+user's shell.
+
 ### Key data structures
 
 | Variable | Type | Purpose |

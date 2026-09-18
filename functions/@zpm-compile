@@ -11,6 +11,17 @@ zcompile "${_ZPM_DIR}/zpm.zsh" 2>/dev/null
 zcompile "${_ZPM_DIR}/lib/init.zsh" 2>/dev/null
 zcompile "${_ZPM_DIR}/lib/imperative.zsh" 2>/dev/null
 
+# The caches source these files by path, so an uncompiled one is re-parsed on every
+# startup. @zpm-source usually compiles them via the `source` override, but that
+# override is installed after zpm-zsh/helpers is already loaded (lib/imperative.zsh),
+# and a plugin upgraded since the last cache build has a stale .zwc.
+local file
+for file in "${_ZPM_file_for_source[@]}" "${_ZPM_file_for_async_source[@]}"; do
+  if [[ -f "$file" && ! "${file}.zwc" -nt "$file" ]]; then
+    zcompile -- "$file" 2>/dev/null
+  fi
+done
+
 for dir in $fpath; do
   if [[ -d "$dir" && -w "$dir" ]]; then
     for i in "${dir}"/**/*(N-.); do

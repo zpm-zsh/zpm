@@ -61,7 +61,7 @@ Zpm is a plugin manager for ZSH who combines the imperative and declarative appr
 
 ## Stats
 
-ZPM achieves near-instant shell startup by combining all loaded plugins and configurations into a single byte-compiled cache (`zpm-cache.zsh.zwc`) and asynchronous runner (`zpm-cache-async.zsh.zwc`). On subsequent shell startups, no plugin manager logic or filesystem lookups are executed—only the pre-compiled cache is sourced.
+ZPM achieves near-instant shell startup by resolving the whole plugin set ahead of time into a single byte-compiled cache (`zpm-cache.zsh.zwc`) and asynchronous runner (`zpm-cache-async.zsh.zwc`). The cache sources each plugin's own byte-compiled file directly, so plugins that locate themselves via `$0` keep working. On subsequent shell startups, no plugin manager logic and no plugin discovery are executed—only the pre-compiled cache is sourced.
 
 | Plugin Manager / Setup | Cold Start / Initialization | Warm Interactive Startup (50+ plugins) |
 |---|---|---|

@@ -17,16 +17,17 @@ local _ZPM_TMP_ASYNC="$(mktemp)"
 
   for plugin in ${_ZPM_plugins_for_source}; do
     local file="$_ZPM_file_for_source["$plugin"]"
-    echo "(){"
-    echo "0='${file}'"
 
     # Workaround for powerlevel10k
     if [[ "$plugin" == "romkatv/powerlevel10k" ]]; then
       echo "export POWERLEVEL9K_INSTALLATION_DIR='$(@zpm-get-plugin-path $plugin)'"
     fi
 
-    cat "${file}"
-    echo "}"
+    # Source the file instead of inlining its body: a plugin that locates itself via
+    # $0, %N or %x must see its own path, not the cache's. The anonymous function is
+    # the scope the plugin would get from @zpm-source on the cold path, so 'emulate -L'
+    # and top-level 'local' do not leak into the user's shell.
+    echo "(){ local ZERO=${(q)file}; source ${(q)file}; }"
     echo
   done
 
@@ -54,16 +55,13 @@ local _ZPM_TMP_ASYNC="$(mktemp)"
 
   for plugin in ${_ZPM_plugins_for_async_source}; do
     local file="$_ZPM_file_for_async_source["$plugin"]"
-    echo "(){"
-    echo "0='${file}'"
 
     # Workaround for powerlevel10k
     if [[ "$plugin" == "romkatv/powerlevel10k" ]]; then
       echo "export POWERLEVEL9K_INSTALLATION_DIR='$(@zpm-get-plugin-path $plugin)'"
     fi
 
-    cat "${file}"
-    echo "}"
+    echo "(){ local ZERO=${(q)file}; source ${(q)file}; }"
     echo
   done
 

@@ -75,14 +75,20 @@ sandbox="$(mktemp -d)"
   is='test'
   @zpm-background-initialization
 
-  assert_match 'ZPM_FAKE_PLUGIN_LOADED' "$(<${_ZPM_CACHE})" 'cache contains plugin body'
-  assert_match '\(\)\{' "$(<${_ZPM_CACHE})" 'cache wraps plugin in anon function'
+  # The cache sources each plugin file rather than inlining its body, so that a plugin
+  # resolving $0/%N/%x sees its own path. See tests/integration/cache-self-location.test.zsh.
+  local _sync_file="${_ZPM_PLUGINS_DIR}/@dir---fake-plugin/fake.plugin.zsh"
+  assert_match "source ${_sync_file}" "$(<${_ZPM_CACHE})" 'sync cache sources the plugin file'
+  assert_match "ZERO=${_sync_file}" "$(<${_ZPM_CACHE})" 'sync cache sets ZERO for the plugin'
 
   # GAP 2: the sync cache must carry the POWERLEVEL9K_INSTALLATION_DIR export.
   assert_match 'POWERLEVEL9K_INSTALLATION_DIR' "$(<${_ZPM_CACHE})" 'p10k injection in cache'
 
-  # GAP 3: async plugin body must be in the ASYNC cache, not the sync cache.
-  assert_match 'ZPM_FAKE_ASYNC_LOADED' "$(<${_ZPM_CACHE_ASYNC})" 'async plugin in async cache'
+  # GAP 3: async plugin must be loaded from the ASYNC cache, not the sync cache.
+  local _async_file="${_ZPM_PLUGINS_DIR}/@dir---fake-async/fake-async.plugin.zsh"
+  assert_match "source ${_async_file}" "$(<${_ZPM_CACHE_ASYNC})" 'async cache sources the async plugin file'
+  assert_eq '0' "$([[ "$(<${_ZPM_CACHE})" == *"${_async_file}"* ]] && echo 1 || echo 0)" \
+    'async plugin is not in the sync cache'
 } always {
   # NIT: guard against empty sandbox var before removing.
   [[ -n "${sandbox}" ]] && rm -rf "${sandbox}"
