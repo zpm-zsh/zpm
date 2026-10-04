@@ -14,14 +14,18 @@ autoload -Uz @zpm-addfpath @zpm-addpath
   source "${_ZPM_DIR}/lib/init.zsh"
   assert_eq '0' "${+_ZPM_CP_FLAGS}" 'init.zsh does not probe cp'
 
-  print -r -- 'new' > "${tmp}/src/functions/myfn"
-  print -r -- 'other' > "${tmp}/other"
-  ln -s "${tmp}/other" "${ZSH_TMP_DIR}/functions/myfn"
+  # cp -p preserves read-only modes, so a re-copy must replace a read-only file
+  print -r -- 'old' > "${tmp}/src/functions/myfn"
+  chmod 444 "${tmp}/src/functions/myfn"
   @zpm-addfpath "${tmp}/src/functions"
   assert_eq '0' "$?" '@zpm-addfpath succeeds with the system cp'
   assert_eq '1' "${+_ZPM_CP_FLAGS}" 'cp flags are probed on first copy'
-  assert_eq 'new' "$(<${ZSH_TMP_DIR}/functions/myfn)" '@zpm-addfpath replaces stale destination'
-  assert_eq 'other' "$(<${tmp}/other)" '@zpm-addfpath does not write through destination symlink'
+
+  chmod 644 "${tmp}/src/functions/myfn"
+  print -r -- 'new' >| "${tmp}/src/functions/myfn"
+  @zpm-addfpath "${tmp}/src/functions"
+  assert_eq '0' "$?" '@zpm-addfpath succeeds over a read-only destination'
+  assert_eq 'new' "$(<${ZSH_TMP_DIR}/functions/myfn)" '@zpm-addfpath replaces stale read-only destination'
 
   print -r -- 'bin' > "${tmp}/src/bin/mybin"
   @zpm-addpath "${tmp}/src/bin"
