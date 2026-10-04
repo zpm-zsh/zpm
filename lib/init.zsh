@@ -1,4 +1,10 @@
 #!/usr/bin/env zsh
+typeset -ga _ZPM_CP_FLAGS=()
+
+if [[ "$(cp --help 2>/dev/null)" == *'--remove-destination'* ]]; then
+  _ZPM_CP_FLAGS+=(--remove-destination)
+fi
+
 typeset -g _ZPM_autoload=()
 
 typeset -ag _ZPM_plugins_for_source
