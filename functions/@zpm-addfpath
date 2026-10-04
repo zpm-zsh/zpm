@@ -1,3 +1,8 @@
 #!/usr/bin/env zsh
 
-cp -RpLf --remove-destination "${1}/." "${ZSH_TMP_DIR}/functions"
+if (( ! ${+_ZPM_CP_FLAGS} )); then
+  typeset -ga _ZPM_CP_FLAGS=()
+  [[ "$(cp --help 2>/dev/null)" == *'--remove-destination'* ]] && _ZPM_CP_FLAGS+=(--remove-destination)
+fi
+
+cp -RpLf "${_ZPM_CP_FLAGS[@]}" "${1}/." "${ZSH_TMP_DIR}/functions"
