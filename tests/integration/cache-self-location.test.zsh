@@ -12,7 +12,7 @@ _ZPM_DIR="${_ZPM_DIR:A}"
 # Body runs inside `always` so the sandbox is removed even on error. Do NOT use
 # `trap ... EXIT`: this file is sourced by run.zsh and would clobber the harness
 # TRAPEXIT summary handler.
-sandbox="$(mktemp -d)"
+sandbox="${$(mktemp -d):A}"  # resolved: macOS TMPDIR is /var -> /private/var
 {
   export ZSH_TMP_DIR="${sandbox}/tmp"
   export ZSH_DATA_HOME="${sandbox}/data"

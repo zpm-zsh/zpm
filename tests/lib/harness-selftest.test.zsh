@@ -15,3 +15,16 @@ if (( _T_FAIL == before + 1 )); then
 else
   print -u2 'HARNESS BROKEN: failure not counted'
 fi
+
+# A script with a failing assertion must exit non-zero (zsh ignores TRAPEXIT's
+# return value for scripts, unlike for `zsh -c`), otherwise CI is always green.
+() {
+  local harness="$1" script="$(mktemp)"
+  print -r -- "source '${harness}'; assert_eq a b 'child failure'" >| "$script"
+  zsh -f "$script" 2>/dev/null
+  assert_eq '1' "$?" 'failing test script exits with status 1'
+  print -r -- "source '${harness}'; assert_eq a a 'child success'" >| "$script"
+  zsh -f "$script" 2>/dev/null
+  assert_eq '0' "$?" 'passing test script exits with status 0'
+  rm -f "$script"
+} "${0:A:h}/harness.zsh"
