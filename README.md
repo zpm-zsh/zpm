@@ -572,6 +572,15 @@ When contributing changes, add information about them to the changelog in the **
 
 ## Changelog
 
+- 6.2
+
+  - Add built-in `zpm info`, `zpm readme` and `zpm link` commands
+  - Fix self-locating plugins (e.g. zsh-syntax-highlighting) breaking on warm start. Fixed [#46](https://github.com/zpm-zsh/zpm/issues/46) in [#70](https://github.com/zpm-zsh/zpm/pull/70)
+  - Fix `cp: illegal option` on macOS/BSD when copying plugin `functions/` and `bin/`. Fixed [#71](https://github.com/zpm-zsh/zpm/issues/71) in [#72](https://github.com/zpm-zsh/zpm/pull/72) by [@zpao](https://github.com/zpao)
+  - Fix `autoload:` tag combined with default autoload functions
+  - Fix documentation links for plugins with an explicit `@github/`, `@gitlab/` or `@bitbucket/` prefix
+  - Add test suite and CI on Linux and macOS ([#74](https://github.com/zpm-zsh/zpm/pull/74))
+
 - 6.1
 
   - Move zpm default location to `$XDG_DATA_HOME/zsh/plugins/@zpm`
