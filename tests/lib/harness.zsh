@@ -36,12 +36,20 @@ assert_fail() {
   fi
 }
 
-TRAPEXIT() {
-  # zsh runs TRAPEXIT in $(...) command-substitution subshells too; only the
-  # top-level shell should print the summary and set the exit code. `exit` is
-  # required: a script ignores TRAPEXIT's return value.
-  (( ZSH_SUBSHELL )) && return
+# Prints the summary and exits 1 if any assertion failed. tests/run.zsh calls it
+# explicitly: zsh < 5.7 ignores any exit status set from an EXIT trap.
+harness_finish() {
+  typeset -g _T_DONE=1
   print -u2 "----"
   print -u2 "PASS=${_T_PASS} FAIL=${_T_FAIL}"
   exit $(( _T_FAIL > 0 ? 1 : 0 ))
+}
+
+# Summary for a test file run on its own. The exit status it sets only takes
+# effect on zsh >= 5.7 (a script ignores TRAPEXIT's return value, hence `exit`).
+TRAPEXIT() {
+  # zsh runs TRAPEXIT in $(...) command-substitution subshells too; only the
+  # top-level shell should print the summary.
+  (( ZSH_SUBSHELL || _T_DONE )) && return
+  harness_finish
 }
