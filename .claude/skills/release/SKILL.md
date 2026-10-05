@@ -50,9 +50,8 @@ missing lines. Classify each line as major, minor or patch, and propose the vers
 
 ## 3. Verify
 
-- `make test` locally: read the `PASS/FAIL` line, because the exit code is always 0.
-- The latest CI run on `next`: there must be no `FAIL:` lines that the previous release did not
-  have, on either OS (`gh run view <id> --log | grep -E 'PASS=|FAIL:'`).
+- `make test` passes locally.
+- The latest CI run on `next` is green on both OSes (`gh run list --branch next --limit 1`).
 
 ## 4. Changelog commit (on `next`)
 

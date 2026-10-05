@@ -110,11 +110,11 @@ Hardcoded special handling exists in `@zpm-get-plugin-file-path` and `@zpm-backg
 - `tests/unit/` — one file per function; `tests/integration/` — load/cache/tag behaviour in a
   temp `ZSH_TMP_DIR`; `tests/startup/` — startup benchmarks; `tests/fixtures/` — fake plugins.
 - Every fix or feature gets a test. Never weaken or delete an existing assertion to get green.
-- **`tests/run.zsh` exits 0 even when tests fail**, so a green `make test` or CI check means
-  nothing by itself. Read the `PASS=N FAIL=M` line, and in CI read the job logs
-  (`gh run view <id> --log | grep -E 'PASS=|FAIL:'`). `FAIL: (intentional) ...` is the harness
-  self-test and is expected. Judge a change by *new* `FAIL:` lines compared with the base
-  branch's latest run, on both OSes.
+- `tests/run.zsh` exits 1 if any assertion failed and prints `PASS=N FAIL=M`. The exit code
+  comes from `exit` in the harness's `TRAPEXIT`, because zsh ignores a trap's `return` value
+  for scripts. `FAIL: (intentional) ...` is the harness self-test and is expected.
+- Fixture directories need at least one tracked file, because git drops empty dirs and CI
+  checkouts would lack them.
 - CI (`.github/workflows/ci.yml`) runs on `ubuntu-latest` and `macos-latest` for pushes and PRs
   to `main`/`next`. Runs for PRs from forks wait for maintainer approval (`action_required`).
 

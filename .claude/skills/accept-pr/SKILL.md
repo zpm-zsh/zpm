@@ -52,13 +52,8 @@ Run `/code-review $ARGUMENTS`, then check zpm specifics by hand:
 
 - A PR from a fork shows `action_required`. Approve the run only after step 1:
   `gh api -X POST repos/zpm-zsh/zpm/actions/runs/<id>/approve`.
-- `tests/run.zsh` exits 0 even when tests fail, so **do not trust the green check**. Compare
-  the `FAIL:` lines in the logs with the base branch's latest run:
-  ```bash
-  gh run view <pr-run> --log  | grep -E 'PASS=|FAIL:' | cut -f1,3-
-  gh run view <base-run> --log | grep -E 'PASS=|FAIL:' | cut -f1,3-
-  ```
-  The PR must add no new `FAIL:` on either `ubuntu-latest` or `macos-latest`.
+- Both `ubuntu-latest` and `macos-latest` must pass. To see which assertions failed:
+  `gh run view <run> --log | grep -E 'PASS=|FAIL:' | cut -f1,3-`.
 
 ## 5. Fix up or request changes
 
