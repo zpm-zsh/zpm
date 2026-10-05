@@ -38,9 +38,10 @@ assert_fail() {
 
 TRAPEXIT() {
   # zsh runs TRAPEXIT in $(...) command-substitution subshells too; only the
-  # top-level shell should print the summary and set the exit code.
+  # top-level shell should print the summary and set the exit code. `exit` is
+  # required: a script ignores TRAPEXIT's return value.
   (( ZSH_SUBSHELL )) && return
   print -u2 "----"
   print -u2 "PASS=${_T_PASS} FAIL=${_T_FAIL}"
-  return $(( _T_FAIL > 0 ? 1 : 0 ))
+  exit $(( _T_FAIL > 0 ? 1 : 0 ))
 }
