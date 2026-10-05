@@ -28,7 +28,7 @@ local _zpm_completions_plugins_loadable=($(
     printf '%s\n%s\n' "${_zpm_completions_plugins_installed[@]}" "${(k)_ZPM_plugins_full[@]}" | sort | uniq -u
 ))
 
-local _zpm_upgrade_plugins=(@zpm ${(k)_ZPM_plugins_full})
+local -aU _zpm_upgrade_plugins=(@zpm ${(k)_ZPM_plugins_full})
 
 local _load_args=(
   'load:Load plugin'
@@ -66,43 +66,52 @@ local _zpm_loaded_plugins=(${(k)_ZPM_plugins_full})
 
 _arguments '*:: :->subcmds' && return 0
 
-if (( CURRENT == 1 )); then
-  _describe -t commands "zpm subcommand" _zpm_all_args
+# The subcommand follows any number of `if <cond>` / `if-not <cond>` prefixes
+local -i cmd_idx=1
+while [[ "$words[cmd_idx]" == (if|if-not) ]]; do
+  (( cmd_idx += 2 ))
+done
+
+if (( CURRENT < cmd_idx )); then
+  _describe -t commands "zpm condition" _zpm_completions_if_args
   return
 fi
 
-if (( CURRENT > 1 )); then
-  PRE=$((CURRENT - 1))
-  PRE2=$((CURRENT - 2))
-
-  if [[ "$words[$PRE]" == 'load' ]]; then
-    _describe -t commands "zpm load" _zpm_completions_plugins_loadable
-    return
-  elif [[ "$words[$PRE]" == 'if' || "$words[$PRE]" == 'if-not' ]]; then
-    _describe -t commands "zpm condition" _zpm_completions_if_args
-    return
-  elif [[ "$words[$PRE2]" == 'if' || "$words[$PRE2]" == 'if-not' ]]; then
-    _describe -t commands "zpm next condition" _load_args
-    return
-  elif [[ "$words[$PRE]" == 'clean' || "$words[$PRE]" == 'c' || "$words[$PRE]" == 'cl' ]]; then
-    return
-  elif [[ "$words[$PRE]" == 'u' || "$words[$PRE]" == 'up' || "$words[$PRE]" == 'upgrade' ]]; then
-    _describe -t commands "zpm upgrade plugins" _zpm_upgrade_plugins
-    return
-  elif [[ "$words[$PRE]" == 'info' || "$words[$PRE]" == 'readme' ]]; then
-    _describe -t commands "zpm plugins" _zpm_upgrade_plugins
-    return
-  elif [[ "$words[$PRE]" == 'list' || "$words[$PRE]" == 'ls' ]]; then
-    return
-  elif [[ "$words[$PRE]" == 'link' ]]; then
-    _files
-    return
-  elif is-callable "_zpm_${words[$PRE]}_completion"; then
-    "_zpm_${words[$PRE]}_completion"
-    return
+if (( CURRENT == cmd_idx )); then
+  if (( cmd_idx == 1 )); then
+    _describe -t commands "zpm subcommand" _zpm_all_args
   else
-    return
+    _describe -t commands "zpm next condition" _load_args
   fi
+  return
 fi
 
-return
+local cmd="$words[cmd_idx]"
+# Plugins already given on the command line are not offered again
+local -a typed=( "${(@)words[cmd_idx+1,CURRENT-1]}" )
+local -a candidates
+
+case "$cmd" in
+  load)
+    candidates=( ${_zpm_completions_plugins_loadable:|typed} )
+    _describe -t commands "zpm load" candidates
+    ;;
+  u|up|upgrade)
+    candidates=( ${_zpm_upgrade_plugins:|typed} )
+    _describe -t commands "zpm upgrade plugins" candidates
+    ;;
+  info|readme)
+    candidates=( ${_zpm_upgrade_plugins:|typed} )
+    _describe -t commands "zpm plugins" candidates
+    ;;
+  link)
+    _files
+    ;;
+  c|cl|clean|list|ls)
+    ;;
+  *)
+    if is-callable "_zpm_${cmd}_completion"; then
+      "_zpm_${cmd}_completion"
+    fi
+    ;;
+esac
