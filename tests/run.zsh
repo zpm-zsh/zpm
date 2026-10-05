@@ -7,3 +7,5 @@ local f
 for f in "${here}"/**/*.test.zsh(.N); do
   source "$f"
 done
+
+harness_finish

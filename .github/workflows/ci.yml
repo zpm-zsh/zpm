@@ -17,7 +17,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Install dependencies (Linux)
         if: runner.os == 'Linux'
@@ -32,3 +32,28 @@ jobs:
 
       - name: Run test suite
         run: zsh tests/run.zsh
+
+  # Run in containers via `docker run`: JavaScript actions such as checkout do not
+  # work inside musl-based (Alpine) job containers.
+  test-container:
+    name: Test on ${{ matrix.name }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: busybox (Alpine)
+            image: alpine:latest
+            setup: apk add --no-cache zsh git
+          - name: zsh 5.1 (minimum supported)
+            image: zshusers/zsh:5.1.1
+            setup: 'true'
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Run test suite
+        run: |
+          docker run --rm -v "$PWD:/src:ro" "${{ matrix.image }}" sh -c \
+            '${{ matrix.setup }} && cp -r /src /work && cd /work && zsh tests/run.zsh'

@@ -110,9 +110,10 @@ Hardcoded special handling exists in `@zpm-get-plugin-file-path` and `@zpm-backg
 - `tests/unit/` — one file per function; `tests/integration/` — load/cache/tag behaviour in a
   temp `ZSH_TMP_DIR`; `tests/startup/` — startup benchmarks; `tests/fixtures/` — fake plugins.
 - Every fix or feature gets a test. Never weaken or delete an existing assertion to get green.
-- `tests/run.zsh` exits 1 if any assertion failed and prints `PASS=N FAIL=M`. The exit code
-  comes from `exit` in the harness's `TRAPEXIT`, because zsh ignores a trap's `return` value
-  for scripts. `FAIL: (intentional) ...` is the harness self-test and is expected.
+- `tests/run.zsh` exits 1 if any assertion failed and prints `PASS=N FAIL=M`; it ends with an
+  explicit `harness_finish`, because zsh < 5.7 ignores any exit status set from an EXIT trap.
+  A single test file run on its own gets its exit status from `TRAPEXIT` (zsh >= 5.7 only).
+  `FAIL: (intentional) ...` is the harness self-test and is expected.
 - Fixture directories need at least one tracked file, because git drops empty dirs and CI
   checkouts would lack them.
 - CI (`.github/workflows/ci.yml`) runs on `ubuntu-latest` and `macos-latest` for pushes and PRs
@@ -120,7 +121,9 @@ Hardcoded special handling exists in `@zpm-get-plugin-file-path` and `@zpm-backg
 
 ## Portability
 
-ZPM runs on Linux (GNU coreutils), macOS (BSD userland), and busybox/Android.
+ZPM runs on zsh >= 5.1 on Linux (GNU coreutils), macOS (BSD userland), and busybox/Android;
+CI covers all of these (`zshusers/zsh:5.1.1` and `alpine` containers).
+- zsh 5.0 lacks array assignment in `local`/`typeset` (`local a=(...)`), which zpm uses widely.
 - Do not use GNU-only options (`cp --remove-destination`, `sed -i` without a suffix,
   `readlink -f`, `stat -c`, ...). If one is needed, probe for it — see `@zpm-addfpath` (#71).
 - macOS `TMPDIR` lives under `/var`, which resolves to `/private/var`; compare resolved paths.
