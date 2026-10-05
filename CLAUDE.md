@@ -7,7 +7,10 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ```bash
 make all      # Format all files with beautysh (indent-size 2, fnpar style)
 make clean    # Remove .zwc compiled files
-make test     # Run zsh tests/base.test.zsh
+make test     # Run zsh tests/run.zsh (all tests/**/*.test.zsh)
+
+# Single test file
+zsh tests/unit/plugin-name.test.zsh
 
 # Manual testing: clear cache and restart shell
 rm -rf "${TMPDIR:-/tmp}/zsh-${UID}"
@@ -99,3 +102,44 @@ Hardcoded special handling exists in `@zpm-get-plugin-file-path` and `@zpm-backg
 - The `ZERO` (`$0`) variable is set during plugin sourcing so plugins can find their own directory
 - The `source` builtin is overridden during init to auto-zcompile files
 - Cache invalidation: conditions stored in `$ZSH_TMP_DIR/is`, regenerated on mismatch or `zpm clean`
+
+## Testing
+
+- `tests/lib/harness.zsh` provides `assert_eq`, `assert_match`, `assert_fail`; each test file
+  is runnable on its own and is also sourced by `tests/run.zsh`.
+- `tests/unit/` — one file per function; `tests/integration/` — load/cache/tag behaviour in a
+  temp `ZSH_TMP_DIR`; `tests/startup/` — startup benchmarks; `tests/fixtures/` — fake plugins.
+- Every fix or feature gets a test. Never weaken or delete an existing assertion to get green.
+- **`tests/run.zsh` exits 0 even when tests fail**, so a green `make test` or CI check means
+  nothing by itself. Read the `PASS=N FAIL=M` line, and in CI read the job logs
+  (`gh run view <id> --log | grep -E 'PASS=|FAIL:'`). `FAIL: (intentional) ...` is the harness
+  self-test and is expected. Judge a change by *new* `FAIL:` lines compared with the base
+  branch's latest run, on both OSes.
+- CI (`.github/workflows/ci.yml`) runs on `ubuntu-latest` and `macos-latest` for pushes and PRs
+  to `main`/`next`. Runs for PRs from forks wait for maintainer approval (`action_required`).
+
+## Portability
+
+ZPM runs on Linux (GNU coreutils), macOS (BSD userland), and busybox/Android.
+- Do not use GNU-only options (`cp --remove-destination`, `sed -i` without a suffix,
+  `readlink -f`, `stat -c`, ...). If one is needed, probe for it — see `@zpm-addfpath` (#71).
+- macOS `TMPDIR` lives under `/var`, which resolves to `/private/var`; compare resolved paths.
+- Prefer zsh builtins and parameter expansion over external commands.
+
+## Startup cost
+
+The warm path (`zpm.zsh` → cache) must not fork. `lib/init.zsh` is re-sourced from the async
+cache on **every** warm start (`@zpm-background-initialization`), so anything placed there runs in
+every new shell. Detect environment features lazily in the function that needs them.
+
+## Branches, PRs, releases
+
+- `main` — released code, tagged `vX.Y.Z`. `next` — integration branch for the next release.
+- Features go to `next`. Bug fixes may target `main`; after merging, `main` is merged back
+  into `next`.
+- Every user-visible change gets a line in the README `## Changelog` under `- next`, with PR
+  and author links.
+- Accepting a PR: `.claude/skills/accept-pr/SKILL.md`. Cutting a release / version bump:
+  `.claude/skills/release/SKILL.md`.
+- Merge PRs with merge commits (`gh pr merge --merge`). Push, merge, tag, and release only after
+  the maintainer confirms.
